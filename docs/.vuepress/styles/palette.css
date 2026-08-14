@@ -1,0 +1,21 @@
+/**
+ * 品牌色板 —— 靛蓝
+ * 内容优先的极简取向：中性灰承托正文，蓝色只出现在链接、按钮、选中态等强调位。
+ * 色阶遵循主题约定：1 深色（文字/实底）、2 中间（hover）、3 浅色、soft 半透明底。
+ */
+:root {
+  --vp-c-brand-1: #2563eb;
+  --vp-c-brand-2: #3b82f6;
+  --vp-c-brand-3: #60a5fa;
+  --vp-c-brand-soft: rgb(59 130 246 / 0.14);
+
+  /* DEPRECATED alias，主题部分组件仍引用 */
+  --vp-c-brand: var(--vp-c-brand-1);
+}
+
+[data-theme='dark'] {
+  --vp-c-brand-1: #7cb0ff;
+  --vp-c-brand-2: #4d8dff;
+  --vp-c-brand-3: #2f6fe0;
+  --vp-c-brand-soft: rgb(76 130 246 / 0.16);
+}

@@ -1,17 +1,23 @@
 ---
 title: 课程总览
-icon: 📚
+icon: ph:graduation-cap
 ---
 
-六门学习课程，全部讲义由 [sync-learn](https://github.com/liuj66794-sys/liuj66794-sys.github.io) 脚本从本地学习仓库同步，保持原样托管（含随堂测交互）。
+五门学习课程，全部讲义由 [sync-learn](https://github.com/liuj66794-sys/liuj66794-sys.github.io) 脚本从本地学习仓库同步，保持原样托管（含随堂测交互）。
 
-| 课程 | 主题 | 讲义数 |
-|------|------|--------|
-| [A 股入门](/courses/a-shares/) | 22 周 A 股投资课程：概念扫盲 → 实战 | 滚动生成中 |
-| [TypeScript Agent](/courses/pi-agent/) | 用 TypeScript 从零构建 Agent | 6 课 |
-| [工程技能](/courses/engineering-skills/) | Matt Pocock 的 AI 工程技能课程 | 7 课 |
-| [英语教学](/courses/english/) | 中考英语教学与练习设计 | 4 课 |
-| [政策学习](/courses/policy/) | 广东专升本政治课程 | 5 课 |
+<CardGrid cols="2">
+
+<LinkCard href="/courses/a-shares/" title="A 股入门" icon="ph:chart-line-up" description="22 周 A 股投资课程：概念扫盲 → 实战，每周滚动新增讲义" />
+
+<LinkCard href="/courses/pi-agent/" title="TypeScript Agent" icon="ph:code" description="用 TypeScript 从零构建命令行 Agent，共 6 课" />
+
+<LinkCard href="/courses/engineering-skills/" title="工程技能" icon="ph:list-checks" description="Matt Pocock 的 AI 工程技能课程，共 7 课" />
+
+<LinkCard href="/courses/english/" title="英语教学" icon="ph:translate" description="中考英语教学与练习设计，共 4 课" />
+
+<LinkCard href="/courses/policy/" title="政策学习" icon="ph:flag-banner" description="广东专升本政治课程，共 5 课" />
+
+</CardGrid>
 
 ## 学习方式
 

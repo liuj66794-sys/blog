@@ -17,6 +17,11 @@ export default defineThemeConfig({
 
   social: [{ icon: 'github', link: 'https://github.com/liuj66794-sys' }],
 
+  footer: {
+    message: '把学习过程变成可检索的知识资产',
+    copyright: 'Copyright © 2026 L1U.J',
+  },
+
   navbar: [
     { text: '首页', link: '/' },
     { text: '博客', link: '/blog/' },
