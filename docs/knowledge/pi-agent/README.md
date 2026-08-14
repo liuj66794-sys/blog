@@ -22,13 +22,13 @@ createTime: 2026/08/14 20:11:42
 
 | 资料 |
 | --- |
-| [node-child-process](/lessons/pi-agent/reference/node-child-process.html){target="_blank"} |
-| [node-fs](/lessons/pi-agent/reference/node-fs.html){target="_blank"} |
-| [ts-async-and-await](/lessons/pi-agent/reference/ts-async-and-await.html){target="_blank"} |
-| [ts-commands-and-setup](/lessons/pi-agent/reference/ts-commands-and-setup.html){target="_blank"} |
-| [ts-types-and-interfaces](/lessons/pi-agent/reference/ts-types-and-interfaces.html){target="_blank"} |
+| [node-child-process](/blog/lessons/pi-agent/reference/node-child-process.html){target="_blank"} |
+| [node-fs](/blog/lessons/pi-agent/reference/node-fs.html){target="_blank"} |
+| [ts-async-and-await](/blog/lessons/pi-agent/reference/ts-async-and-await.html){target="_blank"} |
+| [ts-commands-and-setup](/blog/lessons/pi-agent/reference/ts-commands-and-setup.html){target="_blank"} |
+| [ts-types-and-interfaces](/blog/lessons/pi-agent/reference/ts-types-and-interfaces.html){target="_blank"} |
 
 ## 相关入口
 
 - [课程目录：TypeScript Agent](/courses/pi-agent/)
-- [讲义原始目录](/lessons/pi-agent/lessons/){target="_blank"}
+- [讲义原始目录](/blog/lessons/pi-agent/lessons/){target="_blank"}

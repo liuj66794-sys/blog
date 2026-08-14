@@ -16,10 +16,10 @@ permalink: /courses/english/
 
 | 课次 | 讲义 |
 | --- | --- |
-| 第 1 课 | [错题分析与学习计划 — 25道英语题（单选+翻译）](/lessons/english/lessons/0001-error-analysis-and-plan.html){target="_blank"} |
-| 第 2 课 | [Day 1 练习 — 不定代词辨析](/lessons/english/lessons/0002-day1-indefinite-pronouns-practice.html){target="_blank"} |
-| 第 3 课 | [Day 2 练习 — 介词固定搭配](/lessons/english/lessons/0003-day2-preposition-collocations-practice.html){target="_blank"} |
-| 第 4 课 | [Day 3 练习 — 比较级结构](/lessons/english/lessons/0004-day3-comparative-structures-practice.html){target="_blank"} |
+| 第 1 课 | [错题分析与学习计划 — 25道英语题（单选+翻译）](/blog/lessons/english/lessons/0001-error-analysis-and-plan.html){target="_blank"} |
+| 第 2 课 | [Day 1 练习 — 不定代词辨析](/blog/lessons/english/lessons/0002-day1-indefinite-pronouns-practice.html){target="_blank"} |
+| 第 3 课 | [Day 2 练习 — 介词固定搭配](/blog/lessons/english/lessons/0003-day2-preposition-collocations-practice.html){target="_blank"} |
+| 第 4 课 | [Day 3 练习 — 比较级结构](/blog/lessons/english/lessons/0004-day3-comparative-structures-practice.html){target="_blank"} |
 
 ## 延伸阅读
 

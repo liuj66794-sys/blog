@@ -26,9 +26,9 @@ createTime: 2026/08/14 20:11:42
 
 | 资料 |
 | --- |
-| [a-share-terms](/lessons/a-shares/reference/a-share-terms.html){target="_blank"} |
+| [a-share-terms](/blog/lessons/a-shares/reference/a-share-terms.html){target="_blank"} |
 
 ## 相关入口
 
 - [课程目录：A 股入门](/courses/a-shares/)
-- [讲义原始目录](/lessons/a-shares/lessons/){target="_blank"}
+- [讲义原始目录](/blog/lessons/a-shares/lessons/){target="_blank"}
