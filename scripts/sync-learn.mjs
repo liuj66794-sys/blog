@@ -24,8 +24,9 @@ const PUBLIC_LESSONS = path.join(DOCS, '.vuepress', 'public', 'lessons')
 const LEARN_ROOT = process.env.LEARN_ROOT || 'D:\\01-Documents\\learn'
 const FORCE = process.argv.includes('--force')
 
-/** 镜像时跳过的目录名（含所有点目录：.git/.playwright-mcp/.hallmark 等本地工具状态） */
-const EXCLUDE_DIRS = new Set(['node_modules', 'dist'])
+/** 镜像时跳过的目录名（含所有点目录：.git/.playwright-mcp/.hallmark 等本地工具状态）。
+ *  tools/ 是课程工程的开发构建脚本，不属于学习内容，不发布到公开站点。 */
+const EXCLUDE_DIRS = new Set(['node_modules', 'dist', 'tools'])
 
 function isExcludedDir(name) {
   return EXCLUDE_DIRS.has(name) || name.startsWith('.')
