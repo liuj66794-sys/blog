@@ -1,9 +1,10 @@
 ---
 title: 0002 — Day 2 输出任务检查（介词搭配造句）
-createTime: 2026-08-04 15:36:52
+createTime: 2026-08-04T15:36:52.000Z
 tags:
   - 英语教学
   - 中考英语
+permalink: /blog/english/0002-day-2-output-check/
 ---
 
 # 0002 — Day 2 输出任务检查（介词搭配造句）

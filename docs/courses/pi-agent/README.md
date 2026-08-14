@@ -1,5 +1,7 @@
 ---
 title: TypeScript Agent
+createTime: 2026/08/14 20:11:42
+permalink: /courses/pi-agent/
 ---
 
 # TypeScript Agent

@@ -1,13 +1,13 @@
 ---
 title: 开源项目
 icon: 🚀
-createTime: 2026/08/14 19:59:27
+createTime: 2026/08/14 20:11:42
 permalink: /projects/
 ---
 
 # 开源项目
 
-GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（构建时由 [fetch-projects.mjs](https://github.com/liuj66794-sys/liuj66794-sys.github.io/blob/main/scripts/fetch-projects.mjs) 从 GitHub API 生成）。
+GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（构建时由 [fetch-projects.mjs](https://github.com/liuj66794-sys/blog/blob/main/scripts/fetch-projects.mjs) 从 GitHub API 生成）。
 
 ## ⭐ 主力项目
 
@@ -25,10 +25,11 @@ GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（�
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=liuj66794-sys&layout=compact&theme=tokyonight&locale=cn&hide_border=true)](https://github.com/liuj66794-sys)
 
-## 🗂 全部公开仓库（9）
+## 🗂 全部公开仓库（10）
 
 | 仓库 | 简介 | 语言 | Stars | 最近推送 |
 | --- | --- | --- | --- | --- |
+| [liuj66794-sys.github.io](https://github.com/liuj66794-sys/liuj66794-sys.github.io) | L1U.J 的学习宇宙 —— 个人技术博客：五门课程、博客、知识库与项目墙 | JavaScript | 0 | 2026-08-14 |
 | [glm-5.3-intro](https://github.com/liuj66794-sys/glm-5.3-intro) | — | HTML | 0 | 2026-08-14 |
 | [kimi-production-grade-agent-pack](https://github.com/liuj66794-sys/kimi-production-grade-agent-pack) | 测试 | Python | 0 | 2026-04-26 |
 | [policy-analyzer-pro](https://github.com/liuj66794-sys/policy-analyzer-pro) | 基于 FastAPI + Streamlit 的纯离线政策报告智能分析引擎 (Pro版)。支持 PDF/Word 解析、Transformer 语义变迁比对、TextRank 动态删减监测及 Markdown 简报导出。专为复杂 NLP 落地与工程化实战打造。 | Python | 1 | 2026-03-19 |

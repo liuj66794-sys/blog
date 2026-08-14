@@ -1,3 +1,8 @@
+---
+title: CONTEXT
+createTime: 2026/08/14 20:11:42
+permalink: /knowledge/engineering-skills/context/
+---
 # CONTEXT
 
 本学习工作区的领域术语表。只收术语与含义，不放实现细节。

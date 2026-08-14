@@ -1,9 +1,10 @@
 ---
 title: to-tickets 的核心机制
-createTime: 2026-07-23 21:57:39
+createTime: 2026-07-23T21:57:39.000Z
 tags:
   - 工程技能
   - AI 工具链
+permalink: /blog/engineering-skills/0005-to-tickets-understanding/
 ---
 
 # to-tickets 的核心机制

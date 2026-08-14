@@ -1,9 +1,10 @@
 ---
 title: 0005 Node.js 文件系统：read_file / write_file 真实工具落地
-createTime: 2026-08-06 10:56:54
+createTime: 2026-08-06T10:56:54.000Z
 tags:
   - TypeScript Agent
   - TypeScript
+permalink: /blog/pi-agent/0005-nodejs-file-system/
 ---
 
 # 0005 Node.js 文件系统：read_file / write_file 真实工具落地

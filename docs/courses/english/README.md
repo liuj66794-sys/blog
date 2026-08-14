@@ -1,5 +1,7 @@
 ---
 title: 英语教学
+createTime: 2026/08/14 20:11:42
+permalink: /courses/english/
 ---
 
 # 英语教学

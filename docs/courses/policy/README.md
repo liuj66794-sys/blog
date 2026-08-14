@@ -1,5 +1,7 @@
 ---
 title: 政策学习
+createTime: 2026/08/14 20:11:42
+permalink: /courses/policy/
 ---
 
 # 政策学习

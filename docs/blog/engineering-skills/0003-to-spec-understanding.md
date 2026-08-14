@@ -1,9 +1,10 @@
 ---
 title: to-spec 的核心机制
-createTime: 2026-07-13 17:32:27
+createTime: 2026-07-13T17:32:27.000Z
 tags:
   - 工程技能
   - AI 工具链
+permalink: /blog/engineering-skills/0003-to-spec-understanding/
 ---
 
 # to-spec 的核心机制

@@ -1,6 +1,6 @@
 # L1U.J 的学习宇宙
 
-个人技术博客站点（[liuj66794-sys.github.io](https://liuj66794-sys.github.io)）：学习内容 + 课程 + GitHub 项目 + 个人主页，四合一。
+个人技术博客站点（[liuj66794-sys.github.io/blog](https://liuj66794-sys.github.io/blog/)）：学习内容 + 课程 + GitHub 项目 + 个人主页，四合一。
 
 - **框架**：VuePress 2 + [vuepress-theme-plume](https://theme-plume.vuejs.press/)
 - **部署**：GitHub Actions → GitHub Pages（推送 `main` 自动发布）

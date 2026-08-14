@@ -5,7 +5,9 @@ import theme from './theme.js'
 
 export default defineUserConfig({
   lang: 'zh-CN',
-  base: '/',
+  // 部署在项目站点 https://liuj66794-sys.github.io/blog/；
+  // 若迁移到用户站仓库 liuj66794-sys.github.io（根路径），改回 '/'
+  base: '/blog/',
   title: 'L1U.J 的学习宇宙',
   description:
     '个人技术博客：A 股入门、TypeScript Agent、工程技能、英语教学、政策学习五门课程，配套博客、知识库与 GitHub 项目墙。',

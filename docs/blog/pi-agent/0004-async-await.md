@@ -1,9 +1,10 @@
 ---
 title: 0004 异步与 async/await
-createTime: 2026-07-29 22:46:08
+createTime: 2026-07-29T22:46:08.000Z
 tags:
   - TypeScript Agent
   - TypeScript
+permalink: /blog/pi-agent/0004-async-await/
 ---
 
 # 0004 异步与 async/await

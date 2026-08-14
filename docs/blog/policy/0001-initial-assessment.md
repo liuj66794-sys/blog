@@ -1,9 +1,10 @@
 ---
 title: 初始评估：毛泽东思想概论部分薄弱点
-createTime: 2026-07-28 22:46:22
+createTime: 2026-07-28T22:46:22.000Z
 tags:
   - 政策学习
   - 专升本政治
+permalink: /blog/policy/0001-initial-assessment/
 ---
 
 # 初始评估：毛泽东思想概论部分薄弱点

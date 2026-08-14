@@ -1,3 +1,8 @@
+---
+title: 0004-ai-assistance-tiers-and-red-lines
+createTime: 2026/08/14 20:11:42
+permalink: /knowledge/a-shares/docs/adr/0004-ai-assistance-tiers-and-red-lines/
+---
 # ADR 0004: AI 辅助三档工具栈与红线
 
 - 状态：已接受（Kimi 档位待实测回填）

@@ -1,5 +1,7 @@
 ---
 title: A 股入门
+createTime: 2026/08/14 20:11:42
+permalink: /courses/a-shares/
 ---
 
 # A 股入门
