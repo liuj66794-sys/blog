@@ -16,13 +16,13 @@ Matt Pocock 的 AI 工程技能课程：grill、to-spec、to-tickets、implement
 
 | 课次 | 讲义 |
 | --- | --- |
-| 第 1 课 | [第一课：Mattpocock Skills 概览与调用方式](/lessons/engineering-skills/lessons/0001-mattpocock-skills-overview.html){target="_blank"} |
-| 第 2 课 | [第二课：使用 grill-with-docs 打磨想法](/lessons/engineering-skills/lessons/0002-grill-with-docs.html){target="_blank"} |
-| 第 3 课 | [第三课：使用 to-spec 生成 PRD](/lessons/engineering-skills/lessons/0003-to-spec.html){target="_blank"} |
-| 第 4 课 | [第四课：使用 to-tickets 拆分任务](/lessons/engineering-skills/lessons/0004-to-tickets.html){target="_blank"} |
-| 第 5 课 | [第五课：使用 implement 完成实现](/lessons/engineering-skills/lessons/0005-implement.html){target="_blank"} |
-| 第 6 课 | [第六课：使用 diagnosing-bugs 诊断难 bug](/lessons/engineering-skills/lessons/0006-diagnosing-bugs.html){target="_blank"} |
-| 第 7 课 | [第七课：使用 wayfinder 规划大型模糊项目](/lessons/engineering-skills/lessons/0007-wayfinder.html){target="_blank"} |
+| 第 1 课 | [第一课：Mattpocock Skills 概览与调用方式](/blog/lessons/engineering-skills/lessons/0001-mattpocock-skills-overview.html){target="_blank"} |
+| 第 2 课 | [第二课：使用 grill-with-docs 打磨想法](/blog/lessons/engineering-skills/lessons/0002-grill-with-docs.html){target="_blank"} |
+| 第 3 课 | [第三课：使用 to-spec 生成 PRD](/blog/lessons/engineering-skills/lessons/0003-to-spec.html){target="_blank"} |
+| 第 4 课 | [第四课：使用 to-tickets 拆分任务](/blog/lessons/engineering-skills/lessons/0004-to-tickets.html){target="_blank"} |
+| 第 5 课 | [第五课：使用 implement 完成实现](/blog/lessons/engineering-skills/lessons/0005-implement.html){target="_blank"} |
+| 第 6 课 | [第六课：使用 diagnosing-bugs 诊断难 bug](/blog/lessons/engineering-skills/lessons/0006-diagnosing-bugs.html){target="_blank"} |
+| 第 7 课 | [第七课：使用 wayfinder 规划大型模糊项目](/blog/lessons/engineering-skills/lessons/0007-wayfinder.html){target="_blank"} |
 
 ## 延伸阅读
 

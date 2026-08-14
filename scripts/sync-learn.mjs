@@ -24,6 +24,21 @@ const PUBLIC_LESSONS = path.join(DOCS, '.vuepress', 'public', 'lessons')
 const LEARN_ROOT = process.env.LEARN_ROOT || 'D:\\01-Documents\\learn'
 const FORCE = process.argv.includes('--force')
 
+/**
+ * 站点 base 路径，从 config.ts 读取（单一数据来源）。
+ * 讲义是 public/ 下的静态 .html，VuePress 不会给这类链接自动加 base，
+ * 必须在生成 Markdown 时显式拼上，否则部署在子路径时点击即 404。
+ */
+const SITE_BASE = (() => {
+  try {
+    const config = fs.readFileSync(path.join(DOCS, '.vuepress', 'config.ts'), 'utf8')
+    return config.match(/base:\s*'([^']*)'/)?.[1] ?? '/'
+  } catch {
+    return '/'
+  }
+})()
+const withBase = (p) => `${SITE_BASE.replace(/\/$/, '')}${p}`
+
 /** 镜像时跳过的目录名（含所有点目录：.git/.playwright-mcp/.hallmark 等本地工具状态）。
  *  tools/ 是课程工程的开发构建脚本，不属于学习内容，不发布到公开站点。 */
 const EXCLUDE_DIRS = new Set(['node_modules', 'dist', 'tools'])
@@ -136,11 +151,11 @@ function buildFrontmatter(obj) {
   return `---\n${lines.join('\n')}\n---\n`
 }
 
-/** 学习记录里的相对链接重写：../xxx → /lessons/<slug>/xxx（其余保持原样） */
+/** 学习记录里的相对链接重写：../xxx → <base>/lessons/<slug>/xxx（其余保持原样） */
 function rewriteRelativeLinks(text, slug) {
   return text.replace(/\]\((\.\.\/[^)\s]+)([^)]*)\)/g, (_, rel, tail) => {
     const clean = rel.replace(/^\.\//, '').replace(/^\.\.\//, '')
-    return `](/lessons/${slug}/${clean}${tail})`
+    return `](${withBase(`/lessons/${slug}/${clean}`)}${tail})`
   })
 }
 
@@ -239,7 +254,7 @@ function syncCourse(p) {
     if (f !== 'README.md' && f.endsWith('.md')) fs.rmSync(path.join(dir, f))
   }
 
-  const lessonLink = (l) => `[${l.title}](/lessons/${p.slug}/lessons/${l.file}){target="_blank"}`
+  const lessonLink = (l) => `[${l.title}](${withBase(`/lessons/${p.slug}/lessons/${l.file}`)}){target="_blank"}`
 
   const hasModules = lessons.some((l) => l.module)
   let modulePages = []
@@ -313,7 +328,7 @@ function syncKnowledgeIndex(p) {
     .map((rel) => `| [${rel.replace(/\.md$/, '')}](${encodeURI(rel)}) |`)
     .join('\n')
   const refRows = refFiles
-    .map((f) => `| [${f.replace(/\.html$/, '')}](/lessons/${p.slug}/reference/${encodeURI(f)}){target="_blank"} |`)
+    .map((f) => `| [${f.replace(/\.html$/, '')}](${withBase(`/lessons/${p.slug}/reference/${encodeURI(f)}`)}){target="_blank"} |`)
     .join('\n')
 
   fs.mkdirSync(kdir, { recursive: true })
@@ -345,7 +360,7 @@ ${refRows || '| （暂无） |'}
 ## 相关入口
 
 - [课程目录：${p.name}](/courses/${p.slug}/)
-- [讲义原始目录](/lessons/${p.slug}/lessons/){target="_blank"}
+- [讲义原始目录](${withBase(`/lessons/${p.slug}/lessons/`)}){target="_blank"}
 `,
   )
   return { docs: mdFiles.length, refs: refFiles.length }

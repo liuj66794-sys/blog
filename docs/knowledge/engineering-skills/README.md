@@ -23,15 +23,15 @@ Matt Pocock 的 AI 工程技能课程：grill、to-spec、to-tickets、implement
 
 | 资料 |
 | --- |
-| [diagnosing-bugs-reference](/lessons/engineering-skills/reference/diagnosing-bugs-reference.html){target="_blank"} |
-| [grill-with-docs-flow](/lessons/engineering-skills/reference/grill-with-docs-flow.html){target="_blank"} |
-| [implement-reference](/lessons/engineering-skills/reference/implement-reference.html){target="_blank"} |
-| [skill-cheat-sheet](/lessons/engineering-skills/reference/skill-cheat-sheet.html){target="_blank"} |
-| [to-spec-reference](/lessons/engineering-skills/reference/to-spec-reference.html){target="_blank"} |
-| [to-tickets-reference](/lessons/engineering-skills/reference/to-tickets-reference.html){target="_blank"} |
-| [wayfinder-reference](/lessons/engineering-skills/reference/wayfinder-reference.html){target="_blank"} |
+| [diagnosing-bugs-reference](/blog/lessons/engineering-skills/reference/diagnosing-bugs-reference.html){target="_blank"} |
+| [grill-with-docs-flow](/blog/lessons/engineering-skills/reference/grill-with-docs-flow.html){target="_blank"} |
+| [implement-reference](/blog/lessons/engineering-skills/reference/implement-reference.html){target="_blank"} |
+| [skill-cheat-sheet](/blog/lessons/engineering-skills/reference/skill-cheat-sheet.html){target="_blank"} |
+| [to-spec-reference](/blog/lessons/engineering-skills/reference/to-spec-reference.html){target="_blank"} |
+| [to-tickets-reference](/blog/lessons/engineering-skills/reference/to-tickets-reference.html){target="_blank"} |
+| [wayfinder-reference](/blog/lessons/engineering-skills/reference/wayfinder-reference.html){target="_blank"} |
 
 ## 相关入口
 
 - [课程目录：工程技能](/courses/engineering-skills/)
-- [讲义原始目录](/lessons/engineering-skills/lessons/){target="_blank"}
+- [讲义原始目录](/blog/lessons/engineering-skills/lessons/){target="_blank"}

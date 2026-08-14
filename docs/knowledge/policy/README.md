@@ -20,11 +20,11 @@ createTime: 2026/08/14 20:11:42
 
 | 资料 |
 | --- |
-| [0001-error-analysis](/lessons/policy/reference/0001-error-analysis.html){target="_blank"} |
-| [0002-party-history-timeline](/lessons/policy/reference/0002-party-history-timeline.html){target="_blank"} |
-| [0003-mao-works-mapping](/lessons/policy/reference/0003-mao-works-mapping.html){target="_blank"} |
+| [0001-error-analysis](/blog/lessons/policy/reference/0001-error-analysis.html){target="_blank"} |
+| [0002-party-history-timeline](/blog/lessons/policy/reference/0002-party-history-timeline.html){target="_blank"} |
+| [0003-mao-works-mapping](/blog/lessons/policy/reference/0003-mao-works-mapping.html){target="_blank"} |
 
 ## 相关入口
 
 - [课程目录：政策学习](/courses/policy/)
-- [讲义原始目录](/lessons/policy/lessons/){target="_blank"}
+- [讲义原始目录](/blog/lessons/policy/lessons/){target="_blank"}

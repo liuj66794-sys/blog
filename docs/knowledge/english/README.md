@@ -21,9 +21,9 @@ createTime: 2026/08/14 20:11:42
 
 | 资料 |
 | --- |
-| [grammar-points](/lessons/english/reference/grammar-points.html){target="_blank"} |
+| [grammar-points](/blog/lessons/english/reference/grammar-points.html){target="_blank"} |
 
 ## 相关入口
 
 - [课程目录：英语教学](/courses/english/)
-- [讲义原始目录](/lessons/english/lessons/){target="_blank"}
+- [讲义原始目录](/blog/lessons/english/lessons/){target="_blank"}
