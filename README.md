@@ -41,3 +41,14 @@ pnpm build            # sync + fetch-projects + build 全流程
 3. 提交并推送到 `main`，GitHub Actions 自动构建发布
 
 讲义为独立 HTML（含随堂测交互），过渡期原样托管在 `/lessons/<课程>/`；后续逐步转为 Markdown 纳入主题体系（见 方案.md §4.1 方案 C）。
+
+## 迁移到根域名（可选）
+
+当前部署在项目站点 `liuj66794-sys.github.io/blog/`（`blog` 仓库）。原因：用户站仓库 `liuj66794-sys.github.io` 的 Pages 设置无法通过 gh token API 修改（PATCH /pages 返回 404，且用户站不允许停用 Pages），只能网页 UI 手动切换。
+
+如需迁移到根路径 `liuj66794-sys.github.io/`：
+
+1. `docs/.vuepress/config.ts` 中 `base` 改回 `'/'`
+2. 推送代码到 `user-site` 远端（即 `liuj66794-sys.github.io` 仓库，main 分支）
+3. 网页打开 仓库 Settings → Pages → Source 选择 **GitHub Actions**（一次性手动操作）
+
