@@ -1,9 +1,10 @@
 ---
 title: 0002 TypeScript 类型与接口
-createTime: 2026-07-23 23:26:39
+createTime: 2026-07-23T23:26:39.000Z
 tags:
   - TypeScript Agent
   - TypeScript
+permalink: /blog/pi-agent/0002-types-and-interfaces-for-tools/
 ---
 
 # 0002 TypeScript 类型与接口

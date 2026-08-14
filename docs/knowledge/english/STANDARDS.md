@@ -1,3 +1,8 @@
+---
+title: STANDARDS
+createTime: 2026/08/14 20:11:42
+permalink: /knowledge/english/standards/
+---
 # 教学项目开发规范（STANDARDS）
 
 > 本文件是 AI agent 创建/修改页面时的硬约束。违反 MUST 条目 = bug，必须修复。

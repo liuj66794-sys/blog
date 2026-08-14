@@ -85,7 +85,7 @@ icon: 🚀
 
 # 开源项目
 
-GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（构建时由 [fetch-projects.mjs](https://github.com/${USER}/${USER}.github.io/blob/main/scripts/fetch-projects.mjs) 从 GitHub API 生成）。
+GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（构建时由 [fetch-projects.mjs](https://github.com/${USER}/blog/blob/main/scripts/fetch-projects.mjs) 从 GitHub API 生成）。
 
 ## ⭐ 主力项目
 

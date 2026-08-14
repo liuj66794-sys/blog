@@ -1,9 +1,10 @@
 ---
 title: 0003 模块与 npm 脚本
-createTime: 2026-07-25 15:09:27
+createTime: 2026-07-25T15:09:27.000Z
 tags:
   - TypeScript Agent
   - TypeScript
+permalink: /blog/pi-agent/0003-modules-and-npm-scripts/
 ---
 
 # 0003 模块与 npm 脚本

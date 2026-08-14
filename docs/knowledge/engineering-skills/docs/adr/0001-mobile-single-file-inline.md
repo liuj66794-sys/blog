@@ -1,3 +1,8 @@
+---
+title: 0001-mobile-single-file-inline
+createTime: 2026/08/14 20:11:42
+permalink: /knowledge/engineering-skills/docs/adr/0001-mobile-single-file-inline/
+---
 # 手机版采用单文件内联分发
 
 工作区的页面需要能在手机上复习，但用户的真实使用路径是"微信文件助手 → 手机 Chrome"，该路径只能传输单个文件，既带不走 `assets/` 目录（样式丢失、页面退化为纯文本），也保持不了页面间的相对链接。我们决定：桌面源文件保持不变，用一个可重复运行的构建脚本把每个 HTML 的样式与脚本全部内联，生成自给自足的单文件副本到 `mobile/` 目录；手机版放弃站内导航保障，使用方式为"一次传一课"。

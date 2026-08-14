@@ -1,3 +1,8 @@
+---
+title: SPEC-0001-mobile-rendering-and-standards
+createTime: 2026/08/14 20:11:42
+permalink: /knowledge/english/spec-0001-mobile-rendering-and-standards/
+---
 # SPEC-0001：移动端渲染修复 + 页面开发规范固化
 
 > 状态：已完成实施 · 标签：ready-for-agent

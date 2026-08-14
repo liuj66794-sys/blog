@@ -1,3 +1,8 @@
+---
+title: ROADMAP
+createTime: 2026/08/14 20:11:42
+permalink: /knowledge/pi-agent/roadmap/
+---
 # PatchPilot 学习路线图
 
 > 总周期约 5–6 个月，每周 2–3 课。结构为**交错式**：阶段 0 打基础后，每个 Agent 概念单元 = 概念课 + 动手课，动手成果增量长成 PatchPilot。

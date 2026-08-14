@@ -1,3 +1,8 @@
+---
+title: CONTEXT
+createTime: 2026/08/14 20:11:42
+permalink: /knowledge/a-shares/context/
+---
 # CONTEXT.md — A股入门课程（gupiao 工作区）
 
 > 本文件是课程设计的术语表（ubiquitous language），只收录已对齐的术语定义，不含实现细节。

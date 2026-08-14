@@ -1,9 +1,10 @@
 ---
 title: 上游仓库同步（2026-07-28 → 2026-08-07）
-createTime: 2026-08-07 18:16:55
+createTime: 2026-08-07T18:16:55.000Z
 tags:
   - 工程技能
   - AI 工具链
+permalink: /blog/engineering-skills/0007-upstream-sync-2026-08/
 ---
 
 # 上游仓库同步（2026-07-28 → 2026-08-07）

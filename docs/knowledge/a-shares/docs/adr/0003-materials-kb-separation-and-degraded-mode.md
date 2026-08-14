@@ -1,3 +1,8 @@
+---
+title: 0003-materials-kb-separation-and-degraded-mode
+createTime: 2026/08/14 20:11:42
+permalink: /knowledge/a-shares/docs/adr/0003-materials-kb-separation-and-degraded-mode/
+---
 # ADR 0003: 教材与知识库分离 + 内置降级模式
 
 - 状态：已接受

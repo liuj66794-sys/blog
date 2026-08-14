@@ -1,9 +1,10 @@
 ---
 title: 课程中文化与术语处理偏好
-createTime: 2026-07-13 18:47:24
+createTime: 2026-07-13T18:47:24.000Z
 tags:
   - 工程技能
   - AI 工具链
+permalink: /blog/engineering-skills/0004-localization-preference/
 ---
 
 # 课程中文化与术语处理偏好

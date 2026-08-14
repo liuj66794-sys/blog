@@ -1,9 +1,10 @@
 ---
 title: 0001 TypeScript 环境搭建与第一个程序
-createTime: 2026-07-23 22:05:20
+createTime: 2026-07-23T22:05:20.000Z
 tags:
   - TypeScript Agent
   - TypeScript
+permalink: /blog/pi-agent/0001-typescript-environment-and-first-program/
 ---
 
 # 0001 TypeScript 环境搭建与第一个程序

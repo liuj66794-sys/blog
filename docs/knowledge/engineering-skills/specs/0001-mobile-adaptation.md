@@ -1,3 +1,8 @@
+---
+title: 0001-mobile-adaptation
+createTime: 2026/08/14 20:11:42
+permalink: /knowledge/engineering-skills/specs/0001-mobile-adaptation/
+---
 # Spec 0001：学习工作区移动端适配（手机版）
 
 > 状态：ready-for-agent（本地发布——本工作区无 issue tracker，spec 以文件形式落在 `specs/`）

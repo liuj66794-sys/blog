@@ -1,3 +1,8 @@
+---
+title: 0001-course-attached-to-22-week-plan
+createTime: 2026/08/14 20:11:42
+permalink: /knowledge/a-shares/docs/adr/0001-course-attached-to-22-week-plan/
+---
 # ADR 0001: 课程依附 22 周母计划，不建平行体系
 
 - 状态：已接受

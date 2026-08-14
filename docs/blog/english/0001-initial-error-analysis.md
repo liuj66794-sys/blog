@@ -1,9 +1,10 @@
 ---
 title: 0001 — 初始错题分析（25题：20单选+5翻译）
-createTime: 2026-07-28 22:27:22
+createTime: 2026-07-28T22:27:22.000Z
 tags:
   - 英语教学
   - 中考英语
+permalink: /blog/english/0001-initial-error-analysis/
 ---
 
 # 0001 — 初始错题分析（25题：20单选+5翻译）

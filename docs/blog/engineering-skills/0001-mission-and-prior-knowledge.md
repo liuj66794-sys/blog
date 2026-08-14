@@ -1,9 +1,10 @@
 ---
 title: 已确认学习使命与先验知识
-createTime: 2026-07-11 14:48:03
+createTime: 2026-07-11T14:48:03.000Z
 tags:
   - 工程技能
   - AI 工具链
+permalink: /blog/engineering-skills/0001-mission-and-prior-knowledge/
 ---
 
 # 已确认学习使命与先验知识

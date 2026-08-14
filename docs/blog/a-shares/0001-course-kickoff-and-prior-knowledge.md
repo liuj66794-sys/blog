@@ -1,9 +1,10 @@
 ---
 title: 课程启动与先验知识基线
-createTime: 2026-08-11 11:49:47
+createTime: 2026-08-11T11:49:47.000Z
 tags:
   - A 股入门
   - 投资
+permalink: /blog/a-shares/0001-course-kickoff-and-prior-knowledge/
 ---
 
 # 课程启动与先验知识基线

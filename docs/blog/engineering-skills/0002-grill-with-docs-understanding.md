@@ -1,9 +1,10 @@
 ---
 title: grill-with-docs 的核心机制
-createTime: 2026-07-11 18:41:56
+createTime: 2026-07-11T18:41:56.000Z
 tags:
   - 工程技能
   - AI 工具链
+permalink: /blog/engineering-skills/0002-grill-with-docs-understanding/
 ---
 
 # grill-with-docs 的核心机制

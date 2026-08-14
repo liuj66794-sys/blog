@@ -1,9 +1,10 @@
 ---
 title: 主流程四技能已在真实项目完整走通
-createTime: 2026-07-25 20:56:03
+createTime: 2026-07-25T20:56:03.000Z
 tags:
   - 工程技能
   - AI 工具链
+permalink: /blog/engineering-skills/0006-full-chain-practice/
 ---
 
 # 主流程四技能已在真实项目完整走通
