@@ -1,0 +1,220 @@
+/**
+ * 全局视觉打磨
+ * 依赖 palette.css 的品牌色变量；所有动效均可被系统的减少动态效果偏好关闭。
+ */
+
+/* ---------- 基础 ---------- */
+
+/* 文字选中的品牌色反馈 */
+::selection {
+  color: var(--vp-c-brand-1);
+  background-color: rgb(59 130 246 / 0.22);
+}
+
+/* 中文标题排布：收紧字距，避免松散 */
+.main h1,
+.main h2,
+.main h3 {
+  letter-spacing: -0.01em;
+}
+
+/* ---------- 字体与文字渲染 ---------- */
+
+/* 主题的中文栈直接落到 sans-serif，补上具名系统中文字体保证跨平台一致 */
+:root:where(:lang(zh)),
+:root:where(:lang(zh-CN)) {
+  --vp-font-family-base:
+    'Inter4CJK',
+    -apple-system,
+    blinkmacsystemfont,
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    'Noto Sans SC',
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    'Noto Color Emoji';
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- 导航栏：半透明毛玻璃 ---------- */
+
+:root {
+  --vp-nav-bg-color: color-mix(in srgb, var(--vp-c-bg) 78%, transparent);
+}
+
+.vp-navbar {
+  backdrop-filter: saturate(1.5) blur(12px);
+  -webkit-backdrop-filter: saturate(1.5) blur(12px);
+}
+
+/* ---------- 深浅色切换的平滑过渡 ---------- */
+
+body {
+  transition:
+    background-color var(--vp-t-color),
+    color var(--vp-t-color);
+}
+
+/* ---------- 文章列表卡片 ---------- */
+
+/* 悬浮时抬升 + 投影，与首页 features 卡片的交互语言一致 */
+.vp-post-item {
+  border-radius: 12px;
+  transition:
+    background-color var(--vp-t-color),
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.vp-post-item:hover {
+  background-color: var(--vp-c-bg-elv);
+  box-shadow: var(--vp-shadow-2);
+  transform: translateY(-2px);
+}
+
+/* ---------- 代码块 ---------- */
+
+/* 细边框 + 浅投影，让代码块从正文中立起来 */
+.vp-doc div[class*='language-'] {
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: var(--vp-shadow-1);
+  transition: border-color var(--vp-t-color);
+}
+
+.vp-doc div[class*='language-']:hover {
+  border-color: var(--vp-c-brand-3);
+}
+
+/* ---------- 正文图片 ---------- */
+
+.vp-doc img {
+  border-radius: 6px;
+}
+
+/* ---------- 滚动条 ---------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--vp-c-divider);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--vp-c-brand-3);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-divider) transparent;
+}
+
+/* ---------- 首页 Hero ---------- */
+
+/* 品牌蓝 → 青的同色系渐变，替换主题默认的 紫+蓝 混搭 */
+.vp-home-hero .hero-name {
+  --vp-bg-home-hero-name: linear-gradient(
+    315deg,
+    var(--vp-c-brand-1) 15%,
+    var(--vp-c-brand-2) 55%,
+    #22d3ee 100%
+  );
+}
+
+/* 副标题与描述文字放宽字距，与大标题的收紧形成层次 */
+.vp-home-hero .hero-tagline {
+  letter-spacing: 0.04em;
+}
+
+.vp-home-hero .hero-text {
+  letter-spacing: 0.02em;
+}
+
+/* ---------- 首页 Features 卡片 ---------- */
+
+/* 图标容器：品牌色浅底 + 品牌色图标，替代默认灰底 */
+.vp-home-feature .icon {
+  font-size: 24px;
+  color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-soft);
+  border-radius: 10px;
+}
+
+/* 卡片悬浮：细边框变品牌色 + 轻微上浮 */
+.vp-home-feature.link {
+  transition:
+    border-color var(--vp-t-color),
+    background-color var(--vp-t-color),
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.vp-home-feature.link:hover {
+  border-color: var(--vp-c-brand-2);
+  transform: translateY(-3px);
+  box-shadow: var(--vp-shadow-2);
+}
+
+/* 四张卡片各配一个色相，图标底色随之变化（深浅色模式各自取值） */
+.vp-home-features .item:nth-child(1) .vp-home-feature .icon {
+  color: #2563eb;
+  background-color: rgb(59 130 246 / 0.13);
+}
+
+.vp-home-features .item:nth-child(2) .vp-home-feature .icon {
+  color: #0d9488;
+  background-color: rgb(20 184 166 / 0.13);
+}
+
+.vp-home-features .item:nth-child(3) .vp-home-feature .icon {
+  color: #9333ea;
+  background-color: rgb(168 85 247 / 0.13);
+}
+
+.vp-home-features .item:nth-child(4) .vp-home-feature .icon {
+  color: #ea580c;
+  background-color: rgb(249 115 22 / 0.13);
+}
+
+[data-theme='dark'] .vp-home-features .item:nth-child(1) .vp-home-feature .icon {
+  color: #7cb0ff;
+}
+
+[data-theme='dark'] .vp-home-features .item:nth-child(2) .vp-home-feature .icon {
+  color: #5eead4;
+}
+
+[data-theme='dark'] .vp-home-features .item:nth-child(3) .vp-home-feature .icon {
+  color: #d8b4fe;
+}
+
+[data-theme='dark'] .vp-home-features .item:nth-child(4) .vp-home-feature .icon {
+  color: #fdba74;
+}
+
+/* ---------- 尊重系统"减少动态效果"设置 ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .vp-home-feature.link,
+  .vp-home-feature.link:hover,
+  .vp-post-item,
+  .vp-post-item:hover {
+    transition: none;
+    transform: none;
+  }
+}

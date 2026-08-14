@@ -20,7 +20,6 @@ const OUT = path.resolve(__dirname, '..', 'docs', 'projects', 'README.md')
 const USER = 'liuj66794-sys'
 /** 方案 §5.2 的四个主力项目 */
 const FEATURED = ['PolicyAnalyzerPro', 'Tlisily', 'boxuegu', 'mattpocock-skills-learning']
-const THEME = 'theme=tokyonight&locale=cn&hide_border=true'
 
 function fetchViaGh() {
   try {
@@ -52,21 +51,35 @@ async function fetchViaToken() {
 const esc = (s) =>
   (s ?? '').replace(/\|/g, '\\|').replace(/\r?\n+/g, ' ').trim()
 
-const statsCard = `https://github-readme-stats.vercel.app/api?username=${USER}&show_icons=true&${THEME}`
-const langsCard = `https://github-readme-stats.vercel.app/api/top-langs/?username=${USER}&layout=compact&${THEME}`
-const pinCard = (repo) =>
-  `https://github-readme-stats.vercel.app/api/pin/?username=${USER}&repo=${repo}&${THEME}`
+/** LinkCard description 里的 HTML 属性值转义 */
+const escAttr = (s) => (s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/\r?\n+/g, ' ').trim()
+
+/** 描述截断，避免卡片过高 */
+const brief = (s, n = 64) => {
+  const t = (s ?? '').trim()
+  return t.length > n ? `${t.slice(0, n)}…` : t
+}
 
 function render(repos) {
   const byName = new Map(repos.map((r) => [r.name, r]))
-  const featured = FEATURED.filter((n) => byName.has(n))
+  const featured = FEATURED.filter((n) => byName.has(n)).map((n) => byName.get(n))
 
   const featuredSection = featured
     .map(
-      (n) =>
-        `[![${n}](${pinCard(n)})](https://github.com/${USER}/${n})`,
+      (r) =>
+        `<LinkCard href="${r.html_url}" title="${escAttr(r.name)}" icon="ph:star-four" description="${escAttr(`${r.language ?? '—'} · ★ ${r.stargazers_count ?? 0} · ${brief(r.description) || '—'}`)}" />`,
     )
     .join('\n\n')
+
+  const totalStars = repos.reduce((s, r) => s + (r.stargazers_count ?? 0), 0)
+  const langCount = new Map()
+  for (const r of repos) {
+    if (r.language) langCount.set(r.language, (langCount.get(r.language) ?? 0) + 1)
+  }
+  const langs = [...langCount.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([lang, n]) => `${lang} ×${n}`)
+    .join(' · ') || '—'
 
   const rest = repos
     .filter((r) => !FEATURED.includes(r.name) && r.name !== `${USER}`)
@@ -80,24 +93,35 @@ function render(repos) {
 
   return `---
 title: 开源项目
-icon: 🚀
+icon: ph:rocket-launch
+pageClass: projects-page
 ---
 
 # 开源项目
 
-GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（构建时由 [fetch-projects.mjs](https://github.com/${USER}/blog/blob/main/scripts/fetch-projects.mjs) 从 GitHub API 生成）。
+GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（构建时由 [fetch-projects.mjs](https://github.com/${USER}/blog/blob/main/scripts/fetch-projects.mjs) 从 GitHub API 生成，数据本地渲染，不依赖外链统计图）。
 
-## ⭐ 主力项目
+## 主力项目
+
+<CardGrid cols="2">
 
 ${featuredSection}
 
-## 📊 开发统计
+</CardGrid>
 
-[![L1U.J's GitHub stats](${statsCard})](https://github.com/${USER})
+## 开发统计
 
-[![Top Langs](${langsCard})](https://github.com/${USER})
+<CardGrid cols="3">
 
-## 🗂 全部公开仓库（${repos.length}）
+<Card title="${repos.length}" icon="ph:cube">公开仓库</Card>
+
+<Card title="${totalStars}" icon="ph:star-four">累计 Stars</Card>
+
+<Card title="语言分布" icon="ph:chart-bar">${langs}</Card>
+
+</CardGrid>
+
+## 全部公开仓库（${repos.length}）
 
 | 仓库 | 简介 | 语言 | Stars | 最近推送 |
 | --- | --- | --- | --- | --- |
@@ -107,7 +131,8 @@ ${tableRows || '| （暂无） | | | | |'}
 
 const PLACEHOLDER = `---
 title: 开源项目
-icon: 🚀
+icon: ph:rocket-launch
+pageClass: projects-page
 ---
 
 # 开源项目

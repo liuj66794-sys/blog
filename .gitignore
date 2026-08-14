@@ -5,3 +5,4 @@ docs/.vuepress/dist/
 .mimosa/
 *.log
 .DS_Store
+.serve/

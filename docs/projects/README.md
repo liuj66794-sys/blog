@@ -1,34 +1,46 @@
 ---
 title: 开源项目
-icon: 🚀
+icon: ph:rocket-launch
+pageClass: projects-page
 createTime: 2026/08/14 20:11:42
 permalink: /projects/
 ---
 
 # 开源项目
 
-GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（构建时由 [fetch-projects.mjs](https://github.com/liuj66794-sys/blog/blob/main/scripts/fetch-projects.mjs) 从 GitHub API 生成）。
+GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（构建时由 [fetch-projects.mjs](https://github.com/liuj66794-sys/blog/blob/main/scripts/fetch-projects.mjs) 从 GitHub API 生成，数据本地渲染，不依赖外链统计图）。
 
-## ⭐ 主力项目
+## 主力项目
 
-[![PolicyAnalyzerPro](https://github-readme-stats.vercel.app/api/pin/?username=liuj66794-sys&repo=PolicyAnalyzerPro&theme=tokyonight&locale=cn&hide_border=true)](https://github.com/liuj66794-sys/PolicyAnalyzerPro)
+<CardGrid cols="2">
 
-[![Tlisily](https://github-readme-stats.vercel.app/api/pin/?username=liuj66794-sys&repo=Tlisily&theme=tokyonight&locale=cn&hide_border=true)](https://github.com/liuj66794-sys/Tlisily)
+<LinkCard href="https://github.com/liuj66794-sys/PolicyAnalyzerPro" title="PolicyAnalyzerPro" icon="ph:star-four" description="Python · ★ 2 · PolicyAnalyzerPro 是一套面向 Windows 的离线政务文本分析桌面软件，用于政府工作报告、政策通稿、会议纪要…" />
 
-[![boxuegu](https://github-readme-stats.vercel.app/api/pin/?username=liuj66794-sys&repo=boxuegu&theme=tokyonight&locale=cn&hide_border=true)](https://github.com/liuj66794-sys/boxuegu)
+<LinkCard href="https://github.com/liuj66794-sys/Tlisily" title="Tlisily" icon="ph:star-four" description="TypeScript · ★ 0 · Tlisily（酒馆）- AI 角色扮演桌面应用" />
 
-[![mattpocock-skills-learning](https://github-readme-stats.vercel.app/api/pin/?username=liuj66794-sys&repo=mattpocock-skills-learning&theme=tokyonight&locale=cn&hide_border=true)](https://github.com/liuj66794-sys/mattpocock-skills-learning)
+<LinkCard href="https://github.com/liuj66794-sys/boxuegu" title="boxuegu" icon="ph:star-four" description="JavaScript · ★ 0 · 博学谷 - 基于 uni-app/uni-app-x 的在线学习平台（期末大作业）" />
 
-## 📊 开发统计
+<LinkCard href="https://github.com/liuj66794-sys/mattpocock-skills-learning" title="mattpocock-skills-learning" icon="ph:star-four" description="HTML · ★ 0 · —" />
 
-[![L1U.J's GitHub stats](https://github-readme-stats.vercel.app/api?username=liuj66794-sys&show_icons=true&theme=tokyonight&locale=cn&hide_border=true)](https://github.com/liuj66794-sys)
+</CardGrid>
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=liuj66794-sys&layout=compact&theme=tokyonight&locale=cn&hide_border=true)](https://github.com/liuj66794-sys)
+## 开发统计
 
-## 🗂 全部公开仓库（10）
+<CardGrid cols="3">
+
+<Card title="11" icon="ph:cube">公开仓库</Card>
+
+<Card title="3" icon="ph:star-four">累计 Stars</Card>
+
+<Card title="语言分布" icon="ph:chart-bar">JavaScript ×3 · Python ×3 · HTML ×2 · TypeScript ×1</Card>
+
+</CardGrid>
+
+## 全部公开仓库（11）
 
 | 仓库 | 简介 | 语言 | Stars | 最近推送 |
 | --- | --- | --- | --- | --- |
+| [blog](https://github.com/liuj66794-sys/blog) | L1U.J 的学习宇宙 —— 个人技术博客源码（VuePress 2 + Plume） | JavaScript | 0 | 2026-08-14 |
 | [liuj66794-sys.github.io](https://github.com/liuj66794-sys/liuj66794-sys.github.io) | L1U.J 的学习宇宙 —— 个人技术博客：五门课程、博客、知识库与项目墙 | JavaScript | 0 | 2026-08-14 |
 | [glm-5.3-intro](https://github.com/liuj66794-sys/glm-5.3-intro) | — | HTML | 0 | 2026-08-14 |
 | [kimi-production-grade-agent-pack](https://github.com/liuj66794-sys/kimi-production-grade-agent-pack) | 测试 | Python | 0 | 2026-04-26 |
