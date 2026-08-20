@@ -6,3 +6,4 @@ docs/.vuepress/dist/
 *.log
 .DS_Store
 .serve/
+.zcode/

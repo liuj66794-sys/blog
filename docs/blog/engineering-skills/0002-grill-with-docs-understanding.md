@@ -1,11 +1,14 @@
 ---
 title: grill-with-docs 的核心机制
-createTime: 2026-07-11T18:41:56.000Z
+createTime: 2026-07-11 18:41:56
 tags:
   - 工程技能
   - AI 工具链
+description: 学到的内容 grillwithdocs 是有代码库时的 relentless interview，由 /grilling 驱动，并由 /domainmodeling 维护文档。 和 grillme 的唯一区别：是否把讨论结果持久化到 CONTEXT.md 和 docs/adr/。 grilling …
 permalink: /blog/engineering-skills/0002-grill-with-docs-understanding/
 ---
+
+> 配套讲义：[第二课：使用 grill-with-docs 打磨想法](/blog/lessons/engineering-skills/lessons/0002-grill-with-docs.html){target="_blank"}（含随堂测，新标签页打开）
 
 # grill-with-docs 的核心机制
 

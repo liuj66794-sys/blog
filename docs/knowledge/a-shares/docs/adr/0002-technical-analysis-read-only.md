@@ -1,6 +1,6 @@
 ---
 title: 0002-technical-analysis-read-only
-createTime: 2026/08/14 20:11:42
+createTime: 2026/08/21 00:33:53
 permalink: /knowledge/a-shares/docs/adr/0002-technical-analysis-read-only/
 ---
 # ADR 0002: 技术分析只教"看得懂"，不教"用得好"

@@ -1,11 +1,14 @@
 ---
 title: 课程中文化与术语处理偏好
-createTime: 2026-07-13T18:47:24.000Z
+createTime: 2026-07-13 18:47:24
 tags:
   - 工程技能
   - AI 工具链
+description: 已确认的偏好 通过 /grillme grilling session 确认： 翻译范围：lessons/、reference/、MISSION.md。 翻译深度：正文 + 代码注释/字符串翻译成中文；变量名、函数名、skill 名称保持英文。 术语处理：有特殊含义的英文术语首次出现时 inline…
 permalink: /blog/engineering-skills/0004-localization-preference/
 ---
+
+> 配套讲义：[第四课：使用 to-tickets 拆分任务](/blog/lessons/engineering-skills/lessons/0004-to-tickets.html){target="_blank"}（含随堂测，新标签页打开）
 
 # 课程中文化与术语处理偏好
 

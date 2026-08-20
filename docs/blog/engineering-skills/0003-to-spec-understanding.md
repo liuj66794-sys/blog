@@ -1,11 +1,14 @@
 ---
 title: to-spec 的核心机制
-createTime: 2026-07-13T17:32:27.000Z
+createTime: 2026-07-13 17:32:27
 tags:
   - 工程技能
   - AI 工具链
+description: 学到的内容 /tospec 把 grilling 的结果合成为 PRD，不再 interview。 前置条件：项目已运行 /setupmattpocockskills。 模板包含：Problem Statement、Solution、User Stories、Implementation Decis…
 permalink: /blog/engineering-skills/0003-to-spec-understanding/
 ---
+
+> 配套讲义：[第三课：使用 to-spec 生成 PRD](/blog/lessons/engineering-skills/lessons/0003-to-spec.html){target="_blank"}（含随堂测，新标签页打开）
 
 # to-spec 的核心机制
 

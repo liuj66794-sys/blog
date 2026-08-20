@@ -1,11 +1,14 @@
 ---
 title: 0001 — 初始错题分析（25题：20单选+5翻译）
-createTime: 2026-07-28T22:27:22.000Z
+createTime: 2026-07-28 22:27:22
 tags:
   - 英语教学
   - 中考英语
+description: 日期 20260728 来源 用户提供 25 张错题截图（20 道单选题 + 5 道英译汉翻译题），全部回答错误。 关键发现 错误分布 不定代词混淆：4 题（Q2, Q13, Q14, Q27）— 最严重 介词固定搭配：3 题（Q4, Q21, Q22） 英译汉翻译：5 题（Q46Q50）— 新发现…
 permalink: /blog/english/0001-initial-error-analysis/
 ---
+
+> 配套讲义：[错题分析与学习计划 — 25道英语题（单选+翻译）](/blog/lessons/english/lessons/0001-error-analysis-and-plan.html){target="_blank"}（含随堂测，新标签页打开）
 
 # 0001 — 初始错题分析（25题：20单选+5翻译）
 

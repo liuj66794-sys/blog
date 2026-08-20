@@ -1,11 +1,14 @@
 ---
 title: 主流程四技能已在真实项目完整走通
-createTime: 2026-07-25T20:56:03.000Z
+createTime: 2026-07-25 20:56:03
 tags:
   - 工程技能
   - AI 工具链
+description: 学到的内容 用户把「妈妈音乐播放器」作为实战对象，在真实项目（D:\00Projects\test\4）里完整跑通了 grillwithdocs → tospec → totickets → implement 全链条：grill 出 7 个领域术语、 合成 6 个用户故事的 spec、拆出 5 个…
 permalink: /blog/engineering-skills/0006-full-chain-practice/
 ---
+
+> 配套讲义：[第六课：使用 diagnosing-bugs 诊断难 bug](/blog/lessons/engineering-skills/lessons/0006-diagnosing-bugs.html){target="_blank"}（含随堂测，新标签页打开）
 
 # 主流程四技能已在真实项目完整走通
 

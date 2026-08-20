@@ -1,11 +1,14 @@
 ---
 title: to-tickets 的核心机制
-createTime: 2026-07-23T21:57:39.000Z
+createTime: 2026-07-23 21:57:39
 tags:
   - 工程技能
   - AI 工具链
+description: 学到的内容 /totickets 把 spec/计划/对话拆成 tracer bullet（曳光弹）式的垂直切片 ticket，每个声明 blocking edges（阻塞边）。 垂直切片四条规则：窄但切穿所有层、独立可验证、适配单个上下文窗口、先 prefactor（预重构）。 按 frontie…
 permalink: /blog/engineering-skills/0005-to-tickets-understanding/
 ---
+
+> 配套讲义：[第五课：使用 implement 完成实现](/blog/lessons/engineering-skills/lessons/0005-implement.html){target="_blank"}（含随堂测，新标签页打开）
 
 # to-tickets 的核心机制
 
