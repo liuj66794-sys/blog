@@ -1,6 +1,6 @@
 ---
 title: STANDARDS
-createTime: 2026/08/14 20:11:42
+createTime: 2026/08/21 00:33:53
 permalink: /knowledge/english/standards/
 ---
 # 教学项目开发规范（STANDARDS）

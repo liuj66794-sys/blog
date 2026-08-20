@@ -97,6 +97,8 @@ tr:nth-child(even) td { background: #faf7ec; }
 .quiz .fb { display: none; margin-top: 0.7em; font-size: 0.92rem; color: var(--muted); }
 .quiz.done .fb { display: block; }
 .quiz .opts li.locked { cursor: default; }
+/* 课前回炉：间隔复习旧课的测验，视觉上与新课随堂测区分 */
+.quiz.review { border-style: dashed; background: #faf8f0; }
 
 /* 费曼自测 */
 .feynman {

@@ -1,6 +1,6 @@
 ---
 title: 0001-mobile-adaptation
-createTime: 2026/08/14 20:11:42
+createTime: 2026/08/21 00:33:53
 permalink: /knowledge/engineering-skills/specs/0001-mobile-adaptation/
 ---
 # Spec 0001：学习工作区移动端适配（手机版）

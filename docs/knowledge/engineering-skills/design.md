@@ -1,6 +1,6 @@
 ---
 title: design
-createTime: 2026/08/14 20:11:42
+createTime: 2026/08/21 00:33:53
 permalink: /knowledge/engineering-skills/design/
 ---
 # Design — Mattpocock Skills 学习工作区

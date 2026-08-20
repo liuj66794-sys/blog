@@ -31,4 +31,3 @@ createTime: 2026/08/14 20:11:42
 ## 相关入口
 
 - [课程目录：TypeScript Agent](/courses/pi-agent/)
-- [讲义原始目录](/blog/lessons/pi-agent/lessons/){target="_blank"}

@@ -1,6 +1,6 @@
 ---
 title: 0001-mobile-single-file-inline
-createTime: 2026/08/14 20:11:42
+createTime: 2026/08/21 00:33:53
 permalink: /knowledge/engineering-skills/docs/adr/0001-mobile-single-file-inline/
 ---
 # 手机版采用单文件内联分发

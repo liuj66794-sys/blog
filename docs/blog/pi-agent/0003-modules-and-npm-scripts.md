@@ -1,11 +1,14 @@
 ---
 title: 0003 模块与 npm 脚本
-createTime: 2026-07-25T15:09:27.000Z
+createTime: 2026-07-25 15:09:27
 tags:
   - TypeScript Agent
   - TypeScript
+description: 学习者已完成第 3 课：把 tools.ts 拆成 tooltypes.ts / tools.ts / main.ts 三个文件并用 import/export 连接，配置了 npm start 脚本与 tsconfig.json，并正确产出了预期的 tsc 类型报错。 Evidence npm r…
 permalink: /blog/pi-agent/0003-modules-and-npm-scripts/
 ---
+
+> 配套讲义：[第 3 课 · 模块与 npm 脚本](/blog/lessons/pi-agent/lessons/0003-modules-and-npm-scripts.html){target="_blank"}（含随堂测，新标签页打开）
 
 # 0003 模块与 npm 脚本
 

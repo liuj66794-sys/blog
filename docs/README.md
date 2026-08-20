@@ -1,5 +1,7 @@
 ---
 home: true
+title: L1U.J 的学习宇宙
+description: 个人技术博客：A 股入门、TypeScript Agent、工程技能、英语教学、政策学习五门课程，配套博客、知识库与 GitHub 项目墙。
 config:
   - type: hero
     index: 0
@@ -31,7 +33,7 @@ config:
     features:
       - icon: ph:notebook
         title: 博客
-        details: 六大学习项目的学习记录与复盘，支持分类、标签与全文搜索
+        details: 五门课程的学习记录与复盘，支持标签与全文搜索
         link: /blog/
         linkText: 浏览文章
       - icon: ph:graduation-cap

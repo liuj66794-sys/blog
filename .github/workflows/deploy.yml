@@ -45,6 +45,10 @@ jobs:
       - name: Build site
         run: pnpm docs:build
 
+      # 站内死链校验：生成模板/镜像与产物之间漂移（死链、漏拷、base 拼错）即失败
+      - name: Check internal links
+        run: node scripts/check-links.mjs
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

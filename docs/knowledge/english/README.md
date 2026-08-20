@@ -26,4 +26,3 @@ createTime: 2026/08/14 20:11:42
 ## 相关入口
 
 - [课程目录：英语教学](/courses/english/)
-- [讲义原始目录](/blog/lessons/english/lessons/){target="_blank"}

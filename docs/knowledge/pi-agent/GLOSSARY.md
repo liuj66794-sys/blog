@@ -1,11 +1,11 @@
 ---
 title: GLOSSARY
-createTime: 2026/08/14 20:11:42
+createTime: 2026/08/21 00:33:53
 permalink: /knowledge/pi-agent/glossary/
 ---
 # Agent 求职课程 Glossary
 
-Coding Agent 学习路线（见 [MISSION.md](./MISSION.md)）的规范术语表。所有课件、速查表与 learning record 统一使用这里的措辞。术语只在验收通过后入册——能压缩出准确定义，才算真正理解。
+Coding Agent 学习路线（见 [MISSION.md](/blog/lessons/pi-agent/MISSION.md)）的规范术语表。所有课件、速查表与 learning record 统一使用这里的措辞。术语只在验收通过后入册——能压缩出准确定义，才算真正理解。
 
 ## Terms
 

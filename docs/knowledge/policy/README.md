@@ -27,4 +27,3 @@ createTime: 2026/08/14 20:11:42
 ## 相关入口
 
 - [课程目录：政策学习](/courses/policy/)
-- [讲义原始目录](/blog/lessons/policy/lessons/){target="_blank"}

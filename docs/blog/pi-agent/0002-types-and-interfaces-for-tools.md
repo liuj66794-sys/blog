@@ -1,11 +1,14 @@
 ---
 title: 0002 TypeScript 类型与接口
-createTime: 2026-07-23T23:26:39.000Z
+createTime: 2026-07-23 23:26:39
 tags:
   - TypeScript Agent
   - TypeScript
+description: 学习者已完成第 2 课：成功用 interface Tool 定义工具形状，实现了 calculator 和 greeter，并通过 Record<string, Tool 注册表 + runTool 调度函数跑出了正确输出。 Evidence 正常运行输出：结果是 30 和 你好, 刘杰 代码结构…
 permalink: /blog/pi-agent/0002-types-and-interfaces-for-tools/
 ---
+
+> 配套讲义：[第 2 课 · TypeScript 类型与接口](/blog/lessons/pi-agent/lessons/0002-types-and-interfaces-for-tools.html){target="_blank"}（含随堂测，新标签页打开）
 
 # 0002 TypeScript 类型与接口
 

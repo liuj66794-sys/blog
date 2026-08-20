@@ -31,4 +31,3 @@ createTime: 2026/08/14 20:11:42
 ## 相关入口
 
 - [课程目录：A 股入门](/courses/a-shares/)
-- [讲义原始目录](/blog/lessons/a-shares/lessons/){target="_blank"}

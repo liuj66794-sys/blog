@@ -1,11 +1,14 @@
 ---
 title: 0002 — Day 2 输出任务检查（介词搭配造句）
-createTime: 2026-08-04T15:36:52.000Z
+createTime: 2026-08-04 15:36:52
 tags:
   - 英语教学
   - 中考英语
-permalink: /blog/english/0002-day-2-output-check/
+description: 日期 20260804 来源 用户完成 Day 2 任务 1（抄写 + 造句），提交 3 个句子给老师检查。 关键发现 掌握情况（好消息） 三个目标搭配的结构全部用对： by + doing：I believe that I will succeed by learning. ✓ succeed i…
+permalink: /blog/english/0002-day2-output-check/
 ---
+
+> 配套讲义：[Day 1 练习 — 不定代词辨析](/blog/lessons/english/lessons/0002-day1-indefinite-pronouns-practice.html){target="_blank"}（含随堂测，新标签页打开）
 
 # 0002 — Day 2 输出任务检查（介词搭配造句）
 

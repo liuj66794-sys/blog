@@ -34,4 +34,3 @@ Matt Pocock 的 AI 工程技能课程：grill、to-spec、to-tickets、implement
 ## 相关入口
 
 - [课程目录：工程技能](/courses/engineering-skills/)
-- [讲义原始目录](/blog/lessons/engineering-skills/lessons/){target="_blank"}

@@ -7,6 +7,30 @@ export default defineThemeConfig({
   repo: 'liuj66794-sys',
   editLink: false,
   appearance: true,
+  hostname: 'https://liuj66794-sys.github.io',
+  plugins: {
+    seo: {
+      // page.path 不含 base，canonical 前缀需带上 /blog；迁移根域名时同步改为站点根
+      canonical: 'https://liuj66794-sys.github.io/blog',
+      fallBackImage: avatar,
+      // 首页按 website 标注，其余有源文件的页面按 article
+      isArticle: (page) => Boolean(page.filePathRelative && page.path !== '/'),
+    },
+    // giscus 评论（数据存 GitHub Discussions，仓库 2026-08-21 已启用 Discussions）。
+    // 剩余前置条件：giscus app 安装到仓库 https://github.com/apps/giscus
+    comment: {
+      type: 'giscus',
+      repo: 'liuj66794-sys/blog',
+      repoId: 'R_kgDOT4V1mw',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDOT4V1m84DDz8O',
+      mapping: 'pathname',
+      reactionsEnabled: '1',
+      inputPosition: 'top',
+      theme: 'preferred_color_scheme',
+      lang: 'zh-CN',
+    },
+  },
 
   profile: {
     avatar,
