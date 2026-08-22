@@ -12,9 +12,14 @@ export const origin = 'https://liuj66794-sys.github.io'
  * theme.ts 的导航/集合/分类名从这里派生；sync-learn.mjs 的 PROJECTS
  * 启动时与它做一致性断言。新增课程：此处登记 + sync-learn PROJECTS
  * 补源仓库信息，两处缺一都会在构建/sync 时快速失败。
+ *
+ * lessonMd：讲义是否生成站内 Markdown 全文页（方案 B 试点，2026-08-22 起
+ * 在 a-shares 验证）。开启后 courses/<slug>/l/<no>.md 是转换器
+ * （scripts/lib/lesson-convert.mjs）产出的主题化全文，HTML 镜像保留作
+ * 交互版入口；关闭则维持摘要卡 + 跳镜像的过渡期形态。
  */
 export const COURSES = [
-  { slug: 'a-shares', name: 'A 股入门' },
+  { slug: 'a-shares', name: 'A 股入门', lessonMd: true },
   { slug: 'pi-agent', name: 'TypeScript Agent' },
   { slug: 'engineering-skills', name: '工程技能' },
   { slug: 'english', name: '英语教学' },
