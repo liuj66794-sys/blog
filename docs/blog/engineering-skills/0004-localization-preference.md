@@ -4,6 +4,8 @@ createTime: 2026-07-13 18:47:24
 tags:
   - 工程技能
   - AI 工具链
+categories:
+  - 工程技能
 description: 已确认的偏好 通过 /grillme grilling session 确认： 翻译范围：lessons/、reference/、MISSION.md。 翻译深度：正文 + 代码注释/字符串翻译成中文；变量名、函数名、skill 名称保持英文。 术语处理：有特殊含义的英文术语首次出现时 inline…
 permalink: /blog/engineering-skills/0004-localization-preference/
 ---

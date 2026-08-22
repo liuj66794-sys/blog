@@ -4,6 +4,8 @@ createTime: 2026-07-25 15:09:27
 tags:
   - TypeScript Agent
   - TypeScript
+categories:
+  - TypeScript Agent
 description: 学习者已完成第 3 课：把 tools.ts 拆成 tooltypes.ts / tools.ts / main.ts 三个文件并用 import/export 连接，配置了 npm start 脚本与 tsconfig.json，并正确产出了预期的 tsc 类型报错。 Evidence npm r…
 permalink: /blog/pi-agent/0003-modules-and-npm-scripts/
 ---

@@ -3,7 +3,7 @@ title: 课程总览
 icon: ph:graduation-cap
 ---
 
-五门学习课程，全部讲义由 [sync-learn](https://github.com/liuj66794-sys/liuj66794-sys.github.io) 脚本从本地学习仓库同步，保持原样托管（含随堂测交互）。
+五门学习课程，全部讲义由 [sync-learn](https://github.com/liuj66794-sys/blog/blob/main/scripts/sync-learn.mjs) 脚本从本地学习仓库同步，保持原样托管（含随堂测交互）。
 
 <CardGrid cols="2">
 

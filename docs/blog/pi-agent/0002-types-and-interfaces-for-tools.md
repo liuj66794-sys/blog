@@ -4,6 +4,8 @@ createTime: 2026-07-23 23:26:39
 tags:
   - TypeScript Agent
   - TypeScript
+categories:
+  - TypeScript Agent
 description: 学习者已完成第 2 课：成功用 interface Tool 定义工具形状，实现了 calculator 和 greeter，并通过 Record<string, Tool 注册表 + runTool 调度函数跑出了正确输出。 Evidence 正常运行输出：结果是 30 和 你好, 刘杰 代码结构…
 permalink: /blog/pi-agent/0002-types-and-interfaces-for-tools/
 ---

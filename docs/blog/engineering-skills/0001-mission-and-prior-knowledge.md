@@ -4,6 +4,8 @@ createTime: 2026-07-11 14:48:03
 tags:
   - 工程技能
   - AI 工具链
+categories:
+  - 工程技能
 description: 使命 用户是独立开发者，在多个 AI 客户端之间切换（Kimi Code CLI、Cursor、Claude Code、Codex 等）。学习 Mattpocock Skills 的动机是提升工作效率，让 AI 在代码审查、方案设计、Bug 诊断、需求拆解等任务上输出更稳定。当前策略是先全面概览，再…
 permalink: /blog/engineering-skills/0001-mission-and-prior-knowledge/
 ---

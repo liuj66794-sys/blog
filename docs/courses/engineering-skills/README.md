@@ -22,7 +22,7 @@ Matt Pocock 的 AI 工程技能课程：grill、to-spec、to-tickets、implement
 | 第 4 课 | [第四课：使用 to-tickets 拆分任务](/blog/lessons/engineering-skills/lessons/0004-to-tickets.html){target="_blank"} | [学习复盘](/blog/engineering-skills/0004-localization-preference/) |
 | 第 5 课 | [第五课：使用 implement 完成实现](/blog/lessons/engineering-skills/lessons/0005-implement.html){target="_blank"} | [学习复盘](/blog/engineering-skills/0005-to-tickets-understanding/) |
 | 第 6 课 | [第六课：使用 diagnosing-bugs 诊断难 bug](/blog/lessons/engineering-skills/lessons/0006-diagnosing-bugs.html){target="_blank"} | [学习复盘](/blog/engineering-skills/0006-full-chain-practice/) |
-| 第 7 课 | [第七课：使用 wayfinder 规划大型模糊项目](/blog/lessons/engineering-skills/lessons/0007-wayfinder.html){target="_blank"} | [学习复盘](/blog/engineering-skills/0007-upstream-sync-2026-08/) |
+| 第 7 课 | [第七课：使用 wayfinder 规划大型模糊项目](/blog/lessons/engineering-skills/lessons/0007-wayfinder.html){target="_blank"} | [学习复盘](/blog/engineering-skills/0007-wayfinder-understanding/) |
 
 ## 延伸阅读
 
