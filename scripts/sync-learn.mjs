@@ -35,6 +35,7 @@ import {
   walk,
   withBase,
 } from './lib/learn-utils.mjs'
+import { lessonHtmlToMarkdown } from './lib/lesson-convert.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DOCS = path.resolve(__dirname, '..', 'docs')
@@ -349,6 +350,9 @@ function listLessons(p) {
 function syncCourse(p, lessons) {
   const dir = path.join(DOCS, 'courses', p.slug)
   fs.mkdirSync(dir, { recursive: true })
+  // 讲义是否生成站内 Markdown 全文页（方案 B 试点）：以 site-meta COURSES 的 lessonMd 为准
+  const lessonMd = COURSES.find((c) => c.slug === p.slug)?.lessonMd === true
+  const cardLink = (no) => `/courses/${p.slug}/l/${no}/`
 
   // 博客复盘按课号匹配：docs/blog/<slug>/000N-*.md → /blog/<slug>/<article>/
   const blogDir = path.join(DOCS, 'blog', p.slug)
@@ -361,10 +365,17 @@ function syncCourse(p, lessons) {
   }
   const reviewCell = (no) => (postByNo.has(no) ? `[学习复盘](/blog/${p.slug}/${postByNo.get(no)}/)` : '—')
 
-  const lessonLink = (l) => `[${l.title}](${withBase(`/lessons/${p.slug}/lessons/${l.file}`)}){target="_blank"}`
+  // lessonMd 开启：课次直接链站内全文页；否则跳 HTML 镜像（新标签页，保留随堂测交互）
+  const lessonLink = (l) => lessonMd
+    ? `[${l.title}](${cardLink(l.no)})`
+    : `[${l.title}](${withBase(`/lessons/${p.slug}/lessons/${l.file}`)}){target="_blank"}`
 
   const hasModules = lessons.some((l) => l.module)
   let modulePages = []
+  // 讲义呈现方式说明：全文页课程与镜像跳转课程的文案分流
+  const lessonNote = lessonMd
+    ? '> 正文站内直读（已纳入全文搜索）；每课页内附交互版入口，随堂测可点击作答。'
+    : '> 讲义为独立页面（含随堂测交互），点击在新标签页打开。'
 
   if (hasModules) {
     const groups = new Map()
@@ -380,7 +391,7 @@ function syncCourse(p, lessons) {
       const createTime = fmtTime(new Date(Math.min(...g.lessons.map((l) => l.mtimeMs))))
       writeAtomic(
         path.join(dir, filename),
-        `---\ntitle: 模块 ${g.no} · ${g.name}\ncreateTime: ${createTime}\npermalink: ${permalink}\n---\n\n# 模块 ${g.no} · ${g.name}\n\n| 课次 | 讲义 | 复盘 |\n| --- | --- | --- |\n${rows}\n\n> 讲义为独立页面（含随堂测交互），点击在新标签页打开。\n`,
+        `---\ntitle: 模块 ${g.no} · ${g.name}\ncreateTime: ${createTime}\npermalink: ${permalink}\n---\n\n# 模块 ${g.no} · ${g.name}\n\n| 课次 | 讲义 | 复盘 |\n| --- | --- | --- |\n${rows}\n\n${lessonNote}\n`,
       )
       return { no: g.no, name: g.name, filename, count: g.lessons.length }
     })
@@ -392,23 +403,55 @@ function syncCourse(p, lessons) {
         .join('\n')}`
     : `| 课次 | 讲义 | 复盘 |\n| --- | --- | --- |\n${lessons.map((l) => `| 第 ${l.no} 课 | ${lessonLink(l)} | ${reviewCell(l.no)} |`).join('\n')}`
 
-  // 讲义摘要卡（courses/<slug>/l/<no>.md）：讲义本体是 public/ 静态页、不进搜索索引，
-  // 每课生成一张摘要卡承接搜索流量，卡内一键跳转交互讲义
+  // 每课一页（courses/<slug>/l/<no>.md）：
+  // - lessonMd 开启：转换器产出主题化全文页（方案 B），URL/permalink 与摘要卡时代一致
+  // - 未开启：摘要卡承接搜索流量（讲义本体是 public/ 静态页、不进搜索索引），卡内跳镜像
   const cardsDir = path.join(dir, 'l')
   fs.rmSync(cardsDir, { recursive: true, force: true })
   fs.mkdirSync(cardsDir, { recursive: true })
-  const cardLink = (no) => `/courses/${p.slug}/l/${no}/`
   lessons.forEach((l, i) => {
     const html = fs.readFileSync(path.join(projectRoot(p), 'lessons', l.file), 'utf8')
-    const summary = extractLessonText(html).slice(0, 800)
     const prev = lessons[i - 1]
     const next = lessons[i + 1]
     const moduleLine = l.module ? `**模块 ${l.module.no} · ${l.module.name}**\n\n` : ''
-    const nav = [
+
+    let pageBody
+    let navParts = [
       prev ? `[← ${prev.title}](${cardLink(prev.no)})` : '',
       `[课程目录](/courses/${p.slug}/)`,
       next ? `[${next.title} →](${cardLink(next.no)})` : '',
-    ].filter(Boolean).join(' · ')
+    ]
+    if (lessonMd) {
+      const conv = lessonHtmlToMarkdown(html, {
+        slug: p.slug,
+        onWarn: (m) => console.warn(`${m}（${p.name} ${l.file}）`),
+      })
+      // 讲义导航里的中间链接（如术语参考表）插在「课程目录」与下一课之间
+      navParts = [navParts[0], navParts[1], ...conv.nav.middle.map((m) => `[${m.text}](${m.url})`), navParts[2]]
+      const interactive = withBase(`/lessons/${p.slug}/lessons/${l.file}`)
+      pageBody = `# ${conv.headline}
+
+**${conv.metaLine}**
+
+> 本文为站内全文版（已纳入搜索，随堂测为折叠核对）。随堂测可点击作答的交互版：[**打开讲义**](${interactive}){target="_blank"}
+
+${conv.body}
+
+---
+
+${navParts.filter(Boolean).join(' · ')}
+`
+    } else {
+      const summary = extractLessonText(html).slice(0, 800)
+      pageBody = `${moduleLine}> 本页为摘要卡（供搜索与速览）。完整交互讲义（含随堂测）：[**打开讲义**](${withBase(`/lessons/${p.slug}/lessons/${l.file}`)}){target="_blank"}
+
+${summary}…
+
+---
+
+${navParts.filter(Boolean).join(' · ')}
+`
+    }
     writeAtomic(
       path.join(cardsDir, `${l.no}.md`),
       `---
@@ -417,14 +460,7 @@ createTime: ${fmtTime(new Date(l.mtimeMs))}
 permalink: ${cardLink(l.no)}
 ---
 
-${moduleLine}> 本页为摘要卡（供搜索与速览）。完整交互讲义（含随堂测）：[**打开讲义**](${withBase(`/lessons/${p.slug}/lessons/${l.file}`)}){target="_blank"}
-
-${summary}…
-
----
-
-${nav}
-`,
+${pageBody}`,
     )
   })
 
@@ -448,7 +484,7 @@ ${p.desc}
 
 ${p.plan ?? ''}
 
-> 已生成 **${lessons.length}** 课。讲义为独立 HTML 页面（含随堂测交互），点击在新标签页打开。
+> 已生成 **${lessons.length}** 课。${lessonMd ? '讲义正文站内直读（已纳入搜索），页内附交互版入口。' : '讲义为独立 HTML 页面（含随堂测交互），点击在新标签页打开。'}
 
 ## 目录
 
