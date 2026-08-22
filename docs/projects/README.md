@@ -40,7 +40,7 @@ GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（�
 
 | 仓库 | 简介 | 语言 | Stars | 最近推送 |
 | --- | --- | --- | --- | --- |
-| [blog](https://github.com/liuj66794-sys/blog) | L1U.J 的学习宇宙 —— 个人技术博客源码（VuePress 2 + Plume） | JavaScript | 0 | 2026-08-20 |
+| [blog](https://github.com/liuj66794-sys/blog) | L1U.J 的学习宇宙 —— 个人技术博客源码（VuePress 2 + Plume） | JavaScript | 0 | 2026-08-22 |
 | [liuj66794-sys.github.io](https://github.com/liuj66794-sys/liuj66794-sys.github.io) | L1U.J 的学习宇宙 —— 个人技术博客：五门课程、博客、知识库与项目墙 | JavaScript | 0 | 2026-08-14 |
 | [glm-5.3-intro](https://github.com/liuj66794-sys/glm-5.3-intro) | — | HTML | 0 | 2026-08-14 |
 | [kimi-production-grade-agent-pack](https://github.com/liuj66794-sys/kimi-production-grade-agent-pack) | 测试 | Python | 0 | 2026-04-26 |
