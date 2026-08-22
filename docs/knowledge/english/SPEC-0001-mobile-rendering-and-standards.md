@@ -1,6 +1,6 @@
 ---
 title: SPEC-0001-mobile-rendering-and-standards
-createTime: 2026/08/21 00:33:53
+createTime: 2026/08/21 12:19:23
 permalink: /knowledge/english/spec-0001-mobile-rendering-and-standards/
 ---
 # SPEC-0001：移动端渲染修复 + 页面开发规范固化

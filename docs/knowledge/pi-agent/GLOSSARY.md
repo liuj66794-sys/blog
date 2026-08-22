@@ -1,6 +1,6 @@
 ---
 title: GLOSSARY
-createTime: 2026/08/21 00:33:53
+createTime: 2026/08/21 12:19:23
 permalink: /knowledge/pi-agent/glossary/
 ---
 # Agent 求职课程 Glossary

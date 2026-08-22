@@ -7,10 +7,8 @@ tags:
 categories:
   - 工程技能
 description: 学到的内容 对照 mattpocock/skills 仓库（当前 v1.2.3）把学习素材同步到最新，关键变化： 改名：writinggreatskills → writingforagents（20260727，PR 650）。不只是改名——范围从"写 skill"扩到"写给 agent 看的任何…
-permalink: /blog/engineering-skills/0007-upstream-sync-2026-08/
+permalink: /blog/engineering-skills/0008-upstream-sync-2026-08/
 ---
-
-> 配套讲义：[第七课：使用 wayfinder 规划大型模糊项目](/blog/lessons/engineering-skills/lessons/0007-wayfinder.html){target="_blank"}（含随堂测，新标签页打开）
 
 # 上游仓库同步（2026-07-28 → 2026-08-07）
 

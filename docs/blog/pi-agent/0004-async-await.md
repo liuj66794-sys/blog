@@ -4,6 +4,8 @@ createTime: 2026-07-29 22:46:08
 tags:
   - TypeScript Agent
   - TypeScript
+categories:
+  - TypeScript Agent
 description: 学习者已完成第 4 课（阶段 0 模块 A 收官）：把 Tool 接口改为异步形态（execute 返回 Promise<string），新增 slowGreeter 模拟网络耗时，并用 async main 壳串起全部调用。 Evidence npm run start 正常输出与课程设计一致：两…
 permalink: /blog/pi-agent/0004-async-await/
 ---

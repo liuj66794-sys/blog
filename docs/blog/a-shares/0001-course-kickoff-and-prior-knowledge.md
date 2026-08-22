@@ -4,6 +4,8 @@ createTime: 2026-08-11 11:49:47
 tags:
   - A 股入门
   - 投资
+categories:
+  - A 股入门
 description: 用户（Bettina）在价值投资哲学层已有积累：知识库含 valueinvesting、compoundinterest、巴菲特/芒格系列页面，能讲清"买股票=买公司""能力圈""长期持有"的 why；但 A 股实操层（交易制度、盘面、费用、开户）为零——20260811 拷问会话中确认其对"100…
 permalink: /blog/a-shares/0001-course-kickoff-and-prior-knowledge/
 ---

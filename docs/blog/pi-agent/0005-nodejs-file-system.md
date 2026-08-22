@@ -4,6 +4,8 @@ createTime: 2026-08-06 10:56:54
 tags:
   - TypeScript Agent
   - TypeScript
+categories:
+  - TypeScript Agent
 description: 学习者完成第 5 课动手任务：注册表新增 read_file / write_file 两个真实 fs 工具，并在 main 里完成"先写、再读、再读不存在的"三连调用。更重要的是：学习者独立调试并正确诊断了自己代码里的三个问题，调试能力第一次有明确证据。 Evidence（学习者自行定位并修复） …
 permalink: /blog/pi-agent/0005-nodejs-file-system/
 ---
