@@ -11,7 +11,8 @@
 docs/
 ├── .vuepress/
 │   ├── config.ts          # VuePress 配置
-│   ├── theme.ts           # Plume 主题配置（集合/导航/搜索）
+│   ├── theme.ts           # Plume 主题配置（集合/导航/搜索，课程部分派生自 site-meta）
+│   ├── site-meta.mjs      # 站点元数据单一数据源（base/origin/课程名单）
 │   └── public/lessons/    # 讲义 HTML 原样托管（sync-learn 生成）
 ├── README.md              # 首页
 ├── blog/                  # 博客（post 集合，学习记录）
@@ -20,7 +21,10 @@ docs/
 └── projects/              # 项目墙（fetch-projects 生成）
 scripts/
 ├── sync-learn.mjs         # D:\01-Documents\learn → 站点内容
-└── fetch-projects.mjs     # GitHub API → 项目墙
+├── fetch-projects.mjs     # GitHub API → 项目墙
+├── check-links.mjs        # 站内死链校验（CI 门禁）
+├── serve.mjs              # 本地预览构建产物（与线上 base 一致）
+└── lib/                   # 共享纯函数 + node:test 单测
 ```
 
 ## 常用命令
@@ -32,7 +36,13 @@ pnpm fetch-projects   # 刷新 GitHub 项目墙
 pnpm docs:dev         # 本地开发（http://localhost:8080）
 pnpm docs:build       # 构建
 pnpm build            # sync + fetch-projects + build 全流程
+pnpm preview          # 本地预览构建产物（http://localhost:4173/blog/）
+pnpm test             # node:test 单测（scripts/lib）
+pnpm typecheck        # tsc 类型检查（VuePress 配置）
+pnpm verify           # 一键门禁：typecheck + test + build + 死链校验
 ```
+
+新增课程：在 `docs/.vuepress/site-meta.mjs` 的 `COURSES` 登记（导航/集合/分类名派生），并在 `scripts/sync-learn.mjs` 的 `PROJECTS` 补源仓库信息；两处缺一会在 sync/build 时快速失败。
 
 ## 内容更新流程
 
@@ -48,7 +58,7 @@ pnpm build            # sync + fetch-projects + build 全流程
 
 如需迁移到根路径 `liuj66794-sys.github.io/`：
 
-1. `docs/.vuepress/config.ts` 中 `base` 改回 `'/'`
+1. `docs/.vuepress/site-meta.mjs` 中 `base` 改回 `'/'`（config.ts 的 base、theme.ts 的 canonical、sync-learn/check-links 的链接拼接全部派生自这里，改一处即可）
 2. 推送代码到 `user-site` 远端（即 `liuj66794-sys.github.io` 仓库，main 分支）
 3. 网页打开 仓库 Settings → Pages → Source 选择 **GitHub Actions**（一次性手动操作）
 

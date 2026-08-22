@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.33.2",
   "description": "个人技术博客站点：学习内容 + 课程 + GitHub 项目 + 个人主页",
   "scripts": {
     "docs:dev": "vuepress dev docs",
@@ -10,14 +11,18 @@
     "docs:build": "vuepress build docs",
     "sync": "node scripts/sync-learn.mjs",
     "fetch-projects": "node scripts/fetch-projects.mjs",
+    "test": "node --test",
+    "typecheck": "tsc -p .",
+    "preview": "node scripts/serve.mjs",
+    "verify": "pnpm typecheck && pnpm test && pnpm build && node scripts/check-links.mjs",
     "build": "node scripts/sync-learn.mjs && node scripts/fetch-projects.mjs && vuepress build docs"
   },
   "devDependencies": {
     "@iconify/json": "^2.2.516",
     "@mathjax/src": "^4.1.3",
+    "@types/node": "^24.13.3",
     "@vuepress/bundler-vite": "2.0.0-rc.30",
     "@vuepress/plugin-feed": "2.0.0-rc.3",
-    "@vuepress/plugin-search": "2.0.0-rc.30",
     "gsap": "^3.15.0",
     "pinyin-pro": "^3.28.2",
     "typescript": "^5.9.3",
