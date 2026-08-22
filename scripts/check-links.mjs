@@ -11,21 +11,16 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { base } from '../docs/.vuepress/site-meta.mjs'
+import { walk } from './lib/learn-utils.mjs'
+import { urlToDistFile as mapUrl } from './lib/link-utils.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DOCS = path.resolve(__dirname, '..', 'docs')
 const DIST = path.resolve(process.argv[2] ?? path.join(DOCS, '.vuepress', 'dist'))
 
-/** 与 config.ts 保持同一数据来源；base 决定 URL 路径 → dist 文件的映射 */
-const SITE_BASE = (() => {
-  const config = fs.readFileSync(path.join(DOCS, '.vuepress', 'config.ts'), 'utf8')
-  const match = config.match(/base:\s*'([^']*)'/)
-  if (!match) {
-    console.error('[check-links] 无法从 config.ts 提取 base 配置（仅支持单引号字符串写法）。')
-    process.exit(1)
-  }
-  return match[1].replace(/\/$/, '')
-})()
+/** 与站点同一数据来源（site-meta.mjs）；base 决定 URL 路径 → dist 文件的映射 */
+const SITE_BASE = base.replace(/\/$/, '')
 
 /**
  * client.js fixPostsNavLinks 在运行时改写的裸链接（plume 上游缺陷的兜底）。
@@ -33,31 +28,25 @@ const SITE_BASE = (() => {
  */
 const RUNTIME_PATCHED = /^\/(archives|categories|tags)\/$/
 
-function walkFiles(dir, out = []) {
-  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-    const p = path.join(dir, e.name)
-    if (e.isDirectory()) walkFiles(p, out)
-    else out.push(p)
+/**
+ * 契约断言：RUNTIME_PATCHED 豁免以 client.js 的运行时补丁存在为前提。
+ * 这三条链接没有任何静态保障——补丁若被删/改名而豁免清单没同步清理，
+ * 它们断了 CI 也依然全绿。两处兜底必须同生同死。
+ */
+{
+  const clientSrc = fs.readFileSync(path.join(DOCS, '.vuepress', 'client.js'), 'utf8')
+  const patchAlive = /fixPostsNavLinks/.test(clientSrc) && /archives\|categories\|tags/.test(clientSrc)
+  if (!patchAlive) {
+    console.error('[check-links] client.js 中未找到 fixPostsNavLinks 补丁，但 RUNTIME_PATCHED 豁免清单仍在生效。')
+    console.error('  若上游已修复该缺陷：请同步删除 client.js 补丁、本豁免与本断言；否则这三条链接将失去所有保障。')
+    process.exit(1)
   }
-  return out
 }
 
-/** 站内 URL 路径 → dist 文件路径；返回 null 表示不在站点 base 内（外站/越界路径） */
-function urlToDistFile(pathname) {
-  let decoded
-  try {
-    decoded = decodeURIComponent(pathname)
-  } catch {
-    decoded = pathname
-  }
-  if (decoded === SITE_BASE || decoded === `${SITE_BASE}/`) return path.join(DIST, 'index.html')
-  if (!decoded.startsWith(`${SITE_BASE}/`)) return null
-  let rel = decoded.slice(SITE_BASE.length + 1)
-  if (rel.endsWith('/')) rel += 'index.html'
-  return path.join(DIST, rel)
-}
+/** 站内 URL 路径 → dist 文件路径；实现在 lib/link-utils.mjs（有 node:test 单测） */
+const urlToDistFile = (pathname) => mapUrl(pathname, DIST, SITE_BASE)
 
-const files = fs.existsSync(DIST) ? walkFiles(DIST) : []
+const files = fs.existsSync(DIST) ? walk(DIST) : []
 if (!files.length) {
   console.error(`[check-links] dist 为空或不存在：${DIST}（先执行构建）`)
   process.exit(1)

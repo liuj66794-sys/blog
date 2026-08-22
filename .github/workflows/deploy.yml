@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # PR 门禁：合并前跑构建 + 死链校验（deploy job 对 PR 跳过，不部署）
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -23,8 +25,7 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
+        # 版本以 package.json 的 packageManager 字段为准
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -34,6 +35,12 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Type check
+        run: pnpm typecheck
 
       # 讲义/博客/知识库内容由本地 sync-learn.mjs 同步后提交；
       # 项目墙在 CI 里刷新（获取最新 stars/描述）
@@ -59,6 +66,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

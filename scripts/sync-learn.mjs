@@ -18,6 +18,23 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+// base 单一数据来源：site-meta.mjs。讲义是 public/ 下的静态 .html，VuePress 不会
+// 给这类链接自动加 base，生成 Markdown 时必须显式拼上，否则子路径部署点击即 404。
+// 纯函数（frontmatter/链接重写/摘要提取等）在 lib/learn-utils.mjs，有 node:test 单测。
+import { COURSES } from '../docs/.vuepress/site-meta.mjs'
+import {
+  buildFrontmatter,
+  extractDescription,
+  extractLessonText,
+  fmtTime,
+  minimatchName,
+  parseFrontmatter,
+  rewriteRelativeLinks,
+  rewriteRootDocLinks,
+  sameMtime,
+  walk,
+  withBase,
+} from './lib/learn-utils.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DOCS = path.resolve(__dirname, '..', 'docs')
@@ -26,22 +43,6 @@ const LEARN_ROOT = process.env.LEARN_ROOT || 'D:\\01-Documents\\learn'
 const FORCE = process.argv.includes('--force')
 /** 镜像暂存目录（.vuepress 下，不进 public、不随构建拷贝），换入成功/失败都在结束时清理 */
 const STAGING_DIR = '.staging-lessons'
-
-/**
- * 站点 base 路径，从 config.ts 读取（单一数据来源）。
- * 讲义是 public/ 下的静态 .html，VuePress 不会给这类链接自动加 base，
- * 必须在生成 Markdown 时显式拼上，否则部署在子路径时点击即 404。
- */
-const SITE_BASE = (() => {
-  const config = fs.readFileSync(path.join(DOCS, '.vuepress', 'config.ts'), 'utf8')
-  const match = config.match(/base:\s*'([^']*)'/)
-  if (!match) {
-    console.error('[sync-learn] 无法从 config.ts 提取 base 配置（仅支持单引号字符串写法）。为避免讲义链接指向错误路径，已中止。')
-    process.exit(1)
-  }
-  return match[1]
-})()
-const withBase = (p) => `${SITE_BASE.replace(/\/$/, '')}${p}`
 
 /** 镜像时跳过的目录名（含所有点目录：.git/.playwright-mcp/.hallmark 等本地工具状态） */
 const EXCLUDE_DIRS = new Set(['node_modules', 'dist', 'tools'])
@@ -64,6 +65,9 @@ const MIRROR_KEEP = new Set([
   'lessons', 'assets', 'reference', 'modules', 'index.html',
   'MISSION.md', 'RESOURCES.md', 'GLOSSARY.md', 'ROADMAP.md', '课程总纲.md', 'tokens.css',
 ])
+
+/** 收录名单中的根级 md——知识库根文档链接重写的目标名单 */
+const ROOT_DOC_NAMES = [...MIRROR_KEEP].filter((n) => n.endsWith('.md'))
 
 /** 知识库收录的根级 md（存在才收；支持 * 通配） */
 const KNOWLEDGE_ROOT_FILES = ['课程总纲.md', 'CONTEXT.md', 'GLOSSARY.md', 'ROADMAP.md', 'design.md', 'STANDARDS.md', 'SPEC-*.md']
@@ -99,17 +103,12 @@ const PROJECTS = [
   },
 ]
 
-/* ---------------- 工具函数 ---------------- */
-
-function fmtTime(date) {
-  const p = (n) => String(n).padStart(2, '0')
-  return `${date.getFullYear()}-${p(date.getMonth() + 1)}-${p(date.getDate())} ${p(date.getHours())}:${p(date.getMinutes())}:${p(date.getSeconds())}`
-}
+/* ---------------- 工具函数（纯函数见 lib/learn-utils.mjs） ---------------- */
 
 /** 复制文件并保留源 mtime，返回是否实际复制 */
 function copyIfStale(src, dest) {
   const st = fs.statSync(src)
-  if (!FORCE && fs.existsSync(dest) && fs.statSync(dest).mtimeMs === st.mtimeMs) return false
+  if (!FORCE && fs.existsSync(dest) && sameMtime(fs.statSync(dest).mtimeMs, st.mtimeMs)) return false
   fs.mkdirSync(path.dirname(dest), { recursive: true })
   fs.copyFileSync(src, dest)
   fs.utimesSync(dest, st.atime, st.mtime)
@@ -150,82 +149,29 @@ function mirrorDir(srcDir, destDir) {
   }
 }
 
-function walk(dir, filter, out = []) {
-  if (!fs.existsSync(dir)) return out
-  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (e.isDirectory()) walk(path.join(dir, e.name), filter, out)
-    else if (e.isFile() && filter(e.name)) out.push(path.join(dir, e.name))
-  }
-  return out
-}
-
-/** 极简通配：只支持单个 *（如 SPEC-*.md），够本脚本用 */
-function minimatchName(name, pattern) {
-  const re = new RegExp('^' + pattern.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '[^/]*') + '$')
-  return re.test(name)
-}
-
-/** 解析 markdown frontmatter（仅顶层 key: value，够用即可） */
-function parseFrontmatter(text) {
-  const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/)
-  if (!m) return { fm: null, body: text }
-  const fm = {}
-  for (const line of m[1].split(/\r?\n/)) {
-    const kv = line.match(/^(\w[\w-]*):\s*(.*)$/)
-    if (kv) fm[kv[1]] = kv[2].replace(/^['"]|['"]$/g, '')
-  }
-  return { fm, body: text.slice(m[0].length) }
-}
-
-function buildFrontmatter(obj) {
-  const lines = Object.entries(obj).map(([k, v]) => {
-    if (Array.isArray(v)) return `${k}:\n${v.map((i) => `  - ${i}`).join('\n')}`
-    return `${k}: ${v}`
-  })
-  return `---\n${lines.join('\n')}\n---\n`
-}
-
-/** 学习记录里的相对链接重写：../xxx → <base>/lessons/<slug>/xxx（其余保持原样） */
-function rewriteRelativeLinks(text, slug) {
-  return text.replace(/\]\((\.\.\/[^)\s]+)([^)]*)\)/g, (_, rel, tail) => {
-    const clean = rel.replace(/^\.\//, '').replace(/^\.\.\//, '')
-    return `](${withBase(`/lessons/${slug}/${clean}`)}${tail})`
-  })
-}
-
-/** 从正文提取摘要：首个非标题段落，去除 markdown 标记，截断到 150 字 */
-function extractDescription(body) {
-  const text = body
-    .replace(/^#\s+.+$/m, '')
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/[#>*`~\-\[\]()!|]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-  return text.length > 150 ? `${text.slice(0, 150)}…` : text
-}
-
-/**
- * 知识库 md 里的根文档相对链接重写：](./MISSION.md) / ](MISSION.md) / ](../MISSION.md)
- * → ](/lessons/<slug>/MISSION.md)。
- * md 渲染成页面后相对链接会断裂（页面目录 ≠ 源文件所在目录），
- * 统一改指镜像里原样托管的根文档，与讲义导航栏的链接方式一致。
- */
-function rewriteRootDocLinks(text, slug) {
-  const rootDocs = [...MIRROR_KEEP].filter((n) => n.endsWith('.md'))
-    .map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-  const pattern = new RegExp(`\\]\\((?:\\./|\\.\\./)?(${rootDocs.join('|')})\\)`, 'g')
-  return text.replace(pattern, (_, doc) => `](${withBase(`/lessons/${slug}/${doc}`)})`)
-}
-
 /* ---------------- 各同步环节 ---------------- */
 
 function projectRoot(p) {
   return path.join(LEARN_ROOT, p.src, p.sub)
 }
 
+/** rename 带重试：Windows 上瞬时文件锁（杀毒/索引）会导致 EPERM，稍候重试即可 */
+function renameWithRetry(from, to, attempts = 5) {
+  for (let i = 0; ; i++) {
+    try {
+      fs.renameSync(from, to)
+      return
+    } catch (err) {
+      if (i === attempts - 1) throw err
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 200)
+    }
+  }
+}
+
 /** 1. 收录名单镜像（讲义 + assets + reference + 被讲义链接的根文档，保持相对结构）。
  *  事务化：先全量镜像到暂存目录，数量校验通过后整体换入——
- *  中途任何异常旧目录原样保留，不会出现半成品镜像。 */
+ *  换入采用"旧目录改名 backup → staging 就位 → 失败回滚"三步，
+ *  消除"旧已删、新未入"的丢失窗口（曾发生 rename EPERM 导致整个镜像被删）。 */
 function syncMirror(p) {
   const src = projectRoot(p)
   const dest = path.join(PUBLIC_LESSONS, p.slug)
@@ -257,8 +203,26 @@ function syncMirror(p) {
       `[sync-learn] 新镜像仅 ${stagedCount} 个文件，不足现存 ${destCount} 的一半，疑似源目录/收录名单异常，已中止换入（已发布镜像未受影响）。\n  若确属正常的大规模缩减，请先手动清空 ${dest} 后重跑。`,
     )
   }
-  fs.rmSync(dest, { recursive: true, force: true })
-  fs.renameSync(staging, dest)
+  // 三步换入：dest → backup（同卷 rename 瞬时完成）→ staging → dest；失败回滚
+  const backup = path.join(DOCS, '.vuepress', STAGING_DIR, `${p.slug}.bak`)
+  fs.rmSync(backup, { recursive: true, force: true })
+  const hadDest = fs.existsSync(dest)
+  if (hadDest) renameWithRetry(dest, backup)
+  try {
+    renameWithRetry(staging, dest)
+  } catch (err) {
+    if (hadDest && fs.existsSync(backup)) {
+      try {
+        renameWithRetry(backup, dest)
+      } catch {
+        // rename 回滚仍失败（极端情况），用复制把旧镜像救回来
+        fs.cpSync(backup, dest, { recursive: true })
+      }
+      console.warn(`[sync-learn] ${p.name} 镜像换入失败，已回滚为旧镜像：${err instanceof Error ? err.message : err}`)
+    }
+    throw err
+  }
+  fs.rmSync(backup, { recursive: true, force: true })
 }
 
 /** 2. 学习记录 → 博客文章（按课号互链配套讲义） */
@@ -277,10 +241,12 @@ function syncBlog(p, lessons) {
     // 摘要取自原文正文，避免被下方插入的讲义引导行污染
     const description = (fm && fm.description) || extractDescription(body)
     // 显式 permalink：避免 VuePress slugify 改写文件名（如 day2 → day-2）导致互链失配
+    // categories 以课程名归类，补齐 /blog/categories/ 页内容（方案 P1 遗留项）
     const fmText = buildFrontmatter({
       title,
       createTime,
       tags,
+      categories: [p.name],
       description,
       permalink: `/blog/${p.slug}/${f.replace(/\.md$/, '')}/`,
     })
@@ -293,7 +259,9 @@ function syncBlog(p, lessons) {
     const content = fmText + '\n' + lessonNote + rewriteRelativeLinks(body, p.slug).trim() + '\n'
     const dest = path.join(DOCS, 'blog', p.slug, f)
     const st = fs.statSync(src)
-    if (!FORCE && fs.existsSync(dest) && fs.statSync(dest).mtimeMs === st.mtimeMs) continue
+    // 按内容而非 mtime 跳过：生成模板变更（如新增 categories 字段）时
+    // 源文件 mtime 没变，mtime 跳过会让模板改动永远落不了地
+    if (!FORCE && fs.existsSync(dest) && fs.readFileSync(dest, 'utf8') === content) continue
     writeAtomic(dest, content, st)
     copied++
   }
@@ -322,9 +290,30 @@ function syncKnowledgeFiles(p) {
   }
   for (const { src, rel } of sources) {
     const dest = path.join(DOCS, 'knowledge', p.slug, rel)
-    const text = rewriteRootDocLinks(fs.readFileSync(src, 'utf8'), p.slug)
+    const srcText = fs.readFileSync(src, 'utf8')
+    let text = rewriteRootDocLinks(srcText, p.slug, ROOT_DOC_NAMES)
     const st = fs.statSync(src)
-    if (!FORCE && fs.existsSync(dest) && fs.statSync(dest).mtimeMs === st.mtimeMs) continue
+    // 源文件无 frontmatter 时，为它生成与 plume autoFrontmatter 注入等价的
+    // frontmatter（permalink 取既有值或按 slug/路径推导，createTime 保留既有
+    // 或取源 mtime）——否则构建期注入与 sync 裸复制互相覆盖，git status 永远有假变更。
+    if (!parseFrontmatter(srcText).fm) {
+      const prevBlock = fs.existsSync(dest)
+        ? fs.readFileSync(dest, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/)
+        : null
+      const prevFm = prevBlock ? parseFrontmatter(prevBlock[0]).fm : null
+      const relNoExt = rel.replace(/\.md$/, '')
+      const baseName = path.posix.basename(relNoExt)
+      const permalink = (prevFm && prevFm.permalink)
+        || (/^readme$/i.test(baseName)
+          ? `/knowledge/${p.slug}/${path.posix.dirname(relNoExt).replace(/^\.$/, '')}/`.replace(/\/+/g, '/')
+          : `/knowledge/${p.slug}/${relNoExt.toLowerCase()}/`)
+      const createTime = (prevFm && prevFm.createTime) || fmtTime(st.mtime).replace(/-/g, '/')
+      const title = (prevFm && prevFm.title)
+        || (text.match(/^#\s+(.+)$/m)?.[1] ?? baseName).replace(/\.md$/i, '').trim()
+      text = buildFrontmatter({ title, createTime, permalink }) + text
+    }
+    // 按内容而非 mtime 跳过（理由同 syncBlog：模板/链接重写逻辑变更要能落地）
+    if (!FORCE && fs.existsSync(dest) && fs.readFileSync(dest, 'utf8') === text) continue
     writeAtomic(dest, text, st)
     copied++
   }
@@ -354,18 +343,6 @@ function listLessons(p) {
     ? fs.readdirSync(lessonsDir).filter((f) => f.endsWith('.html')).sort()
       .map((f) => parseLesson(path.join(lessonsDir, f)))
     : []
-}
-
-/** 从讲义 HTML 提取纯文本（供摘要卡），去脚本样式与标签 */
-function extractLessonText(html) {
-  return html
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<!--[\s\S]*?-->/g, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&nbsp;/gi, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
 }
 
 /** 4. 课程目录页（含博客复盘互链列） */
@@ -550,6 +527,36 @@ ${refRows || '| （暂无） |'}
 `,
   )
   return { docs: mdFiles.length, refs: refFiles.length }
+}
+
+/* ---------------- 名单一致性断言 ---------------- */
+
+/**
+ * PROJECTS 承载源仓库信息（src/sub/tags/desc），COURSES（site-meta.mjs）派生
+ * 导航/集合/分类名——两处名单一旦漂移，课程会"有页面没导航"或"导航指向空目录"。
+ * 这里在动任何文件前做快速失败：slug 必须互相覆盖且显示名一致；
+ * COURSES 多出条目仅告警（允许纯手写、无学习仓库源的课程）。
+ */
+{
+  const courseBySlug = new Map(COURSES.map((c) => [c.slug, c]))
+  const fatal = []
+  for (const p of PROJECTS) {
+    const c = courseBySlug.get(p.slug)
+    if (!c) {
+      fatal.push(`[sync-learn] PROJECTS 中的 ${p.slug}（${p.name}）未登记到 site-meta.mjs 的 COURSES，导航/集合/分类页不会包含它。请先在 COURSES 补一行。`)
+    } else if (c.name !== p.name) {
+      fatal.push(`[sync-learn] 课程显示名不一致：site-meta.mjs COURSES 为「${c.name}」，sync-learn PROJECTS 为「${p.name}」（${p.slug}）。请统一后重跑。`)
+    }
+  }
+  if (fatal.length) {
+    for (const msg of fatal) console.error(msg)
+    process.exit(1)
+  }
+  for (const c of COURSES) {
+    if (!PROJECTS.some((p) => p.slug === c.slug)) {
+      console.warn(`[sync-learn] COURSES 中的 ${c.slug}（${c.name}）没有对应的 PROJECTS 源仓库，跳过其内容同步（仅出现在导航/集合中）。`)
+    }
+  }
 }
 
 /* ---------------- 主流程 ---------------- */

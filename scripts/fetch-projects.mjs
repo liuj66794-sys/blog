@@ -87,7 +87,7 @@ function render(repos) {
   const tableRows = rest
     .map((r) => {
       const pushed = r.pushed_at ? r.pushed_at.slice(0, 10) : '-'
-      return `| [${r.name}](${r.html_url}) | ${esc(r.description) || '—'} | ${r.language || '—'} | ${r.stargazers_count} | ${pushed} |`
+      return `| [${r.name}](${r.html_url}) | ${esc(r.description) || '—'} | ${r.language || '—'} | ${r.stargazers_count ?? 0} | ${pushed} |`
     })
     .join('\n')
 

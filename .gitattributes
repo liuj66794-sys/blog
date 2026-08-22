@@ -1,0 +1,25 @@
+# 行尾统一：仓库与工作区都用 LF。
+# 生成脚本（sync-learn 等）按 \n 写文件，Windows autocrlf 默认会在检出时转成
+# CRLF，导致 git 反复警告"LF will be replaced by CRLF"、sync 的字节级内容比对
+# 与检出结果不一致。eol=lf 让工作区保持 LF，checkout 与脚本输出字节一致。
+# 已跟踪文件无需 renormalize（入库本就是 LF，本文件只改变检出行为）。
+* text=auto eol=lf
+
+# 二进制资源不做任何转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.avif binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+*.mp3 binary
+*.mp4 binary
+*.webm binary
+*.pdf binary
+*.zip binary

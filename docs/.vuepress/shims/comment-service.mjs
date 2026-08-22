@@ -6,10 +6,10 @@
  * 上游修复后（exports 含 ./service）可直接删除本文件与 config.ts 里的 alias。
  */
 import { computed, defineComponent, h } from 'vue'
-// 应用源文件经 exports 子路径解析会失败（./components/* 未对 app 上下文开放），
-// 直接相对路径引 dist 文件；GiscusComment 内部会自行读取注入的评论选项
-import { useGiscusOptions } from '../../../node_modules/@vuepress/plugin-comment/dist/client/index.js'
-import GiscusComment from '../../../node_modules/@vuepress/plugin-comment/dist/client/components/GiscusComment.js'
+// 走包 exports 表里的公开子路径（rc.131 已声明 ./client 与 ./components/*），
+// 不依赖 pnpm hoisting 布局；GiscusComment 内部会自行读取注入的评论选项
+import { useGiscusOptions } from '@vuepress/plugin-comment/client'
+import GiscusComment from '@vuepress/plugin-comment/components/GiscusComment'
 
 export default defineComponent({
   name: 'CommentServiceShim',

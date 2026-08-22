@@ -1,23 +1,35 @@
 import { defineThemeConfig } from 'vuepress-theme-plume'
+import { COURSES, origin, siteUrl } from './site-meta.mjs'
 
-const avatar = 'https://github.com/liuj66794-sys.png'
+// 头像本地化（public/avatar.png）。logo/profile 交给 plume 自动补 base（手动拼会双重前缀）；
+// og:image 类必须绝对 URL
+const avatar = '/avatar.png'
+const avatarAbsolute = `${siteUrl}/avatar.png`
+
+/** 博客目录 slug → 课程显示名（分类页分组标签用；名单单一来源见 site-meta.mjs COURSES） */
+const COURSE_NAMES: Record<string, string> = Object.fromEntries(COURSES.map((c) => [c.slug, c.name]))
 
 export default defineThemeConfig({
   logo: avatar,
-  repo: 'liuj66794-sys',
+  // editLink 实际经 resolveThemeData 透传进 themeData 生效（默认 true）；
+  // ThemeConfig 类型没声明此字段是上游类型缺口。@ts-expect-error：
+  // 上游补上类型后这里会报"未使用"，提醒删除标记
+  // @ts-expect-error plume ThemeConfig 缺 editLink 声明
   editLink: false,
   appearance: true,
-  hostname: 'https://liuj66794-sys.github.io',
+  hostname: origin,
   plugins: {
     seo: {
-      // page.path 不含 base，canonical 前缀需带上 /blog；迁移根域名时同步改为站点根
-      canonical: 'https://liuj66794-sys.github.io/blog',
-      fallBackImage: avatar,
+      // page.path 不含 base，canonical 前缀需带 base；siteUrl 已含（派生自 site-meta.mjs）
+      canonical: siteUrl,
+      fallBackImage: avatarAbsolute,
       // 首页按 website 标注，其余有源文件的页面按 article
-      isArticle: (page) => Boolean(page.filePathRelative && page.path !== '/'),
+      // （用结构化类型标注，不依赖 @vuepress/core 的可访问性）
+      isArticle: (page: { filePathRelative: string | null; path: string }) =>
+        Boolean(page.filePathRelative && page.path !== '/'),
     },
-    // giscus 评论（数据存 GitHub Discussions，仓库 2026-08-21 已启用 Discussions）。
-    // 剩余前置条件：giscus app 安装到仓库 https://github.com/apps/giscus
+    // giscus 评论（数据存 GitHub Discussions）。前置条件均已验证（2026-08-21）：
+    // 仓库已启用 Discussions，giscus app 已安装（经 giscus.app/api 验证可访问仓库讨论）。
     comment: {
       type: 'giscus',
       repo: 'liuj66794-sys/blog',
@@ -51,13 +63,7 @@ export default defineThemeConfig({
     { text: '博客', link: '/blog/' },
     {
       text: '课程',
-      items: [
-        { text: 'A 股入门', link: '/courses/a-shares/' },
-        { text: 'TypeScript Agent', link: '/courses/pi-agent/' },
-        { text: '工程技能', link: '/courses/engineering-skills/' },
-        { text: '英语教学', link: '/courses/english/' },
-        { text: '政策学习', link: '/courses/policy/' },
-      ],
+      items: COURSES.map((c) => ({ text: c.name, link: `/courses/${c.slug}/` })),
     },
     { text: '知识库', link: '/knowledge/' },
     { text: '项目', link: '/projects/' },
@@ -70,42 +76,20 @@ export default defineThemeConfig({
       title: '博客',
       link: '/blog/',
       autoFrontmatter: { permalink: 'filepath' },
+      // 分类默认取目录 slug（a-shares 等），映射为课程显示名；id 不变，分类页 URL 稳定
+      categoriesTransform: (categories) =>
+        categories.map((c) => ({ ...c, name: COURSE_NAMES[c.name] ?? c.name })),
     },
-    {
-      type: 'doc',
-      dir: 'courses/a-shares',
-      title: 'A 股入门',
-      sidebar: 'auto',
-      autoFrontmatter: { permalink: 'filepath' },
-    },
-    {
-      type: 'doc',
-      dir: 'courses/pi-agent',
-      title: 'TypeScript Agent',
-      sidebar: 'auto',
-      autoFrontmatter: { permalink: 'filepath' },
-    },
-    {
-      type: 'doc',
-      dir: 'courses/engineering-skills',
-      title: '工程技能',
-      sidebar: 'auto',
-      autoFrontmatter: { permalink: 'filepath' },
-    },
-    {
-      type: 'doc',
-      dir: 'courses/english',
-      title: '英语教学',
-      sidebar: 'auto',
-      autoFrontmatter: { permalink: 'filepath' },
-    },
-    {
-      type: 'doc',
-      dir: 'courses/policy',
-      title: '政策学习',
-      sidebar: 'auto',
-      autoFrontmatter: { permalink: 'filepath' },
-    },
+    // 课程 doc 集合由 COURSES 名单派生（目录/标题一一对应，配置项全同）。
+    // as const：map 展开进数组字面量后不再有字面量上下文，不加会把
+    // 'doc'/'auto'/'filepath' widen 成 string 而 theme 集合类型不收
+    ...COURSES.map((c) => ({
+      type: 'doc' as const,
+      dir: `courses/${c.slug}`,
+      title: c.name,
+      sidebar: 'auto' as const,
+      autoFrontmatter: { permalink: 'filepath' as const },
+    })),
     {
       type: 'doc',
       dir: 'knowledge',
