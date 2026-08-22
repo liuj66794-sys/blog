@@ -429,11 +429,10 @@ function syncCourse(p, lessons) {
       // 讲义导航里的中间链接（如术语参考表）插在「课程目录」与下一课之间
       navParts = [navParts[0], navParts[1], ...conv.nav.middle.map((m) => `[${m.text}](${m.url})`), navParts[2]]
       const interactive = withBase(`/lessons/${p.slug}/lessons/${l.file}`)
-      pageBody = `# ${conv.headline}
+      const metaLine = conv.metaLine ? `**${conv.metaLine}**\n\n` : ''
+      pageBody = `# ${conv.headline || l.title}
 
-**${conv.metaLine}**
-
-> 本文为站内全文版（已纳入搜索，随堂测为折叠核对）。随堂测可点击作答的交互版：[**打开讲义**](${interactive}){target="_blank"}
+${metaLine}> 本文为站内全文版（已纳入搜索，随堂测为折叠核对）。随堂测可点击作答的交互版：[**打开讲义**](${interactive}){target="_blank"}
 
 ${conv.body}
 

@@ -17,6 +17,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const LESSONS_DIR = path.resolve(__dirname, '../../docs/.vuepress/public/lessons/a-shares/lessons')
 
 const convert = (html, onWarn) => lessonHtmlToMarkdown(html, { slug: 'a-shares', onWarn })
+const convertAs = (slug, html) => lessonHtmlToMarkdown(html, { slug })
 
 const realLessons = fs.existsSync(LESSONS_DIR)
   ? fs.readdirSync(LESSONS_DIR).filter((f) => f.endsWith('.html')).sort().map((f) => ({
@@ -98,7 +99,7 @@ test('代码块：<pre><code> 转围栏并解码实体（pi-agent 风格合成�
 
 test('未知块兜底：class 不认识时告警且内容不丢', () => {
   const warns = []
-  const html = '<body><h1>t</h1><div class="callout">一段未知语义的文字</div><p>普通段</p></body>'
+  const html = '<body><h1>t</h1><div class="mystery-box">一段未知语义的文字</div><p>普通段</p></body>'
   const conv = convert(html, (m) => warns.push(m))
   assert.ok(conv.body.includes('一段未知语义的文字'), '未知块内容丢失')
   assert.ok(conv.body.includes('普通段'), '未知块后的正常块丢失')
@@ -135,4 +136,83 @@ test('表格竖线转义：单元格内 | 不破坏表格', () => {
   const html = '<body><h1>t</h1><table><tr><th>列</th></tr><tr><td>a|b</td></tr></table></body>'
   const conv = convert(html)
   assert.ok(conv.body.includes('| a\\|b |'), `竖线未转义：${conv.body}`)
+})
+
+/* ---------------- 其余四门课模板族 ---------------- */
+
+const FAMILY_DIR = (slug) => path.resolve(__dirname, '../../docs/.vuepress/public/lessons', slug, 'lessons')
+const familyLesson = (slug, file) => fs.readFileSync(path.join(FAMILY_DIR(slug), file), 'utf8')
+
+test('pi-agent 族：recall 折叠答案、callout 标题、button.option 选项、字母答案', () => {
+  const conv = convertAs('pi-agent', familyLesson('pi-agent', '0005-nodejs-file-system.html'))
+  assert.ok(conv.metaLine.includes('阶段 0 · 模块 B'), 'lesson-meta（纯文本形态）未捕获')
+  assert.ok(conv.body.includes('::: info 为什么学这个 · Mission 关联'), 'callout label 标题缺失')
+  assert.ok(conv.body.includes('::: details 显示答案'), 'recall 折叠答案缺失')
+  assert.ok(conv.body.includes('只暂停当前函数，不冻住整个程序'), 'recall 答案内容缺失')
+  // quiz：data-answer=b（字母）+ button.option[data-key]；泛型文本已转义防 Vue 误解析
+  assert.ok(conv.body.includes('**答案：B（Promise&lt;string&gt;）**'), '字母答案解析错误')
+  assert.ok(conv.body.includes('writeFile 对不存在的文件会创建'), 'data-explain 解析缺失')
+  assert.ok(conv.body.includes('- D. boolean 成功与否'), '选项 D 缺失')
+  // further 的课程导航链接重写：0004-*.html → 站内课页
+  assert.ok(conv.body.includes('](/courses/pi-agent/l/4/)') || conv.nav.prev, '相邻课链接未重写')
+})
+
+test('engineering-skills 族：label 选项、大写字母答案、script 解析提取、step 编号', () => {
+  const conv = convertAs('engineering-skills', familyLesson('engineering-skills', '0002-grill-with-docs.html'))
+  assert.ok(conv.body.includes('::: info 主源推荐（Primary Source）'), 'callout-title 标题缺失')
+  assert.ok(/\*\*1\.\*\* \*\*按轮/.test(conv.body), 'step 编号段落缺失')
+  // quiz：data-answer="C"（大写）+ label>input[value]
+  assert.ok(conv.body.includes('**答案：C（都不写）**'), '大写字母答案错误')
+  // 解析来自页尾 script 的 explanations 对象（正确项文本）
+  assert.ok(conv.body.includes('正确。这是具体实现细节，应出现在 spec 或代码里'), 'script 解析未提取')
+  assert.ok(conv.body.includes('- A. CONTEXT.md'), 'label 选项缺失')
+})
+
+test('english 族：card 容器、ul[data-answer] 索引答案、h4 题号合并', () => {
+  const conv = convertAs('english', familyLesson('english', '0002-day1-indefinite-pronouns-practice.html'))
+  assert.ok(conv.body.includes('::: info 做题第一步：先数个数'), 'card-info 容器与 h3 标题缺失')
+  assert.ok(conv.body.includes('::: tip 任务 1：画对比表格'), 'card-success→tip 容器缺失')
+  assert.ok(conv.body.includes('**第 1 题：I have two dictionaries'), 'h4 题号未合并进题干')
+  assert.ok(conv.body.includes('**答案：B（the other）**'), 'ul[data-answer=1] 索引答案错误')
+  assert.ok(conv.body.includes('两者中的另一个 → the other'), 'data-explain 解析缺失')
+  assert.ok(conv.body.includes('[语法速查手册 §1](/blog/lessons/english/reference/grammar-points.html)'), '镜像相对链接未重写')
+})
+
+test('policy 族：subtitle→metaLine、compare 对比、onclick 布尔答案、口诀容器', () => {
+  const conv = convertAs('policy', familyLesson('policy', '0001-party-history-events.html'))
+  assert.ok(conv.metaLine.includes('对应错题：第1题、第11题'), 'subtitle 未捕获为 metaLine')
+  assert.ok(conv.body.includes('::: danger'), 'compare-wrong→danger 缺失')
+  assert.ok(conv.body.includes('::: tip'), 'compare-right/card-tip→tip 缺失')
+  assert.ok(conv.body.includes('::: tip 记忆口诀'), 'mnemonic 容器缺失')
+  assert.ok(!conv.body.includes('本课口诀：'), '口诀容器标题与正文前缀重复')
+  // quiz：onclick checkAnswer(this, true, ...) 标记答案，选项自带 A. 前缀（应剥掉防重复）
+  assert.ok(conv.body.includes('**答案：C（遵义会议）**'), 'onclick 布尔答案解析错误')
+  assert.ok(conv.body.includes('- A. 中共一大'), '选项应去重字母前缀')
+  // nav：下一课 + 两个参考
+  assert.equal(conv.nav.next?.url, '/courses/policy/l/2/')
+  assert.equal(conv.nav.middle.length, 2)
+})
+
+test('policy timeline：时间线项转为加粗年份行', () => {
+  const conv = convertAs('policy', familyLesson('policy', '0004-military-building.html'))
+  assert.ok(conv.body.includes('**1927.8.1 南昌起义** —— 打响第一枪'), `时间线转换缺失：${conv.body.slice(0, 200)}`)
+})
+
+test('五门课全部讲义：结构完整、无块级残留、quiz 全量转换', () => {
+  const slugs = ['a-shares', 'pi-agent', 'engineering-skills', 'english', 'policy']
+  for (const slug of slugs) {
+    const dir = FAMILY_DIR(slug)
+    const files = fs.readdirSync(dir).filter((f) => f.endsWith('.html')).sort()
+    assert.ok(files.length >= 4, `${slug} 讲义不足`)
+    for (const f of files) {
+      const html = fs.readFileSync(path.join(dir, f), 'utf8')
+      const warns = []
+      const conv = lessonHtmlToMarkdown(html, { slug, onWarn: (m) => warns.push(m) })
+      assert.ok(conv.body.length > 800, `${slug}/${f}：正文过短`)
+      assert.ok(!/<div|onclick=|data-answer|<button|class="/.test(conv.body), `${slug}/${f}：残留交互标记`)
+      const quizCount = (html.match(/class="quiz[\s"]/g) || []).length
+      const detailsCount = (conv.body.match(/::: details /g) || []).length
+      assert.ok(detailsCount >= quizCount, `${slug}/${f}：quiz ${quizCount} 个仅转出 ${detailsCount} 个`)
+    }
+  }
 })
