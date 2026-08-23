@@ -2,6 +2,7 @@
 title: 工程技能
 createTime: 2026/08/14 20:11:42
 permalink: /courses/engineering-skills/
+banner: /images/covers/engineering-skills.png
 ---
 
 # 工程技能

@@ -2,6 +2,7 @@
 title: A 股入门
 createTime: 2026/08/14 20:11:42
 permalink: /courses/a-shares/
+banner: /images/covers/a-shares.png
 ---
 
 # A 股入门

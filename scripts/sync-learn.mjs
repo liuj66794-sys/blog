@@ -352,6 +352,12 @@ function syncCourse(p, lessons) {
   fs.mkdirSync(dir, { recursive: true })
   // 讲义是否生成站内 Markdown 全文页（方案 B 试点）：以 site-meta COURSES 的 lessonMd 为准
   const lessonMd = COURSES.find((c) => c.slug === p.slug)?.lessonMd === true
+  // 课程 og 分享图（scripts/gen-covers.mjs 生成）。banner 是 @vuepress/plugin-seo
+  // 认识的 frontmatter 字段：/ 开头的站内路径会被自动拼成 hostname+base 绝对 URL；
+  // plume 主题不消费此字段、无渲染副作用。封面缺失时跳过注入，避免 og:image 404。
+  const coverRel = `/images/covers/${p.slug}.png`
+  const banner = fs.existsSync(path.join(DOCS, '.vuepress', 'public', coverRel)) ? coverRel : null
+  const bannerFm = banner ? `banner: ${banner}\n` : ''
   const cardLink = (no) => `/courses/${p.slug}/l/${no}/`
 
   // 博客复盘按课号匹配：docs/blog/<slug>/000N-*.md → /blog/<slug>/<article>/
@@ -391,7 +397,7 @@ function syncCourse(p, lessons) {
       const createTime = fmtTime(new Date(Math.min(...g.lessons.map((l) => l.mtimeMs))))
       writeAtomic(
         path.join(dir, filename),
-        `---\ntitle: 模块 ${g.no} · ${g.name}\ncreateTime: ${createTime}\npermalink: ${permalink}\n---\n\n# 模块 ${g.no} · ${g.name}\n\n| 课次 | 讲义 | 复盘 |\n| --- | --- | --- |\n${rows}\n\n${lessonNote}\n`,
+        `---\ntitle: 模块 ${g.no} · ${g.name}\ncreateTime: ${createTime}\npermalink: ${permalink}\n${bannerFm}---\n\n# 模块 ${g.no} · ${g.name}\n\n| 课次 | 讲义 | 复盘 |\n| --- | --- | --- |\n${rows}\n\n${lessonNote}\n`,
       )
       return { no: g.no, name: g.name, filename, count: g.lessons.length }
     })
@@ -457,7 +463,7 @@ ${navParts.filter(Boolean).join(' · ')}
 title: ${l.title}
 createTime: ${fmtTime(new Date(l.mtimeMs))}
 permalink: ${cardLink(l.no)}
----
+${bannerFm}---
 
 ${pageBody}`,
     )
@@ -475,7 +481,7 @@ ${pageBody}`,
 title: ${p.name}
 createTime: ${createTime}
 permalink: /courses/${p.slug}/
----
+${bannerFm}---
 
 # ${p.name}
 

@@ -2,6 +2,7 @@
 title: 模块 1 · 概念扫盲
 createTime: 2026-08-16 17:52:11
 permalink: /courses/a-shares/module-01/
+banner: /images/covers/a-shares.png
 ---
 
 # 模块 1 · 概念扫盲

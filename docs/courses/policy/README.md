@@ -2,6 +2,7 @@
 title: 政策学习
 createTime: 2026/08/14 20:11:42
 permalink: /courses/policy/
+banner: /images/covers/policy.png
 ---
 
 # 政策学习

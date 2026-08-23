@@ -1,0 +1,44 @@
+# 外链巡检（周定时）：站内死链由 deploy.yml 的 check-links 把关，
+# 外链腐坏靠这里的定期探测。死链 → 退出码 1 → 定时工作流失败邮件通知；
+# 明细写入步骤摘要（GITHUB_STEP_SUMMARY）。软失败（403/429 反爬）只记录不判死。
+name: External Link Audit
+
+on:
+  schedule:
+    # 周一 10:00（北京时间）＝ UTC 02:00
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: link-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build site
+        run: |
+          node scripts/fetch-projects.mjs
+          pnpm docs:build
+
+      # 死链 → 退出码 1 → 定时工作流失败，GitHub 会邮件通知仓库所有者；
+      # 报告明细写入步骤摘要。软失败（403/429 反爬）只记录不判死。
+      - name: Check external links
+        run: node scripts/check-external-links.mjs
