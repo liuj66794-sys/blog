@@ -4,7 +4,7 @@
  *
  * 数据源优先级：
  *   1. gh CLI（本地已登录，无需配置）
- *   2. GH_TOKEN / GITHUB_TOKEN 环境变量（CI 中使用）
+ *   2. GitHub API（CI 优先使用 GH_TOKEN / GITHUB_TOKEN，本地可匿名读取公开仓库）
  *   3. 都不可用 → 保留已有生成文件（首次则写占位页），构建不中断
  *
  * 用法：node scripts/fetch-projects.mjs
@@ -13,13 +13,12 @@ import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { renderRepositoriesPage } from './lib/project-page.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const OUT = path.resolve(__dirname, '..', 'docs', 'projects', 'README.md')
+const OUT = path.resolve(__dirname, '..', 'docs', 'projects', 'repositories.md')
 
 const USER = 'liuj66794-sys'
-/** 方案 §5.2 的四个主力项目 */
-const FEATURED = ['PolicyAnalyzerPro', 'Tlisily', 'boxuegu', 'mattpocock-skills-learning']
 
 function fetchViaGh() {
   try {
@@ -34,13 +33,18 @@ function fetchViaGh() {
   }
 }
 
-async function fetchViaToken() {
+async function fetchViaApi() {
   const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN
-  if (!token) return null
   try {
+    const headers = {
+      Accept: 'application/vnd.github+json',
+      'User-Agent': 'blog-fetch-projects',
+    }
+    if (token) headers.Authorization = `Bearer ${token}`
+
     const res = await fetch(
       `https://api.github.com/users/${USER}/repos?per_page=100&sort=pushed`,
-      { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'blog-fetch-projects' } },
+      { headers },
     )
     return res.ok ? await res.json() : null
   } catch {
@@ -48,99 +52,23 @@ async function fetchViaToken() {
   }
 }
 
-const esc = (s) =>
-  (s ?? '').replace(/\|/g, '\\|').replace(/\r?\n+/g, ' ').trim()
-
-/** LinkCard description 里的 HTML 属性值转义 */
-const escAttr = (s) => (s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/\r?\n+/g, ' ').trim()
-
-/** 描述截断，避免卡片过高 */
-const brief = (s, n = 64) => {
-  const t = (s ?? '').trim()
-  return t.length > n ? `${t.slice(0, n)}…` : t
-}
-
-function render(repos) {
-  const byName = new Map(repos.map((r) => [r.name, r]))
-  const featured = FEATURED.filter((n) => byName.has(n)).map((n) => byName.get(n))
-
-  const featuredSection = featured
-    .map(
-      (r) =>
-        `<LinkCard href="${r.html_url}" title="${escAttr(r.name)}" icon="ph:star-four" description="${escAttr(`${r.language ?? '—'} · ★ ${r.stargazers_count ?? 0} · ${brief(r.description) || '—'}`)}" />`,
-    )
-    .join('\n\n')
-
-  const totalStars = repos.reduce((s, r) => s + (r.stargazers_count ?? 0), 0)
-  const langCount = new Map()
-  for (const r of repos) {
-    if (r.language) langCount.set(r.language, (langCount.get(r.language) ?? 0) + 1)
-  }
-  const langs = [...langCount.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .map(([lang, n]) => `${lang} ×${n}`)
-    .join(' · ') || '—'
-
-  const rest = repos
-    .filter((r) => !FEATURED.includes(r.name) && r.name !== `${USER}`)
-    .sort((a, b) => (b.pushed_at ?? '').localeCompare(a.pushed_at ?? ''))
-  const tableRows = rest
-    .map((r) => {
-      const pushed = r.pushed_at ? r.pushed_at.slice(0, 10) : '-'
-      return `| [${r.name}](${r.html_url}) | ${esc(r.description) || '—'} | ${r.language || '—'} | ${r.stargazers_count ?? 0} | ${pushed} |`
-    })
-    .join('\n')
-
-  return `---
-title: 开源项目
-icon: ph:rocket-launch
-pageClass: projects-page
----
-
-# 开源项目
-
-GitHub 项目墙：主力项目置顶展示，全部公开仓库自动列示（构建时由 [fetch-projects.mjs](https://github.com/${USER}/blog/blob/main/scripts/fetch-projects.mjs) 从 GitHub API 生成，数据本地渲染，不依赖外链统计图）。
-
-## 主力项目
-
-<CardGrid cols="2">
-
-${featuredSection}
-
-</CardGrid>
-
-## 开发统计
-
-<CardGrid cols="3">
-
-<Card title="${repos.length}" icon="ph:cube">公开仓库</Card>
-
-<Card title="${totalStars}" icon="ph:star-four">累计 Stars</Card>
-
-<Card title="语言分布" icon="ph:chart-bar">${langs}</Card>
-
-</CardGrid>
-
-## 全部公开仓库（${repos.length}）
-
-| 仓库 | 简介 | 语言 | Stars | 最近推送 |
-| --- | --- | --- | --- | --- |
-${tableRows || '| （暂无） | | | | |'}
-`
-}
-
 const PLACEHOLDER = `---
-title: 开源项目
-icon: ph:rocket-launch
-pageClass: projects-page
+title: 全部 GitHub 仓库
+icon: ph:github-logo
+permalink: /projects/repositories/
+sidebar: false
+aside: false
+comments: false
 ---
 
-# 开源项目
+# 全部 GitHub 仓库
 
-项目墙由构建脚本自动生成。若看到此页，说明生成脚本未能访问 GitHub API（本地未登录 gh、也未设置 GH_TOKEN）。
+仓库目录由构建脚本自动生成。当前无法访问 GitHub API，已保留最近一次生成结果。
+
+[返回项目案例](/projects/)
 `
 
-const repos = fetchViaGh() ?? (await fetchViaToken())
+const repos = fetchViaGh() ?? (await fetchViaApi())
 if (!repos) {
   if (fs.existsSync(OUT)) {
     console.log('[fetch-projects] 无法访问 GitHub API，保留已有生成文件。')
@@ -153,5 +81,5 @@ if (!repos) {
 }
 
 fs.mkdirSync(path.dirname(OUT), { recursive: true })
-fs.writeFileSync(OUT, render(repos))
-console.log(`[fetch-projects] 已生成项目墙：${repos.length} 个仓库，置顶 ${FEATURED.length} 个。`)
+fs.writeFileSync(OUT, renderRepositoriesPage(repos))
+console.log(`[fetch-projects] 已生成仓库目录：${repos.length} 个公开仓库。`)

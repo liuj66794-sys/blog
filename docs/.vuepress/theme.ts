@@ -47,26 +47,27 @@ export default defineThemeConfig({
   profile: {
     avatar,
     name: 'L1U.J',
-    description: '0x6C6975 · 把学习过程变成可检索的知识资产',
+    description: 'Full-stack · Windows · Android · AI Developer',
     location: 'China',
   },
 
   social: [{ icon: 'github', link: 'https://github.com/liuj66794-sys' }],
 
   footer: {
-    message: '把学习过程变成可检索的知识资产',
+    message: '从需求到源码，独立交付可用产品',
     copyright: 'Copyright © 2026 L1U.J',
   },
 
   navbar: [
     { text: '首页', link: '/' },
+    { text: '找我开发', link: '/hire/' },
+    { text: '项目', link: '/projects/' },
     { text: '博客', link: '/blog/' },
     {
       text: '课程',
       items: COURSES.map((c) => ({ text: c.name, link: `/courses/${c.slug}/` })),
     },
     { text: '知识库', link: '/knowledge/' },
-    { text: '项目', link: '/projects/' },
   ],
 
   collections: [

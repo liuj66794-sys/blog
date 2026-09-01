@@ -1,7 +1,12 @@
 import { defineClientConfig } from 'vuepress/client'
 import { nextTick } from 'vue'
+import CommercialHome from './components/CommercialHome.vue'
+import HireMePage from './components/HireMePage.vue'
+import PortfolioProjectsPage from './components/PortfolioProjectsPage.vue'
+import ProjectCasePage from './components/ProjectCasePage.vue'
 import './styles/palette.css'
 import './styles/index.css'
+import './styles/commercial.css'
 
 /**
  * plume 在页面不属于任何集合时（首页即如此），标签/分类/归档链接会回落到
@@ -23,7 +28,12 @@ function fixPostsNavLinks() {
 }
 
 export default defineClientConfig({
-  enhance({ router }) {
+  enhance({ app, router }) {
+    app.component('CommercialHome', CommercialHome)
+    app.component('HireMePage', HireMePage)
+    app.component('PortfolioProjectsPage', PortfolioProjectsPage)
+    app.component('ProjectCasePage', ProjectCasePage)
+
     if (__VUEPRESS_SSR__) return
     router.afterEach(async () => {
       // 页面内容在路由确认后的后续帧渲染，多等两帧确保目标 DOM 已挂载

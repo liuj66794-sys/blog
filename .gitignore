@@ -8,3 +8,4 @@ docs/.vuepress/.staging-lessons/
 .DS_Store
 .serve/
 .zcode/
+.codex-remote-attachments/

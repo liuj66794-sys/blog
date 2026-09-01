@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.33.2",
-  "description": "个人技术博客站点：学习内容 + 课程 + GitHub 项目 + 个人主页",
+  "description": "L1U.J 的开发者作品集、项目案例与学习博客",
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:clean-dev": "vuepress dev docs --clean-cache --clean-temp",

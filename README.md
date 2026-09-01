@@ -1,6 +1,6 @@
-# L1U.J 的学习宇宙
+# L1U.J 开发者作品集
 
-个人技术博客站点（[liuj66794-sys.github.io/blog](https://liuj66794-sys.github.io/blog/)）：学习内容 + 课程 + GitHub 项目 + 个人主页，四合一。
+商业作品集与学习博客（[liuj66794-sys.github.io/blog](https://liuj66794-sys.github.io/blog/)）：首页先展示可承接的开发服务、完整项目案例和合作流程，同时保留课程、博客与知识库。
 
 - **框架**：VuePress 2 + [vuepress-theme-plume](https://theme-plume.vuejs.press/)
 - **部署**：GitHub Actions → GitHub Pages（推送 `main` 自动发布）
@@ -13,15 +13,20 @@ docs/
 │   ├── config.ts          # VuePress 配置
 │   ├── theme.ts           # Plume 主题配置（集合/导航/搜索，课程部分派生自 site-meta）
 │   ├── site-meta.mjs      # 站点元数据单一数据源（base/origin/课程名单）
+│   ├── portfolio-data.mjs # 服务、案例、联系信息与合作流程的共享数据
+│   ├── components/        # 商业首页、Hire Me、项目案例与联系组件
+│   ├── styles/            # 商业作品集共享样式
+│   ├── public/images/     # 微信二维码与可核验的项目截图
 │   └── public/lessons/    # 讲义 HTML 原样托管（sync-learn 生成）
 ├── README.md              # 首页
+├── hire/                  # Hire Me / 找我开发
 ├── blog/                  # 博客（post 集合，学习记录）
 ├── courses/               # 课程目录页（doc 集合 × 5 门课）
 ├── knowledge/             # 知识库（doc 集合：总纲/术语/ADR）
-└── projects/              # 项目墙（fetch-projects 生成）
+└── projects/              # 精选案例 + 自动生成的公开仓库目录
 scripts/
 ├── sync-learn.mjs         # D:\01-Documents\learn → 站点内容
-├── fetch-projects.mjs     # GitHub API → 项目墙
+├── fetch-projects.mjs     # GitHub API → 公开仓库目录（不覆盖精选案例页）
 ├── check-links.mjs        # 站内死链校验（CI 门禁）
 ├── serve.mjs              # 本地预览构建产物（与线上 base 一致）
 └── lib/                   # 共享纯函数 + node:test 单测
@@ -61,4 +66,3 @@ pnpm verify           # 一键门禁：typecheck + test + build + 死链校验
 1. `docs/.vuepress/site-meta.mjs` 中 `base` 改回 `'/'`（config.ts 的 base、theme.ts 的 canonical、sync-learn/check-links 的链接拼接全部派生自这里，改一处即可）
 2. 推送代码到 `user-site` 远端（即 `liuj66794-sys.github.io` 仓库，main 分支）
 3. 网页打开 仓库 Settings → Pages → Source 选择 **GitHub Actions**（一次性手动操作）
-
