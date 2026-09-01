@@ -63,10 +63,7 @@ export default defineThemeConfig({
     { text: '找我开发', link: '/hire/' },
     { text: '项目', link: '/projects/' },
     { text: '博客', link: '/blog/' },
-    {
-      text: '课程',
-      items: COURSES.map((c) => ({ text: c.name, link: `/courses/${c.slug}/` })),
-    },
+    { text: '课程', link: '/courses/', activeMatch: '^/courses/' },
     { text: '知识库', link: '/knowledge/' },
   ],
 

@@ -893,18 +893,6 @@
 .case-note strong { color: var(--commercial-ink); }
 .case-note p { margin-top: 6px !important; line-height: 1.7; }
 
-.vp-navbar a[href$="/hire/"],
-.vp-nav-screen a[href$="/hire/"] {
-  color: var(--vp-c-brand-1);
-  font-weight: 800;
-}
-
-.vp-navbar a[href$="/hire/"] {
-  padding: 7px 13px;
-  background: var(--vp-c-brand-soft);
-  border-radius: 999px;
-}
-
 :where(.commercial-button, .commercial-link, .portfolio-card a, .learning-card):focus-visible {
   outline: 3px solid color-mix(in srgb, var(--vp-c-brand-2) 68%, transparent);
   outline-offset: 3px;
