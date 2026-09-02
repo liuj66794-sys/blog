@@ -1,5 +1,6 @@
 <script setup>
 import { withBase } from 'vuepress/client'
+import { trackPortfolioEvent } from '../analytics.mjs'
 import PortfolioCards from './PortfolioCards.vue'
 </script>
 
@@ -22,7 +23,11 @@ import PortfolioCards from './PortfolioCards.vue'
         <h2>还想看更多代码？</h2>
         <p>完整公开仓库、语言分布和最近更新仍由 GitHub API 在构建时自动刷新。</p>
       </div>
-      <a class="commercial-button is-secondary" :href="withBase('/projects/repositories/')">
+      <a
+        class="commercial-button is-secondary"
+        :href="withBase('/projects/repositories/')"
+        @click="trackPortfolioEvent('portfolio_repository_catalog_open', { location: 'projects_page' })"
+      >
         浏览全部 GitHub 仓库 <span aria-hidden="true">→</span>
       </a>
     </section>

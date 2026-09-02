@@ -1,24 +1,23 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { withBase } from 'vuepress/client'
-import { contact } from '../portfolio-data.mjs'
+import { trackPortfolioEvent } from '../analytics.mjs'
+import { consultationBrief, contact } from '../portfolio-data.mjs'
 
 const copyStatus = ref('')
 const mailto = computed(
-  () => `mailto:${contact.email}?subject=${encodeURIComponent(contact.emailSubject)}`,
+  () => `mailto:${contact.email}?subject=${encodeURIComponent(contact.emailSubject)}&body=${encodeURIComponent(consultationBrief)}`,
 )
 
 function trackContact(channel) {
-  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-    window.gtag('event', 'portfolio_contact_click', { channel })
-  }
+  trackPortfolioEvent('portfolio_contact_click', { channel })
 }
 
-async function copyWechat() {
+async function copyText(value) {
   let copied = false
   try {
     if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(contact.wechat)
+      await navigator.clipboard.writeText(value)
       copied = true
     }
   } catch {
@@ -27,7 +26,7 @@ async function copyWechat() {
 
   if (!copied) {
     const input = document.createElement('textarea')
-    input.value = contact.wechat
+    input.value = value
     input.setAttribute('readonly', '')
     input.style.position = 'fixed'
     input.style.opacity = '0'
@@ -37,11 +36,27 @@ async function copyWechat() {
     input.remove()
   }
 
-  copyStatus.value = copied ? `已复制微信号：${contact.wechat}` : `请手动复制：${contact.wechat}`
-  trackContact('wechat_copy')
+  return copied
+}
+
+function showCopyStatus(message) {
+  copyStatus.value = message
   window.setTimeout(() => {
     copyStatus.value = ''
   }, 3000)
+}
+
+async function copyWechat() {
+  const copied = await copyText(contact.wechat)
+
+  showCopyStatus(copied ? `已复制微信号：${contact.wechat}` : `请手动复制：${contact.wechat}`)
+  trackContact('wechat_copy')
+}
+
+async function copyBrief() {
+  const copied = await copyText(consultationBrief)
+  showCopyStatus(copied ? '已复制项目咨询模板' : '复制失败，请手动选择模板内容')
+  trackPortfolioEvent('portfolio_brief_copy', { location: 'contact_panel', success: copied })
 }
 </script>
 
@@ -53,6 +68,18 @@ async function copyWechat() {
       <p>
         发我一句需求背景、期望结果和大致时间。我会先帮你判断范围，再决定是否适合合作。
       </p>
+
+      <div class="consultation-brief">
+        <div>
+          <strong>不知道怎么描述？</strong>
+          <p>复制这份简短模板，填得越具体，首次沟通越高效。</p>
+        </div>
+        <button class="commercial-button is-secondary" type="button" @click="copyBrief">
+          <Icon name="ph:copy" size="20" />
+          复制咨询模板
+        </button>
+        <pre>{{ consultationBrief }}</pre>
+      </div>
 
       <div class="contact-actions">
         <button class="commercial-button" type="button" @click="copyWechat">

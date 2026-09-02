@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { withBase } from 'vuepress/client'
+import { trackPortfolioEvent } from '../analytics.mjs'
 import { caseStudies } from '../portfolio-data.mjs'
 
 const props = defineProps({
@@ -9,11 +10,6 @@ const props = defineProps({
 
 const projects = computed(() => (props.limit ? caseStudies.slice(0, props.limit) : caseStudies))
 
-function trackCase(project) {
-  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-    window.gtag('event', 'portfolio_case_open', { case_slug: project.slug })
-  }
-}
 </script>
 
 <template>
@@ -24,9 +20,17 @@ function trackCase(project) {
       class="portfolio-card"
       :class="`is-${project.accent}`"
     >
-      <div class="portfolio-card__visual" aria-hidden="true">
-        <span class="portfolio-card__monogram">{{ project.name.slice(0, 2) }}</span>
-        <span class="portfolio-card__line" />
+      <div class="portfolio-card__visual" :class="{ 'has-cover': project.cover }">
+        <img
+          v-if="project.cover"
+          :src="withBase(project.cover.src)"
+          :alt="project.cover.alt"
+          loading="lazy"
+        >
+        <template v-else>
+          <span class="portfolio-card__monogram" aria-hidden="true">{{ project.name.slice(0, 2) }}</span>
+          <span class="portfolio-card__line" aria-hidden="true" />
+        </template>
       </div>
       <div class="portfolio-card__body">
         <p class="commercial-kicker">{{ project.category }}</p>
@@ -42,7 +46,7 @@ function trackCase(project) {
         <a
           class="commercial-link"
           :href="withBase(`/projects/${project.slug}/`)"
-          @click="trackCase(project)"
+          @click="trackPortfolioEvent('portfolio_case_open', { case_slug: project.slug, location: 'case_card' })"
         >
           查看案例 <span aria-hidden="true">→</span>
         </a>
@@ -52,6 +56,7 @@ function trackCase(project) {
           :href="project.source"
           target="_blank"
           rel="noreferrer"
+          @click="trackPortfolioEvent('portfolio_source_open', { case_slug: project.slug, location: 'case_card' })"
         >
           源码 <span class="sr-only">（在新窗口打开）</span>
         </a>

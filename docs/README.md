@@ -2,6 +2,9 @@
 home: true
 title: L1U.J — 全栈、Windows、Android 与 AI 开发
 description: L1U.J 的开发者作品集与学习博客：独立交付 Web、Windows、Android 和 AI 产品，展示真实项目、课程与技术复盘。
+sidebar: false
+aside: false
+comments: false
 config:
   - type: hero
     index: 0
@@ -28,8 +31,6 @@ config:
       speedTrigger: 150
   - type: custom
     index: 1
-  - type: posts
-    index: 2
 ---
 
 <CommercialHome />

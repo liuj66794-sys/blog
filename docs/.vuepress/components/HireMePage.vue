@@ -1,15 +1,10 @@
 <script setup>
 import { nextTick, onMounted } from 'vue'
 import { withBase } from 'vuepress/client'
-import { developer, services, workflow } from '../portfolio-data.mjs'
+import { trackPortfolioEvent } from '../analytics.mjs'
+import { developer, faq, services, workflow } from '../portfolio-data.mjs'
 import ContactPanel from './ContactPanel.vue'
 import PortfolioCards from './PortfolioCards.vue'
-
-function trackHire(location) {
-  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-    window.gtag('event', 'portfolio_hire_cta', { location })
-  }
-}
 
 function scrollToContact(event) {
   event?.preventDefault()
@@ -24,7 +19,7 @@ function scrollToContact(event) {
 
   window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#contact`)
   window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' })
-  trackHire('hire_hero')
+  trackPortfolioEvent('portfolio_hire_cta', { location: 'hire_hero' })
 }
 
 onMounted(async () => {
@@ -47,7 +42,11 @@ onMounted(async () => {
           <button class="commercial-button" type="button" @click="scrollToContact">
             开始聊项目 <span aria-hidden="true">→</span>
           </button>
-          <a class="commercial-button is-secondary" :href="withBase('/projects/')">先看项目</a>
+          <a
+            class="commercial-button is-secondary"
+            :href="withBase('/projects/')"
+            @click="trackPortfolioEvent('portfolio_case_catalog_open', { location: 'hire_hero' })"
+          >先看项目</a>
         </div>
       </div>
       <div class="commercial-hero__proof" aria-label="合作特点">
@@ -60,6 +59,17 @@ onMounted(async () => {
         </dl>
       </div>
     </header>
+
+    <section class="commercial-section" aria-labelledby="hire-projects-heading">
+      <div class="commercial-section__heading">
+        <div>
+          <p class="commercial-kicker">PROOF OF WORK</p>
+          <h2 id="hire-projects-heading">不是只会技术栈，而是做完产品</h2>
+        </div>
+        <p>案例只展示能够核验的源码、真实截图和明确实现范围；没有的证据不会用概念图冒充。</p>
+      </div>
+      <PortfolioCards />
+    </section>
 
     <section class="commercial-section" aria-labelledby="services-heading">
       <div class="commercial-section__heading">
@@ -78,17 +88,6 @@ onMounted(async () => {
       </div>
     </section>
 
-    <section class="commercial-section" aria-labelledby="hire-projects-heading">
-      <div class="commercial-section__heading">
-        <div>
-          <p class="commercial-kicker">PROOF OF WORK</p>
-          <h2 id="hire-projects-heading">不是只会技术栈，而是做完产品</h2>
-        </div>
-        <p>案例只展示能够核验的源码、真实截图和明确实现范围；没有的证据不会用占位按钮冒充。</p>
-      </div>
-      <PortfolioCards />
-    </section>
-
     <section class="commercial-section" aria-labelledby="workflow-heading">
       <div class="commercial-section__heading">
         <div>
@@ -103,6 +102,22 @@ onMounted(async () => {
           <div><h3>{{ step.title }}</h3><p>{{ step.description }}</p></div>
         </li>
       </ol>
+    </section>
+
+    <section class="commercial-section" aria-labelledby="faq-heading">
+      <div class="commercial-section__heading">
+        <div>
+          <p class="commercial-kicker">FAQ</p>
+          <h2 id="faq-heading">合作前常见问题</h2>
+        </div>
+        <p>先把最容易卡住合作判断的问题讲清楚，减少来回确认。</p>
+      </div>
+      <div class="faq-list">
+        <details v-for="(item, index) in faq" :key="item.question" :open="index === 0">
+          <summary>{{ item.question }}<span aria-hidden="true">+</span></summary>
+          <p>{{ item.answer }}</p>
+        </details>
+      </div>
     </section>
 
     <div id="contact" class="contact-anchor">

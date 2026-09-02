@@ -12,6 +12,16 @@ export const contact = {
   wechatQr: '/images/contact/wechat-qr-source.jpg',
 }
 
+export const consultationBrief = [
+  '项目背景：',
+  '目标用户：',
+  '希望解决的问题：',
+  '期望交付物：',
+  '已有资料 / 当前进度：',
+  '期望上线时间：',
+  '预算范围（可选）：',
+].join('\n')
+
 export const services = [
   {
     icon: 'ph:browser',
@@ -60,6 +70,25 @@ export const workflow = [
   { title: '售后', description: '处理交付后问题，支持后续迭代。' },
 ]
 
+export const faq = [
+  {
+    question: '开始沟通前需要准备什么？',
+    answer: '先说明项目背景、目标用户、希望解决的问题、现有资料和期望时间即可。需求还不完整也没关系，我会先协助拆清范围。',
+  },
+  {
+    question: '如何报价和确定周期？',
+    answer: '根据功能范围、交付物、技术风险和时间要求拆分里程碑，再给出报价与周期。没有确认范围前不会用一个固定数字制造误导。',
+  },
+  {
+    question: '源码和部署资料如何交付？',
+    answer: '按约定范围交付源码、构建产物和必要的运行或部署文档。第三方组件、字体与素材继续遵循各自许可证。',
+  },
+  {
+    question: '需求变化与交付后问题怎么处理？',
+    answer: '范围变化会先说明对费用和周期的影响，再决定是否进入开发；约定范围内的交付问题会继续处理，新增需求则单独评估。',
+  },
+]
+
 export const caseStudies = [
   {
     slug: 'policy-analyzer-pro',
@@ -77,8 +106,16 @@ export const caseStudies = [
     responsibilities: ['产品设计', 'UI 与交互', 'Python 后端', 'NLP / AI', '文档数据处理', 'Windows 打包与交付'],
     technologies: ['Python', 'PySide6', 'SentenceTransformers', 'TextRank', 'PyMuPDF', 'Tesseract', 'PyInstaller'],
     source: 'https://github.com/liuj66794-sys/PolicyAnalyzerPro',
+    cover: null,
     screenshots: [],
     demo: '',
+    evidenceStatus: 'source-only',
+    evidenceNote: '公开仓库当前没有可确认来源的运行截图，因此本页只展示可核验的源码、测试与 Windows 交付链路，不用概念图替代产品界面。',
+    verification: [
+      { label: '公开源码', value: 'MIT 仓库可核验' },
+      { label: '回归保障', value: 'Smoke tests + GUI 交互测试' },
+      { label: '交付链路', value: '环境自检 + Windows 打包脚本' },
+    ],
     accent: 'blue',
   },
   {
@@ -97,8 +134,19 @@ export const caseStudies = [
     responsibilities: ['产品与技术方案', 'Svelte 前端', 'Tauri / Rust', '本地数据层', 'AI 服务集成', 'Windows 发布流程'],
     technologies: ['Svelte 5', 'TypeScript', 'Tauri 2', 'Rust', 'SQLite', 'Tailwind CSS', 'Vitest'],
     source: 'https://github.com/liuj66794-sys/Tlisily',
-    screenshots: [],
+    cover: { src: '/images/projects/tlisily/chat-main.webp', alt: 'Tlisily 桌面端聊天界面' },
+    screenshots: [
+      { src: '/images/projects/tlisily/chat-main.webp', alt: 'Tlisily 桌面端真实聊天界面' },
+      { src: '/images/projects/tlisily/theme-library.webp', alt: 'Tlisily 主题管理与界面预览' },
+      { src: '/images/projects/tlisily/settings.webp', alt: 'Tlisily 设置与版本信息界面' },
+    ],
     demo: '',
+    evidenceStatus: 'visual',
+    verification: [
+      { label: '版本证据', value: 'v0.2.0-beta.1' },
+      { label: '发布目标', value: 'Windows x64 · NSIS' },
+      { label: '发布门禁', value: '前端覆盖率 + Cargo 检查/测试 + 安装卸载 smoke' },
+    ],
     accent: 'violet',
   },
   {
@@ -117,10 +165,19 @@ export const caseStudies = [
     responsibilities: ['学生端 App', 'Web 管理后台', '云函数与数据库', '账号与权限', 'Android 调试', '产品文档'],
     technologies: ['uni-app-x', 'Vue 3', 'UTS', 'uniCloud', 'MongoDB', 'Android'],
     source: 'https://github.com/liuj66794-sys/boxuegu',
+    cover: { src: '/images/projects/boxuegu/course-home.webp', alt: '博学谷学生端课程首页' },
     screenshots: [
-      { src: '/images/projects/boxuegu/course-home.png', alt: '博学谷学生端真实运行首页' },
+      { src: '/images/projects/boxuegu/course-home.webp', alt: '博学谷学生端真实运行首页' },
+      { src: '/images/projects/boxuegu/admin-category.webp', alt: '博学谷管理后台课程分类界面' },
+      { src: '/images/projects/boxuegu/admin-login.webp', alt: '博学谷管理后台登录界面' },
     ],
     demo: '',
+    evidenceStatus: 'visual',
+    verification: [
+      { label: '产品链路', value: '学生端 App + Web 管理后台 + Serverless 后端' },
+      { label: '运行证据', value: 'Android 学生端与后台真实截图' },
+      { label: '项目性质', value: '学习 / 期末大作业，不宣称商业投产' },
+    ],
     note: '该项目是学习/期末大作业项目，用于展示完整产品链路，不宣称为已投产的商业系统。',
     accent: 'orange',
   },
@@ -134,6 +191,21 @@ export const learningLinks = [
 
 export function getCaseStudy(slug) {
   return caseStudies.find((item) => item.slug === slug)
+}
+
+export function buildCaseSearchText(item) {
+  return [
+    item.name,
+    item.category,
+    item.summary,
+    item.problem,
+    ...item.features,
+    ...item.responsibilities,
+    ...item.technologies,
+    ...item.verification.flatMap(({ label, value }) => [label, value]),
+    item.note,
+    item.evidenceNote,
+  ].filter(Boolean).join('\n')
 }
 
 export function validatePortfolioData(items = caseStudies) {
@@ -150,12 +222,23 @@ export function validatePortfolioData(items = caseStudies) {
     }
     if (!item.features?.length) errors.push(`${item.slug}: 缺少功能列表`)
     if (!item.responsibilities?.length) errors.push(`${item.slug}: 缺少实现范围`)
+    if (!item.technologies?.length) errors.push(`${item.slug}: 缺少技术实现`)
+    if (!item.verification?.length) errors.push(`${item.slug}: 缺少可核验证据`)
     if (item.source && !item.source.startsWith('https://')) errors.push(`${item.slug}: 源码链接必须使用 HTTPS`)
     if (item.demo && !item.demo.startsWith('https://')) errors.push(`${item.slug}: Demo 链接必须使用 HTTPS`)
+    if (item.cover && (!item.cover.src?.startsWith('/') || !item.cover.alt?.trim())) {
+      errors.push(`${item.slug}: 封面需要站内绝对路径和替代文本`)
+    }
     for (const screenshot of item.screenshots ?? []) {
       if (!screenshot.src?.startsWith('/') || !screenshot.alt?.trim()) {
         errors.push(`${item.slug}: 截图需要站内绝对路径和替代文本`)
       }
+    }
+    if (item.evidenceStatus === 'visual' && (!item.cover || item.screenshots.length < 3)) {
+      errors.push(`${item.slug}: 视觉案例至少需要封面和 3 张真实截图`)
+    }
+    if (item.evidenceStatus === 'source-only' && !item.evidenceNote?.trim()) {
+      errors.push(`${item.slug}: 仅源码案例需要说明证据边界`)
     }
   }
 

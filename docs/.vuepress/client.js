@@ -1,5 +1,6 @@
 import { defineClientConfig } from 'vuepress/client'
 import { nextTick } from 'vue'
+import { trackPortfolioEvent } from './analytics.mjs'
 import CommercialHome from './components/CommercialHome.vue'
 import HireMePage from './components/HireMePage.vue'
 import PortfolioProjectsPage from './components/PortfolioProjectsPage.vue'
@@ -27,6 +28,20 @@ function fixPostsNavLinks() {
   }
 }
 
+function trackHomepageHero(event) {
+  const link = event.target.closest?.('.vp-home-hero a[href]')
+  if (!link) return
+
+  const url = new URL(link.href, window.location.href)
+  const hirePath = `${__VUEPRESS_BASE__}hire/`
+  const projectsPath = `${__VUEPRESS_BASE__}projects/`
+  if (url.pathname === hirePath) {
+    trackPortfolioEvent('portfolio_hire_cta', { location: 'home_hero' })
+  } else if (url.pathname === projectsPath) {
+    trackPortfolioEvent('portfolio_case_catalog_open', { location: 'home_hero' })
+  }
+}
+
 export default defineClientConfig({
   enhance({ app, router }) {
     app.component('CommercialHome', CommercialHome)
@@ -35,6 +50,7 @@ export default defineClientConfig({
     app.component('ProjectCasePage', ProjectCasePage)
 
     if (__VUEPRESS_SSR__) return
+    document.addEventListener('click', trackHomepageHero)
     router.afterEach(async () => {
       // 页面内容在路由确认后的后续帧渲染，多等两帧确保目标 DOM 已挂载
       await nextTick()

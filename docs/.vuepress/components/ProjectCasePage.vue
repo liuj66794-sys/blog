@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { usePageFrontmatter, withBase } from 'vuepress/client'
+import { trackPortfolioEvent } from '../analytics.mjs'
 import { getCaseStudy } from '../portfolio-data.mjs'
 import ContactPanel from './ContactPanel.vue'
 
@@ -26,6 +27,7 @@ const project = computed(() => getCaseStudy(frontmatter.value.caseSlug))
             :href="project.source"
             target="_blank"
             rel="noreferrer"
+            @click="trackPortfolioEvent('portfolio_source_open', { case_slug: project.slug, location: 'case_hero' })"
           >
             <Icon name="ph:github-logo" size="20" /> 查看源码
           </a>
@@ -33,6 +35,7 @@ const project = computed(() => getCaseStudy(frontmatter.value.caseSlug))
             v-if="project.screenshots.length"
             class="commercial-button is-secondary"
             href="#screenshots"
+            @click="trackPortfolioEvent('portfolio_screenshots_open', { case_slug: project.slug, location: 'case_hero' })"
           >
             项目截图
           </a>
@@ -42,12 +45,16 @@ const project = computed(() => getCaseStudy(frontmatter.value.caseSlug))
             :href="project.demo"
             target="_blank"
             rel="noreferrer"
+            @click="trackPortfolioEvent('portfolio_demo_open', { case_slug: project.slug, location: 'case_hero' })"
           >
             Demo
           </a>
         </div>
       </div>
-      <div class="case-hero__mark" aria-hidden="true">{{ project.name.slice(0, 2) }}</div>
+      <div v-if="project.cover" class="case-hero__media">
+        <img :src="withBase(project.cover.src)" :alt="project.cover.alt">
+      </div>
+      <div v-else class="case-hero__mark" aria-hidden="true">{{ project.name.slice(0, 2) }}</div>
     </header>
 
     <div class="case-story-grid">
@@ -65,6 +72,20 @@ const project = computed(() => getCaseStudy(frontmatter.value.caseSlug))
         </ul>
       </section>
     </div>
+
+    <section class="case-verification" aria-labelledby="verification-heading">
+      <div class="case-verification__heading">
+        <p class="commercial-kicker">VERIFIABLE EVIDENCE</p>
+        <h2 id="verification-heading">可核验证据</h2>
+      </div>
+      <dl>
+        <div v-for="item in project.verification" :key="item.label">
+          <dt>{{ item.label }}</dt>
+          <dd>{{ item.value }}</dd>
+        </div>
+      </dl>
+      <p v-if="project.evidenceNote" class="case-verification__note">{{ project.evidenceNote }}</p>
+    </section>
 
     <section class="commercial-section case-features" aria-labelledby="features-heading">
       <div class="commercial-section__heading">
@@ -86,11 +107,18 @@ const project = computed(() => getCaseStudy(frontmatter.value.caseSlug))
           <p class="commercial-kicker">REAL SCREENS</p>
           <h2 id="screenshots-heading">项目截图</h2>
         </div>
-        <p>以下图片来自项目仓库中的真实运行记录，不使用概念图替代。</p>
+        <p>以下图片来自本地运行记录或项目资料，不使用概念图替代。</p>
       </div>
       <div class="screenshot-gallery">
         <figure v-for="screenshot in project.screenshots" :key="screenshot.src">
-          <img :src="withBase(screenshot.src)" :alt="screenshot.alt" loading="lazy">
+          <a
+            :href="withBase(screenshot.src)"
+            target="_blank"
+            rel="noreferrer"
+            @click="trackPortfolioEvent('portfolio_screenshot_view', { case_slug: project.slug, screenshot: screenshot.src })"
+          >
+            <img :src="withBase(screenshot.src)" :alt="screenshot.alt" loading="lazy">
+          </a>
           <figcaption>{{ screenshot.alt }}</figcaption>
         </figure>
       </div>

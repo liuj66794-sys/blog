@@ -1,13 +1,8 @@
 <script setup>
 import { withBase } from 'vuepress/client'
+import { trackPortfolioEvent } from '../analytics.mjs'
 import { developer, learningLinks, services } from '../portfolio-data.mjs'
 import PortfolioCards from './PortfolioCards.vue'
-
-function trackHire(location) {
-  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-    window.gtag('event', 'portfolio_hire_cta', { location })
-  }
-}
 </script>
 
 <template>
@@ -30,7 +25,7 @@ function trackHire(location) {
       </div>
 
       <div class="service-grid is-compact">
-        <article v-for="service in services.slice(0, 6)" :key="service.title" class="service-card">
+        <article v-for="service in services.slice(0, 4)" :key="service.title" class="service-card">
           <span class="service-card__icon" aria-hidden="true">
             <Icon :name="service.icon" size="23" />
           </span>
@@ -39,7 +34,11 @@ function trackHire(location) {
         </article>
       </div>
       <div class="commercial-section__action">
-        <a class="commercial-link is-prominent" :href="withBase('/hire/')" @click="trackHire('home_services')">
+        <a
+          class="commercial-link is-prominent"
+          :href="withBase('/hire/')"
+          @click="trackPortfolioEvent('portfolio_hire_cta', { location: 'home_services' })"
+        >
           查看合作方式与全部服务 <span aria-hidden="true">→</span>
         </a>
       </div>
