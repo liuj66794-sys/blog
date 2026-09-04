@@ -10,7 +10,7 @@ description: 学习者完成第 5 课动手任务：注册表新增 read_file / 
 permalink: /blog/pi-agent/0005-nodejs-file-system/
 ---
 
-> 配套讲义：[第 5 课 · Node.js 文件系统：Agent 的手](/blog/lessons/pi-agent/lessons/0005-nodejs-file-system.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[第 5 课 · Node.js 文件系统：Agent 的手](/blog/lessons/pi-agent/lessons/0005-nodejs-file-system.html)（含随堂测，页顶有返回导航）
 
 # 0005 Node.js 文件系统：read_file / write_file 真实工具落地
 

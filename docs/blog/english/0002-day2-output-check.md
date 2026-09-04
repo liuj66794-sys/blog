@@ -10,7 +10,7 @@ description: 日期 20260804 来源 用户完成 Day 2 任务 1（抄写 + 造�
 permalink: /blog/english/0002-day2-output-check/
 ---
 
-> 配套讲义：[Day 1 练习 — 不定代词辨析](/blog/lessons/english/lessons/0002-day1-indefinite-pronouns-practice.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[Day 1 练习 — 不定代词辨析](/blog/lessons/english/lessons/0002-day1-indefinite-pronouns-practice.html)（含随堂测，页顶有返回导航）
 
 # 0002 — Day 2 输出任务检查（介词搭配造句）
 

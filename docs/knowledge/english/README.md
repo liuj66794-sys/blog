@@ -21,7 +21,7 @@ createTime: 2026/08/14 20:11:42
 
 | 资料 |
 | --- |
-| [grammar-points](/blog/lessons/english/reference/grammar-points.html){target="_blank"} |
+| [grammar-points](/blog/lessons/english/reference/grammar-points.html) |
 
 ## 相关入口
 

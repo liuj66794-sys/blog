@@ -10,7 +10,7 @@ description: 基于11道错题的初始评估，用户在"毛泽东思想和中�
 permalink: /blog/policy/0001-initial-assessment/
 ---
 
-> 配套讲义：[课程1：党史重大事件辨析 - 广东专升本政治](/blog/lessons/policy/lessons/0001-party-history-events.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[课程1：党史重大事件辨析 - 广东专升本政治](/blog/lessons/policy/lessons/0001-party-history-events.html)（含随堂测，页顶有返回导航）
 
 # 初始评估：毛泽东思想概论部分薄弱点
 

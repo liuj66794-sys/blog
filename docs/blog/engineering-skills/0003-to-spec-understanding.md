@@ -10,7 +10,7 @@ description: 学到的内容 /tospec 把 grilling 的结果合成为 PRD，不�
 permalink: /blog/engineering-skills/0003-to-spec-understanding/
 ---
 
-> 配套讲义：[第三课：使用 to-spec 生成 PRD](/blog/lessons/engineering-skills/lessons/0003-to-spec.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[第三课：使用 to-spec 生成 PRD](/blog/lessons/engineering-skills/lessons/0003-to-spec.html)（含随堂测，页顶有返回导航）
 
 # to-spec 的核心机制
 

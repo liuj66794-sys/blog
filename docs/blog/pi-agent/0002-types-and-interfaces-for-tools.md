@@ -10,7 +10,7 @@ description: 学习者已完成第 2 课：成功用 interface Tool 定义工具
 permalink: /blog/pi-agent/0002-types-and-interfaces-for-tools/
 ---
 
-> 配套讲义：[第 2 课 · TypeScript 类型与接口](/blog/lessons/pi-agent/lessons/0002-types-and-interfaces-for-tools.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[第 2 课 · TypeScript 类型与接口](/blog/lessons/pi-agent/lessons/0002-types-and-interfaces-for-tools.html)（含随堂测，页顶有返回导航）
 
 # 0002 TypeScript 类型与接口
 

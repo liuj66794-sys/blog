@@ -10,7 +10,7 @@ description: 学到的内容 grillwithdocs 是有代码库时的 relentless inte
 permalink: /blog/engineering-skills/0002-grill-with-docs-understanding/
 ---
 
-> 配套讲义：[第二课：使用 grill-with-docs 打磨想法](/blog/lessons/engineering-skills/lessons/0002-grill-with-docs.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[第二课：使用 grill-with-docs 打磨想法](/blog/lessons/engineering-skills/lessons/0002-grill-with-docs.html)（含随堂测，页顶有返回导航）
 
 # grill-with-docs 的核心机制
 

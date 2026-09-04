@@ -20,9 +20,9 @@ createTime: 2026/08/14 20:11:42
 
 | 资料 |
 | --- |
-| [0001-error-analysis](/blog/lessons/policy/reference/0001-error-analysis.html){target="_blank"} |
-| [0002-party-history-timeline](/blog/lessons/policy/reference/0002-party-history-timeline.html){target="_blank"} |
-| [0003-mao-works-mapping](/blog/lessons/policy/reference/0003-mao-works-mapping.html){target="_blank"} |
+| [0001-error-analysis](/blog/lessons/policy/reference/0001-error-analysis.html) |
+| [0002-party-history-timeline](/blog/lessons/policy/reference/0002-party-history-timeline.html) |
+| [0003-mao-works-mapping](/blog/lessons/policy/reference/0003-mao-works-mapping.html) |
 
 ## 相关入口
 

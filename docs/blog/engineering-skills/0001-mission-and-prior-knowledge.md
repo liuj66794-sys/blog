@@ -10,7 +10,7 @@ description: 使命 用户是独立开发者，在多个 AI 客户端之间切�
 permalink: /blog/engineering-skills/0001-mission-and-prior-knowledge/
 ---
 
-> 配套讲义：[第一课：Mattpocock Skills 概览与调用方式](/blog/lessons/engineering-skills/lessons/0001-mattpocock-skills-overview.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[第一课：Mattpocock Skills 概览与调用方式](/blog/lessons/engineering-skills/lessons/0001-mattpocock-skills-overview.html)（含随堂测，页顶有返回导航）
 
 # 已确认学习使命与先验知识
 

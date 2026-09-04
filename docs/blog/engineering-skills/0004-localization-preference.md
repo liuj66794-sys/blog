@@ -10,7 +10,7 @@ description: 已确认的偏好 通过 /grillme grilling session 确认： 翻�
 permalink: /blog/engineering-skills/0004-localization-preference/
 ---
 
-> 配套讲义：[第四课：使用 to-tickets 拆分任务](/blog/lessons/engineering-skills/lessons/0004-to-tickets.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[第四课：使用 to-tickets 拆分任务](/blog/lessons/engineering-skills/lessons/0004-to-tickets.html)（含随堂测，页顶有返回导航）
 
 # 课程中文化与术语处理偏好
 

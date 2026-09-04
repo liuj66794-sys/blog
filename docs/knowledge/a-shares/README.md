@@ -26,7 +26,7 @@ createTime: 2026/08/14 20:11:42
 
 | 资料 |
 | --- |
-| [a-share-terms](/blog/lessons/a-shares/reference/a-share-terms.html){target="_blank"} |
+| [a-share-terms](/blog/lessons/a-shares/reference/a-share-terms.html) |
 
 ## 相关入口
 

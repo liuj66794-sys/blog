@@ -10,7 +10,7 @@ description: 学到的内容 用户把「妈妈音乐播放器」作为实战对
 permalink: /blog/engineering-skills/0006-full-chain-practice/
 ---
 
-> 配套讲义：[第六课：使用 diagnosing-bugs 诊断难 bug](/blog/lessons/engineering-skills/lessons/0006-diagnosing-bugs.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[第六课：使用 diagnosing-bugs 诊断难 bug](/blog/lessons/engineering-skills/lessons/0006-diagnosing-bugs.html)（含随堂测，页顶有返回导航）
 
 # 主流程四技能已在真实项目完整走通
 

@@ -10,7 +10,7 @@ description: 学习者已完成第 4 课（阶段 0 模块 A 收官）：把 Too
 permalink: /blog/pi-agent/0004-async-await/
 ---
 
-> 配套讲义：[第 4 课 · 异步与 async/await](/blog/lessons/pi-agent/lessons/0004-async-await.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[第 4 课 · 异步与 async/await](/blog/lessons/pi-agent/lessons/0004-async-await.html)（含随堂测，页顶有返回导航）
 
 # 0004 异步与 async/await
 

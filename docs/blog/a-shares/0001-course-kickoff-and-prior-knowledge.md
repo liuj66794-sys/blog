@@ -10,7 +10,7 @@ description: 用户（Bettina）在价值投资哲学层已有积累：知识库
 permalink: /blog/a-shares/0001-course-kickoff-and-prior-knowledge/
 ---
 
-> 配套讲义：[第 1 课 · 股票 = 公司所有权](/blog/lessons/a-shares/lessons/0001-stock-is-ownership.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[第 1 课 · 股票 = 公司所有权](/blog/lessons/a-shares/lessons/0001-stock-is-ownership.html)（含随堂测，页顶有返回导航）
 
 # 课程启动与先验知识基线
 

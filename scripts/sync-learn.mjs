@@ -125,6 +125,27 @@ function writeAtomic(dest, content, mtime) {
   if (mtime) fs.utimesSync(dest, mtime.atime, mtime.mtime)
 }
 
+/** 讲义页站点导航条：/lessons/ 下是独立静态页，不加载 VuePress 应用（client.js
+ *  够不到），只能在 sync 镜像时写入。统一顶栏＝返回课程 + 首页/博客/课程/备考，
+ *  四个模板族统一走「<body> 开标签后插入」的保守路线（46 页均有 head/body）。
+ *  幂等：staging 每轮都是全新拷贝，注入必然重放；marker 只防异常路径二次进入。 */
+const NAV_BAR_MARKER = 'data-blog-nav-bar'
+
+function injectLessonNav(html, slug) {
+  const bodyOpen = html.match(/<body[^>]*>/i)
+  if (!bodyOpen || html.includes(NAV_BAR_MARKER)) return html
+  const links = [
+    ['首页', withBase('/')],
+    ['博客', withBase('/blog/')],
+    ['课程', withBase('/courses/')],
+    ['备考', withBase('/prep/')],
+  ]
+    .map(([t, u]) => `<a href="${u}" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">${t}</a>`)
+    .join('')
+  const bar = `<div ${NAV_BAR_MARKER}="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="${withBase(`/courses/${slug}/`)}" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回课程</a><span style="display:flex;gap:14px">${links}</span></div>\n<style>body{padding-top:44px!important}</style>`
+  return html.replace(/<body[^>]*>/i, (m) => `${m}\n${bar}`)
+}
+
 /** 统计目录树中的文件数（排除镜像跳过的目录），用于空源/错源防护 */
 function countFiles(dir) {
   if (!fs.existsSync(dir)) return 0
@@ -194,6 +215,11 @@ function syncMirror(p) {
     else if (e.isFile()) copyIfStale(s, d)
   }
 
+  // 镜像唯一改写点：给每页讲义注入站点导航条（静态页加载不到站点 JS，见 injectLessonNav）
+  for (const f of walk(staging, (n) => n.endsWith('.html'))) {
+    writeAtomic(f, injectLessonNav(fs.readFileSync(f, 'utf8'), p.slug))
+  }
+
   const stagedCount = countFiles(staging)
   if (stagedCount < 3) {
     throw new Error(`[sync-learn] 暂存镜像异常（仅 ${stagedCount} 个文件）：${src}\n  已中止换入，已发布镜像未受影响。请检查 MIRROR_KEEP 与项目目录。`)
@@ -255,7 +281,7 @@ function syncBlog(p, lessons) {
     const no = Number(f.match(/^(\d+)/)?.[1] ?? 0)
     const lesson = lessons.find((l) => l.no === no)
     const lessonNote = lesson
-      ? `> 配套讲义：[${lesson.title}](${withBase(`/lessons/${p.slug}/lessons/${lesson.file}`)}){target="_blank"}（含随堂测，新标签页打开）\n\n`
+      ? `> 配套讲义：[${lesson.title}](${withBase(`/lessons/${p.slug}/lessons/${lesson.file}`)})（含随堂测，页顶有返回导航）\n\n`
       : ''
     const content = fmText + '\n' + lessonNote + rewriteRelativeLinks(body, p.slug).trim() + '\n'
     const dest = path.join(DOCS, 'blog', p.slug, f)
@@ -438,7 +464,7 @@ function syncCourse(p, lessons) {
       const metaLine = conv.metaLine ? `**${conv.metaLine}**\n\n` : ''
       pageBody = `# ${conv.headline || l.title}
 
-${metaLine}> 本文为站内全文版（已纳入搜索，随堂测为折叠核对）。随堂测可点击作答的交互版：[**打开讲义**](${interactive}){target="_blank"}
+${metaLine}> 本文为站内全文版（已纳入搜索，随堂测为折叠核对）。随堂测可点击作答的交互版（页顶可返回课程）：[**打开讲义**](${interactive})
 
 ${conv.body}
 
@@ -448,7 +474,7 @@ ${navParts.filter(Boolean).join(' · ')}
 `
     } else {
       const summary = extractLessonText(html).slice(0, 800)
-      pageBody = `${moduleLine}> 本页为摘要卡（供搜索与速览）。完整交互讲义（含随堂测）：[**打开讲义**](${withBase(`/lessons/${p.slug}/lessons/${l.file}`)}){target="_blank"}
+      pageBody = `${moduleLine}> 本页为摘要卡（供搜索与速览）。完整交互讲义（含随堂测，页顶可返回课程）：[**打开讲义**](${withBase(`/lessons/${p.slug}/lessons/${l.file}`)})
 
 ${summary}…
 
@@ -527,7 +553,7 @@ function syncKnowledgeIndex(p) {
     .map((rel) => `| [${rel.replace(/\.md$/, '')}](${encodeURI(rel)}) |`)
     .join('\n')
   const refRows = refFiles
-    .map((f) => `| [${f.replace(/\.html$/, '')}](${withBase(`/lessons/${p.slug}/reference/${encodeURI(f)}`)}){target="_blank"} |`)
+    .map((f) => `| [${f.replace(/\.html$/, '')}](${withBase(`/lessons/${p.slug}/reference/${encodeURI(f)}`)}) |`)
     .join('\n')
 
   fs.mkdirSync(kdir, { recursive: true })

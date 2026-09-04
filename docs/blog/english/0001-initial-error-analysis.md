@@ -10,7 +10,7 @@ description: 日期 20260728 来源 用户提供 25 张错题截图（20 道单�
 permalink: /blog/english/0001-initial-error-analysis/
 ---
 
-> 配套讲义：[错题分析与学习计划 — 25道英语题（单选+翻译）](/blog/lessons/english/lessons/0001-error-analysis-and-plan.html){target="_blank"}（含随堂测，新标签页打开）
+> 配套讲义：[错题分析与学习计划 — 25道英语题（单选+翻译）](/blog/lessons/english/lessons/0001-error-analysis-and-plan.html)（含随堂测，页顶有返回导航）
 
 # 0001 — 初始错题分析（25题：20单选+5翻译）
 
