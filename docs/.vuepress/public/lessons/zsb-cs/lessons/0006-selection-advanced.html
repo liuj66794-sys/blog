@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 6 课 · 选择进阶：else 配对、switch 穿透与位运算</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第一部分 C 语言</span>
+  <span>第 6 课 / 共 29 课</span>
+</nav>
+
+<h1>选择进阶：else 配对、switch 穿透与位运算</h1>
+<p class="lesson-meta">对应笔记 C语言/04-选择结构程序设计（后半：else 配对、switch、位运算、条件表达式）· 教材 P104–P110 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 根据输入数据，逐行追踪无 break 的 switch 执行路径并算出结果；② 面对多层嵌套 if-else，准确判断 else 与哪个 if 配对；③ 不依赖编译器，笔算含负数、取反、移位、位与或异或的表达式的值。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 5 课「选择结构」：&amp;&amp; 与 || 的短路规则分别是什么？被短路意味着什么？</summary>
+  <div class="recall-a">&amp;&amp; 左侧为 0（假）时右侧不执行，整体为 0；|| 左侧非 0（真）时右侧不执行，整体为 1。被短路时右侧的自增、赋值可能根本不发生。</div>
+</details>
+<details class="recall warmup">
+  <summary>温故 · 第 4 课「顺序结构：printf 与 scanf」：用 scanf 给 double 变量输入，格式符必须写什么？scanf 支持类似 %5.2f 的写法吗？</summary>
+  <div class="recall-a">必须用 %lf，%f 无法正确输入 double；scanf 也没有 %m.nf 形式的输入，scanf("%5.2f", &amp;x) 这种写法直接判错。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么这节课重要</p>
+  <p>else 配对、case 穿透、位运算笔算，是选择结构这一章「程序阅读题」的三大题源。它们都考得很细：else 跟谁走、break 漏写会怎样、负数右移补 0 还是补 1……这节课把笔记后半压缩成可检索的回忆点。</p>
+</div>
+
+<h2>一、嵌套 if-else 与 else 配对</h2>
+<p><strong>核心规则</strong>：C 语言规定，else 总是与它<strong>前面最近的、尚未配对的 if</strong> 配对，<strong>与代码缩进无关</strong>。出题人常用缩进把 else「推远」，不能上当。</p>
+
+<div class="callout warn">
+  <p class="callout-title">两个高频编译错误</p>
+  <ul>
+    <li>内嵌语句若有多条却不用 <code>{ }</code>，第二条语句会把 if 和 else 隔开，导致 <code>else without a previous if</code>。</li>
+    <li>同一 if 后出现两个 else，编译器会报 else 过多（配对冲突）。</li>
+  </ul>
+</div>
+
+<p><strong>用花括号改变配对</strong>：把内层的 if-else 用 <code>{ }</code> 包起来，外层 else 就只能与外层的 if 配对。</p>
+
+<pre><code>if (a &lt; b)
+    if (c &lt; d) x = 1;
+    else       x = 6;      /* else 与内层 if(c&lt;d) 配对 */
+else x = 7;                  /* else 与外层 if(a&lt;b) 配对 */
+</code></pre>
+
+<p>若把内层改成：</p>
+<pre><code>if (a &lt; b) {
+    if (c &lt; d) x = 1;
+    else       x = 6;
+} else x = 7;                /* else 现在与外层 if(a&lt;b) 配对 */
+</code></pre>
+
+<div class="callout tip">
+  <p class="callout-title">快速验证技巧</p>
+  <p>对等价判断题，用特殊值代入：0、1、-1、2。例如判断 <code>if(a)</code> 与 <code>if(a!=0)</code> 是否等价，分别代入 0 和非 0 即可。</p>
+</div>
+
+<h2>二、switch 与 case 穿透</h2>
+
+<table>
+  <tr><th>规则</th><th>要点</th></tr>
+  <tr><td>switch 表达式</td><td>只能是<strong>整型或字符型</strong>，不能是实型</td></tr>
+  <tr><td>case 后</td><td>必须是<strong>整型/字符型常量或常量表达式</strong>，不能是变量</td></tr>
+  <tr><td>case 值</td><td>必须唯一；<code>'a'</code> 与 <code>97</code> 重复会报错</td></tr>
+  <tr><td>default</td><td>同一 switch 只能有一个；位置不影响匹配顺序</td></tr>
+  <tr><td>入口 / 出口</td><td><strong>case 是入口，break 是出口</strong>；无 break 就继续执行下一个 case</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">case 穿透怎么读</p>
+  <p>匹配到某个 case 后，从这个 case 开始<strong>顺序往下执行</strong>，直到遇见 break 或 switch 结束。default 写在最前面也不会先执行——先全部 case 匹配一遍，都不中才走 default。</p>
+</div>
+
+<p><strong>嵌套 switch</strong>：内层 break 只结束所在（最近）的内层 switch；外层 case 若无 break，仍会穿透到外层下一个 case。</p>
+
+<h2>三、位运算（对补码运算）</h2>
+
+<table>
+  <tr><th>运算符</th><th>优先级</th><th>规则</th><th>示例</th></tr>
+  <tr><td><code>~</code></td><td>2</td><td>按位取反，<strong>符号位也变</strong></td><td><code>~3 = -4</code>，<code>~-3 = 2</code></td></tr>
+  <tr><td><code>&lt;&lt;</code></td><td>5</td><td>左移，右侧补 0</td><td><code>6&lt;&lt;2 = 24</code>，等价 <code>m×2ⁿ</code></td></tr>
+  <tr><td><code>&gt;&gt;</code></td><td>5</td><td>右移，<strong>正数左补 0，负数左补 1</strong></td><td><code>-16&gt;&gt;2 = -4</code>，等价 <code>m÷2ⁿ</code></td></tr>
+  <tr><td><code>&amp;</code></td><td>8</td><td>按位与：一 0 则 0</td><td><code>3&amp;6 = 2</code></td></tr>
+  <tr><td><code>^</code></td><td>9</td><td>异或：相同 0，不同 1</td><td><code>3^6 = 5</code></td></tr>
+  <tr><td><code>|</code></td><td>10</td><td>按位或：一 1 则 1</td><td><code>3|6 = 7</code></td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">速算口诀</p>
+  <p>所有位运算都对<strong>补码</strong>进行；负数右移左侧补 1；取反有规律 <code>~x = -x - 1</code>。笔算时先把数写成 8 位或 32 位补码，再逐位运算，最后转回真值。</p>
+</div>
+
+<h2>四、顺带巩固：条件表达式 <code>?:</code></h2>
+<p><code>?:</code> 是 C 语言唯一的三目运算符，优先级高于赋值、低于关系和算术，<strong>从右至左</strong>结合。</p>
+<pre><code>max = a &gt; b ? a : b;           /* 等价于 if-else */
+
+a &gt; b ? a : c &gt; d ? c : d     /* 右结合：a&gt;b?a:(c&gt;d?c:d) */
+</code></pre>
+
+<h2>五、先回忆，再自测</h2>
+
+<details class="recall">
+  <summary>合上笔记：else 到底跟谁配对？缩进有没有影响？</summary>
+  <div class="recall-a">else 与前面最近的、尚未配对的 if 配对；与缩进无关。花括号可以把内层 if-else 包起来，从而改变外层 else 的归属。</div>
+</details>
+
+<details class="recall">
+  <summary>switch 中 case 和 break 各是什么角色？default 写在最前面会先执行吗？</summary>
+  <div class="recall-a">case 是入口，break 是出口；无 break 就继续执行下一个 case，称为穿透。default 位置不影响匹配，先匹配所有 case 都不中时才走 default。</div>
+</details>
+
+<details class="recall">
+  <summary>位运算对什么编码进行？负数右移补什么？<code>~x</code> 有什么快捷公式？</summary>
+  <div class="recall-a">对补码运算；负数右移左侧补 1；快捷公式 <code>~x = -x - 1</code>。左移相当于乘 2ⁿ，右移相当于除以 2ⁿ。</div>
+</details>
+
+<h2>六、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">1. 执行下面程序段后，x 的值是（a=1, b=3, c=5, d=4）</p>
+  <pre><code>if(a&lt;b)
+    if(c&lt;d) x=1;
+    else
+        if(a&lt;c)
+            if(b&lt;d) x=2;
+            else x=3;
+        else x=6;
+else x=7;</code></pre>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">1</li>
+    <li data-opt="b">2</li>
+    <li data-opt="c">3</li>
+    <li data-opt="d">6</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">a&lt;b 为真，进入内层；c&lt;d（5&lt;4）为假，走 else；a&lt;c（1&lt;5）为真，再判断 b&lt;d（3&lt;4）为真，故 x=2。else 始终按「最近未配对 if」配对，与缩进无关。</p>
+</div>
+
+<div class="quiz" data-answer="d">
+  <p class="quiz-q">2. 执行下列程序后，变量 i 的值为</p>
+  <pre><code>int i = 10;
+switch (i)
+{
+    case 9:  i++;
+    case 10: i++;
+    case 11: i++;
+    default: i++;
+}</code></pre>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">10</li>
+    <li data-opt="b">11</li>
+    <li data-opt="c">12</li>
+    <li data-opt="d">13</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">匹配 case 10，i 变为 11；后面没有 break，依次穿透 case 11（12）、default（13），最后退出 switch。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">3. 以下程序输出结果是</p>
+  <pre><code>int x=1, y=0, a=0, b=0;
+switch(x)
+{
+    case 1: switch(y)
+            {
+                case 0: a++; break;
+                case 1: b++; break;
+            }
+    case 2: a++; b++; break;
+    case 3: a++; b++;
+}
+printf("a=%d, b=%d", a, b);</code></pre>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">a=1, b=0</li>
+    <li data-opt="b">a=2, b=1</li>
+    <li data-opt="c">a=1, b=1</li>
+    <li data-opt="d">a=2, b=2</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">外层匹配 case 1；内层 switch(y) 匹配 case 0，a 自增 1，内层 break 只退出内层 switch；外层 case 1 没有 break，继续穿透到 case 2，a、b 各加 1，遇 break 退出。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">4. 下列 switch 用法中，不会导致编译错误的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">switch('A') 后接字符常量</li>
+    <li data-opt="b">case 1.5: 后接实型常量</li>
+    <li data-opt="c">switch(3.5) 使用实型表达式</li>
+    <li data-opt="d">case 'a': 与 case 97: 同时出现</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">switch 表达式只能是整型或字符型；case 后也只能是整型/字符型常量；'a' 的 ASCII 码就是 97，与 case 97 重复会报错。只有 A 合法。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">5. 表达式 <code>-16 &gt;&gt; 2</code> 的值是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">-4</li>
+    <li data-opt="b">-8</li>
+    <li data-opt="c">-2</li>
+    <li data-opt="d">4</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">右移对负数左侧补 1，等价于除以 2ⁿ，所以 -16/4 = -4。正数才是右移补 0。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">6. 已知 <code>int a=5, b=7</code>，表达式 <code>(a ^ b) &amp; ~(-2)</code> 的值是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">0</li>
+    <li data-opt="b">2</li>
+    <li data-opt="c">5</li>
+    <li data-opt="d">7</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">5 ^ 7 = 2（0101 ^ 0111 = 0010）；~(-2) 按公式 -x-1 得 1；2 &amp; 1 = 0。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>打开 题库/选择结构程序设计-章节练习，完成：选择题 7–13（else 配对与 switch 穿透）、15（关系表达式连比）、题海勘误页 25（优先级排序）与 28（奇偶判断）。错题标 ⭐️，二刷时遮住解析重做。</p>
+  <p>然后回到笔记 自测问题 Q4–Q12，口头回答 else 配对、switch 规则、位运算、条件表达式相关题目，卡壳的记入错题本。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：C语言/04-选择结构程序设计（重点看「易错点与对比」表与「自测问题」）。术语速查：<a href="../reference/glossary.html">课程术语表</a>、<a href="../reference/c-syntax-cheatsheet.html">C 语法速查表</a>、<a href="../reference/ds-formula-cheatsheet.html">数据结构公式表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0005-selection-basics.html">← 上一课：选择基础</a>
+  <a href="0007-loops.html">下一课：循环结构 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

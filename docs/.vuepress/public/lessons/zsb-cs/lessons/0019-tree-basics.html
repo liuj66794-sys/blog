@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 19 课 · 树与二叉树基础</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第二部分 数据结构</span>
+  <span>第 19 课 / 共 29 课</span>
+</nav>
+
+<h1>树与二叉树基础</h1>
+<p class="lesson-meta">对应笔记 数据结构/15-树与二叉树 · 教材 P90–92、P97–104 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 准确解释结点的度、树的度、深度、高度、森林等术语；② 默写二叉树六条性质，并能在 30 秒内完成 n₀=n₂+1、完全二叉树编号、空链域个数等计算题；③ 一眼识破「二叉树就是度为 2 的树」「完全二叉树 n₁ 任意」等常见陷阱。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 18 课「串」：长度为 n 的串有多少个子串？公式里的 +1 是什么意思？</summary>
+  <div class="recall-a">子串总数（含空串）为 n(n+1)/2 + 1，加 1 表示空串也是子串；非空子串为 n(n+1)/2 个。</div>
+</details>
+
+<details class="recall warmup">
+  <summary>温故 · 第 17 课「数组、矩阵与广义表」：n 阶对称矩阵压缩存储需要多少个单元？稀疏矩阵怎么存、代价是什么？</summary>
+  <div class="recall-a">对称矩阵只存下三角（含对角线），共需 n(n+1)/2 个存储单元；稀疏矩阵用三元组（行标 i、列标 j、值 v）存每个非零元素，压缩后失去随机存取特性。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么现在复习这个</p>
+  <p>树和二叉树是数据结构部分分值最高、题型最灵活的章节之一。这节课只讲「基础」——术语、定义与六条性质，但它们是后面遍历、树转二叉树、赫夫曼树所有大题的共同起点。巩固阶段要把公式变成条件反射。</p>
+</div>
+
+<h2>一、树的术语：先对齐名词</h2>
+<p>树是 <strong>n 个结点的有限集</strong>，有一个根，其余结点分成若干互不相交的子树。核心逻辑：根没有前驱，其他结点有且只有一个前驱，叶子没有后继。</p>
+<table>
+  <tr><th>术语</th><th>含义</th><th>易错提醒</th></tr>
+  <tr><td>结点的度</td><td>该结点拥有的子树个数</td><td>不是「孩子个数」的口语说法，就是子树数</td></tr>
+  <tr><td>树的度</td><td>各结点度的最大值</td><td>不是所有度之和</td></tr>
+  <tr><td>叶子/终端结点</td><td>度为 0 的结点</td><td>—</td></tr>
+  <tr><td>深度</td><td>从根往下数到该结点的层数，根为第 1 层</td><td>不是从 0 开始</td></tr>
+  <tr><td>高度</td><td>从该结点往下到叶子的最长路径层数</td><td>深度从根往下，高度从叶子往上</td></tr>
+  <tr><td>森林</td><td>m 棵互不相交的树的集合</td><td>m≥0，空森林也是森林</td></tr>
+  <tr><td>有序树/无序树</td><td>子树从左到右能否互换</td><td>二叉树一定是「左右有序」</td></tr>
+</table>
+
+<h2>二、二叉树定义与六条性质</h2>
+<h3>2.1 定义</h3>
+<p>二叉树不是「度为 2 的树」。它的定义只有两点：</p>
+<ol>
+  <li>每个结点最多有两棵子树（度 ≤ 2）；</li>
+  <li><strong>左右子树有顺序</strong>——即使只有一个孩子，也要说清楚是左还是右。</li>
+</ol>
+<p><strong>满二叉树</strong>：所有分支结点都有左右孩子，且所有叶子都在同一层。<br>
+<strong>完全二叉树</strong>：满二叉树从下往上、从右到左逐个删除结点得到，<strong>满二叉树是完全二叉树的特例</strong>。</p>
+
+<div class="callout warn">
+  <p class="callout-title">最高频陷阱</p>
+  <p>「二叉树是度为 2 的有序树」是错的。二叉树可以是空树、可以只有左/右孩子、可以没有度为 2 的结点；但它的左右子树永远有区别。</p>
+</div>
+
+<h3>2.2 六条性质（必背）</h3>
+<table>
+  <tr><th>编号</th><th>内容</th><th>常见用途</th></tr>
+  <tr><td>1</td><td>第 i 层至多有 <code>2^(i-1)</code> 个结点（i≥1）</td><td>层数与结点数上限</td></tr>
+  <tr><td>2</td><td>深度为 k 的二叉树至多有 <code>2^k − 1</code> 个结点</td><td>最大结点数/高度下限</td></tr>
+  <tr><td>3</td><td><strong>n₀ = n₂ + 1</strong>（叶子数 = 度 2 结点数 + 1）</td><td>已知 n₂ 求叶子，或已知 n₀、n₁ 求总结点</td></tr>
+  <tr><td>4</td><td>完全二叉树按 1..n 编号：双亲 <code>⌊i/2⌋</code>；左孩子 <code>2i</code>（若 ≤n）；右孩子 <code>2i+1</code>（若 ≤n）</td><td>由编号推父子</td></tr>
+  <tr><td>5</td><td>n 个结点的完全二叉树深度为 <code>⌊log₂n⌋+1</code></td><td>完全二叉树高度</td></tr>
+  <tr><td>6</td><td>n 个结点的完全二叉树：n 为奇数时叶子 <code>(n+1)/2</code> 个；n 为偶数时叶子 <code>n/2</code> 个</td><td>快速口算叶子数</td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">性质 3 的快速记忆</p>
+  <p>总分支数 = n−1（树的基本事实，n 个结点的树有 n−1 条边）。另一方面，总分支数 = n₁ + 2n₂。两式联立：n−1 = n₁ + 2n₂，且 n = n₀ + n₁ + n₂，消去 n₁ 即得 <strong>n₀ = n₂ + 1</strong>。</p>
+</div>
+
+<div class="callout warn">
+  <p class="callout-title">完全二叉树的 n₁ 只有 0 或 1</p>
+  <p>n 为奇数时，n₁ = 0；n 为偶数时，n₁ = 1。做题时若算出 n₁≥2，一定哪里错了。</p>
+</div>
+
+<h3>2.3 三道口算示范</h3>
+<ul>
+  <li>1001 个结点的完全二叉树，叶子数 = <strong>501</strong>（奇数 → (1001+1)/2）。</li>
+  <li>100 个结点的完全二叉树，度 2 结点数 = <strong>49</strong>（n₀=50，n₁=1，n₂=n₀−1=49）。</li>
+  <li>完全二叉树有 500 个叶子，总结点数最少 = <strong>999</strong>（n₂=499，完全二叉树 n₁ 取最小 0，n=500+0+499）。</li>
+</ul>
+
+<h2>三、二叉链表：为什么是 n+1 个空链域</h2>
+<p>二叉链表每个结点有 <code>lchild</code> 和 <code>rchild</code> 两个指针，共 <code>2n</code> 个指针域。n 个结点的二叉树有 <code>n−1</code> 条分支，每条分支占用一个指针。所以空指针数 = <code>2n − (n−1) = n+1</code>。</p>
+<p>这些空链域在线索二叉树中会被用来存放遍历次序下的前驱/后继指针，称为<strong>线索</strong>。但本节课只需要记住数字：<strong>n 个结点的二叉链表有 n+1 个空链域</strong>。</p>
+
+<h2>四、先回忆，再自测</h2>
+<details class="recall">
+  <summary>合上笔记默写：二叉树六条性质中涉及数值的三组公式</summary>
+  <div class="recall-a">
+    <ul>
+      <li>第 i 层最多：2^(i−1)；深度 k 最多：2^k−1。</li>
+      <li>n₀ = n₂ + 1。</li>
+      <li>完全二叉树深度：⌊log₂n⌋+1；编号 i 的双亲 ⌊i/2⌋，左孩子 2i，右孩子 2i+1（≤n 才存在）。</li>
+    </ul>
+    写不全就再看一遍表格，然后重默一次。
+  </div>
+</details>
+<details class="recall">
+  <summary>为什么 n 个结点的二叉链表恰好有 n+1 个空链域？</summary>
+  <div class="recall-a">2n 个指针域 − (n−1) 条分支 = n+1 个空指针。注意不是 n−1，也不是 2n。</div>
+</details>
+<details class="recall">
+  <summary>完全二叉树 100 个结点，编号 60 的结点的度是多少？</summary>
+  <div class="recall-a">度为 0。60 的左右孩子编号为 120、121，均大于 100，不存在，所以 60 是叶子。</div>
+</details>
+
+<h2>五、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">1. 某二叉树有 10 个度为 2 的结点，则叶子结点数为</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">9 个</li>
+    <li data-opt="b">10 个</li>
+    <li data-opt="c">11 个</li>
+    <li data-opt="d">12 个</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">由性质 3，n₀ = n₂ + 1 = 10 + 1 = 11。注意不是 n₀ = n₂。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">2. 100 个结点的完全二叉树，编号 49 的左孩子编号为</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">96</li>
+    <li data-opt="b">97</li>
+    <li data-opt="c">98</li>
+    <li data-opt="d">99</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">左孩子编号 = 2i = 98，且 98 ≤ 100，所以存在。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">3. 10 个结点的二叉链表共有多少个空链域</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">9 个</li>
+    <li data-opt="b">10 个</li>
+    <li data-opt="c">11 个</li>
+    <li data-opt="d">12 个</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">n 个结点的二叉链表空链域数为 n+1 = 11。来源：2n 个指针域减去 n−1 条分支。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">4. 深度为 4 的二叉树，结点数最多为</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">7 个</li>
+    <li data-opt="b">8 个</li>
+    <li data-opt="c">15 个</li>
+    <li data-opt="d">16 个</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">性质 2：深度 k 的二叉树最多 2^k − 1 个结点。2^4 − 1 = 15。</p>
+</div>
+
+<div class="quiz" data-answer="d">
+  <p class="quiz-q">5. 关于完全二叉树，下列说法正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">满二叉树不是完全二叉树</li>
+    <li data-opt="b">叶子只可能出现在最后一层</li>
+    <li data-opt="c">编号 i 的双亲编号为 i/2</li>
+    <li data-opt="d">总结点 n 为偶数时 n₁=1</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">A 错：满二叉树是完全二叉树的特例；B 错：叶子可在倒数第二层；C 错：双亲应为 ⌊i/2⌋；D 对：完全二叉树 n 为奇数时 n₁=0，偶数时 n₁=1。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">6. 下列关于二叉树的说法正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">二叉树等同于度为 2 的树</li>
+    <li data-opt="b">二叉树每个结点度为 2</li>
+    <li data-opt="c">二叉树的子树有左右之分</li>
+    <li data-opt="d">二叉树一定不允许为空树</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">二叉树允许为空、度可为 0/1，核心特征只是「最多两棵子树且左右有序」。A、B、D 都是常见错误表述。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>打开 数据结构/15-树与二叉树，完成「§2.2 计算练习」3 道题和「随堂练习」中第 3、7、8、12 题以及「补充 1、2」性质计算部分。错题在笔记旁标注 ⭐️，并把错因用一句话写进 <code>NOTES.md</code> 错题区。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：数据结构/15-树与二叉树（§1、§2.1–§2.2、§4.1）。教材对照：严蔚敏《数据结构》P90–92、P97–104。公式速查：<a href="../reference/ds-formula-cheatsheet.html">数据结构公式速查表</a>；术语速查：<a href="../reference/glossary.html">课程术语表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0018-string.html">← 上一课：串</a>
+  <a href="0020-binary-tree-traversal.html">下一课：二叉树遍历 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

@@ -1,27 +1,38 @@
 #!/usr/bin/env node
 /**
- * sync-prep：知识库《29周冲刺计划》→ 博客「备考」区（docs/prep/）单向同步。
+ * sync-prep.mjs —— 知识库专升本内容 → 博客「备考」区单向同步。
  *
  * 内容源（唯一编辑地）：
  *   D:/01-Documents/Knowledge/知识库/知识中心/学习区域/专升本/29周冲刺计划.md
- * 生成：
- *   docs/prep/README.md        总览（倒计时/当前周/总则/周次一览/打卡说明/历史学情）
- *   docs/prep/NN-<slug>.md     四科周计划打卡页（勾选状态存浏览器 localStorage，
- *                              由 client.js enhancePrep 持久化，不回写知识库）
+ *   D:/01-Documents/Knowledge/知识库/专升本/{高数,英语,政治/课程,计算机}/  （课程站）
  *
- * 幂等：内容无变化跳过写入；createTime 沿用已生成文件的值。
- * 校验：必须解析出连续的 W1..W29、每周四科齐全、阶段名合法，否则 exit 1。
- * CI：源文件不存在时告警并跳过（生成物随仓库提交，deploy 不依赖本机盘）。
+ * 三个环节：
+ *   1. 计划页   29周计划 → docs/prep/（总览 + 四科周打卡，勾选存浏览器 localStorage）
+ *   2. 课程站镜像 四科 lessons/assets 等 → public/lessons/<zsb-slug>/（事务化换入 +
+ *               导航条注入，同 sync-learn；原始 PDF/笔记层/题库 md 不进镜像）
+ *   3. 全文转换  四科课件 HTML → docs/courses/<zsb-slug>/（README 目录页 + l/ 全文页，
+ *               lesson-convert 转换，随堂测折叠核对；政治功能页不转换只保留交互版）
+ *
+ * 幂等：镜像 staging 每轮全新 + 换入；生成页按内容比对跳过。
+ * 校验：计划必须 W1..W29 且四科齐全；课程源目录 <3 文件拒换入。
+ * CI：源盘不存在时告警跳过（生成物随仓库提交，deploy 不依赖本机盘）。
  */
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { withBase } from '../docs/.vuepress/site-meta.mjs'
+import { lessonHtmlToMarkdown } from './lib/lesson-convert.mjs'
+import { injectLessonNav } from './lib/lesson-nav.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const DEST_DIR = path.join(ROOT, 'docs', 'prep')
+const DOCS = path.join(ROOT, 'docs')
+const DEST_DIR = path.join(DOCS, 'prep')
+const PUBLIC_LESSONS = path.join(DOCS, '.vuepress', 'public', 'lessons')
+const STAGING_DIR = '.staging-prep'
 const SOURCE =
   process.env.ZSB_PLAN_SOURCE ??
   'D:/01-Documents/Knowledge/知识库/知识中心/学习区域/专升本/29周冲刺计划.md'
+const ZSB_ROOT = 'D:/01-Documents/Knowledge/知识库/专升本'
 
 const SUBJECTS = [
   { key: '高数', slug: 'gaoshu' },
@@ -32,7 +43,44 @@ const SUBJECTS = [
 const TOTAL_WEEKS = 29
 const PHASES = ['强化刷题', '真题两轮', '冲刺押题']
 
-/* ---------------- 解析 ---------------- */
+/** 专升本四科课程站（批次 2 镜像 + 批次 3 全文转换）。
+ *  keep：进公开镜像的白名单（同 sync-learn MIRROR_KEEP 思路——笔记层/原始
+ *  PDF/题库 md/生成脚本一律不发布）；skip：不转站内全文的课件（总览/功能页），
+ *  交互版仍随镜像发布；numeric：文件名 0001-x.html 按课号出 l/<no>/，
+ *  否则按文件名出 l/<名>/（政治 mzt00/xg17）。 */
+const ZSB_COURSES = [
+  {
+    slug: 'zsb-math', name: '备考·高数', subject: '高数', prepSlug: 'gaoshu',
+    src: `${ZSB_ROOT}/高数`,
+    keep: ['lessons', 'assets', 'reference', 'index.html', 'MISSION.md', 'RESOURCES.md'],
+    entry: '/lessons/zsb-math/',
+    lessonsDir: 'lessons', skip: [], numeric: true,
+  },
+  {
+    slug: 'zsb-english', name: '备考·英语', subject: '英语', prepSlug: 'yingyu',
+    src: `${ZSB_ROOT}/英语`,
+    keep: ['lessons', 'assets', 'MISSION.md', 'RESOURCES.md'],
+    entry: '/lessons/zsb-english/lessons/course.html',
+    lessonsDir: 'lessons', skip: ['course'], numeric: true,
+  },
+  {
+    slug: 'zsb-politics', name: '备考·政治', subject: '政治', prepSlug: 'zhengzhi',
+    src: `${ZSB_ROOT}/政治/课程`,
+    keep: ['lessons', 'assets', 'reference', 'index.html', 'MISSION.md', 'RESOURCES.md'],
+    entry: '/lessons/zsb-politics/',
+    lessonsDir: 'lessons', skip: ['practice', 'review', 'srs', 'wrong'],
+    numeric: false, order: ['mzt', 'xg', 'sz'],
+  },
+  {
+    slug: 'zsb-cs', name: '备考·计算机', subject: '计算机', prepSlug: 'jisuanji',
+    src: `${ZSB_ROOT}/计算机`,
+    keep: ['lessons', 'assets', 'reference', 'attachments', 'MISSION.md', 'RESOURCES.md'],
+    entry: '/lessons/zsb-cs/lessons/index.html',
+    lessonsDir: 'lessons', skip: ['index'], numeric: true,
+  },
+]
+
+/* ---------------- 计划解析 ---------------- */
 
 /** 阶段字段容错归一：「强化刷题 · 国庆半负荷」→ 强化刷题；「考试周」→ 冲刺押题 */
 function canonicalPhase(raw) {
@@ -80,7 +128,7 @@ function parseSource(md) {
   return { examDate, general, weeks }
 }
 
-/* ---------------- 生成 ---------------- */
+/* ---------------- 生成：计划页 ---------------- */
 
 /** MM-DD → 完整年份（考试年 3 月往前推：9 月及以后属上一年） */
 function fullDate(examDate, mmdd) {
@@ -120,9 +168,14 @@ function renderReadme({ examDate, general, weeks }) {
     ...phaseEnds.map((p, i) => `data-p${i + 1}="${fullDate(examDate, p.endDate)}" data-p${i + 1}n="${p.phase}"`),
   ].join(' ')
 
-  const subjectLinks = SUBJECTS.map(
-    (s, i) => `| ${s.key} | [${s.key} · ${weeks[0].label}-W${TOTAL_WEEKS} 打卡](/prep/${String(i + 1).padStart(2, '0')}-${s.slug}/) |`,
-  )
+  const bySubject = new Map(ZSB_COURSES.map((c) => [c.subject, c]))
+  const subjectLinks = SUBJECTS.map(({ key, slug }) => {
+    const c = bySubject.get(key)
+    const entries = c
+      ? ` [全文目录](/courses/${c.slug}/) · [交互课程站](${c.entry})`
+      : ''
+    return `| ${key} | [${key} · W1-W${TOTAL_WEEKS} 打卡](/prep/${slug}/) |${entries} |`
+  })
 
   const table = weeks
     .map((w) => `| ${w.label} | ${w.start} ~ ${w.end} | ${w.phase} | ${weekFlags(w)} |`)
@@ -142,10 +195,10 @@ permalink: /prep/
 
 ${general}
 
-## 四科周计划
+## 四科学习入口
 
-| 科目 | 周计划页 |
-| ---- | -------- |
+| 科目 | 周打卡 | 课程内容 |
+| ---- | ------ | -------- |
 ${subjectLinks.join('\n')}
 
 > [!TIP] 打卡说明
@@ -167,6 +220,10 @@ ${table}
 }
 
 function renderSubject(subject, { weeks }) {
+  const course = ZSB_COURSES.find((c) => c.subject === subject.key)
+  const entry = course
+    ? `\n\n本科入口：[站内全文目录](/courses/${course.slug}/) · [交互课程站](${course.entry})（随堂测 / 闪卡 / 进度，页顶可返回备考区）。`
+    : ''
   const sections = PHASES.map((phase) => {
     const inPhase = weeks.filter((w) => w.phase === phase)
     const blocks = inPhase
@@ -193,13 +250,264 @@ permalink: /prep/${subject.slug}/
 
 # ${subject.key} · 周打卡
 
-进度：<span id="prep-progress"></span>。每周轮换与每日节奏见 [备考总览](/prep/)；课程内容入口见四科课程站（后续批次收录）。
+进度：<span id="prep-progress"></span>。每周轮换与每日节奏见 [备考总览](/prep/)。${entry}
 
 ${sections.join('\n\n')}
 `
 }
 
-/* ---------------- 写入 ---------------- */
+/* ---------------- 环节 2：课程站镜像 ---------------- */
+
+const EXCLUDE_NAMES = /^(?:\._|\.)/ // 点/下划线开头的工具状态不进镜像
+
+function walkFiles(dir, filter, out = []) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, e.name)
+    if (e.isDirectory()) walkFiles(full, filter, out)
+    else if (e.isFile() && filter(e.name, full)) out.push(full)
+  }
+  return out
+}
+
+function copyTree(src, dest) {
+  let n = 0
+  const stat = fs.statSync(src)
+  if (stat.isDirectory()) {
+    fs.mkdirSync(dest, { recursive: true })
+    for (const e of fs.readdirSync(src, { withFileTypes: true })) {
+      if (EXCLUDE_NAMES.test(e.name)) continue
+      n += copyTree(path.join(src, e.name), path.join(dest, e.name))
+    }
+  } else {
+    fs.mkdirSync(path.dirname(dest), { recursive: true })
+    fs.copyFileSync(src, dest)
+    fs.utimesSync(dest, stat.atime, stat.mtime)
+    n = 1
+  }
+  return n
+}
+
+/** rename 带重试：Windows 瞬时文件锁（杀毒/索引）会 EPERM（同 sync-learn） */
+function renameWithRetry(from, to, attempts = 5) {
+  for (let i = 0; ; i++) {
+    try {
+      fs.renameSync(from, to)
+      return
+    } catch (err) {
+      if (i === attempts - 1) throw err
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 200)
+    }
+  }
+}
+
+/** 镜像 HTML 里指向未收录源层（笔记 .md / 原始 PDF / 题库）的 ../ 链接：
+ *  Obsidian 里点得动，网页上就是 404——去跳转保文本（白名单内的 ../reference、
+ *  ../assets 等照常保留）。与导航条注入同一遍历执行。 */
+function stripUnmirroredLinks(html, c) {
+  const keep = new Set(c.keep)
+  return html.replace(/<a\b[^>]*?\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, (m, href, text) => {
+    if (!href.startsWith('../')) return m
+    const target = href.slice(3).split(/[/#]/)[0]
+    if (target && keep.has(target)) return m
+    return text
+  })
+}
+
+/** CSS 里引用了不存在的字体兜底格式（源只带 woff2，css 还写着 ttf/woff）：
+ *  从 @font-face 的 src 列表剔除缺失项，整个 face 全缺则删除——免死链也保渲染。
+ *  注意压缩 css 的最后一个属性不带分号，src 用 ;? 收尾 */
+function stripMissingFontUrls(css, cssDir) {
+  return css.replace(/@font-face\{[^}]*\}/g, (block) => {
+    const src = block.match(/src:([^;]+);?/)
+    if (!src) return block
+    const kept = src[1].split(',').filter((part) => {
+      const u = part.match(/url\(([^)]+)\)/)?.[1]
+      if (!u) return true
+      return fs.existsSync(path.resolve(cssDir, u.replace(/["']/g, '')))
+    })
+    return kept.length ? block.replace(src[1], kept.join(',')) : ''
+  })
+}
+
+function syncZsbMirror(c) {
+  const dest = path.join(PUBLIC_LESSONS, c.slug)
+  const staging = path.join(DOCS, '.vuepress', STAGING_DIR, c.slug)
+  fs.rmSync(staging, { recursive: true, force: true })
+  fs.mkdirSync(staging, { recursive: true })
+
+  let count = 0
+  for (const name of c.keep) {
+    const s = path.join(c.src, name)
+    if (!fs.existsSync(s)) {
+      console.warn(`[sync-prep] ${c.slug} 缺少 ${name}，跳过该条目`)
+      continue
+    }
+    count += copyTree(s, path.join(staging, name))
+  }
+  if (count < 3) throw new Error(`[sync-prep] ${c.slug} 镜像仅 ${count} 个文件，疑似源路径异常，已中止换入：${c.src}`)
+
+  // 镜像改写点：HTML 注入导航条 + 摘除未收录源层死链；CSS 剔除缺失字体格式
+  // （/lessons/ 静态页加载不到站点 JS，只能写入时处理，见 lib/lesson-nav.mjs）
+  for (const f of walkFiles(staging, (n) => n.endsWith('.html') || n.endsWith('.css'))) {
+    const raw = fs.readFileSync(f, 'utf8')
+    const patched = f.endsWith('.html')
+      ? injectLessonNav(stripUnmirroredLinks(raw, c), {
+          backUrl: withBase(`/prep/${c.prepSlug}/`),
+          backLabel: '‹ 返回备考',
+        })
+      : stripMissingFontUrls(raw, path.dirname(f))
+    fs.writeFileSync(f, patched)
+  }
+
+  // 三步事务换入：dest → backup → staging → dest，失败回滚（同 sync-learn）
+  const backup = path.join(DOCS, '.vuepress', STAGING_DIR, `${c.slug}.bak`)
+  fs.rmSync(backup, { recursive: true, force: true })
+  const hadDest = fs.existsSync(dest)
+  if (hadDest) renameWithRetry(dest, backup)
+  try {
+    renameWithRetry(staging, dest)
+  } catch (err) {
+    if (hadDest && fs.existsSync(backup)) {
+      try {
+        renameWithRetry(backup, dest)
+      } catch {
+        fs.cpSync(backup, dest, { recursive: true })
+      }
+      console.warn(`[sync-prep] ${c.slug} 镜像换入失败，已回滚为旧镜像：${err instanceof Error ? err.message : err}`)
+    }
+    throw err
+  }
+  fs.rmSync(backup, { recursive: true, force: true })
+  return count
+}
+
+/* ---------------- 环节 3：全文转换 ---------------- */
+
+function fmtMtime(d) {
+  const p = (n) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`
+}
+
+/** 内容无变化跳过（生成模板改动靠内容比对落地，与 syncBlog 同理） */
+function writeIfChanged(file, content) {
+  if (fs.existsSync(file) && fs.readFileSync(file, 'utf8') === content) return false
+  fs.mkdirSync(path.dirname(file), { recursive: true })
+  const tmp = `${file}.tmp`
+  fs.writeFileSync(tmp, content)
+  fs.renameSync(tmp, file)
+  return true
+}
+
+function sortEntries(c, entries) {
+  if (c.numeric) return entries.sort((a, b) => a.no - b.no)
+  const orderOf = (name) => {
+    const prefix = name.match(/^[a-z]+/)?.[0] ?? ''
+    const idx = c.order?.indexOf(prefix) ?? -1
+    return idx === -1 ? c.order?.length ?? 0 : idx
+  }
+  return entries.sort((a, b) => orderOf(a.name) - orderOf(b.name) || a.name.localeCompare(b.name))
+}
+
+function syncZsbCourse(c) {
+  const lessonsDir = path.join(c.src, c.lessonsDir)
+  if (!fs.existsSync(lessonsDir)) throw new Error(`[sync-prep] ${c.slug} 课件目录不存在：${lessonsDir}`)
+  const readmeFile = path.join(DOCS, 'courses', c.slug, 'README.md')
+  const readmeCreateTime =
+    (fs.existsSync(readmeFile)
+      ? fs.readFileSync(readmeFile, 'utf8').match(/^createTime:\s*(.+)$/m)?.[1]
+      : null) ?? timestamp()
+
+  const entries = []
+  for (const f of fs.readdirSync(lessonsDir).filter((f) => f.endsWith('.html')).sort()) {
+    const name = f.replace(/\.html$/, '')
+    if (c.skip.includes(name)) continue
+    entries.push({ name, file: f, no: c.numeric ? Number(name.slice(0, 4)) : null })
+  }
+  sortEntries(c, entries)
+  const lessonNames = new Set(entries.map((e) => e.name))
+
+  const cardsDir = path.join(DOCS, 'courses', c.slug, 'l')
+  const cover = `/images/covers/${c.slug}.png`
+  const hasCover = fs.existsSync(path.join(DOCS, '.vuepress', 'public', 'images', 'covers', `${c.slug}.png`))
+  const permalinkOf = (e) => (c.numeric ? `/courses/${c.slug}/l/${e.no}/` : `/courses/${c.slug}/l/${e.name}/`)
+  const warnings = []
+  const warnTypes = new Map()
+  const tally = (m) => {
+    warnings.push(m)
+    const type = m.match(/class="[^"]*"|<[^>]+>/)?.[0] ?? m
+    warnTypes.set(type, (warnTypes.get(type) ?? 0) + 1)
+  }
+  let changed = 0
+
+  entries.forEach((e, i) => {
+    const html = fs.readFileSync(path.join(lessonsDir, e.file), 'utf8')
+    const conv = lessonHtmlToMarkdown(html, {
+      slug: c.slug,
+      lessonNames,
+      onWarn: (m) => tally(`${e.name}: ${m}`),
+    })
+    const headline = conv.headline || e.name
+    const title = c.numeric ? `第 ${e.no} 课 · ${headline}` : headline
+    const createTime = fmtMtime(fs.statSync(path.join(lessonsDir, e.file)).mtime)
+    const prev = entries[i - 1]
+    const next = entries[i + 1]
+    const navParts = [
+      prev ? `[← ${c.numeric ? `第 ${prev.no} 课` : prev.name}](${permalinkOf(prev)})` : '',
+      `[课程目录](/courses/${c.slug}/)`,
+      next ? `[${c.numeric ? `第 ${next.no} 课` : next.name} →](${permalinkOf(next)})` : '',
+    ]
+    const metaLine = conv.metaLine ? `> ${conv.metaLine}\n\n` : ''
+    const interactive = `/lessons/${c.slug}/lessons/${e.file}`
+    const body = `# ${headline}
+
+${metaLine}> 本文为站内全文版（已纳入搜索，随堂测为折叠核对）。随堂测可点击作答的交互版（页顶可返回备考区）：[**打开讲义**](${interactive})
+
+${conv.body}
+
+---
+
+${navParts.filter(Boolean).join(' · ')}
+`
+    const fm = [
+      '---',
+      `title: ${title}`,
+      `createTime: ${createTime}`,
+      `permalink: ${permalinkOf(e)}`,
+      ...(hasCover ? [`banner: ${cover}`] : []),
+      '---',
+    ].join('\n')
+    changed += writeIfChanged(path.join(cardsDir, `${c.numeric ? e.no : e.name}.md`), `${fm}\n\n${body}\n`) ? 1 : 0
+  })
+
+  // 课程目录页
+  const rows = entries
+    .map((e) => {
+      const label = c.numeric ? `${e.no}` : e.name
+      return `| ${label} | [${c.numeric ? `第 ${e.no} 课` : e.name}](${permalinkOf(e)}) | [交互版](/lessons/${c.slug}/lessons/${e.file}) |`
+    })
+    .join('\n')
+  const readme = `---
+title: ${c.name}
+createTime: ${readmeCreateTime}
+permalink: /courses/${c.slug}/
+${hasCover ? `banner: ${cover}\n` : ''}---
+
+# ${c.name} · 目录
+
+> [!TIP] 学习入口
+> - **站内全文**（本目录，纳入搜索，随堂测折叠核对）共 ${entries.length} 课
+> - [交互课程站](${c.entry})——随堂测点击作答、闪卡与进度记录（存浏览器本地，页顶可返回备考区）
+> - 周计划与打卡：[备考 · ${c.subject}](/prep/${c.prepSlug}/)
+
+| 课次 | 站内全文 | 交互讲义 |
+| ---- | -------- | -------- |
+${rows}
+`
+  changed += writeIfChanged(readmeFile, `${readme}\n`) ? 1 : 0
+  return { lessons: entries.length, changed, warnings, warnTypes }
+}
+
+/* ---------------- 写入（计划页） ---------------- */
 
 /** 写入（内容无变化跳过）；createTime 沿用已有文件，首次生成为当前时间 */
 function writeFileIfChanged(file, rendered) {
@@ -219,18 +527,34 @@ function writeFileIfChanged(file, rendered) {
 /* ---------------- 主流程 ---------------- */
 
 const main = () => {
-  if (!fs.existsSync(SOURCE)) {
-    console.warn(`[sync-prep] 内容源不存在，跳过（生成物以仓库为准）：${SOURCE}`)
+  // 环节 1：计划页（内容源缺失只跳过计划页，课程站镜像/转换照常）
+  let parsed = null
+  if (fs.existsSync(SOURCE)) {
+    parsed = parseSource(fs.readFileSync(SOURCE, 'utf8'))
+    console.log(`[sync-prep] 计划：${parsed.weeks.length} 周，考试日 ${parsed.examDate}`)
+    writeFileIfChanged(path.join(DEST_DIR, 'README.md'), renderReadme(parsed))
+    for (const [i, subject] of SUBJECTS.entries()) {
+      const file = path.join(DEST_DIR, `${String(i + 1).padStart(2, '0')}-${subject.slug}.md`)
+      writeFileIfChanged(file, renderSubject(subject, parsed))
+    }
+  } else {
+    console.warn(`[sync-prep] 计划内容源不存在，跳过计划页（生成物以仓库为准）：${SOURCE}`)
+  }
+
+  // 环节 2+3：课程站镜像 + 全文转换（课程站目录缺失才整体跳过）
+  if (!fs.existsSync(ZSB_ROOT)) {
+    console.warn(`[sync-prep] 课程站源不存在，跳过镜像与转换（生成物以仓库为准）：${ZSB_ROOT}`)
     return
   }
-  const parsed = parseSource(fs.readFileSync(SOURCE, 'utf8'))
-  console.log(`[sync-prep] 解析 ${parsed.weeks.length} 周，考试日 ${parsed.examDate}`)
-  let changed = writeFileIfChanged(path.join(DEST_DIR, 'README.md'), renderReadme(parsed))
-  for (const [i, subject] of SUBJECTS.entries()) {
-    const file = path.join(DEST_DIR, `${String(i + 1).padStart(2, '0')}-${subject.slug}.md`)
-    changed = writeFileIfChanged(file, renderSubject(subject, parsed)) || changed
+  for (const c of ZSB_COURSES) {
+    const files = syncZsbMirror(c)
+    const { lessons, changed, warnings, warnTypes } = syncZsbCourse(c)
+    const types = [...warnTypes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4)
+      .map(([t, n]) => `${t}×${n}`).join('、')
+    console.log(`[sync-prep] ${c.name}：镜像 ${files} 文件 · 全文 ${lessons} 课（更新 ${changed}，告警 ${warnings.length}${types ? `：${types}` : ''}）`)
+    for (const w of warnings.slice(0, 3)) console.warn(`  ⚠ ${w}`)
   }
-  console.log(`[sync-prep] 完成${changed ? '' : '（全部无变化）'}`)
+  console.log('[sync-prep] 完成')
 }
 
 try {

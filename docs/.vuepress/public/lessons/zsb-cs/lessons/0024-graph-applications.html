@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 24 课 · 图的应用</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第二部分 数据结构</span>
+  <span>第 24 课 / 共 29 课</span>
+</nav>
+
+<h1>图的应用</h1>
+<p class="lesson-meta">对应笔记 数据结构/16-图 §4–6 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 一句话区分 Prim（加点法）与 Kruskal（选边法），并牢记两者都只针对无向图、结果不能有环；② 区分 Dijkstra（单源）与 Floyd（所有顶点对），写出 Floyd 的递推式；③ 按步骤对 AOV 网做拓扑排序，说明序列为什么可能不唯一、输出不完说明什么；④ 用「先求点、再求边」口诀算 ve/vl/e/l，找出 e=l 的关键活动并串出关键路径。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 23 课「图的基础与遍历」：无向完全图和有向完全图的边（弧）数各是多少？</summary>
+  <div class="recall-a">无向完全图 n(n−1)/2 条边；有向完全图 n(n−1) 条弧——有向翻倍，每对顶点要方向相反的两条弧。</div>
+</details>
+<details class="recall warmup">
+  <summary>温故 · 第 22 课「赫夫曼树与编码」：WPL 的两种算法分别是什么？</summary>
+  <div class="recall-a">算法一：Σ 每个叶子的权值 × 根到该叶子的路径长度（边数）；算法二：所有内部结点权值之和。两个结果应相等，可互相验算。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么这一课全是考点</p>
+  <p>上一课打好了概念与遍历的地基，这一课是图章<strong>大题高频区</strong>的核心：最小生成树（Prim/Kruskal）、最短路径（Dijkstra/Floyd）、拓扑排序、关键路径（ve/vl/e/l）都可能单独成一道手推大题。每个算法都只需要「几步流程 + 一两句口诀」，练熟两三个完整推演，大题就有底。</p>
+</div>
+
+<h2>一、最小生成树：Prim 加点法与 Kruskal 选边法</h2>
+
+<div class="callout warn">
+  <p class="callout-title">⚠️ 课件强调</p>
+  <p><strong>无论哪种算法，生成树一定不能有环！两种算法都只针对无向图。</strong></p>
+</div>
+
+<table>
+  <tr><th>算法</th><th>基本思想</th><th>记忆</th></tr>
+  <tr><td><strong>Prim（普里姆）</strong></td><td>① 题目给定起点加入树；② 从树内所有顶点出发，选<strong>连接树内与树外且权值最小</strong>的边，把边和新顶点加入树；③ 重复直到全部顶点入树</td><td>加点法</td></tr>
+  <tr><td><strong>Kruskal（克鲁斯卡尔）</strong></td><td>每次<strong>从候选边中选权值最小</strong>的边并入生成树（不构成环），直到所有边检测完</td><td>选边法</td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">口诀</p>
+  <p>Prim「一棵树往外长」——每次一条边、拉进一个点；Kruskal「全局挑便宜边」——先排好序，逐条检查，<strong>成环就扔</strong>。n 个顶点的生成树恰好 n−1 条边。</p>
+</div>
+
+<h2>二、最短路径：Dijkstra 单源与 Floyd 全对</h2>
+<table>
+  <tr><th>算法</th><th>解决问题</th><th>思想</th></tr>
+  <tr><td><strong>Dijkstra（迪杰斯特拉）</strong></td><td><strong>单个源点到其余各顶点</strong>的最短路径</td><td>从源点开始逐步扩展，每轮确定当前已知最短的路径；<strong>按路径长度递增次序</strong>产生</td></tr>
+  <tr><td><strong>Floyd（弗洛伊德）</strong></td><td><strong>所有顶点对</strong>之间的最短路径</td><td>从初始邻接矩阵 D⁻¹ 开始，<strong>逐步引入中间结点</strong>，递推更新 n 阶矩阵</td></tr>
+</table>
+
+<p>Floyd 核心递推（k 依次取所有中间点）：</p>
+<p style="text-align:center;font-weight:bold;">D(A,B) = min( D(A,B), D(A,k)+D(k,B) )</p>
+
+<ul>
+  <li><strong>Dijkstra 例（课件：以 a 为起点）</strong>：第 1 轮确定 (a,b)=2 → 第 2 轮经 b 更新 c=(a,b,c)=3、d=(a,b,d)=5 → 第 3 轮确定 e=(a,b,c,e)=7、f=(a,b,c,f)=4 …… 每轮输出一个「当前最短」的顶点。</li>
+  <li><strong>Floyd 例（课件）</strong>：D(A,B)=min(9, 3+3)=6 → 再 min(6, 1+4)=5；矩阵从 D⁻¹→D⁰→D¹→… 逐轮更新，最终矩阵即所有顶点对的最短路径。</li>
+</ul>
+
+<h2>三、拓扑排序：AOV 网</h2>
+<p><strong>AOV 网（活动在顶点上的网）</strong>：用<strong>有向图</strong>表示工程中各活动的<strong>先后关系</strong>，<strong>顶点 = 活动</strong>。</p>
+<p><strong>拓扑排序</strong>（针对<strong>有向无环图</strong>）的步骤：</p>
+<ol>
+  <li>从 AOV 网中选一个<strong>没有前驱（入度为 0）</strong>的顶点并输出；</li>
+  <li>从网中<strong>删除该顶点及其所有出边</strong>；</li>
+  <li>重复①②直到网空（若输出不完所有顶点 → 图中有环）。</li>
+</ol>
+
+<p><strong>拓扑序列可能不唯一</strong>。课件例：课程先修关系（C1…C12）有两个合法序列：</p>
+<pre><code>(C1, C2, C3, C4, C5, C7, C9, C10, C11, C6, C8, C12)
+(C9, C10, C11, C6, C1, C12, C4, C2, C3, C5, C7, C8)</code></pre>
+
+<div class="callout tip">
+  <p class="callout-title">为什么重要</p>
+  <p><strong>拓扑排序 + 逆拓扑排序是关键路径计算的基础</strong>：拓扑序用来求 ve，逆拓扑序用来求 vl，见下一节。</p>
+</div>
+
+<h2>四、AOE 网与关键路径：ve/vl/e/l</h2>
+<p><strong>AOE 网（边活动网）</strong>：<strong>顶点 = 事件</strong>（旧活动结束、新活动开始），<strong>弧 = 活动</strong>，<strong>弧上权 = 活动持续时间</strong>。</p>
+<p><strong>关键路径 = 完成整个工程的最耗时路径</strong>，其长度 = 最短工期；关键路径上的活动为<strong>关键活动：最早开始时间 = 最晚开始时间（e = l），不可拖延</strong>。</p>
+
+<p>四个量：</p>
+<table>
+  <tr><th>记号</th><th>含义</th></tr>
+  <tr><td>ve</td><td>事件的<strong>最早</strong>开始时间（earliest）</td></tr>
+  <tr><td>vl</td><td>事件的<strong>最晚</strong>开始时间（latest）</td></tr>
+  <tr><td>e</td><td>活动（边）的最早开始时间</td></tr>
+  <tr><td>l</td><td>活动（边）的最晚开始时间</td></tr>
+</table>
+
+<p><strong>计算口诀（课件总结）</strong>：</p>
+<ol>
+  <li><strong>先求点</strong>：<strong>拓扑序</strong>求 ve（取<strong>最大</strong>，源点 ve=0）；<strong>逆拓扑序</strong>求 vl（取<strong>最小</strong>，汇点 vl=ve）；</li>
+  <li><strong>再求边</strong>：<strong>边最早 e = 出发点的 ve</strong>；<strong>边最晚 l = 指向点的 vl − 边权</strong>；</li>
+  <li><strong>e == l 的活动是关键活动</strong>，串起来即关键路径。</li>
+</ol>
+
+<p><strong>课件例</strong>（V1…V6，工程 12 天）：</p>
+<table>
+  <tr><th>顶点</th><th>V1</th><th>V2</th><th>V3</th><th>V4</th><th>V5</th><th>V6</th></tr>
+  <tr><td>ve</td><td>0</td><td>2</td><td>5</td><td>8</td><td>9</td><td>12</td></tr>
+  <tr><td>vl</td><td>0</td><td>4</td><td>5</td><td>8</td><td>11</td><td>12</td></tr>
+</table>
+<p>关键活动为 e=l 的那些（笔记例中为 a、d、f、i、j 等），关键路径为 V1→V2→V4→V5→V6。</p>
+
+<h2>五、易错点对比（本课范围）</h2>
+<table>
+  <tr><th>易错点</th><th>正确认识</th></tr>
+  <tr><td>Prim/Kruskal 可用于有向图</td><td>都是<strong>无向图</strong>的最小生成树算法</td></tr>
+  <tr><td>最小生成树可以有环</td><td>生成树边数 = 顶点数 − 1，<strong>无环</strong></td></tr>
+  <tr><td>拓扑序列唯一</td><td>可能不唯一；且只有<strong>有向无环图</strong>才有拓扑序列</td></tr>
+</table>
+
+<h2>先回忆，再自测</h2>
+<details class="recall">
+  <summary>Prim 和 Kruskal 的思想差别？共同前提是什么？</summary>
+  <div class="recall-a">Prim 是<strong>加点法</strong>：从起点出发，每次选连接树内与树外且权值最小的边；Kruskal 是<strong>选边法</strong>：每次从候选边中选权值最小且不成环的边。共同前提：都只针对<strong>无向图</strong>，结果<strong>不能有环</strong>。</div>
+</details>
+<details class="recall">
+  <summary>Dijkstra 与 Floyd 分别解决什么问题？Floyd 的递推式？</summary>
+  <div class="recall-a">Dijkstra 求<strong>单个源点</strong>到其余各顶点的最短路径（按路径长度递增次序产生）；Floyd 求<strong>所有顶点对</strong>的最短路径。递推式：D(A,B) = min( D(A,B), D(A,k)+D(k,B) )，矩阵 D⁻¹→D⁰→D¹→…。</div>
+</details>
+<details class="recall">
+  <summary>拓扑排序的步骤？什么图才有拓扑序列？输出不完说明什么？</summary>
+  <div class="recall-a">每次选<strong>入度 0（无前驱）</strong>的顶点输出并删除它及其出边，循环到网空。只有<strong>有向无环图</strong>才有拓扑序列；若输出不完所有顶点，说明图中有环。序列可能不唯一。</div>
+</details>
+<details class="recall">
+  <summary>ve、vl、e、l 怎么求？关键活动的判据是什么？</summary>
+  <div class="recall-a">先求点：拓扑序求 ve 取最大（源点 ve=0），逆拓扑序求 vl 取最小（汇点 vl=ve）；再求边：e = 出发点的 ve，l = 指向点的 vl − 边权。<strong>e == l</strong> 的活动是关键活动，串起来即关键路径。</div>
+</details>
+
+<h2>测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">1. 关于 Prim 算法求最小生成树，下列说法正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">每次从全部候选边中选权值最小且不成环的边</li>
+    <li data-opt="b">每次选入度为 0 的顶点输出并删除其出边</li>
+    <li data-opt="c">从起点出发，每次选连接树内与树外权值最小的边</li>
+    <li data-opt="d">按路径长度递增次序逐个确定各顶点的最短路径</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">Prim 是「加点法」：起点入树后，每轮从树内所有顶点出发，选连接树内与树外且权值最小的边，把边和新顶点拉进树。选边不成环是 Kruskal，拓扑排序选入度 0，递增次序产生路径是 Dijkstra。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">2. 关于 Prim 与 Kruskal 两种算法，下列说法正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">都只适用于无向图，且生成树不能有环</li>
+    <li data-opt="b">都只适用于有向图，且生成树不能有环</li>
+    <li data-opt="c">Prim 是选边法，Kruskal 是加点法</li>
+    <li data-opt="d">两种算法求出的最小生成树一定不同</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">课件强调：无论哪种算法，生成树一定不能有环，且两种算法都针对无向图。Prim 是加点法、Kruskal 是选边法，说反了就错。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">3. Dijkstra 算法解决的问题是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">所有顶点对之间的最短路径</li>
+    <li data-opt="b">单个源点到其余各顶点的最短路径</li>
+    <li data-opt="c">无向连通图的最小生成树</li>
+    <li data-opt="d">有向无环图的拓扑序列</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">Dijkstra 解决「单个源点到其余各顶点」的最短路径，按路径长度递增次序逐步扩展；「所有顶点对」是 Floyd 的问题。</p>
+</div>
+
+<div class="quiz" data-answer="d">
+  <p class="quiz-q">4. Floyd 算法的核心递推公式是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">D(A,B) = max( D(A,B), D(A,k)+D(k,B) )</li>
+    <li data-opt="b">D(A,B) = min( D(A,B), D(A,k)−D(k,B) )</li>
+    <li data-opt="c">D(A,B) = D(A,k)+D(k,B)</li>
+    <li data-opt="d">D(A,B) = min( D(A,B), D(A,k)+D(k,B) )</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">k 依次取所有中间点，比较「原路径」与「经过 k 的路径」取较小者：min( D(A,B), D(A,k)+D(k,B) )。课件例：D(A,B)=min(9, 3+3)=6 → min(6, 1+4)=5。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">5. 做拓扑排序时，每一步应从 AOV 网中选出什么样的顶点输出</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">没有前驱（入度为 0）的顶点</li>
+    <li data-opt="b">没有后继（出度为 0）的顶点</li>
+    <li data-opt="c">入度最大的顶点</li>
+    <li data-opt="d">权值最小的顶点</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">拓扑排序每轮选入度 0（无前驱）的顶点输出，并删除该顶点及其所有出边；若输出不完所有顶点，说明图中有环。出度为 0 的顶点是逆拓扑序处理时先处理的。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">6. AOE 网中，某个活动是关键活动的判据是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">活动的 e 等于事件的 ve</li>
+    <li data-opt="b">活动的 l 大于 e</li>
+    <li data-opt="c">活动的最早开始时间等于最晚开始时间</li>
+    <li data-opt="d">活动所在路径的权值最小</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">关键活动：最早开始时间 = 最晚开始时间（e = l），一天都不能拖；关键路径是完成整个工程的最耗时路径，其长度等于最短工期。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>① 完成笔记末尾 自测问题 Q5–Q7：Prim/Kruskal 的思想差别、Dijkstra/Floyd 各解决什么问题、拓扑排序步骤与关键活动判据，口头作答。② 动手推演笔记「随堂练习」的<strong>随堂应用 2</strong>：画出该无向网的最小生成树（n−1=5 条边，不能成环），并在图旁写上所用算法名——用 Prim（从 1 开始）或 Kruskal（全局选最小边、不成环）皆可。这也正是上一课留的那道「回做」任务。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：数据结构/16-图（含「易错点与对比」表与随堂练习原题）。公式速查：<a href="../reference/ds-formula-cheatsheet.html">数据结构公式速查表</a>；术语速查：<a href="../reference/glossary.html">课程术语表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0023-graph-basics-traversal.html">← 上一课：图的基础与遍历</a>
+  <a href="0025-searching.html">下一课：查找 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

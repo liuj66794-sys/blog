@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 16 课 · 栈和队列</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第二部分 数据结构</span>
+  <span>第 16 课 / 共 29 课</span>
+</nav>
+
+<h1>栈和队列</h1>
+<p class="lesson-meta">对应笔记 数据结构/12-栈和队列 · 教材 P51–P64 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 说出栈 LIFO 与队列 FIFO 的插删位置，不被「栈底出栈」这类陷阱带偏；② 用模拟法判断任意出栈序列是否合法；③ 默写循环队列四公式，并解释为何要牺牲一个单元；④ 把中缀表达式转成后缀（逆波兰式）；⑤ 写对链队列的判空条件。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 15 课「线性表」：顺序表在第 i 个位置插入、删除第 i 个元素分别要移动多少个元素？平均移动次数呢？</summary>
+  <div class="recall-a">插入第 i 个位置要 n-i+1 个元素后移，删除第 i 个元素要 n-i 个元素前移；插入平均移动 n/2 次，删除平均移动 (n-1)/2 次，时间复杂度均为 O(n)。</div>
+</details>
+
+<details class="recall warmup">
+  <summary>温故 · 第 14 课「数据结构绪论与时间复杂度」：算法的五个特性是什么？「可读性」算算法特性吗？</summary>
+  <div class="recall-a">有穷性、确定性、可行性、输入、输出，五个特性缺一不可；可读性是好算法的目标，不是算法本身的特性，判断题说「可读性是算法的重要特性」要判错。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么现在要巩固这个</p>
+  <p>栈和队列是数据结构里「操作受限的线性表」，广东专升本年年考：循环队列四公式、出栈序列合法性、中缀转后缀。你一节课把它们焊死，后面图和排序会轻松很多。</p>
+</div>
+
+<h2>一、栈与队列的核心对比</h2>
+<table>
+  <tr><th></th><th>栈 Stack</th><th>队列 Queue</th></tr>
+  <tr><td>原则</td><td>后进先出 LIFO</td><td>先进先出 FIFO</td></tr>
+  <tr><td>插入位置</td><td>栈顶</td><td>队尾 rear</td></tr>
+  <tr><td>删除位置</td><td>栈顶</td><td>队头 front</td></tr>
+  <tr><td>逻辑结构</td><td colspan="2">都是线性表（运算与存储实现可不同）</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">最高频陷阱</p>
+  <p>栈<strong>只</strong>在栈顶插删，队列<strong>只</strong>在队尾入、队头出。出现「删除栈底元素」「在队头插入」的选项直接判错。</p>
+</div>
+
+<h2>二、顺序栈：top 指向栈顶元素的下一个单元</h2>
+<table>
+  <tr><th>状态 / 操作</th><th>条件或公式</th></tr>
+  <tr><td>栈空</td><td><code>top == base</code></td></tr>
+  <tr><td>栈满</td><td><code>top - base >= size</code></td></tr>
+  <tr><td>入栈 Push</td><td>先判满，值送入 <code>*top</code>，再 <code>top++</code></td></tr>
+  <tr><td>出栈 Pop</td><td>先判空，<code>top--</code>，再取 <code>*top</code></td></tr>
+</table>
+<p>链栈用单链表头部作栈顶，最大优点：<strong>不存在栈满上溢</strong>，空间按需增长。</p>
+
+<h2>三、循环队列：四公式与牺牲一个单元</h2>
+<p>普通顺序队列会出现「假溢出」——rear 走到数组尾，但前面已出队的位置空着。把数组首尾相连成环就是循环队列。</p>
+<table>
+  <tr><th>含义</th><th>公式</th></tr>
+  <tr><td>队满</td><td><code>(rear + 1) % MaxSize == front</code></td></tr>
+  <tr><td>队空</td><td><code>front == rear</code></td></tr>
+  <tr><td>队首指针进 1</td><td><code>front = (front + 1) % MaxSize</code></td></tr>
+  <tr><td>队尾指针进 1</td><td><code>rear = (rear + 1) % MaxSize</code></td></tr>
+  <tr><td>元素个数</td><td><code>(rear - front + MaxSize) % MaxSize</code></td></tr>
+</table>
+<div class="callout tip">
+  <p class="callout-title">为什么要牺牲一个单元</p>
+  <p>空队和满队都满足 <code>front == rear</code>，无法区分。所以约定「牺牲一个存储单元」：rear 再往前走一步等于 front 时视为满。因此大小为 N 的数组，循环队列最多存 <strong>N - 1</strong> 个元素。</p>
+</div>
+
+<h2>四、中缀 → 后缀（逆波兰式）</h2>
+<table>
+  <tr><th>表达式形式</th><th>运算符位置</th><th>示例 a + b</th></tr>
+  <tr><td>中缀</td><td>操作数中间</td><td><code>a + b</code></td></tr>
+  <tr><td>前缀（波兰式）</td><td>操作数之前</td><td><code>+ a b</code></td></tr>
+  <tr><td>后缀（逆波兰式）</td><td>操作数之后</td><td><code>a b +</code></td></tr>
+</table>
+<p>转换/求值借助栈。例如 <code>a * (b + c) - d</code> 的后缀式为 <code>abc+*d-</code>：先算括号内 <code>bc+</code>，再与 a 相乘 <code>abc+*</code>，最后减 d 得 <code>abc+*d-</code>。</p>
+
+<h2>五、链队列</h2>
+<p>链队列是带 <code>front</code> 和 <code>rear</code> 两个指针的单链表。注意：</p>
+<ul>
+  <li>判空：<strong><code>front == NULL</code></strong>（课件原文「Q->front==NULL 且 Q->front==NULL」后半应为 rear，系笔误）。</li>
+  <li>不存在队满溢出问题，适合数据元素变动较大的情形。</li>
+</ul>
+
+<h2>六、先回忆，再自测</h2>
+<details class="recall">
+  <summary>合上笔记默写：循环队列四公式与最大容量</summary>
+  <div class="recall-a">队满 <code>(rear+1)%MaxSize==front</code>；队空 <code>front==rear</code>；指针进 1 用 <code>(x+1)%MaxSize</code>；元素个数 <code>(rear-front+MaxSize)%MaxSize</code>。大小为 N 的数组最多存 N-1 个元素（牺牲一格区分空满）。</div>
+</details>
+<details class="recall">
+  <summary>入栈序列 a,b,c,d，判断出栈序列 c,b,d,a 是否合法，并写出推理</summary>
+  <div class="recall-a">合法。模拟：a 入、b 入、c 入，c 出；栈顶为 b，b 出；d 入，d 出；a 出。每一步栈顶都等于目标序列当前元素，所以合法。</div>
+</details>
+<details class="recall">
+  <summary>中缀式 a*(b+c)-d 转成后缀式的步骤是什么</summary>
+  <div class="recall-a">先处理括号内 b+c 得 bc+；再与 a 相乘得 abc+*；最后减 d 得 abc+*d-。</div>
+</details>
+
+<h2>七、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">1. 下列关于栈的描述，正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">栈底元素最先进栈也最先出栈</li>
+    <li data-opt="b">栈顶元素最后进栈却最先出栈</li>
+    <li data-opt="c">栈允许在栈底进行删除操作</li>
+    <li data-opt="d">栈的插入和删除可在任意端进行</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">栈按后进先出 LIFO 原则，只在栈顶插删。栈顶元素最后进、最先出；栈底最先进、最后出。</p>
+</div>
+
+<div class="quiz" data-answer="d">
+  <p class="quiz-q">2. 入栈序列 1,2,3,4，下列不可能是出栈序列的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">1 2 3 4</li>
+    <li data-opt="b">4 3 2 1</li>
+    <li data-opt="c">1 3 2 4</li>
+    <li data-opt="d">4 1 2 3</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">若 4 第一个出栈，说明 1–4 已全部入栈，此时栈顶是 3，下一位只能是 3 而非 1。模拟法可知 D 不合法。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">3. 大小为 6 的循环队列，初始 rear=0、front=3，删除 1 个元素再加入 2 个元素后，rear 和 front 分别是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">rear=0，front=4</li>
+    <li data-opt="b">rear=1，front=4</li>
+    <li data-opt="c">rear=2，front=4</li>
+    <li data-opt="d">rear=4，front=2</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">删除 1 个：front=(3+1)%6=4；加入 2 个：rear 从 0 依次变为 (0+1)%6=1、(1+1)%6=2。注意 rear 指向队尾元素的下一个位置。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">4. 用大小为 N 的数组实现循环队列，采用牺牲一个单元区分空满，该队列最多可存储的元素个数是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">N - 1</li>
+    <li data-opt="b">N</li>
+    <li data-opt="c">N + 1</li>
+    <li data-opt="d">2N</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">牺牲一个单元后，队满条件为 (rear+1)%MaxSize==front，因此实际可用空间为 N-1。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">5. 中缀表达式 a*(b+c)-d 对应的后缀表达式是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">a b c + * d</li>
+    <li data-opt="b">a b c + * d -</li>
+    <li data-opt="c">* a + b c - d</li>
+    <li data-opt="d">a * b + c - d</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">后缀式中运算符在操作数之后。先算 b+c 得 bc+，再乘 a 得 abc+*，最后减 d 得 abc+*d-。</p>
+</div>
+
+<div class="quiz" data-answer="d">
+  <p class="quiz-q">6. 关于链队列，下列说法正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">判空条件是 rear == NULL</li>
+    <li data-opt="b">存在队满溢出问题</li>
+    <li data-opt="c">rear 指向队尾元素的下一个位置</li>
+    <li data-opt="d">适合数据元素变动较大的情形</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">链队列判空看 front==NULL；不存在队满；rear 指向最后一个结点本身；正因动态分配，适合元素变动大的场景。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">7. 容量 70 的循环队列，front=20、rear=11，当前元素个数为</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">11</li>
+    <li data-opt="b">20</li>
+    <li data-opt="c">61</li>
+    <li data-opt="d">70</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">元素个数公式为 (rear-front+MaxSize)%MaxSize。代入 (11-20+70)%70 = 61。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>打开 数据结构/12-栈和队列，完成笔记内「小试牛刀与随堂练习」全部 27 道练习，重点攻克：① 出栈序列合法性判断（如题 1、2）；② 循环队列指针移动与元素个数计算（如题 4、9、10）；③ 中缀转后缀（如题 6）。错题用 ⭐️ 标出，再回到本节回忆卡重默对应公式。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：数据结构/12-栈和队列（含「易错点与对比」表及 27 道练习）。术语速查：<a href="../reference/glossary.html">课程术语表</a>、<a href="../reference/ds-formula-cheatsheet.html">数据结构公式速查表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0015-linear-list.html">← 上一课：线性表</a>
+  <a href="0017-array-matrix-glist.html">下一课：数组、矩阵与广义表 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

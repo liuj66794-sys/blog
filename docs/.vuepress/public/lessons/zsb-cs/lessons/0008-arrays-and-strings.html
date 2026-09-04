@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 8 课 · 数组与字符串</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第一部分 C 语言</span>
+  <span>第 8 课 / 共 29 课</span>
+</nav>
+
+<h1>数组与字符串</h1>
+<p class="lesson-meta">对应笔记 C语言/06-数组 · 教材 P144–P174 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 判断数组定义与初始化是否合法，并说出违法理由；② 用「数组名是地址常量」解释 a++、a+i、整体赋值等陷阱；③ 默写冒泡排序的趟数与比较次数公式；④ 区分 '\0'、strlen 与 sizeof，并正确选用 strcmp 比较字符串。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 7 课「循环结构」：在 for 循环中，break 与 continue 分别「跳到哪里」？嵌套循环时作用范围如何？</summary>
+  <div class="recall-a">break 直接跳到循环后面的语句，不会执行表达式 3；continue 跳到表达式 3，再判断表达式 2。嵌套时两者都遵循就近原则，只作用于自己所在的那一层。</div>
+</details>
+<details class="recall warmup">
+  <summary>温故 · 第 6 课「选择进阶」：位运算对什么编码进行？负数右移时左侧补什么？~x 有什么快捷公式？</summary>
+  <div class="recall-a">所有位运算都对补码进行；负数右移左侧补 1；快捷公式 ~x = -x - 1。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么这一章重要</p>
+  <p>数组是循环的「最佳搭档」，也是指针章的地基。字符串函数、数组名与地址、冒泡排序都是填空/选择/程序阅读的高频考点。进入巩固阶段，这节课把容易混淆的边界条件钉牢。</p>
+</div>
+
+<div class="callout warn">
+  <p class="callout-title">⚠️ 勘误</p>
+  <p>数组章没有配套章节练习 PDF，课后任务以笔记末尾自测题 Q1–Q10 为准。</p>
+</div>
+
+<h2>一、一维数组：定义、初始化与数组名</h2>
+
+<p>定义格式：<code>类型 数组名[常量表达式];</code>，例如 <code>int a[8];</code>。元素为 <code>a[0] ~ a[7]</code>，<strong>下标从 0 开始</strong>。</p>
+
+<table>
+  <tr><th>要点</th><th>正确</th><th>错误</th></tr>
+  <tr><td>数组大小</td><td>必须是常量或常量表达式，如 <code>8</code>、<code>2+6</code></td><td><code>int a[n];</code>（n 变量）、<code>int a[2.3];</code></td></tr>
+  <tr><td>初始化</td><td><code>int a[5]={1,2,3};</code> 剩余自动补 0</td><td>列表个数超过长度会警告；不指定长度又不初始化会报错</td></tr>
+  <tr><td>引用</td><td><code>a[0]</code>、<code>a[i]</code>、<code>a[1+1]</code></td><td><code>a[2.3]</code>、<code>a[-1]</code>（越界不报错）</td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">记忆口诀</p>
+  <p>「初始化则值确定，部分赋值补成零；省略长度要数列，不初不省编译停。」</p>
+</div>
+
+<p><strong>数组名 = 首元素地址 = &amp;a[0]</strong>，因此数组名是<strong>地址常量</strong>：<code>a++</code>、<code>a=a+1</code> 非法；但 <code>a+i</code> ≡ <code>&amp;a[i]</code> 合法，且 <code>a+1</code> 实际加的是 <code>sizeof(元素类型)</code> 字节，不是 1 字节。</p>
+
+<h2>二、二维数组：可省行不可省列</h2>
+
+<p>定义：<code>int a[3][3];</code> 逻辑上是 3 行 3 列，内存中仍是连续线性存储。可以把 <code>a</code> 看成由 3 个「行数组」组成的一维数组，<code>a[0]</code> 又是第一行 3 个元素的数组名。</p>
+
+<table>
+  <tr><th>初始化写法</th><th>结果</th></tr>
+  <tr><td><code>int a[2][3]={{1,2,3},{4,5,6}};</code></td><td>分行初始化，最直观</td></tr>
+  <tr><td><code>int a[2][3]={1,2,3,4,5,6};</code></td><td>平铺填充（易漏，不推荐）</td></tr>
+  <tr><td><code>int a[2][3]={{1},{2,3}};</code></td><td>第 1 行 1,0,0；第 2 行 2,3,0</td></tr>
+  <tr><td><code>int a[][3]={1,2,3,4,5,6,7};</code></td><td>⌈7/3⌉=3 行，第三行 7,0,0</td></tr>
+  <tr><td><code>int a[][3]={{1,2},{},{1,2,3}};</code></td><td>行数 = 内层花括号个数 = 3</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">高频陷阱</p>
+  <p>二维数组<strong>第一维（行数）可以省略，第二维（列数）不可省</strong>。<code>int a[3][]</code> 是错的。元素 <code>a[i][j]</code> 之前有 <strong>i×N+j</strong> 个元素，主对角线 <code>i==j</code>，副对角线 <code>i+j==N-1</code>。</p>
+</div>
+
+<h2>三、冒泡排序的精确计数</h2>
+
+<p>升序冒泡：相邻两元素比较，前面大于后面就交换，每一趟把当前最大数沉到末尾。</p>
+
+<pre><code>for(i = 0; i &lt; n-1; i++)          /* 趟数：n-1        */
+    for(j = 0; j &lt; n-1-i; j++)    /* 每趟：n-1-i 次   */
+        if(a[j] &gt; a[j+1])
+        { t = a[j]; a[j] = a[j+1]; a[j+1] = t; }
+</code></pre>
+
+<div class="callout">
+  <p class="callout-title">课件修订版公式</p>
+  <p>n 个数比较 <strong>n-1 趟，第 x 趟比较 n-x-1 次</strong>。例如 4 个数：第 0 趟比 3 次，第 1 趟比 2 次，第 2 趟比 1 次。注意「第 x 趟」从 0 开始计数。</p>
+</div>
+
+<h2>四、字符数组与字符串</h2>
+
+<p>C 没有字符串类型，用字符数组或指针存放字符串。<strong>只有用字符串初始化时才自动追加 '\0'</strong>。</p>
+
+<table>
+  <tr><th>写法</th><th>长度</th><th>内容</th></tr>
+  <tr><td><code>char c[] = "abc";</code></td><td>4</td><td>a b c '\0'</td></tr>
+  <tr><td><code>char c[5] = {'a','b','c'};</code></td><td>5</td><td>a b c '\0' '\0'（部分初始化补 '\0'）</td></tr>
+  <tr><td><code>char c[5] = {'a','b','c','d','e'};</code></td><td>5</td><td>逐字符初始化，<strong>无 '\0'</strong></td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">strlen 与 sizeof 的本质区别</p>
+  <p><code>strlen</code> 统计字符个数，<strong>不含 '\0'</strong>，遇到 '\0' 就停止；<code>sizeof</code> 求变量占用的总字节数，<strong>含 '\0'</strong>。例如 <code>char c[]="abc";</code>：strlen(c)=3，sizeof(c)=4。</p>
+</div>
+
+<h2>五、六大字符串处理函数</h2>
+
+<table>
+  <tr><th>函数</th><th>头文件</th><th>核心考点</th></tr>
+  <tr><td><code>puts</code></td><td>stdio.h</td><td>输出字符串并<strong>自动换行</strong>，只能一个参数</td></tr>
+  <tr><td><code>gets</code></td><td>stdio.h</td><td>输入字符串，<strong>空格也收入</strong>，只能一个参数</td></tr>
+  <tr><td><code>strcat</code></td><td>string.h</td><td>把串 2 接到串 1 后，<strong>数组 1 必须足够大</strong></td></tr>
+  <tr><td><code>strcpy</code></td><td>string.h</td><td>复制串 2 到数组 1，解决数组名不能整体赋值的问题</td></tr>
+  <tr><td><code>strcmp</code></td><td>string.h</td><td>按 ASCII 逐字符比较，返回正/0/负；字符串<strong>不能用关系运算符</strong>比较</td></tr>
+  <tr><td><code>strlen</code></td><td>string.h</td><td>测长度不含 '\0'；涉及字节/内存空间用 sizeof</td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">输入细节</p>
+  <p><code>scanf("%s", c);</code> 中 <code>c</code> 本身就是地址，不能写成 <code>&amp;c</code>；<code>scanf</code> 遇空格停止，<code>gets</code> 可收空格。</p>
+</div>
+
+<h2>六、先回忆，再自测</h2>
+
+<details class="recall">
+  <summary>合上笔记默写：数组名是什么？a++ 为什么非法？a+1 实际加多少字节？</summary>
+  <div class="recall-a">数组名是首元素地址（&amp;a[0]），属于地址常量，因此 a++、a=a+1 都会改变常量，非法。a+1 实际加 sizeof(元素类型) 字节，对 int 数组就是 4 字节。</div>
+</details>
+
+<details class="recall">
+  <summary>默写二维数组的「可省」规则和 a[i][j] 位置公式</summary>
+  <div class="recall-a">二维数组初始化时，第一维（行数）可以省略，第二维（列数）不可省。a[i][j] 之前有 i×N+j 个元素，它是第 i×N+j+1 个元素。主对角线 i==j，副对角线 i+j==N-1。</div>
+</details>
+
+<details class="recall">
+  <summary>对比 strlen 与 sizeof；字符串比较为什么不能直接用 &gt;、==？</summary>
+  <div class="recall-a">strlen 测长度不含 '\0'，sizeof 求占用字节数含 '\0'。数组名是地址常量，用关系运算符比较字符串实际上是在比较两个地址，不是比较字符内容，必须用 strcmp。</div>
+</details>
+
+<h2>四、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">1. 下列数组定义或初始化中，合法的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">int a[n];（n 为变量）</li>
+    <li data-opt="b">int a[2.3];</li>
+    <li data-opt="c">int a[5] = {0};</li>
+    <li data-opt="d">int a[];</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">数组大小必须是常量表达式且为整型；不指定长度又不初始化会报错。int a[5]={0} 是标准全零写法。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">2. 关于数组名的说法，正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">数组名是变量，a++ 合法</li>
+    <li data-opt="b">a+i 等价于 &amp;a[i]</li>
+    <li data-opt="c">a+1 实际只加 1 个字节</li>
+    <li data-opt="d">a = a+1 可以改变数组位置</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">数组名是地址常量，a++、a=a+1 均非法；a+1 实际加 sizeof(元素类型) 字节；a+i 与 &amp;a[i] 等价。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">3. n 个数进行冒泡排序，比较趟数与第 x 趟次数为</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">n 趟，第 x 趟 n-x 次</li>
+    <li data-opt="b">n-1 趟，第 x 趟 n-x-1 次</li>
+    <li data-opt="c">n 趟，第 x 趟 n-x-1 次</li>
+    <li data-opt="d">n-1 趟，第 x 趟 n-x 次</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">课件修订版公式：n 个数比较 n-1 趟，第 x 趟比较 n-x-1 次。注意 x 从 0 开始。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">4. 对于 int a[][3]={1,2,3,4,5,6,7}，第一维与第三行分别是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">2 行，第三行 7,0,0</li>
+    <li data-opt="b">3 行，第三行 7,0,0</li>
+    <li data-opt="c">3 行，第三行 0,0,7</li>
+    <li data-opt="d">2 行，第三行 0,0,7</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">省略第一维时按 ⌈元素总数/列数⌉ 计算：⌈7/3⌉=3 行。按行优先填充，第三行只有 7，其余补 0。</p>
+</div>
+
+<div class="quiz" data-answer="d">
+  <p class="quiz-q">5. char c[]="abc"; 与 char d[5]={'a','b','c'}; 的长度和内容区别是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">c 长 3，d 长 3，都无 '\0'</li>
+    <li data-opt="b">c 长 4，d 长 3，都含 '\0'</li>
+    <li data-opt="c">c 长 3，d 长 5，都含 '\0'</li>
+    <li data-opt="d">c 长 4，d 长 5，都含 '\0'</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">字符串初始化自动加 '\0'，故 c 为 4 字节；d 指定长度 5 且部分初始化，剩余补 '\0'，长度 5。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">6. 执行 strcmp("abc", "Abc") 的返回值是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">负数</li>
+    <li data-opt="b">正数</li>
+    <li data-opt="c">0</li>
+    <li data-opt="d">无法确定</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">strcmp 按 ASCII 逐字符比较，'a'(97) &gt; 'A'(65)，所以第一个字符已分出大小，返回正数。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>打开 C语言/06-数组 自测问题 Q1–Q10，遮住答案口头作答，卡壳的记入错题本。重点重做 Q2（初始化合法性）、Q4（冒泡排序计数）、Q7（字符串 '\0'）、Q10（strlen/sizeof）。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：C语言/06-数组（含易错点与对比表、strcmp/strlen 练习原题）。教材对照：谭浩强《C程序设计》P144–P174。术语速查：<a href="../reference/glossary.html">课程术语表</a>、<a href="../reference/c-syntax-cheatsheet.html">C 语法速查</a>、<a href="../reference/ds-formula-cheatsheet.html">数据结构公式速查</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0007-loops.html">← 上一课：循环结构程序设计</a>
+  <a href="0009-functions-basics.html">下一课：函数基础 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

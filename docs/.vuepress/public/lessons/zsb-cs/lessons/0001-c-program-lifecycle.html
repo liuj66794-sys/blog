@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 1 课 · C 程序的全貌与编译四步骤</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第一部分 C 语言</span>
+  <span>第 1 课 / 共 29 课</span>
+</nav>
+
+<h1>C 程序的全貌与编译四步骤</h1>
+<p class="lesson-meta">对应笔记 C语言/01-程序设计与C语言 · 教材 P5–P16 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 默写 C 程序从源代码到运行的四个步骤及每步产物的扩展名；② 一眼识破「谁能被计算机直接执行」这类陷阱题；③ 说清 main 函数的两条硬性规则和注释的编译行为。</p>
+</div>
+
+<div class="callout">
+  <p class="callout-title">为什么先学这个</p>
+  <p>编译四步骤是整套试卷填空、选择、简答都考过的最高频考点，也是理解后面「头文件 / 库函数 / 链接错误」等地基。你已经学过一轮——这节课用最快的速度把记忆重新钉牢。</p>
+</div>
+
+<h2>一、四步骤与三个扩展名</h2>
+<p>C 程序的实现经过 <strong>编辑 → 编译 → 连接 → 运行</strong> 四步（注意：是四步，不是五步——题干把「执行」拆开数就是错的）：</p>
+<table>
+  <tr><th>步骤</th><th>产物</th><th>文件性质</th><th>这一步做什么</th></tr>
+  <tr><td>编辑</td><td><code>.c</code> 源程序</td><td>文本文件</td><td>把源程序输入计算机存盘</td></tr>
+  <tr><td>编译</td><td><code>.obj</code> 目标程序</td><td>二进制</td><td>词法分析 + 语法分析，报错定位</td></tr>
+  <tr><td>连接</td><td><code>.exe</code> 可执行程序</td><td>二进制</td><td>把目标程序与库文件连接</td></tr>
+  <tr><td>运行</td><td>运行结果</td><td>—</td><td>运行 .exe 得到结果</td></tr>
+</table>
+<div class="callout warn">
+  <p class="callout-title">最高频陷阱</p>
+  <p>源程序（.c）和目标程序（.obj）都<strong>不能</strong>被计算机直接执行，<strong>只有 .exe 能</strong>。同理：能被计算机直接执行的<strong>语言</strong>只有机器语言；C 是高级语言，必须先编译。</p>
+</div>
+
+<h2>二、配套的三组判断</h2>
+<p><strong>语言三代</strong>：机器语言 → 汇编语言 → 高级语言；机器 + 汇编统称<strong>低级语言</strong>（都依赖具体机器）。高级语言分两种翻译方式：<strong>解释</strong>（边翻译边执行，不产生目标程序）和<strong>编译</strong>（整体翻译成目标程序，再连接成可执行文件）——C 属于编译方式。</p>
+<p><strong>main 函数</strong>：有且<strong>只有一个</strong>，是程序的入口和出口；程序总是从 main 开始执行，与 main 写在什么位置无关。函数之间是<strong>平行</strong>关系，不能嵌套定义。</p>
+<p><strong>注释</strong>：<code>//</code> 到换行符结束、不能跨行；<code>/* */</code> 可跨行。注释<strong>不参与编译</strong>，编译器不会发现注释里的任何错误。另外记住：C 本身<strong>没有输入/输出语句</strong>，I/O 靠 scanf/printf 库函数完成。</p>
+
+<h2>三、先回忆，再自测</h2>
+<details class="recall">
+  <summary>合上笔记默写：四步骤、每步产物扩展名、文件性质</summary>
+  <div class="recall-a">编辑→.c（文本）；编译→.obj（二进制）；连接→.exe（二进制）；运行→结果。写不出来就回到上面的表格再看一遍，然后再默一次。</div>
+</details>
+<details class="recall">
+  <summary>「程序 = ？+ ？」，算法有哪三种基本结构？</summary>
+  <div class="recall-a">程序 = 算法 + 数据结构；三种基本结构：顺序、选择、循环。</div>
+</details>
+
+<h2>四、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">1. 下列文件中，能被计算机直接执行的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">扩展名为 .c 的源程序文件</li>
+    <li data-opt="b">扩展名为 .obj 的目标文件</li>
+    <li data-opt="c">扩展名为 .exe 的可执行文件</li>
+    <li data-opt="d">扩展名为 .h 的头文件</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">只有可执行文件能直接运行；.c 是文本、.obj 是二进制目标文件，都要先经过后续步骤。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">2. C 源程序经过「编译」这一步后得到的产物是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">可直接运行的可执行文件</li>
+    <li data-opt="b">需再连接的目标程序</li>
+    <li data-opt="c">逐句翻译的解释结果</li>
+    <li data-opt="d">包含库函数的可执行程序</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">编译产生 .obj 目标程序，它不能单独执行，必须由连接程序与库文件连接成 .exe。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">3. 关于 C 程序的执行起点，正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">总是从 main 函数开始执行</li>
+    <li data-opt="b">从最前面的函数开始执行</li>
+    <li data-opt="c">从最后面的函数开始执行</li>
+    <li data-opt="d">从预处理命令开始执行</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">与 main 的位置无关，程序永远从 main 开始；main 有且只有一个，是入口也是出口。</p>
+</div>
+
+<div class="quiz" data-answer="d">
+  <p class="quiz-q">4. 关于注释，下列说法正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">单行注释可以跨越多行书写</li>
+    <li data-opt="b">编译器能发现注释中的错误</li>
+    <li data-opt="c">注释中的语句会被编译执行</li>
+    <li data-opt="d">块注释可以跨越多行书写</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl"><code>//</code> 到换行符止，不能跨行；<code>/* */</code> 可跨行。注释不参与编译。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">5. 机器语言和汇编语言统称为</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">高级语言，不依赖具体机器</li>
+    <li data-opt="b">低级语言，依赖具体机器</li>
+    <li data-opt="c">符号语言，可移植性很好</li>
+    <li data-opt="d">自然语言，易学易读易修改</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">机器 + 汇编 = 低级语言，都依赖具体计算机，难学难用；汇编又称符号语言，但它仍属低级语言。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">6. C 语言的输入/输出功能是依靠什么实现的</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">系统内置的输入输出语句</li>
+    <li data-opt="b">编译器自带的输入输出语句</li>
+    <li data-opt="c">scanf 和 printf 等库函数</li>
+    <li data-opt="d">预处理命令提供的输入输出</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">C 本身没有 I/O 语句，靠库函数完成——这正是它移植性好的原因之一。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>打开 题库/程序设计与C语言-章节练习，遮住答案做完 9 道填空 + 4 道单选，错题标 ⭐️。然后回到笔记 自测问题 Q1–Q10，遮住答案口头作答，卡壳的记入错题。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：C语言/01-程序设计与C语言（含「易错点与对比」表，值得再过一遍）。教材对照：谭浩强《C程序设计》P5–P16。术语速查：<a href="../reference/glossary.html">课程术语表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <span>第 1 课</span>
+  <a href="0002-data-representation.html">下一课：数据的表示 — 数制、补码与常量 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

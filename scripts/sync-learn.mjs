@@ -36,6 +36,7 @@ import {
   withBase,
 } from './lib/learn-utils.mjs'
 import { lessonHtmlToMarkdown } from './lib/lesson-convert.mjs'
+import { injectLessonNav } from './lib/lesson-nav.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DOCS = path.resolve(__dirname, '..', 'docs')
@@ -125,27 +126,6 @@ function writeAtomic(dest, content, mtime) {
   if (mtime) fs.utimesSync(dest, mtime.atime, mtime.mtime)
 }
 
-/** 讲义页站点导航条：/lessons/ 下是独立静态页，不加载 VuePress 应用（client.js
- *  够不到），只能在 sync 镜像时写入。统一顶栏＝返回课程 + 首页/博客/课程/备考，
- *  四个模板族统一走「<body> 开标签后插入」的保守路线（46 页均有 head/body）。
- *  幂等：staging 每轮都是全新拷贝，注入必然重放；marker 只防异常路径二次进入。 */
-const NAV_BAR_MARKER = 'data-blog-nav-bar'
-
-function injectLessonNav(html, slug) {
-  const bodyOpen = html.match(/<body[^>]*>/i)
-  if (!bodyOpen || html.includes(NAV_BAR_MARKER)) return html
-  const links = [
-    ['首页', withBase('/')],
-    ['博客', withBase('/blog/')],
-    ['课程', withBase('/courses/')],
-    ['备考', withBase('/prep/')],
-  ]
-    .map(([t, u]) => `<a href="${u}" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">${t}</a>`)
-    .join('')
-  const bar = `<div ${NAV_BAR_MARKER}="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="${withBase(`/courses/${slug}/`)}" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回课程</a><span style="display:flex;gap:14px">${links}</span></div>\n<style>body{padding-top:44px!important}</style>`
-  return html.replace(/<body[^>]*>/i, (m) => `${m}\n${bar}`)
-}
-
 /** 统计目录树中的文件数（排除镜像跳过的目录），用于空源/错源防护 */
 function countFiles(dir) {
   if (!fs.existsSync(dir)) return 0
@@ -215,9 +195,12 @@ function syncMirror(p) {
     else if (e.isFile()) copyIfStale(s, d)
   }
 
-  // 镜像唯一改写点：给每页讲义注入站点导航条（静态页加载不到站点 JS，见 injectLessonNav）
+  // 镜像唯一改写点：给每页讲义注入站点导航条（静态页加载不到站点 JS，见 lib/lesson-nav.mjs）
   for (const f of walk(staging, (n) => n.endsWith('.html'))) {
-    writeAtomic(f, injectLessonNav(fs.readFileSync(f, 'utf8'), p.slug))
+    writeAtomic(f, injectLessonNav(fs.readFileSync(f, 'utf8'), {
+      backUrl: withBase(`/courses/${p.slug}/`),
+      backLabel: '‹ 返回课程',
+    }))
   }
 
   const stagedCount = countFiles(staging)
@@ -620,7 +603,7 @@ ${refRows || '| （暂无） |'}
     process.exit(1)
   }
   for (const c of COURSES) {
-    if (!PROJECTS.some((p) => p.slug === c.slug)) {
+    if (!PROJECTS.some((p) => p.slug === c.slug) && c.source !== 'vault') {
       console.warn(`[sync-learn] COURSES 中的 ${c.slug}（${c.name}）没有对应的 PROJECTS 源仓库，跳过其内容同步（仅出现在导航/集合中）。`)
     }
   }

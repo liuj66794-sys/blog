@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 2 课 · 数据的表示：数制、补码与常量</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第一部分 C 语言</span>
+  <span>第 2 课 / 共 29 课</span>
+</nav>
+
+<h1>数据的表示：数制、补码与常量</h1>
+<p class="lesson-meta">对应笔记 C语言/02-数据存储与运算 · 教材 P41–P47 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 在二进制、八进制、十进制、十六进制之间互转并写出过程；② 一眼判断整型/实型常量、用户标识符是否合法；③ 正数与负数的原码、反码、补码换算；④ 解释 char 溢出后的回绕现象。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 1 课「C 程序的全貌与编译四步骤」：C 程序从源代码到运行要经过哪四步？每步的产物是什么？</summary>
+  <div class="recall-a">编辑→.c（文本）；编译→.obj（二进制）；连接→.exe（二进制）；运行→结果。</div>
+</details>
+<details class="recall warmup">
+  <summary>温故 · 第 1 课「C 程序的全貌与编译四步骤」：「程序 = ？+ ？」算法的三种基本结构是什么？</summary>
+  <div class="recall-a">程序 = 算法 + 数据结构；三种基本结构：顺序、选择、循环。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么这节课重要</p>
+  <p>数制转换、补码、常量合法性、标识符合法性几乎是每次必考，也是理解后面运算符、表达式、数组指针的地基。你已经学过一轮——这节课把源笔记前半部分压缩成可快速检索的回忆链。</p>
+</div>
+
+<h2>一、存储单位：bit 与 Byte</h2>
+<p>计算机内部，<strong>数据以二进制形式存储和运算</strong>。最小单位是 <strong>bit（位）</strong>，数据处理和存储容量的基本单位是 <strong>Byte（字节）</strong>。</p>
+<table>
+  <tr><th>换算</th><th>说明</th></tr>
+  <tr><td>1 Byte = 8 bit</td><td>bit 是最小单位</td></tr>
+  <tr><td>1 KB = 1024 B = 2¹⁰ B</td><td>千字节</td></tr>
+  <tr><td>1 MB = 1024 KB = 2²⁰ B</td><td>兆字节</td></tr>
+  <tr><td>1 GB = 1024 MB = 2³⁰ B</td><td>吉字节</td></tr>
+  <tr><td>1 TB = 1024 GB = 2⁴⁰ B</td><td>太字节</td></tr>
+</table>
+
+<h2>二、数制与转换</h2>
+<p>四个概念：数码、基数、位权、尾符。</p>
+<table>
+  <tr><th>进制</th><th>数码</th><th>基数</th><th>尾符</th></tr>
+  <tr><td>二进制</td><td>0~1</td><td>2</td><td>B</td></tr>
+  <tr><td>八进制</td><td>0~7</td><td>8</td><td>O/Q</td></tr>
+  <tr><td>十进制</td><td>0~9</td><td>10</td><td>D</td></tr>
+  <tr><td>十六进制</td><td>0~9、A~F</td><td>16</td><td>H</td></tr>
+</table>
+
+<p>转换口诀：</p>
+<ul>
+  <li>非十进制 → 十进制：<strong>乘权求和</strong>。例：1101B = 1×2³+1×2²+0×2¹+1×2⁰ = 13D。</li>
+  <li>十进制 → 非十进制：整数 <strong>除 N 取余，倒序输出</strong>；小数 <strong>乘 N 取整，正序输出</strong>。</li>
+  <li>二进制 ↔ 八进制：<strong>每 3 位二进制 = 1 位八进制</strong>。</li>
+  <li>二进制 ↔ 十六进制：<strong>每 4 位二进制 = 1 位十六进制</strong>。</li>
+</ul>
+
+<div class="callout tip">
+  <p class="callout-title">简答常考</p>
+  <p>175D = 10101111B = 257Q = AFH。要能写出除基取余的过程。</p>
+</div>
+
+<h2>三、数据类型与原反补码</h2>
+<p>基本类型中先死记这四个：</p>
+<table>
+  <tr><th>类型</th><th>字节</th><th>位数</th><th>范围</th></tr>
+  <tr><td>char</td><td>1</td><td>8</td><td>-128 ~ 127（-2⁷ ~ 2⁷-1）</td></tr>
+  <tr><td>unsigned char</td><td>1</td><td>8</td><td>0 ~ 255（0 ~ 2⁸-1）</td></tr>
+  <tr><td>int / long</td><td>4</td><td>32</td><td>-2³¹ ~ 2³¹-1</td></tr>
+  <tr><td>float</td><td>4</td><td>32</td><td>约 6 位有效数字</td></tr>
+  <tr><td>double</td><td>8</td><td>64</td><td>约 15 位有效数字</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">易错点</p>
+  <p>实型常量如 <code>3.14</code> 默认按 <strong>double</strong> 处理，不是 float；写 <code>3.14f</code> 或 <code>3.14F</code> 才是 float。</p>
+</div>
+
+<h3>原码、反码、补码</h3>
+<ul>
+  <li>最高位是符号位：<strong>0 正 1 负</strong>。</li>
+  <li>无符号整数：二进制原样存储；有符号整数：<strong>补码</strong>存储；字符：<strong>ASCII</strong>存储。</li>
+  <li>正数：原码 = 反码 = 补码。</li>
+  <li>负数：反码 = 符号位不变，数值位取反；补码 = 反码 + 1。</li>
+</ul>
+
+<p>例：-11（8 位）</p>
+<table>
+  <tr><th>码</th><th>值</th></tr>
+  <tr><td>原码</td><td>10001011</td></tr>
+  <tr><td>反码</td><td>11110100</td></tr>
+  <tr><td>补码</td><td>11110101</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">特殊值</p>
+  <p>8 位有符号数中，<strong>-128 只有补码 10000000</strong>，没有原码和反码。</p>
+</div>
+
+<h3>char 溢出回绕</h3>
+<p>char 范围 -128~127，超出后按 ±256 回绕：</p>
+<ul>
+  <li><code>char c = 128;</code> → 输出 <strong>-128</strong>（128 - 256 = -128）</li>
+  <li><code>char c = -129;</code> → 输出 <strong>127</strong>（-129 + 256 = 127）</li>
+  <li><code>unsigned char c = -1;</code> → 输出 <strong>255</strong>（补码 11111111 按无符号读 = 2⁸-1）</li>
+</ul>
+
+<h2>四、常量与标识符</h2>
+
+<h3>整型常量</h3>
+<table>
+  <tr><th>进制</th><th>特征</th><th>合法例</th><th>非法例</th></tr>
+  <tr><td>十进制</td><td>普通数字</td><td>100、-12</td><td>—</td></tr>
+  <tr><td>八进制</td><td>0 开头，数码 0~7</td><td>066、023L</td><td>66（缺 0）、08C2（含 8/C）</td></tr>
+  <tr><td>十六进制</td><td>0x/0X 开头</td><td>0x66、0xACF</td><td>A8（缺前缀）、0x8CG（含 G）</td></tr>
+</table>
+
+<h3>实型常量</h3>
+<ul>
+  <li>十进制形式：3.14、.2、-9.，口诀是<strong>「点的一侧要有数」</strong>。</li>
+  <li>指数形式 aEn：口诀是<strong>「e 前 e 后要有数，e 后必须是整数」</strong>。如 <code>3.14e2</code>、<code>.7e-2</code> 合法；<code>7e0.0</code>、<code>6e</code> 不合法。</li>
+</ul>
+
+<h3>字符与字符串</h3>
+<table>
+  <tr><th>对比</th><th>'a'</th><th>"a"</th></tr>
+  <tr><td>引号</td><td>单引号</td><td>双引号</td></tr>
+  <tr><td>内存</td><td>1 字节</td><td>2 字节（含结束符 '\0'）</td></tr>
+  <tr><td>含义</td><td>整型值（ASCII 码）</td><td>地址值</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">⚠️ 勘误提醒</p>
+  <p><code>'\101'</code> 是字符型，内存占 1 字节；<code>0101</code> 是整型八进制常量，占 4 字节。两者不要混淆。</p>
+</div>
+
+<h3>标识符</h3>
+<p>用户自定义标识符规则：</p>
+<ol>
+  <li>只能由字母、数字、下划线组成。</li>
+  <li>数字不能开头。</li>
+  <li>不能用关键字。</li>
+  <li>区分大小写（<code>Int</code> 合法，<code>int</code> 不合法）。</li>
+</ol>
+
+<div class="callout warn">
+  <p class="callout-title">高频陷阱</p>
+  <p><code>9_hool</code>（数字开头）、<code>he.llo</code>（含点）、<code>x￥yz</code>（含￥）、<code>int</code>（关键字）、<code>Text-0</code>（含减号）均不合法。</p>
+</div>
+
+<h2>五、先回忆，再自测</h2>
+<details class="recall">
+  <summary>合上笔记默写：十进制转非十进制的口诀、175 的三种进制表示</summary>
+  <div class="recall-a">整数部分「除 N 取余，倒序输出」；小数部分「乘 N 取整，正序输出」。175 = 10101111B = 257Q = AFH。</div>
+</details>
+<details class="recall">
+  <summary>负数的反码、补码怎么求？-11 的 8 位原码、反码、补码各是什么？</summary>
+  <div class="recall-a">反码：符号位不变，数值位取反；补码：反码 + 1。-11：原码 10001011、反码 11110100、补码 11110101。</div>
+</details>
+<details class="recall">
+  <summary>用户标识符的三条硬规则是什么？判断 _buy_2、2_buy、Int、char 的合法性</summary>
+  <div class="recall-a">字母/数字/下划线组成、数字不开头、不用关键字（区分大小写）。_buy_2 ✓、2_buy ✗（数字开头）、Int ✓、char ✗（关键字）。</div>
+</details>
+
+<h2>六、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">1. 十进制 175 对应的二进制、八进制、十六进制是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">10101111B、257Q、AFH</li>
+    <li data-opt="b">10101111B、267Q、AFH</li>
+    <li data-opt="c">10111111B、257Q、AFH</li>
+    <li data-opt="d">10101111B、257Q、AEFH</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">175 除 2 取余得 10101111B；三位一组得 257Q；四位一组得 AFH。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">2. 下列整型常量中，合法的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">08C2</li>
+    <li data-opt="b">0x8CG</li>
+    <li data-opt="c">066</li>
+    <li data-opt="d">A8</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">八进制以 0 开头且只能含 0~7；十六进制以 0x 开头且只能含 0~9/A~F；A8 缺少 0x 前缀。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">3. 下列实型常量中，不合法的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">.7e-2</li>
+    <li data-opt="b">3.14e2</li>
+    <li data-opt="c">7e0.0</li>
+    <li data-opt="d">-9.</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">指数形式要求 e 后必须是整数，7e0.0 违反此规则；.7e-2、3.14e2、-9. 均合法。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">4. 8 位有符号数 -11 的补码是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">10001011</li>
+    <li data-opt="b">11110100</li>
+    <li data-opt="c">11110101</li>
+    <li data-opt="d">11110110</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">-11 原码 10001011，数值位取反得反码 11110100，加 1 得补码 11110101。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">5. 执行 char c = 128; printf("%d", c); 的输出是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">128</li>
+    <li data-opt="b">0</li>
+    <li data-opt="c">-128</li>
+    <li data-opt="d">127</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">char 上限为 127，128 上溢后按 128 - 256 = -128 回绕。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">6. 下列用户标识符中，合法的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">2_buy</li>
+    <li data-opt="b">int</li>
+    <li data-opt="c">_buy_2</li>
+    <li data-opt="d">Text-0</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">2_buy 数字开头，int 是关键字，Text-0 含减号，均不合法；_buy_2 符合字母/数字/下划线且非关键字。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>打开 题库/数据存储与运算-章节练习，完成前半部分（数制转换、数据类型、常量与标识符相关题目），错题标 ⭐️。然后回到笔记 自测问题 Q1–Q7，遮住答案口头作答，卡壳的记入错题本。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：C语言/02-数据存储与运算（前半：存储单位、数制、数据类型、原反补码、常量与标识符）。术语速查：<a href="../reference/glossary.html">课程术语表</a>、<a href="../reference/c-syntax-cheatsheet.html">C 语法速查表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0001-c-program-lifecycle.html">← 上一课：C 程序的全貌与编译四步骤</a>
+  <a href="0003-operators-expressions.html">下一课：运算符与表达式 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

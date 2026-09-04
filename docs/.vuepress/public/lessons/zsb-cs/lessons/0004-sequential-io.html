@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 4 课 · 顺序结构：printf 与 scanf</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第一部分 C 语言</span>
+  <span>第 4 课 / 共 29 课</span>
+</nav>
+
+<h1>顺序结构：printf 与 scanf</h1>
+<p class="lesson-meta">对应笔记 C语言/03-顺序结构程序设计 · 教材 P59–83 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 给定 printf 格式串和输出项，能写出屏幕上的实际结果（含 %m.nf 列宽、四舍五入与对齐）；② 看到 scanf 格式串，能判断用户应该怎么输入（普通字符、%c、%lf 等陷阱）；③ 正确使用 putchar / getchar 处理单字符输入输出。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 3 课「运算符与表达式」：a=10 时，表达式 a += a -= a*a 的结果是多少？</summary>
+  <div class="recall-a">赋值右结合：先算 a -= a*a，得 a = 10 − 100 = −90；再算 a += (−90)，得 a = −180。</div>
+</details>
+<details class="recall warmup">
+  <summary>温故 · 第 2 课「数据的表示：数制、补码与常量」：十进制转成非十进制，整数和小数部分分别怎么做？175 的二进制、八进制、十六进制各是什么？</summary>
+  <div class="recall-a">整数部分「除 N 取余，倒序输出」；小数部分「乘 N 取整，正序输出」。175 = 10101111B = 257Q = AFH。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么这节课关键</p>
+  <p>printf / scanf 是广东专升本程序阅读题和选择题的最大题源之一，尤其是 <code>%m.nf</code> 输出、<code>double</code> 必须用 <code>%lf</code>、<code>%c</code> 会吃空格、格式串中普通字符要原样输入——这四点每年必考。</p>
+</div>
+
+<h2>一、printf 格式输出</h2>
+<p>printf 的格式是 <code>printf(格式控制字符串, 输出列表);</code>。格式控制串里分为两类内容：</p>
+<ul>
+  <li><strong>普通字符</strong>：原样输出，例如 <code>printf("a=%d", 100);</code> 中的 <code>a=</code>。</li>
+  <li><strong>格式声明符</strong>：<code>%</code> 开头，对应输出列表中的一项；有几个格式符就应有几项，<strong>缺项会输出随机值，多余项不输出</strong>。</li>
+</ul>
+
+<table>
+  <tr><th>格式符</th><th>含义</th><th>高频示例</th></tr>
+  <tr><td><code>%d</code></td><td>有符号十进制整数</td><td><code>printf("%d", 100);</code> → 100</td></tr>
+  <tr><td><code>%md</code> / <code>%-md</code></td><td>指定列宽；正数右对齐、负数左对齐</td><td><code>%5d</code> 输出 100 → <code>□□100</code></td></tr>
+  <tr><td><code>%f</code></td><td>实型，默认 6 位小数</td><td><code>printf("%f", 1/2.0);</code> → 0.500000</td></tr>
+  <tr><td><code>%m.nf</code></td><td>宽度 m，保留 n 位小数（四舍五入）</td><td><code>%6.3f</code> 输出 -3.1415 → <code>□-3.142</code></td></tr>
+  <tr><td><code>%.nf</code></td><td>只保留 n 位小数</td><td><code>%.2f</code> 输出 3.1415 → 3.14</td></tr>
+  <tr><td><code>%c</code></td><td>单个字符（不带单引号）</td><td><code>printf("%c", 97);</code> → a</td></tr>
+  <tr><td><code>%s</code></td><td>字符串（不带双引号）</td><td><code>printf("%s", "hi");</code> → hi</td></tr>
+  <tr><td><code>%o</code> / <code>%x</code></td><td>八进制 / 十六进制，不带前缀、不带符号</td><td><code>%#o</code> / <code>%#x</code> 才带 0 / 0x 前缀</td></tr>
+  <tr><td><code>%e</code></td><td>指数形式，默认 6 位小数</td><td>123.456 → 1.234560e+02</td></tr>
+  <tr><td><code>%%</code></td><td>输出一个 %</td><td><code>printf("%%");</code> → %</td></tr>
+  <tr><td><code>%u</code></td><td>无符号十进制</td><td>2 字节 unsigned a = -1 → 65535</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">⚠️ 列宽与四舍五入规则</p>
+  <p><code>%m.nf</code> 的 m 是<strong>总宽度</strong>，小数点、负号都算进宽度；n 位小数按四舍五入。规则：<strong>m 为正左补空格，m 为负右补空格，数据实际宽度 ≥ |m| 时原样输出</strong>。</p>
+  <p>例如 <code>printf("%8.2f", -100.125);</code>：先四舍五入为 -100.13，总宽度 8，当前占 7 位，所以左补一个空格 → <code>□-100.13</code>；而 <code>%-9.2f</code> 则左对齐 → <code>-100.13□□</code>。</p>
+</div>
+
+<h2>二、scanf 格式输入</h2>
+<p>scanf 的格式是 <code>scanf(格式控制字符串, 地址列表);</code>，地址列表必须是 <code>&amp;变量名</code>。scanf 是给变量赋值，必须知道变量地址，没有 <code>&amp;</code> 数据存不进去。</p>
+
+<table>
+  <tr><th>格式串写法</th><th>正确输入方式</th><th>常见错误</th></tr>
+  <tr><td><code>%d%d</code></td><td>用空格、回车或 Tab 分隔，如 <code>10 20</code></td><td>用逗号分隔</td></tr>
+  <tr><td><code>%d,%d</code></td><td>逗号必须原样输入，如 <code>10,20</code></td><td>输入 <code>10 20</code></td></tr>
+  <tr><td><code>a=%d</code></td><td>普通字符原样输入，如 <code>a=2</code></td><td>只输 2</td></tr>
+  <tr><td><code>%c%c%c</code></td><td>连续输入 3 个字符，如 <code>abc</code></td><td>输入 <code>a b c</code>，空格会被当字符读入</td></tr>
+  <tr><td><code>%c,%c,%c</code></td><td><code>q,w,e</code>，逗号也要输入</td><td>用空格替代逗号</td></tr>
+  <tr><td><code>%3d</code></td><td>输入 12345 只取 123，剩余留给下一个变量</td><td>以为会读完整数</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">⚠️ scanf 两大硬规则</p>
+  <ul>
+    <li><strong>double 必须 %lf：</strong> <code>double x; scanf("%f", &amp;x);</code> 无法正确输入；必须用 <code>%lf</code>。printf 输出时 float / double 都可以用 %f。</li>
+    <li><strong>C 没有 %m.nf 形式的输入：</strong> 形如 <code>scanf("%5.2f", &amp;x);</code> 的写法直接判错。</li>
+    <li><strong>%c 会吃空格 / 回车：</strong> <code>scanf("%c%d", &amp;ch, &amp;a);</code> 输入 <code>123</code>，ch 得到 <code>'1'</code>，a 得到 <code>23</code>。</li>
+  </ul>
+</div>
+
+<h2>三、putchar 与 getchar</h2>
+<ul>
+  <li><code>int putchar(int ch);</code>：输出<strong>单个字符</strong>，参数可以是字符常量、字符变量、ASCII 码或转义符。例如 <code>putchar('A');</code> → A，<code>putchar(97);</code> → a。</li>
+  <li><code>int getchar(void);</code>：从键盘缓冲区读一个字符；按回车后才从 stdin 逐个读取，<strong>多余字符留在缓冲区</strong>，等待后续 getchar 读取。</li>
+</ul>
+
+<div class="callout tip">
+  <p class="callout-title">小应用：大写转小写</p>
+  <p>大写字母 ASCII +32 即得小写。教材例题：<code>c2 = c1 + 32;</code> 或直接把 <code>getchar() + 32</code> 传给 <code>putchar()</code> / <code>printf("%c", ...)</code>。</p>
+</div>
+
+<h2>四、先回忆，再自测</h2>
+<details class="recall">
+  <summary>合上笔记回答：printf("%8.2f", -100.125); 输出什么？□ 代表空格。</summary>
+  <div class="recall-a">先四舍五入为 -100.13，总宽度 8，当前 7 位，左补一个空格 → <code>□-100.13</code>。</div>
+</details>
+<details class="recall">
+  <summary>合上笔记回答：char ch; int a; scanf("%c%d", &amp;ch, &amp;a); 输入 123 后，ch 和 a 分别是？</summary>
+  <div class="recall-a">ch = '1'，a = 23。%c 只读一个字符，剩下的 "23" 按 %d 解析。</div>
+</details>
+<details class="recall">
+  <summary>合上笔记回答：double x; 用 scanf 输入时格式符应该写什么？</summary>
+  <div class="recall-a">必须用 <code>%lf</code>：<code>scanf("%lf", &amp;x);</code>。%f 无法正确读入 double。</div>
+</details>
+
+<h2>五、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">1. 执行 <code>printf("%6.2f", -3.1415);</code>，输出结果是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">输出 <code>-3.14</code></li>
+    <li data-opt="b">输出 <code>□-3.14</code></li>
+    <li data-opt="c">输出 <code>-3.142</code></li>
+    <li data-opt="d">输出 <code>□-3.142</code></li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">%6.2f 保留 2 位小数，-3.1415 四舍五入为 -3.14；总宽度 6，当前 5 位，左补一个空格 → □-3.14。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">2. 关于 scanf 的输入规则，正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">double 变量可用 %f 正确输入</li>
+    <li data-opt="b">格式串中的逗号必须原样输入</li>
+    <li data-opt="c">%c 会自动跳过空格再读取字符</li>
+    <li data-opt="d">scanf 支持 %5.2f 这种输入格式</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">double 必须 %lf；%c 会接收空格；C 不提供 %m.nf 输入。普通字符（如逗号）必须按格式串原样输入。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">3. 执行 <code>char c; scanf("%c", &amp;c);</code>，输入 <code> 5</code>（先空格后 5）后，c 的值是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">字符 <code>'5'</code></li>
+    <li data-opt="b">字符 <code>' '</code></li>
+    <li data-opt="c">整数 5</li>
+    <li data-opt="d">随机字符</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">%c 读取单个字符，不会跳过空格，第一个输入的字符就是空格，所以 c = ' '。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">4. 执行 <code>putchar(97);</code>，屏幕输出是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">输出字符 a</li>
+    <li data-opt="b">输出字符 9</li>
+    <li data-opt="c">输出整数 97</li>
+    <li data-opt="d">输出字符串 "97"</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">putchar 输出单个字符；97 是 'a' 的 ASCII 码，所以输出 a。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">5. 执行 <code>printf("%-6.2f", 3.1415);</code>，输出结果是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">输出 <code>□□3.14</code></li>
+    <li data-opt="b">输出 <code>3.14□□</code></li>
+    <li data-opt="c">输出 <code>3.1415</code></li>
+    <li data-opt="d">输出 <code>3.142□</code></li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">负号表示左对齐；保留 2 位小数后 3.14 占 4 位，宽度 6，右侧补两个空格 → 3.14□□。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">6. 执行 <code>double x; scanf("%lf", &amp;x);</code>，输入 <code>1.5</code> 后，x 的值是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">1</li>
+    <li data-opt="b">1.5</li>
+    <li data-opt="c">1.50</li>
+    <li data-opt="d">不确定</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">double 用 %lf 输入能正确接收 1.5；x 的值就是 1.5（注意不是格式化后的 1.50）。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>打开 题库/顺序程序设计-章节练习，遮住答案完整做一遍，错题标 ⭐️。然后回到笔记 自测问题 Q1–Q10，遮住答案口头作答，卡壳的记入错题本。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：C语言/03-顺序结构程序设计（含「易错点与对比」表和自测问题）。格式符速查：<a href="../reference/c-syntax-cheatsheet.html">C 语法速查表</a>。术语速查：<a href="../reference/glossary.html">课程术语表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0003-operators-expressions.html">← 上一课：运算符与表达式</a>
+  <a href="0005-selection-basics.html">下一课：选择结构基础 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

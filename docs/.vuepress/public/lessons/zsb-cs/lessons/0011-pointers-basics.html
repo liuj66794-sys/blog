@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 11 课 · 指针基础与一维数组</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第一部分 C 语言</span>
+  <span>第 11 课 / 共 29 课</span>
+</nav>
+
+<h1>指针基础与一维数组</h1>
+<p class="lesson-meta">对应笔记 C语言/08-指针 前半 · 教材 P224–P256 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 正确定义并初始化指针，说出基类型一致、只能赋地址两条硬性规则；② 用指针或数组名遍历一维数组，熟练互译 a+i、&a[i]、*(a+i)、a[i]；③ 写出能真正交换实参的传址版 swap；④ 一眼区分 *p++、*++p、(*p)++ 三者的运算顺序。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 10 课「函数进阶」：static 局部变量与普通 auto 局部变量有哪些核心区别？</summary>
+  <div class="recall-a">static 变量整个程序运行期不释放、编译时只赋一次初值、不赋初值时自动为 0 或 '\0'；auto 变量函数调用结束即释放、每次调用重新赋初值、不赋初值时是不确定的随机值。两者作用域都仍限于本函数内部。</div>
+</details>
+
+<details class="recall warmup">
+  <summary>温故 · 第 9 课「函数基础」：执行 return (a, b); 时，函数实际返回几个值？值是什么？</summary>
+  <div class="recall-a">只返回一个值。括号内是逗号表达式，其值等于最右边的操作数 b。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么现在巩固这个</p>
+  <p>指针是 C 语言贯穿数组、函数、字符串、结构体的核心工具，也是专升本选择题和程序阅读题的必考区。你已经学过一轮——这节课把「地址」「基类型」「指针算术」「传址交换」四个最基础的关节重新钉牢。</p>
+</div>
+
+<h2>一、指针变量：存地址的变量</h2>
+<p><strong>指针就是地址</strong>；<strong>指针变量是存放地址的变量</strong>。变量 p 中如果存了变量 a 的地址，就说 p 指向 a。</p>
+<pre><code>int a = 10;
+int *p = &a;   /* p 只能存地址；&a 把 a 的地址交给 p */</code></pre>
+
+<table>
+  <tr><th>运算符</th><th>作用</th><th>只能跟什么</th></tr>
+  <tr><td><code>&</code></td><td>取地址</td><td>变量，如 <code>&a</code>；<code>&5</code> 无意义</td></tr>
+  <tr><td><code>*</code></td><td>取值</td><td>地址/指针，如 <code>*p</code>；a 是普通变量时 <code>*a</code> 无意义</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">两条硬性规则</p>
+  <p>① <strong>基类型必须一致</strong>：<code>int a; float *p = &a;</code> 非法。② <strong>指针变量只能赋地址</strong>：<code>int *p = 200;</code> 非法；只有 <code>int *p = 0;</code> 或 <code>int *p = NULL;</code> 合法，表示指向零号地址。</p>
+</div>
+
+<h2>二、指针与一维数组</h2>
+<p>数组名表示数组首元素地址，因此 <code>int *p = a;</code> 与 <code>int *p = &a[0];</code> 完全等价。</p>
+
+<h3>2.1 地址与元素的等价关系</h3>
+<table>
+  <tr><th>表达式</th><th>含义</th></tr>
+  <tr><td><code>a + i</code> / <code>&amp;a[i]</code></td><td>第 i 个元素的地址</td></tr>
+  <tr><td><code>*(a + i)</code> / <code>a[i]</code></td><td>第 i 个元素的值</td></tr>
+  <tr><td><code>p + i</code> / <code>&amp;p[i]</code></td><td>指针 p 后移 i 个元素后的地址</td></tr>
+  <tr><td><code>*(p + i)</code> / <code>p[i]</code></td><td>该位置的元素值</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">指针算术不是字节算术</p>
+  <p><code>p + 1</code> 不是加 1 字节，而是加 <code>sizeof(基类型)</code> 字节。int 型指针每次移动 4 字节，char 型指针每次移动 1 字节。同数组内两个指针相减得到的是<strong>元素个数差</strong>，而不是字节差；指针相加、相乘、相除均无意义。</p>
+</div>
+
+<h3>2.2 用指针遍历数组</h3>
+<pre><code>int a[5] = {1, 3, 5, 7, 9};
+int *p = a;
+for (int i = 0; i &lt; 5; i++)
+    printf("%d ", *(p + i));   /* 等价于 p[i]、a[i] */</code></pre>
+<p>也可以用 <code>p++</code> 逐个移动指针，但注意：<strong>数组名 a 是地址常量</strong>，<code>a++</code> 非法；指针变量 p 才可以自增。</p>
+
+<h2>三、三种 swap 辨析</h2>
+<table>
+  <tr><th>写法</th><th>能否交换 main 里的 a、b</th><th>原因</th></tr>
+  <tr><td><code>void swap(int x, int y){ int t=x; x=y; y=t; }</code></td><td>不能</td><td>传值调用，形参是副本</td></tr>
+  <tr><td><code>void swap(int *x, int *y){ int *t=x; x=y; y=t; }</code></td><td>不能</td><td>只交换了形参指针的指向，没改目标值</td></tr>
+  <tr><td><code>void swap(int *x, int *y){ int t=*x; *x=*y; *y=t; }</code></td><td>能</td><td>通过 *x、*y 直接修改了实参变量的值</td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">记忆口诀</p>
+  <p>想改外面的变量，就要拿到它的地址；拿到地址后还要用 <code>*</code> 去改里面的值，而不是把地址本身挪来挪去。</p>
+</div>
+
+<h2>四、*p++ / *++p / (*p)++ 辨析</h2>
+<table>
+  <tr><th>表达式</th><th>运算顺序</th><th>结果</th></tr>
+  <tr><td><code>*p++</code> / <code>*(p++)</code></td><td>先取 *p，再 p 后移</td><td>得到当前值，指针指向下一个元素</td></tr>
+  <tr><td><code>*++p</code> / <code>*(++p)</code></td><td>先 p 前移，再取 *p</td><td>得到下一个元素的值</td></tr>
+  <tr><td><code>(*p)++</code></td><td>先取 *p 参与运算，再把该值自增 1</td><td>当前元素值加 1，指针不动</td></tr>
+  <tr><td><code>++(*p)</code></td><td>先把 *p 自增 1，再使用</td><td>当前元素值加 1，指针不动</td></tr>
+</table>
+
+<h2>五、先回忆，再自测</h2>
+<details class="recall">
+  <summary>合上笔记，写出 &amp; 与 * 的运算对象限制，并默写两条指针初始化硬性规则</summary>
+  <div class="recall-a">&amp; 后面只能跟变量；* 后面只能跟地址或指针。基类型必须一致；指针变量只能赋地址（0/NULL 除外）。</div>
+</details>
+<details class="recall">
+  <summary>用指针 p 遍历 int a[5]，写出两种等价的输出 a[i] 的表达式</summary>
+  <div class="recall-a">*(p + i) 与 p[i] 等价；*(a + i) 与 a[i] 也等价。注意 a 不能自增，p 可以自增。</div>
+</details>
+<details class="recall">
+  <summary>三种 swap 中，哪种真正能交换 main 里的变量？核心代码是什么？</summary>
+  <div class="recall-a">传址且通过 *x、*y 修改值的版本：void swap(int *x, int *y){ int t=*x; *x=*y; *y=t; }。只传值或只交换形参指向的版本都不行。</div>
+</details>
+
+<h2>六、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">1. 下列指针定义或初始化中，正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">int a; float *p = &amp;a;</li>
+    <li data-opt="b">int *p = 200;</li>
+    <li data-opt="c">int a; int *p = &amp;a;</li>
+    <li data-opt="d">int *p; *p = 10;</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">A 基类型不一致；B 把普通整数赋给指针；D 中 p 未指向具体地址就解引用赋值。C 基类型一致且用 &amp; 取地址。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">2. 已知 int a[5], *p = a; 下列代表 a[2] 地址的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">p + 2</li>
+    <li data-opt="b">*(p + 2)</li>
+    <li data-opt="c">a[2]</li>
+    <li data-opt="d">p[2]</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">p + 2 ≡ &amp;a[2] 是地址；*(p+2)、a[2]、p[2] 都是元素的值。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">3. 能真正交换 main 函数中两个 int 变量值的 swap 是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">void swap(int x,int y){int t=x;x=y;y=t;}</li>
+    <li data-opt="b">void swap(int *x,int *y){int *t=x;x=y;y=t;}</li>
+    <li data-opt="c">void swap(int *x,int *y){int t=*x;*x=*y;*y=t;}</li>
+    <li data-opt="d">void swap(int x,int y){int *t=&amp;x;*t=y;t=&amp;y;*t=x;}</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">A 是传值，只改副本；B 只交换形参指针的指向；D 仍是对形参副本操作。C 用 *x、*y 修改了实参地址里的值。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">4. 执行 int a[3]={1,3,5},*p=a; printf("%d",*p++); 输出为</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">1</li>
+    <li data-opt="b">3</li>
+    <li data-opt="c">5</li>
+    <li data-opt="d">不确定</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">*p++ 是后置形式：先取当前 *p（即 a[0]=1）输出，然后再把 p 后移一位。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">5. 对同一数组内的两个 int* 指针 p1、p2，p2 - p1 的值表示</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">两地址的字节差</li>
+    <li data-opt="b">两元素的下标差</li>
+    <li data-opt="c">两指针占用的字节数</li>
+    <li data-opt="d">数组元素的总字节数</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">指针相减按基类型步长折算，结果是两指针之间相隔的元素个数，不是字节数。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">6. 关于数组名作函数参数，下列说法正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">数组名传递的是整个数组的副本</li>
+    <li data-opt="b">形参数组名完全等价于同长度数组</li>
+    <li data-opt="c">被调函数中修改 arr[i] 会影响 main 的 a[i]</li>
+    <li data-opt="d">实参只能写数组名不能写指针</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">数组名作实参传的是首元素地址，形参本质是指针；因此 arr[i] 与 a[i] 是同一单元。实参可以是数组名或指针，四组组合均合法。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>① 打开 C语言/08-指针 自测问题，遮住答案完成随堂 9 题中的第 1–5 题，错题标 ⭐️。② 回到笔记 易错点与对比，逐条遮住右栏默写正确认识，卡壳的记入错题本。③ 用指针重写一遍传址版 swap，并分别运行传值、交换形参指向、交换值三个版本，观察输出差异。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：C语言/08-指针（§1 指针变量、§2 指针和数组）。术语速查：<a href="../reference/glossary.html">课程术语表</a>、<a href="../reference/c-syntax-cheatsheet.html">C 语法速查表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0010-functions-advanced.html">← 上一课：函数进阶</a>
+  <a href="0012-pointers-advanced.html">下一课：指针进阶 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

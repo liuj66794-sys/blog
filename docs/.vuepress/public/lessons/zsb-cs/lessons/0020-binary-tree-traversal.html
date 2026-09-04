@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 20 课 · 二叉树的遍历与还原</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第二部分 数据结构</span>
+  <span>第 20 课 / 共 29 课</span>
+</nav>
+
+<h1>二叉树的遍历与还原</h1>
+<p class="lesson-meta">对应笔记 数据结构/15-树与二叉树 §2.3 · 教材 P107–114 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 脱口背出四种遍历口诀：先序<strong>根左右</strong>、中序<strong>左根右</strong>、后序<strong>左右根</strong>、层次<strong>从上到下、从左至右</strong>；② 对任意二叉树手写先序、中序、后序序列，并用文字描述「借助队列」的层次遍历步骤；③ 用「先序/后序定根、中序分左右」完整还原一棵二叉树并写出第三种遍历序列；④ 判断哪些序列组合能唯一还原——先序+中序、后序+中序可以，<strong>只有先序+后序不行</strong>。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 19 课「树与二叉树基础」：二叉树的叶子数 n₀ 与度为 2 的结点数 n₂ 有什么关系？</summary>
+  <div class="recall-a">n₀ = n₂ + 1，即叶子数等于度为 2 的结点数加 1；例如有 10 个度为 2 的结点，叶子就有 11 个。</div>
+</details>
+
+<details class="recall warmup">
+  <summary>温故 · 第 18 课「串」：空串和空格串是一回事吗？</summary>
+  <div class="recall-a">不是。空串长度为 0，一个字符都没有；空格串由一个或多个空格组成，长度等于空格的个数。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么现在复习遍历</p>
+  <p>遍历是二叉树大题的「发动机」：给两个序列求第三个序列、还原二叉树、画树形图，卷面上反复出现。这节课专注 §2.3 遍历与还原这一块，把口诀、示例树、两道完整推演一次讲透。</p>
+</div>
+
+<h2>一、四种遍历的口诀</h2>
+<table>
+  <tr><th>遍历</th><th>口诀</th><th>次序</th></tr>
+  <tr><td>先（前）序</td><td><strong>根左右</strong></td><td>先访问根，再递归左子树，最后右子树</td></tr>
+  <tr><td>中序</td><td><strong>左根右</strong></td><td>最左叶子起：左子树→根→右子树</td></tr>
+  <tr><td>后序</td><td><strong>左右根</strong></td><td>左→右→根</td></tr>
+  <tr><td>层次</td><td><strong>从上到下、从左至右</strong></td><td>借助队列，逐层访问</td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">中序小技巧</p>
+  <p>中序不好下手时，可用<strong>「补齐法」</strong>把缺的孩子补成空、补成满二叉树辅助，再按「左根右」走一遍，不容易漏结点。</p>
+</div>
+
+<h2>二、层次遍历：借助队列的四个步骤</h2>
+<ol>
+  <li><strong>根结点入队</strong>；</li>
+  <li>队头结点<strong>出队并访问</strong>；</li>
+  <li>把出队结点的<strong>左、右孩子依次入队</strong>（存在才入）；</li>
+  <li>重复 2–3，<strong>循环至队空</strong>。</li>
+</ol>
+<p>记住辅助结构是<strong>队列</strong>——先进先出才能保证「从上到下、从左至右」的次序。</p>
+
+<h2>三、课件示例树：三种序列各走一遍</h2>
+<p>用文字把这棵树搭出来：<strong>根为 1</strong>；1 的左孩子是 <strong>2</strong>、右孩子是 <strong>3</strong>；2 没有左孩子，右孩子是 <strong>4</strong>；4 的左孩子是 <strong>7</strong>、右孩子是 <strong>8</strong>；3 的左孩子是 <strong>5</strong>、右孩子是 <strong>6</strong>。</p>
+<pre><code>        1
+      /   \
+     2     3
+      \   / \
+       4 5   6
+      / \
+     7   8</code></pre>
+<p>按「整棵树 = 根 + 左子树序列 + 右子树序列」的递归思路拆：</p>
+<ul>
+  <li><strong>先序（根左右）</strong>：1 + (2,4,7,8) + (3,5,6) = <strong>1,2,4,7,8,3,5,6</strong></li>
+  <li><strong>中序（左根右）</strong>：(2,7,4,8) + 1 + (5,3,6) = <strong>2,7,4,8,1,5,3,6</strong></li>
+  <li><strong>后序（左右根）</strong>：(7,8,4,2) + (5,6,3) + 1 = <strong>7,8,4,2,5,6,3,1</strong></li>
+</ul>
+
+<div class="callout warn">
+  <p class="callout-title">课件勘误（以树形为准）</p>
+  <p>① 课件中序印作「2,7,4,8,1,3,6」——<strong>漏了结点 5</strong>，按树形更正为 2,7,4,8,1,5,3,6；② 课件后序那一页的前缀误写为「中序遍历」，内容实为后序序列 7,8,4,2,5,6,3,1。背序列时认树形，别认印刷。</p>
+</div>
+
+<h2>四、还原二叉树：定根 + 分左右</h2>
+<p>还原规则一句话：<strong>先序/后序定根，中序分左右</strong>。</p>
+<ul>
+  <li><strong>先序</strong>序列的<strong>第一个</strong>字符是根；<strong>后序</strong>序列的<strong>最后一个</strong>字符是根；</li>
+  <li>到<strong>中序</strong>序列里找到这个根：它<strong>左边全是左子树</strong>的结点，<strong>右边全是右子树</strong>的结点；</li>
+  <li>对左、右子树各取对应的先序/中序片段，<strong>递归</strong>做下去，整棵树就画出来了。</li>
+</ul>
+<p>因此：<strong>先序+中序</strong> 或 <strong>后序+中序</strong> 可以唯一还原一棵二叉树。</p>
+
+<div class="callout warn">
+  <p class="callout-title">易错点</p>
+  <p><strong>只给先序+后序不能唯一还原</strong>——两个序列都只负责「报根」，没有中序就没人负责「分左右」，子树边界划不开。必须有中序。</p>
+</div>
+
+<h2>五、完整还原推演两例</h2>
+<h3>5.1 例一（随堂练习 4）：先序 EFHIGJK、中序 HFIEJGK，求根的右子树的根</h3>
+<ol>
+  <li>先序第一个字符 <strong>E</strong> = 整棵树的根；</li>
+  <li>在中序 HFIEJGK 中找到 E：左边 <strong>HFI</strong> 是左子树，右边 <strong>JGK</strong> 是右子树；</li>
+  <li>右子树的先序片段是 <strong>GJK</strong>，第一个字符 <strong>G</strong> = 右子树的根。答案 <strong>C. G</strong>。</li>
+</ol>
+<p>顺手把左子树也定掉：左子树先序 FHI、中序 HFI → 左子树根是 <strong>F</strong>。</p>
+
+<h3>5.2 例二（随堂练习 11）：先序 ABCDEF、中序 CBAEDF，求后序</h3>
+<ol>
+  <li>先序第一个 <strong>A</strong> = 根；中序 CBAEDF 中 A 左边 <strong>C B</strong> 是左子树、右边 <strong>E D F</strong> 是右子树；</li>
+  <li>左子树：先序 B C、中序 C B → 根 <strong>B</strong>，C 在 B 左边 → C 是 B 的左孩子；左子树后序 = <strong>C B</strong>；</li>
+  <li>右子树：先序 D E F、中序 E D F → 根 <strong>D</strong>，E 在左、F 在右；右子树后序 = <strong>E F D</strong>；</li>
+  <li>整树后序 = 左后序 + 右后序 + 根 = C B + E F D + A = <strong>CBEFDA</strong>。答案 <strong>A</strong>。</li>
+</ol>
+
+<div class="callout tip">
+  <p class="callout-title">本课之外</p>
+  <p>本课只讲了 §2.3 遍历与还原；二叉树的定义与 6 条性质见<a href="0019-tree-basics.html">第 19 课</a>，树/森林与二叉树的转换和存储见<a href="0021-tree-conversion-storage.html">第 21 课</a>，赫夫曼树与 WPL 见<a href="0022-huffman-tree.html">第 22 课</a>。</p>
+</div>
+
+<h2>六、先回忆，再自测</h2>
+<details class="recall">
+  <summary>四种遍历的口诀分别是什么？层次遍历借助什么结构？</summary>
+  <div class="recall-a">先序根左右、中序左根右、后序左右根；层次遍历从上到下、从左至右，借助<strong>队列</strong>（根入队→出队访问→左右孩子依次入队→循环至队空）。</div>
+</details>
+<details class="recall">
+  <summary>还原二叉树的规则？哪两种组合可以唯一还原？</summary>
+  <div class="recall-a">先序/后序定根，中序分左右子树。先序+中序、后序+中序可唯一还原；只给先序+后序不能——必须有中序才能分左右。</div>
+</details>
+<details class="recall">
+  <summary>为什么只给先序+后序不能唯一还原二叉树？</summary>
+  <div class="recall-a">先序和后序只能确定根（先序第一个、后序最后一个），分左右必须靠中序中根的位置；没有中序，子树边界划不开，答案不唯一。</div>
+</details>
+<details class="recall">
+  <summary>课件示例树的三种遍历序列分别是什么？两处勘误还记得吗？</summary>
+  <div class="recall-a">先序 1,2,4,7,8,3,5,6；中序 2,7,4,8,1,5,3,6（课件漏印结点 5）；后序 7,8,4,2,5,6,3,1（课件该页前缀误写「中序遍历」）。</div>
+</details>
+
+<h2>七、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">1. 中序遍历的口诀是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">根左右</li>
+    <li data-opt="b">左根右</li>
+    <li data-opt="c">左右根</li>
+    <li data-opt="d">从上到下从左至右</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">中序左根右；根左右是先序，左右根是后序，从上到下从左至右是层次遍历。四个口诀要能对应无误。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">2. 层次遍历二叉树需要借助的辅助结构是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">栈</li>
+    <li data-opt="b">队列</li>
+    <li data-opt="c">散列表</li>
+    <li data-opt="d">二维数组</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">层次遍历借助<strong>队列</strong>：根入队→出队访问→左右孩子依次入队→循环至队空，先进先出保证逐层次序。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">3. 课件示例树（根 1，2 的右孩子 4，4 的孩子 7、8，3 的孩子 5、6）的后序序列为</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">1,2,4,7,8,3,5,6</li>
+    <li data-opt="b">2,7,4,8,1,5,3,6</li>
+    <li data-opt="c">7,8,4,2,5,6,3,1</li>
+    <li data-opt="d">7,4,8,2,6,5,3,1</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">后序左右根：(7,8,4,2)+(5,6,3)+1 = 7,8,4,2,5,6,3,1。A 是先序、B 是中序；注意课件该页前缀误写「中序遍历」，内容实为后序。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">4.（随堂练习 4）先序 EFHIGJK、中序 HFIEJGK，根的右子树的根是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">E</li>
+    <li data-opt="b">F</li>
+    <li data-opt="c">G</li>
+    <li data-opt="d">K</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">先序定根 E；中序中 E 右边的 JGK 是右子树，右子树先序片段 GJK 的第一个字符 G 即右子树的根。左子树根为 F。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">5.（随堂练习 11）先序 ABCDEF、中序 CBAEDF，后序序列为</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">CBEFDA</li>
+    <li data-opt="b">CBAEDF</li>
+    <li data-opt="c">ABCDEF</li>
+    <li data-opt="d">FEDCBA</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">根 A，左子树 {B,C}（B 根、C 左孩子）后序 CB，右子树 {D,E,F}（D 根，E 左 F 右）后序 EFD，整树后序 CB+EFD+A = CBEFDA。B 是中序、C 是先序本身。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">6. 只给先序和后序两个遍历序列，能否唯一还原一棵二叉树？</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">能，先序定根后序定尾就够了</li>
+    <li data-opt="b">能，两个序列本身已含全部信息</li>
+    <li data-opt="c">不能，必须有中序才能分左右子树</li>
+    <li data-opt="d">不能，必须有层次遍历序列</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">先序+后序只能「定根」，分左右必须靠中序中根的位置，所以不能唯一还原。可唯一还原的组合是先序+中序、后序+中序。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>① 重读 数据结构/15-树与二叉树 §2.3，把四种遍历口诀抄一遍，对着课件示例树再走一次三种序列。② 完成笔记末尾 自测问题 Q3（四种遍历的口诀与层次遍历的辅助结构），口头作答。③ 打开笔记的随堂练习，<strong>遮住答案重做</strong>第 4、11 题（本课已精讲，重点核对推演步骤），再独立完成第 12、13、15 题，做完再对答案。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：数据结构/15-树与二叉树 §2.3（含示例树、两处课件勘误与随堂练习全解）。公式速查：<a href="../reference/ds-formula-cheatsheet.html">数据结构公式速查表</a>；术语速查：<a href="../reference/glossary.html">课程术语表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0019-tree-basics.html">← 上一课：树与二叉树基础</a>
+  <a href="0021-tree-conversion-storage.html">下一课：树、森林与二叉树的转换和存储 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

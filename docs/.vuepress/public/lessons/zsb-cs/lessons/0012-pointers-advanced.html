@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 12 课 · 指针进阶：二维数组、字符串与复杂声明</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第一部分 C 语言</span>
+  <span>第 12 课 / 共 29 课</span>
+</nav>
+
+<h1>指针进阶：二维数组、字符串与复杂声明</h1>
+<p class="lesson-meta">对应笔记 C语言/08-指针 · 教材 P257–295 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 用二维数组名和行指针快速写出 <code>a[i][j]</code> 的等价地址与等价值表达式；② 区分字符指针初始化的合法写法与非法赋值，能手写 <code>Mystrcpy</code>；③ 一眼识别 <code>int(*p)[4]</code>、<code>int *p[4]</code>、<code>int(*p)()</code>、<code>int *p()</code>、<code>int **p</code> 五种声明的本质。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 11 课「指针基础与一维数组」：&amp; 和 * 的运算对象各有什么限制？指针初始化的两条硬性规则是什么？</summary>
+  <div class="recall-a">&amp; 后面只能跟变量；* 后面只能跟地址或指针。规则：① 基类型必须一致；② 指针变量只能赋地址（0 或 NULL 除外）。</div>
+</details>
+
+<details class="recall warmup">
+  <summary>温故 · 第 10 课「函数进阶」：数组名作实参时，形参的改变会影响实参数组吗？为什么？</summary>
+  <div class="recall-a">会。数组名传的是首元素地址，形参数组与实参数组共用同一片内存单元，所以形参元素变化实参跟着变化。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么这节课重要</p>
+  <p>二维数组地址、字符指针合法性、五种带 <code>*</code> 的声明辨析，是专升本选择/判断/读程序题的高频丢分点。你已经学过一轮，这节课把「等价关系」和「优先级结合规则」焊成肌肉记忆。</p>
+</div>
+
+<h2>一、二维数组：降维寻址</h2>
+<p>把二维数组看成「元素是行」的一维数组。<code>int a[3][3]</code> 里，<code>a</code> 的元素是 <code>a[0]</code>、<code>a[1]</code>、<code>a[2]</code> 三行；<code>a[0]</code> 本身又是该行一维数组的数组名。</p>
+
+<table>
+  <tr><th>表达式</th><th>含义</th></tr>
+  <tr><td><code>a</code></td><td>二维数组名，即首行地址 <code>&amp;a[0]</code></td></tr>
+  <tr><td><code>a+i</code> / <code>&amp;a[i]</code></td><td>第 i <strong>行</strong>的地址</td></tr>
+  <tr><td><code>*(a+i)</code> / <code>a[i]</code></td><td>第 i 行首元素地址 <code>&amp;a[i][0]</code></td></tr>
+  <tr><td><code>*(a+i)+j</code> / <code>a[i]+j</code></td><td>i 行 j 列元素的<strong>地址</strong> <code>&amp;a[i][j]</code></td></tr>
+  <tr><td><code>*(*(a+i)+j)</code> / <code>*(a[i]+j)</code></td><td>i 行 j 列元素的<strong>值</strong> <code>a[i][j]</code></td></tr>
+  <tr><td><code>*a</code> / <code>a[0]</code></td><td>0 行 0 列元素地址 <code>&amp;a[0][0]</code></td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">数值相同 ≠ 类型相同</p>
+  <p><code>a</code> 与 <code>&amp;a[0][0]</code> 数值相同，但类型不同：<code>a</code> 是「指向一行数组的指针」<code>int(*)[n]</code>，<code>a[0]</code> 与 <code>&amp;a[0][0]</code> 是「指向 int 的指针」<code>int *</code>。这就是 <code>a+1</code> 跳一行、<code>a[0]+1</code> 跳一个 int 的原因。</p>
+</div>
+
+<p><strong>数组指针</strong>指向一整行：</p>
+<pre><code>int (*p)[3];   /* p 指向"含 3 个 int 的一行数组" */
+p = a;         /* p+1 跳一整行 */
+/* 访问 a[i][j] 可写 p[i][j] 或 *(*(p+i)+j) */</code></pre>
+
+<h2>二、字符串与字符指针</h2>
+<p>字符串是常量，存放在常量区，<code>"abcd"</code> 本身表示第一个字符的地址，末尾自动含 <code>'\0'</code>。</p>
+
+<table>
+  <tr><th>写法</th><th>合法性</th><th>原因</th></tr>
+  <tr><td><code>char *s = "hello";</code></td><td>合法</td><td>声明时初始化，s 接收字符串首地址</td></tr>
+  <tr><td><code>char *s; *s = "hello";</code></td><td>非法</td><td><code>*s</code> 是字符，不是指针变量，不能接收地址</td></tr>
+  <tr><td><code>char *s; s = {"abcd"};</code></td><td>非法</td><td>花括号初始化列表只能用于声明初始化，不能用于赋值语句</td></tr>
+  <tr><td><code>char s[10]; s = "abcd";</code></td><td>非法</td><td>数组名是地址常量，不能整体赋值，应使用 <code>strcpy(s, "abcd")</code></td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">手写字符串复制函数</p>
+  <pre><code>void Mystrcpy(char *dest, char *src) {
+    while ((*dest++ = *src++) != '\0');
+}</code></pre>
+  <p>循环把 <code>*src</code> 赋给 <code>*dest</code>，然后两者同时后移，直到把 <code>'\0'</code> 也复制过去。如果逐字符循环手动复制，记得<strong>手动补 <code>'\0'</code></strong>，否则输出会越界乱码。</p>
+</div>
+
+<h2>三、五种带 * 的声明辨析</h2>
+<p>判断规则：<strong>看 <code>*p</code> 先与谁结合</strong>。与 <code>[]</code> 结合是数组，与 <code>()</code> 结合是函数，先与 <code>*</code> 结合才是指针变量。</p>
+
+<table>
+  <tr><th>声明</th><th>本质</th><th>读法</th></tr>
+  <tr><td><code>int (*p)[4]</code></td><td>指针变量</td><td>数组指针：指向含 4 个 int 的一行数组</td></tr>
+  <tr><td><code>int *p[4]</code></td><td>数组</td><td>指针数组：4 个元素，每个都是 int* 指针</td></tr>
+  <tr><td><code>int (*p)()</code></td><td>指针变量</td><td>函数指针：指向返回 int 的函数</td></tr>
+  <tr><td><code>int *p()</code></td><td>函数</td><td>返回 int* 指针的函数</td></tr>
+  <tr><td><code>int **p</code></td><td>指针变量</td><td>二级指针：指向 int* 指针的指针</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">两个常见陷阱</p>
+  <p>① <code>int *p[4]</code> 是数组不是指针，<code>int(*p)[4]</code> 才是指向一行的指针；② 函数指针不能做算术运算，<code>p+1</code> 无意义。</p>
+</div>
+
+<h2>四、先回忆，再自测</h2>
+<details class="recall">
+  <summary>合上笔记，写出 <code>a[i][j]</code> 的地址形式和值形式（至少各两种）</summary>
+  <div class="recall-a">地址：<code>&amp;a[i][j]</code>、<code>a[i]+j</code>、<code>*(a+i)+j</code>；值：<code>a[i][j]</code>、<code>*(a[i]+j)</code>、<code>*(*(a+i)+j)</code>。写错一个就回到表格再默一次。</div>
+</details>
+<details class="recall">
+  <summary><code>char *s = "hello";</code> 合法，为什么 <code>char *s; *s = "hello";</code> 与 <code>char s[10]; s = "hello";</code> 都非法？</summary>
+  <div class="recall-a">第一句是声明时初始化，<code>s</code> 是指针变量可接收地址。第二句 <code>*s</code> 是字符不能接收地址。第三句 <code>s</code> 是数组名（地址常量），不能出现在赋值号左边，需用 <code>strcpy</code>。</div>
+</details>
+<details class="recall">
+  <summary>快速判断：<code>int(*p)[4]</code> 与 <code>int *p[4]</code> 的本质区别是什么？</summary>
+  <div class="recall-a">括号改变结合顺序。<code>(*p)</code> 先与 <code>*</code> 结合 → <code>p</code> 是指针 → 数组指针；无括号时 <code>[]</code> 优先级高 → <code>p</code> 先与 <code>[4]</code> 结合 → <code>p</code> 是数组 → 指针数组。</div>
+</details>
+
+<h2>五、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">1. 设有 <code>int a[3][3];</code>，下列表达式中代表 <code>a[1][2]</code> 值的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a"><code>a+1+2</code></li>
+    <li data-opt="b"><code>*(a+1)+2</code></li>
+    <li data-opt="c"><code>*(*(a+1)+2)</code></li>
+    <li data-opt="d"><code>**(a+1+2)</code></li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl"><code>a+1</code> 是第 1 行地址；<code>*(a+1)</code> 即 <code>a[1]</code>，是第 1 行首地址；+2 到 <code>&amp;a[1][2]</code>；再取 * 才是值。A 是行地址运算，B 是元素地址，D 越界到第 3 行。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">2. 关于字符串指针，下列说法正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a"><code>char *s; *s = "abc";</code> 合法</li>
+    <li data-opt="b"><code>char *s = "abc";</code> 合法</li>
+    <li data-opt="c"><code>char s[10]; s = "abc";</code> 合法</li>
+    <li data-opt="d"><code>char *s; s = {"abc"};</code> 合法</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">只有声明时直接初始化合法。<code>*s</code> 是字符不能收地址；数组名是常量不能赋值；花括号列表只能用于初始化不能用于赋值语句。</p>
+</div>
+
+<div class="quiz" data-answer="d">
+  <p class="quiz-q">3. 对于 <code>int a[3][3];</code>，<code>a</code> 与 <code>&amp;a[0][0]</code> 的关系是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">地址值与类型均相同</li>
+    <li data-opt="b">地址值不同但类型相同</li>
+    <li data-opt="c">地址值不同且类型不同</li>
+    <li data-opt="d">地址值相同但类型不同</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">数值上都指向数组开头，但 <code>a</code> 是 <code>int(*)[3]</code>（指向一行），<code>&amp;a[0][0]</code> 是 <code>int *</code>。因此 <code>a+1</code> 跳一行，<code>&amp;a[0][0]+1</code> 跳一个 int。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">4. <code>int (*p)[4];</code> 中，<code>p</code> 的本质是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">指向含 4 个 int 的一维数组</li>
+    <li data-opt="b">含 4 个 int 指针的数组</li>
+    <li data-opt="c">返回 int 指针的函数</li>
+    <li data-opt="d">指向返回 int 函数的指针</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">括号使 <code>*p</code> 先结合，<code>p</code> 是指针；<code>[4]</code> 修饰指向的对象是一维数组。B 是 <code>int *p[4]</code>，C 是 <code>int *p()</code>，D 是 <code>int (*p)()</code>。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">5. 下列定义中，<code>p</code> 是数组而不是指针的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a"><code>int **p;</code></li>
+    <li data-opt="b"><code>int *p[4];</code></li>
+    <li data-opt="c"><code>int (*p)[4];</code></li>
+    <li data-opt="d"><code>int (*p)();</code></li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl"><code>[]</code> 优先级高于 <code>*</code>，<code>p</code> 先与 <code>[4]</code> 结合，所以 <code>int *p[4]</code> 是指针数组（数组），其余三项中 <code>p</code> 都是指针变量。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">6. 手写 <code>Mystrcpy(dest, src)</code> 时，循环结束的条件是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a"><code>*src == '0'</code></li>
+    <li data-opt="b"><code>*dest == '\0'</code></li>
+    <li data-opt="c"><code>(*dest++ = *src++) == '\0'</code></li>
+    <li data-opt="d"><code>(*dest = *src) != 0</code></li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">C 在赋值的同时把 <code>'\0'</code> 也复制到 <code>dest</code>，并移动两个指针，循环自然终止。A 判断字符 '0' 错误；B 未复制结束符；D 只复制一次不移动指针。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>打开笔记 C语言/08-指针 · 自测问题，遮住答案完成：第 5 题（指针数组等价写法）、第 7 题（数组元素正确引用）、追加题（<code>*(*(a+1)+2)</code> 含义），以及自行默写 <code>Mystrcpy</code> 并检查是否把 <code>'\0'</code> 一并复制。错题在笔记旁标 ⭐️，次日先复习 starred 题目。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：C语言/08-指针（重点看 §3 二维数组、§4 字符串、§5 定义辨析与易错点表）。术语速查：<a href="../reference/glossary.html">课程术语表</a>、<a href="../reference/c-syntax-cheatsheet.html">C 语法速查</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0011-pointers-basics.html">← 上一课：指针基础</a>
+  <a href="0013-structs-and-files.html">下一课：结构体与文件 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

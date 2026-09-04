@@ -56,6 +56,14 @@ function rewriteUrl(href, ctx) {
   if (lesson) return `/courses/${ctx.slug}/l/${Number(lesson[1])}/`
   const up = url.match(/^\.\.\/(.+)$/)
   if (up) return withBase(`/lessons/${ctx.slug}/${up[1]}`)
+  // 同目录课件互链（专升本四科）：非纯数字文件名（mzt01.html）且属于本课
+  // 站内全文集 → l/<名>/；否则（刷题场等功能页）→ 镜像交互页
+  const sib = url.match(/^\.?\/?([^/]+\.html)$/)
+  if (sib) {
+    const name = sib[1].replace(/\.html$/, '')
+    if (ctx.lessonNames?.has(name)) return `/courses/${ctx.slug}/l/${name}/`
+    return withBase(`/lessons/${ctx.slug}/lessons/${sib[1]}`)
+  }
   ctx.onWarn(`[lesson-convert] 未识别的相对链接，保持原样：${url}`)
   return url
 }
@@ -70,6 +78,12 @@ function rewriteUrl(href, ctx) {
 function inline(html, ctx) {
   let s = html
   s = s.replace(/<br\s*\/?>/gi, '\n')
+  // 交互控件（标记完成按钮等）与页码溯源/课号徽标（专升本政治 cite、高数 lesson-no/crumb）：
+  // 纯静态全文版用不上，整元素丢弃
+  s = s.replace(/<button\b[^>]*>[\s\S]*?<\/button>/gi, '')
+  s = s.replace(/<span class="(?:cite|lesson-no|crumb)"[^>]*>[\s\S]*?<\/span>/gi, '')
+  // 指向未镜像源层（笔记 .md / 原始 PDF，可带 #锚点）的链接：保留文本去掉跳转（点了就是 404）
+  s = s.replace(/<a\b[^>]*href="[^"]*\.(?:md|pdf)(?:#[^"]*)?"[^>]*>([\s\S]*?)<\/a>/gi, (_, t) => t)
   // 链接先行：链接内可能含加粗/数字 span，递归处理标签部分
   s = s.replace(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, (m, href, text) => {
     const label = inline(text, ctx).replace(/\s+/g, ' ').trim() || decodeEntities(href)
@@ -82,9 +96,10 @@ function inline(html, ctx) {
   s = s.replace(/<\/?(?:u|mark|small|sub|sup|font)[^>]*>/gi, '')
   s = decodeEntities(s)
   // 泛型文本（Promise<string> 等）解码出的裸尖括号会被 Vue 模板编译器当成
-  // 未闭合标签，转义回实体；反引号代码 span 内的内容 markdown-it 会自行
-  // 转义，跳过（占位符保护后统一还原）
+  // 未闭合标签，转义回实体；反引号代码 span 与 $...$ 数学 span（\ge、< 等
+  // 关系符）不经实体转义——转了 katex 就渲染不出——占位符保护后统一还原
   s = s.replace(/`[^`]*`/g, (m) => m.replace(/</g, '\u0000').replace(/>/g, '\u0001'))
+  s = s.replace(/\$[^$\n]+?\$/g, (m) => m.replace(/</g, '\u0000').replace(/>/g, '\u0001'))
   s = s.replace(/</g, '&lt;').replace(/>/g, '&gt;')
   s = s.replace(/\u0000/g, '<').replace(/\u0001/g, '>')
   // CommonMark 强调边界：** 内侧紧贴空格会失效，把空格挤到外侧；再收敛空白
@@ -101,7 +116,7 @@ function cellText(html, ctx) {
 /* ---------------- 块级解析 ---------------- */
 
 /** 结构性包裹标签（main/footer 等）：本身无语义，内容按顶层块展开 */
-const TRANSPARENT_TAGS = new Set(['main', 'footer', 'article', 'section', 'aside', 'header'])
+const TRANSPARENT_TAGS = new Set(['main', 'footer', 'article', 'section', 'aside', 'header', 'nav'])
 /** 行内标签：出现在文本流里不构成块边界（连同其开闭标签一起并入文本 run） */
 const INLINE_TAGS = new Set([
   'a', 'strong', 'b', 'em', 'i', 'code', 'span', 'u', 'mark', 'small',
@@ -183,9 +198,14 @@ function* iterBlocks(html) {
         continue
       }
       const rest = html.slice(i)
-      const end = matchBlockEnd(rest, tag)
+      let end = matchBlockEnd(rest, tag)
+      if (end === -1 && (tag === 'p' || tag === 'li' || tag === 'summary')) {
+        // HTML 允许这些标签省略闭合（下一块级开标签自动收口）：取到下一个块级边界
+        const b = nextBlockBoundary(rest, rest.match(/^<[^>]*>/)[0].length)
+        end = b === -1 ? rest.length : b
+      }
       if (end === -1) {
-        yield { tag: '#unknown', raw: rest } // 未闭合：整段兜底
+        yield { tag: '#unknown', raw: rest } // 真未闭合：整段兜底
         i = n
         continue
       }
@@ -320,20 +340,33 @@ function quizToMarkdown(openTag, inner, ctx) {
     || inner.match(/<ul[^>]*class="[^"]*quiz-options[^"]*"[^>]*data-explain="([^"]*)"/)?.[1]
     || ''))
 
-  // 题干：p.q / p.quiz-question / div.quiz-question /（english）无 class 的 p
+  // 题干：p.q / p.quiz-question / div.quiz-question /（专升本）p.quiz-q /（english）无 class 的 p
   let qHtml = inner.match(/<p class="q">([\s\S]*?)<\/p>/)?.[1]
     || inner.match(/<(?:p|div) class="quiz-question"[^>]*>([\s\S]*?)<\/(?:p|div)>/)?.[1]
+    || inner.match(/<p class="quiz-q"[^>]*>([\s\S]*?)<\/p>/)?.[1]
   const h4 = inner.match(/<h4[^>]*>([\s\S]*?)<\/h4>/)
   if (!qHtml) {
     const plainP = inner.match(/<p>([\s\S]*?)<\/p>/)
     if (plainP) qHtml = plainP[1]
   }
+  // 题号徽标（专升本高数：随堂测 N）
+  const quizNo = stripTags(inner.match(/<span class="quiz-no">([\s\S]*?)<\/span>/)?.[1] ?? '')
 
-  // 选项：三种布局依次探测，产出 { key, text, correct }
+  // 选项：多种布局依次探测，产出 { key, text, correct }
   const opts = []
   const liMatches = [...inner.matchAll(/<li(?=[\s>])[^>]*>([\s\S]*?)<\/li>/gi)]
   const liRaw = [...inner.matchAll(/<li(?=[\s>])[^>]*>/gi)]
-  if (inner.includes('class="option"')) {
+  if (/<button[^>]*data-k=/.test(inner)) {
+    // 专升本高数：div.quiz-opts > button[data-k=字母]
+    for (const m of inner.matchAll(/<button[^>]*data-k="([^"]*)"[^>]*>([\s\S]*?)<\/button>/gi)) {
+      opts.push({ key: m[1].trim().toUpperCase(), text: inline(m[2], ctx).trim(), correct: false })
+    }
+  } else if (/data-opt=/.test(inner)) {
+    // 专升本计算机：ol.quiz-opts > li[data-opt=字母]
+    for (const m of inner.matchAll(/<li[^>]*data-opt="([^"]*)"[^>]*>([\s\S]*?)<\/li>/gi)) {
+      opts.push({ key: m[1].trim().toUpperCase(), text: inline(m[2], ctx).trim(), correct: false })
+    }
+  } else if (inner.includes('class="option"')) {
     // pi-agent：button.option[data-key]
     for (const m of inner.matchAll(/<button class="option" data-key="([^"]*)"[^>]*>([\s\S]*?)<\/button>/gi)) {
       opts.push({ key: m[1].toUpperCase(), text: inline(m[2], ctx).trim(), correct: false })
@@ -368,14 +401,23 @@ function quizToMarkdown(openTag, inner, ctx) {
     answerIdx = opts.findIndex((o) => o.correct)
   }
 
-  // 解析兜底：engineering-skills 页尾 script 的 explanations[ratioName][字母]
+  // 解析兜底：engineering-skills 页尾 script 的 explanations[ratioName][字母]；
+  // 专升本四科在块内自带 quiz-exp / quiz-expl / quiz-verdict（verdict 常为空容器）
+  if (!explain) {
+    explain = escapeAngle(decodeEntities(
+      inner.match(/<div class="quiz-exp"[^>]*>([\s\S]*?)<\/div>/)?.[1]
+      || inner.match(/<p class="quiz-expl"[^>]*>([\s\S]*?)<\/p>/)?.[1]
+      || inner.match(/<div class="quiz-verdict"[^>]*>([\s\S]*?)<\/div>/)?.[1]
+      || '',
+    )).replace(/\s+/g, ' ').trim()
+  }
   if (!explain) {
     const radioName = inner.match(/<input[^>]*name="([^"]*)"/)?.[1]
     const key = answerIdx >= 0 ? (opts[answerIdx].key ?? letterOf(answerIdx)) : null
     explain = radioName && key ? (ctx.explanations?.[radioName]?.[key] ?? '') : ''
   }
 
-  const qText = (h4 ? `${stripTags(h4[1])}：` : '') + (qHtml ? inline(qHtml, ctx) : '')
+  const qText = (h4 ? `${stripTags(h4[1])}：` : '') + (quizNo ? `${quizNo}：` : '') + (qHtml ? inline(qHtml, ctx) : '')
   // 模板族不匹配（缺题干或选项）：整块原样保留，不丢内容
   if (!qText.trim() || !opts.length) {
     ctx.onWarn('[lesson-convert] quiz 块模板不匹配（缺题干或选项），原样保留 HTML')
@@ -398,14 +440,15 @@ function divToMarkdown(openTag, inner, ctx, state) {
   const classes = (openTag.match(/class="([^"]*)"/)?.[1] ?? '').split(/\s+/).filter(Boolean)
   const has = (c) => classes.includes(c)
 
-  if (has('lesson-meta')) {
-    const spans = [...inner.matchAll(/<span>([\s\S]*?)<\/span>/g)]
+  if (has('lesson-meta') || has('meta') || has('meta-row')) {
+    // 专升本高数/政治的 meta、meta-row 与 learn 的 lesson-meta 同构：span 拼元信息行
+    const spans = [...inner.matchAll(/<span(?:\s[^>]*)?>([\s\S]*?)<\/span>/g)]
       .map((m) => stripTags(m[1])).filter(Boolean)
     state.metaLine = escapeAngle(spans.length ? spans.join(' ｜ ') : stripTags(inner))
       .replace(/\s\|\s/g, ' ｜ ')
     return ''
   }
-  if (has('nav')) {
+  if (has('nav') || /nav$/.test(classes[0] ?? '')) {
     const links = [...inner.matchAll(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi)]
       .map((m) => ({ text: stripTags(m[2]), url: rewriteUrl(m[1], ctx) }))
     for (const l of links) {
@@ -420,17 +463,34 @@ function divToMarkdown(openTag, inner, ctx, state) {
   }
   if (has('quiz')) return quizToMarkdown(openTag, inner, ctx)
   if (has('recall')) {
-    // pi-agent 温故/回忆挑战：题干 + 显示答案（reveal 按钮与自评按钮丢弃）
-    const q = inner.match(/<p class="q">([\s\S]*?)<\/p>/)?.[1] ?? ''
-    const answerHtml = inner.match(/<div class="answer"[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? ''
+    // pi-agent（p.q + div.answer）/ 专升本高数（recall-tag + p.recall-q + div.recall-a）
+    const q = inner.match(/<p class="q">([\s\S]*?)<\/p>/)?.[1]
+      ?? inner.match(/<p class="recall-q"[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? ''
+    const answerHtml = inner.match(/<div class="answer"[^>]*>([\s\S]*?)<\/div>/)?.[1]
+      ?? inner.match(/<div class="recall-a"[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? ''
     if (!q || !answerHtml.trim()) {
       ctx.onWarn('[lesson-convert] recall 块缺少题干/答案，原样保留 HTML')
       return inner.trim()
     }
+    const label = stripTags(inner.match(/<span class="recall-tag"[^>]*>([\s\S]*?)<\/span>/)?.[1] ?? '')
+    // 高数回忆卡（有 recall-tag）用回忆式标题；pi-agent 沿用「显示答案」
+    const revealTitle = label ? '先回忆，再揭晓' : '显示答案'
     return [
-      `**${inline(q, ctx)}**`,
-      container('details', '显示答案', convertInner(answerHtml, ctx, state)),
+      `**${label ? `${label}：` : ''}${inline(q, ctx)}**`,
+      container('details', revealTitle, convertInner(answerHtml, ctx, state)),
     ].join('\n\n')
+  }
+  if (has('map')) {
+    // 专升本英语考点地图：span.cap 作标题
+    const cap = stripTags(inner.match(/<span class="cap"[^>]*>([\s\S]*?)<\/span>/)?.[1] ?? '')
+    const rest = inner.replace(/<span class="cap"[^>]*>[\s\S]*?<\/span>/, '')
+    return container('info', cap || '考点地图', convertInner(rest, ctx, state))
+  }
+  if (has('warn')) {
+    // 专升本高数易错框：warn-title 作标题
+    const t = stripTags(inner.match(/<div class="warn-title">([\s\S]*?)<\/div>/)?.[1] ?? '')
+    const rest = inner.replace(/<div class="warn-title">[\s\S]*?<\/div>/, '')
+    return container('danger', t || '易错', convertInner(rest, ctx, state))
   }
   if (has('compare')) {
     // policy 对比框：❌ 错误理解 → danger，✅ 正确理解 → tip
@@ -484,6 +544,26 @@ function divToMarkdown(openTag, inner, ctx, state) {
     return container(name, h3 ? inline(h3[1], ctx) : '', convertInner(rest, ctx, state))
   }
   if (has('further')) return convertInner(inner, ctx, state) // pi-agent 延伸阅读+课程导航：按普通内容展开
+  if (has('goal')) {
+    // 专升本高数学习目标：goal-title 子块作容器标题
+    const titleDiv = inner.match(/<div class="goal-title">([\s\S]*?)<\/div>/)
+    const title = titleDiv ? stripTags(titleDiv[1]) : '学习目标'
+    const rest = titleDiv ? inner.replace(titleDiv[0], '') : inner
+    const md = convertInner(rest, ctx, state).replace(/^(?:学完(?:本课)?(?:你)?(?:将能|能)[：:]?|本课目标[：:]?)\s*/, '')
+    return container('tip', title || '学习目标', md)
+  }
+  if (has('goal-title')) return '' // 未被 goal 消费的孤立标题块（正常不会出现）
+  if (has('keypoint')) {
+    // 专升本高数易错考点框：kp-title 作标题
+    const t = stripTags(inner.match(/<div class="kp-title">([\s\S]*?)<\/div>/)?.[1] ?? '')
+    const rest = inner.replace(/<div class="kp-title">[\s\S]*?<\/div>/, '')
+    return container('warning', t || '易错考点', convertInner(rest, ctx, state))
+  }
+  if (has('recall-a')) return convertInner(inner, ctx, state) // 专升本计算机回忆答案区
+  if (has('wrap') || has('topbar') || has('topbar-inner') || has('crumbs')) {
+    return convertInner(inner, ctx, state) // 专升本政治布局壳
+  }
+  if (has('sec')) return convertInner(inner, ctx, state) // 专升本政治小节包裹层
   if (has('container')) return convertInner(inner, ctx, state) // policy 页面包裹层
   // win/mission-tie 正文以「容器同义前缀：」开头，去掉避免与容器标题重复
   if (has('win')) {
@@ -514,6 +594,25 @@ function divToMarkdown(openTag, inner, ctx, state) {
   }
   if (has('teacher-note')) return container('info', '老师的话', convertInner(inner, ctx, state))
   if (has('src')) return convertInner(inner, ctx, state) // 推荐来源：普通列表/段落即可
+  if (has('kicker')) return '' // 专升本课程名徽标：与 h1/meta-row 重复
+  if (has('gapnote')) {
+    // 专升本政治课件缺口警示（如「真实课件缺失，已由相邻课覆盖」）：原样保留文字
+    return container('warning', '', convertInner(inner, ctx, state))
+  }
+  if (has('spaced-review')) return convertInner(inner, ctx, state) // 专升本高数间隔复习壳
+  if (has('passage')) return convertInner(inner, ctx, state) // 专升本英语题型文章段
+  if (has('plot') || has('plot-row')) return convertInner(inner, ctx, state) // 专升本高数函数图像壳
+  if (has('ansbody')) return convertInner(inner, ctx, state) // 专升本政治答案正文壳
+  if (has('ans')) {
+    // 专升本政治裸答案块（details 之外）：anslabel 作折叠标题
+    const label = stripTags(inner.match(/<span class="anslabel"[^>]*>([\s\S]*?)<\/span>/)?.[1] ?? '')
+    const rest = inner.replace(/<span class="anslabel"[^>]*>[\s\S]*?<\/span>/, '')
+    return container('details', label || '答案', convertInner(rest, ctx, state))
+  }
+  // 无类名裸 div / 纯布局壳（content、lesson-progress 等）：按透明容器展开
+  if (classes.length === 0 || has('content') || has('lesson-progress')) {
+    return inner.trim() ? convertInner(inner, ctx, state) : ''
+  }
 
   ctx.onWarn(`[lesson-convert] 未识别的块（按内容展开）：class="${classes.join(' ')}"`)
   return inner.trim() ? convertInner(inner, ctx, state).trim() : ''
@@ -564,6 +663,14 @@ function blockToMarkdown(b, ctx, state) {
     }
     case 'table':
       return tableToMarkdown(b.inner, ctx)
+    case 'details': {
+      // 专升本政治自测问答（details.qa）：summary = 题干（含 tag 徽标），.ans = 答案要点
+      const summary = b.inner.match(/<summary[^>]*>([\s\S]*?)<\/summary>/i)?.[1] ?? ''
+      const rest = b.inner.replace(/<summary[^>]*>[\s\S]*?<\/summary>/i, '')
+      const title = stripTags(summary.replace(/<span class="tag"[^>]*>[\s\S]*?<\/span>/i, '')) || '自测'
+      const body = convertInner(rest, ctx, state)
+      return container('details', title, body.replace(/^(?:答案要点[：:]?|参考答案[：:]?)\s*/, ''))
+    }
     case 'ul':
       return listToMarkdown(b.inner, ctx, false)
     case 'ol':
@@ -572,6 +679,8 @@ function blockToMarkdown(b, ctx, state) {
       return preToMarkdown(b.raw)
     case 'blockquote':
       return blockquoteToMarkdown(b.inner, ctx)
+    case 'button':
+      return '' // 块级位置的交互控件（揭晓/自评按钮）：纯静态版无意义
     default:
       ctx.onWarn(`[lesson-convert] 未识别的标签（原样保留 HTML）：<${b.tag}>`)
       return b.raw
@@ -600,6 +709,40 @@ export function parseExplanations(html) {
 
 /* ---------------- 顶层入口 ---------------- */
 
+/** 解 JS 字符串字面量的常见转义（\uXXXX、\xXX、\n、\\、\' 等） */
+function jsUnescape(s) {
+  return s.replace(/\\(u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2}|[\s\S])/g, (_, e) => {
+    if (e[0] === 'u' || e[0] === 'x') return String.fromCharCode(parseInt(e.slice(1), 16))
+    return { n: '\n', t: '\t', r: '\r' }[e] ?? e
+  })
+}
+
+/**
+ * 专升本英语：随堂测数据在页尾 script 的 Quiz.render('#quiz', [...]) 里
+ * （q/opts/a/why 字段），script 随后会被剥掉——先把测验静态化成与其他
+ * 模板族同构的 HTML（quiz-q + 选项 li + quiz-exp），再走通用 quiz 转换。
+ */
+function inlineScriptQuizzes(html) {
+  if (!html.includes('Quiz.render(')) return html
+  const arr = html.match(/Quiz\.render\(\s*'[^']*'\s*,\s*(\[[\s\S]*?\])\s*\)/)
+  if (!arr) return html
+  const items = []
+  const itemRe = /\{\s*q:\s*'((?:[^'\\]|\\.)*)'\s*,\s*opts:\s*\[([^\]]*)\]\s*,\s*a:\s*(\d+)\s*,\s*why:\s*'((?:[^'\\]|\\.)*)'\s*\}/g
+  for (const m of arr[1].matchAll(itemRe)) {
+    items.push({
+      q: jsUnescape(m[1]),
+      opts: [...m[2].matchAll(/'((?:[^'\\]|\\.)*)'/g)].map((o) => jsUnescape(o[1])),
+      a: Number(m[3]),
+      why: jsUnescape(m[4]),
+    })
+  }
+  if (!items.length) return html
+  const staticHtml = items
+    .map((it) => `<div class="quiz" data-answer="${it.a}"><p class="q">${it.q}</p><ul>${it.opts.map((o) => `<li>${o}</li>`).join('')}</ul><div class="quiz-exp">${it.why}</div></div>`)
+    .join('\n')
+  return html.replace(/(<div id="quiz"[^>]*>)/i, `$1\n${staticHtml}`)
+}
+
 /**
  * 讲义 HTML → Markdown。
  * @param {string} html 讲义全文
@@ -620,8 +763,11 @@ export function lessonHtmlToMarkdown(html, ctx = {}) {
   }
   const state = { headline: '', metaLine: '', nav: { prev: null, middle: [], next: null } }
 
-  const bodyHtml = (html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? html)
+  const prepared = inlineScriptQuizzes(html)
+  const bodyHtml = (prepared.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? prepared)
     .replace(/\r\n?/g, '\n')
+    // main 只是布局壳（专升本英语课件只开不闭），透明标签剥掉反而防未闭合吞全文
+    .replace(/<\/?main\b[^>]*>/gi, '')
     .replace(/<script[\s\S]*?<\/script>/gi, '')
     .replace(/<style[\s\S]*?<\/style>/gi, '')
 

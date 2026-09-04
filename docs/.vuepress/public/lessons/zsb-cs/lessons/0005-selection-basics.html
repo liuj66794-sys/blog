@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 5 课 · 选择结构：条件、短路规则与 if</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第一部分 C 语言</span>
+  <span>第 5 课 / 共 29 课</span>
+</nav>
+
+<h1>选择结构：条件、短路规则与 if</h1>
+<p class="lesson-meta">对应笔记 C语言/04-选择结构程序设计 · 题库 题库/选择结构程序设计-章节练习 · 教材 P87–110 · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 正确计算含 <code>&&</code>、<code>||</code>、<code>++</code> 副作用的程序阅读题，并判断哪些操作被短路；② 识别 <code>if(x)</code> 与 <code>if(x!=0)</code>、<code>if(!x)</code> 与 <code>if(x==0)</code> 的等价关系；③ 写出用 if-else-if 实现的分段函数，并画出 else 的配对关系。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 4 课「顺序结构：printf 与 scanf」：printf("%8.2f", -100.125); 的输出是什么？（□ 代表空格）</summary>
+  <div class="recall-a">先四舍五入为 -100.13，总宽度 8，当前 7 位，左补一个空格 → □-100.13。</div>
+</details>
+<details class="recall warmup">
+  <summary>温故 · 第 3 课「运算符与表达式」：优先级骨架链是什么？哪三档运算符是右结合？</summary>
+  <div class="recall-a">括号/下标 &gt; 单目 &gt; 算术 &gt; 移位 &gt; 关系 &gt; 位（与&gt;异或&gt;或）&gt; 逻辑 &gt; 条件 &gt; 赋值 &gt; 逗号。右结合：单目、?:、赋值（含复合赋值）。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么这一课这么关键</p>
+  <p>选择结构是程序阅读题的三大题源之一（另外两个是循环和 switch）。广东省专升本真题里，<strong>短路规则</strong>、<strong>else 配对</strong>、<strong>等价形式</strong>反复出现，而且 loves 把 <code>++</code> 藏在被短路的右侧。</p>
+</div>
+
+<h2>一、关系与逻辑表达式：值只有 0 或 1</h2>
+
+<p>关系运算符有 6 个，<strong>左结合</strong>，分两个优先级：</p>
+<table>
+  <tr><th>档次</th><th>运算符</th><th>优先级</th><th>记忆</th></tr>
+  <tr><td>高</td><td><code>&gt; &gt;= &lt; &lt;=</code></td><td>6</td><td>先算大小</td></tr>
+  <tr><td>低</td><td><code>== !=</code></td><td>7</td><td>再算相等</td></tr>
+</table>
+
+<p>完整优先级链（高 → 低）：</p>
+<pre><code>!  →  算术(* / % + -)  →  关系(> >= < <= == !=)  →  &&  →  ||  →  赋值(=)</code></pre>
+
+<div class="callout warn">
+  <p class="callout-title">最高频陷阱</p>
+  <p>关系/逻辑表达式的值<strong>只有 0 或 1</strong>，不是 true/false；C 语言里非 0 即真。数学式 <code>10 &lt; a &lt; 15</code> 在 C 中是 <code>(10 &lt; a) &lt; 15</code>，结果恒为 1；判断范围必须写 <code>a &gt; 10 && a &lt; 15</code>。</p>
+</div>
+
+<p>例（a=10, b=20, c=30）：</p>
+<ul>
+  <li><code>a &lt; b &lt; c</code> → <code>(a &lt; b) &lt; c</code> → <code>1 &lt; 30</code> → <strong>1</strong></li>
+  <li><code>a + b &gt;= c</code> → <code>30 &gt;= 30</code> → <strong>1</strong></li>
+  <li><code>'a' == 'b'</code> → <code>97 == 98</code> → <strong>0</strong></li>
+</ul>
+
+<h2>二、短路规则：右侧可能「白写」</h2>
+
+<table>
+  <tr><th>运算符</th><th>短路条件</th><th>结果</th></tr>
+  <tr><td><code>&&</code></td><td>左侧为 0（假）</td><td>右侧<strong>不执行</strong>，整体为 0</td></tr>
+  <tr><td><code>||</code></td><td>左侧非 0（真）</td><td>右侧<strong>不执行</strong>，整体为 1</td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">判断口诀</p>
+  <p><code>&&</code>「一假俱假」；<code>||</code>「一真皆真」。只要左边已经能决定结果，右边就直接跳过——所以右边的自增、赋值、函数调用可能根本不发生。</p>
+</div>
+
+<p>例：</p>
+<ul>
+  <li><code>b && a++</code>（b=0）：值为 0，<code>a++</code> 不执行。</li>
+  <li><code>a || b++</code>（a=10）：值为 1，<code>b++</code> 不执行。</li>
+  <li><code>!a + 0 && b || c++</code>（a=0, b=1, c=0）：<code>((!a + 0) && b) || c++</code> → <code>(1 && 1) || c++</code> → <code>1 || …</code> → 值 <strong>1</strong>，<code>c++</code> 被短路，<strong>c 仍为 0</strong>。</li>
+</ul>
+
+<div class="callout warn">
+  <p class="callout-title">⚠️ 勘误提醒</p>
+  <p>部分旧版题库对含短路的答案有误。例如 <code>(m=a==b)||(n=c==d)</code> 在全零变量下，<code>m=1</code>、<code>||</code> 左真短路，<code>n</code> 保持 0，答案为 <code>1,0</code>。遇到与笔记结论冲突的旧答案，以源笔记为准。</p>
+</div>
+
+<h2>三、if 单分支、双分支与多分支</h2>
+
+<pre><code>// 单分支
+if (表达式) 语句;
+
+// 双分支
+if (表达式) 语句1;
+else       语句2;
+
+// 多分支（分段函数常用）
+if (表达式1) 语句1;
+else if (表达式2) 语句2;
+else if (表达式3) 语句3;
+else              语句4;</code></pre>
+
+<p>注意：</p>
+<ul>
+  <li>if 的「内嵌语句」只能有<strong>一条</strong>；多条必须用 <code>{ }</code> 包成复合语句。</li>
+  <li>else 前面<strong>必须紧邻同一条 if</strong>，中间不能隔别的语句，否则报错 <code>else without a previous if</code>。</li>
+  <li>多分支从上到下匹配，<strong>只执行其中一条</strong>。</li>
+</ul>
+
+<p>分段函数示例（符号函数）：</p>
+<pre><code>if (x > 0)      y = 1;
+else if (x == 0) y = 0;
+else            y = -1;</code></pre>
+
+<h2>四、条件等价与 else 配对</h2>
+
+<table>
+  <tr><th>写法</th><th>等价形式</th><th>含义</th></tr>
+  <tr><td><code>if (x)</code></td><td><code>if (x != 0)</code></td><td>x 非零则执行</td></tr>
+  <tr><td><code>if (!x)</code></td><td><code>if (x == 0)</code></td><td>x 为零则执行</td></tr>
+</table>
+
+<p>「零值」陷阱表：</p>
+<table>
+  <tr><th>表达式</th><th>逻辑值</th><th>说明</th></tr>
+  <tr><td><code>0</code>、<code>0.0</code>、<code>NULL</code>、<code>'\0'</code></td><td>0</td><td>真正的「零」</td></tr>
+  <tr><td><code>'0'</code>、<code>"0"</code></td><td>1</td><td>字符 '0' 的 ASCII 是 48</td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">两个致命混淆</p>
+  <p><code>if (a = 0)</code> 是赋值，结果恒为 0，条件恒不成立；<code>if (a = b)</code> 把 b 赋给 a，条件值是 b 的逻辑值。比较必须用 <code>==</code>。</p>
+</div>
+
+<p><strong>else 配对规则</strong>：C 规定 else 总是与它<strong>前面最近的、尚未配对的 if</strong> 配对，<strong>与缩进无关</strong>。花括号可以把内层 if-else 包起来，让外层 else 与更外层的 if 配对。</p>
+
+<h2>三、先回忆，再自测</h2>
+
+<details class="recall">
+  <summary>合上笔记默写：优先级链（从 ! 到赋值）和短路规则</summary>
+  <div class="recall-a">优先级：! &gt; 算术 &gt; 关系 &gt; && &gt; || &gt; 赋值。短路：&& 左假右不算；|| 左真右不算。右侧的自增/自减/赋值可能不执行。</div>
+</details>
+
+<details class="recall">
+  <summary><code>if(x)</code> 与 <code>if(!x)</code> 分别等价于什么？写错会发生什么？</summary>
+  <div class="recall-a"><code>if(x)</code> ≡ <code>if(x!=0)</code>；<code>if(!x)</code> ≡ <code>if(x==0)</code>。把 <code>==</code> 写成 <code>=</code> 会变成赋值，导致条件恒真或恒假。</div>
+</details>
+
+<details class="recall">
+  <summary>else 配对看缩进还是看语法？如何用花括号改变配对？</summary>
+  <div class="recall-a">else 与前面最近的未配对 if 配对，和缩进无关。用 <code>{ }</code> 把内层 if-else 包住，可让外层 else 只能与更外层的 if 配对。</div>
+</details>
+
+<h2>四、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="d">
+  <p class="quiz-q">1. 下列运算符中优先级最低的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">逻辑与 &amp;&amp;</li>
+    <li data-opt="b">等于 ==</li>
+    <li data-opt="c">不等于 !=</li>
+    <li data-opt="d">逻辑或 ||</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">优先级：关系（6/7 级）&gt; &amp;&amp;（11 级）&gt; ||（12 级），四者中 || 最低。赋值比 || 还低，但不在选项中。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">2. 执行 <code>int a=1,b=2; (a=0)&amp;&amp;(b++);</code> 后，a、b 的值分别是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">a=0, b=2</li>
+    <li data-opt="b">a=0, b=3</li>
+    <li data-opt="c">a=1, b=2</li>
+    <li data-opt="d">a=1, b=3</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl"><code>a=0</code> 使 &amp;&amp; 左侧为 0，发生短路，右侧 <code>b++</code> 不执行，故 b 仍为 2。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">3. 已知 a=0,b=1,c=0，表达式 <code>!a+0 &amp;&amp; b || c++</code> 的值及 c 的最终值为</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">0，c=0</li>
+    <li data-opt="b">1，c=0</li>
+    <li data-opt="c">1，c=1</li>
+    <li data-opt="d">0，c=1</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">按优先级加括号：<code>((!a+0) &amp;&amp; b) || c++</code> → <code>(1 &amp;&amp; 1) || c++</code> → <code>1 || …</code>，|| 左真短路，c++ 不执行，表达式值为 1。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">4. 下列写法中，与 <code>if(x)</code> 功能不同的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">if(x!=0)</li>
+    <li data-opt="b">if(!x==0)</li>
+    <li data-opt="c">if(x==0)</li>
+    <li data-opt="d">if(x>0||x<0)</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl"><code>if(x)</code> 等价于 <code>if(x!=0)</code>；B 中 <code>!x==0</code> 即 x 非零；D 对整数也等价。C 在 x 为零时才执行，与原式相反。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">5. 当 a=1,b=3,c=5,d=4 时，执行下面程序段后 x 的值是</p>
+  <pre><code>if(a&lt;b)
+    if(c&lt;d) x=1;
+    else
+        if(a&lt;c)
+            if(b&lt;d) x=2;
+            else x=3;
+        else x=6;
+else x=7;</code></pre>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">1</li>
+    <li data-opt="b">2</li>
+    <li data-opt="c">3</li>
+    <li data-opt="d">7</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">a&lt;b 成立 → c&lt;d（5&lt;4）不成立 → 进入 else → a&lt;c（1&lt;5）成立 → b&lt;d（3&lt;4）成立 → x=2。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">6. 阅读下列代码，输出结果是</p>
+  <pre><code>int x=3, y=2;
+if(x&gt;y)
+    if(x==3) printf("A");
+else printf("B");</code></pre>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">输出 A</li>
+    <li data-opt="b">输出 B</li>
+    <li data-opt="c">输出 AB</li>
+    <li data-opt="d">编译错误</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">else 与最近的未配对 if（即 <code>if(x==3)</code>）配对。x&gt;y 成立且 x==3 成立，执行 printf("A")，else 分支不执行。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>打开 题库/选择结构程序设计-章节练习，遮住答案完成「一、选择题」第 1–8 题，错题标 ⭐️。然后回到笔记 自测问题 Q1–Q5，口头作答并记录卡壳点。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：C语言/04-选择结构程序设计（前半：关系/逻辑表达式、短路规则、if 分支与嵌套）。术语速查：<a href="../reference/glossary.html">课程术语表</a>、<a href="../reference/c-syntax-cheatsheet.html">C 语法速查表</a>、<a href="../reference/ds-formula-cheatsheet.html">数据结构公式表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0004-sequential-io.html">← 上一课：顺序结构与输入输出</a>
+  <a href="0006-selection-advanced.html">下一课：选择结构进阶 — switch、条件表达式与位运算 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

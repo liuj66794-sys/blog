@@ -177,6 +177,54 @@ const COMPOSITIONS = {
     fillCircle(c, 800, 190, 30, C.dark, 0.95)
     fillTriangle(c, [770, 308], [830, 308], [800, 352], C.indigo)
   },
+  'zsb-math': (c) => {
+    // 坐标系 + 上扬抛物线 + 两颗函数点：高数的“图像思维”
+    strokeLine(c, 260, 470, 900, 470, 8, C.slate, 0.9)
+    strokeLine(c, 300, 520, 300, 120, 8, C.slate, 0.9)
+    for (let t = 0; t <= 60; t++) {
+      const x = 300 + t * 9.5
+      const y = 440 - Math.pow(t / 60, 2) * 300
+      fillCircle(c, x, y, 7, C.indigo)
+    }
+    fillCircle(c, 590, 320, 16, C.dark)
+    fillCircle(c, 830, 180, 16, C.dark)
+    fillRing(c, 830, 180, 30, 6, C.light, 0.9)
+  },
+  'zsb-english': (c) => {
+    // 三张错位词卡 + 右上对话环：从词汇积累到对话运用
+    const card = (x, y) => {
+      fillRect(c, x, y, 200, 130, C.white)
+      fillRect(c, x, y, 200, 14, C.indigo)
+      fillRect(c, x + 28, y + 48, 110, 16, C.pale)
+      fillRect(c, x + 28, y + 82, 76, 12, C.light)
+    }
+    card(280, 220); card(430, 262); card(580, 196)
+    fillRing(c, 870, 220, 70, 12, C.indigo, 0.9)
+    fillCircle(c, 870, 220, 24, C.light, 0.95)
+  },
+  'zsb-politics': (c) => {
+    // 旗杆 + 两段旗面（三个递淡圆点）+ 底座：纲领与时间线
+    strokeLine(c, 320, 130, 320, 496, 10, C.slate, 0.95)
+    fillRect(c, 326, 150, 330, 74, C.indigo)
+    fillRect(c, 326, 232, 240, 60, C.light)
+    fillCircle(c, 386, 187, 17, C.white)
+    fillCircle(c, 438, 187, 17, C.white, 0.75)
+    fillCircle(c, 490, 187, 17, C.white, 0.5)
+    fillRect(c, 250, 496, 380, 18, C.pale)
+    fillRing(c, 850, 300, 95, 13, C.indigo, 0.35)
+  },
+  'zsb-cs': (c) => {
+    // 大括号 { } 夹循环箭头：程序设计 + 数据结构
+    const brace = (x, dir) => {
+      strokeLine(c, x + dir * 30, 150, x, 210, 14, C.indigo)
+      strokeLine(c, x, 210, x, 400, 14, C.indigo)
+      strokeLine(c, x, 400, x + dir * 30, 460, 14, C.indigo)
+    }
+    brace(430, 1)
+    brace(700, -1)
+    fillRing(c, 565, 305, 78, 12, C.light, 0.95)
+    fillTriangle(c, [565, 215], [625, 247], [565, 247], C.indigo)
+  },
 }
 
 /* ---------------- PNG 编码输出 ---------------- */

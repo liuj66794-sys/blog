@@ -91,8 +91,13 @@ for (const file of files) {
   if (ext !== '.html' && ext !== '.css') continue
   const text = fs.readFileSync(file, 'utf8')
   if (ext === '.html') {
-    for (const m of text.matchAll(/(?:href|src)\s*=\s*"([^"]*)"/g)) checkRef(m[1], file)
-    for (const m of text.matchAll(/(?:href|src)\s*=\s*'([^']*)'/g)) checkRef(m[1], file)
+    // 先剥掉 <script>/<style> 内容再提取：脚本里字符串拼接出的动态 URL 不是
+    // 静态链接，静态分析只会误报（如政治刷题场页的 '/lessons/' + next + '.html'）
+    const markup = text
+      .replace(/<script[\s\S]*?<\/script>/gi, '')
+      .replace(/<style[\s\S]*?<\/style>/gi, '')
+    for (const m of markup.matchAll(/(?:href|src)\s*=\s*"([^"]*)"/g)) checkRef(m[1], file)
+    for (const m of markup.matchAll(/(?:href|src)\s*=\s*'([^']*)'/g)) checkRef(m[1], file)
   } else {
     for (const m of text.matchAll(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g)) checkRef(m[2], file)
   }

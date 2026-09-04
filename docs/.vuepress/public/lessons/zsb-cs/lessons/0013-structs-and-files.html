@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 13 课 · 结构体与文件</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div data-blog-nav-bar="1" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 14px;background:rgba(17,20,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:13px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif"><a href="/blog/prep/jisuanji/" style="color:#fff;text-decoration:none;white-space:nowrap;font-weight:600">‹ 返回备考</a><span style="display:flex;gap:14px"><a href="/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">首页</a><a href="/blog/blog/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">博客</a><a href="/blog/courses/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">课程</a><a href="/blog/prep/" style="color:rgba(255,255,255,.85);text-decoration:none;white-space:nowrap">备考</a></span></div>
+<style>body{padding-top:44px!important}</style>
+
+<nav class="lesson-nav">
+  <span><a href="index.html">课程大纲</a> · 第一部分 C 语言</span>
+  <span>第 13 课 / 共 29 课</span>
+</nav>
+
+<h1>结构体与文件</h1>
+<p class="lesson-meta">对应笔记 C语言/09-结构体与文件 · 教材 P307–326（结构体）、P339–350（文件） · 约 15 分钟</p>
+
+<div class="goal">
+  <p class="goal-title">学完这节课，你能做到：</p>
+  <p>① 正确写出并区分 <code>lisi.num</code>、<code>(*p).num</code>、<code>p->num</code>，一眼判断 <code>*p.num</code> 为何非法；② 解释字符数组成员为何必须用 <code>strcpy</code>、结构体为何只能定义时整体初始化；③ 手写或补全结构体数组的选择排序（按某成员升序）；④ 说明 <code>fopen</code> 的 <code>r/w/a</code> 在打开失败时的不同行为，以及 <code>fgetc/fputc</code> 返回 <code>EOF</code> 的含义。</p>
+</div>
+
+<details class="recall warmup">
+  <summary>温故 · 第 12 课「指针进阶」：int(*p)[4] 与 int *p[4] 的本质区别是什么？</summary>
+  <div class="recall-a">有括号时 (*p) 先与 * 结合，p 是指针，即数组指针，指向含 4 个 int 的一行数组；无括号时 [] 优先级高，p 先与 [4] 结合，p 是数组，即含 4 个 int* 指针的指针数组。</div>
+</details>
+
+<details class="recall warmup">
+  <summary>温故 · 第 11 课「指针基础与一维数组」：三种 swap 写法中，哪种能真正交换 main 里的变量？核心代码是什么？</summary>
+  <div class="recall-a">传址并通过 *x、*y 直接修改实参值的版本：void swap(int *x, int *y){ int t=*x; *x=*y; *y=t; }。只传值的版本改的是副本，只交换形参指向的版本没改目标值，都不行。</div>
+</details>
+
+<div class="callout">
+  <p class="callout-title">为什么这一课性价比高</p>
+  <p>结构体把「不同类型的数据捆成一个新类型」，文件把数据持久化到磁盘。这两章考点集中、题型固定，选择填空常考。巩固阶段的目标是：把易混写法记准，把代码模板写熟，直接对接刷题。</p>
+</div>
+
+<h2>一、结构体：声明、定义与初始化</h2>
+<p>声明结构体就是定义一种新类型，<strong>类型本身不占内存</strong>，只有定义变量后才开辟空间。</p>
+<pre><code>struct Student
+{
+    int num;
+    char name[20];
+    float score;
+};              /* ← 末尾分号不能少 */</code></pre>
+
+<table>
+  <tr><th>要点</th><th>正确做法</th><th>常见错误</th></tr>
+  <tr><td>成员规则</td><td>成员只能定义变量</td><td>在成员处直接赋初值或写常量</td></tr>
+  <tr><td>整体初始化</td><td>只能在<strong>定义变量时</strong>整体初始化</td><td>先定义再整体赋值：<code>lisi = {2,"lisi",80};</code> 非法</td></tr>
+  <tr><td>字符数组成员</td><td>用 <code>strcpy(lisi.name, "lisi");</code></td><td><code>lisi.name = "lisi";</code> 非法（数组名是地址常量）</td></tr>
+  <tr><td>相互赋值</td><td>同类结构体变量可直接赋值：<code>zhangsan = lisi;</code></td><td>把类型名当变量用</td></tr>
+  <tr><td>变量大小</td><td>考试选理论值：各成员大小之和</td><td>无说明时选对齐后的实际值</td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">scanf 取地址口诀</p>
+  <p>数值成员前加 <code>&amp;</code>，字符数组名本身就是地址，<strong>不加 &amp;</strong>：<code>scanf("%d%s%f", &amp;lisi.num, lisi.name, &amp;lisi.score);</code></p>
+</div>
+
+<h2>二、结构体数组与选择排序</h2>
+<pre><code>struct Student stu[3] = {
+    {1, "a", 80},
+    {2, "b", 90},
+    {3, "c", 70}
+};</code></pre>
+<p>选择排序的核心：n 个数据执行 <strong>n-1 轮</strong>；每轮从<strong>未排序区</strong>找出<strong>最小值</strong>放到未排序区最前面；用变量 <strong>p 记录最小值的位置</strong>。</p>
+<pre><code>for (i = 0; i &lt; n - 1; i++)
+{
+    p = i;
+    for (j = i + 1; j &lt; n; j++)
+        if (stu[j].score &lt; stu[p].score) p = j;
+    if (p != i) { t = stu[i]; stu[i] = stu[p]; stu[p] = t; }
+}</code></pre>
+<p>交换时用临时结构体变量<strong>整体交换</strong>，不要只交换某一个成员。</p>
+
+<h2>三、结构体指针：三种成员引用</h2>
+<pre><code>struct Student lisi;
+struct Student *p = &amp;lisi;   /* 普通指针不能指向结构体变量 */</code></pre>
+<p>因为 <code>.</code> 和 <code>-></code> 的优先级高于 <code>*</code>，所以 <code>*p.num</code> 会被理解为 <code>*(p.num)</code>，而 <code>p.num</code> 对指针非法。必须加括号或使用指向运算符。</p>
+
+<table>
+  <tr><th>写法</th><th>含义</th><th>是否等价于 lisi.num</th></tr>
+  <tr><td><code>lisi.num</code></td><td>结构体变量名.成员</td><td>是</td></tr>
+  <tr><td><code>(*p).num</code></td><td>先解引用，再用点号</td><td>是</td></tr>
+  <tr><td><code>p->num</code></td><td>指向运算符，最简形式</td><td>是</td></tr>
+  <tr><td><code>*p.num</code></td><td>等价 <code>*(p.num)</code>，非法</td><td>否</td></tr>
+</table>
+
+<h2>四、文件：fopen / fgetc / fputc</h2>
+<pre><code>FILE *fp;
+fp = fopen("data.txt", "r");
+if (fp == NULL) { /* 打开失败处理 */ }</code></pre>
+
+<table>
+  <tr><th>打开方式</th><th>含义</th><th>打开失败时</th></tr>
+  <tr><td><code>r</code></td><td>只读，从文件读数据</td><td>返回 <strong>NULL</strong></td></tr>
+  <tr><td><code>w</code></td><td>只写，向文件写数据</td><td><strong>新建文件</strong></td></tr>
+  <tr><td><code>a</code></td><td>追加，向文件末尾添加数据</td><td>返回 <strong>NULL</strong></td></tr>
+</table>
+
+<table>
+  <tr><th>函数</th><th>调用方式</th><th>功能</th><th>失败/结束</th></tr>
+  <tr><td><code>fgetc</code></td><td><code>fgetc(fp);</code></td><td>从文件读一个字符</td><td>返回 <strong>EOF</strong></td></tr>
+  <tr><td><code>fputc</code></td><td><code>fputc(ch, fp);</code></td><td>向文件写一个字符</td><td>返回 <strong>EOF</strong></td></tr>
+</table>
+
+<div class="callout warn">
+  <p class="callout-title">课件范围提醒</p>
+  <p>本课文件部分只覆盖 <code>fopen / fgetc / fputc</code>。<code>fread / fwrite / fseek / ftell</code> 等函数课件未讲，但教材（谭浩强《C程序设计》P339 以后）有完整内容，建议按教材补齐，避免考纲缺口。</p>
+</div>
+
+<h2>五、先回忆，再自测</h2>
+<details class="recall">
+  <summary>合上笔记默写：访问结构体成员的三种正确写法，以及 *p.num 为何是错的</summary>
+  <div class="recall-a">三种写法：lisi.num、(*p).num、p->num。因为 . 和 -> 优先级高于 *，*p.num 会被解析为 *(p.num)，而 p.num 对指针不合法，所以必须写成 (*p).num 或 p->num。</div>
+</details>
+<details class="recall">
+  <summary>结构体变量初始化的两条硬规则是什么？字符数组成员为什么不能直接赋值？</summary>
+  <div class="recall-a">只能在定义变量的同时整体初始化，且常量顺序与成员顺序一致；先定义再整体赋值不合法。字符数组成员是数组名，属于地址常量，不能出现在赋值号左边，必须用 strcpy。</div>
+</details>
+<details class="recall">
+  <summary>选择排序的轮数、p 变量的作用，以及 fopen 的 r/w/a 打开失败时分别怎样？</summary>
+  <div class="recall-a">n 个数据执行 n-1 轮；p 记录未排序区最小值的位置。r 失败返回 NULL；w 失败会新建文件；a 失败返回 NULL。</div>
+</details>
+
+<h2>六、测验（点击选项作答）</h2>
+
+<div class="quiz" data-answer="d">
+  <p class="quiz-q">1. 已知 <code>struct Student *p = &amp;lisi;</code>，下列成员引用写法错误的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">lisi.num（变量点成员）</li>
+    <li data-opt="b">(*p).num（解引用括号）</li>
+    <li data-opt="c">p->num（指向运算符）</li>
+    <li data-opt="d">*p.num（缺少括号）</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">. 和 -> 优先级高于 *，*p.num 等价于 *(p.num)，对指针 p 来说 p.num 非法；正确写法是 (*p).num 或 p->num。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">2. 关于结构体变量的初始化，说法正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">定义后再用{}整体赋值</li>
+    <li data-opt="b">只能在定义变量时初始化</li>
+    <li data-opt="c">结构体成员处直接赋初值</li>
+    <li data-opt="d">对结构体类型名整体初始化</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">结构体变量只能在定义的同时整体初始化，常量顺序与成员一致；先定义后整体赋值、对类型名赋值、在成员处初始化都不合法。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">3. 对结构体中的 <code>char name[20]</code> 成员，正确赋值方式是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">s.name = "Tom"（直接赋值）</li>
+    <li data-opt="b">strcpy(s.name,"Tom")（字符串拷贝）</li>
+    <li data-opt="c">s.name == "Tom"（关系比较）</li>
+    <li data-opt="d">name = "Tom"（缺结构体变量）</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">name 是数组名，属于地址常量，不能出现在赋值号左边；必须用 strcpy 把字符串拷贝到数组中。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">4. 结构体数组按成绩升序进行选择排序，内层循环结束后 p 保存的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">未排序区域中的最大值位置</li>
+    <li data-opt="b">未排序区域中的最小值位置</li>
+    <li data-opt="c">已排序区域中的首元素位置</li>
+    <li data-opt="d">当前轮起始位置 i 的值</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">选择排序每轮从未排序区找最小值放到未排序区最前面，p 记录的就是这个最小值的位置。</p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="quiz-q">5. <code>fopen("data.txt", "r")</code> 打开一个不存在的文件，结果是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">自动新建空白文件</li>
+    <li data-opt="b">打开失败返回 NULL</li>
+    <li data-opt="c">返回文件结束标志 EOF</li>
+    <li data-opt="d">程序异常终止报错</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">r 方式只读，文件不存在时返回 NULL；w 方式才会在失败时新建文件，a 方式不存在时也返回 NULL。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">6. 关于 <code>fgetc</code> 与 <code>fputc</code>，说法正确的是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">均以字符串为单位读写</li>
+    <li data-opt="b">失败或结束时返回 NULL</li>
+    <li data-opt="c">均以单个字符为单位读写</li>
+    <li data-opt="d">只能用于二进制文件读写</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">fgetc 从文件读一个字符，fputc 向文件写一个字符；失败或文件结束返回 EOF，不是 NULL。</p>
+</div>
+
+<div class="task">
+  <p class="task-title">课后任务（约 20 分钟）</p>
+  <p>打开 C语言/09-结构体与文件.md 的自测问题 Q1–Q8，遮住答案口头作答；卡壳的题目标 ⭐️。然后手写：① 三种成员引用方式各一行示例；② fopen 的 r/w/a 失败行为对比表；③ 结构体数组选择排序的内层循环片段。</p>
+</div>
+
+<h2>参考资料</h2>
+<p>首选精读：C语言/09-结构体与文件（含「易错点与对比」表与 Q1–Q8 自测）。术语速查：<a href="../reference/glossary.html">课程术语表</a>；语法速查：<a href="../reference/c-syntax-cheatsheet.html">C 语法速查表</a>。下一部分进入数据结构，可提前备查 <a href="../reference/ds-formula-cheatsheet.html">数据结构公式表</a>。</p>
+
+<div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
+
+<nav class="footer-nav">
+  <a href="0012-pointers-advanced.html">← 上一课：指针进阶</a>
+  <span>第 13 课</span>
+  <a href="0014-ds-intro-and-complexity.html">下一课：数据结构绪论与复杂度 →</a>
+</nav>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

@@ -40,14 +40,14 @@ permalink: /prep/
 - 🏁 **2026-12-31 前（W18 初自查）**：计算机两模块掌握 + 英语语法掌握 + 真题一轮完成
 - 🏁 **2027-02-28 前（W25）**：政治完成 + 真题第二轮完成 + 模拟卷/押题卷各 ≥4 套
 
-## 四科周计划
+## 四科学习入口
 
-| 科目 | 周计划页 |
-| ---- | -------- |
-| 高数 | [高数 · W1-W29 打卡](/prep/01-gaoshu/) |
-| 英语 | [英语 · W1-W29 打卡](/prep/02-yingyu/) |
-| 政治 | [政治 · W1-W29 打卡](/prep/03-zhengzhi/) |
-| 计算机 | [计算机 · W1-W29 打卡](/prep/04-jisuanji/) |
+| 科目 | 周打卡 | 课程内容 |
+| ---- | ------ | -------- |
+| 高数 | [高数 · W1-W29 打卡](/prep/gaoshu/) | [全文目录](/courses/zsb-math/) · [交互课程站](/lessons/zsb-math/) |
+| 英语 | [英语 · W1-W29 打卡](/prep/yingyu/) | [全文目录](/courses/zsb-english/) · [交互课程站](/lessons/zsb-english/lessons/course.html) |
+| 政治 | [政治 · W1-W29 打卡](/prep/zhengzhi/) | [全文目录](/courses/zsb-politics/) · [交互课程站](/lessons/zsb-politics/) |
+| 计算机 | [计算机 · W1-W29 打卡](/prep/jisuanji/) | [全文目录](/courses/zsb-cs/) · [交互课程站](/lessons/zsb-cs/lessons/index.html) |
 
 > [!TIP] 打卡说明
 > 勾选状态保存在**当前浏览器**（localStorage），换设备或清理浏览器数据后不保留；学习进度的权威记录仍以知识库笔记与错题本为准。改计划内容请编辑知识库源文件《29周冲刺计划》，然后在博客仓库跑 `pnpm sync:prep` 重新生成。

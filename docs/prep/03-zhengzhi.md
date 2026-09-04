@@ -6,7 +6,9 @@ permalink: /prep/zhengzhi/
 
 # 政治 · 周打卡
 
-进度：<span id="prep-progress"></span>。每周轮换与每日节奏见 [备考总览](/prep/)；课程内容入口见四科课程站（后续批次收录）。
+进度：<span id="prep-progress"></span>。每周轮换与每日节奏见 [备考总览](/prep/)。
+
+本科入口：[站内全文目录](/courses/zsb-politics/) · [交互课程站](/lessons/zsb-politics/)（随堂测 / 闪卡 / 进度，页顶可返回备考区）。
 
 ## 强化刷题（W1-W8）
 
