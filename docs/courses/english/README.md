@@ -1,11 +1,11 @@
 ---
-title: 英语教学
+title: 英语教学（已归档）
 createTime: 2026/08/14 20:11:42
 permalink: /courses/english/
 banner: /images/covers/english.png
 ---
 
-# 英语教学
+# 英语教学（已归档）
 
 中考英语教学与练习设计：不定代词、介词搭配、比较级结构等专题训练与错误分析。
 
@@ -24,5 +24,5 @@ banner: /images/covers/english.png
 
 ## 延伸阅读
 
-- [知识库：英语教学](/knowledge/english/) —— 总纲、术语表、参考资料
+- [知识库：英语教学（已归档）](/knowledge/english/) —— 总纲、术语表、参考资料
 - [博客标签](/blog/tags/) —— 学习记录与复盘

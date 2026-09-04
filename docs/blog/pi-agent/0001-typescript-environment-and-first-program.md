@@ -1,6 +1,6 @@
 ---
 title: 0001 TypeScript 环境搭建与第一个程序
-createTime: 2026-07-23 22:05:20
+createTime: 2026-09-01 14:10:33
 tags:
   - TypeScript Agent
   - TypeScript

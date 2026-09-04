@@ -1,11 +1,11 @@
 ---
-title: 政策学习
+title: 政策学习（已归档）
 createTime: 2026/08/14 20:11:42
 permalink: /courses/policy/
 banner: /images/covers/policy.png
 ---
 
-# 政策学习
+# 政策学习（已归档）
 
 广东专升本政治课程：党史重大事件、毛著重要论断、党的建设、军队建设、新民主主义理论。
 
@@ -25,5 +25,5 @@ banner: /images/covers/policy.png
 
 ## 延伸阅读
 
-- [知识库：政策学习](/knowledge/policy/) —— 总纲、术语表、参考资料
+- [知识库：政策学习（已归档）](/knowledge/policy/) —— 总纲、术语表、参考资料
 - [博客标签](/blog/tags/) —— 学习记录与复盘

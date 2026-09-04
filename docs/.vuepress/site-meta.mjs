@@ -22,8 +22,10 @@ export const COURSES = [
   { slug: 'a-shares', name: 'A 股入门', lessonMd: true },
   { slug: 'pi-agent', name: 'TypeScript Agent', lessonMd: true },
   { slug: 'engineering-skills', name: '工程技能', lessonMd: true },
-  { slug: 'english', name: '英语教学', lessonMd: true },
-  { slug: 'policy', name: '政策学习', lessonMd: true },
+  // 2026-09-05 备考区（/prep/）上线后归档：迷你课被备考区系统课程取代，
+  // 页面与学情保留（备考总览「历史学情」有入口），改名即从导航语义上撤下
+  { slug: 'english', name: '英语教学（已归档）', lessonMd: true },
+  { slug: 'policy', name: '政策学习（已归档）', lessonMd: true },
 ]
 
 /** 站内绝对路径拼 base：withBase('/lessons/x') → '/blog/lessons/x' */

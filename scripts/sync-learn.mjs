@@ -93,12 +93,12 @@ const PROJECTS = [
     desc: 'Matt Pocock 的 AI 工程技能课程：grill、to-spec、to-tickets、implement、diagnosing-bugs、wayfinder 等技能的原理与实战。',
   },
   {
-    src: 'policy', sub: '', slug: 'policy', name: '政策学习',
+    src: 'policy', sub: '', slug: 'policy', name: '政策学习（已归档）',
     tags: ['政策学习', '专升本政治'],
     desc: '广东专升本政治课程：党史重大事件、毛著重要论断、党的建设、军队建设、新民主主义理论。',
   },
   {
-    src: 'English', sub: 'teaching', slug: 'english', name: '英语教学',
+    src: 'English', sub: 'teaching', slug: 'english', name: '英语教学（已归档）',
     tags: ['英语教学', '中考英语'],
     desc: '中考英语教学与练习设计：不定代词、介词搭配、比较级结构等专题训练与错误分析。',
   },

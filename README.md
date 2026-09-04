@@ -22,10 +22,12 @@ docs/
 ├── hire/                  # Hire Me / 找我开发
 ├── blog/                  # 博客（post 集合，学习记录）
 ├── courses/               # 课程目录页（doc 集合 × 5 门课）
+├── prep/                  # 备考区（doc 集合：计划总览 + 四科周打卡，sync-prep 生成）
 ├── knowledge/             # 知识库（doc 集合：总纲/术语/ADR）
 └── projects/              # 精选案例 + 自动生成的公开仓库目录
 scripts/
 ├── sync-learn.mjs         # D:\01-Documents\learn → 站点内容
+├── sync-prep.mjs          # 知识库《29周冲刺计划》→ 备考区（内容源路径见脚本头注释）
 ├── fetch-projects.mjs     # GitHub API → 公开仓库目录（不覆盖精选案例页）
 ├── check-links.mjs        # 站内死链校验（CI 门禁）
 ├── serve.mjs              # 本地预览构建产物（与线上 base 一致）
@@ -37,6 +39,7 @@ scripts/
 ```bash
 pnpm install          # 安装依赖
 pnpm sync             # 同步学习仓库（讲义/学习记录/知识库/课程目录）
+pnpm sync:prep        # 同步备考区（知识库 29周冲刺计划 → docs/prep）
 pnpm fetch-projects   # 刷新 GitHub 项目墙
 pnpm docs:dev         # 本地开发（http://localhost:8080）
 pnpm docs:build       # 构建
@@ -54,6 +57,8 @@ pnpm verify           # 一键门禁：typecheck + test + build + 死链校验
 1. 在学习仓库产出新的讲义 / 学习记录
 2. `pnpm sync` → 检查 `git status` 确认变更
 3. 提交并推送到 `main`，GitHub Actions 自动构建发布
+
+备考区（`/prep/`）的内容源是知识库《29周冲刺计划》md：改计划 → `pnpm sync:prep` → 随下次提交发布；周打卡勾选存在浏览器 localStorage，不回写知识库。
 
 讲义为独立 HTML（含随堂测交互），过渡期原样托管在 `/lessons/<课程>/`；后续逐步转为 Markdown 纳入主题体系（见 方案.md §4.1 方案 C）。
 

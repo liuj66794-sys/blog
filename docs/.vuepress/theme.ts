@@ -64,6 +64,7 @@ export default defineThemeConfig({
     { text: '项目', link: '/projects/' },
     { text: '博客', link: '/blog/' },
     { text: '课程', link: '/courses/', activeMatch: '^/courses/' },
+    { text: '备考', link: '/prep/', activeMatch: '^/prep/' },
     { text: '知识库', link: '/knowledge/' },
   ],
 
@@ -88,6 +89,14 @@ export default defineThemeConfig({
       sidebar: 'auto' as const,
       autoFrontmatter: { permalink: 'filepath' as const },
     })),
+    // 备考区：sync-prep.mjs 从知识库《29周冲刺计划》生成（计划总览 + 四科周打卡）
+    {
+      type: 'doc',
+      dir: 'prep',
+      title: '备考',
+      sidebar: 'auto',
+      autoFrontmatter: { permalink: 'filepath' },
+    },
     {
       type: 'doc',
       dir: 'knowledge',

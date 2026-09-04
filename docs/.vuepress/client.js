@@ -42,6 +42,87 @@ function trackHomepageHero(event) {
   }
 }
 
+/**
+ * 备考区（/prep/，sync-prep 生成）客户端增强：
+ * - #exam-countdown（data-exam）：距考天数
+ * - #prep-now（data-start + data-p1/p2/p3 各阶段最后一天及名称）：当前周与阶段
+ * - .prep-check input：周打卡勾选持久化到 localStorage（换设备不同步，页面有说明）
+ * - #prep-progress：本页周完成计数
+ */
+const PREP_CHECKS_KEY = 'zsb-prep-checks'
+
+function enhancePrep() {
+  if (!window.location.pathname.startsWith(`${__VUEPRESS_BASE__}prep/`)) return
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const toDate = (s) => new Date(`${s}T00:00:00`)
+  const fmt = (d) =>
+    `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+
+  const cd = document.getElementById('exam-countdown')
+  if (cd?.dataset.exam) {
+    const days = Math.round((toDate(cd.dataset.exam) - today) / 86400000)
+    cd.textContent =
+      days > 1
+        ? `距考试还有 ${days} 天`
+        : days === 1
+          ? '明天考试'
+          : days === 0
+            ? '今天考试 🎓'
+            : '考试已结束'
+  }
+
+  const nw = document.getElementById('prep-now')
+  if (nw?.dataset.start) {
+    const start = toDate(nw.dataset.start)
+    const week = Math.min(29, Math.max(0, Math.floor((today - start) / 86400000 / 7) + 1))
+    const phaseEnds = [1, 2, 3]
+      .map((i) => ({ end: nw.dataset[`p${i}`], name: nw.dataset[`p${i}n`] }))
+      .filter((p) => p.end && p.name)
+    const phase = phaseEnds.find((p) => today <= toDate(p.end))
+    if (week === 0) {
+      nw.textContent = `计划尚未开始（W1 自 ${nw.dataset.start.slice(5)} 起）`
+    } else {
+      const ws = new Date(start)
+      ws.setDate(ws.getDate() + (week - 1) * 7)
+      const we = new Date(ws)
+      we.setDate(we.getDate() + 6)
+      nw.textContent = `当前第 ${week} 周（${fmt(ws)} ~ ${fmt(we)}）· ${phase?.name ?? '考期已过'}`
+    }
+  }
+
+  const boxes = [
+    ...(document.querySelector('.vp-doc')?.querySelectorAll('.prep-check input[type="checkbox"]') ?? []),
+  ]
+  if (!boxes.length) return
+  const readStore = () => {
+    try {
+      return JSON.parse(localStorage.getItem(PREP_CHECKS_KEY) ?? '{}')
+    } catch {
+      return {}
+    }
+  }
+  const progress = document.getElementById('prep-progress')
+  const updateProgress = () => {
+    if (progress) {
+      progress.textContent = `已完成 ${boxes.filter((b) => b.checked).length} / ${boxes.length} 周`
+    }
+  }
+  const pageKey = window.location.pathname
+  for (const box of boxes) {
+    const key = `${pageKey}#${box.dataset.key}`
+    box.checked = Boolean(readStore()[key])
+    box.addEventListener('change', () => {
+      const store = readStore()
+      if (box.checked) store[key] = 1
+      else delete store[key]
+      localStorage.setItem(PREP_CHECKS_KEY, JSON.stringify(store))
+      updateProgress()
+    })
+  }
+  updateProgress()
+}
+
 export default defineClientConfig({
   enhance({ app, router }) {
     app.component('CommercialHome', CommercialHome)
@@ -56,6 +137,7 @@ export default defineClientConfig({
       await nextTick()
       await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
       fixPostsNavLinks()
+      enhancePrep()
     })
   },
 })

@@ -10,12 +10,13 @@
     "docs:clean-dev": "vuepress dev docs --clean-cache --clean-temp",
     "docs:build": "vuepress build docs",
     "sync": "node scripts/sync-learn.mjs",
+    "sync:prep": "node scripts/sync-prep.mjs",
     "fetch-projects": "node scripts/fetch-projects.mjs",
     "test": "node --test",
     "typecheck": "tsc -p .",
     "preview": "node scripts/serve.mjs",
     "verify": "pnpm typecheck && pnpm test && pnpm build && node scripts/check-links.mjs",
-    "build": "node scripts/sync-learn.mjs && node scripts/fetch-projects.mjs && vuepress build docs"
+    "build": "node scripts/sync-learn.mjs && node scripts/sync-prep.mjs && node scripts/fetch-projects.mjs && vuepress build docs"
   },
   "devDependencies": {
     "@iconify/json": "^2.2.516",
