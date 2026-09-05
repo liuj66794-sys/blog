@@ -1,14 +1,14 @@
 ---
-title: 备考总览
+title: 备考中心
 createTime: 2026-09-05 00:42:55
 permalink: /prep/
 ---
 
-# 专升本 29 周冲刺计划
-
 考期：<strong>2027-03-27</strong> ｜ <span id="exam-countdown" data-exam="2027-03-27"></span> ｜ <span id="prep-now" data-start="2026-09-07" data-p1="2026-11-01" data-p1n="强化刷题" data-p2="2027-01-31" data-p2n="真题两轮" data-p3="2027-03-27" data-p3n="冲刺押题"></span>
 
-## 总则
+<PrepDashboard />
+
+## 29 周学习计划
 
 - **考试**：广东省普通专升本 · 计算机科学与技术（政治理论 / 公共英语 / 高等数学 / 计算机基础与程序设计）
 - **考试日**：2027-03-27（周六）；W1 从 2026-09-07（周一）起，共 **29 周**
@@ -40,17 +40,8 @@ permalink: /prep/
 - 🏁 **2026-12-31 前（W18 初自查）**：计算机两模块掌握 + 英语语法掌握 + 真题一轮完成
 - 🏁 **2027-02-28 前（W25）**：政治完成 + 真题第二轮完成 + 模拟卷/押题卷各 ≥4 套
 
-## 四科学习入口
-
-| 科目 | 周打卡 | 课程内容 |
-| ---- | ------ | -------- |
-| 高数 | [高数 · W1-W29 打卡](/prep/gaoshu/) | [全文目录](/courses/zsb-math/) · [交互课程站](/lessons/zsb-math/) |
-| 英语 | [英语 · W1-W29 打卡](/prep/yingyu/) | [全文目录](/courses/zsb-english/) · [交互课程站](/lessons/zsb-english/lessons/course.html) |
-| 政治 | [政治 · W1-W29 打卡](/prep/zhengzhi/) | [全文目录](/courses/zsb-politics/) · [交互课程站](/lessons/zsb-politics/) |
-| 计算机 | [计算机 · W1-W29 打卡](/prep/jisuanji/) | [全文目录](/courses/zsb-cs/) · [交互课程站](/lessons/zsb-cs/lessons/index.html) |
-
 > [!TIP] 打卡说明
-> 勾选状态保存在**当前浏览器**（localStorage），换设备或清理浏览器数据后不保留；学习进度的权威记录仍以知识库笔记与错题本为准。改计划内容请编辑知识库源文件《29周冲刺计划》，然后在博客仓库跑 `pnpm sync:prep` 重新生成。
+> 勾选状态保存在**当前浏览器**，换设备或清理浏览器数据后不保留。请同时保留自己的学习笔记与错题记录。
 
 ## 周次一览
 

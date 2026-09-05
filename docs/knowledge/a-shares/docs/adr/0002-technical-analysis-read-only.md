@@ -1,9 +1,8 @@
 ---
-title: 0002-technical-analysis-read-only
-createTime: 2026/08/21 12:19:23
-permalink: /knowledge/a-shares/docs/adr/0002-technical-analysis-read-only/
+title: "决策 0002 · 技术分析只教\"看得懂\"，不教\"用得好\""
+permalink: "/knowledge/a-shares/docs/adr/0002-technical-analysis-read-only/"
+createTime: "2026/08/21 12:19:23"
 ---
-# ADR 0002: 技术分析只教"看得懂"，不教"用得好"
 
 - 状态：已接受
 - 日期：2026-08-11

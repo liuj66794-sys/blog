@@ -10,9 +10,7 @@ description: 完成时间 20260821 本课核心收获 明确 A 股交易的三�
 permalink: /blog/a-shares/0002-lesson-5-trading-fees-completed/
 ---
 
-> 配套讲义：[第 2 课 · 交易所与板块](/blog/lessons/a-shares/lessons/0002-exchanges-and-boards.html)（含随堂测，页顶有返回导航）
-
-# 第 5 课完成记录：交易费用
+> 配套讲义：[第 5 课 · 交易费用](/blog/lessons/a-shares/lessons/0005-trading-fees.html)（含随堂测，页顶有返回导航）
 
 ## 完成时间
 2026-08-21

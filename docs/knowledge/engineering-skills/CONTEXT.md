@@ -1,9 +1,8 @@
 ---
-title: CONTEXT
-createTime: 2026/08/21 12:19:23
-permalink: /knowledge/engineering-skills/context/
+title: "课程术语与学习约定"
+permalink: "/knowledge/engineering-skills/context/"
+createTime: "2026/08/21 12:19:23"
 ---
-# CONTEXT
 
 本学习工作区的领域术语表。只收术语与含义，不放实现细节。
 

@@ -1,9 +1,8 @@
 ---
-title: design
-createTime: 2026/08/21 12:19:23
-permalink: /knowledge/pi-agent/design/
+title: "课程设计"
+permalink: "/knowledge/pi-agent/design/"
+createTime: "2026/08/21 12:19:23"
 ---
-# Design — PatchPilot 课程页面
 
 本项目的锁定设计系统。每一次页面 redesign 先读本文件再写代码。
 不要逐页重新生成——系统需要扩展时,在本文件上修订。

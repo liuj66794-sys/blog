@@ -12,8 +12,6 @@ permalink: /blog/pi-agent/0003-modules-and-npm-scripts/
 
 > 配套讲义：[第 3 课 · 模块与 npm 脚本](/blog/lessons/pi-agent/lessons/0003-modules-and-npm-scripts.html)（含随堂测，页顶有返回导航）
 
-# 0003 模块与 npm 脚本
-
 学习者已完成第 3 课：把 `tools.ts` 拆成 `tool-types.ts` / `tools.ts` / `main.ts` 三个文件并用 import/export 连接，配置了 `npm start` 脚本与 `tsconfig.json`，并正确产出了预期的 tsc 类型报错。
 
 **Evidence**

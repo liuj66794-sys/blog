@@ -1,13 +1,18 @@
 import { defineClientConfig } from 'vuepress/client'
-import { nextTick } from 'vue'
+import { nextTick, onMounted } from 'vue'
 import { trackPortfolioEvent } from './analytics.mjs'
 import CommercialHome from './components/CommercialHome.vue'
 import HireMePage from './components/HireMePage.vue'
 import PortfolioProjectsPage from './components/PortfolioProjectsPage.vue'
 import ProjectCasePage from './components/ProjectCasePage.vue'
+import LearningHome from './components/LearningHome.vue'
+import CourseHub from './components/CourseHub.vue'
+import KnowledgeHub from './components/KnowledgeHub.vue'
+import PrepDashboard from './components/PrepDashboard.vue'
 import './styles/palette.css'
 import './styles/index.css'
 import './styles/commercial.css'
+import './styles/learning.css'
 
 /**
  * plume 在页面不属于任何集合时（首页即如此），标签/分类/归档链接会回落到
@@ -39,6 +44,17 @@ function trackHomepageHero(event) {
     trackPortfolioEvent('portfolio_hire_cta', { location: 'home_hero' })
   } else if (url.pathname === projectsPath) {
     trackPortfolioEvent('portfolio_case_catalog_open', { location: 'home_hero' })
+  }
+}
+
+// 独立 HTML 互动课属于本站，使用正常的当前标签导航。
+function normalizeLessonLinks() {
+  for (const link of document.querySelectorAll(`a[href^="${__VUEPRESS_BASE__}lessons/"]`)) {
+    link.removeAttribute('target')
+    link.removeAttribute('rel')
+    link.classList.remove('vp-external-link-icon')
+    const helper = link.querySelector('.visually-hidden, .sr-only')
+    if (helper?.textContent.includes('新窗口')) helper.remove()
   }
 }
 
@@ -112,6 +128,8 @@ function enhancePrep() {
   for (const box of boxes) {
     const key = `${pageKey}#${box.dataset.key}`
     box.checked = Boolean(readStore()[key])
+    if (box.dataset.prepBound) continue
+    box.dataset.prepBound = 'true'
     box.addEventListener('change', () => {
       const store = readStore()
       if (box.checked) store[key] = 1
@@ -129,6 +147,10 @@ export default defineClientConfig({
     app.component('HireMePage', HireMePage)
     app.component('PortfolioProjectsPage', PortfolioProjectsPage)
     app.component('ProjectCasePage', ProjectCasePage)
+    app.component('LearningHome', LearningHome)
+    app.component('CourseHub', CourseHub)
+    app.component('KnowledgeHub', KnowledgeHub)
+    app.component('PrepDashboard', PrepDashboard)
 
     if (__VUEPRESS_SSR__) return
     document.addEventListener('click', trackHomepageHero)
@@ -137,7 +159,17 @@ export default defineClientConfig({
       await nextTick()
       await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
       fixPostsNavLinks()
+      normalizeLessonLinks()
       enhancePrep()
+    })
+  },
+  setup() {
+    onMounted(() => {
+      nextTick(() => requestAnimationFrame(() => {
+        fixPostsNavLinks()
+        normalizeLessonLinks()
+        enhancePrep()
+      }))
     })
   },
 })

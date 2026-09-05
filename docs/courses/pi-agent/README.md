@@ -5,8 +5,6 @@ permalink: /courses/pi-agent/
 banner: /images/covers/pi-agent.png
 ---
 
-# TypeScript Agent
-
 用 TypeScript 从零构建命令行 Agent：环境搭建、类型系统、模块与 npm scripts、异步、文件系统、子进程。
 
 
@@ -17,7 +15,7 @@ banner: /images/covers/pi-agent.png
 
 | 课次 | 讲义 | 复盘 |
 | --- | --- | --- |
-| 第 1 课 | [第 1 课 · 搭好环境：第一个 TypeScript 程序](/courses/pi-agent/l/1/) | [学习复盘](/blog/pi-agent/0001-typescript-environment-and-first-program/) |
+| 第 1 课 | [第 1 课 · 搭好环境：第一个 TypeScript 程序](/courses/pi-agent/l/1/) | — |
 | 第 2 课 | [第 2 课 · TypeScript 类型与接口](/courses/pi-agent/l/2/) | [学习复盘](/blog/pi-agent/0002-types-and-interfaces-for-tools/) |
 | 第 3 课 | [第 3 课 · 模块与 npm 脚本](/courses/pi-agent/l/3/) | [学习复盘](/blog/pi-agent/0003-modules-and-npm-scripts/) |
 | 第 4 课 | [第 4 课 · 异步与 async/await](/courses/pi-agent/l/4/) | [学习复盘](/blog/pi-agent/0004-async-await/) |

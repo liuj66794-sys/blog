@@ -16,7 +16,7 @@ export default defineUserConfig({
   base,
   title: 'L1U.J',
   description:
-    '全栈、Windows、Android 与 AI 开发者作品集：独立交付完整产品，同时沉淀课程、博客与知识库。',
+    'L1U.J 的学习空间：课程讲义、互动练习、专升本备考、知识库与项目实践。',
   head: [
     // 头像本地化（public/avatar.png），不再依赖 GitHub 头像外链
     ['link', { rel: 'icon', href: withBase('/avatar.png') }],

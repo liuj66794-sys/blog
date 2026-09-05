@@ -1,14 +1,16 @@
 ---
-title: 备考 · 英语
+title: 英语学习计划
 createTime: 2026-09-05 00:42:55
 permalink: /prep/yingyu/
 ---
 
-# 英语 · 周打卡
 
-进度：<span id="prep-progress"></span>。每周轮换与每日节奏见 [备考总览](/prep/)。
 
-本科入口：[站内全文目录](/courses/zsb-english/) · [交互课程站](/lessons/zsb-english/lessons/course.html)（随堂测 / 闪卡 / 进度，页顶可返回备考区）。
+[**英语课程目录**](/courses/zsb-english/) · [**开始互动学习**](/blog/lessons/zsb-english/lessons/course.html) · [返回备考中心](/prep/)
+
+阅读讲义、练习与复习可从课程目录开始；互动页顶部始终保留课程目录和本科目计划入口。
+
+周打卡进度：<span id="prep-progress"></span>。每周轮换与每日节奏见 [备考中心](/prep/)。
 
 ## 强化刷题（W1-W8）
 

@@ -23,6 +23,7 @@ import { fileURLToPath } from 'node:url'
 import { withBase } from '../docs/.vuepress/site-meta.mjs'
 import { lessonHtmlToMarkdown } from './lib/lesson-convert.mjs'
 import { injectLessonNav } from './lib/lesson-nav.mjs'
+import { installLessonRuntime, stripMissingFontUrls } from './lib/lesson-assets.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DOCS = path.join(ROOT, 'docs')
@@ -161,48 +162,33 @@ function phaseRanges(weeks) {
   return ranges
 }
 
-function renderReadme({ examDate, general, weeks }) {
+export function renderReadme({ examDate, general, weeks }) {
   const phaseEnds = phaseRanges(weeks)
   const nowAttrs = [
     `data-start="${fullDate(examDate, weeks[0].start)}"`,
     ...phaseEnds.map((p, i) => `data-p${i + 1}="${fullDate(examDate, p.endDate)}" data-p${i + 1}n="${p.phase}"`),
   ].join(' ')
 
-  const bySubject = new Map(ZSB_COURSES.map((c) => [c.subject, c]))
-  const subjectLinks = SUBJECTS.map(({ key, slug }) => {
-    const c = bySubject.get(key)
-    const entries = c
-      ? ` [全文目录](/courses/${c.slug}/) · [交互课程站](${c.entry})`
-      : ''
-    return `| ${key} | [${key} · W1-W${TOTAL_WEEKS} 打卡](/prep/${slug}/) |${entries} |`
-  })
-
   const table = weeks
     .map((w) => `| ${w.label} | ${w.start} ~ ${w.end} | ${w.phase} | ${weekFlags(w)} |`)
     .join('\n')
 
   return `---
-title: 备考总览
+title: 备考中心
 createTime: __CREATE_TIME__
 permalink: /prep/
 ---
 
-# 专升本 29 周冲刺计划
-
 考期：<strong>${examDate}</strong> ｜ <span id="exam-countdown" data-exam="${examDate}"></span> ｜ <span id="prep-now" ${nowAttrs}></span>
 
-## 总则
+<PrepDashboard />
+
+## 29 周学习计划
 
 ${general}
 
-## 四科学习入口
-
-| 科目 | 周打卡 | 课程内容 |
-| ---- | ------ | -------- |
-${subjectLinks.join('\n')}
-
 > [!TIP] 打卡说明
-> 勾选状态保存在**当前浏览器**（localStorage），换设备或清理浏览器数据后不保留；学习进度的权威记录仍以知识库笔记与错题本为准。改计划内容请编辑知识库源文件《29周冲刺计划》，然后在博客仓库跑 \`pnpm sync:prep\` 重新生成。
+> 勾选状态保存在**当前浏览器**，换设备或清理浏览器数据后不保留。请同时保留自己的学习笔记与错题记录。
 
 ## 周次一览
 
@@ -219,10 +205,10 @@ ${table}
 `
 }
 
-function renderSubject(subject, { weeks }) {
+export function renderSubject(subject, { weeks }) {
   const course = ZSB_COURSES.find((c) => c.subject === subject.key)
   const entry = course
-    ? `\n\n本科入口：[站内全文目录](/courses/${course.slug}/) · [交互课程站](${course.entry})（随堂测 / 闪卡 / 进度，页顶可返回备考区）。`
+    ? `\n\n[**${subject.key}课程目录**](/courses/${course.slug}/) · [**开始互动学习**](${withBase(course.entry)}) · [返回备考中心](/prep/)\n\n阅读讲义、练习与复习可从课程目录开始；互动页顶部始终保留课程目录和本科目计划入口。`
     : ''
   const sections = PHASES.map((phase) => {
     const inPhase = weeks.filter((w) => w.phase === phase)
@@ -243,14 +229,14 @@ function renderSubject(subject, { weeks }) {
   })
 
   return `---
-title: 备考 · ${subject.key}
+title: ${subject.key}学习计划
 createTime: __CREATE_TIME__
 permalink: /prep/${subject.slug}/
 ---
 
-# ${subject.key} · 周打卡
+${entry}
 
-进度：<span id="prep-progress"></span>。每周轮换与每日节奏见 [备考总览](/prep/)。${entry}
+周打卡进度：<span id="prep-progress"></span>。每周轮换与每日节奏见 [备考中心](/prep/)。
 
 ${sections.join('\n\n')}
 `
@@ -313,22 +299,6 @@ function stripUnmirroredLinks(html, c) {
   })
 }
 
-/** CSS 里引用了不存在的字体兜底格式（源只带 woff2，css 还写着 ttf/woff）：
- *  从 @font-face 的 src 列表剔除缺失项，整个 face 全缺则删除——免死链也保渲染。
- *  注意压缩 css 的最后一个属性不带分号，src 用 ;? 收尾 */
-function stripMissingFontUrls(css, cssDir) {
-  return css.replace(/@font-face\{[^}]*\}/g, (block) => {
-    const src = block.match(/src:([^;]+);?/)
-    if (!src) return block
-    const kept = src[1].split(',').filter((part) => {
-      const u = part.match(/url\(([^)]+)\)/)?.[1]
-      if (!u) return true
-      return fs.existsSync(path.resolve(cssDir, u.replace(/["']/g, '')))
-    })
-    return kept.length ? block.replace(src[1], kept.join(',')) : ''
-  })
-}
-
 function syncZsbMirror(c) {
   const dest = path.join(PUBLIC_LESSONS, c.slug)
   const staging = path.join(DOCS, '.vuepress', STAGING_DIR, c.slug)
@@ -346,14 +316,19 @@ function syncZsbMirror(c) {
   }
   if (count < 3) throw new Error(`[sync-prep] ${c.slug} 镜像仅 ${count} 个文件，疑似源路径异常，已中止换入：${c.src}`)
 
+  // 高数镜像补足逐题续学能力，网站运行时由仓库维护，源课程和历史存储均保留。
+  installLessonRuntime(staging, c.slug)
+
   // 镜像改写点：HTML 注入导航条 + 摘除未收录源层死链；CSS 剔除缺失字体格式
   // （/lessons/ 静态页加载不到站点 JS，只能写入时处理，见 lib/lesson-nav.mjs）
   for (const f of walkFiles(staging, (n) => n.endsWith('.html') || n.endsWith('.css'))) {
     const raw = fs.readFileSync(f, 'utf8')
     const patched = f.endsWith('.html')
       ? injectLessonNav(stripUnmirroredLinks(raw, c), {
-          backUrl: withBase(`/prep/${c.prepSlug}/`),
-          backLabel: '‹ 返回备考',
+          backUrl: withBase(`/courses/${c.slug}/`),
+          backLabel: `${c.subject}课程目录`,
+          planUrl: withBase(`/prep/${c.prepSlug}/`),
+          planLabel: `${c.subject}学习计划`,
         })
       : stripMissingFontUrls(raw, path.dirname(f))
     fs.writeFileSync(f, patched)
@@ -457,10 +432,8 @@ function syncZsbCourse(c) {
       next ? `[${c.numeric ? `第 ${next.no} 课` : next.name} →](${permalinkOf(next)})` : '',
     ]
     const metaLine = conv.metaLine ? `> ${conv.metaLine}\n\n` : ''
-    const interactive = `/lessons/${c.slug}/lessons/${e.file}`
-    const body = `# ${headline}
-
-${metaLine}> 本文为站内全文版（已纳入搜索，随堂测为折叠核对）。随堂测可点击作答的交互版（页顶可返回备考区）：[**打开讲义**](${interactive})
+    const interactive = withBase(`/lessons/${c.slug}/lessons/${e.file}`)
+    const body = `${metaLine}> 阅读讲义后，可以[**打开互动练习**](${interactive})完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
 
 ${conv.body}
 
@@ -483,7 +456,7 @@ ${navParts.filter(Boolean).join(' · ')}
   const rows = entries
     .map((e) => {
       const label = c.numeric ? `${e.no}` : e.name
-      return `| ${label} | [${c.numeric ? `第 ${e.no} 课` : e.name}](${permalinkOf(e)}) | [交互版](/lessons/${c.slug}/lessons/${e.file}) |`
+      return `| ${label} | [${c.numeric ? `第 ${e.no} 课` : e.name}](${permalinkOf(e)}) | [互动练习](${withBase(`/lessons/${c.slug}/lessons/${e.file}`)}) |`
     })
     .join('\n')
   const readme = `---
@@ -492,14 +465,12 @@ createTime: ${readmeCreateTime}
 permalink: /courses/${c.slug}/
 ${hasCover ? `banner: ${cover}\n` : ''}---
 
-# ${c.name} · 目录
-
 > [!TIP] 学习入口
-> - **站内全文**（本目录，纳入搜索，随堂测折叠核对）共 ${entries.length} 课
-> - [交互课程站](${c.entry})——随堂测点击作答、闪卡与进度记录（存浏览器本地，页顶可返回备考区）
-> - 周计划与打卡：[备考 · ${c.subject}](/prep/${c.prepSlug}/)
+> - **阅读讲义**：共 ${entries.length} 课，可搜索正文，随堂测可展开核对。
+> - [**开始互动学习**](${withBase(c.entry)})：作答、闪卡与进度记录，随时从页顶返回。
+> - [${c.subject}学习计划与打卡](/prep/${c.prepSlug}/) · [备考中心](/prep/)
 
-| 课次 | 站内全文 | 交互讲义 |
+| 课次 | 阅读讲义 | 互动练习 |
 | ---- | -------- | -------- |
 ${rows}
 `
@@ -557,9 +528,11 @@ const main = () => {
   console.log('[sync-prep] 完成')
 }
 
-try {
-  main()
-} catch (err) {
-  console.error(`[sync-prep] 失败：${err.message}`)
-  process.exit(1)
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  try {
+    main()
+  } catch (err) {
+    console.error(`[sync-prep] 失败：${err.message}`)
+    process.exit(1)
+  }
 }

@@ -1,5 +1,6 @@
 import { defineThemeConfig } from 'vuepress-theme-plume'
 import { COURSES, origin, siteUrl } from './site-meta.mjs'
+import { prepSubjects, topicCourses } from './learning-data.mjs'
 
 // 头像本地化（public/avatar.png）。logo/profile 交给 plume 自动补 base（手动拼会双重前缀）；
 // og:image 类必须绝对 URL
@@ -17,6 +18,7 @@ export default defineThemeConfig({
   // @ts-expect-error plume ThemeConfig 缺 editLink 声明
   editLink: false,
   appearance: true,
+  sidebarMenuLabel: '目录',
   hostname: origin,
   plugins: {
     seo: {
@@ -54,18 +56,18 @@ export default defineThemeConfig({
   social: [{ icon: 'github', link: 'https://github.com/liuj66794-sys' }],
 
   footer: {
-    message: '从需求到源码，独立交付可用产品',
+    message: '学习 · 实践 · 回顾，让理解慢慢积累。',
     copyright: 'Copyright © 2026 L1U.J',
   },
 
   navbar: [
     { text: '首页', link: '/' },
-    { text: '找我开发', link: '/hire/' },
-    { text: '项目', link: '/projects/' },
-    { text: '博客', link: '/blog/' },
     { text: '课程', link: '/courses/', activeMatch: '^/courses/' },
-    { text: '备考', link: '/prep/', activeMatch: '^/prep/' },
+    { text: '备考中心', link: '/prep/', activeMatch: '^/prep/' },
     { text: '知识库', link: '/knowledge/' },
+    { text: '学习手记', link: '/blog/' },
+    { text: '项目', link: '/projects/' },
+    { text: '找我开发', link: '/hire/' },
   ],
 
   collections: [
@@ -86,7 +88,10 @@ export default defineThemeConfig({
       type: 'doc' as const,
       dir: `courses/${c.slug}`,
       title: c.name,
-      sidebar: 'auto' as const,
+      sidebar: [
+        { text: '课程目录', link: `/courses/${c.slug}/` },
+        { text: '课程讲义', prefix: 'l/', items: 'auto' as const },
+      ],
       autoFrontmatter: { permalink: 'filepath' as const },
     })),
     // 备考区：sync-prep.mjs 从知识库《29周冲刺计划》生成（计划总览 + 四科周打卡）
@@ -101,7 +106,12 @@ export default defineThemeConfig({
       type: 'doc',
       dir: 'knowledge',
       title: '知识库',
-      sidebar: 'auto',
+      sidebar: [
+        { text: '知识库总览', link: '/knowledge/' },
+        { text: '专升本备考', items: prepSubjects.map((s) => ({ text: s.name, link: `/knowledge/${s.slug}/` })) },
+        { text: '专题知识', items: topicCourses.filter((c) => c.group !== '已归档').map((c) => ({ text: c.name, link: `/knowledge/${c.slug}/` })) },
+        { text: '历史学习资料', collapsed: true, items: topicCourses.filter((c) => c.group === '已归档').map((c) => ({ text: c.name, link: `/knowledge/${c.slug}/` })) },
+      ],
       autoFrontmatter: { permalink: 'filepath' },
     },
     {

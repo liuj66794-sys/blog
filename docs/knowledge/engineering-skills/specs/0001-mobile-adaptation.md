@@ -1,9 +1,8 @@
 ---
-title: 0001-mobile-adaptation
-createTime: 2026/08/21 12:19:23
-permalink: /knowledge/engineering-skills/specs/0001-mobile-adaptation/
+title: "规范 0001 · 学习工作区移动端适配（手机版）"
+permalink: "/knowledge/engineering-skills/specs/0001-mobile-adaptation/"
+createTime: "2026/08/21 12:19:23"
 ---
-# Spec 0001：学习工作区移动端适配（手机版）
 
 > 状态：ready-for-agent（本地发布——本工作区无 issue tracker，spec 以文件形式落在 `specs/`）
 > 前置：`docs/adr/0001-mobile-single-file-inline.md`（手机版采用单文件内联分发）

@@ -37,6 +37,7 @@ import {
 } from './lib/learn-utils.mjs'
 import { lessonHtmlToMarkdown } from './lib/lesson-convert.mjs'
 import { injectLessonNav } from './lib/lesson-nav.mjs'
+import { knowledgeTitle, normalizeKnowledgeDocument, referenceTitle, resolveRecordLesson, stripLeadingH1 } from './lib/knowledge-content.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DOCS = path.resolve(__dirname, '..', 'docs')
@@ -235,7 +236,7 @@ function syncMirror(p) {
   fs.rmSync(backup, { recursive: true, force: true })
 }
 
-/** 2. 学习记录 → 博客文章（按课号互链配套讲义） */
+/** 2. 学习记录 → 博客文章（仅以原文证据匹配配套讲义，记录序号不等于课号） */
 function syncBlog(p, lessons) {
   const dir = path.join(projectRoot(p), 'learning-records')
   const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.md')).sort() : []
@@ -261,12 +262,11 @@ function syncBlog(p, lessons) {
       permalink: `/blog/${p.slug}/${f.replace(/\.md$/, '')}/`,
     })
 
-    const no = Number(f.match(/^(\d+)/)?.[1] ?? 0)
-    const lesson = lessons.find((l) => l.no === no)
+    const lesson = resolveRecordLesson({ filename: f, title, body }, lessons)
     const lessonNote = lesson
       ? `> 配套讲义：[${lesson.title}](${withBase(`/lessons/${p.slug}/lessons/${lesson.file}`)})（含随堂测，页顶有返回导航）\n\n`
       : ''
-    const content = fmText + '\n' + lessonNote + rewriteRelativeLinks(body, p.slug).trim() + '\n'
+    const content = fmText + '\n' + lessonNote + rewriteRelativeLinks(stripLeadingH1(body), p.slug).trim() + '\n'
     const dest = path.join(DOCS, 'blog', p.slug, f)
     const st = fs.statSync(src)
     // 按内容而非 mtime 跳过：生成模板变更（如新增 categories 字段）时
@@ -303,25 +303,17 @@ function syncKnowledgeFiles(p) {
     const srcText = fs.readFileSync(src, 'utf8')
     let text = rewriteRootDocLinks(srcText, p.slug, ROOT_DOC_NAMES)
     const st = fs.statSync(src)
-    // 源文件无 frontmatter 时，为它生成与 plume autoFrontmatter 注入等价的
-    // frontmatter（permalink 取既有值或按 slug/路径推导，createTime 保留既有
-    // 或取源 mtime）——否则构建期注入与 sync 裸复制互相覆盖，git status 永远有假变更。
-    if (!parseFrontmatter(srcText).fm) {
-      const prevBlock = fs.existsSync(dest)
-        ? fs.readFileSync(dest, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/)
-        : null
-      const prevFm = prevBlock ? parseFrontmatter(prevBlock[0]).fm : null
-      const relNoExt = rel.replace(/\.md$/, '')
-      const baseName = path.posix.basename(relNoExt)
-      const permalink = (prevFm && prevFm.permalink)
-        || (/^readme$/i.test(baseName)
-          ? `/knowledge/${p.slug}/${path.posix.dirname(relNoExt).replace(/^\.$/, '')}/`.replace(/\/+/g, '/')
-          : `/knowledge/${p.slug}/${relNoExt.toLowerCase()}/`)
-      const createTime = (prevFm && prevFm.createTime) || fmtTime(st.mtime).replace(/-/g, '/')
-      const title = (prevFm && prevFm.title)
-        || (text.match(/^#\s+(.+)$/m)?.[1] ?? baseName).replace(/\.md$/i, '').trim()
-      text = buildFrontmatter({ title, createTime, permalink }) + text
-    }
+    // 中文标题来自文档含义；已发布 permalink 与源 frontmatter 其他字段保持不变。
+    // Windows 相对路径先转为 URL 分隔符，避免首次同步写出反斜杠 permalink。
+    const prevFm = fs.existsSync(dest) ? parseFrontmatter(fs.readFileSync(dest, 'utf8')).fm : null
+    const relNoExt = rel.replace(/\\/g, '/').replace(/\.md$/, '')
+    const baseName = path.posix.basename(relNoExt)
+    const permalink = prevFm?.permalink
+      || (/^readme$/i.test(baseName)
+        ? `/knowledge/${p.slug}/${path.posix.dirname(relNoExt).replace(/^\.$/, '')}/`.replace(/\/+/g, '/')
+        : `/knowledge/${p.slug}/${relNoExt.toLowerCase()}/`)
+    const createTime = prevFm?.createTime || fmtTime(st.mtime).replace(/-/g, '/')
+    text = normalizeKnowledgeDocument(text, { relativePath: rel, permalink, createTime })
     // 按内容而非 mtime 跳过（理由同 syncBlog：模板/链接重写逻辑变更要能落地）
     if (!FORCE && fs.existsSync(dest) && fs.readFileSync(dest, 'utf8') === text) continue
     writeAtomic(dest, text, st)
@@ -369,13 +361,15 @@ function syncCourse(p, lessons) {
   const bannerFm = banner ? `banner: ${banner}\n` : ''
   const cardLink = (no) => `/courses/${p.slug}/l/${no}/`
 
-  // 博客复盘按课号匹配：docs/blog/<slug>/000N-*.md → /blog/<slug>/<article>/
-  const blogDir = path.join(DOCS, 'blog', p.slug)
+  // 反向互链也依据学习记录原文，避免记录 0002 被错误解释为课程第 2 课。
+  const blogDir = path.join(projectRoot(p), 'learning-records')
   const postByNo = new Map()
   if (fs.existsSync(blogDir)) {
     for (const f of fs.readdirSync(blogDir).filter((n) => n.endsWith('.md'))) {
-      const no = Number(f.match(/^(\d+)/)?.[1] ?? 0)
-      if (no) postByNo.set(no, f.replace(/\.md$/, ''))
+      const { fm, body } = parseFrontmatter(fs.readFileSync(path.join(blogDir, f), 'utf8'))
+      const title = fm?.title || body.match(/^#\s+(.+)$/m)?.[1] || ''
+      const lesson = resolveRecordLesson({ filename: f, title, body }, lessons)
+      if (lesson) postByNo.set(lesson.no, f.replace(/\.md$/, ''))
     }
   }
   const reviewCell = (no) => (postByNo.has(no) ? `[学习复盘](/blog/${p.slug}/${postByNo.get(no)}/)` : '—')
@@ -406,7 +400,7 @@ function syncCourse(p, lessons) {
       const createTime = fmtTime(new Date(Math.min(...g.lessons.map((l) => l.mtimeMs))))
       writeAtomic(
         path.join(dir, filename),
-        `---\ntitle: 模块 ${g.no} · ${g.name}\ncreateTime: ${createTime}\npermalink: ${permalink}\n${bannerFm}---\n\n# 模块 ${g.no} · ${g.name}\n\n| 课次 | 讲义 | 复盘 |\n| --- | --- | --- |\n${rows}\n\n${lessonNote}\n`,
+        `---\ntitle: 模块 ${g.no} · ${g.name}\ncreateTime: ${createTime}\npermalink: ${permalink}\n${bannerFm}---\n\n| 课次 | 讲义 | 复盘 |\n| --- | --- | --- |\n${rows}\n\n${lessonNote}\n`,
       )
       return { no: g.no, name: g.name, filename, count: g.lessons.length }
     })
@@ -445,9 +439,7 @@ function syncCourse(p, lessons) {
       navParts = [navParts[0], navParts[1], ...conv.nav.middle.map((m) => `[${m.text}](${m.url})`), navParts[2]]
       const interactive = withBase(`/lessons/${p.slug}/lessons/${l.file}`)
       const metaLine = conv.metaLine ? `**${conv.metaLine}**\n\n` : ''
-      pageBody = `# ${conv.headline || l.title}
-
-${metaLine}> 本文为站内全文版（已纳入搜索，随堂测为折叠核对）。随堂测可点击作答的交互版（页顶可返回课程）：[**打开讲义**](${interactive})
+      pageBody = `${metaLine}> 阅读讲义后，可打开[**互动练习**](${interactive})作答随堂测，并随时返回课程。
 
 ${conv.body}
 
@@ -492,8 +484,6 @@ createTime: ${createTime}
 permalink: /courses/${p.slug}/
 ${bannerFm}---
 
-# ${p.name}
-
 ${p.desc}
 
 ${p.plan ?? ''}
@@ -532,11 +522,12 @@ function syncKnowledgeIndex(p) {
     ? fs.readdirSync(refDir).filter((f) => f.endsWith('.html')).sort()
     : []
 
+  const escapeLabel = (label) => label.replace(/\|/g, '\\|').replace(/\[/g, '\\[').replace(/\]/g, '\\]')
   const mdRows = mdFiles
-    .map((rel) => `| [${rel.replace(/\.md$/, '')}](${encodeURI(rel)}) |`)
+    .map((rel) => `| [${escapeLabel(knowledgeTitle(fs.readFileSync(path.join(kdir, rel), 'utf8'), rel))}](${encodeURI(rel)}) |`)
     .join('\n')
   const refRows = refFiles
-    .map((f) => `| [${f.replace(/\.html$/, '')}](${withBase(`/lessons/${p.slug}/reference/${encodeURI(f)}`)}) |`)
+    .map((f) => `| [${escapeLabel(referenceTitle(fs.readFileSync(path.join(refDir, f), 'utf8'), f.replace(/\.html$/, '')))}](${withBase(`/lessons/${p.slug}/reference/${encodeURI(f)}`)}) |`)
     .join('\n')
 
   fs.mkdirSync(kdir, { recursive: true })
@@ -553,8 +544,6 @@ permalink: /knowledge/${p.slug}/
 createTime: ${indexCreateTime}
 ---
 
-# ${p.name} · 知识库
-
 ${p.desc}
 
 ## 文档
@@ -563,9 +552,9 @@ ${p.desc}
 | --- |
 ${mdRows || '| （暂无） |'}
 
-## HTML 参考资料
+## 速查与参考
 
-原样托管的独立参考页面（词典、速查表等）：
+需要查概念、公式或流程时，从这里打开对应资料。
 
 | 资料 |
 | --- |

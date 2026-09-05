@@ -10,10 +10,6 @@ description: 使命 用户是独立开发者，在多个 AI 客户端之间切�
 permalink: /blog/engineering-skills/0001-mission-and-prior-knowledge/
 ---
 
-> 配套讲义：[第一课：Mattpocock Skills 概览与调用方式](/blog/lessons/engineering-skills/lessons/0001-mattpocock-skills-overview.html)（含随堂测，页顶有返回导航）
-
-# 已确认学习使命与先验知识
-
 ## 使命
 
 用户是**独立开发者**，在多个 AI 客户端之间切换（Kimi Code CLI、Cursor、Claude Code、Codex 等）。学习 Mattpocock Skills 的动机是**提升工作效率**，让 AI 在代码审查、方案设计、Bug 诊断、需求拆解等任务上输出更稳定。当前策略是**先全面概览，再按需深入**。

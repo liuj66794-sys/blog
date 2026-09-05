@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import path from 'node:path'
-import { urlToDistFile } from './link-utils.mjs'
+import { isMissingSiteBase, urlToDistFile } from './link-utils.mjs'
 
 const DIST = path.join(path.sep, 'dist')
 const BASE = '/blog'
@@ -33,4 +33,24 @@ test('urlToDistFile: percent-decode 解码后再映射（中文文件名）', ()
 test('urlToDistFile: 畸形编码按原始路径兜底（倾向暴露死链）', () => {
   const fallback = urlToDistFile('/blog/%E0%A4%A/', DIST, BASE)
   assert.equal(fallback, path.join(DIST, '%E0%A4%A', 'index.html'))
+})
+
+test('isMissingSiteBase: 四科静态入口和本站内容根路径必须包含部署 base', () => {
+  for (const url of [
+    '/lessons/zsb-math/',
+    '/lessons/zsb-english/lessons/course.html',
+    '/lessons/zsb-politics/',
+    '/lessons/zsb-cs/lessons/index.html?mode=quiz#start',
+    '/courses/zsb-math/', '/prep/gaoshu/', '/knowledge/', '/images/cover.png',
+    '/%6cessons/zsb-math/',
+  ]) assert.equal(isMissingSiteBase(url, BASE), true, url)
+})
+
+test('isMissingSiteBase: 保留合法 base、根域部署和同域其他项目路径', () => {
+  for (const url of ['/blog/', '/blog/lessons/zsb-math/', '/blogging/', '/other-project/', '/', '//cdn.example.com/lessons/']) {
+    assert.equal(isMissingSiteBase(url, BASE), false, url)
+  }
+  assert.equal(isMissingSiteBase('/lessons/zsb-math/', ''), false)
+  assert.equal(isMissingSiteBase('/lessons/zsb-math/', '/'), false)
+  assert.equal(isMissingSiteBase('/blog/lessons/zsb-math/', '/blog/'), false)
 })

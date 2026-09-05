@@ -10,10 +10,6 @@ description: 学到的内容 /totickets 把 spec/计划/对话拆成 tracer bull
 permalink: /blog/engineering-skills/0005-to-tickets-understanding/
 ---
 
-> 配套讲义：[第五课：使用 implement 完成实现](/blog/lessons/engineering-skills/lessons/0005-implement.html)（含随堂测，页顶有返回导航）
-
-# to-tickets 的核心机制
-
 ## 学到的内容
 
 - `/to-tickets` 把 spec/计划/对话拆成 tracer bullet（曳光弹）式的垂直切片 ticket，每个声明 blocking edges（阻塞边）。

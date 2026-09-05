@@ -10,10 +10,6 @@ description: 学习者已完成第 1 课的动手任务：Node.js v24.17.0 安�
 permalink: /blog/pi-agent/0001-typescript-environment-and-first-program/
 ---
 
-> 配套讲义：[第 1 课 · 搭好环境：第一个 TypeScript 程序](/blog/lessons/pi-agent/lessons/0001-typescript-setup-first-program.html)（含随堂测，页顶有返回导航）
-
-# 0001 TypeScript 环境搭建与第一个程序
-
 学习者已完成第 1 课的动手任务：Node.js v24.17.0 安装成功，使用 `npx tsx` 运行了第一个 `.ts` 文件，理解了 TS 类型报错信息的含义。
 
 **Evidence**

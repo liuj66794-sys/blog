@@ -12,8 +12,6 @@ permalink: /blog/pi-agent/0002-types-and-interfaces-for-tools/
 
 > 配套讲义：[第 2 课 · TypeScript 类型与接口](/blog/lessons/pi-agent/lessons/0002-types-and-interfaces-for-tools.html)（含随堂测，页顶有返回导航）
 
-# 0002 TypeScript 类型与接口
-
 学习者已完成第 2 课：成功用 `interface Tool` 定义工具形状，实现了 `calculator` 和 `greeter`，并通过 `Record<string, Tool>` 注册表 + `runTool` 调度函数跑出了正确输出。
 
 **Evidence**

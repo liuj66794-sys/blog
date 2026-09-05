@@ -10,10 +10,6 @@ description: 学到的内容 /wayfinder 处理的是「想法太大、一个 ses
 permalink: /blog/engineering-skills/0007-wayfinder-understanding/
 ---
 
-> 配套讲义：[第七课：使用 wayfinder 规划大型模糊项目](/blog/lessons/engineering-skills/lessons/0007-wayfinder.html)（含随堂测，页顶有返回导航）
-
-# wayfinder 的核心形状：为模糊大项目画一张共享地图
-
 ## 学到的内容
 
 `/wayfinder` 处理的是「想法太大、一个 session 装不下、从这里到目的地的路还看不见」的入口。

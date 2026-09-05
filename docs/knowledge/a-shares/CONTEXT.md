@@ -1,9 +1,8 @@
 ---
-title: CONTEXT
-createTime: 2026/08/21 12:19:23
-permalink: /knowledge/a-shares/context/
+title: "课程术语与学习约定"
+permalink: "/knowledge/a-shares/context/"
+createTime: "2026/08/21 12:19:23"
 ---
-# CONTEXT.md — A股入门课程（gupiao 工作区）
 
 > 本文件是课程设计的术语表（ubiquitous language），只收录已对齐的术语定义，不含实现细节。
 > 决策记录见 docs/adr/。课程依附的母计划：知识库 `queries/investment-learning-plan-2026-h2.md`（22 周计划）。

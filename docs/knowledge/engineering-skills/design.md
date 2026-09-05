@@ -1,9 +1,8 @@
 ---
-title: design
-createTime: 2026/08/21 12:19:23
-permalink: /knowledge/engineering-skills/design/
+title: "课程设计"
+permalink: "/knowledge/engineering-skills/design/"
+createTime: "2026/08/21 12:19:23"
 ---
-# Design — Mattpocock Skills 学习工作区
 
 A locked design system for this site. Every page redesign reads this file before
 emitting code. Do not regenerate per page — extend or amend this file when the

@@ -10,8 +10,6 @@ description: 学到的内容 对照 mattpocock/skills 仓库（当前 v1.2.3）�
 permalink: /blog/engineering-skills/0008-upstream-sync-2026-08/
 ---
 
-# 上游仓库同步（2026-07-28 → 2026-08-07）
-
 ## 学到的内容
 
 对照 `mattpocock/skills` 仓库（当前 v1.2.3）把学习素材同步到最新，关键变化：

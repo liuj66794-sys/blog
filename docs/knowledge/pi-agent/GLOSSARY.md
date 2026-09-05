@@ -1,9 +1,8 @@
 ---
-title: GLOSSARY
-createTime: 2026/08/21 12:19:23
-permalink: /knowledge/pi-agent/glossary/
+title: "术语表"
+permalink: "/knowledge/pi-agent/glossary/"
+createTime: "2026/08/21 12:19:23"
 ---
-# Agent 求职课程 Glossary
 
 Coding Agent 学习路线（见 [MISSION.md](/blog/lessons/pi-agent/MISSION.md)）的规范术语表。所有课件、速查表与 learning record 统一使用这里的措辞。术语只在验收通过后入册——能压缩出准确定义，才算真正理解。
 

@@ -5,11 +5,9 @@ permalink: /courses/zsb-politics/l/mzt06/
 banner: /images/covers/zsb-politics.png
 ---
 
-# 第六章 邓小平理论
-
 > 毛中特 · 第六章 ｜ 闪卡 23 ｜ 选择 5 ｜ 问答 6
 
-> 本文为站内全文版（已纳入搜索，随堂测为折叠核对）。随堂测可点击作答的交互版（页顶可返回备考区）：[**打开讲义**](/lessons/zsb-politics/lessons/mzt06.html)
+> 阅读讲义后，可以[**打开互动练习**](/blog/lessons/zsb-politics/lessons/mzt06.html)完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
 
 [政治 · 专升本互动课程](/blog/lessons/zsb-politics/index.html)
 

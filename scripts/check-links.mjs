@@ -11,9 +11,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { base } from '../docs/.vuepress/site-meta.mjs'
+import { base, origin } from '../docs/.vuepress/site-meta.mjs'
 import { walk } from './lib/learn-utils.mjs'
-import { urlToDistFile as mapUrl } from './lib/link-utils.mjs'
+import { isMissingSiteBase, urlToDistFile as mapUrl } from './lib/link-utils.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DOCS = path.resolve(__dirname, '..', 'docs')
@@ -64,10 +64,10 @@ function checkRef(ref, fromDistFile) {
 
   let pathname
   if (/^https?:\/\//i.test(ref)) {
-    // HTML/CSS 里的 http 外链不校验；只有 sitemap 的同站绝对 URL 会走到这里之外单独处理
-    return
-  }
-  if (ref.startsWith('/')) {
+    const url = new URL(ref)
+    if (url.origin !== origin) return
+    pathname = url.pathname
+  } else if (ref.startsWith('/')) {
     pathname = ref.split(/[?#]/)[0]
   } else {
     // 相对链接在真实服务器上相对其页面 URL（含 base）解析，镜像讲义的 ./ ../ 同理
@@ -77,7 +77,13 @@ function checkRef(ref, fromDistFile) {
   }
 
   const target = urlToDistFile(pathname)
-  if (!target) return // 不带 base 前缀的绝对路径：外站或已知运行时兜底，不归本检查管
+  if (!target) {
+    if (isMissingSiteBase(pathname, SITE_BASE)) {
+      checked++
+      misses.push({ from: path.relative(DIST, fromDistFile), ref, target: `（本站路径缺少 base ${base}）` })
+    }
+    return
+  }
   checked++
   if (!fs.existsSync(target)) {
     misses.push({ from: path.relative(DIST, fromDistFile), ref, target: path.relative(DIST, target) })
@@ -114,7 +120,9 @@ for (const { name, re } of absoluteSources) {
   if (!fs.existsSync(file)) continue
   for (const m of fs.readFileSync(file, 'utf8').matchAll(re)) {
     if (!/^https?:\/\//i.test(m[1])) continue
-    const pathname = new URL(m[1]).pathname
+    const url = new URL(m[1])
+    if (url.origin !== origin) continue
+    const pathname = url.pathname
     const target = urlToDistFile(pathname)
     if (!target) {
       misses.push({ from: name, ref: m[1], target: '（不在 base 内）' })

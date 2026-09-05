@@ -5,8 +5,6 @@ permalink: /courses/a-shares/
 banner: /images/covers/a-shares.png
 ---
 
-# A 股入门
-
 22 周 A 股投资课程：从概念扫盲到实战。每课 40 分钟三段式——20 分钟输入、15 分钟动手、5 分钟费曼自测。
 
 按《[22 周课程总纲](/knowledge/a-shares/)》滚动生成，每周新增讲义。

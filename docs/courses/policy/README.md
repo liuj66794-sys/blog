@@ -5,8 +5,6 @@ permalink: /courses/policy/
 banner: /images/covers/policy.png
 ---
 
-# 政策学习（已归档）
-
 广东专升本政治课程：党史重大事件、毛著重要论断、党的建设、军队建设、新民主主义理论。
 
 
@@ -17,7 +15,7 @@ banner: /images/covers/policy.png
 
 | 课次 | 讲义 | 复盘 |
 | --- | --- | --- |
-| 第 1 课 | [课程1：党史重大事件辨析 - 广东专升本政治](/courses/policy/l/1/) | [学习复盘](/blog/policy/0001-initial-assessment/) |
+| 第 1 课 | [课程1：党史重大事件辨析 - 广东专升本政治](/courses/policy/l/1/) | — |
 | 第 2 课 | [课程2：毛泽东著作与论断对应 - 广东专升本政治](/courses/policy/l/2/) | — |
 | 第 3 课 | [课程3：党的建设与方针辨析 - 广东专升本政治](/courses/policy/l/3/) | — |
 | 第 4 课 | [课程4：军队建设关键事件 - 广东专升本政治](/courses/policy/l/4/) | — |

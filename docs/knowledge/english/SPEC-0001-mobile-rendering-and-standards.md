@@ -1,9 +1,8 @@
 ---
-title: SPEC-0001-mobile-rendering-and-standards
-createTime: 2026/08/21 12:19:23
-permalink: /knowledge/english/spec-0001-mobile-rendering-and-standards/
+title: "规范 0001 · 移动端渲染修复 + 页面开发规范固化"
+permalink: "/knowledge/english/spec-0001-mobile-rendering-and-standards/"
+createTime: "2026/08/21 12:19:23"
 ---
-# SPEC-0001：移动端渲染修复 + 页面开发规范固化
 
 > 状态：已完成实施 · 标签：ready-for-agent
 > 来源：语法速查页 375px 纯文本 bug → grilling 会话 → STANDARDS.md

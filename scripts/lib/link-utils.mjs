@@ -6,6 +6,25 @@
  */
 import path from 'node:path'
 
+// 这些首段属于本站内容/资源。其他根路径可能属于同一域名的其他项目，
+// 不凭“根路径”一概报错；Plume 的兼容例外由调用方显式处理。
+const SITE_ROOTS = new Set([
+  'lessons', 'courses', 'prep', 'knowledge', 'projects', 'hire',
+  'about', 'archives', 'categories', 'tags', 'images', 'assets',
+])
+
+/** 已知本站路径漏了部署 base。先排除合法 base，避免前缀误判。 */
+export function isMissingSiteBase(pathname, siteBase) {
+  const cleanBase = siteBase.replace(/\/$/, '')
+  if (!cleanBase) return false
+  let decoded
+  try { decoded = decodeURIComponent(pathname) } catch { decoded = pathname }
+  const cleanPath = decoded.split(/[?#]/)[0]
+  if (!cleanPath.startsWith('/') || cleanPath.startsWith('//')) return false
+  if (cleanPath === cleanBase || cleanPath.startsWith(`${cleanBase}/`)) return false
+  return SITE_ROOTS.has(cleanPath.split('/')[1])
+}
+
 /**
  * 站内 URL 路径 → dist 文件路径。
  * - base 根（`/blog` 与 `/blog/`）→ dist/index.html
