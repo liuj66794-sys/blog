@@ -5,11 +5,11 @@ permalink: /knowledge/zsb-english/
 createTime: 2026/09/05 10:47:03
 ---
 
-英语课程共 36 课，按语法专题、题型技巧、模拟与押题练习推进。先定位薄弱点，再进入对应讲义与互动练习。
+英语课程按语法专题、题型技巧、模拟与押题练习推进，完整课次见课程目录。先定位薄弱点，再进入对应讲义与互动练习。
 
 <CardGrid cols="3">
 
-<LinkCard href="/courses/zsb-english/" title="课程目录" icon="ph:graduation-cap" description="浏览 36 课，按语法或题型选择学习内容" />
+<LinkCard href="/courses/zsb-english/" title="课程目录" icon="ph:graduation-cap" description="按语法或题型查找讲义与互动练习" />
 
 <LinkCard href="/blog/lessons/zsb-english/lessons/course.html" title="互动课程" icon="ph:cursor-click" description="进入课程站，练习作答并查看学习进度" />
 

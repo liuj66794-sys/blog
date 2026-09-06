@@ -24,6 +24,7 @@ import { withBase } from '../docs/.vuepress/site-meta.mjs'
 import { lessonHtmlToMarkdown } from './lib/lesson-convert.mjs'
 import { injectLessonNav } from './lib/lesson-nav.mjs'
 import { installLessonRuntime, stripMissingFontUrls } from './lib/lesson-assets.mjs'
+import { collectPrepLessons } from './lib/prep-catalog.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DOCS = path.join(ROOT, 'docs')
@@ -33,7 +34,7 @@ const STAGING_DIR = '.staging-prep'
 const SOURCE =
   process.env.ZSB_PLAN_SOURCE ??
   'D:/01-Documents/Knowledge/知识库/知识中心/学习区域/专升本/29周冲刺计划.md'
-const ZSB_ROOT = 'D:/01-Documents/Knowledge/知识库/专升本'
+const ZSB_ROOT = process.env.ZSB_COURSES_ROOT ?? 'D:/01-Documents/Knowledge/知识库/专升本'
 
 const SUBJECTS = [
   { key: '高数', slug: 'gaoshu' },
@@ -71,13 +72,20 @@ const ZSB_COURSES = [
     entry: '/lessons/zsb-politics/',
     lessonsDir: 'lessons', skip: ['practice', 'review', 'srs', 'wrong'],
     numeric: false, order: ['mzt', 'xg', 'sz'],
+    tools: [
+      { file: 'practice.html', title: '刷题场' },
+      { file: 'srs.html', title: '每日闪卡' },
+      { file: 'wrong.html', title: '错题本' },
+      { file: 'review.html', title: '混合测试' },
+    ],
   },
   {
     slug: 'zsb-cs', name: '备考·计算机', subject: '计算机', prepSlug: 'jisuanji',
     src: `${ZSB_ROOT}/计算机`,
     keep: ['lessons', 'assets', 'reference', 'attachments', 'MISSION.md', 'RESOURCES.md'],
     entry: '/lessons/zsb-cs/lessons/index.html',
-    lessonsDir: 'lessons', skip: ['index'], numeric: true,
+    lessonsDir: 'lessons', skip: ['index', 'mistakes'], numeric: true,
+    tools: [{ file: 'mistakes.html', title: '错题本' }],
   },
 ]
 
@@ -289,9 +297,10 @@ function renameWithRetry(from, to, attempts = 5) {
 /** 镜像 HTML 里指向未收录源层（笔记 .md / 原始 PDF / 题库）的 ../ 链接：
  *  Obsidian 里点得动，网页上就是 404——去跳转保文本（白名单内的 ../reference、
  *  ../assets 等照常保留）。与导航条注入同一遍历执行。 */
-function stripUnmirroredLinks(html, c) {
+export function stripUnmirroredLinks(html, c) {
   const keep = new Set(c.keep)
-  return html.replace(/<a\b[^>]*?\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, (m, href, text) => {
+  return html.replace(/<a\b[^>]*?\bhref=(["'])(.*?)\1[^>]*>([\s\S]*?)<\/a>/gi, (m, quote, href, text) => {
+    if (/^(?:obsidian:|file:|[a-z]:[\\/])/i.test(href)) return text
     if (!href.startsWith('../')) return m
     const target = href.slice(3).split(/[/#]/)[0]
     if (target && keep.has(target)) return m
@@ -373,17 +382,7 @@ function writeIfChanged(file, content) {
   return true
 }
 
-function sortEntries(c, entries) {
-  if (c.numeric) return entries.sort((a, b) => a.no - b.no)
-  const orderOf = (name) => {
-    const prefix = name.match(/^[a-z]+/)?.[0] ?? ''
-    const idx = c.order?.indexOf(prefix) ?? -1
-    return idx === -1 ? c.order?.length ?? 0 : idx
-  }
-  return entries.sort((a, b) => orderOf(a.name) - orderOf(b.name) || a.name.localeCompare(b.name))
-}
-
-function syncZsbCourse(c) {
+function syncZsbCourse(c, entries) {
   const lessonsDir = path.join(c.src, c.lessonsDir)
   if (!fs.existsSync(lessonsDir)) throw new Error(`[sync-prep] ${c.slug} 课件目录不存在：${lessonsDir}`)
   const readmeFile = path.join(DOCS, 'courses', c.slug, 'README.md')
@@ -392,19 +391,12 @@ function syncZsbCourse(c) {
       ? fs.readFileSync(readmeFile, 'utf8').match(/^createTime:\s*(.+)$/m)?.[1]
       : null) ?? timestamp()
 
-  const entries = []
-  for (const f of fs.readdirSync(lessonsDir).filter((f) => f.endsWith('.html')).sort()) {
-    const name = f.replace(/\.html$/, '')
-    if (c.skip.includes(name)) continue
-    entries.push({ name, file: f, no: c.numeric ? Number(name.slice(0, 4)) : null })
-  }
-  sortEntries(c, entries)
-  const lessonNames = new Set(entries.map((e) => e.name))
 
   const cardsDir = path.join(DOCS, 'courses', c.slug, 'l')
   const cover = `/images/covers/${c.slug}.png`
   const hasCover = fs.existsSync(path.join(DOCS, '.vuepress', 'public', 'images', 'covers', `${c.slug}.png`))
-  const permalinkOf = (e) => (c.numeric ? `/courses/${c.slug}/l/${e.no}/` : `/courses/${c.slug}/l/${e.name}/`)
+  const permalinkOf = (e) => `/courses/${c.slug}/l/${e.id}/`
+  const catalogLessons = []
   const warnings = []
   const warnTypes = new Map()
   const tally = (m) => {
@@ -415,13 +407,17 @@ function syncZsbCourse(c) {
   let changed = 0
 
   entries.forEach((e, i) => {
-    const html = fs.readFileSync(path.join(lessonsDir, e.file), 'utf8')
-    const conv = lessonHtmlToMarkdown(html, {
-      slug: c.slug,
-      lessonNames,
-      onWarn: (m) => tally(`${e.name}: ${m}`),
-    })
+    const conv = e.conversion
+    e.warnings.forEach((warning) => tally(`${e.name}: ${warning}`))
     const headline = conv.headline || e.name
+    catalogLessons.push({
+      id: e.id,
+      label: c.numeric ? `第 ${e.no} 课` : e.name,
+      title: headline,
+      group: c.numeric ? '' : ({ mzt: '毛中特', xg: '习概', sz: '时政' }[e.name.match(/^[a-z]+/)[0]]),
+      href: permalinkOf(e),
+      interactive: `/lessons/${c.slug}/lessons/${e.file}`,
+    })
     const title = c.numeric ? `第 ${e.no} 课 · ${headline}` : headline
     const createTime = fmtMtime(fs.statSync(path.join(lessonsDir, e.file)).mtime)
     const prev = entries[i - 1]
@@ -449,33 +445,46 @@ ${navParts.filter(Boolean).join(' · ')}
       ...(hasCover ? [`banner: ${cover}`] : []),
       '---',
     ].join('\n')
-    changed += writeIfChanged(path.join(cardsDir, `${c.numeric ? e.no : e.name}.md`), `${fm}\n\n${body}\n`) ? 1 : 0
+    changed += writeIfChanged(path.join(cardsDir, `${e.id}.md`), `${fm}\n\n${body}\n`) ? 1 : 0
   })
 
-  // 课程目录页
-  const rows = entries
-    .map((e) => {
-      const label = c.numeric ? `${e.no}` : e.name
-      return `| ${label} | [${c.numeric ? `第 ${e.no} 课` : e.name}](${permalinkOf(e)}) | [互动练习](${withBase(`/lessons/${c.slug}/lessons/${e.file}`)}) |`
-    })
-    .join('\n')
+  // Only remove obsolete generated lesson pages inside this course's l/ directory.
+  const expected = new Set(entries.map((e) => `${e.id}.md`))
+  for (const file of fs.readdirSync(cardsDir).filter((f) => f.endsWith('.md') && !expected.has(f))) {
+    const target = path.resolve(cardsDir, file)
+    if (!target.startsWith(path.resolve(cardsDir) + path.sep)) throw new Error(`讲义路径越界：${file}`)
+    const content = fs.readFileSync(target, 'utf8')
+    if (!content.includes(`permalink: /courses/${c.slug}/l/`)) throw new Error(`拒绝删除非生成讲义：${file}`)
+    fs.unlinkSync(target)
+    changed++
+  }
+
+  // Keep the accidentally published old wrong-answer URL usable, outside lesson/search counts.
+  if (c.slug === 'zsb-cs') {
+    const destination = withBase('/lessons/zsb-cs/lessons/mistakes.html')
+    writeIfChanged(path.join(DOCS, '.vuepress', 'public', 'courses', c.slug, 'l', 'NaN', 'index.html'),
+      `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${destination}"><title>计算机错题本</title><p><a href="${destination}">打开计算机错题本</a></p></html>\n`)
+  }
+
+  // Course page and learning cards use the same generated catalog.
   const readme = `---
-title: ${c.name}
+title: ${c.subject}课程目录
 createTime: ${readmeCreateTime}
 permalink: /courses/${c.slug}/
+readingTime: false
+comments: false
 ${hasCover ? `banner: ${cover}\n` : ''}---
 
-> [!TIP] 学习入口
-> - **阅读讲义**：共 ${entries.length} 课，可搜索正文，随堂测可展开核对。
-> - [**开始互动学习**](${withBase(c.entry)})：作答、闪卡与进度记录，随时从页顶返回。
-> - [${c.subject}学习计划与打卡](/prep/${c.prepSlug}/) · [备考中心](/prep/)
-
-| 课次 | 阅读讲义 | 互动练习 |
-| ---- | -------- | -------- |
-${rows}
+<PrepCourseCatalog slug="${c.slug}" />
 `
   changed += writeIfChanged(readmeFile, `${readme}\n`) ? 1 : 0
-  return { lessons: entries.length, changed, warnings, warnTypes }
+  const updatedAt = fmtMtime(new Date(Math.max(...entries.map((e) => fs.statSync(path.join(lessonsDir, e.file)).mtimeMs)))).slice(0, 10)
+  const catalog = {
+    subject: c.subject, count: entries.length, interactive: c.entry, prep: c.prepSlug, updatedAt,
+    tools: (c.tools ?? []).map((tool) => ({ title: tool.title, href: `/lessons/${c.slug}/lessons/${tool.file}` })),
+    lessons: catalogLessons,
+  }
+  return { lessons: entries.length, changed, warnings, warnTypes, catalog }
 }
 
 /* ---------------- 写入（计划页） ---------------- */
@@ -517,14 +526,35 @@ const main = () => {
     console.warn(`[sync-prep] 课程站源不存在，跳过镜像与转换（生成物以仓库为准）：${ZSB_ROOT}`)
     return
   }
-  for (const c of ZSB_COURSES) {
+  // Validate every course before the first mirror is replaced.
+  const prepared = ZSB_COURSES.map((c) => {
+    const lessonsDir = path.join(c.src, c.lessonsDir)
+    const entries = collectPrepLessons(fs.readdirSync(lessonsDir), c)
+    const lessonUrls = new Map(entries.map((e) => [e.name, `/courses/${c.slug}/l/${e.id}/`]))
+    for (const entry of entries) {
+      entry.warnings = []
+      try {
+        entry.conversion = lessonHtmlToMarkdown(fs.readFileSync(path.join(lessonsDir, entry.file), 'utf8'), {
+          slug: c.slug, lessonUrls, onWarn: (warning) => entry.warnings.push(warning),
+        })
+      } catch (error) {
+        throw new Error(`${c.subject}/${entry.file}：${error.message}`)
+      }
+    }
+    return { c, entries }
+  })
+  const catalog = {}
+  for (const { c, entries } of prepared) {
     const files = syncZsbMirror(c)
-    const { lessons, changed, warnings, warnTypes } = syncZsbCourse(c)
+    const { lessons, changed, warnings, warnTypes, catalog: courseCatalog } = syncZsbCourse(c, entries)
+    catalog[c.slug] = courseCatalog
     const types = [...warnTypes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4)
       .map(([t, n]) => `${t}×${n}`).join('、')
     console.log(`[sync-prep] ${c.name}：镜像 ${files} 文件 · 全文 ${lessons} 课（更新 ${changed}，告警 ${warnings.length}${types ? `：${types}` : ''}）`)
     for (const w of warnings.slice(0, 3)) console.warn(`  ⚠ ${w}`)
   }
+  writeIfChanged(path.join(DOCS, '.vuepress', 'prep-catalog.mjs'),
+    `// Generated by pnpm sync:prep. Edit the original courses, then sync.\nexport const prepCatalog = ${JSON.stringify(catalog, null, 2)}\n`)
   console.log('[sync-prep] 完成')
 }
 

@@ -1,6 +1,6 @@
-# L1U.J 开发者作品集
+# L1U.J 学习博客与开发者作品集
 
-商业作品集与学习博客（[liuj66794-sys.github.io/blog](https://liuj66794-sys.github.io/blog/)）：首页先展示可承接的开发服务、完整项目案例和合作流程，同时保留课程、博客与知识库。
+学习博客与开发者作品集（[liuj66794-sys.github.io/blog](https://liuj66794-sys.github.io/blog/)）：首页提供课程、四科备考、知识库和学习手记入口，开发服务与项目案例保留独立页面。
 
 - **框架**：VuePress 2 + [vuepress-theme-plume](https://theme-plume.vuejs.press/)
 - **部署**：GitHub Actions → GitHub Pages（推送 `main` 自动发布）
@@ -21,7 +21,7 @@ docs/
 ├── README.md              # 首页
 ├── hire/                  # Hire Me / 找我开发
 ├── blog/                  # 博客（post 集合，学习记录）
-├── courses/               # 课程目录页（doc 集合 × 5 门课）
+├── courses/               # 专题课程与四科备考讲义（doc 集合）
 ├── prep/                  # 备考区（doc 集合：计划总览 + 四科周打卡，sync-prep 生成）
 ├── knowledge/             # 知识库（doc 集合：总纲/术语/ADR）
 └── projects/              # 精选案例 + 自动生成的公开仓库目录
@@ -39,7 +39,7 @@ scripts/
 ```bash
 pnpm install          # 安装依赖
 pnpm sync             # 同步学习仓库（讲义/学习记录/知识库/课程目录）
-pnpm sync:prep        # 同步备考区（知识库 29周冲刺计划 → docs/prep）
+pnpm sync:prep        # 同步四科互动课、全文讲义、课程目录与 29 周计划
 pnpm fetch-projects   # 刷新 GitHub 项目墙
 pnpm docs:dev         # 本地开发（http://localhost:8080）
 pnpm docs:build       # 构建
@@ -58,7 +58,11 @@ pnpm verify           # 一键门禁：typecheck + test + build + 死链校验
 2. `pnpm sync` → 检查 `git status` 确认变更
 3. 提交并推送到 `main`，GitHub Actions 自动构建发布
 
-备考区（`/prep/`）的内容源是知识库《29周冲刺计划》md：改计划 → `pnpm sync:prep` → 随下次提交发布；周打卡勾选存在浏览器 localStorage，不回写知识库。
+备考区的课程源位于知识库 `专升本/{高数,英语,政治/课程,计算机}`，周计划来自《29周冲刺计划》。更新原始课程后执行 `pnpm sync:prep`，同步互动 HTML、公开配套资源、可搜索的阅读讲义以及 `prep-catalog.mjs`。首页课数、备考卡片与四科目录都读取这一目录数据；错题本等工具单独列出，不计为课次。相关术语见 [CONTEXT.md](./CONTEXT.md)。
+
+同步会先校验全部课号和测验提取结果，遇到重复课号、未知功能页或漏题时中止。英语同一页的多组测验与共享选项都会进入讲义，合并表格按原列关系展开。网站的导航、字体处理和高数逐题续学增强由博客仓库维护；课程内容在知识库编辑。周打卡和课程记录保存在当前浏览器，不回写知识库。
+
+四科更新的发布检查：`pnpm sync:prep` → `pnpm test` → `pnpm typecheck` → `pnpm docs:build` → `node scripts/check-links.mjs`。检查目录筛选、移动端、答题和返回续学后，提交并推送 `main`，等待 Pages 工作流成功。CI 使用已提交生成物，不依赖本机知识库。
 
 讲义为独立 HTML（含随堂测交互），过渡期原样托管在 `/lessons/<课程>/`；后续逐步转为 Markdown 纳入主题体系（见 方案.md §4.1 方案 C）。
 

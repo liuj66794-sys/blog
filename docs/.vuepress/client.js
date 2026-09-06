@@ -9,6 +9,7 @@ import LearningHome from './components/LearningHome.vue'
 import CourseHub from './components/CourseHub.vue'
 import KnowledgeHub from './components/KnowledgeHub.vue'
 import PrepDashboard from './components/PrepDashboard.vue'
+import PrepCourseCatalog from './components/PrepCourseCatalog.vue'
 import './styles/palette.css'
 import './styles/index.css'
 import './styles/commercial.css'
@@ -151,6 +152,7 @@ export default defineClientConfig({
     app.component('CourseHub', CourseHub)
     app.component('KnowledgeHub', KnowledgeHub)
     app.component('PrepDashboard', PrepDashboard)
+    app.component('PrepCourseCatalog', PrepCourseCatalog)
 
     if (__VUEPRESS_SSR__) return
     document.addEventListener('click', trackHomepageHero)

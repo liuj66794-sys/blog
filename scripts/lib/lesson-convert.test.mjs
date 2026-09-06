@@ -138,6 +138,79 @@ test('表格竖线转义：单元格内 | 不破坏表格', () => {
   assert.ok(conv.body.includes('| a\\|b |'), `竖线未转义：${conv.body}`)
 })
 
+test('合并单元格展开后保留名词分类、例词与含义的列对应关系', () => {
+  const html = `<body><h1>名词</h1><table>
+    <tr><th>大类</th><th>子类</th><th>例词</th></tr>
+    <tr><td colspan="2">专有名词</td><td>Beijing</td></tr>
+    <tr><td rowspan="2">可数名词</td><td>个体名词</td><td>book</td></tr>
+    <tr><td>集体名词</td><td>family</td></tr>
+    </table></body>`
+  const { body } = convert(html)
+  assert.ok(body.includes('| 专有名词 | 专有名词 | Beijing |'))
+  assert.ok(body.includes('| 可数名词 | 个体名词 | book |'))
+  assert.ok(body.includes('| 可数名词 | 集体名词 | family |'))
+})
+
+test('同页多组 Quiz.render 全部进入各自段落，包含新增 P22 练习', () => {
+  const html = `<body><h1>句法</h1><h2>基础题</h2><div id="quiz"></div>
+    <h2>P22 练习</h2><div class="exercise" id="quiz-p22"></div><script>
+    Quiz.render('#quiz', [{ q: '基础问题', opts: ['主语', '宾语'], a: 0, why: '基础解析' }]);
+    Quiz.render('#quiz-p22', [{ q: '补充问题', opts: ['定语', '同位语'], a: 1, why: '补充解析' }]);
+    </script></body>`
+  const { body } = convertAs('zsb-english', html)
+  assert.equal((body.match(/::: details 点开核对答案/g) ?? []).length, 2)
+  assert.ok(body.indexOf('基础问题') < body.indexOf('## P22 练习'))
+  assert.ok(body.indexOf('补充问题') > body.indexOf('## P22 练习'))
+  assert.ok(body.includes('**答案：B（同位语）**'))
+  assert.ok(body.includes('补充解析'))
+})
+
+test('缺失测验容器会报错，避免悄悄发布缺题讲义', () => {
+  assert.throws(() => convert(`<body><script>Quiz.render('#lost', [
+    { q: '问题', opts: ['甲', '乙'], a: 0, why: '解析' }
+    ]);</script></body>`), /缺少测验容器/)
+})
+
+test('五选五和句子匹配的多组共享选项按本组引用提取，不执行源脚本', () => {
+  const { body } = convert(`<body><h1>匹配</h1><div id="quiz-p1"></div><div id="quiz-p2"></div><script>
+    var shared = ['A. 第一句', 'B. 第二句'];
+    Quiz.render('#quiz-p1', [{ q: '第一组', opts: shared, a: 1, why: '第一组解析' }]);
+    const other = ['A. 第三句', 'B. 第四句'];
+    Quiz.render('#quiz-p2', [{ q: '第二组', opts: other, a: 0, why: '第二组解析' }]);
+    throw new Error('不应执行脚本');
+    </script></body>`)
+  assert.equal((body.match(/::: details 点开核对答案/g) ?? []).length, 2)
+  assert.ok(body.includes('**答案：B（第二句）**'))
+  assert.ok(body.includes('**答案：A（第三句）**'))
+})
+
+test('政治课件互链使用已登记的讲义路径，并保留锚点', () => {
+  const { body } = lessonHtmlToMarkdown('<body><h1>标题</h1><p><a href="../lessons/mzt01.html#review">复习上一章</a> · <a href="practice.html">刷题场</a></p></body>', {
+    slug: 'zsb-politics', lessonNames: new Set(['mzt01']), lessonUrls: new Map([['mzt01', '/courses/zsb-politics/l/mzt01/']]),
+  })
+  assert.ok(body.includes('[复习上一章](/courses/zsb-politics/l/mzt01/#review)'))
+  assert.ok(body.includes(`[刷题场](${withBase('/lessons/zsb-politics/lessons/practice.html')})`))
+})
+
+test('写作落款的多行选项保留姓名、逗号和换行，四个选项可区分', () => {
+  const { body } = convert(`<body><h1>写作</h1><div class="quiz" data-answer="2">
+    <p class="q">哪一组落款正确？</p><ul>
+    <li>A. Yours sincerely<br>Li Ming,</li><li>B. Yours sincerely,<br>Li Ming,</li>
+    <li>C. Yours sincerely,<br>Li Ming</li><li>D. Yours sincerely<br>Li Ming</li>
+    </ul><div class="quiz-exp">姓名后没有逗号。</div></div></body>`)
+  assert.ok(body.includes('- A. Yours sincerely<br>Li Ming,\n'))
+  assert.ok(body.includes('- B. Yours sincerely,<br>Li Ming,\n'))
+  assert.ok(body.includes('- C. Yours sincerely,<br>Li Ming\n'))
+  assert.ok(body.includes('- D. Yours sincerely<br>Li Ming\n'))
+  assert.ok(body.includes('**答案：C（Yours sincerely,<br>Li Ming）**'))
+})
+
+test('私人笔记链接保留来源文字，公开讲义不触发本机应用', () => {
+  const { body } = convert('<body><h1>标题</h1><p><a href="obsidian://open?vault=notes">原文笔记</a></p></body>')
+  assert.ok(body.includes('原文笔记'))
+  assert.ok(!body.includes('obsidian:'))
+})
+
 /* ---------------- 其余四门课模板族 ---------------- */
 
 const FAMILY_DIR = (slug) => path.resolve(__dirname, '../../docs/.vuepress/public/lessons', slug, 'lessons')

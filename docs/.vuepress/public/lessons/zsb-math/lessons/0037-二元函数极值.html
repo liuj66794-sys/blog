@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../assets/course.css">
 <script defer src="../assets/math.js"></script>
 <script defer src="../assets/quiz.js"></script>
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body data-lesson-id="0037">
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-math/" target="_self">高数课程目录</a><a href="/blog/prep/gaoshu/" target="_self">高数学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -146,16 +147,16 @@ body>.topbar{top:var(--blog-nav-height)}
   <span class="quiz-no">随堂测 4</span>
   <p class="quiz-q">下列说法正确的是</p>
   <div class="quiz-opts">
-    <button data-k="A">驻点必是极值点</button>
-    <button data-k="B">极值点必是驻点</button>
-    <button data-k="C">$\Delta=0$ 时必为鞍点</button>
+    <button data-k="A">任何驻点都必是极值点</button>
+    <button data-k="B">极值点必是驻点，无一例外</button>
+    <button data-k="C">$\Delta=0$ 时驻点必为鞍点</button>
     <button data-k="D">偏导存在的极值点必是驻点，但驻点未必是极值点</button>
   </div>
   <div class="quiz-verdict"></div>
   <div class="quiz-exp">与一元版（0024 课费马引理）完全平行：必要条件单向成立。A 反例 $z=xy$ 原点；B 忽略不可导点；C 是 $\Delta&lt;0$ 的结论。$\Delta=0$ 的真正含义是"判别法失效"。</div>
 </div>
 
-<div class="quiz" data-answer="C">
+<div class="quiz" data-answer="A">
   <span class="quiz-no">随堂测 5</span>
   <p class="quiz-q">求 $f(x,y)=x^{3}+y^{3}-3xy$ 的极值时，驻点是</p>
   <div class="quiz-opts">
@@ -165,7 +166,7 @@ body>.topbar{top:var(--blog-nav-height)}
     <button data-k="D">$(-1,-1)$ 与 $(1,1)$</button>
   </div>
   <div class="quiz-verdict"></div>
-  <div class="quiz-exp">$f_x=3x^{2}-3y=0$、$f_y=3y^{2}-3x=0$ ⇒ $y=x^{2}$、$x=y^{2}$ ⇒ $x=x^{4}$ ⇒ $x=0$ 或 $1$：驻点 $(0,0)$ 与 $(1,1)$。判别：$(0,0)$ 处 $A=B=C=0$，$\Delta=0$ 失效（实为鞍点）；$(1,1)$ 处 $A=6,B=-3,C=6$，$\Delta=27&gt;0$，$A&gt;0$ ⇒ 极小值 $-1$。</div>
+  <div class="quiz-exp">$f_x=3x^{2}-3y=0$、$f_y=3y^{2}-3x=0$ ⇒ $y=x^{2}$、$x=y^{2}$ ⇒ $x=x^{4}$ ⇒ $x=0$ 或 $1$：驻点 $(0,0)$ 与 $(1,1)$，选 A。判别：$(0,0)$ 处 $A=0$，$B=-3$，$C=0$，$\Delta=0-9=-9&lt;0$ ⇒ 鞍点；$(1,1)$ 处 $A=6,B=-3,C=6$，$\Delta=27&gt;0$，$A&gt;0$ ⇒ 极小值 $-1$。</div>
 </div>
 
 <div class="warn">

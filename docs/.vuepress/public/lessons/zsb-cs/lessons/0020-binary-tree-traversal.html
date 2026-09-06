@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 20 课 · 二叉树的遍历与还原</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -161,25 +162,25 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <h2>七、测验（点击选项作答）</h2>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">1. 中序遍历的口诀是</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">根左右</li>
-    <li data-opt="b">左根右</li>
-    <li data-opt="c">左右根</li>
-    <li data-opt="d">从上到下从左至右</li>
+    <li data-opt="b">左右根</li>
+    <li data-opt="c">从上到下从左至右</li>
+    <li data-opt="d">左根右</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">中序左根右；根左右是先序，左右根是后序，从上到下从左至右是层次遍历。四个口诀要能对应无误。</p>
 </div>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">2. 层次遍历二叉树需要借助的辅助结构是</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">栈</li>
-    <li data-opt="b">队列</li>
-    <li data-opt="c">散列表</li>
-    <li data-opt="d">二维数组</li>
+    <li data-opt="b">散列表</li>
+    <li data-opt="c">二维数组</li>
+    <li data-opt="d">队列</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">层次遍历借助<strong>队列</strong>：根入队→出队访问→左右孩子依次入队→循环至队空，先进先出保证逐层次序。</p>
@@ -225,7 +226,7 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="quiz-q">6. 只给先序和后序两个遍历序列，能否唯一还原一棵二叉树？</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">能，先序定根后序定尾就够了</li>
-    <li data-opt="b">能，两个序列本身已含全部信息</li>
+    <li data-opt="b">不能，但加上层次遍历序列也无法还原</li>
     <li data-opt="c">不能，必须有中序才能分左右子树</li>
     <li data-opt="d">不能，必须有层次遍历序列</li>
   </ol>

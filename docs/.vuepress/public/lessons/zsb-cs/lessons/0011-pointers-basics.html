@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 11 课 · 指针基础与一维数组</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -100,6 +101,7 @@ int *p = a;
 for (int i = 0; i &lt; 5; i++)
     printf("%d ", *(p + i));   /* 等价于 p[i]、a[i] */</code></pre>
 <p>也可以用 <code>p++</code> 逐个移动指针，但注意：<strong>数组名 a 是地址常量</strong>，<code>a++</code> 非法；指针变量 p 才可以自增。</p>
+<p>指针挪动后「根据地」随之变化：<code>p</code> 后移（如 <code>++p</code>）后，<code>p[0]</code> 就是原来的 <code>a[1]</code>——下标总是<strong>相对当前位置</strong>计算的。</p>
 
 <h2>三、三种 swap 辨析</h2>
 <table>
@@ -122,6 +124,11 @@ for (int i = 0; i &lt; 5; i++)
   <tr><td><code>(*p)++</code></td><td>先取 *p 参与运算，再把该值自增 1</td><td>当前元素值加 1，指针不动</td></tr>
   <tr><td><code>++(*p)</code></td><td>先把 *p 自增 1，再使用</td><td>当前元素值加 1，指针不动</td></tr>
 </table>
+
+<div class="callout warn">
+  <p class="callout-title">课件范围提醒</p>
+  <p>指针章部分课件（指针【三】【五】）缺失，本课已覆盖指针基础与一维数组的高频考点；更细的内容（如二维数组与指针、函数指针等）课件未讲，按谭浩强《C程序设计》教材补齐，避免考纲缺口。</p>
+</div>
 
 <h2>五、先回忆，再自测</h2>
 <details class="recall">
@@ -204,7 +211,7 @@ for (int i = 0; i &lt; 5; i++)
   <ol class="quiz-opts" type="A">
     <li data-opt="a">数组名传递的是整个数组的副本</li>
     <li data-opt="b">形参数组名完全等价于同长度数组</li>
-    <li data-opt="c">被调函数中修改 arr[i] 会影响 main 的 a[i]</li>
+    <li data-opt="c">在函数中改 arr[i] 即改 a[i]</li>
     <li data-opt="d">实参只能写数组名不能写指针</li>
   </ol>
   <p class="quiz-feedback"></p>
@@ -213,7 +220,7 @@ for (int i = 0; i &lt; 5; i++)
 
 <div class="task">
   <p class="task-title">课后任务（约 20 分钟）</p>
-  <p>① 打开 C语言/08-指针 自测问题，遮住答案完成随堂 9 题中的第 1–5 题，错题标 ⭐️。② 回到笔记 易错点与对比，逐条遮住右栏默写正确认识，卡壳的记入错题本。③ 用指针重写一遍传址版 swap，并分别运行传值、交换形参指向、交换值三个版本，观察输出差异。</p>
+  <p>① 打开 C语言/08-指针 自测问题，遮住答案完成随堂 9 题中的第 1–5 题，错题标 ⭐️。② 回到笔记 易错点与对比，逐条遮住右栏默写正确认识，卡壳的记入错题本。③ 用指针重写一遍传址版 swap，再对传值、交换形参指向、交换值三个版本手写逐行执行推演，并默写各自的输出。</p>
 </div>
 
 <h2>参考资料</h2>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 8 课 · 数组与字符串</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -61,13 +62,13 @@ body>.topbar{top:var(--blog-nav-height)}
 </div>
 
 <div class="callout warn">
-  <p class="callout-title">⚠️ 勘误</p>
+  <p class="callout-title">练习缺口提示</p>
   <p>数组章没有配套章节练习 PDF，课后任务以笔记末尾自测题 Q1–Q10 为准。</p>
 </div>
 
 <h2>一、一维数组：定义、初始化与数组名</h2>
 
-<p>定义格式：<code>类型 数组名[常量表达式];</code>，例如 <code>int a[8];</code>。元素为 <code>a[0] ~ a[7]</code>，<strong>下标从 0 开始</strong>。</p>
+<p>定义格式：<code>类型 数组名[常量表达式];</code>，例如 <code>int a[8];</code>。元素为 <code>a[0] ~ a[7]</code>，<strong>下标从 0 开始</strong>；且数组一旦定义，<strong>大小不可改变</strong>。</p>
 
 <table>
   <tr><th>要点</th><th>正确</th><th>错误</th></tr>
@@ -166,7 +167,7 @@ body>.topbar{top:var(--blog-nav-height)}
   <div class="recall-a">strlen 测长度不含 '\0'，sizeof 求占用字节数含 '\0'。数组名是地址常量，用关系运算符比较字符串实际上是在比较两个地址，不是比较字符内容，必须用 strcmp。</div>
 </details>
 
-<h2>四、测验（点击选项作答）</h2>
+<h2>七、测验（点击选项作答）</h2>
 
 <div class="quiz" data-answer="c">
   <p class="quiz-q">1. 下列数组定义或初始化中，合法的是</p>

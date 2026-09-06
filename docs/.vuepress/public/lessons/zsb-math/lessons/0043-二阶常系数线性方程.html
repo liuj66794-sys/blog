@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../assets/course.css">
 <script defer src="../assets/math.js"></script>
 <script defer src="../assets/quiz.js"></script>
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body data-lesson-id="0043">
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-math/" target="_self">高数课程目录</a><a href="/blog/prep/gaoshu/" target="_self">高数学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -71,12 +72,12 @@ body>.topbar{top:var(--blog-nav-height)}
 </table>
 
 <div class="example">
-  <p><span class="ex-tag">例 1（缺 $x$ 型）</span>解 $y''=(y')^{2}+1$。（练习 12(6)）</p>
+  <p><span class="ex-tag">例 1（缺 $y$ 型；本题恰好也缺 $x$）</span>解 $y''=(y')^{2}+1$。（练习 12(6)）</p>
   <details><summary>先自己降阶，再展开</summary>
     <p>令 $p=y'$，$y''=p\dfrac{dp}{dy}$：$p\dfrac{dp}{dy}=p^{2}+1$，分离 $\dfrac{p\,dp}{1+p^{2}}=dy$。</p>
     <p>积分：$\dfrac12\ln(1+p^{2})=y+C$，取 $p=\tan(x+C_1)$（对应 $p' = p^2+1$ 沿 $x$ 解的另一支——两种降阶路径同果）：</p>
     <p>通解 $$y=-\ln\left|\cos(x+C_1)\right|+C_2$$</p>
-    <p>验算：$y'=\tan(x+C_1)$，$y''=\sec^{2}(x+C_1)=1+\tan^{2}=1+(y')^{2}$ ✓。<strong>缺 $x$ 型的 $y''=p\frac{dp}{dy}$ 不是 $p'$</strong>——链式法则的代价。</p>
+    <p>验算：$y'=\tan(x+C_1)$，$y''=\sec^{2}(x+C_1)=1+\tan^{2}=1+(y')^{2}$ ✓。<strong>缺 $y$ 型的 $y''=p\frac{dp}{dy}$ 不是 $p'$</strong>——链式法则的代价（本题也缺 $x$，走 $p'=p^{2}+1$ 的另一条路同样能到，见笔记详解）。</p>
   </details>
 </div>
 

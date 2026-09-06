@@ -52,8 +52,16 @@ const escapeAngle = (s) => s.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 function rewriteUrl(href, ctx) {
   const url = decodeEntities(href.trim())
   if (/^(https?:|mailto:|#|\/)/i.test(url)) return url
-  const lesson = url.match(/^\.?\/?(\d{4})-[^/?#]+\.html/)
-  if (lesson) return `/courses/${ctx.slug}/l/${Number(lesson[1])}/`
+  const sibling = url.match(/^(?:\.\/|\.\.\/lessons\/)?([^/?#]+)\.html([?#].*)?$/)
+  if (sibling) {
+    const [, name, suffix = ''] = sibling
+    const mapped = ctx.lessonUrls?.get(name)
+    if (mapped) return mapped + suffix
+    const numeric = name.match(/^(\d{4})-/)
+    if (numeric && !ctx.lessonUrls) return `/courses/${ctx.slug}/l/${Number(numeric[1])}/${suffix}`
+    if (ctx.lessonNames?.has(name)) return `/courses/${ctx.slug}/l/${name}/${suffix}`
+    return withBase(`/lessons/${ctx.slug}/lessons/${name}.html${suffix}`)
+  }
   const up = url.match(/^\.\.\/(.+)$/)
   if (up) return withBase(`/lessons/${ctx.slug}/${up[1]}`)
   // 同目录课件互链（专升本四科）：非纯数字文件名（mzt01.html）且属于本课
@@ -82,6 +90,7 @@ function inline(html, ctx) {
   // 纯静态全文版用不上，整元素丢弃
   s = s.replace(/<button\b[^>]*>[\s\S]*?<\/button>/gi, '')
   s = s.replace(/<span class="(?:cite|lesson-no|crumb)"[^>]*>[\s\S]*?<\/span>/gi, '')
+  s = s.replace(/<a\b[^>]*href=(["'])(?:obsidian:|file:|[a-z]:[\\/]).*?\1[^>]*>([\s\S]*?)<\/a>/gi, (_, quote, text) => text)
   // 指向未镜像源层（笔记 .md / 原始 PDF，可带 #锚点）的链接：保留文本去掉跳转（点了就是 404）
   s = s.replace(/<a\b[^>]*href="[^"]*\.(?:md|pdf)(?:#[^"]*)?"[^>]*>([\s\S]*?)<\/a>/gi, (_, t) => t)
   // 链接先行：链接内可能含加粗/数字 span，递归处理标签部分
@@ -280,13 +289,32 @@ function listToMarkdown(html, ctx, ordered) {
 }
 
 function tableToMarkdown(html, ctx) {
-  const rows = [...html.matchAll(/<tr(?=[\s>])[^>]*>([\s\S]*?)<\/tr>/gi)]
-    .map((r) => [...r[1].matchAll(/<t[hd](?=[\s>])[^>]*>([\s\S]*?)<\/t[hd]>/gi)]
-      .map((c) => cellText(c[1], ctx)))
+  // Expand merged cells into a rectangular table, retaining each cell's column meaning.
+  const rows = []
+  const sourceRows = [...html.matchAll(/<tr(?=[\s>])[^>]*>([\s\S]*?)<\/tr>/gi)]
+  sourceRows.forEach((sourceRow, rowIndex) => {
+    const row = rows[rowIndex] ?? (rows[rowIndex] = [])
+    let column = 0
+    for (const cell of sourceRow[1].matchAll(/<t[hd]((?=[\s>])[^>]*)>([\s\S]*?)<\/t[hd]>/gi)) {
+      while (row[column] !== undefined) column++
+      const span = (name, limit) => {
+        const value = Number(cell[1].match(new RegExp(`\\b${name}\\s*=\\s*["']?(\\d+)`, 'i'))?.[1] ?? 1)
+        return Math.min(limit, Math.max(1, value))
+      }
+      const height = span('rowspan', sourceRows.length - rowIndex)
+      const width = span('colspan', 100)
+      const text = cellText(cell[2], ctx)
+      for (let r = rowIndex; r < rowIndex + height; r++) {
+        rows[r] ??= []
+        for (let c = column; c < column + width; c++) rows[r][c] = text
+      }
+      column += width
+    }
+  })
   if (!rows.length) return ''
   const width = Math.max(...rows.map((r) => r.length))
   const norm = rows.map((r) => {
-    const cells = [...r]
+    const cells = Array.from(r, (cell) => cell ?? ' ')
     while (cells.length < width) cells.push(' ')
     return cells
   })
@@ -383,7 +411,7 @@ function quizToMarkdown(openTag, inner, ctx) {
       const raw = liRaw[i]?.[0] ?? ''
       const correct = /,\s*true\b/.test(raw) // policy：onclick 的 true 标记
       let key = null
-      const prefixed = text.match(/^([A-Za-z])[.、)]\s*(.*)/)
+      const prefixed = text.match(/^([A-Za-z])[.、)]\s*([\s\S]*)/)
       if (prefixed) { key = prefixed[1].toUpperCase(); text = prefixed[2] } // policy 自带前缀
       opts.push({ key, text, correct })
     })
@@ -426,8 +454,8 @@ function quizToMarkdown(openTag, inner, ctx) {
   const hasAnswer = answerIdx >= 0 && answerIdx < opts.length
   const parts = []
   parts.push(`**${qText.replace(/\*/g, '').trim()}**`)
-  parts.push(opts.map((o, i) => `- ${letterOf(i)}. ${o.text}`).join('\n'))
-  const ansOpt = hasAnswer ? `（${escapeAngle(opts[answerIdx].text.replace(/[*`]/g, ''))}）` : ''
+  parts.push(opts.map((o, i) => `- ${letterOf(i)}. ${o.text.replace(/\n/g, '<br>')}`).join('\n'))
+  const ansOpt = hasAnswer ? `（${escapeAngle(opts[answerIdx].text.replace(/[*`]/g, '')).replace(/\n/g, '<br>')}）` : ''
   parts.push(container('details', '点开核对答案',
     hasAnswer
       ? `**答案：${letterOf(answerIdx)}${ansOpt}**${explain ? ` —— ${explain}` : ''}`
@@ -724,23 +752,41 @@ function jsUnescape(s) {
  */
 function inlineScriptQuizzes(html) {
   if (!html.includes('Quiz.render(')) return html
-  const arr = html.match(/Quiz\.render\(\s*'[^']*'\s*,\s*(\[[\s\S]*?\])\s*\)/)
-  if (!arr) return html
-  const items = []
-  const itemRe = /\{\s*q:\s*'((?:[^'\\]|\\.)*)'\s*,\s*opts:\s*\[([^\]]*)\]\s*,\s*a:\s*(\d+)\s*,\s*why:\s*'((?:[^'\\]|\\.)*)'\s*\}/g
-  for (const m of arr[1].matchAll(itemRe)) {
-    items.push({
-      q: jsUnescape(m[1]),
-      opts: [...m[2].matchAll(/'((?:[^'\\]|\\.)*)'/g)].map((o) => jsUnescape(o[1])),
-      a: Number(m[3]),
-      why: jsUnescape(m[4]),
-    })
+  const source = html
+  const calls = [...html.matchAll(/Quiz\.render\(\s*(['"])#([\w-]+)\1\s*,\s*(\[[\s\S]*?\])\s*\)/g)]
+  if (!calls.length) throw new Error('无法提取 Quiz.render 测验，请检查源课程格式')
+  for (const call of calls) {
+    const items = []
+    const itemRe = /\{\s*q:\s*'((?:[^'\\]|\\.)*)'\s*,\s*opts:\s*(\[[^\]]*\]|[\w$]+)\s*,\s*a:\s*(\d+)\s*,\s*why:\s*'((?:[^'\\]|\\.)*)'\s*\}/g
+    for (const m of call[3].matchAll(itemRe)) {
+      let options = m[2]
+      // Matching passages share one literal option bank across several questions.
+      if (!options.startsWith('[')) {
+        const identifier = options.replace(/\$/g, '\\$')
+        const declaration = new RegExp(`\\b(?:var|let|const)\\s+${identifier}\\s*=\\s*(\\[[\\s\\S]*?\\])\\s*;`, 'g')
+        options = [...source.slice(0, call.index).matchAll(declaration)].at(-1)?.[1]
+        if (!options) throw new Error(`#${call[2]} 无法提取共享选项 ${m[2]}`)
+      }
+      const opts = [...options.matchAll(/'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)"/g)]
+        .map((o) => jsUnescape(o[1] ?? o[2]))
+      if (opts.length < 2 || Number(m[3]) >= opts.length) throw new Error(`#${call[2]} 测验选项或答案索引异常`)
+      items.push({
+        q: jsUnescape(m[1]),
+        opts,
+        a: Number(m[3]),
+        why: jsUnescape(m[4]),
+      })
+    }
+    const expected = (call[3].match(/\{\s*q:/g) ?? []).length
+    if (!expected || items.length !== expected) throw new Error(`#${call[2]} 测验提取不完整：${items.length}/${expected}`)
+    const staticHtml = items
+      .map((it) => `<div class="quiz" data-answer="${it.a}"><p class="q">${it.q}</p><ul>${it.opts.map((o) => `<li>${o}</li>`).join('')}</ul><div class="quiz-exp">${it.why}</div></div>`)
+      .join('\n')
+    const target = new RegExp(`<div\\b[^>]*\\bid=(["'])${call[2]}\\1[^>]*>`, 'i')
+    if (!target.test(html)) throw new Error(`缺少测验容器 #${call[2]}`)
+    html = html.replace(target, (opening) => `${opening}\n${staticHtml}`)
   }
-  if (!items.length) return html
-  const staticHtml = items
-    .map((it) => `<div class="quiz" data-answer="${it.a}"><p class="q">${it.q}</p><ul>${it.opts.map((o) => `<li>${o}</li>`).join('')}</ul><div class="quiz-exp">${it.why}</div></div>`)
-    .join('\n')
-  return html.replace(/(<div id="quiz"[^>]*>)/i, `$1\n${staticHtml}`)
+  return html
 }
 
 /**
@@ -758,6 +804,8 @@ function inlineScriptQuizzes(html) {
 export function lessonHtmlToMarkdown(html, ctx = {}) {
   const c = {
     slug: ctx.slug ?? '',
+    lessonNames: ctx.lessonNames,
+    lessonUrls: ctx.lessonUrls,
     onWarn: ctx.onWarn ?? (() => {}),
     explanations: parseExplanations(html),
   }

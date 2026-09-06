@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 10 课 · 函数进阶：数组传址、static 与递归</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -90,6 +91,7 @@ void f(int a[3][]);   /* 错误：第二维不能省 */</code></pre>
   <tr><td>不赋初值时</td><td><strong>自动为 0 或 '\0'</strong></td><td>不确定的随机值</td></tr>
   <tr><td>作用域</td><td>仍限于本函数内部</td><td>限于本函数内部</td></tr>
 </table>
+<p>另记 register（寄存器变量）：建议存放在 <strong>CPU 寄存器</strong>中（数量有限），不属于静态或动态存储区。</p>
 
 <div class="callout tip">
   <p class="callout-title">记忆口诀</p>
@@ -97,6 +99,7 @@ void f(int a[3][]);   /* 错误：第二维不能省 */</code></pre>
 </div>
 
 <h2>三、全局变量：默认 0，且会被局部同名变量屏蔽</h2>
+<p>先回忆局部变量：作用域从<strong>定义处</strong>开始有效，之前不可用；复合语句像<strong>一堵墙</strong>，其中定义的变量只在 <code>{}</code> 内有效，有同名变量时<strong>就近取用</strong>。命题辨析：「一个函数内的局部变量在该函数任何范围都可以引用」是<strong>错误</strong>说法——定义处之前不能引用。</p>
 <ul>
   <li>全局变量定义在所有函数之外，作用域从定义处到文件结束。</li>
   <li><strong>不初始化时默认值为 0</strong>（局部 auto 变量不初始化才是随机值）。</li>

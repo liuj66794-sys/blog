@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 14 课 · 数据结构绪论与时间复杂度</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -123,8 +124,10 @@ body>.topbar{top:var(--blog-nav-height)}
     for(j=1; j&lt;=n; j++)
         printf("hello");</code></pre>
 <p>内层执行 n 次，外层执行 n 次，共 n² 次输出，时间复杂度为 <strong>O(n²)</strong>。</p>
+<p><strong>注意</strong>：时间复杂度还可能同时与问题规模 n 和<strong>待处理数据的初始状态</strong>有关——如直接插入排序，数据基本有序（最好）时为 O(n)，完全逆序（最坏）时为 O(n²)。</p>
 
 <h2>五、先回忆，再自测</h2>
+<p>正文未展开的一个考点：<strong>ADT（抽象数据类型）</strong>用（数据对象，数据关系，基本操作集）三元组表示（见笔记 10），描述数据的逻辑结构和抽象运算。</p>
 <details class="recall">
   <summary>合上笔记：数据、数据对象、数据元素、数据项的包含关系？最小单位是？</summary>
   <div class="recall-a">包含关系：数据 &gt; 数据对象 &gt; 数据元素 &gt; 数据项。最小单位是数据项；数据元素只是基本单位。</div>
@@ -136,6 +139,10 @@ body>.topbar{top:var(--blog-nav-height)}
 <details class="recall">
   <summary>算法五特性是什么？「可读性」算特性吗？</summary>
   <div class="recall-a">有穷性、确定性、可行性、输入、输出。可读性属于好算法目标，不是算法特性。</div>
+</details>
+<details class="recall">
+  <summary>ADT 三元组是什么？</summary>
+  <div class="recall-a">ADT（抽象数据类型）=（数据对象，数据关系，基本操作集）三元组，描述数据的逻辑结构和抽象运算。</div>
 </details>
 
 <h2>六、测验（点击选项作答）</h2>
@@ -203,7 +210,7 @@ body>.topbar{top:var(--blog-nav-height)}
 <div class="quiz" data-answer="b">
   <p class="quiz-q">6. 抽象数据类型 ADT 通常用哪个三元组表示</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">（逻辑结构、存储结构、运算）</li>
+    <li data-opt="a">（逻辑结构、存储结构、基本运算）</li>
     <li data-opt="b">（数据对象、数据关系、基本操作集）</li>
     <li data-opt="c">（数据、数据元素、数据项）</li>
     <li data-opt="d">（输入、输出、处理步骤）</li>

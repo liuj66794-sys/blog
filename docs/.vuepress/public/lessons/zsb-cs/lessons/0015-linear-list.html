@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 15 课 · 线性表</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -85,6 +86,8 @@ body>.topbar{top:var(--blog-nav-height)}
 <p>链表用一组<strong>任意的存储单元</strong>存放元素，靠指针建立逻辑关系。结点 = 数据域 + 指针域。它<strong>不能随机存取</strong>，查找必须从表头遍历；但插入删除只需改指针。</p>
 
 <h3>3.1 判空条件</h3>
+<p><strong>循环链表</strong>：尾结点 next 指回头结点（不指 NULL）形成环，因此从表中任意结点出发都能扫描整个表。</p>
+<p>带头结点的循环单链表，判空条件为 <code>L->next == L</code>。</p>
 <table>
   <tr><th>链表类型</th><th>判空条件</th></tr>
   <tr><td>不带头结点</td><td><code>L == NULL</code></td></tr>
@@ -176,7 +179,7 @@ p->next = s;            /* ④ p 指向 s */</code></pre>
 <div class="quiz" data-answer="b">
   <p class="quiz-q">4. 双链表中，将结点 s 插入到 p 之后，四句的正确顺序是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">s->next=p->next; s->prev=p; p->next->prev=s; p->next=s;</li>
+    <li data-opt="a">s->next=p->next; s->prev=p; p->next=s; p->next->prev=s;</li>
     <li data-opt="b">s->next=p->next; p->next->prev=s; s->prev=p; p->next=s;</li>
     <li data-opt="c">p->next=s; s->prev=p; s->next=p->next; p->next->prev=s;</li>
     <li data-opt="d">s->prev=p; p->next=s; s->next=p->next; p->next->prev=s;</li>

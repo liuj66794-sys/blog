@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 23 课 · 图的基础与遍历</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -166,13 +167,13 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <h2>测验（点击选项作答）</h2>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">1. n 个顶点的有向图，所有顶点出度之和为 s，则所有顶点度数之和为</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">s</li>
-    <li data-opt="b">2s</li>
-    <li data-opt="c">2n</li>
-    <li data-opt="d">2e</li>
+    <li data-opt="b">2n</li>
+    <li data-opt="c">2e</li>
+    <li data-opt="d">2s</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">度数和 = 出度和 + 入度和 = s + s = 2s。别和邻接矩阵的 2e 记混：那是有向图之外、无向图矩阵有效元的结论。</p>
@@ -202,13 +203,13 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="quiz-expl">连通图任意两点间都有路径，其极大连通子图就是整个图本身，所以连通分量个数是 1。</p>
 </div>
 
-<div class="quiz" data-answer="c">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">4. 把 n 个顶点连成一个连通图，至少需要多少条边</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">n</li>
     <li data-opt="b">n+1</li>
-    <li data-opt="c">n−1</li>
-    <li data-opt="d">2n</li>
+    <li data-opt="c">2n</li>
+    <li data-opt="d">n−1</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">至少 n−1 条，恰好是生成树的边数。判断小抄：边数 &lt; n−1 一定不连通，&gt; n−1 必有环。</p>
@@ -226,11 +227,11 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="quiz-expl">无向图矩阵对称，每条边对应两个有效元素，共 2e 个；无效元是 n²−2e 个，矩阵总占 n² 个存储单元。</p>
 </div>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="a">
   <p class="quiz-q">6. n 个顶点 e 条边的有向图，其邻接矩阵中有效元素个数为</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">2e</li>
-    <li data-opt="b">e</li>
+    <li data-opt="a">e</li>
+    <li data-opt="b">2e</li>
     <li data-opt="c">n²−e</li>
     <li data-opt="d">n²</li>
   </ol>

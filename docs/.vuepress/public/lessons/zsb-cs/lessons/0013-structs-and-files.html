@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 13 课 · 结构体与文件</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -83,6 +84,7 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="callout-title">scanf 取地址口诀</p>
   <p>数值成员前加 <code>&amp;</code>，字符数组名本身就是地址，<strong>不加 &amp;</strong>：<code>scanf("%d%s%f", &amp;lisi.num, lisi.name, &amp;lisi.score);</code></p>
 </div>
+<p>成员也可以是另一个结构体类型：嵌套成员<strong>一级级往下找</strong>，如 <code>lisi.dahuang.age = 2;</code>。</p>
 
 <h2>二、结构体数组与选择排序</h2>
 <pre><code>struct Student stu[3] = {
@@ -112,6 +114,7 @@ struct Student *p = &amp;lisi;   /* 普通指针不能指向结构体变量 */</
   <tr><td><code>p->num</code></td><td>指向运算符，最简形式</td><td>是</td></tr>
   <tr><td><code>*p.num</code></td><td>等价 <code>*(p.num)</code>，非法</td><td>否</td></tr>
 </table>
+<p>指针也可指向结构体数组：<code>p = stu;</code> 后 <code>*p</code> 即 <code>stu[0]</code>，<code>*(p+1)</code> 与 <code>stu[1]</code> 等价，可 <code>p++</code> 逐个遍历。</p>
 
 <h2>四、文件：fopen / fgetc / fputc</h2>
 <pre><code>FILE *fp;
@@ -122,7 +125,7 @@ if (fp == NULL) { /* 打开失败处理 */ }</code></pre>
   <tr><th>打开方式</th><th>含义</th><th>打开失败时</th></tr>
   <tr><td><code>r</code></td><td>只读，从文件读数据</td><td>返回 <strong>NULL</strong></td></tr>
   <tr><td><code>w</code></td><td>只写，向文件写数据</td><td><strong>新建文件</strong></td></tr>
-  <tr><td><code>a</code></td><td>追加，向文件末尾添加数据</td><td>返回 <strong>NULL</strong></td></tr>
+  <tr><td><code>a</code></td><td>追加，向文件末尾添加数据</td><td>文件不存在则<strong>新建</strong>（不因此失败）</td></tr>
 </table>
 
 <table>
@@ -147,7 +150,7 @@ if (fp == NULL) { /* 打开失败处理 */ }</code></pre>
 </details>
 <details class="recall">
   <summary>选择排序的轮数、p 变量的作用，以及 fopen 的 r/w/a 打开失败时分别怎样？</summary>
-  <div class="recall-a">n 个数据执行 n-1 轮；p 记录未排序区最小值的位置。r 失败返回 NULL；w 失败会新建文件；a 失败返回 NULL。</div>
+  <div class="recall-a">n 个数据执行 n-1 轮；p 记录未排序区最小值的位置。r 方式文件不存在时失败返回 NULL；w、a 方式文件不存在时都会新建文件。</div>
 </details>
 
 <h2>六、测验（点击选项作答）</h2>
@@ -209,7 +212,7 @@ if (fp == NULL) { /* 打开失败处理 */ }</code></pre>
     <li data-opt="d">程序异常终止报错</li>
   </ol>
   <p class="quiz-feedback"></p>
-  <p class="quiz-expl">r 方式只读，文件不存在时返回 NULL；w 方式才会在失败时新建文件，a 方式不存在时也返回 NULL。</p>
+  <p class="quiz-expl">r 方式只读，文件不存在时返回 NULL；w、a 方式文件不存在时都会新建文件并成功打开（w 清空重写、a 保留后追加）。</p>
 </div>
 
 <div class="quiz" data-answer="c">

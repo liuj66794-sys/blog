@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 6 课 · 选择进阶：else 配对、switch 穿透与位运算</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -71,19 +72,17 @@ body>.topbar{top:var(--blog-nav-height)}
   </ul>
 </div>
 
-<p><strong>用花括号改变配对</strong>：把内层的 if-else 用 <code>{ }</code> 包起来，外层 else 就只能与外层的 if 配对。</p>
+<p><strong>用花括号改变配对</strong>：else 总与最近的、未配对的 if 结合，花括号能改变这个「最近」。</p>
 
 <pre><code>if (a &lt; b)
     if (c &lt; d) x = 1;
-    else       x = 6;      /* else 与内层 if(c&lt;d) 配对 */
-else x = 7;                  /* else 与外层 if(a&lt;b) 配对 */
+else x = 2;      /* else 被最近的内层 if(c&lt;d) 抢走，
+                    等价于 if (a &lt; b) { if (c &lt; d) x = 1; else x = 2; } */
 </code></pre>
 
-<p>若把内层改成：</p>
-<pre><code>if (a &lt; b) {
-    if (c &lt; d) x = 1;
-    else       x = 6;
-} else x = 7;                /* else 现在与外层 if(a&lt;b) 配对 */
+<p>若给内层 if 加上花括号：</p>
+<pre><code>if (a &lt; b) { if (c &lt; d) x = 1; }
+else x = 2;      /* 花括号隔开配对，else 归外层 if(a&lt;b) */
 </code></pre>
 
 <div class="callout tip">
@@ -153,23 +152,23 @@ a &gt; b ? a : c &gt; d ? c : d     /* 右结合：a&gt;b?a:(c&gt;d?c:d) */
 <h2>六、测验（点击选项作答）</h2>
 
 <div class="quiz" data-answer="b">
-  <p class="quiz-q">1. 执行下面程序段后，x 的值是（a=1, b=3, c=5, d=4）</p>
-  <pre><code>if(a&lt;b)
-    if(c&lt;d) x=1;
-    else
-        if(a&lt;c)
-            if(b&lt;d) x=2;
-            else x=3;
-        else x=6;
-else x=7;</code></pre>
+  <p class="quiz-q">1. 执行下面程序段后，输出结果是</p>
+  <pre><code>char grade = 'B';
+switch (grade)
+{
+    case 'A': printf("90+");
+    case 'B': printf("80");
+    case 'C': printf("70"); break;
+    case 'D': printf("60");
+}</code></pre>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">1</li>
-    <li data-opt="b">2</li>
-    <li data-opt="c">3</li>
-    <li data-opt="d">6</li>
+    <li data-opt="a">输出 80</li>
+    <li data-opt="b">输出 8070</li>
+    <li data-opt="c">输出 807060</li>
+    <li data-opt="d">输出 70</li>
   </ol>
   <p class="quiz-feedback"></p>
-  <p class="quiz-expl">a&lt;b 为真，进入内层；c&lt;d（5&lt;4）为假，走 else；a&lt;c（1&lt;5）为真，再判断 b&lt;d（3&lt;4）为真，故 x=2。else 始终按「最近未配对 if」配对，与缩进无关。</p>
+  <p class="quiz-expl">匹配 case 'B' 输出 80，其后无 break，穿透到 case 'C' 输出 70 后遇 break 退出；case 'A' 在 B 之前不会被匹配，case 'D' 在 break 之后不执行。</p>
 </div>
 
 <div class="quiz" data-answer="d">
@@ -254,7 +253,7 @@ printf("a=%d, b=%d", a, b);</code></pre>
 
 <div class="task">
   <p class="task-title">课后任务（约 20 分钟）</p>
-  <p>打开 题库/选择结构程序设计-章节练习，完成：选择题 7–13（else 配对与 switch 穿透）、15（关系表达式连比）、题海勘误页 25（优先级排序）与 28（奇偶判断）。错题标 ⭐️，二刷时遮住解析重做。</p>
+  <p>打开 题库/选择结构程序设计-章节练习，完成：选择题 8、11、12、13（else 配对与编译报错）、15（关系表达式连比）、题海勘误页 25（优先级排序）与 28（奇偶判断）。错题标 ⭐️，二刷时遮住解析重做。</p>
   <p>然后回到笔记 自测问题 Q4–Q12，口头回答 else 配对、switch 规则、位运算、条件表达式相关题目，卡壳的记入错题本。</p>
 </div>
 

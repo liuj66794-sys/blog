@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../assets/course.css">
 <script defer src="../assets/math.js"></script>
 <script defer src="../assets/quiz.js"></script>
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body data-lesson-id="0017">
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-math/" target="_self">高数课程目录</a><a href="/blog/prep/gaoshu/" target="_self">高数学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -114,7 +115,7 @@ body>.topbar{top:var(--blog-nav-height)}
   <p><span class="ex-tag">例 2（进阶：一函数两类型）</span>讨论 $f(x)=\dfrac{1}{e^{\frac{x}{x-1}}-1}$ 的间断点。</p>
   <details><summary>先找全无定义点，再展开（夏连续教材 P48）</summary>
     <p><strong>找点</strong>：指数分母 $x-1=0$ 给 $x=1$；外层 $e^0-1=0$ 给 $x=0$。两个都查。</p>
-    <p><strong>$x=1$</strong>：$x\to1^-$ 时 $\frac{x}{x-1}\to-\infty$、$e^{\cdot}\to0$、$f\to\dfrac{1}{0-1}=-1$；$x\to1^+$ 时 $f\to\infty$……都存在？注意左侧 $=-1$、右侧 $\to0^-$ 附近——两侧单侧极限分别为 $-1$ 与 $0$（都存在不相等）⇒ <strong>跳跃</strong>间断点。</p>
+    <p><strong>$x=1$</strong>：$x\to1^-$ 时 $\frac{x}{x-1}\to-\infty$、$e^{\cdot}\to0$、$f=\dfrac{1}{e^{\cdot}-1}\to\dfrac{1}{0-1}=-1$；$x\to1^+$ 时 $\frac{x}{x-1}\to+\infty$、$e^{\cdot}\to+\infty$、$f\to\dfrac{1}{+\infty}=0^{+}$——两侧单侧极限 $-1$ 与 $0$ 都存在但不相等 ⇒ <strong>跳跃</strong>间断点。</p>
     <p><strong>$x=0$</strong>：$\frac{x}{x-1}\to0$，$e^0-1\to0$，$f\to\infty$ ⇒ <strong>无穷</strong>间断点。</p>
     <p>一个函数可以同时有不同类型的间断点——逐点独立判。</p>
   </details>

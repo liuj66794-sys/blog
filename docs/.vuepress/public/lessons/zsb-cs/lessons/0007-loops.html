@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 7 课 · 循环结构</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -139,7 +140,7 @@ int main()
     return 0;
 }
 </code></pre>
-<p>核心记忆点：外层一次，内层一轮；内层循环变量要在外层循环体内部重新初始化或按行控制，否则行与行之间会乱。</p>
+<p>核心记忆点：外层一次，内层一轮；内层循环变量要在外层循环体内部重新初始化或按行控制，否则行与行之间会乱。当前版本内层 j 从 1 到 i，输出的是<strong>下三角</strong>。</p>
 
 <h2>五、先回忆，再自测</h2>
 
@@ -230,6 +231,40 @@ int main()
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">for 的三个表达式全部省略时，表达式 2 默认恒真，等价 <code>while(1)</code>，都是无限循环。其他三个选项条件为假，不会等价。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">7. 执行下面程序段后，输出结果是</p>
+  <pre><code>for (i = 1; i &lt;= 5; i++)
+{
+    if (i == 3) break;
+    printf("%d", i);
+}</code></pre>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">12</li>
+    <li data-opt="b">123</li>
+    <li data-opt="c">12345</li>
+    <li data-opt="d">3</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">i=1、2 时输出 1、2；i=3 时遇 break，直接结束整个循环（不经过表达式 3），后面的 3、4、5 都不再输出。</p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">8. 执行下面程序段后，输出结果是</p>
+  <pre><code>for (i = 1; i &lt;= 5; i++)
+{
+    if (i % 2 == 0) continue;
+    printf("%d", i);
+}</code></pre>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">135</li>
+    <li data-opt="b">12345</li>
+    <li data-opt="c">24</li>
+    <li data-opt="d">13</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">i=2、4 时 i%2==0 成立，continue 跳过本次的 printf，先执行表达式 3（i++）再判 i&lt;=5，循环不终止；只有奇数 1、3、5 被输出。</p>
 </div>
 
 <div class="task">

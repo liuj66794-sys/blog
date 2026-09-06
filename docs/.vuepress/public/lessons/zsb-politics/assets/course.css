@@ -520,3 +520,16 @@ footer.foot a { color: var(--indigo); text-decoration: none; }
 .todaycard li { margin: .3rem 0; font-size: .95rem; }
 .todaycard a { color: var(--indigo); }
 @media (max-width: 640px) { .dashboard { grid-template-columns: 1fr; } }
+
+/* 拓展材料折叠（应试低频内容，2026-09-05 优化追加） */
+details.ext {
+  border: 1px dashed var(--line-strong); border-radius: .8rem; background: transparent;
+  padding: .45rem .9rem; margin: .7rem 0; color: var(--ink-soft); font-size: .93em;
+}
+details.ext summary { cursor: pointer; font-family: var(--sans); font-size: .8rem; letter-spacing: .04em; }
+details.ext[open] { background: color-mix(in srgb, var(--paper) 55%, transparent); }
+details.ext[open] summary { margin-bottom: .45rem; }
+
+/* 知识框架下的主线/总纲段（逻辑主线、时间主线等） */
+.content.mainline { margin-top: .8rem; padding-top: .7rem; border-top: 1px dashed var(--line); }
+.content.mainline p { margin: .3rem 0; }

@@ -26,6 +26,14 @@
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
+  /* 富文本转义：先转 HTML 再把 **加粗** 渲染为 <strong>（笔记速记答案里的强调标记）；
+     不成对的孤立 ** 一并清除，避免字面星号露出 */
+  function escRich(s) {
+    return esc(s).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>").replace(/\*\*/g, "");
+  }
+  /* 各页面内联脚本直接使用全局 esc/escRich（历史约定），这里显式导出 */
+  window.esc = esc;
+  window.escRich = escRich;
   /* 稳定 id：djb2——与生成器 md5 前 10 位等价使用（生成器已内嵌 id 时优先） */
   function hash(s) {
     s = String(s || "");
@@ -147,7 +155,8 @@
         var item = el("div", "q-item");
         var stem = el("div", "stem");
         stem.innerHTML = '<span class="qno">' + (qi + 1) + '</span>' + esc(q.stem) +
-          (multi ? ' <span class="mtag">多选</span>' : "");
+          (multi ? ' <span class="mtag">多选</span>' : "") +
+          (q.doubt ? ' <span class="mtag">存疑?</span>' : "");
         item.appendChild(stem);
 
         var optsBox = el("div", "opts");
@@ -166,7 +175,7 @@
 
           if (!q.answer) {
             judge.className = "q-judge warn";
-            judge.innerHTML = "⚠️ 原卷未提供答案，请对照笔记或课件核对。" + (q.warn ? "<br>" + esc(q.warn) : "");
+            judge.innerHTML = "⚠️ 原卷未提供答案，请对照笔记或课件核对。" + (q.warn ? "<br>" + escRich(q.warn) : "");
             return;
           }
           var ans = q.answer.split("").sort().join("");
@@ -189,9 +198,9 @@
           }
           judge.className = "q-judge " + (right ? "ok" : "no");
           judge.innerHTML = (right ? "✓ 回答正确" : "✗ 正确答案：<b>" + esc(q.answer) + "</b>") +
-            (q.src ? '<span class="qsrc">' + esc(q.src) + "</span>" : "") +
+            (q.src ? '<span class="qsrc">' + escRich(q.src) + "</span>" : "") +
             (q.doubt ? '<span class="qsrc">⚠️ 存疑题（?）——答案待老师讲评，仅供核对。</span>' : "") +
-            (q.exp && !right ? '<details class="qexp"><summary>解析</summary>' + esc(q.exp) + "</details>" : "");
+            (q.exp && !right ? '<details class="qexp"><summary>解析</summary>' + escRich(q.exp) + "</details>" : "");
           if (opts.onJudge) opts.onJudge(q, right);
           updateScore();
         }
@@ -208,7 +217,7 @@
               var buttons = optsBox.querySelectorAll(".opt");
               for (var i = 0; i < buttons.length; i++) buttons[i].disabled = true;
               judge.className = "q-judge warn";
-              judge.innerHTML = "⚠️ 原卷未提供答案，请对照笔记或课件核对。" + (q.warn ? "<br>" + esc(q.warn) : "");
+              judge.innerHTML = "⚠️ 原卷未提供答案，请对照笔记或课件核对。" + (q.warn ? "<br>" + escRich(q.warn) : "");
               return;
             }
             if (multi) {
@@ -323,10 +332,10 @@
 
     function paint() {
       var c = cards[order[pos]];
-      front.innerHTML = '<span class="label">考点 · 回忆</span><div class="q">' + esc(c.term) + "</div>";
+      front.innerHTML = '<span class="label">考点 · 回忆</span><div class="q">' + escRich(c.term) + "</div>";
       back.innerHTML =
-        '<span class="label">答案</span><div class="a">' + esc(c.answer) + "</div>" +
-        (c.src ? '<span class="src">出处：' + esc(c.src) + "</span>" : "");
+        '<span class="label">答案</span><div class="a">' + escRich(c.answer) + "</div>" +
+        (c.src ? '<span class="src">出处：' + escRich(c.src) + "</span>" : "");
       card.classList.remove("flipped");
       posEl.textContent = (pos + 1) + " / " + cards.length;
       if (srsOn) paintBoxInfo(c);
@@ -498,7 +507,8 @@
       }
       var picked = pool.slice(0, Math.min(n, pool.length)).map(function (q) {
         return { id: q.id, stem: "【" + q.course + " " + q.chapter + "】" + q.stem,
-                 options: q.options, answer: q.answer };
+                 options: q.options, answer: q.answer,
+                 doubt: q.doubt, warn: q.warn, src: q.src, exp: q.exp };
       });
       area.innerHTML = "";
       var head = el("p", "hint", "本轮 " + picked.length + " 题，来自不同章节混合抽题。做完自动计分，错题自动进错题本。");
@@ -515,6 +525,8 @@
     srs: srs,
     wrong: wrong,
     hash: hash,
+    esc: esc,
+    escRich: escRich,
     mountQuiz: mountQuiz,
     mountCards: mountCards,
     mountDue: mountDue,

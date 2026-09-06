@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 28 课 · 2025 年真题模拟</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -61,13 +62,13 @@ body>.topbar{top:var(--blog-nav-height)}
 <table>
   <tr><th>题型</th><th>题量 × 分值</th><th>小计</th></tr>
   <tr><td>单项选择题</td><td>20 × 3 分</td><td>60 分</td></tr>
-  <tr><td>判断题</td><td>5 × 4 分</td><td>20 分</td></tr>
+  <tr><td>判断题</td><td>10 × 4 分</td><td>40 分</td></tr>
   <tr><td>填空题</td><td>5 × 4 分</td><td>20 分</td></tr>
-  <tr><td>简答题</td><td>3 题</td><td>题库未标分值，按卷面估计</td></tr>
+  <tr><td>简答题</td><td>4 题</td><td>题库未标分值，按卷面估计</td></tr>
   <tr><td>计算题</td><td>3 题</td><td>题库未标分值，按卷面估计</td></tr>
   <tr><td>应用题</td><td>3 题</td><td>题库未标分值，按卷面估计</td></tr>
 </table>
-<p><small>注：题库分节标题写作「判断 5 题、简答 3 题」，但正文实际收录判断题编号 21–30（共 10 题）、简答题编号 36–39（共 4 题）。模拟时以正文实际题量为准——下面的时间分配表已按偏满题量给出，多出的题量占用不了多少时间。</small></p>
+<p><small>注：题库分节标题写作「判断 5 题、简答 3 题」，但正文实际收录判断题编号 21–30（共 10 题）、简答题编号 36–39（共 4 题）。上表已按正文实际题量与分值给出——判断题 10 × 4 = 40 分，单选、判断、填空三项客观题合计 120 分，模拟与对答案均按此口径执行。</small></p>
 
 <h2>三、120 分钟时间分配</h2>
 <table>
@@ -87,7 +88,7 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <h2>四、作答策略</h2>
 <ul>
-  <li><strong>先客观后主观</strong>：单选＋判断＋填空共 100 分上下，且题干短、见分快，先把客观分稳稳拿住，再进主观题。</li>
+  <li><strong>先客观后主观</strong>：单选＋判断＋填空合计 120 分，且题干短、见分快，先把客观分稳稳拿住，再进主观题。</li>
   <li><strong>简答按关键词给分的逻辑写</strong>：阅卷找的是定义词、特征词、区别词。先写「是什么」，再分点补特点或对比，宁多写要点，不堆长句。</li>
   <li><strong>应用题代码按「输入→处理→输出」三段写</strong>：头文件与 main 框架、变量定义与输入、核心循环与输出。即使算法写不全，也要把骨架和循环边界写出来——应用题按步骤给分，骨架就是步骤分。</li>
   <li><strong>计算题读程序</strong>：在草稿上画一张「变量值随行变化」的表，逐行更新，循环题按轮次列表，别指望心算一遍过。</li>
@@ -124,43 +125,43 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <h2>七、先回忆，再自测</h2>
 <details class="recall">
-  <summary>临场自检 1：循环队列怎么判满、怎么判空？</summary>
-  <div class="recall-a">牺牲一个存储单元的约定下：队满 front==(rear+1)%M，队空 front==rear。两个条件别混，取模别忘写。客观题高频。</div>
+  <summary>临场自检 1：开考前，装备清单逐项核对了吗？</summary>
+  <div class="recall-a">证件（准考证、身份证）、黑色签字笔、2B 铅笔与橡皮、计时工具——考前一晚按清单装袋，进场前口述再核一遍。装备缺项动摇的是整场执行，不是某一题。</div>
 </details>
 <details class="recall">
-  <summary>临场自检 2：else 和谁配对？continue 与 break 差在哪？</summary>
-  <div class="recall-a">else 与它前面最近的、尚未配对的 if 配对，与书写缩进无关。continue 结束「本次」进入下一次循环判定，break 直接跳出整层循环。读程序计算题就爱考这两处。</div>
+  <summary>临场自检 2：客观题的填涂节奏定好了吗？</summary>
+  <div class="recall-a">「做一大块、涂一大块」，不做一题涂一题，也不留到全卷最后才涂；每次涂完扫一眼题号有无错位串行。涂卡错位是最冤枉的整块失分。</div>
 </details>
 <details class="recall">
-  <summary>临场自检 3：fopen 三种基本打开方式是什么？fclose 成功返回什么？</summary>
-  <div class="recall-a">"r" 只读、"w" 只写（清空重建）、"a" 追加；fclose 成功返回 0。填空与判断题的常客。</div>
+  <summary>临场自检 3：每做完一个板块，核一次时间分配表了吗？</summary>
+  <div class="recall-a">完成一块就记下累计用时，只记录、不慌改——数据留给复盘去分析。模拟的价值就是攒下这些真实用时，考场上的版本只是照着执行。</div>
 </details>
 <details class="recall">
-  <summary>临场自检 4：二叉树结点数与深度的两条性质公式？</summary>
-  <div class="recall-a">度为 0 结点数 n₀ = 度为 2 结点数 n₂ + 1；深度为 k 的二叉树结点最多 2<sup>k</sup>−1 个。31 个结点的满二叉树即 2⁵−1。</div>
+  <summary>临场自检 4：收卷前的检查顺序是什么？</summary>
+  <div class="recall-a">先按卷面结构表逐块清点：单选、判断、填空、简答、计算、应用每题都有作答痕迹，主观题题号都写齐；再核对姓名、考号与涂卡完成度。先查整题漏答，再抠细节。</div>
 </details>
 
 <h2>八、测验（点击选项作答）</h2>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="a">
   <p class="quiz-q">1. 模拟中遇到题面或选项疑似有误的选择题，正确做法是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">当场翻资料求证，弄懂后接着做</li>
-    <li data-opt="b">圈出题号先作答继续推进，对答案时以题库整理判定为准</li>
+    <li data-opt="a">圈出题号先作答继续推进</li>
+    <li data-opt="b">当场翻资料求证，弄懂后接着做</li>
     <li data-opt="c">直接跳过不写，留到复盘再补</li>
     <li data-opt="d">反复重读题目，直到确定选项为止</li>
   </ol>
   <p class="quiz-feedback"></p>
-  <p class="quiz-expl">本卷第 4、17 题即属题库标注「原卷选项疑有误」的题。考场同理：先写一个答案保证不空，把疑问留到对答案环节，不在单题上耗时间。</p>
+  <p class="quiz-expl">本卷第 4、17 题即属题库标注「原卷选项疑有误」的题，对答案时以题库「参考答案（整理判定）」为准。考场同理：先写一个答案保证不空，把疑问留到对答案环节，不在单题上耗时间。</p>
 </div>
 
-<div class="quiz" data-answer="c">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">2. 停笔对答案时，第一步应该做的是</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">先看讲解 PDF 把全卷听一遍</li>
     <li data-opt="b">把做错的题立刻原题重做</li>
-    <li data-opt="c">统计各题型得分与总分，量化失分分布</li>
-    <li data-opt="d">先把简答题库背一遍再对主观题</li>
+    <li data-opt="c">先把简答题库背一遍再对主观题</li>
+    <li data-opt="d">统计各题型得分与总分，量化失分分布</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">复盘从量化开始：先知道客观、主观各丢多少分，才能判断失分属于知识缺口、熟练度不足还是时间失控，后面的动作才有靶子。</p>
@@ -169,7 +170,7 @@ body>.topbar{top:var(--blog-nav-height)}
 <div class="quiz" data-answer="a">
   <p class="quiz-q">3. 应用题没有完整思路时，最优先写下的内容是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">输入→处理→输出的骨架：头文件、main、变量与循环边界</li>
+    <li data-opt="a">先默写输入→处理→输出的代码骨架</li>
     <li data-opt="b">标注「不会」两字，整题留白</li>
     <li data-opt="c">回头再想，把时间全给前面的题</li>
     <li data-opt="d">把题目文字抄写一遍，表示作答过</li>
@@ -184,17 +185,17 @@ body>.topbar{top:var(--blog-nav-height)}
     <li data-opt="a">累计错题数量，用作学习打卡记录</li>
     <li data-opt="b">替代笔记本，之后只看归章表</li>
     <li data-opt="c">记录每道题的作答用时</li>
-    <li data-opt="d">把每道错题定位到笔记章节，回对应章重学考点</li>
+    <li data-opt="d">把错题定位到笔记章节，回章重学</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">C 语言错题归笔记 01–09，数据结构错题归笔记 10–18。归章之后「重学」才有落点，否则对答案只是看一遍正确写法。</p>
 </div>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="a">
   <p class="quiz-q">5. 简答题答不到给分点，复盘时正确的补救是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">把参考答案工整抄写三遍</li>
-    <li data-opt="b">回第 27 课打卡表对应组，按关键词背整组考点</li>
+    <li data-opt="a">回第 27 课打卡表对应组，按关键词背整组考点</li>
+    <li data-opt="b">把参考答案工整抄写三遍</li>
     <li data-opt="c">先跳过，简答题分值占比不高</li>
     <li data-opt="d">只背自己做错的这一道题</li>
   </ol>

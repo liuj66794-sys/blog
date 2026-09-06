@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 12 课 · 指针进阶：二维数组、字符串与复杂声明</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -101,6 +102,7 @@ p = a;         /* p+1 跳一整行 */
     while ((*dest++ = *src++) != '\0');
 }</code></pre>
   <p>循环把 <code>*src</code> 赋给 <code>*dest</code>，然后两者同时后移，直到把 <code>'\0'</code> 也复制过去。如果逐字符循环手动复制，记得<strong>手动补 <code>'\0'</code></strong>，否则输出会越界乱码。</p>
+  <p>同时记住：笔记 08 §4.2 明确 <strong>Mystrcat</strong>（先把指针走到 dest 末尾，再逐位复制 src）与 <strong>Mystrcmp</strong>（逐位比较字符、返回差值）也考手写，一并练熟。</p>
 </div>
 
 <h2>三、五种带 * 的声明辨析</h2>
@@ -114,10 +116,16 @@ p = a;         /* p+1 跳一整行 */
   <tr><td><code>int *p()</code></td><td>函数</td><td>返回 int* 指针的函数</td></tr>
   <tr><td><code>int **p</code></td><td>指针变量</td><td>二级指针：指向 int* 指针的指针</td></tr>
 </table>
+<p>二级指针的双重取值：以 <code>int a, *p=&amp;a, **q=&amp;p;</code> 为例，q 存的是<strong>指针 p 的地址</strong>，<code>*q</code> 是 p（即 a 的地址），<code>**q</code> 才是 a 的值——链路 q→p→a，两次取值才到底。</p>
 
 <div class="callout warn">
   <p class="callout-title">两个常见陷阱</p>
   <p>① <code>int *p[4]</code> 是数组不是指针，<code>int(*p)[4]</code> 才是指向一行的指针；② 函数指针不能做算术运算，<code>p+1</code> 无意义。</p>
+</div>
+
+<div class="callout warn">
+  <p class="callout-title">课件范围提醒</p>
+  <p>指针章部分课件（指针【三】【五】）缺失，本课已覆盖二维数组指针、字符串指针等高频考点；其余未讲到的更细内容按谭浩强《C程序设计》教材补齐，避免考纲缺口。</p>
 </div>
 
 <h2>四、先回忆，再自测</h2>
@@ -206,6 +214,18 @@ p = a;         /* p+1 跳一整行 */
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">C 在赋值的同时把 <code>'\0'</code> 也复制到 <code>dest</code>，并移动两个指针，循环自然终止。A 判断字符 '0' 错误；B 未复制结束符；D 只复制一次不移动指针。</p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="quiz-q">7. 已知 <code>int x=5, *p=&amp;x, **q=&amp;p;</code>，则 <code>**q</code> 的值是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">x 的地址</li>
+    <li data-opt="b">p 的地址</li>
+    <li data-opt="c">5</li>
+    <li data-opt="d">q 的地址</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">q 存 p 的地址；*q 即 p，是 x 的地址；再取一次 **q 才是 x 的值 5。二级指针要解两次引用才到达数据。</p>
 </div>
 
 <div class="task">

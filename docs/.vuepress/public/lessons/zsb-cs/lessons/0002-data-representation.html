@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 2 课 · 数据的表示：数制、补码与常量</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -100,6 +101,7 @@ body>.topbar{top:var(--blog-nav-height)}
   <tr><th>类型</th><th>字节</th><th>位数</th><th>范围</th></tr>
   <tr><td>char</td><td>1</td><td>8</td><td>-128 ~ 127（-2⁷ ~ 2⁷-1）</td></tr>
   <tr><td>unsigned char</td><td>1</td><td>8</td><td>0 ~ 255（0 ~ 2⁸-1）</td></tr>
+  <tr><td>short</td><td>2</td><td>16</td><td>-2¹⁵ ~ 2¹⁵-1</td></tr>
   <tr><td>int / long</td><td>4</td><td>32</td><td>-2³¹ ~ 2³¹-1</td></tr>
   <tr><td>float</td><td>4</td><td>32</td><td>约 6 位有效数字</td></tr>
   <tr><td>double</td><td>8</td><td>64</td><td>约 15 位有效数字</td></tr>
@@ -163,8 +165,10 @@ body>.topbar{top:var(--blog-nav-height)}
   <tr><td>含义</td><td>整型值（ASCII 码）</td><td>地址值</td></tr>
 </table>
 
+<p>常用转义字符速记：<code>\n</code> 换行、<code>\t</code> 制表、<code>\\</code> 反斜杠、<code>\'</code> 与 <code>\"</code> 引号；<code>\ddd</code> 八进制、<code>\xhh</code> 十六进制。一个转义字符只占 1 字节，如 <code>'\101'</code> 就是 'A'。</p>
+
 <div class="callout warn">
-  <p class="callout-title">⚠️ 勘误提醒</p>
+  <p class="callout-title">⚠️ 易错区分</p>
   <p><code>'\101'</code> 是字符型，内存占 1 字节；<code>0101</code> 是整型八进制常量，占 4 字节。两者不要混淆。</p>
 </div>
 
@@ -180,6 +184,13 @@ body>.topbar{top:var(--blog-nav-height)}
 <div class="callout warn">
   <p class="callout-title">高频陷阱</p>
   <p><code>9_hool</code>（数字开头）、<code>he.llo</code>（含点）、<code>x￥yz</code>（含￥）、<code>int</code>（关键字）、<code>Text-0</code>（含减号）均不合法。</p>
+</div>
+
+<h3>符号常量与 const 常变量</h3>
+<p><code>#define PI 3.14</code>：编译前把 PI <strong>文本替换</strong>为 3.14，<strong>不占内存</strong>；它是预处理指令不是语句，<strong>末尾不加分号</strong>。<code>const</code> 常变量则<strong>占内存</strong>、有类型。</p>
+<div class="callout warn">
+  <p class="callout-title">宏定义陷阱</p>
+  <p><code>#define N 5</code> 后写 <code>N++</code> 不合法——N 是符号常量，不是变量。</p>
 </div>
 
 <h2>五、先回忆，再自测</h2>
@@ -270,9 +281,21 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="quiz-expl">2_buy 数字开头，int 是关键字，Text-0 含减号，均不合法；_buy_2 符合字母/数字/下划线且非关键字。</p>
 </div>
 
+<div class="quiz" data-answer="a">
+  <p class="quiz-q">7. 字符常量 'a' 与字符串常量 "a" 占用的内存分别是</p>
+  <ol class="quiz-opts" type="A">
+    <li data-opt="a">'a' 占 1 字节，"a" 占 2 字节</li>
+    <li data-opt="b">'a' 占 2 字节，"a" 占 1 字节</li>
+    <li data-opt="c">都占 1 字节</li>
+    <li data-opt="d">都占 2 字节</li>
+  </ol>
+  <p class="quiz-feedback"></p>
+  <p class="quiz-expl">'a' 是字符常量，按 ASCII 码存 1 字节；"a" 是字符串常量，末尾自动补 '\0'，共占 2 字节。</p>
+</div>
+
 <div class="task">
   <p class="task-title">课后任务（约 20 分钟）</p>
-  <p>打开 题库/数据存储与运算-章节练习，完成前半部分（数制转换、数据类型、常量与标识符相关题目），错题标 ⭐️。然后回到笔记 自测问题 Q1–Q7，遮住答案口头作答，卡壳的记入错题本。</p>
+  <p>打开 题库/数据存储与运算-章节练习，完成前半部分（数制转换、数据类型、常量与标识符相关题目），错题标 ⭐️。然后回到笔记 自测问题 Q1–Q9，遮住答案口头作答，卡壳的记入错题本。</p>
 </div>
 
 <h2>参考资料</h2>

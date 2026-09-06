@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../assets/course.css">
 <script defer src="../assets/math.js"></script>
 <script defer src="../assets/quiz.js"></script>
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body data-lesson-id="0020">
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-math/" target="_self">高数课程目录</a><a href="/blog/prep/gaoshu/" target="_self">高数学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -107,7 +108,7 @@ body>.topbar{top:var(--blog-nav-height)}
   <p><span class="ex-tag">例 3（隐函数）</span>$e^{xy}+x^{2}y=1$，求 $y'$。</p>
   <details><summary>先自己两边求导，再展开（秋讲练习 23）</summary>
     <p>两边对 $x$ 求导（$xy$ 是乘积再复合）：$e^{xy}(y+xy')+2xy+x^{2}y'=0$。</p>
-    <p>整理：$y'(xe^{xy}+x^{2})=-ye^{xy}-2xy$，故 $y'=-\dfrac{y(e^{xy}+2x)}{e^{xy}+x}$（除以 $x$ 后）。</p>
+    <p>整理：$y'(xe^{xy}+x^{2})=-ye^{xy}-2xy$，故 $y'=-\dfrac{ye^{xy}+2xy}{xe^{xy}+x^{2}}=-\dfrac{y(e^{xy}+2x)}{x(e^{xy}+x)}$（分子分母各提公因式后约去一个 $x$，分母里的 $x$ 别丢）。</p>
     <p>口诀：<strong>含 $y$ 项全带 $y'$，最后把 $y'$ 当未知数解方程</strong>。</p>
   </details>
 </div>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 5 课 · 选择结构：条件、短路规则与 if</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -57,7 +58,7 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <div class="callout">
   <p class="callout-title">为什么这一课这么关键</p>
-  <p>选择结构是程序阅读题的三大题源之一（另外两个是循环和 switch）。广东省专升本真题里，<strong>短路规则</strong>、<strong>else 配对</strong>、<strong>等价形式</strong>反复出现，而且 loves 把 <code>++</code> 藏在被短路的右侧。</p>
+  <p>选择结构这一章的三大题源：<strong>短路求值</strong>、<strong>else 配对</strong>、<strong>case 穿透</strong>。广东省专升本真题里，<strong>短路规则</strong>、<strong>else 配对</strong>、<strong>等价形式</strong>反复出现，出题人最爱把 <code>++</code> 藏在被短路的右侧。</p>
 </div>
 
 <h2>一、关系与逻辑表达式：值只有 0 或 1</h2>
@@ -158,7 +159,7 @@ else            y = -1;</code></pre>
 
 <p><strong>else 配对规则</strong>：C 规定 else 总是与它<strong>前面最近的、尚未配对的 if</strong> 配对，<strong>与缩进无关</strong>。花括号可以把内层 if-else 包起来，让外层 else 与更外层的 if 配对。</p>
 
-<h2>三、先回忆，再自测</h2>
+<h2>五、先回忆，再自测</h2>
 
 <details class="recall">
   <summary>合上笔记默写：优先级链（从 ! 到赋值）和短路规则</summary>
@@ -175,7 +176,7 @@ else            y = -1;</code></pre>
   <div class="recall-a">else 与前面最近的未配对 if 配对，和缩进无关。用 <code>{ }</code> 把内层 if-else 包住，可让外层 else 只能与更外层的 if 配对。</div>
 </details>
 
-<h2>四、测验（点击选项作答）</h2>
+<h2>六、测验（点击选项作答）</h2>
 
 <div class="quiz" data-answer="d">
   <p class="quiz-q">1. 下列运算符中优先级最低的是</p>

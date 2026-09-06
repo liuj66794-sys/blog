@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 21 课 · 树、森林与二叉树的转换和存储</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -147,25 +148,25 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="quiz-expl">根结点没有兄弟，所以右孩子必为空。右子树放的是兄弟，不是孩子，也不是森林总根。</p>
 </div>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">2. 森林转换为二叉树时，第二棵树的根应作为</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">第一棵根的左孩子</li>
-    <li data-opt="b">第一棵根的右孩子</li>
-    <li data-opt="c">森林总根的左孩子</li>
-    <li data-opt="d">森林总根的右孩子</li>
+    <li data-opt="b">森林总根的左孩子</li>
+    <li data-opt="c">森林总根的右孩子</li>
+    <li data-opt="d">第一棵根的右孩子</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">森林转二叉树后，各树的根通过右指针依次串接：第二棵树的根是第一棵树根的右孩子，第三棵是第二棵的右孩子，依此类推。</p>
 </div>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">3. 对一棵树进行后序遍历，等价于对其二叉树表示进行</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">先序遍历</li>
-    <li data-opt="b">中序遍历</li>
-    <li data-opt="c">后序遍历</li>
-    <li data-opt="d">层次遍历</li>
+    <li data-opt="b">后序遍历</li>
+    <li data-opt="c">层次遍历</li>
+    <li data-opt="d">中序遍历</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">易错点：树的先序对应二叉树先序；树的后序对应二叉树中序。树本身没有中序遍历，不要混淆。</p>

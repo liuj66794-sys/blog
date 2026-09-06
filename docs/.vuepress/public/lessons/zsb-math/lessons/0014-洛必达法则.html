@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../assets/course.css">
 <script defer src="../assets/math.js"></script>
 <script defer src="../assets/quiz.js"></script>
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body data-lesson-id="0014">
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-math/" target="_self">高数课程目录</a><a href="/blog/prep/gaoshu/" target="_self">高数学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -110,7 +111,7 @@ body>.topbar{top:var(--blog-nav-height)}
   <p><span class="ex-tag">例 3（$\infty-\infty$）</span>求 $\lim\limits_{x\to1}\left(\dfrac{1}{\ln x}-\dfrac{1}{x-1}\right)$。</p>
   <details><summary>先自己通分，再展开（秋讲练习 13）</summary>
     <p>通分：$\dfrac{(x-1)-\ln x}{(x-1)\ln x}$。令 $t=x-1\to0$：$\dfrac{t-\ln(1+t)}{t\ln(1+t)}$，分母 $\sim t^2$、分子 $\sim\frac12t^2$（三阶差表），得 $\dfrac12$。</p>
-    <p>也可以洛：$\lim\limits_{t\to0}\dfrac{1-\frac{1}{1+t}}{\ln(1+t)+\frac{t}{1+t}}=\lim\limits_{t\to0}\dfrac{t}{(1+t)t+t}=\dfrac12$。先等价再洛，快得多。</p>
+    <p>也可以洛一次后再通分：分子分母同乘 $(1+t)$ 得 $\lim\limits_{t\to0}\dfrac{t}{(1+t)\ln(1+t)+t}$；因式 $(1+t)\to1$ 有界非零，故 $(1+t)\ln(1+t)\sim t$（乘除位置可换），分母 $\sim2t$，得 $\dfrac12$。先等价再洛，快得多。</p>
   </details>
 </div>
 

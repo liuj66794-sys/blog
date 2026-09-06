@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 9 课 · 函数基础</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -73,6 +74,7 @@ void hello(void) {           /* 无参函数，无返回值 */
 <p>调用时把实参的值传给形参：</p>
 <pre><code>int s = add(3, 5);           /* 实参 3、5 → 形参 a、b */
 hello();                     /* 无参调用不能省略 () */</code></pre>
+<p>注意：<strong>函数未被调用时不占存储空间</strong>；形参也是调用时才开辟空间，调用结束即随函数一起释放。</p>
 
 <div class="callout warn">
   <p class="callout-title">先定义后使用</p>
@@ -178,13 +180,13 @@ int main() {
 <div class="quiz" data-answer="b">
   <p class="quiz-q">5. 函数 void print(int n) 的调用方式，正确的是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">int a = print(5); printf("%d", a);</li>
+    <li data-opt="a">a = print(5);</li>
     <li data-opt="b">print(5);</li>
-    <li data-opt="c">printf("%d", print(5));</li>
+    <li data-opt="c">printf(print(5));</li>
     <li data-opt="d">return print(5);</li>
   </ol>
   <p class="quiz-feedback"></p>
-  <p class="quiz-expl">void 函数调用无返回值，不能赋值、不能输出、不能作为 return 的表达式。</p>
+  <p class="quiz-expl">正确做法是像 b 那样作为独立语句调用。a 把无返回值的调用赋给变量；c 把它当作 printf 的实参去输出；d 把它作为 return 的表达式——void 函数调用没有值，三种用法都不合法。</p>
 </div>
 
 <div class="quiz" data-answer="c">

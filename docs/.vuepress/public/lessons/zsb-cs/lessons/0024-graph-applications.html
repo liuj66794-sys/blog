@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 24 课 · 图的应用</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -137,7 +138,7 @@ body>.topbar{top:var(--blog-nav-height)}
   <tr><td>ve</td><td>0</td><td>2</td><td>5</td><td>8</td><td>9</td><td>12</td></tr>
   <tr><td>vl</td><td>0</td><td>4</td><td>5</td><td>8</td><td>11</td><td>12</td></tr>
 </table>
-<p>关键活动为 e=l 的那些（笔记例中为 a、d、f、i、j 等），关键路径为 V1→V2→V4→V5→V6。</p>
+<p>关键活动为 e=l 的那些——课件例中为 b、e、i，关键路径为 <strong>V1→V3→V4→V6</strong>，长 5+3+4=12 天；V2（ve=2、vl=4）与 V5（ve=9、vl=11）各有 2 天余量，不在关键路径上。判断时以 e=l 判据为准——课件流传的「V1→V2→V4→V5→V6」与自身 ve/vl 数据矛盾：关键路径上的事件必须 ve=vl（无余量）。</p>
 
 <h2>五、易错点对比（本课范围）</h2>
 <table>
@@ -191,13 +192,13 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="quiz-expl">课件强调：无论哪种算法，生成树一定不能有环，且两种算法都针对无向图。Prim 是加点法、Kruskal 是选边法，说反了就错。</p>
 </div>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">3. Dijkstra 算法解决的问题是</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">所有顶点对之间的最短路径</li>
-    <li data-opt="b">单个源点到其余各顶点的最短路径</li>
-    <li data-opt="c">无向连通图的最小生成树</li>
-    <li data-opt="d">有向无环图的拓扑序列</li>
+    <li data-opt="b">无向连通图的最小生成树</li>
+    <li data-opt="c">有向无环图的拓扑序列</li>
+    <li data-opt="d">单个源点到其余各顶点的最短路径</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">Dijkstra 解决「单个源点到其余各顶点」的最短路径，按路径长度递增次序逐步扩展；「所有顶点对」是 Floyd 的问题。</p>
@@ -227,12 +228,12 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="quiz-expl">拓扑排序每轮选入度 0（无前驱）的顶点输出，并删除该顶点及其所有出边；若输出不完所有顶点，说明图中有环。出度为 0 的顶点是逆拓扑序处理时先处理的。</p>
 </div>
 
-<div class="quiz" data-answer="c">
+<div class="quiz" data-answer="a">
   <p class="quiz-q">6. AOE 网中，某个活动是关键活动的判据是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">活动的 e 等于事件的 ve</li>
-    <li data-opt="b">活动的 l 大于 e</li>
-    <li data-opt="c">活动的最早开始时间等于最晚开始时间</li>
+    <li data-opt="a">活动的 e 与 l 相等</li>
+    <li data-opt="b">活动的 e 等于其弧头事件的 ve</li>
+    <li data-opt="c">活动的 l 大于 e</li>
     <li data-opt="d">活动所在路径的权值最小</li>
   </ol>
   <p class="quiz-feedback"></p>

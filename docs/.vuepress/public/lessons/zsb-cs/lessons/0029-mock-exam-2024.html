@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 29 课 · 2024 年真题模拟</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -43,7 +44,7 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <div class="goal">
   <p class="goal-title">学完这节课，你能做到：</p>
-  <p>① 限时 120 分钟独立完成 2024 年全卷并手写答案，这是本课程第二场也是最后一场全真模拟；② 适应本卷与 2025 卷的结构差异——判断题 10 题、简答题 4 题——并按新节奏执行时间分配表；③ 复盘时对照上次写下的三类失分模式，验证哪些已修复、哪些还在；④ 结课时写下自己三轮复习的日程表。</p>
+  <p>① 限时 120 分钟独立完成 2024 年全卷并手写答案，这是本课程第二场也是最后一场全真模拟；② 按本卷卷面结构——判断题 10 题、简答题 4 题——执行时间分配表，把手写节奏跑顺；③ 复盘时对照上次写下的三类失分模式，验证哪些已修复、哪些还在；④ 结课时写下自己三轮复习的日程表。</p>
 </div>
 
 <div class="callout">
@@ -67,13 +68,13 @@ body>.topbar{top:var(--blog-nav-height)}
   <tr><td>计算题</td><td>3 × 10 分</td><td>30 分</td></tr>
   <tr><td>应用题</td><td>3 × 10 分</td><td>30 分</td></tr>
 </table>
-<p><small>与 2025 卷的差异：判断题多 5 题（客观题合计多 40 分）、简答题多 1 题；计算与应用明确为每题 10 分，是大题里按步骤给分最重的板块。客观题总分更高意味着「会但不熟」的损失被放大，读题速度要练出来。</small></p>
+<p><small>题量口径勘误：2025 题库分节标题写作「判断 5 题、简答 3 题」，曾让人以为本卷判断题多 5 题、简答题多 1 题；按两卷正文实际点数核对，判断题同为 10 题、简答题同为 4 题，客观题合计同为 120 分（单选 20×3＋判断 10×4＋填空 5×4），第 28 课已按此实际口径统一。本卷与 2025 卷真正不同的是：计算与应用明确为每题 10 分，是大题里按步骤给分最重的板块。客观题合计 120 分意味着「会但不熟」的损失被放大，读题速度要练出来。</small></p>
 
 <h2>三、120 分钟时间分配</h2>
 <table>
   <tr><th>环节</th><th>建议用时</th><th>执行要点</th></tr>
   <tr><td>单项选择（20 题）</td><td>35 分钟</td><td>单题 2 分钟封顶，卡壳先猜先标记</td></tr>
-  <tr><td>判断（10 题）</td><td>12 分钟</td><td>题量比 2025 多一倍，每题别超过 1 分钟</td></tr>
+  <tr><td>判断（10 题）</td><td>12 分钟</td><td>10 题连续作答，每题别超过 1 分钟</td></tr>
   <tr><td>填空（5 题）</td><td>13 分钟</td><td>按步骤算，结果写成题目要求的形式</td></tr>
   <tr><td>简答（4 题）</td><td>18 分钟</td><td>每题约 4 分钟，分点写关键词</td></tr>
   <tr><td>计算（3 × 10 分）</td><td>18 分钟</td><td>读程序逐行列表跟踪变量</td></tr>
@@ -131,31 +132,31 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <h2>八、先回忆，再自测</h2>
 <details class="recall">
-  <summary>临场自检 1：结构体成员的两种引用写法？结构体变量在内存里怎么放？</summary>
-  <div class="recall-a">变量用「成员名」前加点：s.name；指针用箭头：p-&gt;name。结构体变量整体开辟空间，所有成员在程序执行期间一直驻留内存。</div>
+  <summary>临场自检 1：进考场坐定后，开考前的固定动作是什么？</summary>
+  <div class="recall-a">先填姓名与考号，翻看全卷确认页数齐全、各题块位置，铃响前不落笔。把开考流程固定成一套动作，紧张也不会漏步。</div>
 </details>
 <details class="recall">
-  <summary>临场自检 2：带头结点的单链表判空条件？顺序表插入删除的代价？</summary>
-  <div class="recall-a">带头结点判空：head-&gt;next==NULL（不带头结点才是 head==NULL）。顺序表插入、删除平均要移动约一半元素，时间复杂度 O(n)；链式存储则分两部分：结点值＋表示关系的指针。</div>
+  <summary>临场自检 2：单题卡壳的处理规则是什么？</summary>
+  <div class="recall-a">2 分钟封顶：先按第一判断选一个、圈出题号，全卷过完再回头攻坚，交卷前确认圈过的题号都已作答。不为单题赔上整卷节奏。</div>
 </details>
 <details class="recall">
-  <summary>临场自检 3：栈和队列的共同点与出入规则？</summary>
-  <div class="recall-a">二者都是操作受限的<strong>线性表</strong>（不是没有共同点）。栈后进先出——判断出栈序列时盯住栈顶；队列先进先出。出栈序列题从「第一个出栈的是谁」倒推栈内顺序。</div>
+  <summary>临场自检 3：涂卡与题号怎么自查？</summary>
+  <div class="recall-a">客观题做一块涂一块，涂完扫一遍题号有无错位串行；主观题动笔前先写题号，答案写在对应答题区域内。</div>
 </details>
 <details class="recall">
-  <summary>临场自检 4：读程序两大陷阱自查？</summary>
-  <div class="recall-a">条件里写「=」是赋值、表达式的值决定分支走向（≠「==」比较）；i++ 先用后加、++i 先加后用。开考通读代码时先把这两类地方圈出来。</div>
+  <summary>临场自检 4：收卷前的检查顺序是什么？</summary>
+  <div class="recall-a">先按卷面结构表逐块清点有无整题漏答，再核对姓名、考号与涂卡完成度。检查只查漏错，不大改已写好的答案。</div>
 </details>
 
 <h2>九、测验（点击选项作答）</h2>
 
-<div class="quiz" data-answer="c">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">1. 开考 60 分钟你才做完单选，明显慢于计划，此时应该</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">提速做完判断填空，主观题简单应付</li>
     <li data-opt="b">维持原节奏，做不完的部分认了</li>
-    <li data-opt="c">按预案压缩判断填空用时，保住计算应用的大题时间</li>
-    <li data-opt="d">放弃检查环节，把剩余时间全补给客观题</li>
+    <li data-opt="c">放弃检查环节，把剩余时间全补给客观题</li>
+    <li data-opt="d">按预案压缩判断填空用时，保住计算应用的大题时间</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">时间分配表的价值就在超时时有预案：客观题单题卡壳超过 2 分钟先猜先标记，优先保主观题的步骤分——本卷计算、应用每题 10 分，是单题价值最高的板块。</p>
@@ -179,17 +180,17 @@ body>.topbar{top:var(--blog-nav-height)}
     <li data-opt="a">坚持自己的答案，不作任何标记</li>
     <li data-opt="b">直接把题库答案当结论背下来</li>
     <li data-opt="c">认定题库有误，直接跳过这题</li>
-    <li data-opt="d">先回笔记核对该考点定义，仍存疑再看讲解 PDF，最后写下批注</li>
+    <li data-opt="d">先回笔记自证，存疑再看讲解 PDF</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">本卷答案为整理判定，但多数题目按笔记定义可以自证。核对顺序：笔记 → 讲解 PDF → 自己的批注，把分歧落成记录，不为单个答案内耗。</p>
 </div>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="a">
   <p class="quiz-q">4. 错题标 ⭐️ 之后，合理的重做节奏是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">当天对完答案立刻原题重做一遍</li>
-    <li data-opt="b">第二天遮住答案重做，做对才摘星，再错列入重点清单</li>
+    <li data-opt="a">第二天遮住答案重做，做对才摘星</li>
+    <li data-opt="b">当天对完答案立刻原题重做一遍</li>
     <li data-opt="c">所有错题留到考前一次性重做</li>
     <li data-opt="d">重做时瞄一眼答案，确认思路对就算过</li>
   </ol>
@@ -197,13 +198,13 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="quiz-expl">隔天重做检验的是存储强度而不是短期记忆；「做对才摘星」防止假性掌握，「再错入清单」保证顽固错点进二轮专题。</p>
 </div>
 
-<div class="quiz" data-answer="a">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">5. 计算题读程序时，发现 if 的条件里写的是赋值「=」，第一反应应是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">这是赋值不是比较、恒为真，按赋值语义推分支走向</li>
-    <li data-opt="b">当作印刷错误，跳过这个条件不理</li>
-    <li data-opt="c">当成相等比较，照常往下分析</li>
-    <li data-opt="d">只检查这条语句末尾的分号有没有错</li>
+    <li data-opt="a">当作印刷错误，跳过这个条件不理</li>
+    <li data-opt="b">当成相等比较，照常往下分析</li>
+    <li data-opt="c">只检查这条语句末尾的分号有没有错</li>
+    <li data-opt="d">这是赋值不是比较、恒为真，按赋值语义推分支走向</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">题库在第 41 题处明确标注：原卷把赋值写在 if 条件里属「原样考点」，不是印刷错误。通读代码先圈出 = 与 ==，再逐行跟踪变量。</p>
@@ -211,7 +212,7 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <div class="task">
   <p class="task-title">课后任务：执行模拟并启动二轮</p>
-  <p>① 打开 题库/真题-2024年，答案 callout 保持折叠，备好白纸和笔。② 倒计时 120 分钟，闭卷、断资料，按本课时间分配表作答（判断 10 题、简答 4 题，节奏与 2025 场不同）。③ 到点停笔：对答案、统计得分、填错题归章表。④ 错题回对应笔记重学并标 ⭐️，第二天摘星重做；对照上一场写下的失分模式做验收。⑤ 翻开「三轮复习地图」：给一轮画上完成勾，写下二轮 14 天背诵的起止日期，并把距考前重做两套真题的日子（目标限时正确率 ≥85%）写进日历。</p>
+  <p>① 打开 题库/真题-2024年，答案 callout 保持折叠，备好白纸和笔。② 倒计时 120 分钟，闭卷、断资料，按本课时间分配表作答（判断 10 题、简答 4 题）。③ 到点停笔：对答案、统计得分、填错题归章表。④ 错题回对应笔记重学并标 ⭐️，第二天摘星重做；对照上一场写下的失分模式做验收。⑤ 翻开「三轮复习地图」：给一轮画上完成勾，写下二轮 14 天背诵的起止日期，并把距考前重做两套真题的日子（目标限时正确率 ≥85%）写进日历。</p>
 </div>
 
 <h2>参考资料</h2>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 1 课 · C 程序的全貌与编译四步骤</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -66,11 +67,16 @@ body>.topbar{top:var(--blog-nav-height)}
 </div>
 
 <h2>二、配套的三组判断</h2>
+<p><strong>C 的诞生</strong>：由 Denis M. Ritchie（丹尼斯·里奇）于 <strong>1972—1973 年</strong>在美国<strong>贝尔实验室</strong>设计（常考判断/选择）。</p>
 <p><strong>语言三代</strong>：机器语言 → 汇编语言 → 高级语言；机器 + 汇编统称<strong>低级语言</strong>（都依赖具体机器）。高级语言分两种翻译方式：<strong>解释</strong>（边翻译边执行，不产生目标程序）和<strong>编译</strong>（整体翻译成目标程序，再连接成可执行文件）——C 属于编译方式。</p>
-<p><strong>main 函数</strong>：有且<strong>只有一个</strong>，是程序的入口和出口；程序总是从 main 开始执行，与 main 写在什么位置无关。函数之间是<strong>平行</strong>关系，不能嵌套定义。</p>
+<p><strong>main 函数</strong>：有且<strong>只有一个</strong>，是程序的入口和出口；程序总是从 main 开始执行，与 main 写在什么位置无关。每个函数由<strong>函数头 + 函数体</strong>两部分组成，函数之间是<strong>平行</strong>关系，不能嵌套定义。</p>
 <p><strong>注释</strong>：<code>//</code> 到换行符结束、不能跨行；<code>/* */</code> 可跨行。注释<strong>不参与编译</strong>，编译器不会发现注释里的任何错误。另外记住：C 本身<strong>没有输入/输出语句</strong>，I/O 靠 scanf/printf 库函数完成。</p>
 
 <h2>三、先回忆，再自测</h2>
+<details class="recall">
+  <summary>C 语言诞生的时间、地点、人物？</summary>
+  <div class="recall-a">1972—1973 年，美国贝尔实验室，Denis M. Ritchie（丹尼斯·里奇）。</div>
+</details>
 <details class="recall">
   <summary>合上笔记默写：四步骤、每步产物扩展名、文件性质</summary>
   <div class="recall-a">编辑→.c（文本）；编译→.obj（二进制）；连接→.exe（二进制）；运行→结果。写不出来就回到上面的表格再看一遍，然后再默一次。</div>
@@ -145,7 +151,7 @@ body>.topbar{top:var(--blog-nav-height)}
 <div class="quiz" data-answer="c">
   <p class="quiz-q">6. C 语言的输入/输出功能是依靠什么实现的</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">系统内置的输入输出语句</li>
+    <li data-opt="a">属于 C 语言关键字的输入输出命令</li>
     <li data-opt="b">编译器自带的输入输出语句</li>
     <li data-opt="c">scanf 和 printf 等库函数</li>
     <li data-opt="d">预处理命令提供的输入输出</li>
@@ -156,7 +162,7 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <div class="task">
   <p class="task-title">课后任务（约 20 分钟）</p>
-  <p>打开 题库/程序设计与C语言-章节练习，遮住答案做完 9 道填空 + 4 道单选，错题标 ⭐️。然后回到笔记 自测问题 Q1–Q10，遮住答案口头作答，卡壳的记入错题。</p>
+  <p>打开 题库/程序设计与C语言-章节练习，遮住答案做完 9 道填空 + 4 道单选 + 2 道简答（其中「简述 C 语言的开发运行过程」就是本课主考点的简答形式），错题标 ⭐️。然后回到笔记 自测问题 Q1–Q10，遮住答案口头作答，卡壳的记入错题。</p>
 </div>
 
 <h2>参考资料</h2>

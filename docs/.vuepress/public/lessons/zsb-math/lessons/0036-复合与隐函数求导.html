@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../assets/course.css">
 <script defer src="../assets/math.js"></script>
 <script defer src="../assets/quiz.js"></script>
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body data-lesson-id="0036">
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-math/" target="_self">高数课程目录</a><a href="/blog/prep/gaoshu/" target="_self">高数学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -112,21 +113,21 @@ body>.topbar{top:var(--blog-nav-height)}
   <details><summary>两种方法都走一遍</summary>
     <p><strong>公式法</strong>：$F=x^{2}+y^{2}+z^{2}-4z$，$F_x=2x$，$F_z=2z-4$，$z_x=-\dfrac{2x}{2z-4}=\dfrac{x}{2-z}$。</p>
     <p><strong>直接法</strong>：两边对 $x$ 求导（$z$ 是 $x$ 的函数，$y$ 是常数）：$2x+2zz_x=4z_x$，解出 $z_x=\dfrac{x}{2-z}$ ✓。</p>
-    <p>两法同果。直接法的口诀：<strong>含 $z$ 项全带 $z'$，最后解方程</strong>（0017 课一元隐函数的老套路）。</p>
+    <p>两法同果。直接法的口诀：<strong>含 $z$ 项全带 $z'$，最后解方程</strong>（0020 课一元隐函数的老套路）。</p>
   </details>
 </div>
 
-<div class="quiz" data-answer="B">
+<div class="quiz" data-answer="A">
   <span class="quiz-no">随堂测 1</span>
   <p class="quiz-q">$z=u^{2}v$，$u=x+y$，$v=xy$，则 $z_x=$</p>
   <div class="quiz-opts">
     <button data-k="A">$2uv+u^{2}y$</button>
-    <button data-k="B">$2uv+u^{2}y$ 之外的 $\dfrac{2uv}{x}$</button>
+    <button data-k="B">$2uv$</button>
     <button data-k="C">$2uv\cdot y$</button>
     <button data-k="D">$u^{2}y$</button>
   </div>
   <div class="quiz-verdict"></div>
-  <div class="quiz-exp">两条路：经 $u$：$2uv\cdot u_x=2uv\cdot1$；经 $v$：$u^{2}\cdot v_x=u^{2}y$。相加 $2uv+u^{2}y$。<strong>"沿路相乘、同标相加"</strong>八个字就是全部。</div>
+  <div class="quiz-exp">两条路：经 $u$：$2uv\cdot u_x=2uv\cdot1$；经 $v$：$u^{2}\cdot v_x=u^{2}y$。相加 $2uv+u^{2}y$，选 A。B、D 各只算了一条路——多元复合函数每个中间变量都是一条路，一条都不能漏。</div>
 </div>
 
 <div class="quiz" data-answer="C">

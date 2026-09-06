@@ -50,6 +50,9 @@ body>.topbar{top:var(--blog-nav-height)}
 export function injectLessonNav(html, back) {
   const bodyOpen = html.match(/<body[^>]*>/i)
   if (!bodyOpen || !back?.backUrl || html.includes(NAV_BAR_MARKER)) return html
+  if (!/<link\b[^>]*\brel=["'][^"']*\bicon\b/i.test(html)) {
+    html = html.replace(/<\/head>/i, `<link rel="icon" type="image/png" href="${withBase('/avatar.png')}">\n</head>`)
+  }
   const links = BAR_LINKS
     .map(([label, url]) => `<a href="${escapeHtml(withBase(url))}" target="_self">${label}</a>`)
     .join('')

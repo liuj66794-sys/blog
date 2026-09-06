@@ -8,6 +8,7 @@
 <script defer src="../assets/math.js"></script>
 <script defer src="../assets/quiz.js"></script>
 <script defer src="../assets/plot.js"></script>
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body data-lesson-id="0024">
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-math/" target="_self">高数课程目录</a><a href="/blog/prep/gaoshu/" target="_self">高数学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -96,7 +97,7 @@ body>.topbar{top:var(--blog-nav-height)}
 <div class="example">
   <p><span class="ex-tag">例 2（含不可导点）</span>求 $f(x)=\dfrac23x-(x-1)^{2/3}$ 的极值。（夏应用 P42）</p>
   <details><summary>先找全候选点，再展开</summary>
-    <p>$f'(x)=\dfrac23-\dfrac{2}{3}(x-1)^{1/3}$。驻点：$(x-1)^{1/3}=1$，$x=2$；<strong>不可导点 $x=1$</strong>。</p>
+    <p>$f'(x)=\dfrac23-\dfrac{2}{3}(x-1)^{-1/3}$。驻点：$(x-1)^{-1/3}=1$，即 $x-1=1$，$x=2$；<strong>不可导点 $x=1$</strong>（负指数幂在 $x=1$ 处无定义）。</p>
     <p>符号：$x&lt;1$ 时 $f'&gt;0$；$1&lt;x&lt;2$ 时 $f'&lt;0$；$x&gt;2$ 时 $f'&gt;0$。</p>
     <p>极大值 $f(1)=\dfrac23$（不可导点！），极小值 $f(2)=\dfrac13$。</p>
     <p>警示：<strong>候选点 = 驻点 + 不可导点</strong>，漏掉后者是本考点最常见丢分。</p>

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { renderReadme, renderSubject } from './sync-prep.mjs'
+import { renderReadme, renderSubject, stripUnmirroredLinks } from './sync-prep.mjs'
 
 const plan = {
   examDate: '2027-03-27',
@@ -11,6 +11,14 @@ const plan = {
     { no: 3, label: 'W3', start: '03-22', end: '03-27', phase: '冲刺押题', items: { 全科: '错题复习' } },
   ],
 }
+
+test('镜像保留公开配套资源，去除本机笔记跳转且保留来源文字', () => {
+  const result = stripUnmirroredLinks(`<a href="obsidian://open?vault=notes">原文笔记</a>
+    <a href='../private/a.md'>课程来源</a><a href="../reference/terms.html">术语表</a>`, { keep: ['reference'] })
+  assert.ok(result.includes('原文笔记') && result.includes('课程来源'))
+  assert.ok(!result.includes('obsidian:') && !result.includes('../private'))
+  assert.ok(result.includes('href="../reference/terms.html"'))
+})
 
 test('备考首页的四科入口在长计划之前，保留倒计时和计划正文', () => {
   const page = renderReadme(plan)

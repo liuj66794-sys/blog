@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 18 课 · 串</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -173,22 +174,22 @@ body>.topbar{top:var(--blog-nav-height)}
 <div class="quiz" data-answer="c">
   <p class="quiz-q">3. 关于空串与空格串，下列说法正确的是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">空串就是空格串，两者长度都为 0</li>
-    <li data-opt="b">空格串的长度规定为 0</li>
+    <li data-opt="a">空串就是空格串，两者长度都为 0，可互换使用</li>
+    <li data-opt="b">空格串的长度规定为 0，不含任何字符</li>
     <li data-opt="c">空格串由一个或多个空格组成，长度等于空格个数</li>
-    <li data-opt="d">空串由一个空格组成，长度为 1</li>
+    <li data-opt="d">空串由一个空格组成，长度为 1，也称空白串</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">空格串不是空串：空格串由一个或多个空格组成，长度 = 空格个数；空串长度为 0，不含任何字符。</p>
 </div>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">4. 串与线性表相比，下列说法正确的是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">串的逻辑结构与线性表完全不同</li>
-    <li data-opt="b">串的数据对象限定为字符集，操作通常以子串为单位</li>
-    <li data-opt="c">线性表的操作通常以子串为单位</li>
-    <li data-opt="d">串的操作对象只能是单个字符</li>
+    <li data-opt="a">串的逻辑结构与线性表完全不同，属于非线性结构</li>
+    <li data-opt="b">线性表的操作通常以子串为单位进行插入删除</li>
+    <li data-opt="c">串的操作对象只能是单个字符，不能是子串</li>
+    <li data-opt="d">串的数据对象限定为字符集，操作通常以子串为单位</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">两者逻辑结构极为相似，区别仅在于串的数据对象限定为字符集；操作层面线性表按单个元素、串按子串（单个字符也属于子串）。</p>
@@ -197,7 +198,7 @@ body>.topbar{top:var(--blog-nav-height)}
 <div class="quiz" data-answer="a">
   <p class="quiz-q">5. 串的两种存储结构是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">定长顺序存储与堆（变长）分配存储</li>
+    <li data-opt="a">定长顺序与堆分配存储</li>
     <li data-opt="b">顺序存储与索引存储</li>
     <li data-opt="c">链式存储与散列存储</li>
     <li data-opt="d">定长链式存储与堆链式存储</li>

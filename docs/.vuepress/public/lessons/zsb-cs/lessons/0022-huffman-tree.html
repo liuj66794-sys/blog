@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 22 课 · 赫夫曼树与编码</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -39,7 +40,7 @@ body>.topbar{top:var(--blog-nav-height)}
 </nav>
 
 <h1>赫夫曼树与编码</h1>
-<p class="lesson-meta">对应笔记 数据结构/15-树与二叉树 · 教材 P107–P114 · 约 15 分钟</p>
+<p class="lesson-meta">对应笔记 数据结构/15-树与二叉树 · 页码见笔记对应节 · 约 15 分钟</p>
 
 <div class="goal">
   <p class="goal-title">学完这节课，你能做到：</p>
@@ -121,7 +122,7 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <div class="callout warn">
   <p class="callout-title">⚠️ 编码易错点</p>
-  <p>同一个构造过程，如果某次合并时两个子树的左右位置交换，得到的 0/1 编码会不同，但仍然是正确的赫夫曼编码（WPL 不变）。考试画图时只要<strong> consistently 左 0 右 1 </strong>即可，不要死记某一个编码表。</p>
+  <p>同一个构造过程，如果某次合并时两个子树的左右位置交换，得到的 0/1 编码会不同，但仍然是正确的赫夫曼编码（WPL 不变）。考试画图时只要<strong>全程统一左 0 右 1</strong>即可，不要死记某一个编码表。</p>
 </div>
 
 <h2>五、先回忆，再自测</h2>
@@ -140,13 +141,13 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <h2>六、测验（点击选项作答）</h2>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">1. n 个叶子的赫夫曼树，其结点总数为</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">共有 n+1 个结点</li>
-    <li data-opt="b">共有 2n−1 个结点</li>
-    <li data-opt="c">共有 2n 个结点</li>
-    <li data-opt="d">共有 2n+1 个结点</li>
+    <li data-opt="b">共有 2n 个结点</li>
+    <li data-opt="c">共有 2n+1 个结点</li>
+    <li data-opt="d">共有 2n−1 个结点</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">n 个叶子 + (n−1) 个合并产生的内部结点 = 2n−1；且每次合并都产生度为 2 的结点，故无度为 1 的结点。</p>
@@ -176,28 +177,28 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="quiz-expl">初始给定的权值最终都成为叶子，所以叶子数等于初始权值个数；权值越小离根越远；总结点数为 2n−1 且无度为 1 的结点。</p>
 </div>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">4. 下列编码组中，属于前缀编码的是</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">{0, 1, 01, 10}</li>
-    <li data-opt="b">{0, 10, 110, 111}</li>
-    <li data-opt="c">{0, 01, 011, 0111}</li>
-    <li data-opt="d">{10, 110, 101, 1001}</li>
+    <li data-opt="b">{0, 01, 011, 0111}</li>
+    <li data-opt="c">{10, 110, 101, 1001}</li>
+    <li data-opt="d">{0, 10, 110, 111}</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">前缀编码要求任一编码不是另一编码的前缀。B 中 0、10、110、111 互不前缀；其余选项中均存在前缀关系（如 A 中 0/1 是 01/10 的前缀）。</p>
 </div>
 
 <div class="quiz" data-answer="c">
-  <p class="quiz-q">5. 笔记中 a,b,c,d,e,f 频度分别为 45,13,12,16,9,5，字符 c 的赫夫曼编码是</p>
+  <p class="quiz-q">5. 笔记中 a,b,c,d,e,f 频度分别为 45,13,12,16,9,5，字符 c 的赫夫曼编码长度是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">0</li>
-    <li data-opt="b">101</li>
-    <li data-opt="c">100</li>
-    <li data-opt="d">111</li>
+    <li data-opt="a">1 位</li>
+    <li data-opt="b">2 位</li>
+    <li data-opt="c">3 位</li>
+    <li data-opt="d">4 位</li>
   </ol>
   <p class="quiz-feedback"></p>
-  <p class="quiz-expl">按笔记给出的编码表：a:0，c:100，b:101，f:1100，e:1101，d:111。注意同一构造过程若左右子树交换，编码会不同，但 WPL 不变。</p>
+  <p class="quiz-expl">c 的编码长度确定为 3 位——权 12 的叶子在树中深度为 3，这与左右摆放无关；具体编码（如 100）则随同权子树左右摆放不同而不唯一，正如本课所说「不要死记某一个编码表」。</p>
 </div>
 
 <div class="quiz" data-answer="d">

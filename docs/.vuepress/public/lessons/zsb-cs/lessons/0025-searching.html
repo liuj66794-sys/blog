@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 25 课 · 查找</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-cs/" target="_self">计算机课程目录</a><a href="/blog/prep/jisuanji/" target="_self">计算机学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -155,7 +156,7 @@ body>.topbar{top:var(--blog-nav-height)}
   <p>BF 为正（左边高）→ 右旋；BF 为负（右边高）→ 左旋。折线型（LR/RL）先把下面扭成直线型，再按 LL/RR 旋一次。</p>
 </div>
 
-<h2>三、先回忆，再自测</h2>
+<h2>六、先回忆，再自测</h2>
 <details class="recall">
   <summary>折半查找的判定树怎么画？树高是多少？</summary>
   <div class="recall-a">根 = (low+high)/2 向下取整，左右递归。树高 = ⌊log₂n⌋+1。想不起来就回头重看 8 个元素的例子。</div>
@@ -169,15 +170,15 @@ body>.topbar{top:var(--blog-nav-height)}
   <div class="recall-a">LL 右旋，RR 左旋；LR 先左旋再右旋，RL 先右旋再左旋。本质是把“折线”先扭成“直线”，再旋一次。</div>
 </details>
 
-<h2>四、测验（点击选项作答）</h2>
+<h2>七、测验（点击选项作答）</h2>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">1. 对长度为 11 的顺序表做等概率顺序查找，查找成功时的 ASL 为</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">5</li>
-    <li data-opt="b">6</li>
-    <li data-opt="c">5.5</li>
-    <li data-opt="d">11</li>
+    <li data-opt="b">5.5</li>
+    <li data-opt="c">11</li>
+    <li data-opt="d">6</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">顺序查找 ASL<sub>成功</sub>=(n+1)/2，代入 n=11 得 6。注意区分“平均比较次数”与“最多比较次数”。</p>
@@ -195,13 +196,13 @@ body>.topbar{top:var(--blog-nav-height)}
   <p class="quiz-expl">折半查找需要随机存取，因此只适用于有序的顺序表；链表无法直接定位中间元素。</p>
 </div>
 
-<div class="quiz" data-answer="c">
+<div class="quiz" data-answer="d">
   <p class="quiz-q">3. 散列表表长 m=15，用除留余数法 H(key)=key%p 时，p 最好取</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">15</li>
     <li data-opt="b">14</li>
-    <li data-opt="c">13</li>
-    <li data-opt="d">12</li>
+    <li data-opt="c">12</li>
+    <li data-opt="d">13</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">除留余数法要求 p 取小于等于表长 m 的质数。15 以内最大质数是 13。</p>
@@ -210,20 +211,20 @@ body>.topbar{top:var(--blog-nav-height)}
 <div class="quiz" data-answer="d">
   <p class="quiz-q">4. 关于散列表冲突处理，下列说法正确的是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">平方探测只加不减</li>
-    <li data-opt="b">线性探测适合频繁插删</li>
-    <li data-opt="c">拉链法容易产生聚集</li>
+    <li data-opt="a">平方探测的增量只往一个方向加</li>
+    <li data-opt="b">线性探测适合插入删除频繁的场合</li>
+    <li data-opt="c">拉链法最容易产生记录堆积</li>
     <li data-opt="d">同义词指映射到同一地址的关键字</li>
   </ol>
   <p class="quiz-feedback"></p>
   <p class="quiz-expl">平方探测增量为 1²,−1²,2²,−2²…；频繁插删适合拉链法；线性探测易产生聚集。同义词定义正确。</p>
 </div>
 
-<div class="quiz" data-answer="b">
+<div class="quiz" data-answer="a">
   <p class="quiz-q">5. 在 BST 中删除一个左右子树都非空的结点，正确的替换做法是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">用任意叶子结点替换</li>
-    <li data-opt="b">用左子树最大或右子树最小替换</li>
+    <li data-opt="a">用左子树最大或右子树最小替换</li>
+    <li data-opt="b">用任意叶子结点替换</li>
     <li data-opt="c">用右子树最大结点替换</li>
     <li data-opt="d">直接删除并连接两个孩子</li>
   </ol>
@@ -245,7 +246,7 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <div class="task">
   <p class="task-title">课后任务（约 20 分钟）</p>
-  <p>① 打开 数据结构/17-查找，重做正文中的两道散列推演例（地址 0~16 的线性探测题、以及 {32,75,63,48,94,25,36,18} 的构造与 ASL 计算），遮住答案独立完成。② 完成笔记末尾 自测问题 Q1–Q7，口头作答，卡壳的题目标 ⭐️ 第二天再测。</p>
+  <p>① 打开 数据结构/17-查找，重做正文中的两道散列推演例（地址 0~16 的线性探测题、以及 {32,75,63,48,94,25,36,18} 的构造与 ASL 计算），遮住答案独立完成。② 完成笔记末尾 自测问题 Q1–Q7，口头作答，卡壳的题目标 ⭐️ 第二天再测。③ 遮住笔记 17-查找 §5 的答案，亲手推演 AVL 插入序列 4,6,14,15,10,19,2,1：逐个插入，每次标出失衡结点与旋转类型（LL/RR/LR/RL），最后对照笔记给出的最终树核对。</p>
 </div>
 
 <h2>参考资料</h2>

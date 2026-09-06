@@ -6,6 +6,7 @@
 <title>课程 08 · 句法 — 专升本英语</title>
 <link rel="stylesheet" href="../assets/course.css">
 <script defer src="../assets/quiz.js"></script>
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body>
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-english/" target="_self">英语课程目录</a><a href="/blog/prep/yingyu/" target="_self">英语学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -75,7 +76,7 @@ body>.topbar{top:var(--blog-nav-height)}
 <table>
   <tr><th>成分</th><th>词性</th><th>位置</th><th>例句</th></tr>
   <tr><td><strong>① 主语</strong>：句子所描述的事件中的主角</td><td>n.（名词、代词、数词、动词不定式、动名词、句子等均可）</td><td>谓语动词之前</td><td class="en"><b>She</b> likes chocolate. / <b>The book</b> is not mine.</td></tr>
-  <tr><td><strong>② 谓语</strong>：主语发出来的动作或状态</td><td>v.</td><td>——（一句话有且只有一个谓语动词）</td><td class="en">We all <b>like</b> studying English. / The dog in the next door never <b>stops</b> barking.（隔壁的狗一直叫个不停。）</td></tr>
+  <tr><td><strong>② 谓语</strong>：主语发出来的动作或状态</td><td>v.</td><td>——（一句话有且只有一个谓语动词）</td><td class="en">We all <b>like</b> studying English. / Tom <b>goes</b> to school every day. / The dog in the next door never <b>stops</b> barking.（隔壁的狗一直叫个不停。）</td></tr>
   <tr><td><strong>③ 宾语</strong>：谓语动作的承受者或接受者</td><td>n.</td><td>v. 后 / 介词后</td><td class="en">She likes <b>chocolate</b>. / He saw <b>her</b>. / They enjoy <b>reading</b>. / I listen to <b>music</b> every morning.（介词后宾语）</td></tr>
   <tr><td><strong>④ 宾语补足语</strong>：对宾语进行补充说明</td><td>任意</td><td>宾语之后</td><td class="en">I heard a bird <b>singing</b>. / My mother made me <b>happy</b>.</td></tr>
   <tr><td><strong>⑤ 系动词</strong>：连接主语和表语的动词</td><td>v.</td><td>——</td><td class="en">I <b>am</b> happy. / They <b>look</b> very tired after the trip.</td></tr>
@@ -110,6 +111,11 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <h2>课堂练习</h2>
 <div id="quiz"></div>
+
+<h3>随堂练习 · 前置讲义 P22：判断下列句子的全部划线成分（课件原题，课件已给答案）</h3>
+<p>课件原题要求判断下面两个句子中<strong>全部划线成分</strong>（共 12 处）。每题对应一个划线部分，<strong>加粗</strong>处为该题所问成分，其余划线成分以 <u>下划线</u> 标出；答案与解析采用课件原答案：</p>
+<p class="ex en">1. <u>Google</u>, <u>a famous Internet company</u>, <u>earns</u> <u>billions of</u> <u>dollars</u> <u>every year</u>.<br>2. <u>I</u> <u>bought</u> <u>a</u> <u>new</u> <u>English</u> <u>book</u> <u>at the bookstore</u> <u>yesterday</u>.</p>
+<div id="quiz-p22"></div>
 
 <h2>口诀卡</h2>
 <div class="callout mn"><span class="cap">本课全部口诀</span>
@@ -158,6 +164,45 @@ document.addEventListener('DOMContentLoaded', function () {
     { q: 'He knows <b>that she likes playing football</b>.<br>划线部分在句中作什么成分？',
       opts: ['A. 宾语', 'B. 表语', 'C. 定语', 'D. 状语'], a: 0,
       why: '笔记例 1：该从句整体作 knows 的宾语。区分主从句的方法：找连词，连词后面的那句话就是从句。' }
+  ]);
+
+  Quiz.render('#quiz-p22', [
+    { q: '原句 1：<br><u><b>Google</b></u>, <u>a famous Internet company</u>, <u>earns</u> <u>billions of</u> <u>dollars</u> <u>every year</u>.<br>句中加粗的 Google 作什么成分？',
+      opts: ['A. 主语', 'B. 谓语', 'C. 宾语', 'D. 同位语'], a: 0,
+      why: '课件原答案：Google（主语）。' },
+    { q: '原句 1：<br><u>Google</u>, <u><b>a famous Internet company</b></u>, <u>earns</u> <u>billions of</u> <u>dollars</u> <u>every year</u>.<br>句中加粗的 a famous Internet company 作什么成分？',
+      opts: ['A. 主语', 'B. 同位语', 'C. 定语', 'D. 宾语'], a: 1,
+      why: '课件原答案：a famous Internet company（同位语）。' },
+    { q: '原句 1：<br><u>Google</u>, <u>a famous Internet company</u>, <u><b>earns</b></u> <u>billions of</u> <u>dollars</u> <u>every year</u>.<br>句中加粗的 earns 作什么成分？',
+      opts: ['A. 宾语', 'B. 定语', 'C. 谓语', 'D. 状语'], a: 2,
+      why: '课件原答案：earns（谓语）。' },
+    { q: '原句 1：<br><u>Google</u>, <u>a famous Internet company</u>, <u>earns</u> <u><b>billions of</b></u> <u>dollars</u> <u>every year</u>.<br>句中加粗的 billions of 作什么成分？',
+      opts: ['A. 定语', 'B. 宾语', 'C. 同位语', 'D. 表语'], a: 0,
+      why: '课件原答案：billions of（定语）。' },
+    { q: '原句 1：<br><u>Google</u>, <u>a famous Internet company</u>, <u>earns</u> <u>billions of</u> <u><b>dollars</b></u> <u>every year</u>.<br>句中加粗的 dollars 作什么成分？',
+      opts: ['A. 主语', 'B. 宾语', 'C. 谓语', 'D. 定语'], a: 1,
+      why: '课件原答案：dollars（宾语）。' },
+    { q: '原句 1：<br><u>Google</u>, <u>a famous Internet company</u>, <u>earns</u> <u>billions of</u> <u>dollars</u> <u><b>every year</b></u>.<br>句中加粗的 every year 作什么成分？',
+      opts: ['A. 地点状语', 'B. 时间状语', 'C. 宾语补足语', 'D. 定语'], a: 1,
+      why: '课件原答案：every year（时间状语）。' },
+    { q: '原句 2：<br><u><b>I</b></u> <u>bought</u> <u>a</u> <u>new</u> <u>English</u> <u>book</u> <u>at the bookstore</u> <u>yesterday</u>.<br>句中加粗的 I 作什么成分？',
+      opts: ['A. 主语', 'B. 谓语', 'C. 宾语', 'D. 定语'], a: 0,
+      why: '课件原答案：I（主语）。' },
+    { q: '原句 2：<br><u>I</u> <u><b>bought</b></u> <u>a</u> <u>new</u> <u>English</u> <u>book</u> <u>at the bookstore</u> <u>yesterday</u>.<br>句中加粗的 bought 作什么成分？',
+      opts: ['A. 主语', 'B. 谓语', 'C. 宾语', 'D. 状语'], a: 1,
+      why: '课件原答案：bought（谓语）。' },
+    { q: '原句 2：<br><u>I</u> <u>bought</u> <u><b>a</b></u> <u><b>new</b></u> <u><b>English</b></u> <u>book</u> <u>at the bookstore</u> <u>yesterday</u>.<br>句中三个加粗的划线词 a / new / English 共同作什么成分？',
+      opts: ['A. 宾语', 'B. 定语', 'C. 状语', 'D. 同位语'], a: 1,
+      why: '课件原答案：a / new / English（定语）。' },
+    { q: '原句 2：<br><u>I</u> <u>bought</u> <u>a</u> <u>new</u> <u>English</u> <u><b>book</b></u> <u>at the bookstore</u> <u>yesterday</u>.<br>句中加粗的 book 作什么成分？',
+      opts: ['A. 定语', 'B. 宾语', 'C. 谓语', 'D. 主语'], a: 1,
+      why: '课件原答案：book（宾语）。' },
+    { q: '原句 2：<br><u>I</u> <u>bought</u> <u>a</u> <u>new</u> <u>English</u> <u>book</u> <u><b>at the bookstore</b></u> <u>yesterday</u>.<br>句中加粗的 at the bookstore 作什么成分？',
+      opts: ['A. 宾语', 'B. 定语', 'C. 地点状语', 'D. 时间状语'], a: 2,
+      why: '课件原答案：at the bookstore（地点状语）。' },
+    { q: '原句 2：<br><u>I</u> <u>bought</u> <u>a</u> <u>new</u> <u>English</u> <u>book</u> <u>at the bookstore</u> <u><b>yesterday</b></u>.<br>句中加粗的 yesterday 作什么成分？',
+      opts: ['A. 时间状语', 'B. 地点状语', 'C. 定语', 'D. 宾语'], a: 0,
+      why: '课件原答案：yesterday（时间状语）。' }
   ]);
 });
 </script>

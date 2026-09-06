@@ -8,6 +8,7 @@
 <script defer src="../assets/math.js"></script>
 <script defer src="../assets/quiz.js"></script>
 <script defer src="../assets/plot.js"></script>
+<link rel="icon" type="image/png" href="/blog/avatar.png">
 </head>
 <body data-lesson-id="0015">
 <nav data-blog-nav-bar="2" aria-label="学习导航"><div class="blog-lesson-nav-inner"><a href="/blog/" target="_self">首页</a><a href="/blog/courses/" target="_self">课程总览</a><a href="/blog/prep/" target="_self">备考中心</a><a class="blog-lesson-nav-back" href="/blog/courses/zsb-math/" target="_self">高数课程目录</a><a href="/blog/prep/gaoshu/" target="_self">高数学习计划</a></div></nav><div data-blog-nav-spacer aria-hidden="true"></div>
@@ -128,14 +129,14 @@ body>.topbar{top:var(--blog-nav-height)}
 
 <div class="plot-row">
   <div class="plot" data-fn="(x*x*x)/(x*x+2*x-3)" data-xmin="-5" data-xmax="5" data-ymin="-10" data-ymax="10" data-w="300" data-h="200" data-vlines="1,-3" data-clipy="1.2" data-label="$y=\dfrac{x^3}{x^2+2x-3}$：垂直渐近线 $x=1,\ x=-3$"></div>
-  <div class="plot" data-fn="Math.sqrt(x*x+x+1)" data-fn2="Math.abs(x)+0.5" data-xmin="-4" data-xmax="4" data-ymin="-2" data-ymax="6" data-w="300" data-h="200" data-label="$y=\sqrt{x^2+x+1}$ 与其两条斜渐近线"></div>
+  <div class="plot" data-fn="Math.sqrt(x*x+x+1)" data-fn2="Math.abs(x)-0.5" data-xmin="-4" data-xmax="4" data-ymin="-2" data-ymax="6" data-w="300" data-h="200" data-label="$y=\sqrt{x^2+x+1}$ 与其两条斜渐近线"></div>
 </div>
 
 <div class="example">
   <p><span class="ex-tag">例 1（斜渐近线全流程）</span>求 $y=\sqrt{x^{2}+x+1}$ 的斜渐近线。</p>
   <details><summary>先自己算 $k,b$，再展开（夏讲教材 P37）</summary>
     <p><strong>$x\to+\infty$</strong>：$k=\lim\dfrac{f(x)}{x}=1$；$b=\lim\left(\sqrt{x^2+x+1}-x\right)=\lim\dfrac{x+1}{\sqrt{x^2+x+1}+x}=\dfrac12$ ⇒ $y=x+\dfrac12$。</p>
-    <p><strong>$x\to-\infty$</strong>：$k=\lim\dfrac{\sqrt{x^2+x+1}}{x}=-1$（$\sqrt{x^2}=-x$！）；$b=\lim\left(\sqrt{x^2+x+1}+x\right)=\lim\dfrac{x+1}{\sqrt{x^2+x+1}-x}=-1$ ⇒ $y=-x-1$。</p>
+    <p><strong>$x\to-\infty$</strong>：$k=\lim\dfrac{\sqrt{x^2+x+1}}{x}=-1$（$\sqrt{x^2}=-x$！）；$b=\lim\left(\sqrt{x^2+x+1}+x\right)=\lim\dfrac{x+1}{\sqrt{x^2+x+1}-x}=-\dfrac12$（分母 $\sim-2x$，负号别丢）⇒ $y=-x-\dfrac12$。</p>
     <p>两条都要算——右渐近线不能想当然推广到左边。</p>
   </details>
 </div>
@@ -165,13 +166,13 @@ body>.topbar{top:var(--blog-nav-height)}
   <span class="quiz-no">随堂测 4</span>
   <p class="quiz-q">曲线 $y=\dfrac{x^{2}-4x+3}{x^{2}+x-2}$ 的渐近线情况是（秋讲练习 26(3)）</p>
   <div class="quiz-opts">
-    <button data-k="A">仅垂直渐近线 $x=-2$；$x=1$ 处极限存在，不是渐近线</button>
+    <button data-k="A">垂直渐近线 $x=-2$；$x=1$ 处极限存在，不是渐近线</button>
     <button data-k="B">垂直渐近线 $x=-2$ 与 $x=1$</button>
     <button data-k="C">没有渐近线</button>
     <button data-k="D">仅有水平渐近线</button>
   </div>
   <div class="quiz-verdict"></div>
-  <div class="quiz-exp">因式分解 $\dfrac{(x-1)(x-3)}{(x+2)(x-1)}$：$x=-2$ 处分母 $\to0$ ⇒ 垂直渐近线；$x=1$ 被约分<strong>约掉了</strong>，极限 $=\dfrac{1-3}{1+2}=-\dfrac23$ 存在——只是可去间断点，不是渐近线。另有水平渐近线 $y=1$，但 A 对"垂直渐近线部分"的描述是本课考点。</div>
+  <div class="quiz-exp">因式分解 $\dfrac{(x-1)(x-3)}{(x+2)(x-1)}$：$x=-2$ 处分母 $\to0$ ⇒ 垂直渐近线；$x=1$ 被约分<strong>约掉了</strong>，极限 $=\dfrac{1-3}{1+2}=-\dfrac23$ 存在——只是可去间断点，不是渐近线（B 恰栽在这）。另有水平渐近线 $y=1$，A 对垂直渐近线与 $x=1$ 的判断完全准确。</div>
 </div>
 
 <div class="quiz" data-answer="D">
