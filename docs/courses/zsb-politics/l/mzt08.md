@@ -7,7 +7,7 @@ banner: /images/covers/zsb-politics.png
 
 > 毛中特 · 第八章 ｜ 闪卡 22 ｜ 选择 5 ｜ 问答 7
 
-> 阅读讲义后，可以[**打开互动练习**](/blog/lessons/zsb-politics/lessons/mzt08.html)完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
+> 这是本课阅读版。[**打开互动课程**](/blog/lessons/zsb-politics/lessons/mzt08.html)即可在同一页阅读、作答与复习，学习记录保存在此设备。
 
 [政治 · 专升本互动课程](/blog/lessons/zsb-politics/index.html)
 
@@ -355,7 +355,7 @@ banner: /images/covers/zsb-politics.png
 
 ### 主观题 · 先自己写要点，再展开对答案
 
-::: details 简述科学发展观的科学内涵。
+:::: details 简述科学发展观的科学内涵。
 
 ::: details 答案要点
 
@@ -363,9 +363,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 为什么说以人为本是科学发展观的核心立场？坚持以人为本有哪些要求？
+:::: details 为什么说以人为本是科学发展观的核心立场？坚持以人为本有哪些要求？
 
 ::: details 答案要点
 
@@ -373,9 +373,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述"全面协调可持续"的基本要求。
+:::: details 简述"全面协调可持续"的基本要求。
 
 ::: details 答案要点
 
@@ -383,9 +383,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述构建社会主义和谐社会的总要求。
+:::: details 简述构建社会主义和谐社会的总要求。
 
 ::: details 答案要点
 
@@ -393,9 +393,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述全面提高党的建设科学化水平的总要求。
+:::: details 简述全面提高党的建设科学化水平的总要求。
 
 ::: details 答案要点
 
@@ -403,9 +403,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述科学发展观的主要内容。
+:::: details 试述科学发展观的主要内容。
 
 ::: details 答案要点
 
@@ -413,9 +413,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述科学发展观的历史地位。
+:::: details 试述科学发展观的历史地位。
 
 ::: details 答案要点
 
@@ -423,7 +423,7 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
 ### 选择题 · 点击选项即时判分
 

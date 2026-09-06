@@ -21,6 +21,15 @@ export const topicCourses = [
   { slug: 'policy', name: '政策学习', mark: '文', tone: 'amber', description: '早期政治错题复盘与学习记录，保留查阅。', topics: '历史课程', group: '已归档' },
 ]
 
+const topicEntrances = {
+  'pi-agent': '/lessons/pi-agent/lessons/0001-typescript-setup-first-program.html',
+  'engineering-skills': '/lessons/engineering-skills/',
+  'a-shares': '/lessons/a-shares/lessons/0001-stock-is-ownership.html',
+  english: '/lessons/english/lessons/0001-error-analysis-and-plan.html',
+  policy: '/lessons/policy/lessons/0001-party-history-events.html',
+}
+topicCourses.forEach(course => { course.interactive = topicEntrances[course.slug] })
+
 export const learningEntrances = [
   { title: '课程总览', subtitle: '循序渐进，读懂每一课', href: '/courses/', icon: 'ph:books' },
   { title: '备考中心', subtitle: '四科课程与每周学习计划', href: '/prep/', icon: 'ph:calendar-check' },

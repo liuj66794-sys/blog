@@ -7,7 +7,7 @@ banner: /images/covers/zsb-politics.png
 
 > 毛中特 · 第二章 ｜ 闪卡 19 ｜ 选择 4 ｜ 问答 6
 
-> 阅读讲义后，可以[**打开互动练习**](/blog/lessons/zsb-politics/lessons/mzt02.html)完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
+> 这是本课阅读版。[**打开互动课程**](/blog/lessons/zsb-politics/lessons/mzt02.html)即可在同一页阅读、作答与复习，学习记录保存在此设备。
 
 [政治 · 专升本互动课程](/blog/lessons/zsb-politics/index.html)
 
@@ -326,7 +326,7 @@ banner: /images/covers/zsb-politics.png
 
 ### 主观题 · 先自己写要点，再展开对答案
 
-::: details 简述新民主主义革命总路线的完整内容，并说明它指明了革命的哪些基本问题。
+:::: details 简述新民主主义革命总路线的完整内容，并说明它指明了革命的哪些基本问题。
 
 ::: details 答案要点
 
@@ -334,9 +334,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述新民主主义的基本纲领。
+:::: details 简述新民主主义的基本纲领。
 
 ::: details 答案要点
 
@@ -344,9 +344,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 为什么中国革命必须走农村包围城市、武装夺取政权的道路？
+:::: details 为什么中国革命必须走农村包围城市、武装夺取政权的道路？
 
 ::: details 答案要点
 
@@ -354,9 +354,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述建立和巩固统一战线的实践经验。
+:::: details 简述建立和巩固统一战线的实践经验。
 
 ::: details 答案要点
 
@@ -364,9 +364,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述新民主主义革命与旧民主主义革命相比的"新"，以及它与社会主义革命的区别和联系。
+:::: details 试述新民主主义革命与旧民主主义革命相比的"新"，以及它与社会主义革命的区别和联系。
 
 ::: details 答案要点
 
@@ -374,9 +374,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述统一战线、武装斗争、党的建设三大法宝的内容及相互关系。
+:::: details 试述统一战线、武装斗争、党的建设三大法宝的内容及相互关系。
 
 ::: details 答案要点
 
@@ -384,7 +384,7 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
 ### 选择题 · 点击选项即时判分
 

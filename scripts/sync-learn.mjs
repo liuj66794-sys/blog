@@ -37,11 +37,13 @@ import {
 } from './lib/learn-utils.mjs'
 import { lessonHtmlToMarkdown } from './lib/lesson-convert.mjs'
 import { injectLessonNav } from './lib/lesson-nav.mjs'
+import { installLearningAssets } from './lib/lesson-assets.mjs'
 import { knowledgeTitle, normalizeKnowledgeDocument, referenceTitle, resolveRecordLesson, stripLeadingH1 } from './lib/knowledge-content.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DOCS = path.resolve(__dirname, '..', 'docs')
 const PUBLIC_LESSONS = path.join(DOCS, '.vuepress', 'public', 'lessons')
+installLearningAssets(path.dirname(PUBLIC_LESSONS))
 const LEARN_ROOT = process.env.LEARN_ROOT || 'D:\\01-Documents\\learn'
 const FORCE = process.argv.includes('--force')
 /** 镜像暂存目录（.vuepress 下，不进 public、不随构建拷贝），换入成功/失败都在结束时清理 */
@@ -375,16 +377,15 @@ function syncCourse(p, lessons) {
   const reviewCell = (no) => (postByNo.has(no) ? `[学习复盘](/blog/${p.slug}/${postByNo.get(no)}/)` : '—')
 
   // lessonMd 开启：课次直接链站内全文页；否则跳 HTML 镜像（新标签页，保留随堂测交互）
-  const lessonLink = (l) => lessonMd
-    ? `[${l.title}](${cardLink(l.no)})`
-    : `[${l.title}](${withBase(`/lessons/${p.slug}/lessons/${l.file}`)}){target="_blank"}`
+  const lessonLink = (l) => `[${l.title}](${withBase(`/lessons/${p.slug}/lessons/${l.file}`)})`
+    + (lessonMd ? ` · [阅读版](${cardLink(l.no)})` : '')
 
   const hasModules = lessons.some((l) => l.module)
   let modulePages = []
   // 讲义呈现方式说明：全文页课程与镜像跳转课程的文案分流
   const lessonNote = lessonMd
-    ? '> 正文站内直读（已纳入全文搜索）；每课页内附交互版入口，随堂测可点击作答。'
-    : '> 讲义为独立页面（含随堂测交互），点击在新标签页打开。'
+    ? '> 点击课名进入互动课，边读边练；阅读版保留完整讲义，便于查阅和搜索。'
+    : '> 点击课名进入互动课，在同一页阅读与练习。'
 
   if (hasModules) {
     const groups = new Map()
@@ -439,7 +440,7 @@ function syncCourse(p, lessons) {
       navParts = [navParts[0], navParts[1], ...conv.nav.middle.map((m) => `[${m.text}](${m.url})`), navParts[2]]
       const interactive = withBase(`/lessons/${p.slug}/lessons/${l.file}`)
       const metaLine = conv.metaLine ? `**${conv.metaLine}**\n\n` : ''
-      pageBody = `${metaLine}> 阅读讲义后，可打开[**互动练习**](${interactive})作答随堂测，并随时返回课程。
+      pageBody = `${metaLine}> 这是本课阅读版。打开[**互动课程**](${interactive})，即可在同一页阅读与练习。
 
 ${conv.body}
 

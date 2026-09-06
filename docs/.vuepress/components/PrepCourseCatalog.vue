@@ -1,13 +1,13 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { withBase } from 'vuepress/client'
 import { prepCatalog } from '../prep-catalog.mjs'
 import { filterPrepLessons } from '../../../scripts/lib/prep-catalog.mjs'
+import { useCourseFilters } from '../composables/useCourseFilters.mjs'
 
 const props = defineProps({ slug: { type: String, required: true } })
 const course = computed(() => prepCatalog[props.slug])
-const query = ref('')
-const group = ref('')
+const { query, group } = useCourseFilters()
 const groups = computed(() => [...new Set(course.value.lessons.map((lesson) => lesson.group).filter(Boolean))])
 const matches = computed(() => filterPrepLessons(course.value.lessons, query.value, group.value))
 </script>
@@ -16,7 +16,7 @@ const matches = computed(() => filterPrepLessons(course.value.lessons, query.val
   <section class="prep-catalog" aria-label="课程目录">
     <div class="prep-catalog__intro">
       <p class="learning-meta">{{ course.count }} 节讲义 · 内容更新 {{ course.updatedAt }}</p>
-      <p>按知识点找到一课，先读讲义，再用互动练习检验理解。</p>
+      <p>按知识点找到一课，在互动页边读边练；阅读版保留完整讲义，方便查阅。</p>
       <div class="subject-actions">
         <a :href="withBase(course.interactive)">开始互动学习 →</a>
         <a :href="withBase(`/prep/${course.prep}/`)">{{ course.subject }}学习计划</a>
@@ -42,11 +42,11 @@ const matches = computed(() => filterPrepLessons(course.value.lessons, query.val
       <li v-for="lesson in matches" :key="lesson.id" class="prep-catalog__lesson">
         <div>
           <span class="learning-meta">{{ lesson.group }} {{ lesson.label }}</span>
-          <a class="prep-catalog__title" :href="withBase(lesson.href)">{{ lesson.title }}</a>
+          <a class="prep-catalog__title" :href="withBase(lesson.interactive)">{{ lesson.title }}</a>
         </div>
         <div class="prep-catalog__actions">
-          <a :href="withBase(lesson.href)" :aria-label="`阅读讲义：${lesson.title}`">阅读讲义</a>
-          <a :href="withBase(lesson.interactive)" :aria-label="`互动练习：${lesson.title}`">互动练习 →</a>
+          <a :href="withBase(lesson.interactive)" :aria-label="`互动练习：${lesson.title}`">开始学习 →</a>
+          <a :href="withBase(lesson.href)" :aria-label="`阅读讲义：${lesson.title}`">阅读版</a>
         </div>
       </li>
     </ol>

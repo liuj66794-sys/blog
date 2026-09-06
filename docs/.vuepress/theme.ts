@@ -66,8 +66,10 @@ export default defineThemeConfig({
     { text: '备考中心', link: '/prep/', activeMatch: '^/prep/' },
     { text: '知识库', link: '/knowledge/' },
     { text: '学习手记', link: '/blog/' },
-    { text: '项目', link: '/projects/' },
-    { text: '找我开发', link: '/hire/' },
+    { text: '更多', items: [
+      { text: '项目', link: '/projects/' },
+      { text: '找我开发', link: '/hire/' },
+    ] },
   ],
 
   collections: [

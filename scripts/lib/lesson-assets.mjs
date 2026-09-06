@@ -63,6 +63,16 @@ export function stripMissingFontUrls(css, cssDir) {
 
 /** Website-specific fixes live in the repository; mirroring never edits the private source. */
 export function installLessonRuntime(courseRoot, slug) {
-  if (slug !== 'zsb-math') return
-  fs.copyFileSync(new URL('../runtime/math-quiz.js', import.meta.url), path.join(courseRoot, 'assets', 'quiz.js'))
+  const runtimes = { 'zsb-math': 'math', 'zsb-english': 'english', 'zsb-politics': 'politics', 'zsb-cs': 'cs' }
+  if (!runtimes[slug]) return
+  fs.mkdirSync(path.join(courseRoot, 'assets'), { recursive: true })
+  fs.copyFileSync(new URL(`../runtime/${runtimes[slug]}-quiz.js`, import.meta.url), path.join(courseRoot, 'assets', 'quiz.js'))
+}
+
+export function installLearningAssets(publicRoot) {
+  const dest = path.join(publicRoot, 'learning')
+  fs.mkdirSync(dest, { recursive: true })
+  for (const file of ['learning-tokens.css', 'lesson-shell.css', 'lesson-shell.mjs', 'reading-state.mjs']) {
+    fs.copyFileSync(new URL(`../runtime/${file}`, import.meta.url), path.join(dest, file))
+  }
 }

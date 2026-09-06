@@ -342,7 +342,10 @@ function blockquoteToMarkdown(inner, ctx) {
 
 /** 容器包装（只允许 VuePress 核心容器名，见文件头注释） */
 function container(name, title, contentMd) {
-  return `::: ${name}${title ? ` ${title}` : ''}\n\n${contentMd.trim()}\n\n:::`
+  // An outer callout needs a longer fence than nested details, or its closing marker leaks into the page.
+  const innerFences = [...contentMd.matchAll(/^(:{3,})/gm)].map(match => match[1].length)
+  const fence = ':'.repeat(Math.max(3, ...innerFences.map(length => length + 1)))
+  return `${fence} ${name}${title ? ` ${title}` : ''}\n\n${contentMd.trim()}\n\n${fence}`
 }
 
 /**

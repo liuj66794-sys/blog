@@ -23,7 +23,7 @@ import { fileURLToPath } from 'node:url'
 import { withBase } from '../docs/.vuepress/site-meta.mjs'
 import { lessonHtmlToMarkdown } from './lib/lesson-convert.mjs'
 import { injectLessonNav } from './lib/lesson-nav.mjs'
-import { installLessonRuntime, stripMissingFontUrls } from './lib/lesson-assets.mjs'
+import { installLearningAssets, installLessonRuntime, stripMissingFontUrls } from './lib/lesson-assets.mjs'
 import { collectPrepLessons } from './lib/prep-catalog.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -429,7 +429,7 @@ function syncZsbCourse(c, entries) {
     ]
     const metaLine = conv.metaLine ? `> ${conv.metaLine}\n\n` : ''
     const interactive = withBase(`/lessons/${c.slug}/lessons/${e.file}`)
-    const body = `${metaLine}> 阅读讲义后，可以[**打开互动练习**](${interactive})完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
+    const body = `${metaLine}> 这是本课阅读版。[**打开互动课程**](${interactive})即可在同一页阅读、作答与复习，学习记录保存在此设备。
 
 ${conv.body}
 
@@ -507,6 +507,7 @@ function writeFileIfChanged(file, rendered) {
 /* ---------------- 主流程 ---------------- */
 
 const main = () => {
+  installLearningAssets(path.dirname(PUBLIC_LESSONS))
   // 环节 1：计划页（内容源缺失只跳过计划页，课程站镜像/转换照常）
   let parsed = null
   if (fs.existsSync(SOURCE)) {

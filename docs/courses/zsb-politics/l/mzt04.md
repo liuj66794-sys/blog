@@ -7,7 +7,7 @@ banner: /images/covers/zsb-politics.png
 
 > 毛中特 · 第四章 ｜ 闪卡 21 ｜ 选择 6 ｜ 问答 7
 
-> 阅读讲义后，可以[**打开互动练习**](/blog/lessons/zsb-politics/lessons/mzt04.html)完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
+> 这是本课阅读版。[**打开互动课程**](/blog/lessons/zsb-politics/lessons/mzt04.html)即可在同一页阅读、作答与复习，学习记录保存在此设备。
 
 [政治 · 专升本互动课程](/blog/lessons/zsb-politics/index.html)
 
@@ -252,7 +252,7 @@ banner: /images/covers/zsb-politics.png
 
 ### 主观题 · 先自己写要点，再展开对答案
 
-::: details 简述《论十大关系》的基本方针及其标志意义。
+:::: details 简述《论十大关系》的基本方针及其标志意义。
 
 ::: details 答案要点
 
@@ -260,9 +260,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述社会主义社会基本矛盾的内容、性质、特点和解决途径。
+:::: details 简述社会主义社会基本矛盾的内容、性质、特点和解决途径。
 
 ::: details 答案要点
 
@@ -270,9 +270,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述毛泽东提出的正确处理人民内部矛盾的具体方针。
+:::: details 简述毛泽东提出的正确处理人民内部矛盾的具体方针。
 
 ::: details 答案要点
 
@@ -280,9 +280,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述走中国工业化道路的总方针和"两条腿走路"的思路。
+:::: details 简述走中国工业化道路的总方针和"两条腿走路"的思路。
 
 ::: details 答案要点
 
@@ -290,9 +290,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述毛泽东关于社会主义社会矛盾学说的主要内容和意义。
+:::: details 试述毛泽东关于社会主义社会矛盾学说的主要内容和意义。
 
 ::: details 答案要点
 
@@ -300,9 +300,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述党对社会主义建设道路初步探索的意义。
+:::: details 试述党对社会主义建设道路初步探索的意义。
 
 ::: details 答案要点
 
@@ -310,9 +310,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述党对社会主义建设道路初步探索的经验教训。
+:::: details 试述党对社会主义建设道路初步探索的经验教训。
 
 ::: details 答案要点
 
@@ -320,7 +320,7 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
 ### 选择题 · 点击选项即时判分
 

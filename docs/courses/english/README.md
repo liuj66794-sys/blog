@@ -15,10 +15,10 @@ banner: /images/covers/english.png
 
 | 课次 | 讲义 | 复盘 |
 | --- | --- | --- |
-| 第 1 课 | [错题分析与学习计划 — 25道英语题（单选+翻译）](/courses/english/l/1/) | — |
-| 第 2 课 | [Day 1 练习 — 不定代词辨析](/courses/english/l/2/) | — |
-| 第 3 课 | [Day 2 练习 — 介词固定搭配](/courses/english/l/3/) | — |
-| 第 4 课 | [Day 3 练习 — 比较级结构](/courses/english/l/4/) | — |
+| 第 1 课 | [错题分析与学习计划 — 25道英语题（单选+翻译）](/blog/lessons/english/lessons/0001-error-analysis-and-plan.html) · [阅读版](/courses/english/l/1/) | — |
+| 第 2 课 | [Day 1 练习 — 不定代词辨析](/blog/lessons/english/lessons/0002-day1-indefinite-pronouns-practice.html) · [阅读版](/courses/english/l/2/) | — |
+| 第 3 课 | [Day 2 练习 — 介词固定搭配](/blog/lessons/english/lessons/0003-day2-preposition-collocations-practice.html) · [阅读版](/courses/english/l/3/) | — |
+| 第 4 课 | [Day 3 练习 — 比较级结构](/blog/lessons/english/lessons/0004-day3-comparative-structures-practice.html) · [阅读版](/courses/english/l/4/) | — |
 
 ## 延伸阅读
 

@@ -15,12 +15,12 @@ banner: /images/covers/pi-agent.png
 
 | 课次 | 讲义 | 复盘 |
 | --- | --- | --- |
-| 第 1 课 | [第 1 课 · 搭好环境：第一个 TypeScript 程序](/courses/pi-agent/l/1/) | — |
-| 第 2 课 | [第 2 课 · TypeScript 类型与接口](/courses/pi-agent/l/2/) | [学习复盘](/blog/pi-agent/0002-types-and-interfaces-for-tools/) |
-| 第 3 课 | [第 3 课 · 模块与 npm 脚本](/courses/pi-agent/l/3/) | [学习复盘](/blog/pi-agent/0003-modules-and-npm-scripts/) |
-| 第 4 课 | [第 4 课 · 异步与 async/await](/courses/pi-agent/l/4/) | [学习复盘](/blog/pi-agent/0004-async-await/) |
-| 第 5 课 | [第 5 课 · Node.js 文件系统：Agent 的手](/courses/pi-agent/l/5/) | [学习复盘](/blog/pi-agent/0005-nodejs-file-system/) |
-| 第 6 课 | [第 6 课 · 进程与子进程：Agent 跑命令的能力](/courses/pi-agent/l/6/) | — |
+| 第 1 课 | [第 1 课 · 搭好环境：第一个 TypeScript 程序](/blog/lessons/pi-agent/lessons/0001-typescript-setup-first-program.html) · [阅读版](/courses/pi-agent/l/1/) | — |
+| 第 2 课 | [第 2 课 · TypeScript 类型与接口](/blog/lessons/pi-agent/lessons/0002-types-and-interfaces-for-tools.html) · [阅读版](/courses/pi-agent/l/2/) | [学习复盘](/blog/pi-agent/0002-types-and-interfaces-for-tools/) |
+| 第 3 课 | [第 3 课 · 模块与 npm 脚本](/blog/lessons/pi-agent/lessons/0003-modules-and-npm-scripts.html) · [阅读版](/courses/pi-agent/l/3/) | [学习复盘](/blog/pi-agent/0003-modules-and-npm-scripts/) |
+| 第 4 课 | [第 4 课 · 异步与 async/await](/blog/lessons/pi-agent/lessons/0004-async-await.html) · [阅读版](/courses/pi-agent/l/4/) | [学习复盘](/blog/pi-agent/0004-async-await/) |
+| 第 5 课 | [第 5 课 · Node.js 文件系统：Agent 的手](/blog/lessons/pi-agent/lessons/0005-nodejs-file-system.html) · [阅读版](/courses/pi-agent/l/5/) | [学习复盘](/blog/pi-agent/0005-nodejs-file-system/) |
+| 第 6 课 | [第 6 课 · 进程与子进程：Agent 跑命令的能力](/blog/lessons/pi-agent/lessons/0006-nodejs-child-process.html) · [阅读版](/courses/pi-agent/l/6/) | — |
 
 ## 延伸阅读
 

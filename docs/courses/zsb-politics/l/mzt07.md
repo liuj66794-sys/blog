@@ -7,7 +7,7 @@ banner: /images/covers/zsb-politics.png
 
 > 毛中特 · 第七章 ｜ 闪卡 16 ｜ 选择 7 ｜ 问答 7
 
-> 阅读讲义后，可以[**打开互动练习**](/blog/lessons/zsb-politics/lessons/mzt07.html)完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
+> 这是本课阅读版。[**打开互动课程**](/blog/lessons/zsb-politics/lessons/mzt07.html)即可在同一页阅读、作答与复习，学习记录保存在此设备。
 
 [政治 · 专升本互动课程](/blog/lessons/zsb-politics/index.html)
 
@@ -310,7 +310,7 @@ banner: /images/covers/zsb-politics.png
 
 ### 主观题 · 先自己写要点，再展开对答案
 
-::: details 简述“三个代表”重要思想的集中概括及三者的辩证关系。
+:::: details 简述“三个代表”重要思想的集中概括及三者的辩证关系。
 
 ::: details 答案要点
 
@@ -318,9 +318,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述贯彻“三个代表”重要思想的根本要求。
+:::: details 简述贯彻“三个代表”重要思想的根本要求。
 
 ::: details 答案要点
 
@@ -328,9 +328,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述我国加入世界贸易组织谈判中阐明的原则。
+:::: details 简述我国加入世界贸易组织谈判中阐明的原则。
 
 ::: details 答案要点
 
@@ -338,9 +338,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述加强和改进党的作风建设的核心问题及“两个最大”。
+:::: details 简述加强和改进党的作风建设的核心问题及“两个最大”。
 
 ::: details 答案要点
 
@@ -348,9 +348,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述为什么发展是党执政兴国的第一要务，以及如何紧紧把握发展这个第一要务。
+:::: details 试述为什么发展是党执政兴国的第一要务，以及如何紧紧把握发展这个第一要务。
 
 ::: details 答案要点
 
@@ -358,9 +358,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述建设社会主义政治文明最根本的要求及其制度安排。
+:::: details 试述建设社会主义政治文明最根本的要求及其制度安排。
 
 ::: details 答案要点
 
@@ -368,9 +368,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述“三个代表”重要思想的历史地位。
+:::: details 试述“三个代表”重要思想的历史地位。
 
 ::: details 答案要点
 
@@ -378,7 +378,7 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
 ### 选择题 · 点击选项即时判分
 

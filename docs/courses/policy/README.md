@@ -15,11 +15,11 @@ banner: /images/covers/policy.png
 
 | 课次 | 讲义 | 复盘 |
 | --- | --- | --- |
-| 第 1 课 | [课程1：党史重大事件辨析 - 广东专升本政治](/courses/policy/l/1/) | — |
-| 第 2 课 | [课程2：毛泽东著作与论断对应 - 广东专升本政治](/courses/policy/l/2/) | — |
-| 第 3 课 | [课程3：党的建设与方针辨析 - 广东专升本政治](/courses/policy/l/3/) | — |
-| 第 4 课 | [课程4：军队建设关键事件 - 广东专升本政治](/courses/policy/l/4/) | — |
-| 第 5 课 | [课程5：新民主主义革命理论 - 广东专升本政治](/courses/policy/l/5/) | — |
+| 第 1 课 | [课程1：党史重大事件辨析 - 广东专升本政治](/blog/lessons/policy/lessons/0001-party-history-events.html) · [阅读版](/courses/policy/l/1/) | — |
+| 第 2 课 | [课程2：毛泽东著作与论断对应 - 广东专升本政治](/blog/lessons/policy/lessons/0002-mao-works-assertions.html) · [阅读版](/courses/policy/l/2/) | — |
+| 第 3 课 | [课程3：党的建设与方针辨析 - 广东专升本政治](/blog/lessons/policy/lessons/0003-party-building.html) · [阅读版](/courses/policy/l/3/) | — |
+| 第 4 课 | [课程4：军队建设关键事件 - 广东专升本政治](/blog/lessons/policy/lessons/0004-military-building.html) · [阅读版](/courses/policy/l/4/) | — |
+| 第 5 课 | [课程5：新民主主义革命理论 - 广东专升本政治](/blog/lessons/policy/lessons/0005-new-democracy-theory.html) · [阅读版](/courses/policy/l/5/) | — |
 
 ## 延伸阅读
 

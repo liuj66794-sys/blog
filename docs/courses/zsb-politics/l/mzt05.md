@@ -7,7 +7,7 @@ banner: /images/covers/zsb-politics.png
 
 > 毛中特 · 第五章 ｜ 闪卡 23 ｜ 选择 5 ｜ 问答 5
 
-> 阅读讲义后，可以[**打开互动练习**](/blog/lessons/zsb-politics/lessons/mzt05.html)完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
+> 这是本课阅读版。[**打开互动课程**](/blog/lessons/zsb-politics/lessons/mzt05.html)即可在同一页阅读、作答与复习，学习记录保存在此设备。
 
 [政治 · 专升本互动课程](/blog/lessons/zsb-politics/index.html)
 
@@ -167,7 +167,7 @@ banner: /images/covers/zsb-politics.png
 
 ### 主观题 · 先自己写要点，再展开对答案
 
-::: details 简述中国特色社会主义理论体系形成发展的社会历史条件。
+:::: details 简述中国特色社会主义理论体系形成发展的社会历史条件。
 
 ::: details 答案要点
 
@@ -175,9 +175,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述邓小平理论形成发展的过程。
+:::: details 简述邓小平理论形成发展的过程。
 
 ::: details 答案要点
 
@@ -185,9 +185,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述科学发展观的形成过程。
+:::: details 简述科学发展观的形成过程。
 
 ::: details 答案要点
 
@@ -195,9 +195,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述"三个代表"重要思想形成的社会历史条件、形成过程及其历史地位。
+:::: details 试述"三个代表"重要思想形成的社会历史条件、形成过程及其历史地位。
 
 ::: details 答案要点
 
@@ -205,9 +205,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 如何理解中国特色社会主义理论体系同马克思列宁主义、毛泽东思想"一脉相承又与时俱进"？
+:::: details 如何理解中国特色社会主义理论体系同马克思列宁主义、毛泽东思想"一脉相承又与时俱进"？
 
 ::: details 答案要点
 
@@ -215,7 +215,7 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
 ### 选择题 · 点击选项即时判分
 

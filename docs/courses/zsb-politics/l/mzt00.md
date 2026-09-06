@@ -7,7 +7,7 @@ banner: /images/covers/zsb-politics.png
 
 > 毛中特 · 导论 ｜ 闪卡 14 ｜ 选择 5 ｜ 问答 5
 
-> 阅读讲义后，可以[**打开互动练习**](/blog/lessons/zsb-politics/lessons/mzt00.html)完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
+> 这是本课阅读版。[**打开互动课程**](/blog/lessons/zsb-politics/lessons/mzt00.html)即可在同一页阅读、作答与复习，学习记录保存在此设备。
 
 [政治 · 专升本互动课程](/blog/lessons/zsb-politics/index.html)
 
@@ -197,7 +197,7 @@ banner: /images/covers/zsb-politics.png
 
 ### 主观题 · 先自己写要点，再展开对答案
 
-::: details 简述马克思主义中国化时代化的内涵（三层意思）。
+:::: details 简述马克思主义中国化时代化的内涵（三层意思）。
 
 ::: details 答案要点
 
@@ -205,9 +205,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述马克思主义为什么要中国化时代化。
+:::: details 简述马克思主义为什么要中国化时代化。
 
 ::: details 答案要点
 
@@ -215,9 +215,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述马克思主义中国化时代化历史进程中形成的理论成果及各自的定位。
+:::: details 简述马克思主义中国化时代化历史进程中形成的理论成果及各自的定位。
 
 ::: details 答案要点
 
@@ -225,9 +225,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 如何理解马克思主义中国化时代化的理论成果是一脉相承又与时俱进的关系？
+:::: details 如何理解马克思主义中国化时代化的理论成果是一脉相承又与时俱进的关系？
 
 ::: details 答案要点
 
@@ -235,9 +235,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述毛泽东思想形成发展的历史进程及其历史地位。
+:::: details 试述毛泽东思想形成发展的历史进程及其历史地位。
 
 ::: details 答案要点
 
@@ -245,7 +245,7 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
 ### 选择题 · 点击选项即时判分
 

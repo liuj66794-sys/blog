@@ -19,6 +19,14 @@ const LESSONS_DIR = path.resolve(__dirname, '../../docs/.vuepress/public/lessons
 const convert = (html, onWarn) => lessonHtmlToMarkdown(html, { slug: 'a-shares', onWarn })
 const convertAs = (slug, html) => lessonHtmlToMarkdown(html, { slug })
 
+test('嵌套答案折叠使用更长的外层围栏，避免正文残留容器标记', () => {
+  const result = convertAs('zsb-math', '<main><h1>例题</h1><div class="example"><p>先尝试</p><details><summary>答案</summary><p>完整解答</p></details></div></main>')
+  assert.match(result.body, /:::: tip/)
+  assert.match(result.body, /::: details 答案/)
+  assert.match(result.body, /完整解答/)
+  assert.match(result.body.trim(), /::::$/)
+})
+
 const realLessons = fs.existsSync(LESSONS_DIR)
   ? fs.readdirSync(LESSONS_DIR).filter((f) => f.endsWith('.html')).sort().map((f) => ({
     file: f,

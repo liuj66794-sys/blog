@@ -14,12 +14,13 @@ test('课程讲义保留首页、课程总览、备考中心和课程目录，�
   for (const u of ['/blog/', '/blog/courses/', '/blog/prep/', '/blog/courses/a-shares/']) {
     assert.ok(out.includes(`href="${u}" target="_self"`), `缺当前标签站点链接 ${u}`)
   }
-  assert.match(out, /<nav data-blog-nav-bar="2" aria-label="学习导航">/)
+  assert.match(out, /<nav data-blog-nav-bar="3" aria-label="学习导航">/)
   assert.ok(out.indexOf('<h1>') > out.indexOf(NAV_BAR_MARKER))
-  assert.match(out, /min-height:44px/)
-  assert.match(out, /grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/)
+  assert.match(out, /data-lesson-toc aria-haspopup="dialog"/)
+  assert.match(out, /data-lesson-theme aria-label="切换主题"/)
+  assert.match(out, /href="\/blog\/learning\/lesson-shell.css"/)
+  assert.match(out, /src="\/blog\/learning\/lesson-shell.mjs"/)
   assert.match(out, /data-blog-nav-spacer aria-hidden="true"/)
-  assert.match(out, /body>\.topbar\{top:var\(--blog-nav-height\)\}/)
   assert.doesNotMatch(out, /body\{padding-top:/)
   assert.ok(out.includes('<link rel="icon" type="image/png" href="/blog/avatar.png">'))
 })
@@ -32,7 +33,7 @@ test('备考讲义区分本科目课程目录与学习计划，保留原课程�
   })
   assert.match(out, /href="\/blog\/courses\/zsb-math\/" target="_self">高数课程目录/)
   assert.match(out, /href="\/blog\/prep\/gaoshu\/" target="_self">高数学习计划/)
-  assert.equal((out.match(/<a /g) ?? []).length, 5)
+  assert.equal((out.match(/<a /g) ?? []).length, 6)
   assert.ok(out.includes(script))
 })
 

@@ -7,7 +7,7 @@ banner: /images/covers/zsb-politics.png
 
 > 毛中特 · 第三章 ｜ 闪卡 13 ｜ 选择 4 ｜ 问答 6
 
-> 阅读讲义后，可以[**打开互动练习**](/blog/lessons/zsb-politics/lessons/mzt03.html)完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
+> 这是本课阅读版。[**打开互动课程**](/blog/lessons/zsb-politics/lessons/mzt03.html)即可在同一页阅读、作答与复习，学习记录保存在此设备。
 
 [政治 · 专升本互动课程](/blog/lessons/zsb-politics/index.html)
 
@@ -270,7 +270,7 @@ banner: /images/covers/zsb-politics.png
 
 ### 主观题 · 先自己写要点，再展开对答案
 
-::: details 简述党在过渡时期的总路线的完整内容，并说明"一化"与"三改"的关系。
+:::: details 简述党在过渡时期的总路线的完整内容，并说明"一化"与"三改"的关系。
 
 ::: details 答案要点
 
@@ -278,9 +278,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述我国对农业社会主义改造的基本经验。
+:::: details 简述我国对农业社会主义改造的基本经验。
 
 ::: details 答案要点
 
@@ -288,9 +288,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述社会主义改造的历史经验。
+:::: details 简述社会主义改造的历史经验。
 
 ::: details 答案要点
 
@@ -298,9 +298,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 为什么我国能够对资本主义工商业采取和平赎买的方式？
+:::: details 为什么我国能够对资本主义工商业采取和平赎买的方式？
 
 ::: details 答案要点
 
@@ -308,9 +308,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 如何理解新民主主义社会是一个过渡性的社会？
+:::: details 如何理解新民主主义社会是一个过渡性的社会？
 
 ::: details 答案要点
 
@@ -318,9 +318,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述中国社会主义基本制度确立的重大意义。
+:::: details 试述中国社会主义基本制度确立的重大意义。
 
 ::: details 答案要点
 
@@ -328,7 +328,7 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
 ### 选择题 · 点击选项即时判分
 

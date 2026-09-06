@@ -7,7 +7,7 @@ banner: /images/covers/zsb-politics.png
 
 > 毛中特 · 第六章 ｜ 闪卡 23 ｜ 选择 5 ｜ 问答 6
 
-> 阅读讲义后，可以[**打开互动练习**](/blog/lessons/zsb-politics/lessons/mzt06.html)完成随堂测验、闪卡与复习。互动页顶部可随时返回课程目录和学习计划。
+> 这是本课阅读版。[**打开互动课程**](/blog/lessons/zsb-politics/lessons/mzt06.html)即可在同一页阅读、作答与复习，学习记录保存在此设备。
 
 [政治 · 专升本互动课程](/blog/lessons/zsb-politics/index.html)
 
@@ -325,7 +325,7 @@ banner: /images/covers/zsb-politics.png
 
 ### 主观题 · 先自己写要点，再展开对答案
 
-::: details 简述社会主义本质论断的内容及其理论意义。
+:::: details 简述社会主义本质论断的内容及其理论意义。
 
 ::: details 答案要点
 
@@ -333,9 +333,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 为什么说解放思想、实事求是是邓小平理论的精髓？
+:::: details 为什么说解放思想、实事求是是邓小平理论的精髓？
 
 ::: details 答案要点
 
@@ -343,9 +343,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述党在社会主义初级阶段基本路线的主要内容。
+:::: details 简述党在社会主义初级阶段基本路线的主要内容。
 
 ::: details 答案要点
 
@@ -353,9 +353,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 简述"和平统一、一国两制"构想的基本内容。
+:::: details 简述"和平统一、一国两制"构想的基本内容。
 
 ::: details 答案要点
 
@@ -363,9 +363,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述邓小平社会主义市场经济理论的形成过程、主要内涵及意义。
+:::: details 试述邓小平社会主义市场经济理论的形成过程、主要内涵及意义。
 
 ::: details 答案要点
 
@@ -373,9 +373,9 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
-::: details 试述邓小平理论的历史地位。
+:::: details 试述邓小平理论的历史地位。
 
 ::: details 答案要点
 
@@ -383,7 +383,7 @@ banner: /images/covers/zsb-politics.png
 
 :::
 
-:::
+::::
 
 ### 选择题 · 点击选项即时判分
 

@@ -43,13 +43,17 @@ test('checks decoded local paths without query or fragment and leaves unrelated 
   assert.equal(stripMissingFontUrls(css, dir), css)
 })
 
-test('math mirror installs the maintained resume runtime while other subjects retain their own scripts', (t) => {
+test('all four prep mirrors install maintained resume runtimes; other courses keep their original scripts', (t) => {
   const dir = fontFixture(t)
   fs.mkdirSync(path.join(dir, 'assets'))
   const target = path.join(dir, 'assets', 'quiz.js')
   fs.writeFileSync(target, 'original subject runtime')
-  installLessonRuntime(dir, 'zsb-english')
+  installLessonRuntime(dir, 'a-shares')
   assert.equal(fs.readFileSync(target, 'utf8'), 'original subject runtime')
+  for (const [slug, file] of [['zsb-english', 'english'], ['zsb-politics', 'politics'], ['zsb-cs', 'cs']]) {
+    installLessonRuntime(dir, slug)
+    assert.equal(fs.readFileSync(target, 'utf8'), fs.readFileSync(new URL(`../runtime/${file}-quiz.js`, import.meta.url), 'utf8'))
+  }
   installLessonRuntime(dir, 'zsb-math')
   assert.equal(fs.readFileSync(target, 'utf8'), fs.readFileSync(new URL('../runtime/math-quiz.js', import.meta.url), 'utf8'))
   installLessonRuntime(dir, 'zsb-math')

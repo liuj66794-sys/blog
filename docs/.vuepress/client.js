@@ -10,10 +10,19 @@ import CourseHub from './components/CourseHub.vue'
 import KnowledgeHub from './components/KnowledgeHub.vue'
 import PrepDashboard from './components/PrepDashboard.vue'
 import PrepCourseCatalog from './components/PrepCourseCatalog.vue'
+import { trackReading } from '../../scripts/runtime/reading-state.mjs'
+import '../../scripts/runtime/learning-tokens.css'
 import './styles/palette.css'
 import './styles/index.css'
 import './styles/commercial.css'
 import './styles/learning.css'
+import './styles/study.css'
+
+let stopReading = null
+function startReadingPage() {
+  stopReading?.()
+  stopReading = trackReading(__VUEPRESS_BASE__)
+}
 
 /**
  * plume 在页面不属于任何集合时（首页即如此），标签/分类/归档链接会回落到
@@ -156,6 +165,17 @@ export default defineClientConfig({
 
     if (__VUEPRESS_SSR__) return
     document.addEventListener('click', trackHomepageHero)
+    const themeScroll = router.options.scrollBehavior
+    router.options.scrollBehavior = async (to, from, savedPosition) => {
+      const position = await themeScroll?.(to, from, savedPosition)
+      // Plume finishes its page transition after our reading tracker starts.
+      // Keep its delayed scroll-to-top from overriding an explicit resume or live filter.
+      if (to.query.resume === '1' && !to.hash) return false
+      if (to.path === from.path && to.hash === from.hash
+        && (to.query.q !== from.query.q || to.query.group !== from.query.group)) return false
+      return position
+    }
+    router.beforeEach(() => { stopReading?.(); stopReading = null })
     router.afterEach(async () => {
       // 页面内容在路由确认后的后续帧渲染，多等两帧确保目标 DOM 已挂载
       await nextTick()
@@ -163,6 +183,7 @@ export default defineClientConfig({
       fixPostsNavLinks()
       normalizeLessonLinks()
       enhancePrep()
+      startReadingPage()
     })
   },
   setup() {
@@ -171,6 +192,7 @@ export default defineClientConfig({
         fixPostsNavLinks()
         normalizeLessonLinks()
         enhancePrep()
+        startReadingPage()
       }))
     })
   },
