@@ -159,3 +159,36 @@ test('disabled browser storage does not prevent answering or showing feedback', 
   assert.match(lesson.verdict.textContent, /第一次选错了/)
   assert.match(lesson.progress.textContent, /1\/1 已完成（首次答对 0）/)
 })
+
+test('visiting or answering incorrectly stays in learning state and exposes review-needed metadata', () => {
+  const visited = openLesson()
+  assert.equal(visited.progress.dataset.status, 'in-progress')
+  assert.match(visited.progress.textContent, /状态：学习中/)
+  assert.equal(visited.quiz.classList.contains('done'), false)
+
+  visited.options[1].click()
+  assert.equal(visited.progress.dataset.status, 'in-progress')
+  assert.equal(visited.progress.dataset.exerciseComplete, '0')
+  assert.equal(visited.progress.dataset.reviewNeeded, '1')
+  assert.equal(visited.quiz.dataset.reviewNeeded, '1')
+})
+
+test('completed practice is separate from all-correct evidence', () => {
+  const corrected = openLesson()
+  corrected.options[1].click()
+  corrected.options[0].click()
+  corrected.reveal.click()
+  corrected.good.click()
+  assert.equal(corrected.progress.dataset.status, 'exercise-complete')
+  assert.equal(corrected.progress.dataset.exerciseComplete, '1')
+  assert.equal(corrected.progress.dataset.allCorrect, '0')
+  assert.equal(corrected.progress.dataset.reviewNeeded, '1')
+
+  const clean = openLesson({ id: '0002' })
+  clean.options[0].click()
+  clean.reveal.click()
+  clean.good.click()
+  assert.equal(clean.progress.dataset.status, 'exercise-complete')
+  assert.equal(clean.progress.dataset.allCorrect, '1')
+  assert.equal(clean.progress.dataset.reviewNeeded, '0')
+})

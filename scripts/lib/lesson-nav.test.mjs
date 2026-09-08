@@ -22,7 +22,7 @@ test('课程讲义保留首页、课程总览、备考中心和课程目录，�
   assert.match(out, /src="\/blog\/learning\/lesson-shell.mjs"/)
   assert.match(out, /data-blog-nav-spacer aria-hidden="true"/)
   assert.doesNotMatch(out, /body\{padding-top:/)
-  assert.ok(out.includes('<link rel="icon" type="image/png" href="/blog/avatar.png">'))
+  assert.ok(out.includes('<link rel="icon" type="image/png" href="/blog/brand/zhixu-mark.png">'))
 })
 
 test('备考讲义区分本科目课程目录与学习计划，保留原课程脚本', () => {

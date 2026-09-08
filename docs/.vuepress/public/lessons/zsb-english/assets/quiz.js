@@ -18,8 +18,25 @@
       if (!root) return;
       var key = 'l1uj-english-answers-v1:' + location.pathname + ':' + (root.id || target);
       var saved = {};
-      try { saved = JSON.parse(localStorage.getItem(key) || '{}') || {}; } catch (e) {}
+      function readSaved() {
+        try {
+          var value = JSON.parse(localStorage.getItem(key) || '{}');
+          return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+        } catch (e) { return saved; }
+      }
+      saved = readSaved();
       function save() { try { localStorage.setItem(key, JSON.stringify(saved)); } catch (e) {} }
+      // Replace the listener when this group is rendered again, including a restart.
+      if (root.refreshEnglishAnswers) {
+        window.removeEventListener('storage', root.refreshEnglishAnswers);
+        window.removeEventListener('pageshow', root.refreshEnglishAnswers);
+      }
+      root.refreshEnglishAnswers = function (event) {
+        if (event.type === 'storage' && event.key !== null && event.key !== key) return;
+        if (JSON.stringify(readSaved()) !== JSON.stringify(saved)) window.Quiz.render(root, questions);
+      };
+      window.addEventListener('storage', root.refreshEnglishAnswers);
+      window.addEventListener('pageshow', root.refreshEnglishAnswers);
       root.innerHTML = '';
       var total = questions.length, answered = 0, correct = 0;
       var bar = el('div', 'quiz-score', '已完成 <b>0</b> / ' + total + '，点选项即可作答');
@@ -46,7 +63,16 @@
           var head = ok ? '✓ 答对了。' : '✗ 正确答案：' + item.opts[item.a] + '。';
           card.appendChild(el('div', 'qwhy', head + (item.why ? ' ' + item.why : '')));
           bar.innerHTML = '已完成 <b>' + answered + '</b> / ' + total + ' · 答对 <b>' + correct + '</b> 题';
-          if (!restoring) { saved[qi] = { signature: signature, picked: oi }; save(); }
+          if (!restoring) {
+            // Merge only this answer into the latest round. A stale tab must not
+            // overwrite another answer or bring back a round that was restarted.
+            var latest = readSaved();
+            var changedElsewhere = JSON.stringify(latest) !== JSON.stringify(saved);
+            saved = latest;
+            saved[qi] = { signature: signature, picked: oi };
+            save();
+            if (changedElsewhere) window.Quiz.render(root, questions);
+          }
         }
 
         item.opts.forEach(function (text, oi) {

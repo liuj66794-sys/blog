@@ -1,11 +1,11 @@
 import { defineThemeConfig } from 'vuepress-theme-plume'
 import { COURSES, origin, siteUrl } from './site-meta.mjs'
 import { prepSubjects, topicCourses } from './learning-data.mjs'
+import { brand } from './brand.mjs'
 
-// 头像本地化（public/avatar.png）。logo/profile 交给 plume 自动补 base（手动拼会双重前缀）；
-// og:image 类必须绝对 URL
-const avatar = '/avatar.png'
-const avatarAbsolute = `${siteUrl}/avatar.png`
+// Plume adds base for logo/profile; SEO images require the absolute site URL.
+const avatar = brand.mark
+const brandImageAbsolute = `${siteUrl}${brand.hero}`
 
 /** 博客目录 slug → 课程显示名（分类页分组标签用；名单单一来源见 site-meta.mjs COURSES） */
 const COURSE_NAMES: Record<string, string> = Object.fromEntries(COURSES.map((c) => [c.slug, c.name]))
@@ -24,7 +24,7 @@ export default defineThemeConfig({
     seo: {
       // page.path 不含 base，canonical 前缀需带 base；siteUrl 已含（派生自 site-meta.mjs）
       canonical: siteUrl,
-      fallBackImage: avatarAbsolute,
+      fallBackImage: brandImageAbsolute,
       // 首页按 website 标注，其余有源文件的页面按 article
       // （用结构化类型标注，不依赖 @vuepress/core 的可访问性）
       isArticle: (page: { filePathRelative: string | null; path: string }) =>
@@ -48,16 +48,16 @@ export default defineThemeConfig({
 
   profile: {
     avatar,
-    name: 'L1U.J',
-    description: 'Full-stack · Windows · Android · AI Developer',
+    name: brand.name,
+    description: '系统学习 · 主动练习 · 工程实践',
     location: 'China',
   },
 
   social: [{ icon: 'github', link: 'https://github.com/liuj66794-sys' }],
 
   footer: {
-    message: '学习 · 实践 · 回顾，让理解慢慢积累。',
-    copyright: 'Copyright © 2026 L1U.J',
+    message: brand.tagline,
+    copyright: 'Copyright © 2026 知序 ZHIXU',
   },
 
   navbar: [

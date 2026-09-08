@@ -16,6 +16,7 @@
  * 用法：node scripts/sync-learn.mjs [--force]   （--force 忽略 mtime 全量复制）
  */
 import fs from 'node:fs'
+import { execFileSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 // base 单一数据来源：site-meta.mjs。讲义是 public/ 下的静态 .html，VuePress 不会
@@ -629,6 +630,7 @@ try {
     )
   }
   console.log('[sync-learn] 完成。ts-playground 无讲义/记录，未纳入站点。')
+  console.log(execFileSync(process.execPath, [path.join(__dirname,'generate-lesson-search.mjs')], {cwd:path.dirname(__dirname),encoding:'utf8'}).trim())
 } catch (err) {
   console.error(`[sync-learn] 同步中断${done.length ? `（已完成：${done.join('、')}；其后项目未执行）` : ''}：`)
   console.error(err instanceof Error ? err.message : err)

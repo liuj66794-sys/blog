@@ -120,7 +120,7 @@ async function copyBrief() {
       <div class="wechat-qr-crop">
         <img
           :src="withBase(contact.wechatQr)"
-          alt="微信二维码，扫码添加 L1U.J"
+          alt="微信二维码，联系知序网站作者"
           width="579"
           height="1280"
           loading="lazy"

@@ -11,16 +11,24 @@ import KnowledgeHub from './components/KnowledgeHub.vue'
 import PrepDashboard from './components/PrepDashboard.vue'
 import PrepCourseCatalog from './components/PrepCourseCatalog.vue'
 import { trackReading } from '../../scripts/runtime/reading-state.mjs'
+import { attachLessonSession } from '../../scripts/runtime/lesson-session.mjs'
+import { STUDY_EVENT } from '../../scripts/runtime/study-state.mjs'
 import '../../scripts/runtime/learning-tokens.css'
+import '../../scripts/runtime/study-session.css'
 import './styles/palette.css'
 import './styles/index.css'
 import './styles/commercial.css'
 import './styles/learning.css'
 import './styles/study.css'
+import './styles/tasks.css'
+import './styles/brand.css'
 
 let stopReading = null
+let stopSession = null
 function startReadingPage() {
   stopReading?.()
+  stopSession?.()
+  stopSession = attachLessonSession(__VUEPRESS_BASE__)
   stopReading = trackReading(__VUEPRESS_BASE__)
 }
 
@@ -145,6 +153,10 @@ function enhancePrep() {
       if (box.checked) store[key] = 1
       else delete store[key]
       localStorage.setItem(PREP_CHECKS_KEY, JSON.stringify(store))
+      let meta = {}
+      try {meta = JSON.parse(localStorage.getItem('zsb-prep-checks-meta-v1') || '{}')} catch {}
+      localStorage.setItem('zsb-prep-checks-meta-v1', JSON.stringify({...meta,[key]:{checked:box.checked,updatedAt:Date.now()}}))
+      window.dispatchEvent(new CustomEvent(STUDY_EVENT))
       updateProgress()
     })
   }
@@ -175,7 +187,7 @@ export default defineClientConfig({
         && (to.query.q !== from.query.q || to.query.group !== from.query.group)) return false
       return position
     }
-    router.beforeEach(() => { stopReading?.(); stopReading = null })
+    router.beforeEach(() => { stopReading?.(); stopReading = null; stopSession?.(); stopSession = null })
     router.afterEach(async () => {
       // 页面内容在路由确认后的后续帧渲染，多等两帧确保目标 DOM 已挂载
       await nextTick()

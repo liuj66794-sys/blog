@@ -1,3 +1,4 @@
+@import url('./study-session.css');
 html[data-study-shell] {
   --paper:var(--study-bg); --surface:var(--study-panel); --card:var(--study-panel); --ink:var(--study-text);
   --ink-soft:var(--study-muted); --muted:var(--study-muted); --line:var(--study-line); --line-strong:var(--study-line);
@@ -105,3 +106,19 @@ html[data-study-shell] .study-contents h2 { margin:0; font-size:20px; }
 @media(max-width:350px) { .blog-lesson-nav-inner { padding-inline:8px; }.blog-lesson-actions { gap:0; }[data-lesson-theme] { width:36px; } }
 @media(prefers-reduced-motion:reduce) { html[data-study-shell] { scroll-behavior:auto; }html[data-study-shell] * { transition:none!important; animation:none!important; } }
 @media print { [data-blog-nav-bar],[data-blog-nav-spacer],.study-contents { display:none; } html[data-study-shell] { --blog-nav-height:0px; } }
+
+/* Brand identity sits in the shared shell; lesson content stays in its own layout. */
+[data-blog-nav-bar] .blog-lesson-home { gap:8px; color:var(--study-text); font:600 19px/1.4 var(--study-display-font); letter-spacing:1px; }
+.study-nav-mark { width:28px; height:28px; object-fit:contain; flex-shrink:0; }
+.study-nav-mark.is-mobile { display:none; }
+[data-theme='dark'] .study-nav-mark { background:#f5f4ee; border-radius:5px; }
+html[data-study-shell] h1 { font-family:var(--study-display-font); font-weight:600; }
+html[data-study-shell] :is(a,button,summary,input,select,[tabindex]):focus-visible { outline-color:var(--study-focus); }
+[data-blog-nav-bar] :is(a,button,summary) { transition:background var(--study-duration),color var(--study-duration); }
+@media(max-width:600px) {
+  .study-nav-mark.is-mobile { display:block; width:24px; height:24px; margin-right:7px; }
+  [data-blog-nav-bar] .blog-lesson-nav-back { padding-right:2px; font-size:12px; }
+  .blog-lesson-nav-inner { gap:3px; padding-inline:8px; }
+  [data-blog-nav-bar] .blog-lesson-actions :is(button,summary) { padding-inline:6px; font-size:12px; }
+}
+@media(prefers-reduced-motion:reduce) { [data-blog-nav-bar] :is(a,button,summary) { transition:none; } }

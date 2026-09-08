@@ -2,11 +2,16 @@
 title: 备考中心
 createTime: 2026-09-05 00:42:55
 permalink: /prep/
+readingTime: false
+comments: false
 ---
+
+<PrepDashboard />
 
 考期：<strong>2027-03-27</strong> ｜ <span id="exam-countdown" data-exam="2027-03-27"></span> ｜ <span id="prep-now" data-start="2026-09-07" data-p1="2026-11-01" data-p1n="强化刷题" data-p2="2027-01-31" data-p2n="真题两轮" data-p3="2027-03-27" data-p3n="冲刺押题"></span>
 
-<PrepDashboard />
+<details class="study-full-plan">
+<summary>查看完整 29 周计划与背景</summary>
 
 ## 29 周学习计划
 
@@ -41,7 +46,7 @@ permalink: /prep/
 - 🏁 **2027-02-28 前（W25）**：政治完成 + 真题第二轮完成 + 模拟卷/押题卷各 ≥4 套
 
 > [!TIP] 打卡说明
-> 勾选状态保存在**当前浏览器**，换设备或清理浏览器数据后不保留。请同时保留自己的学习笔记与错题记录。
+> 勾选状态保存在**当前浏览器**。换设备前可在本页导出统一学习备份，再在另一设备导入。请同时保留自己的学习笔记与错题记录。
 
 ## 周次一览
 
@@ -83,3 +88,5 @@ permalink: /prep/
 
 - [政策学习（已归档）](/courses/policy/)——毛概错题复盘 5 课与错误模式分析
 - [英语教学（已归档）](/courses/english/)——英语薄弱点突破 4 课（不定代词 / 介词搭配 / 比较级）
+
+</details>

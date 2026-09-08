@@ -1,5 +1,6 @@
 /** Shared shell for mirrored lessons. Source content and course scripts remain intact. */
 import { withBase } from '../../docs/.vuepress/site-meta.mjs'
+import { brand } from '../../docs/.vuepress/brand.mjs'
 
 export const NAV_BAR_MARKER = 'data-blog-nav-bar'
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({
@@ -15,7 +16,7 @@ export function injectLessonNav(html, back) {
   const theme = `<script data-study-appearance>try{var a=localStorage.getItem('vuepress-theme-appearance');document.documentElement.dataset.theme=a==='dark'||((a!=='light')&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}</script>`
   const assets = `${theme}<link rel="stylesheet" href="${withBase('/learning/learning-tokens.css')}"><link rel="stylesheet" href="${withBase('/learning/lesson-shell.css')}"><script type="module" src="${withBase('/learning/lesson-shell.mjs')}" data-study-base="${withBase('/')}"></script>`
   if (!/<link\b[^>]*\brel=["'][^"']*\bicon\b/i.test(html)) {
-    html = html.replace(/<\/head>/i, `<link rel="icon" type="image/png" href="${withBase('/avatar.png')}">\n</head>`)
+    html = html.replace(/<\/head>/i, `<link rel="icon" type="image/png" href="${withBase(brand.mark)}">\n</head>`)
   }
   return html.replace(/<html\b/i, '<html data-study-shell')
     .replace(/<\/head>/i, `${assets}\n</head>`)

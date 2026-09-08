@@ -18,6 +18,7 @@
  * CI：源盘不存在时告警跳过（生成物随仓库提交，deploy 不依赖本机盘）。
  */
 import fs from 'node:fs'
+import { execFileSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { withBase } from '../docs/.vuepress/site-meta.mjs'
@@ -25,6 +26,9 @@ import { lessonHtmlToMarkdown } from './lib/lesson-convert.mjs'
 import { injectLessonNav } from './lib/lesson-nav.mjs'
 import { installLearningAssets, installLessonRuntime, stripMissingFontUrls } from './lib/lesson-assets.mjs'
 import { collectPrepLessons } from './lib/prep-catalog.mjs'
+import { buildStudyPlan, linkedLessons, linkedTools } from './lib/study-plan.mjs'
+import { prepCatalog as previousCatalog } from '../docs/.vuepress/prep-catalog.mjs'
+import { patchPoliticsLearning } from './lib/politics-learning-patch.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DOCS = path.join(ROOT, 'docs')
@@ -101,7 +105,7 @@ function canonicalPhase(raw) {
   return base
 }
 
-function parseSource(md) {
+export function parseSource(md) {
   const examDate = md.match(/^exam-date:\s*(\d{4}-\d{2}-\d{2})\s*$/m)?.[1]
   if (!examDate) throw new Error('源文件 frontmatter 缺 exam-date')
 
@@ -185,18 +189,23 @@ export function renderReadme({ examDate, general, weeks }) {
 title: 备考中心
 createTime: __CREATE_TIME__
 permalink: /prep/
+readingTime: false
+comments: false
 ---
+
+<PrepDashboard />
 
 考期：<strong>${examDate}</strong> ｜ <span id="exam-countdown" data-exam="${examDate}"></span> ｜ <span id="prep-now" ${nowAttrs}></span>
 
-<PrepDashboard />
+<details class="study-full-plan">
+<summary>查看完整 29 周计划与背景</summary>
 
 ## 29 周学习计划
 
 ${general}
 
 > [!TIP] 打卡说明
-> 勾选状态保存在**当前浏览器**，换设备或清理浏览器数据后不保留。请同时保留自己的学习笔记与错题记录。
+> 勾选状态保存在**当前浏览器**。换设备前可在本页导出统一学习备份，再在另一设备导入。请同时保留自己的学习笔记与错题记录。
 
 ## 周次一览
 
@@ -210,10 +219,12 @@ ${table}
 
 - [政策学习（已归档）](/courses/policy/)——毛概错题复盘 5 课与错误模式分析
 - [英语教学（已归档）](/courses/english/)——英语薄弱点突破 4 课（不定代词 / 介词搭配 / 比较级）
+
+</details>
 `
 }
 
-export function renderSubject(subject, { weeks }) {
+export function renderSubject(subject, { weeks }, catalog = previousCatalog) {
   const course = ZSB_COURSES.find((c) => c.subject === subject.key)
   const entry = course
     ? `\n\n[**${subject.key}课程目录**](/courses/${course.slug}/) · [**开始互动学习**](${withBase(course.entry)}) · [返回备考中心](/prep/)\n\n阅读讲义、练习与复习可从课程目录开始；互动页顶部始终保留课程目录和本科目计划入口。`
@@ -225,12 +236,16 @@ export function renderSubject(subject, { weeks }) {
         // 该周科目任务；无专属条目时（如考试周）回落到「全科」行
         const task = w.items[subject.key] ?? w.items['全科']
         const lines = [`- ${subject.key}：${task}`]
+        const linked = course ? linkedLessons(course.slug, task, catalog) : []
+        const tools = course ? linkedTools(course.slug, task, catalog) : []
+        if (tools.length) lines.push(`- 配套工具：${tools.map(tool=>`[${tool.title}](${withBase(tool.href)}?returnTo=${encodeURIComponent(withBase(`/prep/${subject.slug}/`)+`#w${w.no}`)})`).join(' · ')}`)
+        if (linked.length) lines.push(`- 配套课程（不替代原计划的练习卷）：${linked.map(lesson => `[${lesson.label} ${lesson.title.replace(/\[/g, '（').replace(/\]/g, '）')}](${withBase(lesson.interactive)}?returnTo=${encodeURIComponent(withBase(`/prep/${subject.slug}/`) + `#w${w.no}`)})`).join(' · ')}`)
         const sat = w.items['周六']
         if (sat && (sat.includes(subject.key) || sat.includes('全科') || sat.includes('四科'))) {
           lines.push(`- 周六：${sat}`)
         }
         if (w.items['备注']) lines.push(`- 备注：${w.items['备注']}`)
-        return `### ${w.label} ｜ ${w.start} ~ ${w.end}\n\n${lines.join('\n')}\n\n<label class="prep-check"><input type="checkbox" data-key="w${w.no}"> ${w.label} 完成（${w.start} ~ ${w.end}）</label>`
+        return `<span id="w${w.no}"></span>\n\n### ${w.label} ｜ ${w.start} ~ ${w.end}\n\n${lines.join('\n')}\n\n<label class="prep-check"><input type="checkbox" data-key="w${w.no}"> ${w.label} 完成（${w.start} ~ ${w.end}）</label>`
       })
       .join('\n\n')
     return `## ${phase}（W${inPhase[0].no}-W${inPhase[inPhase.length - 1].no}）\n\n${blocks}`
@@ -240,6 +255,8 @@ export function renderSubject(subject, { weeks }) {
 title: ${subject.key}学习计划
 createTime: __CREATE_TIME__
 permalink: /prep/${subject.slug}/
+readingTime: false
+comments: false
 ---
 
 ${entry}
@@ -331,7 +348,8 @@ function syncZsbMirror(c) {
   // 镜像改写点：HTML 注入导航条 + 摘除未收录源层死链；CSS 剔除缺失字体格式
   // （/lessons/ 静态页加载不到站点 JS，只能写入时处理，见 lib/lesson-nav.mjs）
   for (const f of walkFiles(staging, (n) => n.endsWith('.html') || n.endsWith('.css'))) {
-    const raw = fs.readFileSync(f, 'utf8')
+    let raw = fs.readFileSync(f, 'utf8')
+    if (c.slug === 'zsb-politics' && path.relative(staging,f) === 'index.html') raw = patchPoliticsLearning(raw)
     const patched = f.endsWith('.html')
       ? injectLessonNav(stripUnmirroredLinks(raw, c), {
           backUrl: withBase(`/courses/${c.slug}/`),
@@ -513,11 +531,6 @@ const main = () => {
   if (fs.existsSync(SOURCE)) {
     parsed = parseSource(fs.readFileSync(SOURCE, 'utf8'))
     console.log(`[sync-prep] 计划：${parsed.weeks.length} 周，考试日 ${parsed.examDate}`)
-    writeFileIfChanged(path.join(DEST_DIR, 'README.md'), renderReadme(parsed))
-    for (const [i, subject] of SUBJECTS.entries()) {
-      const file = path.join(DEST_DIR, `${String(i + 1).padStart(2, '0')}-${subject.slug}.md`)
-      writeFileIfChanged(file, renderSubject(subject, parsed))
-    }
   } else {
     console.warn(`[sync-prep] 计划内容源不存在，跳过计划页（生成物以仓库为准）：${SOURCE}`)
   }
@@ -525,6 +538,8 @@ const main = () => {
   // 环节 2+3：课程站镜像 + 全文转换（课程站目录缺失才整体跳过）
   if (!fs.existsSync(ZSB_ROOT)) {
     console.warn(`[sync-prep] 课程站源不存在，跳过镜像与转换（生成物以仓库为准）：${ZSB_ROOT}`)
+    publishPlan(parsed, previousCatalog)
+    console.log(execFileSync(process.execPath, [path.join(ROOT,'scripts/generate-lesson-search.mjs')], {cwd:ROOT,encoding:'utf8'}).trim())
     return
   }
   // Validate every course before the first mirror is replaced.
@@ -556,7 +571,18 @@ const main = () => {
   }
   writeIfChanged(path.join(DOCS, '.vuepress', 'prep-catalog.mjs'),
     `// Generated by pnpm sync:prep. Edit the original courses, then sync.\nexport const prepCatalog = ${JSON.stringify(catalog, null, 2)}\n`)
+  publishPlan(parsed, catalog)
+  console.log(execFileSync(process.execPath, [path.join(ROOT,'scripts/generate-lesson-search.mjs')], {cwd:ROOT,encoding:'utf8'}).trim())
   console.log('[sync-prep] 完成')
+}
+
+function publishPlan(parsed, catalog) {
+  if (!parsed) return
+  writeFileIfChanged(path.join(DEST_DIR, 'README.md'), renderReadme(parsed))
+  for (const [i, subject] of SUBJECTS.entries()) {
+    writeFileIfChanged(path.join(DEST_DIR, `${String(i + 1).padStart(2, '0')}-${subject.slug}.md`), renderSubject(subject, parsed, catalog))
+  }
+  writeIfChanged(path.join(DOCS, '.vuepress', 'study-plan-data.mjs'), `// Generated by sync:prep from the existing study plan.\nexport const studyPlan = ${JSON.stringify(buildStudyPlan(parsed,catalog),null,2)}\n`)
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

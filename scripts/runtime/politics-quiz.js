@@ -41,9 +41,38 @@
     for (var i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
     return "h" + h.toString(36);
   }
-  function today() { return new Date().toISOString().slice(0, 10); }
+  function today() {
+    var date = new Date();
+    return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+  }
   function daysBetween(isoA, isoB) {
     return Math.round((new Date(isoB) - new Date(isoA)) / 86400000);
+  }
+
+  var LESSON_STATUS = {
+    'not-started': '未开始',
+    'in-progress': '学习中',
+    'exercise-complete': '已完成练习'
+  };
+
+  function numberOrZero(value) {
+    return Number.isFinite(Number(value)) ? Number(value) : 0;
+  }
+
+  function lessonHasActivity(record) {
+    return !!(record && (
+      numberOrZero(record.visits) > 0 || numberOrZero(record.quizAnswered) > 0 ||
+      numberOrZero(record.quizTotal) > 0 || numberOrZero(record.quizRoundTotal) > 0 ||
+      numberOrZero(record.cardsReviewed) > 0 || record.manualActivity ||
+      record.done === true || record.manualDone === true || record.quizComplete === true ||
+      record.exerciseComplete === true || record.best != null
+    ));
+  }
+
+  function lessonStatus(record) {
+    if (!lessonHasActivity(record)) return 'not-started';
+    return record && (record.exerciseComplete === true || record.exerciseStatus === 'exercise-complete')
+      ? 'exercise-complete' : 'in-progress';
   }
 
   /* ---------------- 课程进度 ---------------- */
@@ -59,6 +88,40 @@
       try { localStorage.setItem(this.key(lessonId), JSON.stringify(next)); } catch (e) {}
       document.dispatchEvent(new CustomEvent("zzkk:progress", { detail: { lessonId: lessonId } }));
       return next;
+    },
+    touch: function (lessonId) {
+      if (!lessonId) return this.get(lessonId);
+      var visitKey = NS + "visited:" + lessonId;
+      try {
+        if (typeof sessionStorage !== "undefined" && sessionStorage.getItem(visitKey)) return this.get(lessonId);
+        if (typeof sessionStorage !== "undefined") sessionStorage.setItem(visitKey, "1");
+      } catch (e) { /* sessionStorage 不可用时仍记录一次当前访问 */ }
+      var cur = this.get(lessonId);
+      return this.update(lessonId, { visits: numberOrZero(cur.visits) + 1 });
+    },
+    summary: function (lessonId) {
+      var record = this.get(lessonId);
+      var quizTotal = numberOrZero(record.quizTotal || record.quizRoundTotal);
+      var quizAnswered = numberOrZero(record.quizAnswered);
+      var quizCorrect = numberOrZero(record.quizCorrect);
+      var quizComplete = record.exerciseComplete === true || record.quizComplete === true ||
+        (record.best != null && quizTotal > 0);
+      var status = lessonStatus(Object.assign({}, record, { exerciseComplete: quizComplete }));
+      var allCorrect = record.quizAllCorrect === true || (quizComplete && quizCorrect === quizTotal && quizTotal > 0);
+      return {
+        lessonId: lessonId,
+        status: status,
+        statusLabel: LESSON_STATUS[status],
+        visits: numberOrZero(record.visits),
+        quizTotal: quizTotal,
+        quizAnswered: quizAnswered,
+        quizCorrect: quizCorrect,
+        quizComplete: quizComplete,
+        quizAllCorrect: allCorrect,
+        reviewNeeded: record.reviewNeeded === true || record.quizReviewNeeded === true || record.cardsReviewNeeded === true,
+        manualDone: record.manualDone === true || record.done === true,
+        best: record.best == null ? null : numberOrZero(record.best)
+      };
     },
     all: function () {
       return scanMap(NS + "lesson:");
@@ -81,6 +144,7 @@
   /* ---------------- Leitner 三盒：1 盒隔1天，2 盒隔3天，3 盒隔7天 ---------------- */
   var srs = {
     INTERVAL: [1, 3, 7],
+    LIMITS: { due: 20, fresh: 10, total: 30 },
     key: function (id) { return NS + "card:" + id; },
     get: function (id) {
       try { return JSON.parse(localStorage.getItem(this.key(id))) || null; }
@@ -96,14 +160,61 @@
       return cur;
     },
     boxOf: function (id) { var s = this.get(id); return s ? s.box : 0; },
+    isLearned: function (id) {
+      var state = this.get(id);
+      return !!(state && Number(state.box) >= 1);
+    },
+    isNew: function (id) { return !this.isLearned(id); },
     isDue: function (id) {
       var s = this.get(id);
-      if (!s || !s.box) return true;               // 新卡视为待学
-      return daysBetween(s.at, today()) >= this.INTERVAL[s.box - 1];
+      if (!s || Number(s.box) < 1) return false;  // 新卡另列，不冒充到期复习
+      if (!s.at) return true;                     // 旧记录缺日期时保守安排复习
+      var box = Math.max(1, Math.min(this.INTERVAL.length, Number(s.box)));
+      return daysBetween(s.at, today()) >= this.INTERVAL[box - 1];
     },
     dueIds: function (ids) {
       var self = this;
       return (ids || []).filter(function (id) { return self.isDue(id); });
+    },
+    newIds: function (ids) {
+      var self = this;
+      return (ids || []).filter(function (id) { return self.isNew(id); });
+    },
+    learnedIds: function (ids) {
+      var self = this;
+      return (ids || []).filter(function (id) { return self.isLearned(id); });
+    },
+    stats: function (ids) {
+      ids = ids || [];
+      var fresh = this.newIds(ids);
+      var due = this.dueIds(ids);
+      return {
+        total: ids.length,
+        learned: ids.length - fresh.length,
+        fresh: fresh.length,
+        new: fresh.length,
+        due: due.length
+      };
+    },
+    plan: function (ids, limits) {
+      var opts = Object.assign({}, this.LIMITS, limits || {});
+      var dueIds = this.dueIds(ids);
+      var newIds = this.newIds(ids);
+      var totalLimit = Math.max(0, Number(opts.total));
+      var dueLimit = Math.min(totalLimit, Math.max(0, Number(opts.due)));
+      var freshLimit = Math.min(totalLimit, Math.max(0, Number(opts.fresh != null ? opts.fresh : opts.new)));
+      var due = dueIds.slice(0, dueLimit);
+      var fresh = newIds.slice(0, Math.min(freshLimit, Math.max(0, totalLimit - due.length)));
+      return {
+        dueIds: dueIds,
+        newIds: newIds,
+        due: due,
+        fresh: fresh,
+        new: fresh,
+        dueRemaining: Math.max(0, dueIds.length - due.length),
+        newRemaining: Math.max(0, newIds.length - fresh.length),
+        limits: { due: due.length, fresh: fresh.length, total: due.length + fresh.length }
+      };
     }
   };
 
@@ -144,16 +255,37 @@
     var fromLabel = opts.from || (lessonId || "");
     var recordWrong = opts.recordWrong !== false;
     var state = {};
+    if (lessonId) progress.touch(lessonId);
     var resumeKey = 'l1uj-politics-answers-v1:' + location.pathname + ':' + (container.id || lessonId || 'quiz');
     var persist = !/\/(practice|review|srs|wrong)\.html$/.test(location.pathname);
     var saved = {};
-    try { if (persist) saved = JSON.parse(localStorage.getItem(resumeKey) || '{}') || {}; } catch (e) {}
+    function readSaved() {
+      if (!persist) return saved;
+      try {
+        var value = JSON.parse(localStorage.getItem(resumeKey) || '{}');
+        return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+      } catch (e) { return saved; }
+    }
+    saved = readSaved();
     function save() { try { if (persist) localStorage.setItem(resumeKey, JSON.stringify(saved)); } catch (e) {} }
     function restart() { saved = {}; save(); render(); }
+    if (container.refreshPoliticsAnswers) {
+      window.removeEventListener('storage', container.refreshPoliticsAnswers);
+      window.removeEventListener('pageshow', container.refreshPoliticsAnswers);
+    }
+    container.refreshPoliticsAnswers = function (event) {
+      if (event.type === 'storage' && event.key !== null && event.key !== resumeKey) return;
+      var latest = readSaved();
+      if (JSON.stringify(latest) !== JSON.stringify(saved)) { saved = latest; render(); }
+    };
+    if (persist) {
+      window.addEventListener('storage', container.refreshPoliticsAnswers);
+      window.addEventListener('pageshow', container.refreshPoliticsAnswers);
+    }
 
     function render() {
       container.innerHTML = "";
-      state = { answered: 0, correct: 0, total: questions.length };
+       state = { answered: 0, correct: 0, total: questions.length, reviewNeeded: false, unassessed: 0 };
       var box = el("div", "quiz");
 
       questions.forEach(function (q, qi) {
@@ -172,6 +304,7 @@
         var signature = hash(JSON.stringify([q.stem, q.options, q.answer]));
         var previous = saved[signature];
         function savePick(done) {
+          saved = readSaved();
           saved[signature] = { picked: Object.keys(picked).filter(function (letter) { return picked[letter]; }), done: done };
           save();
         }
@@ -180,22 +313,28 @@
           if (locked) return;
           var pickedLetters = Object.keys(picked).filter(function (letter) { return picked[letter]; });
           if (!pickedLetters.length) return;
-          locked = true;
-          state.answered++;
-          if (!restoring) savePick(true);
+           locked = true;
+           state.answered++;
+           if (!restoring) savePick(true);
           var buttons = optsBox.querySelectorAll(".opt");
           for (var i = 0; i < buttons.length; i++) buttons[i].disabled = true;
 
-          if (!q.answer) {
-            judge.className = "q-judge warn";
-            judge.innerHTML = "⚠️ 原卷未提供答案，请对照笔记或课件核对。" + (q.warn ? "<br>" + escRich(q.warn) : "");
-            return;
-          }
+           if (!q.answer) {
+             state.reviewNeeded = true;
+             state.unassessed++;
+             judge.className = "q-judge warn";
+             judge.innerHTML = "⚠️ 原卷未提供答案，请对照笔记或课件核对。" + (q.warn ? "<br>" + escRich(q.warn) : "");
+             syncLessonProgress();
+             return;
+           }
           var ans = q.answer.split("").sort().join("");
           var mine = pickedLetters.sort().join("");
-          var right = mine === ans;
-          if (right) state.correct++;
-          else if (recordWrong && !restoring) wrong.record(q, { from: fromLabel });
+           var right = mine === ans;
+           if (right) state.correct++;
+           else {
+             state.reviewNeeded = true;
+             if (recordWrong && !restoring) wrong.record(q, { from: fromLabel });
+           }
           for (var i = 0; i < buttons.length; i++) {
             var L = buttons[i].getAttribute("data-letter");
             if (q.answer.indexOf(L) >= 0) buttons[i].classList.add("correct");
@@ -214,9 +353,10 @@
             (q.src ? '<span class="qsrc">' + escRich(q.src) + "</span>" : "") +
             (q.doubt ? '<span class="qsrc">⚠️ 存疑题（?）——答案待老师讲评，仅供核对。</span>' : "") +
             (q.exp && !right ? '<details class="qexp"><summary>解析</summary>' + escRich(q.exp) + "</details>" : "");
-          if (opts.onJudge && !restoring) opts.onJudge(q, right);
-          updateScore(!restoring);
-        }
+           if (opts.onJudge && !restoring) opts.onJudge(q, right);
+           updateScore(!restoring);
+           syncLessonProgress();
+         }
 
         q.options.forEach(function (op) {
           var b = el("button", "opt");
@@ -269,9 +409,29 @@
       var redo = el("button", "btn", "↺ 重做本组测验");
       redo.addEventListener("click", restart);
       score.appendChild(redo);
-      container.appendChild(box);
-      updateScore();
-    }
+       container.appendChild(box);
+       updateScore();
+       syncLessonProgress();
+     }
+
+     function syncLessonProgress() {
+       if (!lessonId || !state) return;
+       var complete = state.total > 0 && state.answered === state.total;
+       var allCorrect = complete && !state.reviewNeeded && state.unassessed === 0 && state.correct === state.total;
+       progress.update(lessonId, {
+         quizTotal: state.total,
+         quizRoundTotal: state.total,
+         quizAnswered: state.answered,
+         quizCorrect: state.correct,
+         quizComplete: complete,
+         exerciseComplete: complete,
+         quizAllCorrect: allCorrect,
+         quizReviewNeeded: state.reviewNeeded,
+         reviewNeeded: state.reviewNeeded,
+         exerciseStatus: complete ? 'exercise-complete' : 'in-progress',
+         status: complete ? 'exercise-complete' : 'in-progress'
+       });
+     }
 
     function updateScore(allowPersist) {
       var score = container.querySelector(".quiz-score");
@@ -319,6 +479,8 @@
     opts = opts || {};
     var srsOn = !!opts.srs;
     var ns = opts.srs === true ? "" : (opts.srs || "");
+    var lessonId = typeof opts.srs === "string" ? opts.srs : null;
+    if (lessonId) progress.touch(lessonId);
     var order = cards.map(function (_, i) { return i; });
     var pos = 0;
 
@@ -379,6 +541,16 @@
         return;
       }
       srs.grade(cardId(c), ok);
+      if (lessonId) {
+        var current = progress.get(lessonId);
+        progress.update(lessonId, {
+          cardsReviewed: numberOrZero(current.cardsReviewed) + 1,
+          cardsGood: numberOrZero(current.cardsGood) + (ok ? 1 : 0),
+          cardsBad: numberOrZero(current.cardsBad) + (ok ? 0 : 1),
+          cardsReviewNeeded: current.cardsReviewNeeded === true || !ok,
+          manualActivity: true
+        });
+      }
       move(1);
     }
     function move(d) { pos = (pos + d + cards.length) % cards.length; paint(); }
@@ -416,7 +588,12 @@
 
   /* ---------------- 每日到期闪卡复习（跨课） ---------------- */
   function mountDue(container, allCards) {
-    var SESSION = 30;
+    var LIMITS = srs.LIMITS || { due: 20, fresh: 10, total: 30 };
+    var requestedLimit = null;
+    try {
+      var rawLimit = new URLSearchParams(location.search || '').get('limit');
+      if (rawLimit != null && /^\d+$/.test(rawLimit)) requestedLimit = Math.max(1, Math.min(30, Number(rawLimit)));
+    } catch (e) { /* 旧浏览器或异常 URL 时使用默认批量 */ }
     var pool = [];
 
     container.innerHTML = "";
@@ -425,36 +602,73 @@
     container.appendChild(head);
     container.appendChild(area);
 
-    function start(cards) {
+    function start(cards, kind) {
       pool = cards.slice();
       area.innerHTML = "";
       if (!pool.length) {
-        area.appendChild(el("p", "hint", "今天没有到期的卡片（都背熟了或还没开始）。可以直接去课程页学新课，或用下面的按钮随机加练。"));
+        area.appendChild(el("p", "hint", kind === "new"
+          ? "今天没有安排新的卡片。可以继续复习已学卡，或用下面的按钮随机加练。"
+          : "今天没有已学且到期的卡片。可以先学下面的新卡，或用随机加练。"));
         return;
       }
       var mount = el("div");
       area.appendChild(mount);
       var countdown = el("p", "hint",
-        "本组 " + cards.length + " 张到期卡（一轮上限 30 张，做完可刷新页面再练）。");
+        (kind === "new" ? "本组 " : "本组 ") + cards.length + " 张" +
+        (kind === "new" ? "新卡" : "已学到期卡") +
+        "（每日小批安排，完成后可继续下一组）。");
       area.insertBefore(countdown, mount);
       mountCards(mount, pool, { srs: true });
     }
 
     function compute() {
       var ids = allCards.map(function (c) { return c.id || hash((c.lessonId || "") + "#" + c.term); });
-      var due = srs.dueIds(ids);
       var byId = {};
       allCards.forEach(function (c) { byId[c.id || hash((c.lessonId || "") + "#" + c.term)] = c; });
-      return due.slice(0, SESSION).map(function (id) {
-        var c = byId[id];
-        return c ? Object.assign({ id: id }, c) : null;
-      }).filter(Boolean);
+      var planLimits = LIMITS;
+      if (requestedLimit != null && srs.plan) {
+        var allDue = srs.dueIds(ids).length;
+        var dueCap = Math.min(Number(LIMITS.due) || 20, requestedLimit, allDue);
+        var freshCap = Math.min(Number(LIMITS.fresh) || 10, Math.max(0, requestedLimit - dueCap));
+        planLimits = Object.assign({}, LIMITS, { due: dueCap, fresh: freshCap });
+      }
+      var plan = srs.plan ? srs.plan(ids, planLimits) : {
+        dueIds: srs.dueIds(ids), newIds: srs.newIds ? srs.newIds(ids) : [],
+        due: srs.dueIds(ids).slice(0, planLimits.due), fresh: []
+      };
+      plan.fresh = plan.fresh || plan.new || [];
+      function cardsOf(list) {
+        return list.map(function (id) {
+          var c = byId[id];
+          return c ? Object.assign({ id: id }, c) : null;
+        }).filter(Boolean);
+      }
+      return {
+        ids: ids,
+        dueIds: plan.dueIds || [],
+        newIds: plan.newIds || [],
+        due: cardsOf(plan.due || []),
+        fresh: cardsOf(plan.fresh || [])
+      };
     }
 
-    var due = compute();
-    head.innerHTML = '<span class="chip">到期卡片 <b>' + due.length + "</b> 张</span>" +
-      '<span class="chip">总卡量 <b>' + allCards.length + "</b> 张</span>";
-    start(due);
+    var plan = compute();
+    head.innerHTML = '<span class="chip">已学到期 <b>' + plan.dueIds.length + "</b> 张</span>" +
+      '<span class="chip">今日新卡 <b>' + plan.fresh.length + "</b> 张</span>" +
+      '<span class="chip">未学余量 <b>' + plan.newIds.length + "</b> 张</span>" +
+      '<span class="chip">总卡量 <b>' + allCards.length + "</b> 张</span>" +
+      (requestedLimit != null ? '<span class="chip">本轮上限 <b>' + requestedLimit + "</b> 张</span>" : '');
+    if (plan.due.length) start(plan.due, "due");
+    else start([], "due");
+    if (plan.fresh.length) {
+      var newSection = el("div", "due-new-section");
+      var previousArea = area;
+      area = newSection;
+      start(plan.fresh, "new");
+      newSection.insertBefore(el("h3", "due-group-title", "新卡小批"), newSection.firstChild);
+      container.appendChild(newSection);
+      area = previousArea;
+    }
 
     var extra = el("button", "btn", "🎲 随机加练 10 张（也计入三盒）");
     extra.addEventListener("click", function () {
@@ -474,13 +688,15 @@
   /* ---------------- 标记已学 ---------------- */
   function mountDone(button, lessonId) {
     function paint() {
-      var done = progress.get(lessonId).done;
+      var record = progress.get(lessonId);
+      var done = record.manualDone === true || record.done === true;
       button.className = "btn" + (done ? " done" : " primary");
       button.textContent = done ? "✓ 已学（点击取消）" : "✓ 标记本章已学";
     }
     button.addEventListener("click", function () {
-      var done = progress.get(lessonId).done;
-      progress.update(lessonId, { done: !done });
+      var record = progress.get(lessonId);
+      var done = record.manualDone === true || record.done === true;
+      progress.update(lessonId, { done: !done, manualDone: !done, manualActivity: true });
       paint();
     });
     paint();
@@ -548,6 +764,7 @@
 
   window.ZQ = {
     config: { examDate: EXAM_DATE },
+    lessonStatus: LESSON_STATUS,
     progress: progress,
     srs: srs,
     wrong: wrong,

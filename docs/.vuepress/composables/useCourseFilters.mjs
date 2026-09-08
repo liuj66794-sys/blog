@@ -9,9 +9,9 @@ export function useCourseFilters(defaultGroup = '') {
   // Static HTML is generated without a query string. Apply URL filters after hydration.
   const query = ref('')
   const group = ref(defaultGroup)
-  let ready = false
+  const ready = ref(false)
   onMounted(() => {
-    ready = true
+    ready.value = true
     query.value = text(route.query.q)
     group.value = text(route.query.group) || defaultGroup
   })
@@ -20,12 +20,12 @@ export function useCourseFilters(defaultGroup = '') {
     group.value = text(g) || defaultGroup
   })
   watch([query, group], ([q, g]) => {
-    if (!ready) return
+    if (!ready.value) return
     const next = { ...route.query }
     if (q) next.q = q; else delete next.q
     if (g && g !== defaultGroup) next.group = g; else delete next.group
     if (text(route.query.q) === q && (text(route.query.group) || defaultGroup) === g) return
     router.replace({ path: route.path, query: next, hash: route.hash })
   }, { flush: 'post' })
-  return { query, group }
+  return { query, group, ready }
 }

@@ -1,5 +1,7 @@
+import { brand } from './brand.mjs'
+
 export const developer = {
-  brand: 'L1U.J',
+  brand: brand.name,
   role: 'Full-stack · Windows · Android · AI Developer',
   promise: '从需求梳理到源码交付，独立完成 Web、桌面、Android 与 AI 产品。',
   github: 'https://github.com/liuj66794-sys',

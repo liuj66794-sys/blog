@@ -1,7 +1,14 @@
 <script setup>
-import SubjectCards from './SubjectCards.vue'
+import TodayTasks from './TodayTasks.vue'
+import WeekTasks from './WeekTasks.vue'
+import StudyBackup from './StudyBackup.vue'
 </script>
 
 <template>
-  <section class="prep-dashboard" aria-labelledby="prep-courses-heading"><div class="learning-section__heading"><div><p class="learning-eyebrow">先选科目，再开始学习</p><h2 id="prep-courses-heading">今天，从哪一科开始？</h2></div></div><SubjectCards /><div class="prep-dashboard__hint"><span>边读边练</span><span aria-hidden="true">→</span><span>主动回忆</span><span aria-hidden="true">→</span><span>每周回顾</span></div></section>
+  <div class="prep-dashboard">
+    <nav class="prep-quick-nav" aria-label="备考操作"><a href="#week-tasks">本周四科</a><a href="#today-tasks">今日任务</a><a href="#study-backup">学习备份</a></nav>
+    <WeekTasks />
+    <TodayTasks />
+    <section id="study-backup"><StudyBackup /></section>
+  </div>
 </template>

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.33.2",
-  "description": "L1U.J 的开发者作品集、项目案例与学习博客",
+  "description": "知序 ZHIXU：系统学习、互动练习、专升本备考与工程实践",
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:clean-dev": "vuepress dev docs --clean-cache --clean-temp",

@@ -1,7 +1,36 @@
 import { trackReading } from './reading-state.mjs'
+import { attachLessonSession } from './lesson-session.mjs'
 
 const base = document.querySelector('script[data-study-base]')?.dataset.studyBase || '/blog/'
 const root = document.documentElement
+// The shared runtime brands existing mirrors as well as future generated lessons.
+const brandMark = `${base}brand/zhixu-mark.png`
+function makeBrandMark(extraClass = '') {
+  const image = document.createElement('img')
+  image.src = brandMark
+  image.alt = ''
+  image.width = 28
+  image.height = 28
+  image.className = `study-nav-mark ${extraClass}`.trim()
+  return image
+}
+const homeLink = document.querySelector('.blog-lesson-home')
+if (homeLink) {
+  const wordmark = document.createElement('span')
+  wordmark.textContent = '知序'
+  homeLink.replaceChildren(makeBrandMark(), wordmark)
+  homeLink.setAttribute('aria-label', '知序首页')
+}
+document.querySelector('.blog-lesson-nav-back')?.prepend(makeBrandMark('is-mobile'))
+const icons = [...document.querySelectorAll('link[rel~="icon"]')]
+if (!icons.length) {
+  const icon = document.createElement('link')
+  icon.rel = 'icon'
+  document.head.append(icon)
+  icons.push(icon)
+}
+for (const icon of icons) { icon.href = brandMark; icon.type = 'image/png' }
+if (!document.title.includes('知序')) document.title += ' | 知序'
 const appearanceKey = 'vuepress-theme-appearance'
 const themeButton = document.querySelector('[data-lesson-theme]')
 const systemTheme = matchMedia('(prefers-color-scheme: dark)')
@@ -75,5 +104,6 @@ for (const table of main.querySelectorAll('table')) {
   table.before(wrapper)
   wrapper.append(table)
 }
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => trackReading(base), { once: true })
-else trackReading(base)
+function startSession() { attachLessonSession(base, {interactive:true}); trackReading(base) }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startSession, { once: true })
+else startSession()

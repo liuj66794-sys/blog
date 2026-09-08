@@ -2,8 +2,10 @@
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { withBase } from 'vuepress/client'
 import { prepSubjects, topicCourses } from '../learning-data.mjs'
+import { brand } from '../brand.mjs'
 import { readRecent, resumeUrl, READING_EVENT } from '../../../scripts/runtime/reading-state.mjs'
 import SubjectCards from './SubjectCards.vue'
+import TodayTasks from './TodayTasks.vue'
 
 const recent = ref(null)
 const total = prepSubjects.reduce((sum, subject) => sum + subject.count, 0)
@@ -25,12 +27,24 @@ onUnmounted(() => {
 
 <template>
   <main class="learning-surface learning-home">
-    <header class="study-welcome">
-      <div><p class="learning-eyebrow">L1U.J / 学习空间</p><h1>今天，继续学一点。</h1><p class="study-welcome__lead">读懂一个概念，做好一道练习。让理解慢慢积累。</p></div>
-      <span class="study-welcome__meta">4 门备考课程 <span aria-hidden="true">·</span> {{ total }} 课</span>
+    <header class="brand-hero">
+      <div class="brand-hero__copy">
+        <p class="learning-eyebrow"><span class="brand-rule" aria-hidden="true" />知序 · 学习与实践</p>
+        <h1>把知识连成路，<br><span>一步步走向理解。</span></h1>
+        <p class="brand-hero__lead">读懂一个概念，做好一道练习。<br>从系统学习到亲手实践，让每一步都有收获。</p>
+        <div class="learning-buttons brand-hero__actions">
+          <a class="learn-button" :href="recent ? resume : '#today-tasks'">{{ recent ? '继续学习' : '开始今天的学习' }} <span aria-hidden="true">→</span></a>
+          <a class="learning-text-link" :href="withBase('/courses/')">浏览课程 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="brand-hero__meta"><span><b>04</b> 门备考课程</span><span><b>{{ total }}</b> 节系统讲义</span><span><b>03</b> 个探索专题</span></div>
+      </div>
+      <figure class="brand-hero__visual">
+        <img :src="withBase(brand.hero)" alt="翻开的书页折成松绿阶梯，通向理解之门" width="1536" height="1024" fetchpriority="high" decoding="async">
+        <figcaption><span>知序 / KNOWLEDGE BECOMES A PATH</span><span aria-hidden="true">01 — ∞</span></figcaption>
+      </figure>
     </header>
 
-    <div class="study-start-grid">
+    <div class="study-start-grid" id="study-desk">
       <section class="study-resume" aria-labelledby="resume-heading">
         <div class="study-resume__top"><span class="study-label"><span class="status-dot" />{{ recent ? '接着上次，继续往前' : '从一节课开始' }}</span><span class="study-resume__number" aria-hidden="true">01</span></div>
         <template v-if="recent">
@@ -43,27 +57,24 @@ onUnmounted(() => {
         <template v-else>
           <h2 id="resume-heading">选一门课，<br>开始今天的学习。</h2>
           <p class="study-resume__context">阅读与练习在同一页。下次回来，可以接着上次的位置继续。</p>
-          <div class="study-first-subjects"><a v-for="subject in prepSubjects" :key="subject.slug" :href="withBase(subject.interactive)"><span>{{ subject.short }}</span><span aria-hidden="true">↗</span></a></div>
+          <div class="study-first-subjects"><a v-for="subject in prepSubjects" :key="subject.slug" :href="withBase(`/courses/${subject.slug}/`)"><span>{{ subject.short }}</span><span aria-hidden="true">↗</span></a></div>
           <p class="study-resume__footnote">从感兴趣的一课开始，也可以按章节循序渐进。</p>
         </template>
       </section>
 
-      <aside class="study-week" aria-labelledby="week-heading">
-        <div class="study-week__top"><Icon name="ph:calendar-blank" size="24" /><span class="learning-meta">学习有节奏</span></div>
-        <h2 id="week-heading">给本周，<br>一个小目标。</h2>
-        <p>看看四科计划，安排学习与回顾的时间。</p>
-        <a class="learning-text-link" :href="withBase('/prep/')">查看本周计划 <span aria-hidden="true">→</span></a>
-        <div class="study-week__loop"><span>理解</span><span aria-hidden="true">→</span><span>练习</span><span aria-hidden="true">→</span><span>回顾</span></div>
+      <aside class="study-week">
+        <TodayTasks compact />
+        <a class="learning-text-link" :href="withBase('/prep/')+'#week-tasks'">本周四科任务与学习备份 <span aria-hidden="true">→</span></a>
       </aside>
     </div>
 
     <section class="learning-section" aria-labelledby="home-prep-heading">
-      <div class="learning-section__heading"><div><p class="learning-eyebrow">系统备考</p><h2 id="home-prep-heading">你的四门课程</h2></div><a class="learning-text-link" :href="withBase('/courses/')">全部课程 <span aria-hidden="true">→</span></a></div>
+      <div class="learning-section__heading"><div><p class="learning-eyebrow">01 / 系统备考</p><h2 id="home-prep-heading">四门课程，一步步打牢基础。</h2></div><a class="learning-text-link" :href="withBase('/courses/')">全部课程 <span aria-hidden="true">→</span></a></div>
       <SubjectCards />
     </section>
 
     <section class="learning-section" aria-labelledby="home-topics-heading">
-      <div class="learning-section__heading"><div><p class="learning-eyebrow">持续探索</p><h2 id="home-topics-heading">课本之外，也有好奇心</h2></div></div>
+      <div class="learning-section__heading"><div><p class="learning-eyebrow">02 / 持续探索</p><h2 id="home-topics-heading">课本之外，让好奇心继续。</h2></div></div>
       <div class="topic-grid"><article v-for="course in topicCourses.filter(c => c.group !== '已归档')" :key="course.slug" class="topic-card"><span class="topic-card__number" aria-hidden="true">{{ course.mark }}</span><h3><a :href="withBase(course.interactive)">{{ course.name }}</a></h3><p>{{ course.description }}</p><a class="learning-text-link" :href="withBase(course.interactive)">开始学习 <span aria-hidden="true">→</span></a></article></div>
     </section>
 

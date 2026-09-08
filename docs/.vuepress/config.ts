@@ -5,6 +5,7 @@ import { plumeTheme } from 'vuepress-theme-plume'
 import { fileURLToPath } from 'node:url'
 import theme from './theme.js'
 import { base, origin, siteUrl, withBase } from './site-meta.mjs'
+import { brand } from './brand.mjs'
 
 // 上游 @vuepress/plugin-comment rc.131 自引用断裂的兜底，详见 shim 文件头注释
 const commentServiceShim = fileURLToPath(new URL('./shims/comment-service.mjs', import.meta.url))
@@ -14,26 +15,23 @@ export default defineUserConfig({
   // 部署在项目站点 https://liuj66794-sys.github.io/blog/；
   // base/origin 取值见 site-meta.mjs（单一数据来源，迁移根域名只改那个文件）
   base,
-  title: 'L1U.J',
-  description:
-    'L1U.J 的学习空间：课程讲义、互动练习、专升本备考、知识库与项目实践。',
+  title: brand.name,
+  description: brand.description,
   head: [
-    // 头像本地化（public/avatar.png），不再依赖 GitHub 头像外链
-    ['link', { rel: 'icon', href: withBase('/avatar.png') }],
-    ['meta', { name: 'keywords', content: 'L1U.J,全栈开发,Windows软件,Android开发,AI应用,Agent,MVP,开发者作品集,技术博客' }],
+    ['link', { rel: 'icon', type: 'image/png', href: withBase(brand.mark) }],
+    ['meta', { name: 'theme-color', content: '#214e45' }],
+    ['meta', { name: 'keywords', content: '知序,ZHIXU,系统学习,专升本备考,互动练习,知识库,TypeScript,Agent,工程实践' }],
     [
       'script',
       { type: 'application/ld+json' },
       JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'Person',
-        name: 'L1U.J',
-        alternateName: 'liuj66794-sys',
+        '@type': 'WebSite',
+        name: brand.name,
+        alternateName: brand.latin,
         url: siteUrl,
-        email: 'mailto:386239680@qq.com',
-        sameAs: ['https://github.com/liuj66794-sys'],
-        jobTitle: 'Full-stack, Windows, Android and AI Developer',
-        knowsAbout: ['Web development', 'Windows desktop software', 'Android development', 'AI applications', 'AI agents'],
+        description: brand.description,
+        inLanguage: 'zh-CN',
       }),
     ],
     // Google Analytics（Measurement ID: G-TYH712JVJB，2026-08-21 创建）
