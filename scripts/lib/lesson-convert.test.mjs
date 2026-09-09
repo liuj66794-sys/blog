@@ -297,3 +297,11 @@ test('五门课全部讲义：结构完整、无块级残留、quiz 全量转换
     }
   }
 })
+
+test('数学段内的圈号包进 \\text{}，数学段之外的保持原样', () => {
+  const conv = convertAs('zsb-math', '<main><h1>变限积分</h1><p>形式①见 $$② f(x)$$ 与行内 $③ g(x)$，文本里的④不动。</p></main>')
+  assert.ok(conv.body.includes('$$\\text{②} f(x)$$'))
+  assert.ok(conv.body.includes('$\\text{③} g(x)$'))
+  assert.ok(conv.body.includes('形式①见'))
+  assert.ok(conv.body.includes('文本里的④不动'))
+})

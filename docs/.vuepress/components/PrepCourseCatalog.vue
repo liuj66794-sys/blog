@@ -21,7 +21,12 @@ function lessonHref(lesson,reading=false) {
   if(query.value) params.set('q',query.value)
   if(group.value) params.set('group',group.value)
   const origin = withBase(`/courses/${props.slug}/`) + (params.size ? '?' + params : '')
-  return withStudyContext(reading?lesson.href:lesson.interactive,origin,__VUEPRESS_BASE__)
+  const extra = !reading && statuses.value[lesson.id]?.state === 'learning' ? { resume: '1' } : {}
+  return withStudyContext(reading?lesson.href:lesson.interactive,origin,__VUEPRESS_BASE__,extra)
+}
+function actionLabel(lesson) {
+  const state = statuses.value[lesson.id]?.state
+  return state === 'learning' ? '继续学习 →' : state === 'complete' ? '再练一遍 →' : '开始学习 →'
 }
 </script>
 
@@ -62,7 +67,7 @@ function lessonHref(lesson,reading=false) {
           <p v-if="statuses[lesson.id].reviewNeeded" class="learning-meta">{{statuses[lesson.id].reviewNeeded}} 题答错过或待核对</p>
         </div>
         <div class="prep-catalog__actions">
-          <a :href="lessonHref(lesson)" :aria-label="`互动练习：${lesson.title}`">开始学习 →</a>
+          <a :href="lessonHref(lesson)" :aria-label="`互动练习：${lesson.title}`">{{ actionLabel(lesson) }}</a>
           <a :href="lessonHref(lesson,true)" :aria-label="`阅读讲义：${lesson.title}`">阅读版</a>
         </div>
       </li>

@@ -325,7 +325,7 @@ export function stripUnmirroredLinks(html, c) {
   })
 }
 
-function syncZsbMirror(c) {
+function syncZsbMirror(c, examDate) {
   const dest = path.join(PUBLIC_LESSONS, c.slug)
   const staging = path.join(DOCS, '.vuepress', STAGING_DIR, c.slug)
   fs.rmSync(staging, { recursive: true, force: true })
@@ -356,6 +356,7 @@ function syncZsbMirror(c) {
           backLabel: `${c.subject}课程目录`,
           planUrl: withBase(`/prep/${c.prepSlug}/`),
           planLabel: `${c.subject}学习计划`,
+          examDate,
         })
       : stripMissingFontUrls(raw, path.dirname(f))
     fs.writeFileSync(f, patched)
@@ -561,7 +562,7 @@ const main = () => {
   })
   const catalog = {}
   for (const { c, entries } of prepared) {
-    const files = syncZsbMirror(c)
+    const files = syncZsbMirror(c, parsed?.examDate)
     const { lessons, changed, warnings, warnTypes, catalog: courseCatalog } = syncZsbCourse(c, entries)
     catalog[c.slug] = courseCatalog
     const types = [...warnTypes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4)

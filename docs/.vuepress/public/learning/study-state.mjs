@@ -51,6 +51,15 @@ export function lessonStatus(slug, lesson, base = '/blog/', storage) {
   const legacy = Boolean(math?.visits || political?.at || english)
   return { total: 0, answered: 0, correct: 0, reviewNeeded: 0, state: visited || legacy ? 'learning' : 'new', label: visited || legacy ? '学习中' : '未开始', legacy }
 }
+export function subjectProgress(slug, lessons, base = '/blog/', storage) {
+  const statuses = lessons.map(lesson => lessonStatus(slug, lesson, base, storage))
+  const complete = statuses.filter(status => status.state === 'complete').length
+  const learning = statuses.filter(status => status.state === 'learning').length
+  const resumeIndex = statuses.findIndex(status => status.state === 'learning')
+  const freshIndex = statuses.findIndex(status => status.state === 'new')
+  const index = resumeIndex >= 0 ? resumeIndex : freshIndex
+  return { complete, learning, total: lessons.length, started: complete + learning > 0, continueLesson: index >= 0 ? lessons[index] : null }
+}
 export function saveStudyProgress(entry, storage) {
   const store = storageObject(STUDY_KEY, storage)
   const entries = store.version === 1 && store.entries && typeof store.entries === 'object' ? store.entries : {}

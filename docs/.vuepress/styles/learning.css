@@ -60,6 +60,10 @@
 .subject-card :is(h2,h3) a { display:flex; justify-content:space-between; color:var(--learn-ink); }
 .subject-card h3 a span { font-size:14px; color:var(--learn-muted); font-weight:400; }
 .subject-card p { font-size:13px; line-height:1.8; color:var(--learn-muted); margin:0; }
+.subject-progress { margin-top:14px; display:grid; gap:7px; }
+.subject-progress__bar { height:5px; border-radius:99px; background:var(--subject-soft); overflow:hidden; }
+.subject-progress__bar>span { display:block; height:100%; border-radius:inherit; background:var(--subject-color); transition:width .45s ease; }
+.subject-progress .learning-meta { margin:0; }
 .subject-actions { display:flex; flex-wrap:wrap; align-items:center; gap:4px 15px; margin-top:auto; padding-top:20px; }
 .subject-actions a { min-height:44px; display:inline-flex; align-items:center; color:var(--vp-c-brand-1); font-size:13px; font-weight:600; white-space:nowrap; }
 .subject-actions a+a { color:var(--learn-muted); font-weight:400; }

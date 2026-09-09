@@ -93,7 +93,13 @@ html[data-study-shell] .study-contents h2 { margin:0; font-size:20px; }
 .study-contents nav { padding:12px; }
 .study-contents a { display:block; min-height:44px; padding:10px 14px; border-radius:8px; text-decoration:none; }
 .study-contents a:hover { background:var(--study-tint); }
+.study-contents a[aria-current] { background:var(--study-tint); color:var(--study-accent); font-weight:650; }
 .study-contents .is-child { padding-left:28px; font-size:14px; }
+/* 阅读进度条：固定在课页导航下缘，不拦截点击 */
+.study-reading-progress { position:fixed; top:var(--blog-nav-height); left:0; right:0; height:3px; z-index:999; pointer-events:none; }
+.study-reading-progress>span { display:block; height:100%; width:0; background:var(--study-accent); }
+.study-reading-progress[hidden] { display:none; }
+[data-lesson-theme] svg { display:block; }
 @media(max-width:600px) {
   .blog-lesson-nav-inner { gap:6px; padding:0 12px; }
   [data-blog-nav-bar] .blog-lesson-home { display:none; }
@@ -105,7 +111,20 @@ html[data-study-shell] .study-contents h2 { margin:0; font-size:20px; }
 }
 @media(max-width:350px) { .blog-lesson-nav-inner { padding-inline:8px; }.blog-lesson-actions { gap:0; }[data-lesson-theme] { width:36px; } }
 @media(prefers-reduced-motion:reduce) { html[data-study-shell] { scroll-behavior:auto; }html[data-study-shell] * { transition:none!important; animation:none!important; } }
-@media print { [data-blog-nav-bar],[data-blog-nav-spacer],.study-contents { display:none; } html[data-study-shell] { --blog-nav-height:0px; } }
+@media print { [data-blog-nav-bar],[data-blog-nav-spacer],.study-contents,.study-reading-progress { display:none; } html[data-study-shell] { --blog-nav-height:0px; } }
+
+/* 答题与翻卡反馈：短促、不循环；系统要求减少动效时整体关闭 */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-study-shell] :is(.q-judge.ok,.q-judge.no,.q-judge.warn,.quiz-verdict.ok,.quiz-verdict.no,.quiz-feedback.ok,.quiz-feedback.bad,.quiz-score) { animation:study-verdict .18s ease-out; }
+  html[data-study-shell] :is(.qwhy,.quiz-expl) { animation:study-rise .22s ease-out; }
+  html[data-study-shell] .recall.shown :is(.recall-a,.self-msg) { animation:study-rise .22s ease-out; }
+  html[data-study-shell] :is(.quiz-opts button,.quiz-opts li,.opts button,.qopts button,.opt) { transition:background var(--study-duration),color var(--study-duration),border-color var(--study-duration),transform var(--study-duration); }
+  html[data-study-shell] :is(.opt.is-ok,.opt.is-no,.quiz-opts .correct,.quiz-opts .wrong) { animation:study-pop .18s ease-out; }
+  html[data-study-shell] .flashcard .face { transition:transform .28s ease,opacity .28s ease; }
+}
+@keyframes study-verdict { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+@keyframes study-rise { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+@keyframes study-pop { 0% { transform:scale(.97); } 60% { transform:scale(1.015); } 100% { transform:scale(1); } }
 
 /* Brand identity sits in the shared shell; lesson content stays in its own layout. */
 [data-blog-nav-bar] .blog-lesson-home { gap:8px; color:var(--study-text); font:600 19px/1.4 var(--study-display-font); letter-spacing:1px; }

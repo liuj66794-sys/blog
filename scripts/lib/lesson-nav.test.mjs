@@ -55,3 +55,12 @@ test('重复注入幂等；无 body 或缺 backUrl 时原样返回', () => {
     return '<body'
   }
 })
+
+test('提供 examDate 时写入 script 数据集并转义，缺省时不带该属性', () => {
+  const withDate = injectLessonNav(PAGE, { backUrl: '/blog/courses/zsb-politics/', examDate: '2027-03-27' })
+  assert.match(withDate, /data-exam-date="2027-03-27"/)
+  const without = injectLessonNav(PAGE, { backUrl: '/blog/courses/zsb-politics/' })
+  assert.doesNotMatch(without, /data-exam-date/)
+  const evil = injectLessonNav(PAGE, { backUrl: '/blog/courses/zsb-politics/', examDate: '2027-03-27" onload="x' })
+  assert.doesNotMatch(evil, /onload="x"/)
+})

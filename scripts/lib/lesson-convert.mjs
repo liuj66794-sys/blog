@@ -793,6 +793,15 @@ function inlineScriptQuizzes(html) {
 }
 
 /**
+ * KaTeX 在数学模式里不认识 ①-⑳ 这类圈号 Unicode（构建期警告且字形不稳），
+ * 包进 \text{} 后按文本渲染；数学段之外的圈号保持原样。
+ */
+function fixCircledNumbersInMath(md) {
+  return md.replace(/\$\$[\s\S]+?\$\$|\$[^$\n]+?\$/g, segment =>
+    segment.replace(/[①-⑳]/g, char => `\\text{${char}}`))
+}
+
+/**
  * 讲义 HTML → Markdown。
  * @param {string} html 讲义全文
  * @param {{ slug?: string, onWarn?: (msg: string) => void }} ctx
@@ -831,7 +840,7 @@ export function lessonHtmlToMarkdown(html, ctx = {}) {
   return {
     headline: state.headline,
     metaLine: state.metaLine,
-    body: out.join('\n\n').trim(),
+    body: fixCircledNumbersInMath(out.join('\n\n').trim()),
     nav: state.nav,
   }
 }

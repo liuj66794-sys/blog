@@ -100,6 +100,11 @@ export function trackReading(base = '/blog/') {
       const anchor = anchors.find(node => node.dataset.readingAnchor === previous.anchor)
       const y = anchor ? window.scrollY + anchor.getBoundingClientRect().top + (previous.offset || 0) : previous.y
       window.scrollTo({ top: Math.max(0, y), behavior: 'instant' })
+      // 焦点随阅读位置走：键盘与读屏用户落在恢复到的章节，而不是页首
+      if (anchor) {
+        anchor.setAttribute('tabindex', '-1')
+        anchor.focus({ preventScroll: true })
+      }
     }
     active = true
     capture()

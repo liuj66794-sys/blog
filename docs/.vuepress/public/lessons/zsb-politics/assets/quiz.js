@@ -13,8 +13,11 @@
   "use strict";
   var NS = "zzkk:v2:";
 
-  /* 考试日期（倒计时用）。考期有变改这里即可。 */
-  var EXAM_DATE = "2027-03-27";
+  /* 考试日期（倒计时用）：由 sync-prep 从计划源 frontmatter 注入（script[data-exam-date]），
+     独立打开旧镜像时回落到这里的默认值。考期有变，改 29周冲刺计划.md 的 exam-date。 */
+  var examSource = typeof document !== "undefined" && typeof document.querySelector === "function"
+    ? document.querySelector("script[data-study-base]") : null;
+  var EXAM_DATE = (examSource && examSource.dataset && examSource.dataset.examDate) || "2027-03-27";
 
   function el(tag, cls, html) {
     var n = document.createElement(tag);

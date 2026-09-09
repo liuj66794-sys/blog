@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {lessonStatus,saveStudyProgress,studyIdentity,safeReturnTo,withStudyContext,reviewCounts,changeTask,STUDY_KEY} from '../runtime/study-state.mjs'
+import {lessonStatus,saveStudyProgress,studyIdentity,safeReturnTo,withStudyContext,reviewCounts,changeTask,subjectProgress,STUDY_KEY} from '../runtime/study-state.mjs'
 import {linkedLessons,activeWeek,buildStudyPlan} from './study-plan.mjs'
 import {prepCatalog} from '../../docs/.vuepress/prep-catalog.mjs'
 import {todayTasks,weeklyTasks} from '../../docs/.vuepress/study-tasks.mjs'
@@ -50,6 +50,23 @@ test('today has at most three direct tasks, supports deferral, and course comple
   assert.equal(weeklyTasks(plan,prepCatalog,'/blog/',source,date)[0].completed,1)
   assert.equal(source.getItem('zsb-prep-checks'),null)
 })
+test('subject progress aggregates states and points at the lesson to continue',()=>{
+  const lessons=prepCatalog['zsb-math'].lessons.slice(0,12)
+  const empty=subjectProgress('zsb-math',lessons,'/blog/',storage())
+  assert.deepEqual({complete:empty.complete,learning:empty.learning,started:empty.started},{complete:0,learning:0,started:false})
+  assert.equal(empty.continueLesson.id,'1')
+  const source=storage()
+  saveReading({path:'/blog/lessons/zsb-math/lessons/0003-x.html',title:'函数概念与定义域',y:10,offset:0},'/blog/',source)
+  saveStudyProgress({slug:'zsb-math',id:'1',title:'三角函数必背包',path:'/blog/lessons/zsb-math/lessons/0001-x.html',total:3,answered:3,correct:3,reviewNeeded:0},source)
+  const progress=subjectProgress('zsb-math',lessons,'/blog/',source)
+  assert.equal(progress.complete,1)
+  assert.equal(progress.learning,1)
+  assert.equal(progress.started,true)
+  assert.equal(progress.continueLesson.id,'3')
+  const blocked={getItem(){throw Error('blocked')},setItem(){throw Error('blocked')}}
+  assert.equal(subjectProgress('zsb-math',lessons,'/blog/',blocked).started,false)
+})
+
 test('damaged or unavailable storage leaves learning and its navigation usable',()=>{
   const source=storage({[STUDY_KEY]:'null'})
   assert.equal(lessonStatus('zsb-math',lesson,'/blog/',source).state,'new')
