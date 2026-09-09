@@ -576,6 +576,7 @@
       var c = cards[order[pos]];
       clear(front);
       front.appendChild(el("span", "label", "考点 · 回忆"));
+      if (c.ctx) front.appendChild(el("span", "ctx", c.ctx));
       var termBox = el("div", "q");
       appendRich(termBox, c.term);
       front.appendChild(termBox);

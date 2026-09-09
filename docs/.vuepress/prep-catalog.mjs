@@ -689,7 +689,7 @@ export const prepCatalog = {
     "count": 28,
     "interactive": "/lessons/zsb-politics/",
     "prep": "zhengzhi",
-    "updatedAt": "2026-09-05",
+    "updatedAt": "2026-09-09",
     "tools": [
       {
         "title": "刷题场",

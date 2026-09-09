@@ -1,6 +1,6 @@
 ---
 title: 第三章 社会主义改造理论
-createTime: 2026-09-05 15:10:02
+createTime: 2026-09-09 21:01:13
 permalink: /courses/zsb-politics/l/mzt03/
 banner: /images/covers/zsb-politics.png
 ---
@@ -332,7 +332,7 @@ banner: /images/covers/zsb-politics.png
 
 ### 选择题 · 点击选项即时判分
 
-专升本政治 · 互动课程 · 由知识库笔记自动构建于 2026-09-05
+专升本政治 · 互动课程 · 由知识库笔记自动构建于 2026-09-09
 有不懂的，随时回到 [ZCode](/blog/lessons/zsb-politics/index.html) 问你的 AI 老师 · 康奈尔式复习：先回忆，再核对
 
 ---

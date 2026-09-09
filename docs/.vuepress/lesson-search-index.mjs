@@ -3524,7 +3524,7 @@ export const lessonSearchIndex = {
       "count": 28,
       "interactive": "/lessons/zsb-politics/",
       "prep": "zhengzhi",
-      "updatedAt": "2026-09-05",
+      "updatedAt": "2026-09-09",
       "group": "专升本备考",
       "lessonCount": 28,
       "lessonRange": "28 个章节",

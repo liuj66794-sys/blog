@@ -241,6 +241,12 @@ ol.objectives li::before {
   color: var(--muted); position: absolute; top: 1.1rem; left: 1.4rem;
 }
 .flashcard .face.back { transform: rotateY(180deg); background: var(--indigo-soft); border-color: var(--indigo); }
+.flashcard .ctx {
+  align-self: center; margin: 0; font-family: var(--sans);
+  font-size: .72rem; line-height: 1; color: var(--indigo);
+  background: var(--indigo-soft); border: 1px solid var(--indigo);
+  border-radius: 999px; padding: .28rem .7rem;
+}
 .flashcard .q { font-size: 1.12rem; font-weight: 700; line-height: 1.6; }
 .flashcard .a { font-size: 1.05rem; line-height: 1.8; }
 .flashcard .src { font-family: var(--sans); font-size: .72rem; color: var(--muted); }
