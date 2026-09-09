@@ -19,11 +19,32 @@
     ? document.querySelector("script[data-study-base]") : null;
   var EXAM_DATE = (examSource && examSource.dataset && examSource.dataset.examDate) || "2027-03-27";
 
-  function el(tag, cls, html) {
+  /* 渲染约定：本文件不走 innerHTML——文本一律 textContent，富文本用 appendRich 组装节点，
+     从根上消除“转义后拼 HTML”的 XSS 模式（esc/escRich 仅为页面内联脚本的历史约定保留导出）。 */
+  function el(tag, cls, text) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
-    if (html !== undefined) n.innerHTML = html;
+    if (text !== undefined) n.textContent = text;
     return n;
+  }
+  function clear(node) {
+    while (node.firstChild) node.removeChild(node.firstChild);
+    return node;
+  }
+  /* 富文本渲染：**加粗** 转 <strong>，不成对的孤立 ** 一并清除——escRich 的 DOM 版 */
+  function appendRich(node, s) {
+    var text = String(s == null ? "" : s);
+    var pair = /\*\*([^*]+)\*\*/g;
+    var last = 0, m;
+    while ((m = pair.exec(text))) {
+      if (m.index > last) node.appendChild(document.createTextNode(text.slice(last, m.index).replace(/\*\*/g, "")));
+      var strong = document.createElement("strong");
+      strong.textContent = m[1];
+      node.appendChild(strong);
+      last = m.index + m[0].length;
+    }
+    if (last < text.length) node.appendChild(document.createTextNode(text.slice(last).replace(/\*\*/g, "")));
+    return node;
   }
   function esc(s) {
     return String(s == null ? "" : s)
@@ -287,7 +308,7 @@
     }
 
     function render() {
-      container.innerHTML = "";
+      clear(container);
        state = { answered: 0, correct: 0, total: questions.length, reviewNeeded: false, unassessed: 0 };
       var box = el("div", "quiz");
 
@@ -295,9 +316,10 @@
         var multi = q.answer && q.answer.length > 1;
         var item = el("div", "q-item");
         var stem = el("div", "stem");
-        stem.innerHTML = '<span class="qno">' + (qi + 1) + '</span>' + esc(q.stem) +
-          (multi ? ' <span class="mtag">多选</span>' : "") +
-          (q.doubt ? ' <span class="mtag">存疑?</span>' : "");
+        stem.appendChild(el("span", "qno", String(qi + 1)));
+        stem.appendChild(document.createTextNode(String(q.stem == null ? "" : q.stem)));
+        if (multi) stem.appendChild(el("span", "mtag", " 多选"));
+        if (q.doubt) stem.appendChild(el("span", "mtag", " 存疑?"));
         item.appendChild(stem);
 
         var optsBox = el("div", "opts");
@@ -326,7 +348,11 @@
              state.reviewNeeded = true;
              state.unassessed++;
              judge.className = "q-judge warn";
-             judge.innerHTML = "⚠️ 原卷未提供答案，请对照笔记或课件核对。" + (q.warn ? "<br>" + escRich(q.warn) : "");
+             judge.textContent = "⚠️ 原卷未提供答案，请对照笔记或课件核对。";
+             if (q.warn) {
+               judge.appendChild(document.createElement("br"));
+               appendRich(judge, q.warn);
+             }
              syncLessonProgress();
              return;
            }
@@ -352,10 +378,25 @@
             });
           }
           judge.className = "q-judge " + (right ? "ok" : "no");
-          judge.innerHTML = (right ? "✓ 回答正确" : "✗ 正确答案：<b>" + esc(q.answer) + "</b>") +
-            (q.src ? '<span class="qsrc">' + escRich(q.src) + "</span>" : "") +
-            (q.doubt ? '<span class="qsrc">⚠️ 存疑题（?）——答案待老师讲评，仅供核对。</span>' : "") +
-            (q.exp && !right ? '<details class="qexp"><summary>解析</summary>' + escRich(q.exp) + "</details>" : "");
+          judge.textContent = right ? "✓ 回答正确" : "✗ 正确答案：";
+          if (!right) {
+            var answerB = document.createElement("b");
+            answerB.textContent = q.answer;
+            judge.appendChild(answerB);
+          }
+          if (q.src) {
+            var srcSpan = el("span", "qsrc");
+            appendRich(srcSpan, q.src);
+            judge.appendChild(srcSpan);
+          }
+          if (q.doubt) judge.appendChild(el("span", "qsrc", "⚠️ 存疑题（?）——答案待老师讲评，仅供核对。"));
+          if (q.exp && !right) {
+            var expBox = document.createElement("details");
+            expBox.className = "qexp";
+            expBox.appendChild(el("summary", undefined, "解析"));
+            appendRich(expBox, q.exp);
+            judge.appendChild(expBox);
+          }
            if (opts.onJudge && !restoring) opts.onJudge(q, right);
            updateScore(!restoring);
            syncLessonProgress();
@@ -365,7 +406,8 @@
           var b = el("button", "opt");
           b.setAttribute("data-letter", op.letter);
           b.setAttribute("aria-pressed", "false");
-          b.innerHTML = '<span class="letter">' + esc(op.letter) + '.</span>' + esc(op.text);
+          b.appendChild(el("span", "letter", op.letter + "."));
+          b.appendChild(document.createTextNode(String(op.text == null ? "" : op.text)));
           b.addEventListener("click", function () {
             if (locked) return;
             if (!q.answer) {
@@ -455,15 +497,23 @@
       var pct = judged ? Math.round((correct / state.total) * 100) : 0;
       var finalPct = judged === state.total ? pct : null;
 
-      score.innerHTML =
-        '<span>已答 <b>' + judged + "</b> / " + state.total +
-        " · 答对 <b>" + correct + "</b></span>" +
-        (finalPct !== null
-          ? '<span class="big">' + finalPct + "分</span>" +
-            (finalPct === 100 ? "<span>满分，漂亮！</span>"
-              : finalPct >= 80 ? "<span>不错，错题已进错题本。</span>"
-              : "<span>建议回到正文重读后重做；错题已进错题本。</span>")
-          : "<span>做完全部题目后计分" + (unanswered > 0 ? "（含 " + unanswered + " 题原卷未给答案，不计判）" : "") + "</span>");
+      clear(score);
+      var progressLine = el("span");
+      progressLine.appendChild(document.createTextNode("已答 "));
+      progressLine.appendChild(el("b", undefined, String(judged)));
+      progressLine.appendChild(document.createTextNode(" / " + state.total + " · 答对 "));
+      progressLine.appendChild(el("b", undefined, String(correct)));
+      score.appendChild(progressLine);
+      if (finalPct !== null) {
+        score.appendChild(el("span", "big", finalPct + "分"));
+        score.appendChild(el("span", undefined,
+          finalPct === 100 ? "满分，漂亮！"
+            : finalPct >= 80 ? "不错，错题已进错题本。"
+              : "建议回到正文重读后重做；错题已进错题本。"));
+      } else {
+        score.appendChild(el("span", undefined,
+          "做完全部题目后计分" + (unanswered > 0 ? "（含 " + unanswered + " 题原卷未给答案，不计判）" : "")));
+      }
 
       var redo = el('button', 'btn quiz-redo', '↺ 重做本组测验（保留历史记录）');
       redo.type = 'button';
@@ -487,7 +537,7 @@
     var order = cards.map(function (_, i) { return i; });
     var pos = 0;
 
-    container.innerHTML = "";
+    clear(container);
     var shell = el("div", "cards-shell");
     var stage = el("div", "card-stage");
     var card = el("div", "flashcard");
@@ -524,10 +574,22 @@
 
     function paint() {
       var c = cards[order[pos]];
-      front.innerHTML = '<span class="label">考点 · 回忆</span><div class="q">' + escRich(c.term) + "</div>";
-      back.innerHTML =
-        '<span class="label">答案</span><div class="a">' + escRich(c.answer) + "</div>" +
-        (c.src ? '<span class="src">出处：' + escRich(c.src) + "</span>" : "");
+      clear(front);
+      front.appendChild(el("span", "label", "考点 · 回忆"));
+      var termBox = el("div", "q");
+      appendRich(termBox, c.term);
+      front.appendChild(termBox);
+      clear(back);
+      back.appendChild(el("span", "label", "答案"));
+      var answerBox = el("div", "a");
+      appendRich(answerBox, c.answer);
+      back.appendChild(answerBox);
+      if (c.src) {
+        var srcBox = el("span", "src");
+        srcBox.appendChild(document.createTextNode("出处："));
+        appendRich(srcBox, c.src);
+        back.appendChild(srcBox);
+      }
       card.classList.remove("flipped");
       posEl.textContent = (pos + 1) + " / " + cards.length;
       if (srsOn) paintBoxInfo(c);
@@ -599,7 +661,7 @@
     } catch (e) { /* 旧浏览器或异常 URL 时使用默认批量 */ }
     var pool = [];
 
-    container.innerHTML = "";
+    clear(container);
     var head = el("div", "due-head");
     var area = el("div");
     container.appendChild(head);
@@ -607,7 +669,7 @@
 
     function start(cards, kind) {
       pool = cards.slice();
-      area.innerHTML = "";
+      clear(area);
       if (!pool.length) {
         area.appendChild(el("p", "hint", kind === "new"
           ? "今天没有安排新的卡片。可以继续复习已学卡，或用下面的按钮随机加练。"
@@ -656,11 +718,18 @@
     }
 
     var plan = compute();
-    head.innerHTML = '<span class="chip">已学到期 <b>' + plan.dueIds.length + "</b> 张</span>" +
-      '<span class="chip">今日新卡 <b>' + plan.fresh.length + "</b> 张</span>" +
-      '<span class="chip">未学余量 <b>' + plan.newIds.length + "</b> 张</span>" +
-      '<span class="chip">总卡量 <b>' + allCards.length + "</b> 张</span>" +
-      (requestedLimit != null ? '<span class="chip">本轮上限 <b>' + requestedLimit + "</b> 张</span>" : '');
+    function chip(label, value, post) {
+      var c = el("span", "chip");
+      c.appendChild(document.createTextNode(label));
+      c.appendChild(el("b", undefined, String(value)));
+      if (post) c.appendChild(document.createTextNode(post));
+      return c;
+    }
+    head.appendChild(chip("已学到期 ", plan.dueIds.length, " 张"));
+    head.appendChild(chip("今日新卡 ", plan.fresh.length, " 张"));
+    head.appendChild(chip("未学余量 ", plan.newIds.length, " 张"));
+    head.appendChild(chip("总卡量 ", allCards.length, " 张"));
+    if (requestedLimit != null) head.appendChild(chip("本轮上限 ", requestedLimit, " 张"));
     if (plan.due.length) start(plan.due, "due");
     else start([], "due");
     if (plan.fresh.length) {
@@ -756,7 +825,7 @@
                  options: q.options, answer: q.answer,
                  doubt: q.doubt, warn: q.warn, src: q.src, exp: q.exp };
       });
-      area.innerHTML = "";
+      clear(area);
       var head = el("p", "hint", "本轮 " + picked.length + " 题，来自不同章节混合抽题。做完自动计分，错题自动进错题本。");
       area.appendChild(head);
       var mount = el("div");
