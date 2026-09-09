@@ -15,7 +15,7 @@
 ### 核心工程工作流
 
 - [`~/.agents/skills/grilling/SKILL.md`](file:///C:/Users/38623/.agents/skills/grilling/SKILL.md) / [`grill-with-docs/SKILL.md`](file:///C:/Users/38623/.agents/skills/grill-with-docs/SKILL.md) / [`grill-me/SKILL.md`](file:///C:/Users/38623/.agents/skills/grill-me/SKILL.md)
-   relentless interview（ relentless 提问）的核心技能。`grill-with-docs` 会在提问过程中更新 `CONTEXT.md` 和 ADR；`grill-me` 是无代码库时的纯对话版本。**注意（2026-07 更新）**：grilling 已改为 round-by-round（分轮）frontier 采访制——每轮问完整个 frontier（前提已确定的所有决策），问题格式固定为 `❓ **Q1** - **标题**:` + `➡️` 推荐答案；不再是"一次只问一个问题"。
+   relentless interview（ relentless 提问）的核心技能。`grill-with-docs` 会在提问过程中更新 `CONTEXT.md` 和 ADR；`grill-me` 是无代码库时的纯对话版本。**注意（2026-07 更新）**：grilling 已改为 round-by-round（分轮）frontier 采访制——每轮问完整个 frontier（前提已确定的所有决策），问题格式固定为 `❓ **Q1** - **标题**:` + `➡️` 推荐答案，同轮问题之间用水平线 `---` 分隔（2026-08-20 起）；不再是"一次只问一个问题"。
 
 - [`~/.agents/skills/to-spec/SKILL.md`](file:///C:/Users/38623/.agents/skills/to-spec/SKILL.md)
   把当前对话整理成 PRD/spec，发布到 issue tracker。
@@ -25,6 +25,9 @@
 
 - [`~/.agents/skills/implement/SKILL.md`](file:///C:/Users/38623/.agents/skills/implement/SKILL.md)
   基于 spec/tickets 实现功能，内部驱动 `/tdd`，最后跑 `/code-review`。
+
+- [仓库 `skills/in-progress/implement-spec/SKILL.md`](https://github.com/mattpocock/skills/blob/main/skills/in-progress/implement-spec/SKILL.md)（2026-08-21 新增，in-progress 实验性，本地暂未安装）
+  implement 的并行放大版：把 spec 的 tickets 当作带阻塞边的任务图，后台并行派发 implementer 子 agent（各自 worktree/分支），由 merger 子 agent 合并成单个 PR，解锁新 frontier 就继续派发，收尾跑 code-review。与 wayfinder 的 frontier 概念同源。
 
 - [`~/.agents/skills/tdd/SKILL.md`](file:///C:/Users/38623/.agents/skills/tdd/SKILL.md)
   测试驱动开发的规则： seams、anti-patterns、red-green 循环。
@@ -75,6 +78,9 @@
 - [`~/.agents/skills/teach/SKILL.md`](file:///C:/Users/38623/.agents/skills/teach/SKILL.md)
   在当前目录建立跨 session 的学习工作区（本目录就是它产出的）。
 
+- [仓库 `skills/in-progress/retro/SKILL.md`](https://github.com/mattpocock/skills/blob/main/skills/in-progress/retro/SKILL.md)（2026-08-24 新增，in-progress 实验性，本地暂未安装）
+  对一次编码会话做回顾（retrospective）：分析指定会话（默认当前会话）的原始记录，从导航指针、自动检查、评审用编码规范、AGENTS.md 瘦身、工具经济、空转指令、信息获取七个维度找出改进 agent 环境的候选，按严重度排序呈现给用户。
+
 ### 写作与通用工具
 
 - [`~/.agents/skills/writing-for-agents/SKILL.md`](file:///C:/Users/38623/.agents/skills/writing-for-agents/SKILL.md)（原 `writing-great-skills`，2026-07-27 改名并扩大范围）
@@ -84,6 +90,8 @@
   写作三阶段：fragments（探索）、beats（按节奏组装）、shape（成文）。**注意：这三个在仓库里仍属 in-progress（实验性），行为可能变化。**
 
 > 已从仓库删除（2026-08-05，勿用于新工作）：`ubiquitous-language`、`design-an-interface`、`qa`、`request-refactor-plan` 四个 deprecated skill 已**彻底删除**（`skills/deprecated/` 只剩一个 README 墓碑），同时整个 personal 桶（`edit-article`、`obsidian-vault`）也被移除。`batch-grill-me` 此前在 in-progress，现已不在仓库任何分类中。本地 `~/.agents/skills/` 已于 2026-08-07 同步到 v1.2.3，上述失效 skill 均已从本地卸载。
+>
+> **本地安装异常（2026-09-09 发现，待修复）**：2026-09-08 本地混入了一套第三方 `claudekit` skill 包——新增了 `design`、`design-system`、`ui-styling` 三个不属于 Matt 仓库的目录，并**覆盖**了 Matt 版的 `code-review`、`diagnosing-bugs`、`tdd`（内容是重组过的衍生版，不再是仓库原文；例如 diagnosing-bugs 丢了"Build a feedback loop"六阶段结构和独立 Redact 小节）。仓库新出的 `retro`、`implement-spec` 也尚未安装。待网络通了按 NOTES.md 约定重跑 `npx skills@latest add mattpocock/skills -g -y` 恢复；期间学习以上游 GitHub 为准，本地路径仅供参考。
 
 ## Wisdom (Communities)
 

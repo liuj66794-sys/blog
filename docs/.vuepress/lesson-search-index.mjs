@@ -8147,8 +8147,8 @@ export const lessonSearchIndex = {
       "topics": "基础概念 · 交易机制 · 风险",
       "group": "专题学习",
       "interactive": "/lessons/a-shares/lessons/0001-stock-is-ownership.html",
-      "lessonCount": 6,
-      "lessonRange": "第 1–6 课",
+      "lessonCount": 13,
+      "lessonRange": "第 1–13 课",
       "courseHref": "/courses/a-shares/",
       "interactiveHref": "/lessons/a-shares/lessons/0001-stock-is-ownership.html",
       "lessons": [
@@ -8377,6 +8377,273 @@ export const lessonSearchIndex = {
             },
             {
               "heading": "费曼自测（5 分钟）"
+            },
+            {
+              "heading": "推荐一手来源"
+            }
+          ]
+        },
+        {
+          "id": "7",
+          "label": "第 7 课",
+          "title": "第 7 课 · 市值、PE 与 PB",
+          "group": "",
+          "kind": "lesson",
+          "kindLabel": "课程",
+          "readingHref": "/courses/a-shares/l/7/",
+          "interactiveHref": "/lessons/a-shares/lessons/0007-market-cap-pe-pb.html",
+          "aliases": [
+            "市值、PE 与 PB：公司值多少钱，你买贵了吗"
+          ],
+          "chapterHits": [
+            {
+              "heading": "课前回炉（凭记忆作答，不许翻旧讲义）"
+            },
+            {
+              "heading": "一、市值：市场给公司的整体标价"
+            },
+            {
+              "heading": "二、市盈率 PE：标价与盈利之比"
+            },
+            {
+              "heading": "三、市净率 PB：标价与家底之比"
+            },
+            {
+              "heading": "动手 15 分钟：用问财查三个数"
+            },
+            {
+              "heading": "随堂测（回忆作答，不许翻上文）"
+            },
+            {
+              "heading": "费曼自测（5 分钟）"
+            },
+            {
+              "heading": "推荐一手来源"
+            }
+          ]
+        },
+        {
+          "id": "8",
+          "label": "第 8 课",
+          "title": "第 8 课 · 分红与除权除息",
+          "group": "",
+          "kind": "lesson",
+          "kindLabel": "课程",
+          "readingHref": "/courses/a-shares/l/8/",
+          "interactiveHref": "/lessons/a-shares/lessons/0008-dividend-and-ex-dividend.html",
+          "aliases": [
+            "分红与除权除息：钱是怎么到手的"
+          ],
+          "chapterHits": [
+            {
+              "heading": "课前回炉（凭记忆作答，不许翻旧讲义）"
+            },
+            {
+              "heading": "一、分红：公司把利润分给股东"
+            },
+            {
+              "heading": "二、三个关键日期：登记、除息、到账"
+            },
+            {
+              "heading": "三、除权除息：一道记账动作，不是真跌"
+            },
+            {
+              "heading": "四、红利税：持有越久越便宜"
+            },
+            {
+              "heading": "动手 15 分钟：用问财查一次真实分红"
+            },
+            {
+              "heading": "随堂测（回忆作答，不许翻上文）"
+            },
+            {
+              "heading": "费曼自测（5 分钟）"
+            },
+            {
+              "heading": "推荐一手来源"
+            }
+          ]
+        },
+        {
+          "id": "9",
+          "label": "第 9 课",
+          "title": "第 9 课 · K 线与成交量",
+          "group": "",
+          "kind": "lesson",
+          "kindLabel": "课程",
+          "readingHref": "/courses/a-shares/l/9/",
+          "interactiveHref": "/lessons/a-shares/lessons/0009-candlestick-and-volume.html",
+          "aliases": [
+            "K 线与成交量：盘面语言（看得懂级）"
+          ],
+          "chapterHits": [
+            {
+              "heading": "课前回炉（凭记忆作答，不许翻旧讲义）"
+            },
+            {
+              "heading": "一、一根 K 线：四个价格 + 阴阳"
+            },
+            {
+              "heading": "二、成交量：分歧的温度计"
+            },
+            {
+              "heading": "三、为什么只学\"看得懂\""
+            },
+            {
+              "heading": "动手 15 分钟：读一张真实的日 K 图"
+            },
+            {
+              "heading": "随堂测（回忆作答，不许翻上文）"
+            },
+            {
+              "heading": "费曼自测（5 分钟）"
+            },
+            {
+              "heading": "推荐一手来源"
+            }
+          ]
+        },
+        {
+          "id": "10",
+          "label": "第 10 课",
+          "title": "第 10 课 · 停牌、复牌与多空",
+          "group": "",
+          "kind": "lesson",
+          "kindLabel": "课程",
+          "readingHref": "/courses/a-shares/l/10/",
+          "interactiveHref": "/lessons/a-shares/lessons/0010-suspension-and-bulls-bears.html",
+          "aliases": [
+            "停牌、复牌与多空：极端时刻的规则与语言"
+          ],
+          "chapterHits": [
+            {
+              "heading": "课前回炉（凭记忆作答，不许翻旧讲义）"
+            },
+            {
+              "heading": "一、停牌：股票被\"暂停交易\""
+            },
+            {
+              "heading": "二、多头与空头：市场的两方辩手"
+            },
+            {
+              "heading": "动手 15 分钟：查停牌名单 + 写一条预案"
+            },
+            {
+              "heading": "随堂测（回忆作答，不许翻上文）"
+            },
+            {
+              "heading": "费曼自测（5 分钟）"
+            },
+            {
+              "heading": "推荐一手来源"
+            }
+          ]
+        },
+        {
+          "id": "11",
+          "label": "第 11 课",
+          "title": "第 11 课 · 打新与国债逆回购",
+          "group": "",
+          "kind": "lesson",
+          "kindLabel": "课程",
+          "readingHref": "/courses/a-shares/l/11/",
+          "interactiveHref": "/lessons/a-shares/lessons/0011-new-share-and-reverse-repo.html",
+          "aliases": [
+            "打新与国债逆回购：账户开好后的两个可选动作"
+          ],
+          "chapterHits": [
+            {
+              "heading": "课前回炉（凭记忆作答，不许翻旧讲义）"
+            },
+            {
+              "heading": "一、打新：申购新发行的股票"
+            },
+            {
+              "heading": "二、国债逆回购：让闲钱过夜生息"
+            },
+            {
+              "heading": "动手 15 分钟：看一次真实逆回购行情"
+            },
+            {
+              "heading": "随堂测（回忆作答，不许翻上文）"
+            },
+            {
+              "heading": "费曼自测（5 分钟）"
+            },
+            {
+              "heading": "推荐一手来源"
+            }
+          ]
+        },
+        {
+          "id": "12",
+          "label": "第 12 课",
+          "title": "第 12 课 · 复利",
+          "group": "",
+          "kind": "lesson",
+          "kindLabel": "课程",
+          "readingHref": "/courses/a-shares/l/12/",
+          "interactiveHref": "/lessons/a-shares/lessons/0012-compound-interest.html",
+          "aliases": [
+            "复利：整个计划的数学灵魂"
+          ],
+          "chapterHits": [
+            {
+              "heading": "课前回炉（凭记忆作答，不许翻旧讲义）"
+            },
+            {
+              "heading": "一、单利 vs 复利：差在\"收益是否再投入\""
+            },
+            {
+              "heading": "二、72 法则：心算翻倍年数"
+            },
+            {
+              "heading": "三、定投的复利：模块 2 你会亲手算"
+            },
+            {
+              "heading": "四、复利的三个敌人"
+            },
+            {
+              "heading": "五、时间才是最大的杠杆"
+            },
+            {
+              "heading": "动手 15 分钟：亲手滚一遍雪球"
+            },
+            {
+              "heading": "随堂测（回忆作答，不许翻上文）"
+            },
+            {
+              "heading": "费曼自测（5 分钟）"
+            },
+            {
+              "heading": "推荐一手来源"
+            }
+          ]
+        },
+        {
+          "id": "13",
+          "label": "第 13 课",
+          "title": "证据课 · 22 概念大闯关",
+          "group": "",
+          "kind": "lesson",
+          "kindLabel": "概念课",
+          "readingHref": "/courses/a-shares/l/13/",
+          "interactiveHref": "/lessons/a-shares/lessons/0013-module-1-final-review.html",
+          "aliases": [
+            "模块 1 收官：22 概念大闯关"
+          ],
+          "chapterHits": [
+            {
+              "heading": "第一步：闯关测验（12 题混排，凭记忆作答）"
+            },
+            {
+              "heading": "第二步：费曼清单（逐条出声，录音回听更狠）"
+            },
+            {
+              "heading": "第三步：归档（三件事，今天做完）"
+            },
+            {
+              "heading": "费曼自测（3 分钟版）"
             },
             {
               "heading": "推荐一手来源"

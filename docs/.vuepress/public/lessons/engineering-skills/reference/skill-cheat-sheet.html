@@ -63,7 +63,7 @@
       <tr>
         <td>（底层引擎）</td>
         <td><span class="skill-tag model-invoked">/grilling</span></td>
-        <td>grill-with-docs / grill-me 内部调用的追问引擎；出现 "grill" 触发词时自动加载，一般不需要直接调用。现为 round-by-round 分轮采访：每轮问完整个 frontier，问题格式 ❓+编号+加粗标题+➡️推荐答案。</td>
+        <td>grill-with-docs / grill-me 内部调用的追问引擎；出现 "grill" 触发词时自动加载，一般不需要直接调用。现为 round-by-round 分轮采访：每轮问完整个 frontier，问题格式 ❓+编号+加粗标题+➡️推荐答案，同轮问题之间用水平线分隔（2026-08-20 起）。</td>
         <td>“grill 我一下这个方案。”</td>
       </tr>
       <tr>
@@ -147,8 +147,8 @@
       <tr>
         <td>维护领域术语 / 写 ADR</td>
         <td><span class="skill-tag model-invoked">/domain-modeling</span></td>
-        <td>更新 CONTEXT.md（术语表），为难以逆转的架构决策记录 ADR。</td>
-        <td>“我们统一一下术语” / “这个决策值得记个 ADR。”</td>
+        <td>更新 CONTEXT.md（术语表），为难以逆转的架构决策记录 ADR。2026-08-13 起触发点明确覆盖“正在写 CONTEXT.md / ADR”这件事本身。</td>
+        <td>“我们在讨论术语怎么定” / “该更新 CONTEXT.md 了” / “这个决策值得记个 ADR。”</td>
       </tr>
     </tbody>
   </table>
@@ -275,6 +275,18 @@
         <td><span class="skill-tag user-invoked">/setup-ts-deep-modules</span></td>
         <td>接入 dependency-cruiser，让每个 package 的实现藏在子目录里，只经入口文件访问。</td>
         <td>“把这个 TS 仓库改造成 deep modules 结构。”</td>
+      </tr>
+      <tr>
+        <td>把 spec + tickets 并行实现成一个 PR</td>
+        <td><span class="skill-tag user-invoked">/implement-spec</span></td>
+        <td>（2026-08-21 新增）把 spec 的 tickets 当任务图（含阻塞边），并行派发 implementer 子 agent 各自在 worktree 干活，合并成单个 PR，收尾跑 code-review。</td>
+        <td>“把这个 spec 和它的 tickets 实现掉。”</td>
+      </tr>
+      <tr>
+        <td>复盘一次编码会话</td>
+        <td><span class="skill-tag user-invoked">/retro</span></td>
+        <td>（2026-08-24 新增）回顾指定会话（默认当前会话），从导航、自动检查、编码规范、AGENTS.md 瘦身、工具经济、空转指令、信息获取七个维度提出改进建议，按严重度排序。</td>
+        <td>“帮我给这次会话做个复盘。”</td>
       </tr>
       <tr>
         <td>写作第 1 阶段：挖掘素材</td>
