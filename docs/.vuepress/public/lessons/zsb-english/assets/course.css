@@ -72,6 +72,10 @@ th { background: #f2efe6; font-weight: 600; white-space: nowrap; }
 .quiz-score b { color: var(--ink); font-size: 1.05rem; }
 .qcard { border: 1px solid var(--line); border-radius: 8px; padding: .9rem 1.1rem 1rem; margin: 0 0 1rem; background: #fff; }
 .qtext { margin: 0 0 .6rem; font-weight: 600; }
+/* 常见中文字体和 Georgia 只有 400/700 两档：600 会被渲染成粗体，导致题干里的 <b> 与周围文字同重、看不出加粗。
+   因此题干英文句用常规字重，加粗词再上强调色，保证任何设备上都能一眼看出考点词。 */
+.qtext .en { font-weight: 400; }
+.qtext b, .qtext strong { font-weight: 700; color: var(--accent); }
 .qno { color: var(--accent); margin-right: .2rem; }
 .qopts { display: grid; gap: .45rem; }
 button.opt {
