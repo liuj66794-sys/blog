@@ -10,6 +10,7 @@ import CourseHub from './components/CourseHub.vue'
 import KnowledgeHub from './components/KnowledgeHub.vue'
 import PrepDashboard from './components/PrepDashboard.vue'
 import PrepCourseCatalog from './components/PrepCourseCatalog.vue'
+import ReviewNotebook from './components/ReviewNotebook.vue'
 import { trackReading } from '../../scripts/runtime/reading-state.mjs'
 import { attachLessonSession } from '../../scripts/runtime/lesson-session.mjs'
 import { STUDY_EVENT } from '../../scripts/runtime/study-state.mjs'
@@ -22,6 +23,7 @@ import './styles/learning.css'
 import './styles/study.css'
 import './styles/tasks.css'
 import './styles/brand.css'
+import './styles/experience.css'
 
 let stopReading = null
 let stopSession = null
@@ -62,6 +64,29 @@ function trackHomepageHero(event) {
     trackPortfolioEvent('portfolio_hire_cta', { location: 'home_hero' })
   } else if (url.pathname === projectsPath) {
     trackPortfolioEvent('portfolio_case_catalog_open', { location: 'home_hero' })
+  }
+}
+
+/**
+ * 滚动渐入：只给首屏以下的区块加 .reveal，进入视口时补 .is-in。
+ * JS 不参与时没有任何类，内容始终可见；系统要求减少动效时整体跳过。
+ */
+const REVEAL_SELECTOR = '.learning-home .learning-section, .learning-home .study-start-grid, .learning-home .study-library-links, .learning-hub .catalog-grid > *, .learning-hub .learning-note, .prep-catalog__intro'
+let revealObserver = null
+function setupReveal() {
+  if (!('IntersectionObserver' in window)) return
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  revealObserver ??= new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue
+      entry.target.classList.add('is-in')
+      revealObserver.unobserve(entry.target)
+    }
+  }, { rootMargin: '0px 0px -8% 0px' })
+  for (const el of document.querySelectorAll(REVEAL_SELECTOR)) {
+    if (el.classList.contains('reveal') || el.classList.contains('is-in')) continue
+    el.classList.add('reveal')
+    revealObserver.observe(el)
   }
 }
 
@@ -174,6 +199,7 @@ export default defineClientConfig({
     app.component('KnowledgeHub', KnowledgeHub)
     app.component('PrepDashboard', PrepDashboard)
     app.component('PrepCourseCatalog', PrepCourseCatalog)
+    app.component('ReviewNotebook', ReviewNotebook)
 
     if (__VUEPRESS_SSR__) return
     document.addEventListener('click', trackHomepageHero)
@@ -196,6 +222,7 @@ export default defineClientConfig({
       normalizeLessonLinks()
       enhancePrep()
       startReadingPage()
+      setupReveal()
     })
   },
   setup() {
@@ -205,6 +232,7 @@ export default defineClientConfig({
         normalizeLessonLinks()
         enhancePrep()
         startReadingPage()
+        setupReveal()
       }))
     })
   },

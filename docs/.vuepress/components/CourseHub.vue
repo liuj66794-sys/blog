@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, withBase } from 'vuepress/client'
 import { prepSubjects, topicCourses } from '../learning-data.mjs'
 import {
@@ -11,8 +11,10 @@ import {
 import { lessonSearchIndex } from '../lesson-search-index.mjs'
 import { base } from '../site-meta.mjs'
 import { useCourseFilters } from '../composables/useCourseFilters.mjs'
+import CourseSearch from './CourseSearch.vue'
 
-const { query, group, ready } = useCourseFilters('全部')
+const { query, group, ready, currentQuery, reset } = useCourseFilters('全部')
+const searchField = ref(null)
 const route = useRoute()
 const groups = ['全部', '专升本备考', '专题学习', '已归档']
 const courseMeta = [
@@ -39,7 +41,7 @@ const matchedItems = computed(() => matches.value.reduce((sum, course) => sum + 
 const hasQuery = computed(() => Boolean(query.value.trim()))
 const hasSearchContext = computed(() => hasQuery.value || group.value !== '全部')
 const returnTo = computed(() => hasSearchContext.value
-  ? makeSearchReturnTo(route.path, route.query, route.hash, base)
+  ? makeSearchReturnTo(route.path, currentQuery.value, route.hash, base)
   : '')
 
 function linkFor(path) {
@@ -49,6 +51,7 @@ function linkFor(path) {
 function hitLink(hit) {
   return linkFor(hit.interactiveHref || hit.readingHref)
 }
+function resetFilters() { reset(); searchField.value?.focus() }
 </script>
 
 <template>
@@ -65,14 +68,10 @@ function hitLink(hit) {
           {{ name }}
         </button>
       </div>
-      <label class="course-search">
-        <Icon name="ph:magnifying-glass" size="19" aria-hidden="true" />
-        <span class="sr-only">查找课程、课次或知识点</span>
-        <input v-model="query" type="search" :disabled="!ready" :placeholder="ready?'查找课程、课次或知识点':'正在加载筛选…'" aria-label="查找课程、课次或知识点">
-      </label>
+      <CourseSearch ref="searchField" id="all-course-search" v-model="query" :disabled="!ready" placeholder="查找课程、课次或知识点" />
     </div>
 
-    <p class="learning-meta course-results" aria-live="polite">
+    <div class="catalog-result-summary course-results"><p class="learning-meta" aria-live="polite" aria-atomic="true">
       <template v-if="hasQuery">
         找到 {{ matches.length }} 门课程
         <span v-if="matchedItems"> · {{ matchedItems }} 个命中课次或资料</span>
@@ -82,7 +81,7 @@ function hitLink(hit) {
         {{ matches.length }} 门课程
         <span v-if="group === '全部'"> · 历史课程收录在「已归档」</span>
       </template>
-    </p>
+    </p><button v-if="hasSearchContext" class="catalog-reset" type="button" @click="resetFilters">重置筛选</button></div>
 
     <div v-if="matches.length" class="catalog-grid" :class="{'is-searching':hasQuery}">
       <article v-for="course in matches" :key="course.slug" class="subject-card course-result" :data-tone="course.tone">
@@ -135,8 +134,8 @@ function hitLink(hit) {
 
     <div v-else class="learning-empty">
       <h2>暂时没有匹配的课程</h2>
-      <p>试试“洛必达”“极限”“英语”或课号，也可以清除筛选。</p>
-      <button class="learn-button is-secondary" type="button" @click="query = ''; group = '全部'">查看全部课程</button>
+      <p><span v-if="hasQuery">没有找到含“{{ query }}”的课程或讲义。</span>试试更短的知识点，或清除筛选。</p>
+      <button class="learn-button is-secondary" type="button" @click="resetFilters">查看全部课程</button>
     </div>
 
     <aside class="learning-note">

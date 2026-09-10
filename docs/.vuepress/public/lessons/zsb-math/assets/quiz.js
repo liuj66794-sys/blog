@@ -260,6 +260,8 @@
     var verdict = quiz.querySelector('.quiz-verdict');
     var id = itemId(quiz, index, '.quiz-q', opts);
     quiz.dataset.progressId = id;
+    quiz.studyQuestion = { slug: 'zsb-math', lessonId: LESSON_ID, ref: 'quiz:' + id, answer: [answer] };
+    quiz.addEventListener('study-retry', function () { var items = readItems(); delete items.quiz[id]; saveItems(items); restore(); ZC.refreshProgress(); });
     if (verdict) verdict.setAttribute('role', 'status');
 
     function restore(state) {
@@ -274,6 +276,7 @@
       quiz.dataset.reviewNeeded = hasWrong ? '1' : '0';
       opts.forEach(function (button) {
         button.disabled = !!state.done;
+        button.setAttribute('aria-pressed', String(attempts.includes(button.dataset.k)));
         button.classList.toggle('correct', !!state.done && button.dataset.k === answer);
         button.classList.toggle('wrong', attempts.includes(button.dataset.k) && button.dataset.k !== answer);
       });
@@ -282,22 +285,24 @@
           ? (attempts.length === 1 ? '✓ 一次答对，漂亮！' : '✓ 答对了（第一次选错了，别急，看清错在哪）')
           : '✗ 再想想——先别急着看解析。';
         verdict.className = 'quiz-verdict ' + (state.done ? 'ok' : 'no');
-      }
+      } else if (verdict) { verdict.textContent = ''; verdict.className = 'quiz-verdict'; }
     }
     restore(readItems().quiz[id]);
+    quiz.refreshStudyAnswer = function () { restore(readItems().quiz[id]); };
 
       opts.forEach(function (btn) {
         btn.addEventListener('click', function () {
           var items = readItems();
           var state = items.quiz[id] || { attempts: [], done: false };
           if (!Array.isArray(state.attempts)) state.attempts = [];
-          if (state.done) { restore(state); return; }
+          if (state.done || state.attempts.includes(btn.dataset.k)) { restore(state); return; }
           var k = btn.dataset.k;
           state.attempts.push(k);
         state.done = k === answer;
           items.quiz[id] = state;
           saveItems(items);
           restore(state);
+          document.dispatchEvent(new CustomEvent('study:attempt', { detail: { node: quiz, correct: k === answer, independent: state.attempts.length === 1 } }));
           if (k === answer) {
           /* 一个练习轮次每题只结算一次；返回课程恢复题目，不重复累计。 */
           var r = rec();
@@ -317,6 +322,8 @@
     var msg = card.querySelector('.self-msg');
     var id = itemId(card, index, '.recall-q');
     card.dataset.progressId = id;
+    card.studyQuestion = { slug: 'zsb-math', lessonId: LESSON_ID, ref: 'recall:' + id, kind: 'recall', answer: [] };
+    card.addEventListener('study-retry', function () { var items = readItems(); delete items.recall[id]; saveItems(items); restore(); ZC.refreshProgress(); });
     if (msg) msg.setAttribute('role', 'status');
 
     function restore(state) {
@@ -330,6 +337,7 @@
       card.dataset.reviewNeeded = state.vote === 'bad' ? '1' : '0';
       if (good) good.disabled = !!state.vote;
       if (bad) bad.disabled = !!state.vote;
+      if (msg && !state.vote) msg.textContent = '';
       if (msg && state.vote) msg.textContent = state.vote === 'good'
         ? '已记录。隔天和一周后回来再测这张卡。'
         : '已记录——“没记住”的卡才是最值得练的。建议现在重读一遍，明天再来。';
@@ -344,6 +352,7 @@
       saveItems(items);
       restore(state);
       if (vote) {
+        document.dispatchEvent(new CustomEvent('study:attempt', { detail: { node: card, correct: vote === 'good', independent: true } }));
         var r = rec();
         var field = vote === 'good' ? 'recallOk' : 'recallNo';
         r[field] = (r[field] || 0) + 1;
@@ -351,6 +360,7 @@
       } else ZC.refreshProgress();
     }
     restore(readItems().recall[id]);
+    card.refreshStudyAnswer = function () { restore(readItems().recall[id]); };
 
     if (reveal) reveal.addEventListener('click', function () {
       update();
@@ -449,6 +459,18 @@
     document.querySelectorAll('.recall').forEach(setupRecall);
     document.querySelectorAll('.lesson-progress').forEach(setupProgress);
     if (document.body.dataset.indexPage === '1') ZC.decorateIndex();
+    function refreshStoredAnswers(event) {
+      if (event.type === 'storage' && event.key !== null && event.key !== ITEMS_KEY && event.key !== 'zc-progress-v1') return;
+      itemsCache = null;
+      document.querySelectorAll('.quiz').forEach(function (node) { if (node.refreshStudyAnswer) node.refreshStudyAnswer(); });
+      document.querySelectorAll('.recall').forEach(function (node) { if (node.refreshStudyAnswer) node.refreshStudyAnswer(); });
+      ZC.refreshProgress();
+    }
+    if (window.addEventListener) {
+      window.addEventListener('storage', refreshStoredAnswers);
+      window.addEventListener('pageshow', refreshStoredAnswers);
+      window.addEventListener('l1uj:backup-imported', refreshStoredAnswers);
+    }
   }
 
   if (document.readyState === 'loading') {

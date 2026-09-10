@@ -49,8 +49,8 @@
       var text = title ? title.textContent.trim() : '';
       var signature = JSON.stringify([text, answer, options.map(function (node) { return node.textContent; })]);
       var attempts = [];
-      // The mistakes tool's explicit #qN link starts a fresh attempt for this question only.
-      if (location.hash === '#q' + qn) { delete round[qn]; write(ROUND, round); }
+      quiz.studyQuestion = { slug: 'zsb-cs', lessonId: lid, ref: 'q:' + qn, answer: [answer] };
+      quiz.addEventListener('study-retry', function () { round = read(ROUND); delete round[qn]; write(ROUND, round); refreshRecords(); });
       function flag() {
         var past = rec[qn];
         if (!title) return;
@@ -90,7 +90,10 @@
           feedback.className = 'quiz-feedback bad';
         }
         if (quiz.classList.contains('done')) options.forEach(function (node) { node.setAttribute('aria-disabled', 'true'); });
-        if (!restoring) { round[qn] = { signature: signature, attempts: attempts.slice() }; write(ROUND, round); }
+        if (!restoring) {
+          round[qn] = { signature: signature, attempts: attempts.slice() }; write(ROUND, round);
+          document.dispatchEvent(new CustomEvent('study:attempt', { detail: { node: quiz, correct: picked === answer, independent: attempts.length === 1 } }));
+        }
         flag(); summary();
       }
       options.forEach(function (node) {
@@ -126,13 +129,11 @@
     window.addEventListener('pageshow', refreshRecords);
     if (lid && quizzes.length) {
       panel = document.createElement('div'); panel.className = 'quiz-log';
-      panel.innerHTML = '<p class="quiz-log-title">本课测验小结</p><p class="quiz-log-summary"></p><p><a href="mistakes.html">打开错题本 →</a></p>';
+      panel.innerHTML = '<p class="quiz-log-title">本课测验小结</p><p class="quiz-log-summary"></p><p><a href="mistakes.html">统一错题本 →</a></p>';
       var restart = document.createElement('button'); restart.type = 'button'; restart.className = 'btn quiz-redo';
       restart.textContent = '重新练习本课（保留错题记录）';
       restart.addEventListener('click', function () { write(ROUND, {}); location.reload(); });
-      var clear = document.createElement('button'); clear.type = 'button'; clear.className = 'quiz-clear btn'; clear.textContent = '清空本课错题记录';
-      clear.addEventListener('click', function () { all = read(STORE); delete all[lid]; write(STORE, all); write(ROUND, {}); location.reload(); });
-      panel.appendChild(restart); panel.appendChild(clear);
+      panel.appendChild(restart);
       quizzes[quizzes.length - 1].after(panel); summary();
     }
     if (/^#q\d+$/.test(location.hash)) {

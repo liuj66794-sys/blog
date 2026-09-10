@@ -160,6 +160,11 @@
 
   renderTabs();
   renderList();
+/* zhixu-review-paper */
+  var reviewRef = new URLSearchParams(location.search).get('reviewQuestion');
+  var reviewPaper = reviewRef && papers.find(function (p) { return p.mcqs.some(function (q) { return q.id === reviewRef; }); });
+  if (reviewPaper) openPaper(reviewPaper.id);
+
 })();
 </script>
 </body>

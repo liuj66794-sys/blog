@@ -1,5 +1,7 @@
 import { trackReading } from './reading-state.mjs'
 import { attachLessonSession } from './lesson-session.mjs'
+import { attachMistakeTracking } from './lesson-mistakes.mjs'
+import { attachLearningGuide } from './learning-guide.mjs'
 
 const base = document.querySelector('script[data-study-base]')?.dataset.studyBase || '/blog/'
 const root = document.documentElement
@@ -150,6 +152,24 @@ for (const table of main.querySelectorAll('table')) {
   table.before(wrapper)
   wrapper.append(table)
 }
-function startSession() { attachLessonSession(base, {interactive:true}); trackReading(base) }
+// 状态胶囊在窄屏折叠为一行，点按或回车展开全文（样式只在 ≤600px 生效）
+for (const pill of document.querySelectorAll('.lesson-progress')) {
+  pill.setAttribute('data-collapsed', '')
+  pill.setAttribute('role', 'button')
+  pill.setAttribute('tabindex', '0')
+  pill.setAttribute('aria-expanded', 'false')
+  pill.setAttribute('aria-label', '学习状态摘要，展开查看详情')
+  const toggle = () => {
+    const collapsed = pill.hasAttribute('data-collapsed')
+    if (collapsed) pill.removeAttribute('data-collapsed')
+    else pill.setAttribute('data-collapsed', '')
+    pill.setAttribute('aria-expanded', String(collapsed))
+  }
+  pill.addEventListener('click', toggle)
+  pill.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle() }
+  })
+}
+function startSession() { attachMistakeTracking(base); attachLessonSession(base, {interactive:true}); attachLearningGuide(base); trackReading(base) }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startSession, { once: true })
 else startSession()

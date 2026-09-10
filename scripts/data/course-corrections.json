@@ -1,0 +1,580 @@
+[
+  {
+    "id": "MATH-0007-ln-tangent-position",
+    "subject": "zsb-math",
+    "file": "lessons/0007-基本初等函数图像库实战.html",
+    "reason": "ln x 在 x>0 上满足 ln x≤x−1，且仅在 x=1 取等；原文把曲线写成恒在切线 y=x−1 上方，方向相反且掩盖等号。",
+    "changes": [
+      {
+        "from": "$\\ln x$ 在 $y=x-1$ 上方",
+        "to": "$\\ln x$ 不高于 $y=x-1$，且在 $x=1$ 处相切",
+        "count": 1
+      },
+      {
+        "from": "<strong>恒在直线 $y=x-1$ 上方</strong>（相切于 $(1,0)$）",
+        "to": "<strong>不高于直线 $y=x-1$，且在 $x=1$ 处相切</strong>",
+        "count": 1
+      },
+      {
+        "from": "data-label=\"$y=\\ln x$（蓝）恒在 $y=x-1$（虚线）上方\"",
+        "to": "data-label=\"$y=\\ln x$（蓝）不高于 $y=x-1$（虚线），$x=1$ 处相切\"",
+        "count": 1
+      },
+      {
+        "from": "$\\ln x$ 恒在 $y=x-1$ 上方（切于 $(1,0)$）",
+        "to": "$\\ln x$ 不高于 $y=x-1$，且在 $x=1$ 处相切",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "MATH-0010-infinity-notation-clarity",
+    "subject": "zsb-math",
+    "file": "lessons/0010-极限概念与左右极限.html",
+    "reason": "本课表格已明确把 x→∞ 约定为 |x|→∞；题干再显式写出该约定，可避免跨教材读者把裸记号误读为仅 x→+∞，保留原答案 D。",
+    "changes": [
+      {
+        "from": "<p class=\"quiz-q\">$\\lim\\limits_{x\\to\\infty}e^{x}$ 的结论是</p>",
+        "to": "<p class=\"quiz-q\">若按本课约定 $|x|\\to\\infty$，则 $\\lim\\limits_{|x|\\to\\infty}e^{x}$ 的结论是</p>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "MATH-0012-q4-domain-proof",
+    "subject": "zsb-math",
+    "file": "lessons/0012-两个重要极限.html",
+    "reason": "原题仅给 a≠0 且 x→0，两侧时底数可能为负，表达式没有统一的实值定义；按本课对比题意保留答案 1，限定 a>0、x→0+ 后取对数证明才严格。",
+    "changes": [
+      {
+        "from": "<p class=\"quiz-q\">$\\lim\\limits_{x\\to0}\\left(1+\\dfrac ax\\right)^{bx}$（$a\\neq0$）的值是（易错题）</p>",
+        "to": "<p class=\"quiz-q\">$\\lim\\limits_{x\\to0^+}\\left(1+\\dfrac ax\\right)^{bx}$（$a>0$）的值是（易错题）</p>",
+        "count": 1
+      },
+      {
+        "from": "<div class=\"quiz-exp\">这不是 $1^{\\infty}$！底 $1+\\frac ax\\to\\infty$，属 $\\infty^{0}$ 型。取对数，令 $u=\\frac ax\\to\\infty$：$\\ln L=bx\\ln\\left(1+\\frac ax\\right)=ab\\cdot\\dfrac{\\ln(1+u)}{u}\\to ab\\cdot 0=0$，故 $L=e^{0}=1$。先验底再套公式——三步法的第一步是\"确认 $u\\to1$\"。（秋讲练习 11(4) 原题陷阱。）</div>",
+        "to": "<div class=\"quiz-exp\">$a>0,\\ x\\to0^+$ 时，令 $u=\\dfrac ax\\to+\\infty$，底 $1+u>0$。这是 $\\infty^{0}$ 型，不能套 $1^{\\infty}$。取对数：$\\ln L=bx\\ln(1+u)=ab\\cdot\\dfrac{\\ln(1+u)}{u}\\to ab\\cdot0=0$，故 $L=e^0=1$。三步法的前提是先确认底趋于 $1$；本题不满足。（秋讲练习 11(4) 原题陷阱。）</div>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "MATH-0017-q4-real-domain",
+    "subject": "zsb-math",
+    "file": "lessons/0017-连续与间断点.html",
+    "reason": "f 的实自然定义域为 [-1,1]∖{0}；−3 不是定义域的聚点，不能把不存在的 arcsin(−3) 归为无穷间断点，实定义域内只需分类 x=0。",
+    "changes": [
+      {
+        "from": "<button data-k=\"D\">$x=0$ 可去、$x=-3$ 无穷</button>",
+        "to": "<button data-k=\"D\">$x=0$ 可去；$x=-3$ 不属于该实函数定义域的聚点，不能分类为间断点</button>",
+        "count": 1
+      },
+      {
+        "from": "<div class=\"quiz-exp\">$x=0$：$\\arcsin x\\sim x$，极限 $=\\dfrac{1}{0+3}=\\dfrac13$ 存在但无定义 ⇒ 可去。$x=-3$：分母 $\\to0$、分子 $\\arcsin(-3)$ 又无意义，属无穷型。两个无定义点，逐点判，别漏。</div>",
+        "to": "<div class=\"quiz-exp\">实数范围内，$f$ 的自然定义域为 $[-1,1]\\setminus\\{0\\}$。$x=0$ 时 $\\arcsin x\\sim x$，故极限 $=\\dfrac13$ 存在但函数无定义，是可去间断点。$x=-3$ 不在定义域的聚点中，$x\\to-3$ 时没有定义域内的实数点可趋近，不能写 $\\arcsin(-3)$，也不能归类为无穷间断点。因此该实函数只有 $x=0$ 这一可去间断点。</div>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "MATH-0028-q5-domain",
+    "subject": "zsb-math",
+    "file": "lessons/0028-第二类换元与三角换元.html",
+    "reason": "倒代换后的答案 −arcsin(1/x)+C 在 x>1 分支上成立；原题未给分支，x<−1 时导数符号不同，应显式限定。",
+    "changes": [
+      {
+        "from": "<p class=\"quiz-q\">积分 $\\displaystyle\\int\\dfrac{dx}{x\\sqrt{x^{2}-1}}$ 的合适解法是（秋讲练习 10(7)）</p>",
+        "to": "<p class=\"quiz-q\">积分 $\\displaystyle\\int\\dfrac{dx}{x\\sqrt{x^{2}-1}}$ 的合适解法是（取 $x>1$；秋讲练习 10(7)）</p>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "MATH-0034-q1-area-answer",
+    "subject": "zsb-math",
+    "file": "lessons/0034-定积分应用.html",
+    "reason": "解析算出面积 4/3，而 data-answer=C 且 C 选项写成“4/3 之外的 8/3”，造成判分与选项文本都不一致。",
+    "changes": [
+      {
+        "from": "<div class=\"quiz\" data-answer=\"C\">\n  <span class=\"quiz-no\">随堂测 1</span>",
+        "to": "<div class=\"quiz\" data-answer=\"A\">\n  <span class=\"quiz-no\">随堂测 1</span>",
+        "count": 1
+      },
+      {
+        "from": "<button data-k=\"C\">$\\dfrac{4}{3}$ 之外的 $\\dfrac{8}{3}$</button>",
+        "to": "<button data-k=\"C\">$\\dfrac{8}{3}$</button>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "MATH-0042-q4-derivation-typo",
+    "subject": "zsb-math",
+    "file": "lessons/0042-一阶微分方程.html",
+    "reason": "两边乘 x 后应为 (xy)'=x²；原解析写成 (xy)'=x，但后续积分和答案仍按 x² 计算，属于可直接修复的推导笔误。",
+    "changes": [
+      {
+        "from": "$(xy)'=x$，积分",
+        "to": "$(xy)'=x^{2}$，积分",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "MATH-0043-q5-independent-solutions",
+    "subject": "zsb-math",
+    "file": "lessons/0043-二阶常系数线性方程.html",
+    "reason": "A 作为二阶通解需要 y1−y3、y2−y3 构成齐次解基；三个特解若相关或重复，原题条件不足，A 不一定覆盖全部通解。",
+    "changes": [
+      {
+        "from": "设 $y_1,y_2,y_3$ 是 $L[y]=f(x)$ 的三个特解，则",
+        "to": "设 $y_1,y_2,y_3$ 是 $L[y]=f(x)$ 的三个特解，且 $y_1-y_3$、$y_2-y_3$ 线性无关，则",
+        "count": 1
+      },
+      {
+        "from": "<div class=\"quiz-exp\">$y_1-y_3$、$y_2-y_3$ 都是齐次解，通解 = 齐次通解 + $y_3$，整理即 A（夏讲 P50 选择题）。B 的三个常数不独立（二阶方程只容两个）。</div>",
+        "to": "<div class=\"quiz-exp\">在题设的线性无关条件下，$y_1-y_3$、$y_2-y_3$ 构成对应二阶齐次方程的解基；通解 = 齐次通解 + $y_3$，整理即 A（夏讲 P50 选择题）。若缺少线性无关条件，三个特解可能重复或差解相关，A 不一定覆盖全部通解。</div>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "CS-0002-char-premise",
+    "subject": "zsb-cs",
+    "file": "lessons/0002-data-representation.html",
+    "reason": "char 的位宽、signedness 以及溢出结果由实现决定；原文把 8 位有符号二补码示例写成普适 C 结论，应显式标注本题环境约定。",
+    "changes": [
+      {
+        "from": "<tr><td>char</td><td>1</td><td>8</td><td>-128 ~ 127（-2⁷ ~ 2⁷-1）</td></tr>",
+        "to": "<tr><td>有符号 char（本课按 8 位二补码示例）</td><td>1</td><td>8</td><td>-128 ~ 127（-2⁷ ~ 2⁷-1）</td></tr>",
+        "count": 1
+      },
+      {
+        "from": "<p>char 范围 -128~127，超出后按 ±256 回绕：</p>",
+        "to": "<p>以下按本课示例约定：char 为 8 位有符号二补码，超出可表示范围时按 ±256 回绕；实际 C 实现的 char 位宽与 signedness 可能不同。</p>",
+        "count": 1
+      },
+      {
+        "from": "<p class=\"quiz-q\">5. 执行 char c = 128; printf(\"%d\", c); 的输出是</p>",
+        "to": "<p class=\"quiz-q\">5. 在本课约定的 8 位有符号 char 且按模 256 回绕的环境下，执行 char c = 128; printf(\"%d\", c); 的输出是</p>",
+        "count": 1
+      },
+      {
+        "from": "<p class=\"quiz-expl\">char 上限为 127，128 上溢后按 128 - 256 = -128 回绕。</p>",
+        "to": "<p class=\"quiz-expl\">在上述约定下，char 上限为 127，128 按 8 位有符号二补码回绕为 -128。</p>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "CS-0004-ascii-premise",
+    "subject": "zsb-cs",
+    "file": "lessons/0004-sequential-io.html",
+    "reason": "标准 C 不保证字符编码中数值 97 对应 a；题目实际考 ASCII，应把平台前提写进示例和题干。",
+    "changes": [
+      {
+        "from": "<li><code>int putchar(int ch);</code>：输出<strong>单个字符</strong>，参数可以是字符常量、字符变量、ASCII 码或转义符。例如 <code>putchar('A');</code> → A，<code>putchar(97);</code> → a。</li>",
+        "to": "<li><code>int putchar(int ch);</code>：输出<strong>单个字符</strong>，参数可以是字符常量、字符变量、ASCII 码或转义符。例如 <code>putchar('A');</code> → A；在 ASCII 编码环境下，<code>putchar(97);</code> → a。</li>",
+        "count": 1
+      },
+      {
+        "from": "<p class=\"quiz-q\">4. 执行 <code>putchar(97);</code>，屏幕输出是</p>",
+        "to": "<p class=\"quiz-q\">4. 在 ASCII 编码环境下，执行 <code>putchar(97);</code>，屏幕输出是</p>",
+        "count": 1
+      },
+      {
+        "from": "<p class=\"quiz-expl\">putchar 输出单个字符；97 是 'a' 的 ASCII 码，所以输出 a。</p>",
+        "to": "<p class=\"quiz-expl\">putchar 输出单个字符；在 ASCII 编码环境下，97 是 'a' 的编码值，所以输出 a。</p>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "CS-0006-right-shift-premise",
+    "subject": "zsb-cs",
+    "file": "lessons/0006-selection-advanced.html",
+    "reason": "负有符号整数右移在标准 C 中依实现而定；原答案 −16>>2=−4 采用常见二补码算术右移，应显式注明题设前提。",
+    "changes": [
+      {
+        "from": "<tr><td><code>&gt;&gt;</code></td><td>5</td><td>右移，<strong>正数左补 0，负数左补 1</strong></td><td><code>-16&gt;&gt;2 = -4</code>，等价 <code>m÷2ⁿ</code></td></tr>",
+        "to": "<tr><td><code>&gt;&gt;</code></td><td>5</td><td>本课按常见有符号二补码算术右移：正数左补 0，负数左补 1；标准 C 对负有符号数右移的结果依实现而定</td><td><code>-16&gt;&gt;2 = -4</code>；此例恰好整除，负奇数算术右移需向下取整</td></tr>",
+        "count": 1
+      },
+      {
+        "from": "<p>所有位运算都对<strong>补码</strong>进行；负数右移左侧补 1；取反有规律 <code>~x = -x - 1</code>。笔算时先把数写成 8 位或 32 位补码，再逐位运算，最后转回真值。</p>",
+        "to": "<p>以下按常见有符号二补码算术右移约定：所有位运算都对<strong>补码</strong>进行；负数右移左侧补 1；取反有规律 <code>~x = -x - 1</code>。标准 C 对负有符号数右移的结果依实现而定；笔算时先把数写成 8 位或 32 位补码，再逐位运算，最后转回真值。</p>",
+        "count": 1
+      },
+      {
+        "from": "<div class=\"recall-a\">对补码运算；负数右移左侧补 1；快捷公式 <code>~x = -x - 1</code>。左移相当于乘 2ⁿ，右移相当于除以 2ⁿ。</div>",
+        "to": "<div class=\"recall-a\">按本课常见有符号二补码算术右移约定：对补码运算；负数右移左侧补 1；快捷公式 <code>~x = -x - 1</code>。移位数须小于类型位宽：有符号非负数左移仅在结果可表示时可按乘 2ⁿ 理解；算术右移按除 2ⁿ 后向下取整理解（如 -5&gt;&gt;1=-3，与 C 的 -5/2=-2 不同）；标准 C 对负有符号数右移的结果依实现而定。</div>",
+        "count": 1
+      },
+      {
+        "from": "<p class=\"quiz-q\">5. 表达式 <code>-16 &gt;&gt; 2</code> 的值是</p>",
+        "to": "<p class=\"quiz-q\">5. 在本课采用常见有符号二补码算术右移的约定下，表达式 <code>-16 &gt;&gt; 2</code> 的值是</p>",
+        "count": 1
+      },
+      {
+        "from": "<p class=\"quiz-expl\">右移对负数左侧补 1，等价于除以 2ⁿ，所以 -16/4 = -4。正数才是右移补 0。</p>",
+        "to": "<p class=\"quiz-expl\">在题设约定下，负数右移左侧补 1，此处 -16 可被 4 整除，所以 -16&gt;&gt;2 = -4；正数右移左侧补 0。</p>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "CS-0008-vla-scope",
+    "subject": "zsb-cs",
+    "file": "lessons/0008-arrays-and-strings.html",
+    "reason": "原表和 A 把 int a[n] 一概判错；C99/C11 块作用域允许变长数组，只有文件作用域的普通变量长度数组不合法。为保留原题唯一答案，补上文件作用域前提并同步解释。",
+    "changes": [
+      {
+        "from": "<tr><td>数组大小</td><td>必须是常量或常量表达式，如 <code>8</code>、<code>2+6</code></td><td><code>int a[n];</code>（n 变量）、<code>int a[2.3];</code></td></tr>",
+        "to": "<tr><td>数组大小</td><td>文件作用域必须是整型常量表达式；块作用域在 C99 或支持变长数组的 C11 实现中可使用正的变长数组，如 <code>int a[n];</code></td><td>文件作用域的 <code>int a[n];</code>（n 普通变量）、<code>int a[2.3];</code></td></tr>",
+        "count": 1
+      },
+      {
+        "from": "<li data-opt=\"a\">int a[n];（n 为变量）</li>",
+        "to": "<li data-opt=\"a\">文件作用域的 int a[n];（n 为普通变量）</li>",
+        "count": 1
+      },
+      {
+        "from": "<p class=\"quiz-expl\">数组大小必须是常量表达式且为整型；不指定长度又不初始化会报错。int a[5]={0} 是标准全零写法。</p>",
+        "to": "<p class=\"quiz-expl\">本题把 A 明确为文件作用域数组：文件作用域数组长度必须是整型常量表达式，所以 int a[n]（n 为普通变量）不合法；块作用域在 C99 或支持变长数组的 C11 实现中可有变长数组，但不属于此选项前提。D 在块作用域既不指定长度又不初始化，不能定义该自动数组；int a[5]={0} 是标准全零写法。</p>",
+        "count": 1
+      },
+      {
+        "from": "<li data-opt=\"d\">int a[];</li>",
+        "to": "<li data-opt=\"d\">块作用域的 int a[];（无 extern、无初始化）</li>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "CS-0027-processing-explanation",
+    "subject": "zsb-cs",
+    "file": "lessons/0027-sprint-recitation.html",
+    "reason": "data-answer=d 且 D 为“插入、删除、排序”，三者均为改变结构值的加工型操作；解析误写成只有 B，导致反馈与判分冲突。",
+    "changes": [
+      {
+        "from": "<p class=\"quiz-expl\">数据结构绪论笔记：加工型操作改变结构的值，如插入、删除、更新、排序；引用型操作只查询，如查找、遍历。因此只有 B 组全部属于加工型。</p>",
+        "to": "<p class=\"quiz-expl\">数据结构绪论笔记：加工型操作改变结构的值，如插入、删除、更新、排序；引用型操作只查询，如查找、遍历。因此只有 D 组全部属于加工型。</p>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0009-marriage-time-anchor",
+    "subject": "zsb-english",
+    "file": "lessons/0009-tenses-voice.html",
+    "reason": "题干把 wedding（婚礼，名词）误作 They 的后置修饰语，且 by 2022 没有说话时点时会在当前回顾语境与将来完成时之间产生歧义。题目应明确是真题改编并给出 2021 年的假设说话时点。",
+    "changes": [
+      {
+        "from": "【22重庆真题】They, wedding in 1992, ____ for 30 years by 2022.",
+        "to": "【22重庆真题改编（假设说话时点为2021年）】They got married in 1992 and ____ for 30 years by 2022.",
+        "count": 1
+      },
+      {
+        "from": "课件附答案 C：by + 将来时间（站在过去看 2022）→ 将来完成时 will have been married。",
+        "to": "本题为真题改编，明确将说话时点设为2021年；by 2022 表示将来完成时点，故用 will have been married。若改成当前回顾语境，应改为 had been married，不能沿用原答案。",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0011-not-invited-unique",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "reason": "not having been invited 与 not being invited 都能构成语法正确的被动动名词短语；原题没有明确先后时，不能把后者作为绝对错误。将干扰项改成主动且缺宾语的形式，保留完成被动答案并在解析中说明原两种形式的适用语境。",
+    "changes": [
+      {
+        "from": "opts: ['A. not inviting', 'B. not having been invited', 'C. not invited', 'D. not being invited'], a: 1,",
+        "to": "opts: ['A. not inviting', 'B. not having been invited', 'C. not invited', 'D. not having invited'], a: 1,",
+        "count": 1
+      },
+      {
+        "from": "原为填空题 not invite（笔记补充解析）。Tom 与 invite 是被动关系，且“没被邀请”先于“不高兴” → not having been invited。",
+        "to": "Tom 是被邀请的一方，故需要被动形式。not having been invited 表示此前没有受到邀请，B 符合；A、D 是主动形式，C 不能在 of 后单独充当动名词短语。注意：not being invited 本身也合语法，不应把完成式当作唯一被动表达。",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0011-interrupted-unique",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "reason": "being interrupted 表示一般情形，having been interrupted 可表示已完成的被打断；题干无时间限制，原两项存在语义与体的竞争。把干扰项改为主动形式，使被动关系唯一。",
+    "changes": [
+      {
+        "from": "opts: ['A. being', 'B. having been', 'C. be', 'D. been'], a: 0,",
+        "to": "opts: ['A. being', 'B. having', 'C. be', 'D. been'], a: 0,",
+        "count": 1
+      },
+      {
+        "from": "教材 P157 综合练习。like 接 doing；“被打断”是被动 → being done。",
+        "to": "like 后可接动名词。句意是他工作时不喜欢被打断，being interrupted 表示被动，A 符合；having interrupted 是主动形式。完成被动式 having been interrupted 在回顾已发生的打断时也可能成立。",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0011-produced-unique",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "reason": "Producing 与 Having produced 都能与主句 craftsman 构成语法句，分别表达伴随或先后；原题没有限定动作关系。将 A 换为过去分词，避免与完成式答案竞争。",
+    "changes": [
+      {
+        "from": "opts: ['A. Producing', 'B. Being produced', 'C. Produced', 'D. Having produced'], a: 3,",
+        "to": "opts: ['A. Produces', 'B. Being produced', 'C. Produced', 'D. Having produced'], a: 3,",
+        "count": 1
+      },
+      {
+        "from": "教材 P157 综合练习。制作先于邀请，craftsman 主动 → having done。",
+        "to": "主句的主语 craftsman 是制造动作的执行者；制造完成后发出邀请，用 having produced 表示主动且先于主句的动作，选 D。Produces 是有限动词，不能在该位置充当非谓语状语；B、C 是被动形式。",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0011-see-playing-unique",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "reason": "see sb. do 与 see sb. doing 都是有效结构，原题没有说明观察完整动作还是正在发生的动作。保留 playing 并把干扰项改为过去分词，避免把可用结构判成错误。",
+    "changes": [
+      {
+        "from": "opts: ['A. play', 'B. playing', 'C. played', 'D. to play'], a: 1,",
+        "to": "opts: ['A. plays', 'B. playing', 'C. played', 'D. to play'], a: 1,",
+        "count": 1
+      },
+      {
+        "from": "教材 P161 随堂练习（笔记补充解析）。后句说明动作正在发生 → see sb. doing。",
+        "to": "see sb. doing 表示看到动作正在进行，选 B playing。see sb. do 也可用，但侧重动作整体；plays 是有限动词，不能用于 see him plays 这一结构。",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0011-after-admitted-unique",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "reason": "being admitted 与 having been admitted 都是语法正确的被动动名词，前者不必然因“先发生”而错误。将 C 换为主动且缺宾语的形式，保留完成被动答案，并在解析中承认原 C 的语法可能性。",
+    "changes": [
+      {
+        "from": "opts: ['A. admitting', 'B. admitted', 'C. being admitted', 'D. having been admitted'], a: 3,",
+        "to": "opts: ['A. admitting', 'B. admitted', 'C. having admitted', 'D. having been admitted'], a: 3,",
+        "count": 1
+      },
+      {
+        "from": "教材 P163–166 随堂练习（笔记补充解析）。动作被动且先于 began → having been done。",
+        "to": "After 后接动名词，he 是被录取的一方，用 having been admitted 表示录取先于 began，选 D。注意：after being admitted 也能表达“被录取之后”，不能仅凭动作有先后就排除一般式。",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0012-scholarship-article",
+    "subject": "zsb-english",
+    "file": "lessons/0012-attributive-clauses.html",
+    "reason": "winner 是可数名词，表示获得一项奖学金时应使用 a scholarship；原句缺少冠词，影响题干语言准确性。",
+    "changes": [
+      {
+        "from": "【24重庆真题】Alex is the only one of the students who ____ a winner of scholarship for three years.",
+        "to": "【24重庆真题改编】Alex is the only one of the students who ____ a scholarship winner for three years.",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0012-lifetime",
+    "subject": "zsb-english",
+    "file": "lessons/0012-attributive-clauses.html",
+    "reason": "lifetime 是固定单词，原题写成 a life time 属于拼写/词形错误。",
+    "changes": [
+      {
+        "from": "（原填空题）Students at university can learn and make friends ____ will last a life time.",
+        "to": "（原填空题）Students at university can learn and make friends ____ will last a lifetime.",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0013-such-a-success",
+    "subject": "zsb-english",
+    "file": "lessons/0013-noun-clauses.html",
+    "reason": "such 修饰单数可数名词时使用 such a/an + 名词，原题的 a such success 词序错误。",
+    "changes": [
+      {
+        "from": "【22重庆】____ makes me feel surprised is that he made a such success.",
+        "to": "【22重庆真题改编】____ makes me feel surprised is that he made such a success.",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0016-so-selfish-past",
+    "subject": "zsb-english",
+    "file": "lessons/0016-special-structures.html",
+    "reason": "倒装答案 was she 使用过去时，主句谓语 avoid 也应与该过去叙述保持一致；原 avoid 与答案及解析时态不一致。",
+    "changes": [
+      {
+        "from": "So selfish ____ that everyone avoid talking with her.（她如此自私，以至于人人都避免和她说话。）",
+        "to": "So selfish ____ that everyone avoided talking with her.（她如此自私，以至于人人都避免和她说话。）",
+        "count": 1
+      },
+      {
+        "from": "课件原答案：So 置于句首引发部分倒装，主语是 she → was she。笔记注明：课件原文谓语 avoid 按标准语法应为 avoids。",
+        "to": "课件原答案：So 置于句首引发部分倒装，主语是 she → was she。为与过去时 was 保持一致，主句改为 everyone avoided talking with her。",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0020-bought-typo",
+    "subject": "zsb-english",
+    "file": "lessons/0020-passage-reading.html",
+    "reason": "选项 A 的 bought 被误拼为 bough；即使是干扰项，也不应保留明显拼写错误。",
+    "changes": [
+      {
+        "from": "A. have; bough（课件原文如此，应为 bought）",
+        "to": "A. have; bought",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0020-unemployment-range",
+    "subject": "zsb-english",
+    "file": "lessons/0020-passage-reading.html",
+    "reason": "失业率从 20% 到 30% 是上升，不能与 has fallen 搭配；原解析已指出矛盾却保留题面，造成答案与事实逻辑冲突。改为从 30% 降至 20%，保留现在完成时考点。",
+    "changes": [
+      {
+        "from": "4. 个别源题本身有瑕疵（如 Passage 9 第 6 题「fall from 20% to 30%」数值矛盾），按源题完整保留作答，不擅自改题<br>",
+        "to": "4. 个别源题在整理时已对明显文字或数值矛盾做最小修订，并在题干与解析中标明修订口径<br>",
+        "count": 1
+      },
+      {
+        "from": "The unemployment rate in this district ______ from 20% to 30% in the past two years.<br>（过去两年，这一地区的失业率从 20% 变为 30%。）",
+        "to": "The unemployment rate in this district ______ from 30% to 20% in the past two years.<br>（过去两年，这一地区的失业率从 30% 降至 20%。）（整理时已修正原题百分比的增减方向。）",
+        "count": 1
+      },
+      {
+        "from": "四个选项中只有 A 的时态能与 in the past two years 搭配，但 fall from 20% to 30% 在数值逻辑上矛盾（20% 到 30% 应为 rise）。按源题完整保留，不擅自改题。",
+        "to": "in the past two years 与现在完成时搭配；失业率从 30% 降至 20%，所以选 has fallen。",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "politics-resources-mcq-count",
+    "subject": "zsb-politics",
+    "file": "RESOURCES.md",
+    "reason": "题库结构扫描统计 40 份卷、1245 道客观题；资源页仍写 1214，道路由汇总数字不一致造成。",
+    "changes": [
+      {
+        "from": "刷题场直接消费 40 份卷子（随堂练习/题海/模拟押题，客观题 1214 道）",
+        "to": "刷题场直接消费 40 份卷子（随堂练习/题海/模拟押题，客观题 1245 道）",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "en-0011-though-explicit-task",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "reason": "原题 being tired 与 tired 都可成立；明确要求连词加形容词的省略结构，避免把另一语法形式误判为错误。",
+    "changes": [
+      {
+        "from": "Though ____, he still went on working.<br>（尽管很累，他仍继续工作。）",
+        "to": "将 Though he was tired 改写为“连词 + 形容词”的省略结构：Though ____, he still went on working.<br>（尽管很累，他仍继续工作。）",
+        "count": 1
+      },
+      {
+        "from": "教材 P163–166 随堂练习（笔记补充解析）。让步状语；being tired 可省略 being，保留连词 though → tired。",
+        "to": "本题要求“连词 + 形容词”的省略结构：从 Though he was tired 中省去与主句相同的主语 he 和 be 动词 was，保留 Though tired，选 B。Though being tired 本身并非语法错误，但不是本题指定的简化形式。",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "CS-0002-char-object-vs-literal",
+    "subject": "zsb-cs",
+    "file": "lessons/0002-data-representation.html",
+    "reason": "标准 C 字符常量类型为 int。改考 char 对象与字符数组的 sizeof，区分字符常量和存储对象。",
+    "changes": [
+      {
+        "from": "<div class=\"quiz\" data-answer=\"a\">\n  <p class=\"quiz-q\">7. 字符常量 'a' 与字符串常量 \"a\" 占用的内存分别是</p>\n  <ol class=\"quiz-opts\" type=\"A\">\n    <li data-opt=\"a\">'a' 占 1 字节，\"a\" 占 2 字节</li>\n    <li data-opt=\"b\">'a' 占 2 字节，\"a\" 占 1 字节</li>\n    <li data-opt=\"c\">都占 1 字节</li>\n    <li data-opt=\"d\">都占 2 字节</li>\n  </ol>\n  <p class=\"quiz-feedback\"></p>\n  <p class=\"quiz-expl\">'a' 是字符常量，按 ASCII 码存 1 字节；\"a\" 是字符串常量，末尾自动补 '\\0'，共占 2 字节。</p>\n</div>",
+        "to": "<div class=\"quiz\" data-answer=\"a\">\n  <p class=\"quiz-q\">7. 定义 char c = 'a'; char s[] = \"a\"; 后，sizeof(c) 与 sizeof(s) 分别是</p>\n  <ol class=\"quiz-opts\" type=\"A\">\n    <li data-opt=\"a\">c 占 1 字节，s 占 2 字节</li>\n    <li data-opt=\"b\">c 占 2 字节，s 占 1 字节</li>\n    <li data-opt=\"c\">都占 1 字节</li>\n    <li data-opt=\"d\">都占 2 字节</li>\n  </ol>\n  <p class=\"quiz-feedback\"></p>\n  <p class=\"quiz-expl\">sizeof(char) 按定义为 1 个 C 字节，所以 c 占 1 字节；s 是包含 a 和末尾空字符的 char 数组，占 2 字节。注意：标准 C 中字符常量本身的类型是 int，sizeof('a') 等于 sizeof(int)，不能与 sizeof(c) 混淆。</p>\n</div>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "MATH-0014-lhopital-unique",
+    "subject": "zsb-math",
+    "file": "lessons/0014-洛必达法则.html",
+    "reason": "两种等价变形都可使用洛必达；题干明确考查无穷比无穷的等价变形，解析承认另一个形式合法。",
+    "changes": [
+      {
+        "from": "<p class=\"quiz-q\">化 $\\lim\\limits_{x\\to0^+}x\\ln x$（$0\\cdot\\infty$ 型）为可直接洛的形式，最好写成</p>",
+        "to": "<p class=\"quiz-q\">化 $\\lim\\limits_{x\\to0^+}x\\ln x$（$0\\cdot\\infty$ 型）等价改写为可直接使用洛必达法则的无穷比无穷型，应该写成</p>",
+        "count": 1
+      },
+      {
+        "from": "<div class=\"quiz-exp\">A 洛一次得 $\\dfrac{1/x}{-1/x^2}=-x\\to0$。经验法则：<strong>把多项式放到分母，复杂的（对数）留在分子</strong>——B、C 那样放会越洛越繁。答案：$x\\ln x\\to0$。</div>",
+        "to": "<div class=\"quiz-exp\">A 与原式相等且为无穷比无穷型，洛一次得 $\\dfrac{1/x}{-1/x^2}=-x\\to0$。B 也是合法的等价变形，可以按 $0/0$ 型使用洛必达，但不符合本题指定的型别；C 不与原式相等，且其型别也不是无穷比无穷。原极限为 $0$。</div>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "CS-0008-bubble-index",
+    "subject": "zsb-cs",
+    "file": "lessons/0008-arrays-and-strings.html",
+    "reason": "比较次数公式依赖从 0 开始的趟编号和没有提前退出的完整循环。",
+    "changes": [
+      {
+        "from": "<p class=\"quiz-q\">3. n 个数进行冒泡排序，比较趟数与第 x 趟次数为</p>",
+        "to": "<p class=\"quiz-q\">3. n 个数进行不提前退出的冒泡排序，趟编号 x 从 0 到 n−2。总趟数与第 x 趟比较次数为</p>",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "CS-0026-shell-gap-sequence",
+    "subject": "zsb-cs",
+    "file": "lessons/0026-sorting.html",
+    "reason": "希尔排序的复杂度取决于增量序列。不能把 n^1.3 的经验估计、最好 n 与最坏 n² 写为所有实现的统一结论。",
+    "changes": [
+      {
+        "from": "描述希尔排序「逐趟缩小增量」的思想与平均 O(n^1.3)",
+        "to": "描述希尔排序「逐趟缩小增量」的思想，并说明其时间复杂度依赖增量序列",
+        "count": 1
+      },
+      {
+        "from": "<table>\n  <tr><th>复杂度</th><th>值</th></tr>\n  <tr><td>最好</td><td>O(n)</td></tr>\n  <tr><td>最坏</td><td>O(n²)</td></tr>\n  <tr><td>平均</td><td><strong>O(n^1.3)</strong>（数学上尚未精确解决）</td></tr>\n  <tr><td>空间</td><td>O(1)</td></tr>\n</table>",
+        "to": "<table>\n  <tr><th>复杂度</th><th>适用条件</th></tr>\n  <tr><td>时间</td><td>须先指定增量序列及实现，不能统一背成某个固定幂次；本课原 O(n^1.3) 只能视作特定情形的经验估计。</td></tr>\n  <tr><td>具体例子</td><td>Knuth 增量 1,4,13,40,… 的标准实现，最坏比较与交换次数为 Θ(n^(3/2))。</td></tr>\n  <tr><td>空间</td><td>原地实现使用 O(1) 额外空间。</td></tr>\n</table>",
+        "count": 1
+      },
+      {
+        "from": "<tr><td>希尔</td><td>O(n)</td><td>平均 O(n^1.3)</td><td>O(1)</td><td><strong>不稳定</strong></td><td>是</td></tr>",
+        "to": "<tr><td>希尔</td><td>依增量序列</td><td>依增量序列与实现</td><td>O(1)</td><td><strong>不稳定</strong></td><td>是</td></tr>",
+        "count": 1
+      },
+      {
+        "from": "<p class=\"quiz-q\">4. 希尔排序的平均时间复杂度是</p>",
+        "to": "<p class=\"quiz-q\">4. 未指定增量序列时，关于希尔排序平均时间复杂度的严谨表述是</p>",
+        "count": 1
+      },
+      {
+        "from": "<li data-opt=\"a\">O(n^1.3)</li>",
+        "to": "<li data-opt=\"a\">依赖增量序列，不能无条件给出一个统一幂次</li>",
+        "count": 1
+      },
+      {
+        "from": "<p class=\"quiz-expl\">希尔排序的平均复杂度 O(n^1.3)（数学上尚未精确解决）；最好 O(n)、最坏 O(n²)、空间 O(1)。</p>",
+        "to": "<p class=\"quiz-expl\">希尔排序要先指定增量序列，才能讨论相应的复杂度界。O(n^1.3) 不是所有希尔排序实现的统一平均复杂度。学习时应优先掌握分组插入、逐步缩小增量以及最终增量为 1。</p>",
+        "count": 1
+      }
+    ]
+  }
+]

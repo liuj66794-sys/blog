@@ -171,7 +171,7 @@
 
 <div class="quiz" data-answer="A">
   <span class="quiz-no">随堂测 5</span>
-  <p class="quiz-q">设 $y_1,y_2,y_3$ 是 $L[y]=f(x)$ 的三个特解，则 $L[y]=f(x)$ 的通解可写成</p>
+  <p class="quiz-q">设 $y_1,y_2,y_3$ 是 $L[y]=f(x)$ 的三个特解，且 $y_1-y_3$、$y_2-y_3$ 线性无关，则 $L[y]=f(x)$ 的通解可写成</p>
   <div class="quiz-opts">
     <button data-k="A">$C_1y_1+C_2y_2+(1-C_1-C_2)y_3$</button>
     <button data-k="B">$C_1y_1+C_2y_2+C_3y_3$（三个常数）</button>
@@ -179,7 +179,7 @@
     <button data-k="D">$C(y_1-y_2)+y_3$ 之外无其他形式</button>
   </div>
   <div class="quiz-verdict"></div>
-  <div class="quiz-exp">$y_1-y_3$、$y_2-y_3$ 都是齐次解，通解 = 齐次通解 + $y_3$，整理即 A（夏讲 P50 选择题）。B 的三个常数不独立（二阶方程只容两个）。</div>
+  <div class="quiz-exp">在题设的线性无关条件下，$y_1-y_3$、$y_2-y_3$ 构成对应二阶齐次方程的解基；通解 = 齐次通解 + $y_3$，整理即 A（夏讲 P50 选择题）。若缺少线性无关条件，三个特解可能重复或差解相关，A 不一定覆盖全部通解。</div>
 </div>
 
 <div class="warn">

@@ -35,7 +35,7 @@
   <ul>
     <li>报出六类基本初等函数各自的<strong>定义域、值域、恒过定点</strong></li>
     <li>看见 $2^x$、$\ln x$、$\sqrt x$ 就能在脑中"放电影"——位置、走势、渐近线</li>
-    <li>用三条<strong>图像位置关系</strong>（底大者高、$e^x$ 在 $y=x+1$ 上方、$\ln x$ 在 $y=x-1$ 上方）秒杀比较大小题</li>
+    <li>用三条<strong>图像位置关系</strong>（底大者高、$e^x$ 在 $y=x+1$ 上方、$\ln x$ 不高于 $y=x-1$，且在 $x=1$ 处相切）秒杀比较大小题</li>
   </ul>
 </div>
 
@@ -115,12 +115,12 @@
   <div class="kp-title">必背三条</div>
   <p style="margin:0.2rem 0">① 同在 $x&gt;0$：<strong>底大者高</strong>（$3^x&gt;2^x$）；$x&lt;0$ 时反过来。</p>
   <p style="margin:0.2rem 0">② $y=e^x$ 的图象<strong>恒在直线 $y=x+1$ 上方</strong>（相切于 $(0,1)$）。</p>
-  <p style="margin:0.2rem 0">③ $y=\ln x$ 的图象<strong>恒在直线 $y=x-1$ 上方</strong>（相切于 $(1,0)$）。</p>
+  <p style="margin:0.2rem 0">③ $y=\ln x$ 的图象<strong>不高于直线 $y=x-1$，且在 $x=1$ 处相切</strong>。</p>
 </div>
 
 <div class="plot-row">
   <div class="plot" data-fn="Math.exp(x)" data-fn2="x+1" data-xmin="-3" data-xmax="2.5" data-ymin="-2" data-ymax="7" data-w="280" data-h="190" data-label="$y=e^x$（蓝）恒在 $y=x+1$（虚线）上方"></div>
-  <div class="plot" data-fn="Math.log(x)" data-fn2="x-1" data-xmin="-1" data-xmax="7" data-ymin="-3" data-ymax="2.5" data-w="280" data-h="190" data-label="$y=\ln x$（蓝）恒在 $y=x-1$（虚线）上方"></div>
+  <div class="plot" data-fn="Math.log(x)" data-fn2="x-1" data-xmin="-1" data-xmax="7" data-ymin="-3" data-ymax="2.5" data-w="280" data-h="190" data-label="$y=\ln x$（蓝）不高于 $y=x-1$（虚线），$x=1$ 处相切"></div>
 </div>
 
 <p>这三条在第二章全是"隐形考点"：比较 $e^{0.3}$ 与 $1.3$ 的大小——$e^{0.3}$ 在 $y=x+1$ 上方，而直线上 $x=0.3$ 处高度是 $1.3$，所以 $e^{0.3}&gt;1.3$，不用按计算器。指数与对数还互为反函数：$y=2^x$ 与 $y=\log_2x$ 的图象关于直线 $y=x$ 对称（0008 课细讲）。</p>
@@ -192,7 +192,7 @@
   <span class="recall-tag">回忆卡</span>
   <p class="recall-q">默写四条图像位置关系：$x&gt;0$ 时 $2^x$ vs $3^x$；$e^x$ vs $y=x+1$；$\ln x$ vs $y=x-1$；$y=2^x$ vs $y=\log_2x$。</p>
   <div class="recall-a">
-    <p style="margin:0.2rem 0">底大者高（$3^x&gt;2^x$）；$e^x$ 恒在 $y=x+1$ 上方（切于 $(0,1)$）；$\ln x$ 恒在 $y=x-1$ 上方（切于 $(1,0)$）；互为反函数，图象关于 $y=x$ 对称。</p>
+    <p style="margin:0.2rem 0">底大者高（$3^x&gt;2^x$）；$e^x$ 恒在 $y=x+1$ 上方（切于 $(0,1)$）；$\ln x$ 不高于 $y=x-1$，且在 $x=1$ 处相切；互为反函数，图象关于 $y=x$ 对称。</p>
   </div>
   <div class="recall-actions">
     <button class="reveal-btn">先回忆，再揭晓</button>

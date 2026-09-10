@@ -1,7 +1,15 @@
 .prep-quick-nav,.task-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
 .study-start-grid>.study-week{display:flex;flex-direction:column;min-width:0}
-.prep-quick-nav{margin:0 0 24px;padding:10px 0;border-bottom:1px solid var(--study-line)}
-.prep-quick-nav a{min-height:44px;display:inline-flex;align-items:center}
+/* 考期信息条：倒计时一眼可见，替代原来的纯文本行 */
+.prep-exam-strip{display:flex;flex-wrap:wrap;align-items:center;gap:8px 26px;margin:4px 0 8px;padding:14px 20px;border:1px solid var(--study-line);border-radius:10px;background:var(--study-panel);font-size:14px;color:var(--study-muted)}
+.prep-exam-strip__item{display:inline-flex;align-items:center;min-height:32px;gap:6px}
+.prep-exam-strip__item strong{color:var(--study-text);font-weight:650}
+.prep-exam-strip__countdown{color:var(--study-accent);font-weight:650}
+/* 备考操作入口：标签样式，明确可点 */
+.prep-quick-nav{margin:0 0 24px;padding:12px 0;border-bottom:1px solid var(--study-line);gap:10px}
+.prep-quick-nav a{min-height:44px;display:inline-flex;align-items:center;padding:8px 16px;border:1px solid var(--study-line);border-radius:999px;background:var(--study-panel);color:var(--study-text);font-size:13px;transition:background var(--study-duration,.2s),border-color var(--study-duration,.2s),color var(--study-duration,.2s)}
+.prep-quick-nav a:hover{border-color:var(--study-accent);color:var(--study-accent);background:var(--study-tint)}
+@media(max-width:600px){.prep-exam-strip{gap:6px 16px;padding:12px 16px;font-size:13px}}
 .today-tasks,.week-tasks,#study-backup{scroll-margin-top:100px;margin:24px 0 40px;min-width:0}
 .today-task-list{padding:0!important;margin:0!important;list-style:none!important;display:grid;gap:14px}
 .today-task-list>li,.week-task-grid>article{margin:0!important;padding:20px;background:var(--study-panel);border:1px solid var(--study-line);border-radius:16px;min-width:0}

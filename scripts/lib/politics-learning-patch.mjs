@@ -145,3 +145,15 @@ export function patchPoliticsLearning(html, { page = 'index' } = {}) {
 }
 
 export const patchPoliticsLearningPage = patchPoliticsLearning
+/** Reopen the paper containing a question before the shared retry handler runs. */
+export function patchPoliticsPractice(html) {
+  const marker = '/* zhixu-review-paper */'
+  if (html.includes(marker)) return html
+  const anchor = '  renderTabs();\n  renderList();'
+  if (!html.includes(anchor)) throw new Error('政治刷题场入口已变化，请核对错题返回逻辑')
+  return html.replace(anchor, anchor + '\n' + marker + `
+  var reviewRef = new URLSearchParams(location.search).get('reviewQuestion');
+  var reviewPaper = reviewRef && papers.find(function (p) { return p.mcqs.some(function (q) { return q.id === reviewRef; }); });
+  if (reviewPaper) openPaper(reviewPaper.id);
+`)
+}

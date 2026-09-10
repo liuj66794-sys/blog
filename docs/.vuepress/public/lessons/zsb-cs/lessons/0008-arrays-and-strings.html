@@ -50,7 +50,7 @@
 
 <table>
   <tr><th>要点</th><th>正确</th><th>错误</th></tr>
-  <tr><td>数组大小</td><td>必须是常量或常量表达式，如 <code>8</code>、<code>2+6</code></td><td><code>int a[n];</code>（n 变量）、<code>int a[2.3];</code></td></tr>
+  <tr><td>数组大小</td><td>文件作用域必须是整型常量表达式；块作用域在 C99 或支持变长数组的 C11 实现中可使用正的变长数组，如 <code>int a[n];</code></td><td>文件作用域的 <code>int a[n];</code>（n 普通变量）、<code>int a[2.3];</code></td></tr>
   <tr><td>初始化</td><td><code>int a[5]={1,2,3};</code> 剩余自动补 0</td><td>列表个数超过长度会警告；不指定长度又不初始化会报错</td></tr>
   <tr><td>引用</td><td><code>a[0]</code>、<code>a[i]</code>、<code>a[1+1]</code></td><td><code>a[2.3]</code>、<code>a[-1]</code>（越界不报错）</td></tr>
 </table>
@@ -150,13 +150,13 @@
 <div class="quiz" data-answer="c">
   <p class="quiz-q">1. 下列数组定义或初始化中，合法的是</p>
   <ol class="quiz-opts" type="A">
-    <li data-opt="a">int a[n];（n 为变量）</li>
+    <li data-opt="a">文件作用域的 int a[n];（n 为普通变量）</li>
     <li data-opt="b">int a[2.3];</li>
     <li data-opt="c">int a[5] = {0};</li>
-    <li data-opt="d">int a[];</li>
+    <li data-opt="d">块作用域的 int a[];（无 extern、无初始化）</li>
   </ol>
   <p class="quiz-feedback"></p>
-  <p class="quiz-expl">数组大小必须是常量表达式且为整型；不指定长度又不初始化会报错。int a[5]={0} 是标准全零写法。</p>
+  <p class="quiz-expl">本题把 A 明确为文件作用域数组：文件作用域数组长度必须是整型常量表达式，所以 int a[n]（n 为普通变量）不合法；块作用域在 C99 或支持变长数组的 C11 实现中可有变长数组，但不属于此选项前提。D 在块作用域既不指定长度又不初始化，不能定义该自动数组；int a[5]={0} 是标准全零写法。</p>
 </div>
 
 <div class="quiz" data-answer="b">
@@ -172,7 +172,7 @@
 </div>
 
 <div class="quiz" data-answer="b">
-  <p class="quiz-q">3. n 个数进行冒泡排序，比较趟数与第 x 趟次数为</p>
+  <p class="quiz-q">3. n 个数进行不提前退出的冒泡排序，趟编号 x 从 0 到 n−2。总趟数与第 x 趟比较次数为</p>
   <ol class="quiz-opts" type="A">
     <li data-opt="a">n 趟，第 x 趟 n-x 次</li>
     <li data-opt="b">n-1 趟，第 x 趟 n-x-1 次</li>

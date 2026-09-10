@@ -24,9 +24,11 @@ function element() {
 
 function openLesson({ values = new Map(), group = 'quiz', denied = false } = {}) {
   const events = new Map()
+  const attempts = []
   const root = Object.assign(element(), { id: group })
   const context = {
-    document: { createElement: element },
+    document: { createElement: element, dispatchEvent(event) { attempts.push(event) } },
+    CustomEvent: class { constructor(type, { detail } = {}) { this.type = type; this.detail = detail } },
     location: { pathname },
     localStorage: {
       getItem(name) { if (denied) throw new Error('denied'); return values.get(name) ?? null },
@@ -39,7 +41,7 @@ function openLesson({ values = new Map(), group = 'quiz', denied = false } = {})
   vm.runInNewContext(runtime, context)
   context.Quiz.render(root, questions)
   return {
-    values, root, events,
+    values, root, events, attempts,
     option(q, choice = 0) { return root.children[q + 1].children[1].children[choice] },
     restart() { root.children.at(-1).click() },
     storageChanged(changedKey = key) { for (const listener of [...events.get('storage')]) listener({ type: 'storage', key: changedKey }) },
@@ -55,6 +57,8 @@ test('English answers from two already-open tabs survive sequential writes and a
   assert.equal(restored.option(1).disabled, true)
   assert.equal(restored.option(2).disabled, false)
   assert.match(second.root.children[0].innerHTML, /已完成 <b>2<\/b>/)
+  assert.equal(first.attempts.length, 1)
+  assert.equal(restored.attempts.length, 0)
 })
 
 test('an old English tab cannot restore answers from a round restarted in another tab', () => {

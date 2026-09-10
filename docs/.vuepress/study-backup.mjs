@@ -8,6 +8,7 @@
  * imported.
  */
 
+import { parseMistakeBackup } from '../../scripts/runtime/mistake-store.mjs'
 export const BACKUP_FORMAT = 'l1uj-study-backup'
 export const BACKUP_VERSION = 1
 export const DEFAULT_BASE = '/blog/'
@@ -19,6 +20,7 @@ export const STUDY_STORAGE_KEYS = Object.freeze([
   'l1uj-reading-v1',
   'zc-progress-v1',
   'zsb-mistakes-v1',
+  'zhixu-mistakes-v1',
   'zsb-prep-checks',
   'l1uj-study-progress-v1',
   'l1uj-study-tasks-v1',
@@ -170,9 +172,12 @@ function isAllowedPathAnswerKey(key, base = DEFAULT_BASE) {
 }
 
 function keyInfo(key, base = DEFAULT_BASE) {
+  if (key.startsWith('l1uj-learning-guide-note-v1:') && isLessonPath(key.slice('l1uj-learning-guide-note-v1:'.length), base)) return { kind: 'learning-guide-note' }
   if (key === 'l1uj-reading-v1') return { kind: 'l1uj-reading-v1', mode: CONTAINER_MODES.reading }
   if (key === 'zc-progress-v1') return { kind: 'zc-progress-v1' }
   if (key === 'zsb-mistakes-v1') return { kind: 'zsb-mistakes-v1' }
+  // Same versioned entry-map merge contract, with a dedicated validator below.
+  if (key === 'zhixu-mistakes-v1') return { kind: 'zhixu-mistakes-v1', mode: CONTAINER_MODES.studyProgress }
   if (key === 'zsb-prep-checks') return { kind: 'zsb-prep-checks' }
   if (key === 'l1uj-study-progress-v1') return { kind: 'l1uj-study-progress-v1', mode: CONTAINER_MODES.studyProgress }
   if (key === 'l1uj-study-tasks-v1') return { kind: 'l1uj-study-tasks-v1', mode: CONTAINER_MODES.studyTasks }
@@ -496,6 +501,9 @@ function validateRecord(key, value, errors, base) {
   const info = keyInfo(key, base)
   if (!info) { addError(errors, `records.${key}`, '存储键不在白名单中'); return }
   switch (info.kind) {
+    case 'learning-guide-note':
+      if (typeof value !== 'string' || value.length > 2000) errors.push(`records.${key}: 回忆笔记须为 2000 字以内文本`)
+      return
     case 'l1uj-reading-v1': return validateReading(value, errors, base)
     case 'zc-progress-v1': return validateMathProgress(value, errors)
     case 'zc-progress-items-v1': return validateMathItems(value, errors)
@@ -504,6 +512,9 @@ function validateRecord(key, value, errors, base) {
       return
     case 'l1uj-english-answers-v1': return validateEnglishAnswers(value, errors, `records.${key}`)
     case 'zsb-mistakes-v1': return validateCsMistakes(value, errors)
+    case 'zhixu-mistakes-v1':
+      try { parseMistakeBackup(JSON.stringify(value), base) } catch (error) { addError(errors, `records.${key}`, error.message) }
+      return
     case 'l1uj-cs-answers-v1': return validateCsAnswers(value, errors, `records.${key}`)
     case 'zzkk:v2:lesson': return validatePoliticsProgress(value, errors, `records.${key}`)
     case 'zzkk:v2:card': return validatePoliticsCard(value, errors, `records.${key}`)
@@ -587,6 +598,7 @@ export function writeLastBackupAt(storage, timestamp = Date.now()) {
 function parseStoredValue(key, raw, base) {
   const info = keyInfo(key, base)
   if (!info) return { ok: false, errors: [`${key}: 存储键不在白名单中`] }
+  if (info.kind === 'learning-guide-note') return { ok: typeof raw === 'string' && raw.length <= 2000, value: raw, errors: raw?.length > 2000 ? [`${key}: 回忆笔记超过 2000 字`] : [] }
   if (info.kind === 'zsb-course-done') return { ok: raw === '1', value: raw, errors: raw === '1' ? [] : [`${key}: 本地值不是字符串 1`] }
   if (typeof raw !== 'string' || raw.length > MAX_JSON_LENGTH) return { ok: false, errors: [`${key}: 本地 JSON 过大或不是字符串`] }
   let value
@@ -606,7 +618,7 @@ function readStudyKeys(storage, base) {
 }
 
 function rawValueFor(key, value) {
-  return keyInfo(key)?.kind === 'zsb-course-done' ? value : JSON.stringify(value)
+  return key.startsWith('l1uj-learning-guide-note-v1:') || key.startsWith('zsb-course-done-') ? value : JSON.stringify(value)
 }
 
 /**

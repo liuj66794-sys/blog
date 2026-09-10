@@ -1,8 +1,21 @@
-import { readEntries } from './reading-state.mjs'
+import { readEntries, resumeUrl } from './reading-state.mjs'
+import { readMistakes, isDue } from './mistake-store.mjs'
 
 export const STUDY_KEY = 'l1uj-study-progress-v1'
 export const TASKS_KEY = 'l1uj-study-tasks-v1'
 export const STUDY_EVENT = 'l1uj:study'
+export const STUDY_FILTERS = [
+  { value: 'all', label: '全部' },
+  { value: 'learning', label: '学习中' },
+  { value: 'review', label: '待巩固' },
+  { value: 'new', label: '未开始' },
+  { value: 'complete', label: '已完成练习' },
+]
+export function matchesStudyFilter(status, filter = 'all') {
+  if (filter === 'review') return status?.reviewNeeded > 0
+  if (['new', 'learning', 'complete'].includes(filter)) return (status?.state || 'new') === filter
+  return true
+}
 export function storageObject(key, storage) {
   try { const value = JSON.parse((storage || window.localStorage).getItem(key) || '{}'); return value && typeof value === 'object' && !Array.isArray(value) ? value : {} } catch { return {} }
 }
@@ -23,7 +36,7 @@ export function safeReturnTo(value, base = '/blog/') {
   try {
     const url = new URL(value, 'https://study.invalid')
     if (url.origin !== 'https://study.invalid' || !url.pathname.startsWith(base)) return null
-    if (!/^(?:courses|prep|knowledge)(?:\/|$)/.test(url.pathname.slice(base.length))) return null
+    if (!/^(?:courses|prep|knowledge|review)(?:\/|$)/.test(url.pathname.slice(base.length))) return null
     return url.pathname + url.search + url.hash
   } catch { return null }
 }
@@ -52,13 +65,32 @@ export function lessonStatus(slug, lesson, base = '/blog/', storage) {
   return { total: 0, answered: 0, correct: 0, reviewNeeded: 0, state: visited || legacy ? 'learning' : 'new', label: visited || legacy ? '学习中' : '未开始', legacy }
 }
 export function subjectProgress(slug, lessons, base = '/blog/', storage) {
-  const statuses = lessons.map(lesson => lessonStatus(slug, lesson, base, storage))
-  const complete = statuses.filter(status => status.state === 'complete').length
-  const learning = statuses.filter(status => status.state === 'learning').length
-  const resumeIndex = statuses.findIndex(status => status.state === 'learning')
-  const freshIndex = statuses.findIndex(status => status.state === 'new')
-  const index = resumeIndex >= 0 ? resumeIndex : freshIndex
-  return { complete, learning, total: lessons.length, started: complete + learning > 0, continueLesson: index >= 0 ? lessons[index] : null }
+  const statuses = Object.fromEntries(lessons.map(lesson => [lesson.id, lessonStatus(slug, lesson, base, storage)]))
+  const values = Object.values(statuses)
+  const complete = values.filter(status => status.state === 'complete').length
+  const learning = values.filter(status => status.state === 'learning').length
+  const recentById = new Map()
+  for (const entry of readEntries(base, storage)) {
+    const identity = studyIdentity(entry.path, base)
+    if (identity?.slug === slug && !recentById.has(identity.id)) recentById.set(identity.id, entry)
+  }
+  const lastActivity = lesson => Math.max(recentById.get(lesson.id)?.updatedAt || 0, statuses[lesson.id].updatedAt || 0)
+  const continueLesson = lessons.filter(lesson => statuses[lesson.id].state === 'learning')
+    .sort((a, b) => lastActivity(b) - lastActivity(a))[0]
+    || lessons.find(lesson => statuses[lesson.id].state === 'new') || null
+  const entry = continueLesson && recentById.get(continueLesson.id)
+  // Only restore a current catalog URL; old renamed paths must not create broken resume links.
+  const canonicalPaths = continueLesson ? [continueLesson.href, continueLesson.interactive].filter(Boolean).map(href => {
+    const pathname = href.startsWith(base) ? href : base + href.replace(/^\//, '')
+    try { return decodeURI(pathname) } catch { return pathname }
+  }) : []
+  const continueEntry = entry && canonicalPaths.includes(entry.path) ? entry : null
+  return {
+    complete, learning, fresh: values.filter(status => status.state === 'new').length,
+    review: values.filter(status => status.reviewNeeded > 0).length,
+    total: lessons.length, started: complete + learning > 0, statuses, continueLesson, continueEntry,
+    continueHref: continueEntry ? resumeUrl(continueEntry, base) : continueLesson ? withStudyContext(continueLesson.interactive, null, base) : null,
+  }
 }
 export function saveStudyProgress(entry, storage) {
   const store = storageObject(STUDY_KEY, storage)
@@ -77,7 +109,8 @@ export function localDay(date = new Date()) {
   return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`
 }
 export function reviewCounts(storage, date = new Date()) {
-  const result = { due: 0, politicalWrong: 0, csWrong: 0 }
+  const result = { due: 0, politicalWrong: 0, csWrong: 0, mathWrong: 0, englishWrong: 0 }
+  const unified = readMistakes(storage)
   try {
     const source = storage || window.localStorage
     const day = Date.parse(localDay(date) + 'T00:00:00Z')
@@ -87,10 +120,14 @@ export function reviewCounts(storage, date = new Date()) {
         const card = storageObject(key, source)
         if ([1,2,3].includes(card.box) && (!card.at || (Number.isFinite(Date.parse(card.at)) && day - Date.parse(card.at) >= [1,3,7][card.box-1]*86400000))) result.due++
       }
-      if (key?.startsWith('zzkk:v2:wrong:')) result.politicalWrong++
+      if (key?.startsWith('zzkk:v2:wrong:') && !unified[`zsb-politics:bank:${key.slice('zzkk:v2:wrong:'.length)}`]) result.politicalWrong++
     }
-    for (const lesson of Object.values(storageObject('zsb-mistakes-v1', source))) if (lesson && typeof lesson === 'object') {
-      result.csWrong += Object.values(lesson).filter(item => item && item.wrongs > 0 && !item.fixed).length
+    for (const [lid, lesson] of Object.entries(storageObject('zsb-mistakes-v1', source))) if (lesson && typeof lesson === 'object') {
+      result.csWrong += Object.entries(lesson).filter(([qn, item]) => item && item.wrongs > 0 && !item.fixed && !unified[`zsb-cs:${Number(lid)}:q:${qn}`]).length
+    }
+    for (const entry of Object.values(unified)) if (isDue(entry, date.getTime())) {
+      const field = { 'zsb-math': 'mathWrong', 'zsb-english': 'englishWrong', 'zsb-cs': 'csWrong', 'zsb-politics': 'politicalWrong' }[entry.slug]
+      if (field) result[field]++
     }
   } catch {}
   return result

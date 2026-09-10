@@ -28,9 +28,9 @@ export function todayTasks(plan,catalog,base='/blog/',storage,date=new Date()) {
   }
   const counts=reviewCounts(storage,date)
   if(counts.due>0) tasks.push({id:'review:politics',kind:'到期复习',subject:'政治',title:'复习已学闪卡',description:`${counts.due} 张已学且到期，先复习一小组。`,count:counts.due,minutes:5,href:`${base}lessons/zsb-politics/lessons/srs.html?limit=10&returnTo=${encodeURIComponent(base+'prep/#today-tasks')}`})
-  if(counts.csWrong>0 || counts.politicalWrong>0) {
-    const cs=counts.csWrong>0
-    tasks.push({id:cs?'wrong:cs':'wrong:politics',kind:'处理一个薄弱点',subject:cs?'计算机':'政治',title:cs?'重做计算机错题':'重做政治错题',description:`${cs?counts.csWrong:counts.politicalWrong} 道待订正，先做一道。`,minutes:5,href:`${base}lessons/${cs?'zsb-cs/lessons/mistakes.html':'zsb-politics/lessons/wrong.html'}?returnTo=${encodeURIComponent(base+'prep/#today-tasks')}`})
+  const wrongTotal = counts.csWrong + counts.politicalWrong + counts.mathWrong + counts.englishWrong
+  if(wrongTotal>0) {
+    tasks.push({id:'wrong:all',kind:'处理一个薄弱点',subject:'四科复习',title:'重做错题',description:`${wrongTotal} 道现在可复习，先做一小组。`,minutes:5,href:`${base}review/`})
   }
   const preferred={0:'zsb-politics',2:'zsb-math',3:'zsb-cs',5:'zsb-english',6:'zsb-english'}[date.getDay()]
   const weekly=weeklyTasks(plan,catalog,base,storage,date).sort((a,b)=>Number(b.slug===preferred)-Number(a.slug===preferred))

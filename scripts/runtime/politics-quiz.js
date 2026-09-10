@@ -274,6 +274,12 @@
 
   /* ---------------- 选择题测验（单选/多选） ---------------- */
   function mountQuiz(container, questions, opts) {
+    // Imported papers use both ABC and A、B、C. Compare option letters only.
+    questions = questions.map(function (q) {
+      var answer = q.answer == null ? null : String(q.answer).toUpperCase().replace(/[、，,\s]+/g, '');
+      if (answer && !answer.split('').every(function (letter) { return q.options.some(function (o) { return o.letter === letter; }); })) answer = null;
+      return Object.assign({}, q, { answer: answer });
+    });
     opts = opts || {};
     var lessonId = opts.lessonId || null;
     var fromLabel = opts.from || (lessonId || "");
@@ -327,6 +333,9 @@
         var locked = false;
         var picked = {};
         var signature = hash(JSON.stringify([q.stem, q.options, q.answer]));
+        item.studyQuestion = { slug: 'zsb-politics', lessonId: lessonId || '', ref: qidOf(q), stem: q.stem,
+          options: q.options.map(function (o) { return { value: o.letter, text: o.text }; }), answer: q.answer ? q.answer.split('') : [], explanation: q.exp || '', sourceLabel: q.src || '', doubt: !!q.doubt };
+        item.addEventListener('study-retry', function () { saved = readSaved(); delete saved[signature]; save(); render(); });
         var previous = saved[signature];
         function savePick(done) {
           saved = readSaved();
@@ -344,21 +353,23 @@
           var buttons = optsBox.querySelectorAll(".opt");
           for (var i = 0; i < buttons.length; i++) buttons[i].disabled = true;
 
-           if (!q.answer) {
+           if (!q.answer || q.doubt) {
              state.reviewNeeded = true;
              state.unassessed++;
              judge.className = "q-judge warn";
-             judge.textContent = "⚠️ 原卷未提供答案，请对照笔记或课件核对。";
+             judge.textContent = q.doubt ? "⚠️ 原题答案存疑，暂不自动判分，请对照权威材料核对。" : "⚠️ 原卷未提供答案，请对照笔记或课件核对。";
              if (q.warn) {
                judge.appendChild(document.createElement("br"));
                appendRich(judge, q.warn);
              }
              syncLessonProgress();
+             updateScore(false);
              return;
            }
           var ans = q.answer.split("").sort().join("");
           var mine = pickedLetters.sort().join("");
            var right = mine === ans;
+           if (!restoring) document.dispatchEvent(new CustomEvent('study:attempt', { detail: { node: item, correct: right, independent: true } }));
            if (right) state.correct++;
            else {
              state.reviewNeeded = true;
@@ -390,7 +401,7 @@
             judge.appendChild(srcSpan);
           }
           if (q.doubt) judge.appendChild(el("span", "qsrc", "⚠️ 存疑题（?）——答案待老师讲评，仅供核对。"));
-          if (q.exp && !right) {
+          if (q.exp) {
             var expBox = document.createElement("details");
             expBox.className = "qexp";
             expBox.appendChild(el("summary", undefined, "解析"));
@@ -489,31 +500,30 @@
         container.querySelectorAll(".q-judge"),
         function (j) { return j.className.indexOf("ok") >= 0; }
       ).length;
-      var unanswered = state.total - Array.prototype.filter.call(
-        container.querySelectorAll(".q-judge"),
-        function (j) { return j.className.indexOf("warn") < 0; }
-      ).length;
+      var gradable = questions.filter(function (q) { return q.answer && !q.doubt; }).length;
+      var unassessedTotal = state.total - gradable;
       var old = lessonId ? progress.get(lessonId).best || 0 : 0;
-      var pct = judged ? Math.round((correct / state.total) * 100) : 0;
-      var finalPct = judged === state.total ? pct : null;
+      var pct = gradable ? Math.round((correct / gradable) * 100) : 0;
+      var finalPct = gradable > 0 && judged === gradable ? pct : null;
 
       clear(score);
       var progressLine = el("span");
       progressLine.appendChild(document.createTextNode("已答 "));
-      progressLine.appendChild(el("b", undefined, String(judged)));
-      progressLine.appendChild(document.createTextNode(" / " + state.total + " · 答对 "));
+      progressLine.appendChild(el("b", undefined, String(state.answered)));
+      progressLine.appendChild(document.createTextNode(" / " + state.total + " · 已判 " + judged + " · 答对 "));
       progressLine.appendChild(el("b", undefined, String(correct)));
       score.appendChild(progressLine);
       if (finalPct !== null) {
-        score.appendChild(el("span", "big", finalPct + "分"));
+        score.appendChild(el("span", "big", finalPct + "分（可判分题）"));
         score.appendChild(el("span", undefined,
           finalPct === 100 ? "满分，漂亮！"
             : finalPct >= 80 ? "不错，错题已进错题本。"
               : "建议回到正文重读后重做；错题已进错题本。"));
       } else {
         score.appendChild(el("span", undefined,
-          "做完全部题目后计分" + (unanswered > 0 ? "（含 " + unanswered + " 题原卷未给答案，不计判）" : "")));
+          gradable ? "做完可判分题目后计分" : "本组暂不自动计分，仅供核对"));
       }
+      if (unassessedTotal > 0) score.appendChild(el("span", undefined, "另有 " + unassessedTotal + " 题无答案或存疑，不计入分数。"));
 
       var redo = el('button', 'btn quiz-redo', '↺ 重做本组测验（保留历史记录）');
       redo.type = 'button';

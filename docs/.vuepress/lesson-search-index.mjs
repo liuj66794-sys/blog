@@ -1280,7 +1280,7 @@ export const lessonSearchIndex = {
       "count": 36,
       "interactive": "/lessons/zsb-english/lessons/course.html",
       "prep": "yingyu",
-      "updatedAt": "2026-09-05",
+      "updatedAt": "2026-09-09",
       "group": "专升本备考",
       "lessonCount": 36,
       "lessonRange": "第 1–36 课",
@@ -1299,13 +1299,16 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "一、名词的分类"
+              "heading": "一、名词的分类",
+              "href": "#pt-1"
             },
             {
-              "heading": "二、名词的六大功能"
+              "heading": "二、名词的六大功能",
+              "href": "#pt-2"
             },
             {
-              "heading": "三、名词的单复数"
+              "heading": "三、名词的单复数",
+              "href": "#pt-3"
             },
             {
               "heading": "1. 规则变化"
@@ -1326,7 +1329,8 @@ export const lessonSearchIndex = {
               "heading": "6. 抽象名词具体化"
             },
             {
-              "heading": "四、名词的所有格"
+              "heading": "四、名词的所有格",
+              "href": "#pt-4"
             },
             {
               "heading": "1. 's 所有格：A's B ＝ \"A 的 B\""
@@ -1357,7 +1361,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "一、不定冠词 a / an（表泛指）"
+              "heading": "一、不定冠词 a / an（表泛指）",
+              "href": "#pt-1"
             },
             {
               "heading": "1. a 和 an 的区别：看发音，不看字母"
@@ -1366,10 +1371,12 @@ export const lessonSearchIndex = {
               "heading": "2. 五种基本用法"
             },
             {
-              "heading": "二、定冠词 the（表特指）"
+              "heading": "二、定冠词 the（表特指）",
+              "href": "#pt-2"
             },
             {
-              "heading": "三、零冠词"
+              "heading": "三、零冠词",
+              "href": "#pt-3"
             },
             {
               "heading": "易错清单"
@@ -1394,7 +1401,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "一、人称代词"
+              "heading": "一、人称代词",
+              "href": "#pt-1"
             },
             {
               "heading": "形物代 vs 名物代"
@@ -1403,19 +1411,23 @@ export const lessonSearchIndex = {
               "heading": "it 的 7 种用法"
             },
             {
-              "heading": "二、反身代词的用法"
+              "heading": "二、反身代词的用法",
+              "href": "#pt-2"
             },
             {
-              "heading": "相互代词 each other / one another"
+              "heading": "相互代词 each other / one another",
+              "href": "#pt-5"
             },
             {
-              "heading": "三、指示代词"
+              "heading": "三、指示代词",
+              "href": "#pt-3"
             },
             {
               "heading": "四、疑问代词"
             },
             {
-              "heading": "五、不定代词（考试重头戏）"
+              "heading": "五、不定代词（考试重头戏）",
+              "href": "#pt-4"
             },
             {
               "heading": "1. it / one / ones / the one / that / those"
@@ -1461,13 +1473,16 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "一、介词三要素"
+              "heading": "一、介词三要素",
+              "href": "#pt-1"
             },
             {
-              "heading": "二、11 个常见介词核心用法"
+              "heading": "二、11 个常见介词核心用法",
+              "href": "#pt-2"
             },
             {
-              "heading": "三、13 组介词辨析（重头戏）"
+              "heading": "三、13 组介词辨析（重头戏）",
+              "href": "#pt-3"
             },
             {
               "heading": "1. 在上面：above / over / on"
@@ -1528,7 +1543,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 数词"
+              "heading": "第一部分 · 数词",
+              "href": "#pt-1"
             },
             {
               "heading": "1. 基数词：确切 vs 不确切数量"
@@ -1543,7 +1559,8 @@ export const lessonSearchIndex = {
               "heading": "4. 倍数的四种句型"
             },
             {
-              "heading": "第二部分 · 连词"
+              "heading": "第二部分 · 连词",
+              "href": "#pt-2"
             },
             {
               "heading": "易错清单"
@@ -1568,7 +1585,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 形容词"
+              "heading": "第一部分 · 形容词",
+              "href": "#pt-1"
             },
             {
               "heading": "1. 形容词的四大功能（教材 P30）"
@@ -1583,7 +1601,8 @@ export const lessonSearchIndex = {
               "heading": "4. 由分词转化而来的形容词（教材 P32–33）"
             },
             {
-              "heading": "第二部分 · 副词"
+              "heading": "第二部分 · 副词",
+              "href": "#pt-2"
             },
             {
               "heading": "1. 形容词变副词的规则"
@@ -1601,7 +1620,8 @@ export const lessonSearchIndex = {
               "heading": "5. 易混副词辨析（教材 P36）"
             },
             {
-              "heading": "第三部分 · 比较级与最高级（教材 P37–40）"
+              "heading": "第三部分 · 比较级与最高级（教材 P37–40）",
+              "href": "#pt-3"
             },
             {
               "heading": "1. 原级比较（教材 P37）"
@@ -1638,10 +1658,12 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 动词的概念（前置讲义 P17）"
+              "heading": "第一部分 · 动词的概念（前置讲义 P17）",
+              "href": "#pt-1"
             },
             {
-              "heading": "第二部分 · 实义动词（教材 P42–45）"
+              "heading": "第二部分 · 实义动词（教材 P42–45）",
+              "href": "#pt-2"
             },
             {
               "heading": "1. 不及物动词 vi.：不能（直接）跟宾语"
@@ -1650,13 +1672,16 @@ export const lessonSearchIndex = {
               "heading": "2. 及物动词 vt.：能跟宾语"
             },
             {
-              "heading": "第三部分 · 系动词（教材 P45）"
+              "heading": "第三部分 · 系动词（教材 P45）",
+              "href": "#pt-3"
             },
             {
-              "heading": "第四部分 · 助动词（教材 P46）"
+              "heading": "第四部分 · 助动词（教材 P46）",
+              "href": "#pt-4"
             },
             {
-              "heading": "第五部分 · 情态动词（教材 P46–54 · 考试重点）"
+              "heading": "第五部分 · 情态动词（教材 P46–54 · 考试重点）",
+              "href": "#pt-5"
             },
             {
               "heading": "1. can / could"
@@ -1711,13 +1736,16 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 五大基本句型"
+              "heading": "第一部分 · 五大基本句型",
+              "href": "#pt-1"
             },
             {
-              "heading": "第二部分 · 九大句子成分"
+              "heading": "第二部分 · 九大句子成分",
+              "href": "#pt-2"
             },
             {
-              "heading": "第三部分 · 三大基本句式"
+              "heading": "第三部分 · 三大基本句式",
+              "href": "#pt-3"
             },
             {
               "heading": "易错清单"
@@ -1745,7 +1773,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "时态总览 · 16 种时态结构总表"
+              "heading": "时态总览 · 16 种时态结构总表",
+              "href": "#pt-1"
             },
             {
               "heading": "一、时态（11 种）"
@@ -1784,7 +1813,8 @@ export const lessonSearchIndex = {
               "heading": "11. 过去将来时（教材 P99）"
             },
             {
-              "heading": "二、被动语态（教材 P99-103）"
+              "heading": "二、被动语态（教材 P99-103）",
+              "href": "#pt-2"
             },
             {
               "heading": "各时态下的被动语态"
@@ -1818,7 +1848,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "一、意义一致原则（教材 P205-208）"
+              "heading": "一、意义一致原则（教材 P205-208）",
+              "href": "#pt-1"
             },
             {
               "heading": "1. 集体名词作主语"
@@ -1879,10 +1910,12 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 总纲：先判谓语还是非谓语"
+              "heading": "第一部分 · 总纲：先判谓语还是非谓语",
+              "href": "#pt-1"
             },
             {
-              "heading": "第二部分 · 不定式 to do"
+              "heading": "第二部分 · 不定式 to do",
+              "href": "#pt-2"
             },
             {
               "heading": "1. 形式与含义"
@@ -1903,7 +1936,8 @@ export const lessonSearchIndex = {
               "heading": "6. 逻辑主语与解题三步"
             },
             {
-              "heading": "第三部分 · 动名词 doing"
+              "heading": "第三部分 · 动名词 doing",
+              "href": "#pt-3"
             },
             {
               "heading": "1. 句法功能与形式"
@@ -1924,7 +1958,8 @@ export const lessonSearchIndex = {
               "heading": "6. 逻辑主语、时态与语态"
             },
             {
-              "heading": "第四部分 · 分词（doing / done）"
+              "heading": "第四部分 · 分词（doing / done）",
+              "href": "#pt-4"
             },
             {
               "heading": "1. 核心对立与形式"
@@ -1945,7 +1980,8 @@ export const lessonSearchIndex = {
               "heading": "6. 形式总表与做题算法"
             },
             {
-              "heading": "第五部分 · 独立主格"
+              "heading": "第五部分 · 独立主格",
+              "href": "#pt-5"
             },
             {
               "heading": "易错清单"
@@ -1994,7 +2030,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 什么是定语与定语从句"
+              "heading": "第一部分 · 什么是定语与定语从句",
+              "href": "#pt-1"
             },
             {
               "heading": "1. 什么是定语"
@@ -2006,10 +2043,12 @@ export const lessonSearchIndex = {
               "heading": "3. 基本概念与关系词的作用"
             },
             {
-              "heading": "第二部分 · 关系代词（教材 P105–110）"
+              "heading": "第二部分 · 关系代词（教材 P105–110）",
+              "href": "#pt-2"
             },
             {
-              "heading": "第三部分 · 介词 + which/whom 引导的定语从句（教材 P107）"
+              "heading": "第三部分 · 介词 + which/whom 引导的定语从句（教材 P107）",
+              "href": "#pt-3"
             },
             {
               "heading": "1. 介词提前"
@@ -2024,10 +2063,12 @@ export const lessonSearchIndex = {
               "heading": "4. 两种常见形式"
             },
             {
-              "heading": "第四部分 · 只能用 that / 只能用 which / 常用 who（教材 P108–110）"
+              "heading": "第四部分 · 只能用 that / 只能用 which / 常用 who（教材 P108–110）",
+              "href": "#pt-4"
             },
             {
-              "heading": "第五部分 · 关系副词（教材 P111–112）"
+              "heading": "第五部分 · 关系副词（教材 P111–112）",
+              "href": "#pt-5"
             },
             {
               "heading": "拓展 1 · 时间/地点/原因名词后不一定用关系副词"
@@ -2039,7 +2080,8 @@ export const lessonSearchIndex = {
               "heading": "拓展 3 · 先行词是 way 的时候"
             },
             {
-              "heading": "第六部分 · 限制性 vs 非限制性定语从句（教材 P113–114）"
+              "heading": "第六部分 · 限制性 vs 非限制性定语从句（教材 P113–114）",
+              "href": "#pt-6"
             },
             {
               "heading": "第七部分 · as 引导的定语从句（教材 P114）"
@@ -2051,7 +2093,8 @@ export const lessonSearchIndex = {
               "heading": "2. as 引导的非限制性定语从句常见固定搭配"
             },
             {
-              "heading": "第八部分 · 定语从句的主谓一致"
+              "heading": "第八部分 · 定语从句的主谓一致",
+              "href": "#pt-7"
             },
             {
               "heading": "易错清单"
@@ -2076,10 +2119,12 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 什么是名词性从句（教材 P83/P115）"
+              "heading": "第一部分 · 什么是名词性从句（教材 P83/P115）",
+              "href": "#pt-1"
             },
             {
-              "heading": "第二部分 · 名词性从句的引导词（教材 P116）"
+              "heading": "第二部分 · 名词性从句的引导词（教材 P116）",
+              "href": "#pt-2"
             },
             {
               "heading": "1. 不作从句成分的三类引导词（从句不缺成分时用）"
@@ -2091,13 +2136,15 @@ export const lessonSearchIndex = {
               "heading": "3. 四步解题法"
             },
             {
-              "heading": "4. 名词性从句的语序（教材 P116 补充）"
+              "heading": "4. 名词性从句的语序（教材 P116 补充）",
+              "href": "#pt-3"
             },
             {
               "heading": "第三部分 · 主语从句（教材 P117）"
             },
             {
-              "heading": "拓展 · 常用 it 作形式主语（4 种句型）"
+              "heading": "拓展 · 常用 it 作形式主语（4 种句型）",
+              "href": "#pt-4"
             },
             {
               "heading": "第四部分 · 宾语从句（教材 P119–120）"
@@ -2106,7 +2153,8 @@ export const lessonSearchIndex = {
               "heading": "1. that 引导的宾语从句"
             },
             {
-              "heading": "2. 用 whether 不用 if 的 7 种情况"
+              "heading": "2. 用 whether 不用 if 的 7 种情况",
+              "href": "#pt-5"
             },
             {
               "heading": "第五部分 · 表语从句（教材 P121+123）"
@@ -2143,7 +2191,8 @@ export const lessonSearchIndex = {
               "heading": "什么是状语从句"
             },
             {
-              "heading": "第一类 · 时间状语从句"
+              "heading": "第一类 · 时间状语从句",
+              "href": "#pt-1"
             },
             {
               "heading": "1. when、while 与 as"
@@ -2164,16 +2213,20 @@ export const lessonSearchIndex = {
               "heading": "6. “主将从现\""
             },
             {
-              "heading": "第二类 · 地点状语从句"
+              "heading": "第二类 · 地点状语从句",
+              "href": "#pt-2"
             },
             {
-              "heading": "第三类 · 原因状语从句"
+              "heading": "第三类 · 原因状语从句",
+              "href": "#pt-3"
             },
             {
-              "heading": "第四类 · 条件状语从句"
+              "heading": "第四类 · 条件状语从句",
+              "href": "#pt-4"
             },
             {
-              "heading": "第五类 · 让步状语从句"
+              "heading": "第五类 · 让步状语从句",
+              "href": "#pt-5"
             },
             {
               "heading": "1. though / although"
@@ -2185,7 +2238,8 @@ export const lessonSearchIndex = {
               "heading": "3. 其他让步结构"
             },
             {
-              "heading": "第六类 · 目的状语从句与结果状语从句"
+              "heading": "第六类 · 目的状语从句与结果状语从句",
+              "href": "#pt-6"
             },
             {
               "heading": "1. 目的状语从句"
@@ -2194,10 +2248,12 @@ export const lessonSearchIndex = {
               "heading": "2. 结果状语从句"
             },
             {
-              "heading": "第七类 · 方式状语从句"
+              "heading": "第七类 · 方式状语从句",
+              "href": "#pt-7"
             },
             {
-              "heading": "第八类 · 比较状语从句"
+              "heading": "第八类 · 比较状语从句",
+              "href": "#pt-8"
             },
             {
               "heading": "易错清单"
@@ -2225,7 +2281,8 @@ export const lessonSearchIndex = {
               "heading": "什么是虚拟语气"
             },
             {
-              "heading": "第一部分 · (should) be 型虚拟"
+              "heading": "第一部分 · (should) be 型虚拟",
+              "href": "#pt-1"
             },
             {
               "heading": "1. “一二四四\"标志词"
@@ -2243,7 +2300,8 @@ export const lessonSearchIndex = {
               "heading": "5. lest / in case / for fear that 与祝愿"
             },
             {
-              "heading": "第二部分 · were 型虚拟"
+              "heading": "第二部分 · were 型虚拟",
+              "href": "#pt-2"
             },
             {
               "heading": "1. wish 引导宾语从句"
@@ -2258,7 +2316,8 @@ export const lessonSearchIndex = {
               "heading": "4. would rather 等引导宾语从句"
             },
             {
-              "heading": "第三部分 · if 条件句虚拟及主句虚拟"
+              "heading": "第三部分 · if 条件句虚拟及主句虚拟",
+              "href": "#pt-3"
             },
             {
               "heading": "1. 同一时空虚拟"
@@ -2279,7 +2338,8 @@ export const lessonSearchIndex = {
               "heading": "6. 情态动词 + have done"
             },
             {
-              "heading": "第四部分 · 特殊虚拟结构"
+              "heading": "第四部分 · 特殊虚拟结构",
+              "href": "#pt-4"
             },
             {
               "heading": "易错清单"
@@ -2304,7 +2364,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 感叹句"
+              "heading": "第一部分 · 感叹句",
+              "href": "#pt-1"
             },
             {
               "heading": "1. what 引导：中心词是名词"
@@ -2313,7 +2374,8 @@ export const lessonSearchIndex = {
               "heading": "2. how 引导：中心词是形容词或副词"
             },
             {
-              "heading": "第二部分 · 祈使句"
+              "heading": "第二部分 · 祈使句",
+              "href": "#pt-2"
             },
             {
               "heading": "1. 动词原形开头"
@@ -2322,7 +2384,8 @@ export const lessonSearchIndex = {
               "heading": "2. let 开头"
             },
             {
-              "heading": "第三部分 · 强调句"
+              "heading": "第三部分 · 强调句",
+              "href": "#pt-3"
             },
             {
               "heading": "1. 基本结构"
@@ -2340,7 +2403,8 @@ export const lessonSearchIndex = {
               "heading": "5. It 易混句型"
             },
             {
-              "heading": "第四部分 · 倒装句"
+              "heading": "第四部分 · 倒装句",
+              "href": "#pt-4"
             },
             {
               "heading": "1. 完全倒装"
@@ -2349,7 +2413,8 @@ export const lessonSearchIndex = {
               "heading": "2. 部分倒装"
             },
             {
-              "heading": "第五部分 · 反义疑问句"
+              "heading": "第五部分 · 反义疑问句",
+              "href": "#pt-5"
             },
             {
               "heading": "1. 特殊主语与否定词"
@@ -2392,10 +2457,12 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "核心区别：七个替代词一张表"
+              "heading": "核心区别：七个替代词一张表",
+              "href": "#pt-1"
             },
             {
-              "heading": "one / ones 与 that / those 的纠缠点"
+              "heading": "one / ones 与 that / those 的纠缠点",
+              "href": "#pt-2"
             },
             {
               "heading": "易错清单"
@@ -2420,13 +2487,16 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 考情分析与答题原则"
+              "heading": "第一部分 · 考情分析与答题原则",
+              "href": "#pt-1"
             },
             {
-              "heading": "第二部分 · 解题三步"
+              "heading": "第二部分 · 解题三步",
+              "href": "#pt-2"
             },
             {
-              "heading": "第三部分 · 七大解题策略"
+              "heading": "第三部分 · 七大解题策略",
+              "href": "#pt-3"
             },
             {
               "heading": "策略一 · 语境推理"
@@ -2453,7 +2523,8 @@ export const lessonSearchIndex = {
               "heading": "易错清单"
             },
             {
-              "heading": "课堂练习"
+              "heading": "课堂练习",
+              "href": "#pt-4"
             },
             {
               "heading": "2025 年真题 · 完形 21–35"
@@ -2535,13 +2606,16 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读三步走"
+              "heading": "第一部分 · 阅读三步走",
+              "href": "#pt-1"
             },
             {
-              "heading": "第二部分 · 五类错误选项"
+              "heading": "第二部分 · 五类错误选项",
+              "href": "#pt-2"
             },
             {
-              "heading": "第三部分 · 五类题型与解题方法"
+              "heading": "第三部分 · 五类题型与解题方法",
+              "href": "#pt-3"
             },
             {
               "heading": "题型一 · 细节理解题（教材 P213）"
@@ -2562,7 +2636,8 @@ export const lessonSearchIndex = {
               "heading": "易错清单"
             },
             {
-              "heading": "课堂练习"
+              "heading": "课堂练习",
+              "href": "#pt-4"
             },
             {
               "heading": "练习一 · 无尽的故事"
@@ -2656,16 +2731,19 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "精读方法（五步）"
+              "heading": "精读方法（五步）",
+              "href": "#pt-1"
             },
             {
-              "heading": "篇章索引"
+              "heading": "篇章索引",
+              "href": "#pt-2"
             },
             {
               "heading": "易错清单"
             },
             {
-              "heading": "课堂练习"
+              "heading": "课堂练习",
+              "href": "#pt-3"
             },
             {
               "heading": "Passage 1 · Fall in Love with English（教材 P5）"
@@ -2729,10 +2807,12 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "题型概览"
+              "heading": "题型概览",
+              "href": "#pt-1"
             },
             {
-              "heading": "解题步骤（五步）"
+              "heading": "解题步骤（五步）",
+              "href": "#pt-2"
             },
             {
               "heading": "易错清单"
@@ -2802,10 +2882,12 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "考情分析（教材 P224；课件 p3）"
+              "heading": "考情分析（教材 P224；课件 p3）",
+              "href": "#pt-1"
             },
             {
-              "heading": "解题步骤（教材 P224-225；课件 p4-8）"
+              "heading": "解题步骤（教材 P224-225；课件 p4-8）",
+              "href": "#pt-2"
             },
             {
               "heading": "第一步 · 了解文章话题、结构和考查形式"
@@ -2814,7 +2896,8 @@ export const lessonSearchIndex = {
               "heading": "第二步 · 看选项，画出逻辑词和实词"
             },
             {
-              "heading": "解题技巧（教材 P226-229；课件 p9-18）"
+              "heading": "解题技巧（教材 P226-229；课件 p9-18）",
+              "href": "#pt-3"
             },
             {
               "heading": "线索一 · 细节逻辑（第 1–5 招）"
@@ -2884,10 +2967,12 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "考情分析（教材 P240；技巧课 p3-4）"
+              "heading": "考情分析（教材 P240；技巧课 p3-4）",
+              "href": "#pt-1"
             },
             {
-              "heading": "解题技巧 · 无提示词（技巧课 p5-14）"
+              "heading": "解题技巧 · 无提示词（技巧课 p5-14）",
+              "href": "#pt-2"
             },
             {
               "heading": "技巧 1 · 句子缺主语或宾语，通常填代词或名词"
@@ -2905,7 +2990,8 @@ export const lessonSearchIndex = {
               "heading": "技巧 5 · 两个成分或两个句子之间缺连接，考虑连词"
             },
             {
-              "heading": "解题技巧 · 有提示词（技巧课 p15-25）"
+              "heading": "解题技巧 · 有提示词（技巧课 p15-25）",
+              "href": "#pt-3"
             },
             {
               "heading": "技巧 6 · 提示词为名词"
@@ -2923,7 +3009,8 @@ export const lessonSearchIndex = {
               "heading": "易错清单"
             },
             {
-              "heading": "课堂练习"
+              "heading": "课堂练习",
+              "href": "#pt-4"
             },
             {
               "heading": "连词随堂练习（技巧课 p14）"
@@ -2996,13 +3083,16 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "考情分析（教材 P230；课件 p2-3）"
+              "heading": "考情分析（教材 P230；课件 p2-3）",
+              "href": "#pt-1"
             },
             {
-              "heading": "应用文通用格式（教材 P255；课件 p4-5）"
+              "heading": "应用文通用格式（教材 P255；课件 p4-5）",
+              "href": "#pt-2"
             },
             {
-              "heading": "十四类应用文模板与范文"
+              "heading": "十四类应用文模板与范文",
+              "href": "#pt-3"
             },
             {
               "heading": "一 · 申请信 / 求职信（教材 P255）"
@@ -3068,7 +3158,8 @@ export const lessonSearchIndex = {
               "heading": "练习六 · 感谢住院期间给予帮助的师生（题海 P97）"
             },
             {
-              "heading": "万能展开 · 从开头到结尾的句型库（202603 版 p48-72）"
+              "heading": "万能展开 · 从开头到结尾的句型库（202603 版 p48-72）",
+              "href": "#pt-4"
             },
             {
               "heading": "1. 三段式书信结构"

@@ -1,14 +1,18 @@
 ---
 title: 备考中心
-createTime: 2026-09-05 00:42:55
+createTime: 2026-09-10 11:20:27
 permalink: /prep/
 readingTime: false
 comments: false
 ---
 
-<PrepDashboard />
+<div class="prep-exam-strip">
+  <span class="prep-exam-strip__item" title="学习计划推算目标，正式考期以官方通知为准">计划目标日 <strong>2027-03-27</strong></span>
+  <span class="prep-exam-strip__item prep-exam-strip__countdown" id="exam-countdown" data-exam="2027-03-27"></span>
+  <span class="prep-exam-strip__item" id="prep-now" data-start="2026-09-07" data-p1="2026-11-01" data-p1n="强化刷题" data-p2="2027-01-31" data-p2n="真题两轮" data-p3="2027-03-27" data-p3n="冲刺押题"></span>
+</div>
 
-考期：<strong>2027-03-27</strong> ｜ <span id="exam-countdown" data-exam="2027-03-27"></span> ｜ <span id="prep-now" data-start="2026-09-07" data-p1="2026-11-01" data-p1n="强化刷题" data-p2="2027-01-31" data-p2n="真题两轮" data-p3="2027-03-27" data-p3n="冲刺押题"></span>
+<PrepDashboard />
 
 <details class="study-full-plan">
 <summary>查看完整 29 周计划与背景</summary>

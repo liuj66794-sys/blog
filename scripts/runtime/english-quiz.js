@@ -48,6 +48,10 @@
         var list = el('div', 'qopts');
         var locked = false;
         var signature = JSON.stringify([item.q, item.opts, item.a]);
+        card.studyQuestion = { slug: 'zsb-english', lessonId: (location.pathname.match(/\/(\d{4})[^/]*\.html$/) || [,''])[1],
+          ref: (root.id || target) + ':' + qi, stem: item.q, html: true,
+          options: item.opts.map(function (text, i) { return { value: String(i), text: text }; }), answer: [String(item.a)], explanation: item.why || '' };
+        card.addEventListener('study-retry', function () { saved = readSaved(); delete saved[qi]; save(); window.Quiz.render(root, questions); });
         function choose(oi, restoring) {
           if (locked) return;
           locked = true;
@@ -71,6 +75,7 @@
             saved = latest;
             saved[qi] = { signature: signature, picked: oi };
             save();
+            document.dispatchEvent(new CustomEvent('study:attempt', { detail: { node: card, correct: ok, independent: true } }));
             if (changedElsewhere) window.Quiz.render(root, questions);
           }
         }
@@ -91,7 +96,7 @@
         if (previous && previous.signature === signature && Number.isInteger(previous.picked)
           && previous.picked >= 0 && previous.picked < item.opts.length) choose(previous.picked, true);
       });
-      var redo = el('button', 'btn quiz-redo', '重新练习本课（保留完成标记）');
+      var redo = el('button', 'btn quiz-redo', '重新练习本组（保留错题记录）');
       redo.type = 'button';
       redo.addEventListener('click', function () {
         saved = {}; save(); window.Quiz.render(root, questions);

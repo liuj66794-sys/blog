@@ -25,6 +25,7 @@ function element(textContent = '') {
 }
 
 function openLesson({ store = new Map(), session = new Map(), id = '0001', question = '$x+1$ 等于多少？', denied = false } = {}) {
+  const events = new Map()
   const options = ['A', 'B'].map(key => Object.assign(element(key === 'A' ? '$2$' : '$3$'), { dataset: { k: key } }))
   const verdict = element()
   const title = typeof question === 'string' ? element(question) : question
@@ -52,8 +53,10 @@ function openLesson({ store = new Map(), session = new Map(), id = '0001', quest
   })
   const context = { document, location: { pathname: `/blog/lessons/zsb-math/${id}.html`, reload() { reloaded = true } }, localStorage: storage(store), sessionStorage: storage(session), CustomEvent: class {} }
   context.window = context
+  context.addEventListener = (type, listener) => events.set(type, listener)
   vm.runInNewContext(runtime, context)
-  return { options, quiz, recall, reveal, good, bad, progress, verdict, message, restart, reloaded: () => reloaded, store, session }
+  return { options, quiz, recall, reveal, good, bad, progress, verdict, message, restart, reloaded: () => reloaded, store, session,
+    storageChanged() { events.get('storage')({ type: 'storage', key: `zc-progress-items-v1:${id}` }) } }
 }
 
 test('returning to the same lesson restores the solved answer without counting it twice', () => {
@@ -80,6 +83,17 @@ test('wrong attempts survive navigation so a later correction is not counted as 
   assert.equal(record.quizTotal, 1)
   assert.equal(record.quizRight, 0)
   assert.match(back.progress.textContent, /首次答对 0/)
+})
+
+test('another math tab and a backup reset repaint saved answers without adding attempts', () => {
+  const first = openLesson(), second = openLesson(first)
+  first.options[0].click(); second.storageChanged()
+  assert.equal(second.options[0].disabled, true)
+  const key = 'zc-progress-items-v1:0001', stored = JSON.parse(first.store.get(key))
+  stored.quiz = {}; stored.recall = {}; first.store.set(key, JSON.stringify(stored))
+  second.storageChanged()
+  assert.equal(second.options[0].disabled, false)
+  assert.equal(second.verdict.textContent, '')
 })
 
 test('revealed and graded recall cards resume with their grade, without repeated votes', () => {

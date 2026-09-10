@@ -753,7 +753,7 @@ function jsUnescape(s) {
  * （q/opts/a/why 字段），script 随后会被剥掉——先把测验静态化成与其他
  * 模板族同构的 HTML（quiz-q + 选项 li + quiz-exp），再走通用 quiz 转换。
  */
-function inlineScriptQuizzes(html) {
+export function inlineScriptQuizzes(html) {
   if (!html.includes('Quiz.render(')) return html
   const source = html
   const calls = [...html.matchAll(/Quiz\.render\(\s*(['"])#([\w-]+)\1\s*,\s*(\[[\s\S]*?\])\s*\)/g)]

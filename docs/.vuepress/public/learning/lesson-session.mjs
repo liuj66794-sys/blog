@@ -2,6 +2,7 @@ import { studyIdentity, safeReturnTo, saveStudyProgress } from './study-state.mj
 
 export function attachLessonSession(base = '/blog/', {interactive = false} = {}) {
   const identity = studyIdentity(location.pathname, base)
+  const hasMistakes = identity && ['zsb-math', 'zsb-english', 'zsb-politics', 'zsb-cs'].includes(identity.slug)
   const params = new URLSearchParams(location.search)
   const back = safeReturnTo(params.get('returnTo'), base)
   const main = document.querySelector('.vp-doc, main, article, .wrap') || document.body
@@ -13,9 +14,10 @@ export function attachLessonSession(base = '/blog/', {interactive = false} = {})
   const addLink = (label, href, parent = top) => {
     const link = document.createElement('a'); link.textContent = label; link.href = href; parent.append(link); return link
   }
-  if (back) addLink(back.includes('/prep/') ? '返回原学习任务' : '返回搜索与筛选', back)
+  if (back) addLink(back.includes('/review/') ? '返回错题复习' : back.includes('/prep/') ? '返回原学习任务' : '返回搜索与筛选', back)
   addLink('今日任务', `${base}prep/#today-tasks`)
   if (identity) addLink('课程与学习状态', `${base}courses/${identity.slug}/`)
+  if (hasMistakes) addLink('错题复习', `${base}review/?subject=${identity.slug}`)
   if (!identity && !back) return () => {}
   main.prepend(top)
   if (!interactive || !identity) return () => top.remove()
@@ -29,6 +31,7 @@ export function attachLessonSession(base = '/blog/', {interactive = false} = {})
   const actions = document.createElement('div'); actions.className = 'study-session-actions'
   footer.append(heading,progress,review,actions)
   addLink('回到今日任务', `${base}prep/#today-tasks`, actions)
+  if (hasMistakes) addLink('查看本学科错题', `${base}review/?subject=${identity.slug}`, actions)
   if (back) addLink('返回原来的位置',back,actions)
   const next = [...main.querySelectorAll('a')].find(link => /下一课/.test(link.textContent) && !link.closest('[data-study-session]'))
   if (next) {
