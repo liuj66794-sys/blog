@@ -2,7 +2,7 @@
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { prepCatalog } from '../prep-catalog.mjs'
 import { SUBJECTS, REVIEW_LABELS, MISTAKES_EVENT, readMistakes, migrateLegacy, recordAttempt, canGrade as validChoice, isDue, exportMistakes, importMistakes, setMistakeNote, reopenMistake, safeLessonPath, refreshQuestionDefinitions } from '../../../scripts/runtime/mistake-store.mjs'
-import { readableText } from '../../../scripts/runtime/lesson-mistakes.mjs'
+import { readableText, readableMarkup } from '../../../scripts/runtime/lesson-mistakes.mjs'
 
 const base = __VUEPRESS_BASE__
 const entries = ref({}), ready = ref(false), subject = ref('all'), state = ref('due'), search = ref(''), message = ref('')
@@ -11,7 +11,8 @@ const queue = ref([]), position = ref(0), root = ref(null)
 const verifiedIds = ref(new Set())
 const canGrade = q => verifiedIds.value.has(q.id) && validChoice(q)
 const canRecall = q => verifiedIds.value.has(q.id) && q.kind === 'recall'
-const optionText = (option, q) => readableText(option.text, q.legacyHtml).replace(/^[A-Z][.、．]\s+/i, '')
+const optionMarkup = (option, q) => readableMarkup(option.html || option.text, Boolean(option.html) || q.legacyHtml, true)
+const explanationMarkup = q => readableMarkup(q.explanationHtml || q.explanation || '原题未附解析，请回到原课对照知识点解释原因。', Boolean(q.explanationHtml) || q.legacyHtml)
 let timer, mathPromise
 function refresh() { entries.value = readMistakes() }
 async function updateDefinitions() {
@@ -35,7 +36,7 @@ const filtered = computed(() => all.value.filter(q => (subject.value === 'all' |
   .sort((a, b) => (a.dueAt || 0) - (b.dueAt || 0) || b.wrongs - a.wrongs))
 const shown = ref(30)
 const counts = computed(() => ({ due: all.value.filter(q => isDue(q)).length, mastered: all.value.filter(q => q.status === 'mastered').length }))
-const text = q => readableText(q.stem || '', q.legacyHtml)
+const stemMarkup = q => readableMarkup(q.stemHtml || q.stem || '', Boolean(q.stemHtml) || q.legacyHtml)
 function original(q) {
   const path = safeLessonPath(q.source, base)
   return path ? `${path}?reviewQuestion=${encodeURIComponent(q.ref)}&returnTo=${encodeURIComponent(base + 'review/')}` : `${base}courses/${q.slug}/`
@@ -133,27 +134,28 @@ onUnmounted(() => { clearInterval(timer); window.removeEventListener('storage', 
     <p v-if="message" class="review-message" role="status">{{ message }}</p>
     <section v-if="active" class="review-practice" tabindex="-1" aria-label="错题复测">
       <div class="review-row"><span>{{ SUBJECTS[active.slug] }} · 第 {{ position + 1 }} / {{ queue.length }} 题</span><button @click="active = null">结束本组</button></div>
-      <h2 class="review-math">{{ text(active) }}</h2>
+      <h2 class="review-math review-question" v-html="stemMarkup(active)" />
       <p class="review-muted">{{ active.title }}<span v-if="active.answer.length > 1"> · 多选题，请选全后提交</span></p>
       <p v-if="active.sourceLabel" class="review-muted">答案来源：{{ active.sourceLabel }}</p>
-      <div v-if="canGrade(active)" class="review-options" role="group" aria-label="答案选项"><button v-for="(option, i) in active.options" :key="option.value" :disabled="submitted" :aria-pressed="picked.includes(option.value)" @click="choose(option.value)"><span>{{ String.fromCharCode(65 + i) }}.</span><span class="review-math">{{ optionText(option, active) }}</span></button></div>
+      <div v-if="canGrade(active)" class="review-options" role="group" aria-label="答案选项"><button v-for="(option, i) in active.options" :key="option.value" :disabled="submitted" :aria-pressed="picked.includes(option.value)" @click="choose(option.value)"><span>{{ String.fromCharCode(65 + i) }}.</span><span class="review-math" v-html="optionMarkup(option, active)" /></button></div>
       <label v-else-if="canRecall(active)">先不看答案，用自己的话回忆<textarea v-model="recalled" :disabled="revealed" placeholder="先写一句解释，再核对参考答案" /></label>
       <p v-else class="review-muted">{{ active.contextRequired ? '这道题需要结合原课的完整材料。请回原课作答，结果仍会同步到错题本。' : '这条记录没有完整题目或可靠答案，请回原课核对；暂不自动判分。' }}</p>
       <div class="review-actions"><button v-if="canGrade(active)" class="review-primary" :disabled="submitted || !picked.length" @click="submit()">提交答案</button><button v-if="!revealed && (canGrade(active) || canRecall(active))" @click="revealed = true; peeked = true">{{ active.kind === 'recall' ? '核对回忆' : '先看解析' }}</button><a :href="original(active)">回原课重新作答 →</a></div>
-      <div v-if="revealed" class="review-explanation"><p v-if="active.answer.length && canGrade(active)" class="review-math"><strong>参考答案：</strong>{{ active.options.filter(o => active.answer.includes(o.value)).map(o => readableText(o.text, active.legacyHtml)).join('；') }}</p><p class="review-math">{{ readableText(active.explanation || '原题未附解析，请回到原课对照知识点解释原因。', active.legacyHtml) }}</p><p v-if="!submitted" class="review-muted">已查看答案，这次作答用于订正，不计入独立复测。</p><div v-if="canRecall(active) && !submitted" class="review-actions"><button @click="submit(true)">自评：回忆正确</button><button @click="submit(false)">自评：还没记住</button></div></div>
+      <div v-if="revealed" class="review-explanation"><p v-if="active.answer.length && canGrade(active)" class="review-math"><strong>参考答案：</strong>{{ active.options.filter(o => active.answer.includes(o.value)).map(o => readableText(o.text, active.legacyHtml)).join('；') }}</p><p class="review-math" v-html="explanationMarkup(active)" /><p v-if="!submitted" class="review-muted">已查看答案，这次作答用于订正，不计入独立复测。</p><div v-if="canRecall(active) && !submitted" class="review-actions"><button @click="submit(true)">自评：回忆正确</button><button @click="submit(false)">自评：还没记住</button></div></div>
       <p v-if="feedback" class="review-message" role="status">{{ feedback }}</p>
       <label>我错在哪里，下次怎样判断？<textarea v-model="note" maxlength="2000" placeholder="例如：忘了定义域；把必要条件当成充分条件……" /></label>
       <div class="review-actions"><button @click="saveNote">保存错因</button><button @click="next">{{ position + 1 < queue.length ? '下一题 →' : '完成本组' }}</button></div>
     </section>
     <p class="review-muted" role="status">{{ ready ? `找到 ${filtered.length} 道错题` : '正在读取此浏览器的学习记录…' }}</p>
     <div v-if="ready && !filtered.length" class="review-empty"><h2>{{ all.length ? '这个筛选下暂时没有题目' : '从第一次认真尝试开始' }}</h2><p>{{ all.length ? '切换到“全部记录”可查看后续复测和已巩固的题。' : '在四科互动课里答错，题目会自动来到这里。已有旧错题会合并，原记录保留。' }}</p><a :href="`${base}courses/`">去选一节课 →</a></div>
-    <ol class="review-list"><li v-for="q in filtered.slice(0, shown)" :key="q.id"><div class="review-row"><span>{{ SUBJECTS[q.slug] }} · {{ REVIEW_LABELS[q.status] }}</span><span>曾错 {{ q.wrongs }} 次</span></div><h3 class="review-math">{{ text(q) }}</h3><p class="review-muted">{{ q.title }}<span v-if="q.status === 'scheduled' && !isDue(q)"> · {{ new Date(q.dueAt).toLocaleDateString('zh-CN') }} 复测</span></p><p v-if="q.note">错因：{{ q.note }}</p><div class="review-actions"><button @click="start([q])">{{ q.kind === 'recall' ? '回忆自测' : '重新作答' }}</button><a :href="original(q)">回原课</a><button v-if="q.status === 'mastered'" @click="reopenMistake(q.id); refresh()">仍需巩固</button></div></li></ol>
+    <ol class="review-list"><li v-for="q in filtered.slice(0, shown)" :key="q.id"><div class="review-row"><span>{{ SUBJECTS[q.slug] }} · {{ REVIEW_LABELS[q.status] }}</span><span>曾错 {{ q.wrongs }} 次</span></div><h3 class="review-math review-question" v-html="stemMarkup(q)" /><p class="review-muted">{{ q.title }}<span v-if="q.status === 'scheduled' && !isDue(q)"> · {{ new Date(q.dueAt).toLocaleDateString('zh-CN') }} 复测</span></p><p v-if="q.note">错因：{{ q.note }}</p><div class="review-actions"><button @click="start([q])">{{ q.kind === 'recall' ? '回忆自测' : '重新作答' }}</button><a :href="original(q)">回原课</a><button v-if="q.status === 'mastered'" @click="reopenMistake(q.id); refresh()">仍需巩固</button></div></li></ol>
     <button v-if="filtered.length > shown" @click="shown += 30">继续显示更多错题</button>
   </div>
 </template>
 
 <style>
 .review-notebook{color:var(--vp-c-text-1);--review-line:var(--vp-c-divider);--review-panel:var(--vp-c-bg-soft);--review-accent:var(--vp-c-brand-1)}
+.review-notebook .review-question{font-weight:400}.review-notebook .review-math strong{font-weight:750}.review-notebook .review-math u{text-decoration:underline;text-decoration-thickness:.08em;text-underline-offset:.18em}
 .review-notebook p,.review-notebook h3{overflow-wrap:anywhere}.review-lead{font-size:20px}.review-muted{color:var(--vp-c-text-2);font-size:14px;line-height:1.8}.review-overview{display:flex;flex-wrap:wrap;gap:16px 30px;padding:22px;background:var(--review-panel);border-radius:12px}.review-overview strong{font-size:27px;color:var(--review-accent)}
 .review-filters{display:flex;flex-wrap:wrap;gap:14px;margin:24px 0}.review-notebook label{display:grid;gap:7px;font-size:14px}.review-search{flex:1;min-width:160px}.review-notebook :is(input,select,textarea){box-sizing:border-box;min-height:44px;width:100%;border:1px solid var(--review-line);border-radius:7px;background:var(--vp-c-bg);color:inherit;padding:10px;font:inherit}.review-notebook textarea{min-height:90px;resize:vertical}.review-notebook :is(button,a,input,textarea,select):focus-visible{outline:3px solid var(--review-accent);outline-offset:3px}.review-notebook button,.review-file{min-height:44px;padding:9px 14px;border:1px solid var(--review-line);border-radius:7px;background:var(--vp-c-bg);color:inherit;font:inherit;cursor:pointer}.review-notebook button:disabled{opacity:.6;cursor:default}.review-notebook .review-primary{background:var(--vp-c-brand-1);color:var(--vp-c-bg)}
 .review-actions,.review-row{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px}.review-actions{margin:16px 0}.review-actions a{display:inline-flex;align-items:center;min-height:44px}.review-row{justify-content:space-between;color:var(--vp-c-text-2);font-size:13px}.review-file{position:relative;display:inline-flex!important;align-items:center}.review-file:focus-within{outline:3px solid var(--review-accent)}.review-file input{position:absolute;inset:0;opacity:0;cursor:pointer}

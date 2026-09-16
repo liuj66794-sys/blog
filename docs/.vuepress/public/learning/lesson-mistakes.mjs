@@ -1,17 +1,47 @@
 import { migrateLegacy, recordAttempt, registerQuestion } from './mistake-store.mjs'
+import { escapeMarkup, serializeQuestionMarkup } from './question-markup.mjs'
 
-export function readableText(value, html = false) {
-  if (typeof value === 'string' && !html) return value
-  const copy = typeof value === 'string' ? document.createElement('div') : value?.cloneNode(true)
-  if (!copy) return ''
-  if (typeof value === 'string') copy.innerHTML = value // Only authored course HTML; output is always text.
+function readableNode(value) {
+  let copy
+  if (typeof value === 'string') {
+    const template = document.createElement('template')
+    template.innerHTML = value
+    copy = template.content
+  } else copy = value?.cloneNode?.(true)
+  if (!copy) return null
   copy.querySelectorAll('.katex').forEach(math => {
     const tex = math.querySelector('annotation')
     if (tex) math.replaceWith(document.createTextNode(`$${tex.textContent}$`))
   })
-  copy.querySelectorAll('.quiz-flag,.qno,.mtag').forEach(node => node.remove())
+  copy.querySelectorAll('.quiz-flag,.qno,.mtag,script,style,template,iframe,object').forEach(node => node.remove())
   copy.querySelectorAll('br').forEach(node => node.replaceWith(document.createTextNode('\n')))
-  return copy.textContent.trim()
+  return copy
+}
+export function readableText(value, html = false) {
+  if (typeof value === 'string' && !html) return value
+  return readableNode(value)?.textContent.trim() || ''
+}
+const domReader = {
+  text: node => node.nodeType === 3 ? node.textContent : null,
+  tag: node => node.tagName?.toLowerCase() || '',
+  attr: (node, key) => node.getAttribute?.(key) || '',
+  children: node => [...node.childNodes],
+}
+export function readableMarkup(value, html = false, stripOptionLabel = false) {
+  if (typeof value === 'string' && !html) return escapeMarkup(stripOptionLabel ? value.replace(/^[A-Z][.、．]\s+/i, '') : value)
+  const copy = readableNode(value)
+  if (!copy) return ''
+  if (stripOptionLabel) {
+    let remaining = copy.textContent.match(/^\s*[A-Z][.、．]\s+/i)?.[0].length || 0
+    const walker = document.createTreeWalker(copy, 4)
+    while (remaining) {
+      const node = walker.nextNode()
+      if (!node) break
+      const count = Math.min(remaining, node.textContent.length)
+      node.textContent = node.textContent.slice(count); remaining -= count
+    }
+  }
+  return serializeQuestionMarkup(copy, domReader).trim()
 }
 function snapshot(node, base) {
   const meta = node.studyQuestion
@@ -21,12 +51,16 @@ function snapshot(node, base) {
   const options = meta.options || [...node.querySelectorAll('.quiz-opts button,.quiz-opts li')].map(option => ({
     value: option.dataset.k || option.dataset.opt, text: readableText(option),
   }))
+  const explanation = meta.explanation ?? node.querySelector(recall ? '.recall-a' : '.quiz-exp,.quiz-expl,.quiz-explanation')
+  const formatted = meta.slug === 'zsb-english'
   return { slug: meta.slug, lessonId: meta.lessonId, ref: meta.ref, kind: recall ? 'recall' : 'choice',
-    stem: readableText(stem, meta.html), options: options.map(o => ({ value: String(o.value), text: readableText(o.text, meta.html) })),
+    stem: readableText(stem, meta.html), legacyHtml: false,
+    ...(formatted ? { stemHtml: readableMarkup(stem, meta.html), explanationHtml: readableMarkup(explanation, meta.html) } : {}),
+    options: options.map(o => ({ value: String(o.value), text: readableText(o.text, meta.html), ...(formatted ? { html: readableMarkup(o.text, meta.html) } : {}) })),
     answer: meta.answer || [], doubt: !!meta.doubt,
     sourceLabel: meta.sourceLabel || '',
     contextRequired: (meta.slug === 'zsb-english' && Number(meta.lessonId) >= 18 && Number(meta.lessonId) <= 23) || !!node.querySelector('img,svg,canvas'),
-    explanation: readableText(meta.explanation ?? node.querySelector(recall ? '.recall-a' : '.quiz-exp,.quiz-expl,.quiz-explanation'), meta.html),
+    explanation: readableText(explanation, meta.html),
     source: location.pathname, title: document.querySelector('h1')?.textContent.trim() || document.title,
     reading: `${base}courses/${meta.slug}/l/${/^\d+$/.test(meta.lessonId) ? Number(meta.lessonId) : meta.lessonId}/` }
 }

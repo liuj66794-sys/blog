@@ -1,6 +1,7 @@
 import { createRequire } from 'node:module'
 import { inlineScriptQuizzes } from './lesson-convert.mjs'
 import { mistakeId } from '../runtime/mistake-store.mjs'
+import { serializeQuestionMarkup } from '../runtime/question-markup.mjs'
 
 // Vue already owns the site's HTML parser. No course JavaScript is evaluated.
 const require = createRequire(import.meta.resolve('vue/package.json'))
@@ -20,6 +21,10 @@ function tree(html) { return parse(html, { parseMode: 'html', onError() {} }) }
 function hash(text) { let h = 5381; for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) >>> 0; return h.toString(36) }
 const itemText = n => plain(n).replace(/\$/g, '').replace(/\\[()[\]]/g, '').replace(/\s+/g, '')
 const text = n => plain(n).trim()
+const markup = node => serializeQuestionMarkup(node, {
+  text: n => n.type === 2 ? n.content : null,
+  tag: n => n.tag?.toLowerCase() || '', attr, children: n => n.children || [],
+}).trim()
 
 export function extractCourseQuestions(html, { slug, lessonId, source, title }) {
   const doc = tree(slug === 'zsb-english' ? inlineScriptQuizzes(html) : html)
@@ -45,8 +50,12 @@ export function extractCourseQuestions(html, { slug, lessonId, source, title }) 
         const name = attr(group || {}, 'id'); if (!name) throw new Error(`英语题目缺少分组：${source}`)
         const ordinal = groups.get(name) || 0; groups.set(name, ordinal + 1); ref = `${name}:${ordinal}`
       }
-      result.push({ ...common, ref, kind: 'choice', stem: text(stem), options: opts.map((o, i) => ({ value: slug === 'zsb-english' ? String(i) : attr(o, 'data-k') || attr(o, 'data-opt'), text: text(o) })),
-        answer: [answer], explanation: text(first(q, n => has(n, 'quiz-exp') || has(n, 'quiz-expl') || has(n, 'quiz-explanation'))),
+      const explanation = first(q, n => has(n, 'quiz-exp') || has(n, 'quiz-expl') || has(n, 'quiz-explanation'))
+      const formatted = slug === 'zsb-english'
+      result.push({ ...common, ref, kind: 'choice', stem: text(stem),
+        ...(formatted ? { stemHtml: markup(stem), explanationHtml: markup(explanation) } : {}),
+        options: opts.map((o, i) => ({ value: formatted ? String(i) : attr(o, 'data-k') || attr(o, 'data-opt'), text: text(o), ...(formatted ? { html: markup(o) } : {}) })),
+        answer: [answer], explanation: text(explanation),
         contextRequired: (slug === 'zsb-english' && Number(lessonId) >= 18 && Number(lessonId) <= 23) || nodes(q, n => ['img', 'svg', 'canvas'].includes(n.tag)).length > 0 })
     }
     if (slug === 'zsb-math') for (const [index, q] of nodes(doc, n => has(n, 'recall')).entries()) {
