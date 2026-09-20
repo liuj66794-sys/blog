@@ -128,3 +128,24 @@ test('old completed quiz records remain completed without becoming mastery evide
   assert.equal(summary.quizComplete, true)
   assert.equal(summary.quizAllCorrect, false)
 })
+
+test('durable SRS rejects repeat grades across sessions and preserves old fields', () => {
+  const values = new Map([['zzkk:v2:card:stable-id', JSON.stringify({ box: 1, streak: 1, at: '2026-09-01', note: '保留' })]])
+  const app = boot({ values })
+  assert.equal(app.ZQ.srs.grade('stable-id', true).box, 2)
+  const saved = values.get('zzkk:v2:card:stable-id')
+  assert.equal(app.ZQ.srs.grade('stable-id', true).alreadyReviewed, true)
+  assert.equal(boot({ values }).ZQ.srs.grade('stable-id', false).alreadyReviewed, true)
+  assert.equal(values.get('zzkk:v2:card:stable-id'), saved)
+  assert.equal(JSON.parse(saved).note, '保留')
+  assert.equal(boot({ values, now: '2026-09-11' }).ZQ.srs.grade('stable-id', true).box, 3)
+})
+
+test('durable SRS write failure does not mutate records or announce success', () => {
+  const app = boot({ values: new Map([['zzkk:v2:card:old', '{"box":1,"at":"2026-09-01","streak":2}']]) })
+  const before = app.values.get('zzkk:v2:card:old')
+  app.localStorage.setItem = () => { throw new Error('quota') }
+  assert.equal(app.ZQ.srs.grade('old', true).saved, false)
+  assert.equal(app.values.get('zzkk:v2:card:old'), before)
+  assert.equal(app.document.events.length, 0)
+})

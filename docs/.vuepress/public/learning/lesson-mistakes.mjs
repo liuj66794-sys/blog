@@ -54,6 +54,8 @@ function snapshot(node, base) {
   const explanation = meta.explanation ?? node.querySelector(recall ? '.recall-a' : '.quiz-exp,.quiz-expl,.quiz-explanation')
   const formatted = meta.slug === 'zsb-english'
   return { slug: meta.slug, lessonId: meta.lessonId, ref: meta.ref, kind: recall ? 'recall' : 'choice',
+    ...(meta.slug === 'zsb-politics' ? { schemaVersion: meta.schemaVersion, contentVersion: meta.contentVersion,
+      question: meta.question, chapter: meta.chapter, legacyQuestion: meta.legacyQuestion, sourceMetadata: meta.sourceMetadata } : {}),
     stem: readableText(stem, meta.html), legacyHtml: false,
     ...(formatted ? { stemHtml: readableMarkup(stem, meta.html), explanationHtml: readableMarkup(explanation, meta.html) } : {}),
     options: options.map(o => ({ value: String(o.value), text: readableText(o.text, meta.html), ...(formatted ? { html: readableMarkup(o.text, meta.html) } : {}) })),
@@ -63,7 +65,7 @@ function snapshot(node, base) {
     ...(meta.subjective ? { subjective: meta.subjective } : {}),
     contextRequired: (meta.slug === 'zsb-english' && Number(meta.lessonId) >= 18 && Number(meta.lessonId) <= 23) || !!node.querySelector('img,svg,canvas'),
     explanation: readableText(explanation, meta.html),
-    source: location.pathname, title: document.querySelector('h1')?.textContent.trim() || document.title,
+    source: meta.source || location.pathname, title: meta.title || document.querySelector('h1')?.textContent.trim() || document.title,
     reading: `${base}courses/${meta.slug}/l/${/^\d+$/.test(meta.lessonId) ? Number(meta.lessonId) : meta.lessonId}/` }
 }
 

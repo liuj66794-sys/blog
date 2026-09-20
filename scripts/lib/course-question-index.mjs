@@ -2,6 +2,7 @@ import { createRequire } from 'node:module'
 import { inlineScriptQuizzes } from './lesson-convert.mjs'
 import { mistakeId } from '../runtime/mistake-store.mjs'
 import { serializeQuestionMarkup } from '../runtime/question-markup.mjs'
+import { importQuestion, questionForNotebook } from './politics-data.mjs'
 
 // Vue already owns the site's HTML parser. No course JavaScript is evaluated.
 const require = createRequire(import.meta.resolve('vue/package.json'))
@@ -34,8 +35,7 @@ export function extractCourseQuestions(html, { slug, lessonId, source, title }) 
     const block = first(doc, n => attr(n, 'id') === 'lesson-data')
     if (!block) return []
     const data = JSON.parse(block.children.map(c => c.content || '').join(''))
-    for (const q of data.mcqs || []) result.push({ ...common, ref: q.id || 'h' + hash(`${lessonId}#${q.stem}`), kind: 'choice', stem: q.stem,
-      options: q.options.map(o => ({ value: o.letter, text: o.text })), answer: String(q.answer || '').replace(/[、，,\s]+/g, '').split(''), explanation: q.exp || '', sourceLabel: q.src || '', doubt: !!q.doubt })
+    for (const q of data.mcqs || []) result.push({ ...common, ...questionForNotebook(importQuestion(q, { lessonId, source, chapter: title })) })
   } else {
     const groups = new Map()
     const quizzes = nodes(doc, n => has(n, 'quiz') && attr(n, 'data-answer'))

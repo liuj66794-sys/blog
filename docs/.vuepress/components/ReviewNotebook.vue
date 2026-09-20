@@ -19,7 +19,7 @@ const overview = computed(() => reviewOverview(all.value.filter(q => settings.su
 const hasFilters = computed(() => settings.subject !== 'all' || settings.state !== 'due' || settings.search)
 const canGrade = q => verifiedIds.value.has(q.id) && validChoice(q)
 const canRecall = q => verifiedIds.value.has(q.id) && q.kind === 'recall' && !q.doubt
-const stemMarkup = q => readableMarkup(q.stemHtml || q.stem || '', Boolean(q.stemHtml) || q.legacyHtml)
+const stemMarkup = q => q.slug === 'zsb-politics' && q.question ? readableMarkup(q.question, false) : readableMarkup(q.stemHtml || q.stem || '', Boolean(q.stemHtml) || q.legacyHtml)
 const optionMarkup = (option, q) => readableMarkup(option.html || option.text, Boolean(option.html) || q.legacyHtml, true)
 const explanationMarkup = q => readableMarkup(q.explanationHtml || q.explanation || '原题未附解析，请回到原课对照知识点解释原因。', Boolean(q.explanationHtml) || q.legacyHtml)
 // 教学补充（q.teaching）：分步判断、逐选项解析、原文定位、翻译与词组。无补充时整块不渲染。
@@ -225,7 +225,7 @@ onUnmounted(() => {
     <section v-if="active" class="review-practice" tabindex="-1" aria-label="错题复测">
       <div class="review-row"><span>{{ SUBJECTS[active.slug] }} · 第 {{ session.position + 1 }} / {{ session.ids.length }} 题</span><div class="review-actions"><button @click="paused = true">暂停，稍后继续</button><button @click="finish">结束本组</button></div></div>
       <progress class="review-progress" :value="summary.answered" :max="summary.total" :aria-label="'本组已作答 ' + summary.answered + ' / ' + summary.total + ' 题'" />
-      <p class="review-muted">{{ active.title }}<span v-if="active.answer.length > 1"> · 多选题，请选全后提交</span></p>
+      <p class="review-muted">章节：{{ active.chapter || active.title }}<span v-if="active.answer.length > 1"> · 多选题，请选全后提交</span></p>
       <h2 class="review-math review-question" v-html="stemMarkup(active)" />
       <p v-if="active.sourceLabel" class="review-muted">答案来源：{{ active.sourceLabel }}</p>
       <div v-if="canGrade(active)" class="review-options" role="group" aria-label="答案选项">

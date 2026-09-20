@@ -6,6 +6,7 @@ import { withBase } from '../docs/.vuepress/site-meta.mjs'
 import { extractCourseQuestions } from './lib/course-question-index.mjs'
 import { beforeCourseCorrections } from './lib/course-corrections.mjs'
 import { loadTeachingCatalog, supplementsForLesson, resolveQuestionRef, mergeQuestionTeaching, validateSubject } from './lib/teaching.mjs'
+import { importQuestion, questionForNotebook, questionAliases } from './lib/politics-data.mjs'
 
 const root = fileURLToPath(new URL('../docs/.vuepress/public/', import.meta.url))
 const teachingCatalog = loadTeachingCatalog()
@@ -26,17 +27,15 @@ for (const [slug, course] of Object.entries(prepCatalog)) {
     }
   }
   if (slug === 'zsb-politics') {
+    Object.assign(aliases, questionAliases)
     const html = fs.readFileSync(path.join(root, 'lessons/zsb-politics/lessons/practice.html'), 'utf8')
     const bank = JSON.parse(html.match(/<script[^>]+id="bank"[^>]*>([\s\S]*?)<\/script>/)[1])
     for (const paper of bank) {
       const paperQuestions = []
       for (const q of paper.mcqs || []) {
-        const id = `${slug}:bank:${q.id}`
-        const entry = { id, slug, ref: q.id, lessonId: paper.id, kind: 'choice', stem: q.stem,
-          options: q.options.map(o => ({ value: o.letter, text: o.text })), answer: String(q.answer || '').replace(/[、，,\s]+/g, '').split(''),
-          explanation: q.exp || '', sourceLabel: q.src || '', doubt: !!q.doubt, title: paper.name, legacyHtml: false,
-          source: withBase('/lessons/zsb-politics/lessons/practice.html') }
-        entries[id] = entry
+        const entry = questionForNotebook(importQuestion(q, { lessonId: paper.id, chapter: paper.name, paperTitle: paper.name,
+          source: withBase('/lessons/zsb-politics/lessons/practice.html') }))
+        entries[entry.id] = entry
         paperQuestions.push(entry)
       }
       questionsByLesson.set(paper.id, paperQuestions)

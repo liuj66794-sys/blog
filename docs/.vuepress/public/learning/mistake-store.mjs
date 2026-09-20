@@ -6,7 +6,21 @@ const DAY = 86400000
 const object = value => value && typeof value === 'object' && !Array.isArray(value)
 const storageOf = storage => storage || globalThis.localStorage
 const number = value => Number.isFinite(value) && value >= 0 ? value : 0
-const definition = q => Object.fromEntries(['slug', 'lessonId', 'ref', 'kind', 'stem', 'stemHtml', 'options', 'answer', 'explanation', 'explanationHtml', 'doubt', 'source', 'sourceLabel', 'title', 'reading', 'legacyHtml', 'contextRequired', 'teaching', 'subjective'].filter(k => k in q).map(k => [k, q[k]]))
+const definition = q => Object.fromEntries(['schemaVersion', 'contentVersion', 'question', 'chapter', 'knowledgePoint', 'sourceMetadata', 'legacyQuestion', 'slug', 'lessonId', 'ref', 'kind', 'stem', 'stemHtml', 'options', 'answer', 'explanation', 'explanationHtml', 'doubt', 'source', 'sourceLabel', 'title', 'reading', 'legacyHtml', 'contextRequired', 'teaching', 'subjective'].filter(k => k in q).map(k => [k, q[k]]))
+
+// Compatibility is limited to an identical registered definition. A genuine
+// answer/content change still invalidates mastery as it did before.
+export function equivalentPoliticsDefinition(old, q) {
+  if (q.slug !== 'zsb-politics' || q.schemaVersion !== 1) return false
+  let stem = old.question || old.stem || ''
+  const original = q.legacyQuestion || q.question
+  while (stem !== original && /^【[^】]*】/.test(stem)) stem = stem.replace(/^【[^】]*】/, '')
+  const answers = value => [...new Set((Array.isArray(value) ? value.join('') : String(value || '')).replace(/[、，,\s]/g, '').split(''))].sort()
+  const options = list => (list || []).map(o => [o.value || o.letter, o.text])
+  return (stem === q.question || stem === original) && original === q.question
+    && JSON.stringify(options(old.options)) === JSON.stringify(options(q.options))
+    && JSON.stringify(answers(old.answer)) === JSON.stringify(answers(q.answer))
+}
 
 export function readMistakes(storage) {
   try {
@@ -71,7 +85,7 @@ export function registerQuestion(q, storage) {
   const entries = readMistakes(storage), id = mistakeId(q), old = entries[id]
   if (!old) return true
   const signature = questionSignature(q)
-  const changed = old.signature && old.signature !== signature
+  const changed = old.signature && old.signature !== signature && !equivalentPoliticsDefinition(old, q)
   const next = { ...old, ...definition(q), id, signature }
   if (changed) Object.assign(next, { status: 'pending', successDays: 0, lastSuccessAt: 0, dueAt: 0, revisionChanged: true })
   if (JSON.stringify(next) === JSON.stringify(old)) return true
@@ -88,9 +102,13 @@ export function refreshQuestionDefinitions(index, storage) {
     const target = index.aliases?.[id] || id, q = index.entries[target]
     if (!q) continue
     const current = entries[target], signature = questionSignature(q)
-    const revised = target !== id || (old.signature && old.signature !== signature)
-    const history = target === id ? old : { ...old, ...current, wrongs: number(old.wrongs) + number(current?.wrongs), lastWrongAt: Math.max(number(old.lastWrongAt), number(current?.lastWrongAt)),
-      note: number(old.updatedAt) > number(current?.updatedAt) ? old.note : current?.note || old.note,
+    const revised = (target !== id || (old.signature && old.signature !== signature)) && !equivalentPoliticsDefinition(old, q)
+    const winner = !current || number(old.updatedAt) > number(current.updatedAt) ? old : current
+    const history = target === id ? old : { ...old, ...current, ...winner,
+      wrongs: number(old.wrongs) + number(current?.wrongs), lastWrongAt: Math.max(number(old.lastWrongAt), number(current?.lastWrongAt)),
+      note: [...new Set([old.note, current?.note].filter(Boolean))].join('\n\n'),
+      recentAttempts: [...new Set([...(old.recentAttempts || []), ...(current?.recentAttempts || [])])],
+      migrationHistory: { ...(old.migrationHistory || {}), ...(current?.migrationHistory || {}), [id]: old, ...(current ? { [target]: current } : {}) },
       legacyIds: [...new Set([...(old.legacyIds || []), ...(current?.legacyIds || []), id])] }
     const next = { ...history, ...definition(q), id: target, signature }
     if (revised) Object.assign(next, { status: 'pending', successDays: 0, lastSuccessAt: 0, dueAt: 0, revisionChanged: true })

@@ -1,4 +1,4 @@
-import { SUBJECTS, REVIEW_LABELS, isDue, questionSignature } from '../../scripts/runtime/mistake-store.mjs'
+import { SUBJECTS, REVIEW_LABELS, isDue, questionSignature, equivalentPoliticsDefinition } from '../../scripts/runtime/mistake-store.mjs'
 import { safeReturnTo } from '../../scripts/runtime/study-state.mjs'
 
 export const REVIEW_SESSION_KEY = 'zhixu-review-session-v1'
@@ -64,6 +64,19 @@ export function restoreReviewSession(raw, entries, base = '/blog/') {
     if (saved.version !== 1 || typeof saved.id !== 'string' || saved.id.length > 100
       || !Array.isArray(saved.ids) || !saved.ids.length || saved.ids.length > 10
       || !Number.isInteger(saved.position) || saved.position < 0 || saved.position >= saved.ids.length) return null
+    saved.ids = saved.ids.map(id => {
+      const target = entries[id] || Object.values(entries).find(q => q.legacyIds?.includes(id))
+      if (!target) return id
+      if (target.id !== id) {
+        saved.drafts[target.id] = saved.drafts[id]
+        saved.signatures[target.id] = saved.signatures[id]
+      }
+      try {
+        const [stem, options, answer] = JSON.parse(saved.signatures[target.id])
+        if (equivalentPoliticsDefinition({ stem, options, answer }, target)) saved.signatures[target.id] = questionSignature(target)
+      } catch { /* Invalid signatures are handled by the normal revision guard. */ }
+      return target.id
+    })
     const ids = [...new Set(saved.ids)].filter(id => typeof id === 'string' && Object.hasOwn(entries, id))
     if (!ids.length) return null
     const context = reviewSettings(new URL(reviewHref(saved.context, base), 'https://study.invalid').search, base)

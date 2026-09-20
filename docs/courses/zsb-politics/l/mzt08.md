@@ -5,7 +5,7 @@ permalink: /courses/zsb-politics/l/mzt08/
 banner: /images/covers/zsb-politics.png
 ---
 
-> 毛中特 · 第八章 ｜ 闪卡 22 ｜ 选择 5 ｜ 问答 7
+> 毛中特 · 第八章 ｜ 闪卡 23 ｜ 选择 5 ｜ 问答 7
 
 > 这是本课阅读版。[**打开互动课程**](/blog/lessons/zsb-politics/lessons/mzt08.html)即可在同一页阅读、作答与复习，学习记录保存在此设备。
 

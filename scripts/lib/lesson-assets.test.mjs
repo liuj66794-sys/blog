@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { test } from 'node:test'
+import { politicsRuntimeSource } from './lesson-assets.mjs'
 import { installLessonRuntime, installLearningAssets, stripMissingFontUrls } from './lesson-assets.mjs'
 
 function fontFixture(t) {
@@ -52,7 +53,7 @@ test('all four prep mirrors install maintained resume runtimes; other courses ke
   assert.equal(fs.readFileSync(target, 'utf8'), 'original subject runtime')
   for (const [slug, file] of [['zsb-english', 'english'], ['zsb-politics', 'politics'], ['zsb-cs', 'cs']]) {
     installLessonRuntime(dir, slug)
-    assert.equal(fs.readFileSync(target, 'utf8'), fs.readFileSync(new URL(`../runtime/${file}-quiz.js`, import.meta.url), 'utf8'))
+    assert.equal(fs.readFileSync(target, 'utf8'), file === 'politics' ? politicsRuntimeSource() : fs.readFileSync(new URL(`../runtime/${file}-quiz.js`, import.meta.url), 'utf8'))
   }
   installLessonRuntime(dir, 'zsb-math')
   assert.equal(fs.readFileSync(target, 'utf8'), fs.readFileSync(new URL('../runtime/math-quiz.js', import.meta.url), 'utf8'))

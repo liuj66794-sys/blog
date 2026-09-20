@@ -991,8 +991,8 @@ export function lessonHtmlToMarkdown(html, ctx = {}) {
     if (mcqs.length) {
       const lessonId = c.teaching.lessonId
       const stubs = mcqs.map((q) => ({
-        ref: q.id || 'h' + djb2(`${lessonId}#${q.stem}`), kind: 'choice',
-        options: (q.options ?? []).map((o) => ({ value: o.letter })),
+        ref: q.id, kind: 'choice',
+        options: (q.options ?? []).map((o) => ({ value: o.value || o.letter })),
       }))
       const supplementByRef = new Map()
       for (const [key, value] of c.teaching.questions ?? new Map()) {
@@ -1036,10 +1036,10 @@ function resolveTeachingRef(key, questions) {
 
 /** 政治课内 mcq → 题干 + 字母选项 + 折叠核对（答案字母 + 解析 exp + teaching 补充） */
 function politicsMcqToMarkdown(q, index, supplement, ctx) {
-  const stem = inline(String(q.stem ?? ''), ctx)
-  const opts = (q.options ?? []).map((o) => `- ${o.letter}. ${inline(String(o.text ?? ''), ctx)}`)
+  const stem = inline(String(q.question ?? q.stem ?? ''), ctx)
+  const opts = (q.options ?? []).map((o) => `- ${o.value || o.letter}. ${inline(String(o.text ?? ''), ctx)}`)
   const answer = String(q.answer ?? '').replace(/[、，,\s]+/g, '').split('').join('')
-  const answerLines = [`**答案：${answer || '见互动版'}**${q.exp ? ` —— ${inline(String(q.exp), ctx)}` : ''}`]
+  const answerLines = [`**答案：${answer || '见互动版'}**${(q.explanation || q.exp) ? ` —— ${inline(String(q.explanation || q.exp), ctx)}` : ''}`]
   if (supplement) {
     const extra = questionTeachingMarkdown(supplement, (o) => String(o).toUpperCase())
     if (extra) answerLines.push(extra)

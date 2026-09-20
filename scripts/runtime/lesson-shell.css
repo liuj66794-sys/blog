@@ -61,6 +61,17 @@ html[data-study-shell] :is(.q-judge.no,.quiz-feedback.bad) { color:var(--study-e
 html[data-study-shell][data-theme='dark'] [style*='color:#dc2626'] { color:var(--study-error)!important; }
 html[data-study-shell][data-theme='dark'] [style*='color:#16a34a'] { color:var(--study-success)!important; }
 html[data-study-shell] :is(.face,.front,.back) { background:var(--study-panel); color:var(--study-text); border-color:var(--study-line); }
+/* Both faces participate in sizing. Flipping remains a transform on the parent;
+   a card switch replaces that parent atomically instead of reversing old content. */
+html[data-study-shell] .flashcard { display:grid; min-height:13.5rem; height:auto; }
+html[data-study-shell] .flashcard .face { grid-area:1 / 1; position:relative; inset:auto; min-width:0; box-sizing:border-box; padding:3.4rem 1.4rem 1.6rem; overflow-wrap:anywhere; }
+html[data-study-shell] .flashcard .face .label { top:1rem; left:1.4rem; }
+html[data-study-shell] .flashcard .ctx { white-space:normal; line-height:1.6; max-width:100%; box-sizing:border-box; }
+html[data-study-shell] .flashcard .q,html[data-study-shell] .flashcard .a { white-space:pre-wrap; }
+html[data-study-shell] .cards-shell [hidden] { display:none!important; }
+html[data-study-shell] .cards-shell button:disabled { cursor:default; opacity:.5; }
+html[data-study-shell] .cards-completion { padding:1.2rem; background:var(--study-tint); border-radius:var(--study-card-radius); }
+html[data-study-shell] .q-metadata { color:var(--study-muted); font-size:.85rem; }
 html[data-study-shell] body>.topbar { position:static; background:var(--study-panel); color:var(--study-muted); border-color:var(--study-line); }
 html[data-study-shell] body>.topbar :is(.topbar-inner,nav.topnav) { flex-wrap:wrap; }
 .study-table-scroll { max-width:100%; overflow-x:auto; overscroll-behavior-x:contain; margin-block:20px; }

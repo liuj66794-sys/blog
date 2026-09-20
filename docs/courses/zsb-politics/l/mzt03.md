@@ -5,7 +5,7 @@ permalink: /courses/zsb-politics/l/mzt03/
 banner: /images/covers/zsb-politics.png
 ---
 
-> 毛中特 · 第三章 ｜ 闪卡 13 ｜ 选择 4 ｜ 问答 6
+> 毛中特 · 第三章 ｜ 闪卡 14 ｜ 选择 4 ｜ 问答 6
 
 > 这是本课阅读版。[**打开互动课程**](/blog/lessons/zsb-politics/lessons/mzt03.html)即可在同一页阅读、作答与复习，学习记录保存在此设备。
 

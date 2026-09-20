@@ -9,6 +9,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import vm from 'node:vm'
+import { createCardSession } from '../runtime/politics-card-session.mjs'
 import {
   KNOWLEDGE_KEY, KNOWLEDGE_INTERVALS, WARMUP_LIMIT, sectionsKey, readKnowledge, writeKnowledge,
   isDuePoint, dueKnowledge, recordKnowledge, HISTORY_LIMIT, readSections, markSectionDone,
@@ -274,6 +275,11 @@ class FakeNode {
     }
   }
   get textContent() { return stripTags(this.html) + this.text + this.children.map(child => child.textContent).join('') }
+  get firstChild() { return this.children[0] || null }
+  removeChild(child) { child.remove(); return child }
+  get isConnected() { return this.tagName === 'BODY' || !!this.parentNode?.isConnected }
+  getBoundingClientRect() { return { top: 0, bottom: 500 } }
+  closest(selector) { if (matchesSelector(this, selector)) return this; return this.parentNode?.closest(selector) || null }
   set textContent(value) { this.children = []; this.html = ''; this.text = value == null ? '' : String(value) }
   get innerHTML() { return this.html + escapeHtml(this.text) + this.children.map(child => child.innerHTML).join('') }
   set innerHTML(value) { this.children = []; this.text = ''; this.html = value == null ? '' : String(value) }
@@ -354,21 +360,77 @@ function loadRuntime(name, { pathname = '/blog/lessons/zsb-english/lessons/0001-
   }
   const location = { pathname, search: '', hash: '', href: pathname }
   const window = {
-    localStorage: storage, location, document,
+    localStorage: storage, location, document, innerHeight: 900, PoliticsSession: { createCardSession },
     addEventListener: (type, handler) => add(type, windowListeners, handler),
     removeEventListener: (type, handler) => drop(type, windowListeners, handler),
     dispatchEvent: event => fire(event, windowListeners),
   }
   const sandbox = {
-    window, document, location, localStorage: storage, CustomEvent: FakeCustomEvent,
+    window, document, location, localStorage: storage, sessionStorage: memory(), CustomEvent: FakeCustomEvent, URLSearchParams,
     setTimeout, clearTimeout, console, JSON, Object, Array, String, Number, Boolean, Math, Date, Error, Promise, RegExp, Map, Set,
   }
   vm.runInContext(fs.readFileSync(new URL(`../runtime/${name}`, import.meta.url), 'utf8'), vm.createContext(sandbox), { filename: name })
-  return { window, document, sandbox, container, body, nodes, storage }
+  return { window, document, sandbox, container, body, nodes, storage, documentListeners, windowListeners }
 }
 
 const textOf = node => node.textContent
 const click = node => node.dispatch('click')
+
+const cardFixtures = Array.from({ length: 3 }, (_, i) => ({ schemaVersion: 1, id: 'fixture-' + i, lessonId: 'test', question: '第' + i + '个独立问题？', answer: '答案' + i, chapter: '', source: { label: '' }, contentVersion: 1 }))
+const cardButton = (node, text) => node.querySelectorAll('button').find(b => b.textContent === text)
+function cardKey(env, target, code, extras = {}) { env.document.dispatchEvent({ type: 'keydown', target, code, key: code, preventDefault() {}, ...extras }) }
+
+test('flashcard keyboard is scoped, ignores repeat and editable targets, and disposes on remount', () => {
+  const env = loadRuntime('politics-quiz.js')
+  const a = env.container, b = new FakeNode('div'); b.id = 'second'; env.body.appendChild(b)
+  const one = env.window.ZQ.mountCards(a, cardFixtures), two = env.window.ZQ.mountCards(b, cardFixtures)
+  one.activate(); cardKey(env, a, 'Space')
+  assert.equal(one.getState().face, 'back'); assert.equal(two.getState().face, 'front')
+  cardKey(env, a, 'Space', { repeat: true }); assert.equal(one.getState().face, 'back')
+  cardKey(env, new FakeNode('textarea'), 'Space'); assert.equal(one.getState().face, 'back')
+  two.activate(); cardKey(env, b, 'Space'); assert.equal(two.getState().face, 'back')
+  assert.equal(env.documentListeners.keydown.length, 2)
+  const replacement = env.window.ZQ.mountCards(a, cardFixtures)
+  assert.equal(env.documentListeners.keydown.length, 2)
+  assert.equal(a.querySelectorAll('.cards-shell').length, 1)
+  two.dispose(); replacement.dispose()
+  assert.equal(env.documentListeners.keydown.length, 0)
+  assert.equal(env.windowListeners.storage.length, 0)
+  assert.equal(env.windowListeners.pagehide.length, 0)
+  assert.equal(env.windowListeners.pageshow.length, 0)
+})
+
+test('flashcard rapid events cannot grade front/completed cards; switching resets face atomically', () => {
+  const env = loadRuntime('politics-quiz.js'), box = env.container
+  const ctrl = env.window.ZQ.mountCards(box, cardFixtures, { debug: true })
+  const yes = cardButton(box, '✓ 记住了（1）'), flip = cardButton(box, '翻转 空格')
+  click(yes); assert.equal(ctrl.getState().queueLength, 3)
+  click(flip); click(flip); click(flip)
+  assert.equal(ctrl.getState().face, 'back')
+  const oldNode = box.querySelector('.flashcard')
+  click(cardButton(box, '下一张 ›'))
+  assert.equal(ctrl.getState().face, 'front')
+  assert.notEqual(box.querySelector('.flashcard'), oldNode)
+  for (let i = 0; i < 3; i++) { click(flip); click(yes); click(yes) }
+  assert.equal(ctrl.getState().phase, 'dailyComplete')
+  assert.equal(yes.disabled, true); assert.equal(flip.disabled, true)
+  assert.equal(cardButton(box, '🔀 洗牌').disabled, true)
+  click(flip); click(yes); assert.equal(ctrl.getState().queueLength, 0)
+  for (const c of cardFixtures) assert.equal(env.window.ZQ.srs.get(c.id).box, 1)
+  assert.equal(box.flashcardDebug.cardId, null)
+  assert.ok(box.flashcardDebugHistory.some(e => e.flipStart && e.questionLength > 0))
+})
+
+test('flashcard cached navigation stays interactive; final pagehide disposes listeners', () => {
+  const env = loadRuntime('politics-quiz.js'), box = env.container
+  const ctrl = env.window.ZQ.mountCards(box, cardFixtures)
+  env.window.dispatchEvent({ type: 'pagehide', persisted: true })
+  env.window.dispatchEvent({ type: 'pageshow', persisted: true })
+  click(cardButton(box, '翻转 空格')); assert.equal(ctrl.getState().face, 'back')
+  assert.equal(env.documentListeners.keydown.length, 1)
+  env.window.dispatchEvent({ type: 'pagehide', persisted: false })
+  assert.equal(env.documentListeners.keydown.length, 0)
+})
 
 /* ---------------- 英语逐选项反馈 ---------------- */
 
@@ -485,10 +547,11 @@ const politicsTeaching = {
     m2: { optionAnalysis: [{ option: 'A', verdict: 'correct', why: '第二题答案' }, { option: 'B', verdict: 'wrong', why: '第二题干扰项' }] },
   },
 }
+const canonicalFixture = q => ({ schemaVersion: 1, contentVersion: 1, id: q.id, lessonId: 'mzt01', kind: 'choice', question: q.stem, options: q.options.map(o => ({ value: o.letter, text: o.text })), answer: q.answer.split(''), explanation: q.exp, chapter: '第一章', knowledgePoint: '', source: { label: '', path: '/blog/lessons/zsb-politics/lessons/mzt01.html' }, answerStatus: 'provided' })
 const politicsQuestions = () => [
   { id: 'm1', stem: '毛泽东思想活的灵魂不包括？', options: [{ letter: 'A', text: '实事求是' }, { letter: 'B', text: '群众路线' }, { letter: 'C', text: '独立自主' }, { letter: 'D', text: '改革开放' }], answer: 'ABC', exp: '活的灵魂是前三者' },
   { id: 'm2', stem: '第二题', options: [{ letter: 'A', text: '对项' }, { letter: 'B', text: '错项' }], answer: 'A', exp: '第二题解析' },
-]
+].map(canonicalFixture)
 
 test('政治多选：错选项、漏选项、分步判断、正确项理由与其余选项分别渲染', () => {
   const env = loadRuntime('politics-quiz.js', { pathname: '/blog/lessons/zsb-politics/lessons/mzt01.html', teaching: politicsTeaching })
@@ -524,7 +587,7 @@ test('政治单选：其余选项折叠，错题入库时带上教学补充', ()
   env.body.appendChild(container)
   env.window.ZQ.mountQuiz(container, [
     { id: 'm2', stem: '第二题', options: [{ letter: 'A', text: '对项' }, { letter: 'B', text: '错项' }], answer: 'A', exp: '第二题解析' },
-  ], { lessonId: 'mzt01' })
+  ].map(canonicalFixture), { lessonId: 'mzt01' })
   const item = container.querySelectorAll('.q-item')[0]
   click(item.querySelectorAll('.opt')[1])
   const card = textOf(item)

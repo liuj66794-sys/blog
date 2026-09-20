@@ -62,11 +62,16 @@ export function stripMissingFontUrls(css, cssDir) {
 }
 
 /** Website-specific fixes live in the repository; mirroring never edits the private source. */
+export function politicsRuntimeSource() {
+  const session = fs.readFileSync(new URL('../runtime/politics-card-session.mjs', import.meta.url), 'utf8').replace(/^export /gm, '')
+  return `window.PoliticsSession = (function () {\n${session}\nreturn { createCardSession };\n})();\n` + fs.readFileSync(new URL('../runtime/politics-quiz.js', import.meta.url), 'utf8')
+}
 export function installLessonRuntime(courseRoot, slug) {
   const runtimes = { 'zsb-math': 'math', 'zsb-english': 'english', 'zsb-politics': 'politics', 'zsb-cs': 'cs' }
   if (!runtimes[slug]) return
   fs.mkdirSync(path.join(courseRoot, 'assets'), { recursive: true })
-  fs.copyFileSync(new URL(`../runtime/${runtimes[slug]}-quiz.js`, import.meta.url), path.join(courseRoot, 'assets', 'quiz.js'))
+  if (slug === 'zsb-politics') fs.writeFileSync(path.join(courseRoot, 'assets', 'quiz.js'), politicsRuntimeSource())
+  else fs.copyFileSync(new URL(`../runtime/${runtimes[slug]}-quiz.js`, import.meta.url), path.join(courseRoot, 'assets', 'quiz.js'))
 }
 
 export function installLearningAssets(publicRoot) {

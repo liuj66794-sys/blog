@@ -175,13 +175,17 @@
       catch (e) { return null; }
     },
     grade: function (id, ok) {
-      var cur = this.get(id) || { box: 0, streak: 0 };
-      cur.box = ok ? Math.min(3, (cur.box || 0) + 1) : 1;
-      if (ok) cur.streak = (cur.streak || 0) + 1; else cur.streak = 0;
+      var previous = this.get(id);
+      // Once per local day, across UI loops, reloads and other study entries.
+      if (previous && previous.at === today() && Number(previous.box) >= 1) return Object.assign({ saved: true, alreadyReviewed: true }, previous);
+      var cur = Object.assign({}, previous || { box: 0, streak: 0 });
+      cur.box = ok ? Math.min(3, Math.max(0, Number(cur.box) || 0) + 1) : 1;
+      cur.streak = ok ? Math.max(0, Number(cur.streak) || 0) + 1 : 0;
       cur.at = today();
-      try { localStorage.setItem(this.key(id), JSON.stringify(cur)); } catch (e) {}
-      document.dispatchEvent(new CustomEvent("zzkk:srs", { detail: { id: id } }));
-      return cur;
+      try { localStorage.setItem(this.key(id), JSON.stringify(cur)); }
+      catch (e) { return { saved: false, error: 'storage' }; }
+      document.dispatchEvent(new CustomEvent('zzkk:srs', { detail: { id: id } }));
+      return Object.assign({ saved: true, alreadyReviewed: false }, cur);
     },
     boxOf: function (id) { var s = this.get(id); return s ? s.box : 0; },
     isLearned: function (id) {
@@ -194,7 +198,8 @@
       if (!s || Number(s.box) < 1) return false;  // 新卡另列，不冒充到期复习
       if (!s.at) return true;                     // 旧记录缺日期时保守安排复习
       var box = Math.max(1, Math.min(this.INTERVAL.length, Number(s.box)));
-      return daysBetween(s.at, today()) >= this.INTERVAL[box - 1];
+      var elapsed = daysBetween(s.at, today());
+      return !Number.isFinite(elapsed) || !Number.isFinite(box) || elapsed >= this.INTERVAL[box - 1];
     },
     dueIds: function (ids) {
       var self = this;
@@ -253,10 +258,10 @@
       var cur = this.get(q.id) || { count: 0, firstAt: today() };
       cur.count++;
       cur.lastAt = today();
-      cur.stem = q.stem;
-      cur.options = q.options;
-      cur.answer = q.answer || null;
-      cur.exp = q.exp || "";
+      cur.stem = q.question;
+      cur.options = q.options.map(function (o) { return { letter: o.value, text: o.text }; });
+      cur.answer = q.answer.length ? q.answer.join("") : null;
+      cur.exp = q.explanation || "";
       cur.from = meta && meta.from ? meta.from : "";
       try { localStorage.setItem(this.key(q.id), JSON.stringify(cur)); } catch (e) {}
       document.dispatchEvent(new CustomEvent("zzkk:wrong", { detail: { id: q.id } }));
@@ -270,7 +275,7 @@
     count: function () { return Object.keys(scanMap(NS + "wrong:")).length; }
   };
 
-  function qidOf(q, lessonId) { return q.id || hash(String(lessonId || "") + "#" + q.stem); }
+  function qidOf(q) { return q.id; }
 
   /* ---------------- 教学补充（逐选项反馈 / 主观题支架） ---------------- */
 
@@ -472,12 +477,10 @@
       document.addEventListener('DOMContentLoaded', function () { mountQuiz(container, questions, opts); }, { once: true });
       return;
     }
-    // Imported papers use both ABC and A、B、C. Compare option letters only.
-    questions = questions.map(function (q) {
-      var answer = q.answer == null ? null : String(q.answer).toUpperCase().replace(/[、，,\s]+/g, '');
-      if (answer && !answer.split('').every(function (letter) { return q.options.some(function (o) { return o.letter === letter; }); })) answer = null;
-      return Object.assign({}, q, { answer: answer });
-    });
+    // Canonical payloads are normalized and validated during import, never here.
+    if (questions.some(function (q) { return q.schemaVersion !== 1 || !q.id || !q.question || !Array.isArray(q.answer); })) {
+      clear(container); container.appendChild(el('p', 'hint', '题目资料格式异常，请刷新课程后重试。')); return;
+    }
     opts = opts || {};
     var lessonId = opts.lessonId || null;
     var fromLabel = opts.from || (lessonId || "");
@@ -519,22 +522,23 @@
       var box = el("div", "quiz");
 
       questions.forEach(function (q, qi) {
-        var multi = q.answer && q.answer.length > 1;
+        var multi = q.answer.length && q.answer.length > 1;
         var item = el("div", "q-item");
         var stem = el("div", "stem");
         stem.appendChild(el("span", "qno", String(qi + 1)));
-        stem.appendChild(document.createTextNode(String(q.stem == null ? "" : q.stem)));
+        stem.appendChild(document.createTextNode(String(q.question == null ? "" : q.question)));
         if (multi) stem.appendChild(el("span", "mtag", " 多选"));
-        if (q.doubt) stem.appendChild(el("span", "mtag", " 存疑?"));
+        if ((q.answerStatus === 'doubt')) stem.appendChild(el("span", "mtag", " 存疑?"));
+        if (q.chapter) item.appendChild(el('p', 'q-metadata', '章节：' + q.chapter));
         item.appendChild(stem);
 
         var optsBox = el("div", "opts");
         var judge = el("div", "q-judge");
         var locked = false;
         var picked = {};
-        var signature = hash(JSON.stringify([q.stem, q.options, q.answer]));
-        item.studyQuestion = { slug: 'zsb-politics', lessonId: lessonId || '', ref: qidOf(q, lessonId), stem: q.stem,
-          options: q.options.map(function (o) { return { value: o.letter, text: o.text }; }), answer: q.answer ? q.answer.split('') : [], explanation: q.exp || '', sourceLabel: q.src || '', doubt: !!q.doubt };
+        var signature = hash(JSON.stringify([q.question, q.options.map(function (o) { return { letter: o.value, text: o.text }; }), q.answer.length ? q.answer.join('') : null]));
+        item.studyQuestion = { slug: 'zsb-politics', lessonId: q.lessonId, ref: q.id, schemaVersion: 1, question: q.question, chapter: q.chapter, contentVersion: q.contentVersion, legacyQuestion: q.legacyQuestion, sourceMetadata: q.source, source: q.source.path, title: q.chapter, stem: q.question,
+          options: q.options.map(function (o) { return { value: o.value, text: o.text }; }), answer: q.answer ? q.answer.slice() : [], explanation: q.explanation || '', sourceLabel: q.source.label || '', doubt: !!(q.answerStatus === 'doubt') };
         var supp = (function () { var t = teachingData(); return t && t.questions ? t.questions[item.studyQuestion.ref] : null; })();
         if (supp) {
           if (supp.knowledgePoints) item.studyQuestion.knowledgePoints = supp.knowledgePoints;
@@ -568,11 +572,11 @@
           var buttons = optsBox.querySelectorAll(".opt");
           for (var i = 0; i < buttons.length; i++) buttons[i].disabled = true;
 
-           if (!q.answer || q.doubt) {
+           if (!q.answer.length || (q.answerStatus === 'doubt')) {
              state.reviewNeeded = true;
              state.unassessed++;
              judge.className = "q-judge warn";
-             judge.textContent = q.doubt ? "⚠️ 原题答案存疑，暂不自动判分，请对照权威材料核对。" : "⚠️ 原卷未提供答案，请对照笔记或课件核对。";
+             judge.textContent = (q.answerStatus === 'doubt') ? "⚠️ 原题答案存疑，暂不自动判分，请对照权威材料核对。" : "⚠️ 原卷未提供答案，请对照笔记或课件核对。";
              if (q.warn) {
                judge.appendChild(document.createElement("br"));
                appendRich(judge, q.warn);
@@ -581,7 +585,7 @@
              updateScore(false);
              return;
            }
-          var ans = q.answer.split("").sort().join("");
+          var ans = q.answer.slice().sort().join("");
           var mine = pickedLetters.sort().join("");
            var right = mine === ans;
            if (!restoring) document.dispatchEvent(new CustomEvent('study:attempt', { detail: { node: item, correct: right, independent: true } }));
@@ -607,23 +611,23 @@
           judge.textContent = right ? "✓ 回答正确" : "✗ 正确答案：";
           if (!right) {
             var answerB = document.createElement("b");
-            answerB.textContent = q.answer;
+            answerB.textContent = q.answer.join("、");
             judge.appendChild(answerB);
           }
-          if (q.src) {
+          if (q.source.label) {
             var srcSpan = el("span", "qsrc");
-            appendRich(srcSpan, q.src);
+            appendRich(srcSpan, q.source.label);
             judge.appendChild(srcSpan);
           }
-          if (q.doubt) judge.appendChild(el("span", "qsrc", "⚠️ 存疑题（?）——答案待老师讲评，仅供核对。"));
-          if (q.exp) {
+          if ((q.answerStatus === 'doubt')) judge.appendChild(el("span", "qsrc", "⚠️ 存疑题（?）——答案待老师讲评，仅供核对。"));
+          if (q.explanation) {
             var expBox = document.createElement("details");
             expBox.className = "qexp";
             expBox.appendChild(el("summary", undefined, "解析"));
-            appendRich(expBox, q.exp);
+            appendRich(expBox, q.explanation);
             judge.appendChild(expBox);
           }
-           if (supp) renderTeaching(item, container, supp, pickedLetters, q.answer.split(""));
+           if (supp) renderTeaching(item, container, supp, pickedLetters, q.answer.slice());
            paintSubjective();
            finalizeCompareRefs(container);
            if (opts.onJudge && !restoring) opts.onJudge(q, right);
@@ -633,25 +637,25 @@
 
         q.options.forEach(function (op) {
           var b = el("button", "opt");
-          b.setAttribute("data-letter", op.letter);
+          b.setAttribute("data-letter", op.value);
           b.setAttribute("aria-pressed", "false");
-          b.appendChild(el("span", "letter", op.letter + "."));
+          b.appendChild(el("span", "letter", op.value + "."));
           b.appendChild(document.createTextNode(String(op.text == null ? "" : op.text)));
           b.addEventListener("click", function () {
             if (locked) return;
-            if (!q.answer) {
-              picked[op.letter] = true;
+            if (!q.answer.length) {
+              picked[op.value] = true;
               b.setAttribute('aria-pressed', 'true');
               finishPick(false);
               return;
             }
             if (multi) {
-              picked[op.letter] = !picked[op.letter];
-              b.classList.toggle("picked", !!picked[op.letter]);
-              b.setAttribute('aria-pressed', String(!!picked[op.letter]));
+              picked[op.value] = !picked[op.value];
+              b.classList.toggle("picked", !!picked[op.value]);
+              b.setAttribute('aria-pressed', String(!!picked[op.value]));
               savePick(false);
             } else {
-              picked[op.letter] = true;
+              picked[op.value] = true;
               b.setAttribute('aria-pressed', 'true');
               finishPick(false);
             }
@@ -660,7 +664,7 @@
         });
 
         item.appendChild(optsBox);
-        if (multi && q.answer) {
+        if (multi && q.answer.length) {
           var confirmBtn = el("button", "btn small confirm", "确认答案");
           confirmBtn.addEventListener("click", function () { finishPick(false); });
           item.appendChild(confirmBtn);
@@ -670,7 +674,7 @@
         box.appendChild(item);
         if (previous && Array.isArray(previous.picked)) {
           previous.picked.forEach(function (letter) {
-            if (!q.options.some(function (op) { return op.letter === letter; })) return;
+            if (!q.options.some(function (op) { return op.value === letter; })) return;
             picked[letter] = true;
             var button = Array.prototype.find.call(optsBox.children, function (b) { return b.getAttribute('data-letter') === letter; });
             if (button) { button.classList.add('picked'); button.setAttribute('aria-pressed', 'true'); }
@@ -721,7 +725,7 @@
         container.querySelectorAll(".q-judge"),
         function (j) { return j.className.indexOf("ok") >= 0; }
       ).length;
-      var gradable = questions.filter(function (q) { return q.answer && !q.doubt; }).length;
+      var gradable = questions.filter(function (q) { return q.answer.length && !(q.answerStatus === 'doubt'); }).length;
       var unassessedTotal = state.total - gradable;
       var old = lessonId ? progress.get(lessonId).best || 0 : 0;
       var pct = gradable ? Math.round((correct / gradable) * 100) : 0;
@@ -758,235 +762,200 @@
     render();
   }
 
-  /* ---------------- 考点闪卡（可带三盒自评） ---------------- */
+  /* ---------------- Flashcard session / lifecycle ---------------- */
+  var activeCards = null;
   function mountCards(container, cards, opts) {
     opts = opts || {};
-    var srsOn = !!opts.srs;
-    var ns = opts.srs === true ? "" : (opts.srs || "");
-    var lessonId = typeof opts.srs === "string" ? opts.srs : null;
+    if (container.disposeCards) container.disposeCards();
+    var valid = cards.filter(function (c) { return c && c.schemaVersion === 1 && c.id && c.question && c.answer; });
+    var disposed = false, painting = false, session = null, renderedId = null, card = null, debug = null;
+    var lessonId = typeof opts.srs === 'string' ? opts.srs : null;
     if (lessonId) progress.touch(lessonId);
-    var order = cards.map(function (_, i) { return i; });
-    var pos = 0;
-
     clear(container);
-    var shell = el("div", "cards-shell");
-    var stage = el("div", "card-stage");
-    var card = el("div", "flashcard");
-    var front = el("div", "face front");
-    var back = el("div", "face back");
-    card.appendChild(front); card.appendChild(back);
-    stage.appendChild(card);
-    shell.appendChild(stage);
-
-    var ctrl = el("div", "cards-ctrl");
-    var prev = el("button", "btn", "‹ 上一张");
-    var posEl = el("span", "pos", "");
-    var next = el("button", "btn", "下一张 ›");
-    var flip = el("button", "btn primary", "翻转 空格");
-    var shuffle = el("button", "btn", "🔀 洗牌");
-    ctrl.appendChild(prev); ctrl.appendChild(posEl); ctrl.appendChild(next);
-    ctrl.appendChild(flip); ctrl.appendChild(shuffle);
-    shell.appendChild(ctrl);
-
-    var gradeRow = el("div", "grade-row");
-    var gYes = el("button", "btn ok", "✓ 记住了（1）");
-    var gNo = el("button", "btn no", "✗ 没记住（2）");
-    var boxInfo = el("span", "boxinfo", "");
-    gradeRow.appendChild(gNo); gradeRow.appendChild(gYes); gradeRow.appendChild(boxInfo);
-    if (srsOn) shell.appendChild(gradeRow);
-
-    var hint = el("div", "hint", srsOn
-      ? "先自己回忆答案，再翻面核对；然后自评——记住了进下一盒（1→3盒分别隔 1/3/7 天再复习），没记住回 1 盒。"
-      : "先自己回忆答案，再点击卡片或按空格键核对。");
-    shell.appendChild(hint);
+    var shell = el('div', 'cards-shell'); shell.tabIndex = 0;
+    var status = el('p', 'hint cards-status'); status.setAttribute('role', 'status');
+    var stage = el('div', 'card-stage');
+    var ctrl = el('div', 'cards-ctrl');
+    var prev = el('button', 'btn', '‹ 上一张'), position = el('span', 'pos'), next = el('button', 'btn', '下一张 ›');
+    var flip = el('button', 'btn', '翻转 空格'), shuffle = el('button', 'btn', '🔀 洗牌');
+    [prev, position, next, flip, shuffle].forEach(function (n) { ctrl.appendChild(n); });
+    var grades = el('div', 'grade-row');
+    var no = el('button', 'btn no', '✗ 没记住（2）'), yes = el('button', 'btn ok', '✓ 记住了（1）'), boxInfo = el('span', 'boxinfo');
+    [no, yes, boxInfo].forEach(function (n) { grades.appendChild(n); });
+    var completion = el('div', 'cards-completion'); completion.setAttribute('role', 'status');
+    var nextBatch = el('button', 'btn primary', '学习下一组');
+    var notice = el('p', 'hint cards-notice'); notice.setAttribute('role', 'alert');
+    [status, stage, ctrl, grades, completion, nextBatch, notice].forEach(function (n) { shell.appendChild(n); });
     container.appendChild(shell);
-
-    function cardId(c) { return c.id || (ns ? hash(ns + "#" + c.term) : hash(c.term)); }
-
-    function paint() {
-      var c = cards[order[pos]];
-      clear(front);
-      front.appendChild(el("span", "label", "考点 · 回忆"));
-      if (c.ctx) front.appendChild(el("span", "ctx", c.ctx));
-      var termBox = el("div", "q");
-      appendRich(termBox, c.term);
-      front.appendChild(termBox);
-      clear(back);
-      back.appendChild(el("span", "label", "答案"));
-      var answerBox = el("div", "a");
-      appendRich(answerBox, c.answer);
-      back.appendChild(answerBox);
-      if (c.src) {
-        var srcBox = el("span", "src");
-        srcBox.appendChild(document.createTextNode("出处："));
-        appendRich(srcBox, c.src);
-        back.appendChild(srcBox);
-      }
-      card.classList.remove("flipped");
-      posEl.textContent = (pos + 1) + " / " + cards.length;
-      if (srsOn) paintBoxInfo(c);
+    shell.querySelectorAll('button').forEach(function (b) { b.type = 'button'; });
+    var controller = { dispose: dispose, activate: activate, refresh: refresh, getState: function () { return session.view(); } };
+    container.disposeCards = dispose;
+    container.cardController = controller;
+    if (!activeCards) activeCards = controller;
+    function activate() { if (!disposed) activeCards = controller; }
+    function snapshot(v) {
+      return { cardId: v.currentCard ? v.currentCard.id : null, phase: v.phase,
+        currentCardIndex: v.currentCardIndex, queueLength: v.queueLength,
+        questionLength: v.currentCard ? v.currentCard.question.length : 0,
+        answerLength: v.currentCard ? v.currentCard.answer.length : 0,
+        flipStart: debug && debug.flipStart || null, flipEnd: debug && debug.flipEnd || null };
     }
-    function paintBoxInfo(c) {
-      var id = cardId(c);
-      var box = srs.boxOf(id);
-      boxInfo.textContent = box ? "当前第 " + box + " 盒" : "新卡";
+    var debugHistory = [];
+    function recordDebug(v) {
+      debug = snapshot(v);
+      container.flashcardDebug = Object.assign({}, debug);
+      if (opts.debug || new URLSearchParams(location.search || '').get('debugFlashcards') === '1') {
+        debugHistory.push(Object.assign({ at: Date.now() }, debug));
+        if (debugHistory.length > 100) debugHistory.shift();
+        container.flashcardDebugHistory = debugHistory.slice();
+      }
+    }
+    function draw(v) {
+      if (disposed || painting) return;
+      painting = true;
+      var c = v.currentCard;
+      var complete = !c || v.phase === 'batchComplete' || v.phase === 'dailyComplete';
+      if ((c && c.id) !== renderedId) {
+        clear(stage); renderedId = c && c.id;
+        debug = null;
+        if (c) {
+          card = el('div', 'flashcard');
+          var front = el('div', 'face front'), back = el('div', 'face back');
+          front.appendChild(el('span', 'label', c.editorialStatus === 'legacy' ? '考点 · 待审校问句' : '问题 · 回忆'));
+          if (c.chapter) front.appendChild(el('span', 'ctx', '章节：' + c.chapter));
+          var q = el('div', 'q'); appendRich(q, c.question); front.appendChild(q);
+          back.appendChild(el('span', 'label', '答案'));
+          var a = el('div', 'a'); appendRich(a, c.answer); back.appendChild(a);
+          if (c.source && c.source.label) { var src = el('span', 'src'); appendRich(src, '出处：' + c.source.label); back.appendChild(src); }
+          card.appendChild(front); card.appendChild(back); stage.appendChild(card);
+        } else card = null;
+      }
+      if (card) {
+        card.classList.toggle('flipped', v.face === 'back');
+        card.querySelector('.front').setAttribute('aria-hidden', String(v.face === 'back'));
+        card.querySelector('.back').setAttribute('aria-hidden', String(v.face !== 'back'));
+        boxInfo.textContent = srs.boxOf(c.id) ? '当前第 ' + srs.boxOf(c.id) + ' 盒' : '新卡';
+      }
+      status.textContent = complete ? '' : '本组 ' + v.batchIds.length + ' 张 · 已完成 ' + (v.batchIds.length - v.remainingIds.length) + ' 张';
+      position.textContent = c ? (v.currentCardIndex + 1) + ' / ' + v.remainingIds.length + '（待学）' : '0 / 0';
+      stage.hidden = complete; grades.hidden = complete;
+      prev.disabled = next.disabled = complete || v.phase === 'saving' || v.remainingIds.length < 2;
+      flip.disabled = shuffle.disabled = complete || v.phase === 'saving';
+      yes.disabled = no.disabled = complete || v.phase !== 'back';
+      flip.setAttribute('aria-pressed', String(v.face === 'back'));
+      completion.hidden = !complete;
+      completion.textContent = complete ? (v.batchIds.length ? '本组已完成。' : '暂无可学习卡片。') + ' 今日还剩 ' + v.dueCount + ' 张到期卡。' : '';
+      nextBatch.hidden = !complete || !v.available;
+      nextBatch.disabled = !v.available || v.phase === 'saving';
+      notice.textContent = [v.error, v.resumeWarning, valid.length !== cards.length ? '部分卡片资料不完整，已跳过并保留原学习记录。' : ''].filter(Boolean).join(' ');
+      recordDebug(v);
+      painting = false;
+      if (opts.onChange) opts.onChange(v);
+    }
+    var store;
+    try { store = sessionStorage; } catch (e) { store = { getItem: function () { return null; }, setItem: function () { throw e; } }; }
+    session = window.PoliticsSession.createCardSession({ cards: valid, srs: srs, mode: opts.mode || 'lesson',
+      limit: opts.limit || Math.min(30, Math.max(1, valid.length)), storage: store,
+      key: opts.sessionKey || 'zzkk:flash-session:v1:' + location.pathname + ':' + (container.id || lessonId || 'cards'),
+      day: today(), getDay: today, onChange: draw });
+    function doFlip() {
+      activate();
+      var before = session.view();
+      if (!before.currentCard || !['front', 'back'].includes(before.phase)) return;
+      debug = snapshot(before); debug.flipStart = Date.now(); debug.flipEnd = null;
+      session.flip();
+      if (typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        debug.flipEnd = Date.now(); recordDebug(session.view());
+      }
+    }
+    function transitionEnd(e) {
+      if (!card || e.target !== card || e.propertyName !== 'transform') return;
+      if (debug) debug.flipEnd = Date.now(); recordDebug(session.view());
     }
     function grade(ok) {
-      var c = cards[order[pos]];
-      if (!card.classList.contains("flipped")) {
-        hint.textContent = "先翻面核对答案，再自评。";
-        return;
+      activate();
+      var c = session.view().currentCard;
+      if (session.grade(ok, c && c.id) && lessonId) {
+        var p = progress.get(lessonId);
+        progress.update(lessonId, { cardsReviewed: numberOrZero(p.cardsReviewed) + 1,
+          cardsGood: numberOrZero(p.cardsGood) + (ok ? 1 : 0), cardsBad: numberOrZero(p.cardsBad) + (ok ? 0 : 1),
+          cardsReviewNeeded: p.cardsReviewNeeded === true || !ok, manualActivity: true });
       }
-      srs.grade(cardId(c), ok);
-      if (lessonId) {
-        var current = progress.get(lessonId);
-        progress.update(lessonId, {
-          cardsReviewed: numberOrZero(current.cardsReviewed) + 1,
-          cardsGood: numberOrZero(current.cardsGood) + (ok ? 1 : 0),
-          cardsBad: numberOrZero(current.cardsBad) + (ok ? 0 : 1),
-          cardsReviewNeeded: current.cardsReviewNeeded === true || !ok,
-          manualActivity: true
-        });
-      }
-      move(1);
     }
-    function move(d) { pos = (pos + d + cards.length) % cards.length; paint(); }
-
-    card.addEventListener("click", function () { card.classList.toggle("flipped"); });
-    flip.addEventListener("click", function () { card.classList.toggle("flipped"); });
-    prev.addEventListener("click", function () { move(-1); });
-    next.addEventListener("click", function () { move(1); });
-    gYes.addEventListener("click", function () { grade(true); });
-    gNo.addEventListener("click", function () { grade(false); });
-    shuffle.addEventListener("click", function () {
-      for (var i = order.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var t = order[i]; order[i] = order[j]; order[j] = t;
-      }
-      pos = 0; paint();
-    });
-    document.addEventListener("keydown", function (e) {
-      if (!withinViewport(container)) return;
-      if (document.activeElement && document.activeElement.tagName === "INPUT") return;
-      if (e.code === "Space") { e.preventDefault(); card.classList.toggle("flipped"); }
-      if (e.code === "ArrowRight") move(1);
-      if (e.code === "ArrowLeft") move(-1);
-      if (srsOn && e.key === "1") grade(true);
-      if (srsOn && e.key === "2") grade(false);
-    });
-
-    function withinViewport(node) {
-      var r = node.getBoundingClientRect();
-      return r.top < window.innerHeight && r.bottom > 0;
+    function onKey(e) {
+      if (disposed || activeCards !== controller || !container.isConnected || e.repeat || e.isComposing || e.altKey || e.ctrlKey || e.metaKey) return;
+      var target = e.target || document.activeElement;
+      if (target && target.closest && target.closest('input,textarea,select,button,a,[contenteditable]:not([contenteditable="false"])')) return;
+      var rect = container.getBoundingClientRect();
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
+      if (e.code === 'Space') { e.preventDefault(); doFlip(); }
+      else if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') { e.preventDefault(); session.move(e.code === 'ArrowLeft' ? -1 : 1); }
+      else if (e.key === '1' || e.key === '2') { e.preventDefault(); grade(e.key === '1'); }
     }
-
-    paint();
+    function refresh() { if (!disposed && session && session.view().phase !== 'saving') session.refresh(); }
+    function storageChange(e) { if (!e.key || e.key.indexOf('zzkk:v2:card:') === 0) refresh(); }
+    function visibilityChange() { if (document.visibilityState === 'visible') refresh(); }
+    // A page kept in the browser back/forward cache retains its DOM and listeners.
+    function pageHide(e) { if (!e.persisted) dispose(); }
+    function pageShow(e) { if (e.persisted) refresh(); }
+    function dispose() {
+      if (disposed) return;
+      disposed = true;
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('zzkk:srs', refresh);
+      document.removeEventListener('visibilitychange', visibilityChange);
+      window.removeEventListener('storage', storageChange);
+      window.removeEventListener('pagehide', pageHide);
+      window.removeEventListener('pageshow', pageShow);
+      observer && observer.disconnect();
+      if (activeCards === controller) activeCards = null;
+      if (container.disposeCards === dispose) { delete container.disposeCards; delete container.cardController; }
+    }
+    var observer = typeof MutationObserver === 'function' ? new MutationObserver(function () { if (!container.isConnected) dispose(); }) : null;
+    if (observer) observer.observe(document.documentElement, { childList: true, subtree: true });
+    shell.addEventListener('pointerdown', activate); shell.addEventListener('focusin', activate);
+    stage.addEventListener('click', doFlip); stage.addEventListener('transitionend', transitionEnd);
+    flip.addEventListener('click', doFlip);
+    prev.addEventListener('click', function () { activate(); session.move(-1); });
+    next.addEventListener('click', function () { activate(); session.move(1); });
+    shuffle.addEventListener('click', function () { activate(); session.shuffle(); });
+    no.addEventListener('click', function () { grade(false); }); yes.addEventListener('click', function () { grade(true); });
+    nextBatch.addEventListener('click', function () { activate(); session.nextBatch(); });
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('zzkk:srs', refresh);
+    document.addEventListener('visibilitychange', visibilityChange);
+    window.addEventListener('storage', storageChange);
+    window.addEventListener('pagehide', pageHide); window.addEventListener('pageshow', pageShow);
+    controller.start = function (mode) { session.nextBatch(mode); };
+    draw(session.view());
+    return controller;
   }
 
-  /* ---------------- 每日到期闪卡复习（跨课） ---------------- */
   function mountDue(container, allCards) {
-    var LIMITS = srs.LIMITS || { due: 20, fresh: 10, total: 30 };
-    var requestedLimit = null;
-    try {
-      var rawLimit = new URLSearchParams(location.search || '').get('limit');
-      if (rawLimit != null && /^\d+$/.test(rawLimit)) requestedLimit = Math.max(1, Math.min(30, Number(rawLimit)));
-    } catch (e) { /* 旧浏览器或异常 URL 时使用默认批量 */ }
-    var pool = [];
-
+    if (container.disposeDue) container.disposeDue();
     clear(container);
-    var head = el("div", "due-head");
-    var area = el("div");
-    container.appendChild(head);
-    container.appendChild(area);
-
-    function start(cards, kind) {
-      pool = cards.slice();
-      clear(area);
-      if (!pool.length) {
-        area.appendChild(el("p", "hint", kind === "new"
-          ? "今天没有安排新的卡片。可以继续复习已学卡，或用下面的按钮随机加练。"
-          : "今天没有已学且到期的卡片。可以先学下面的新卡，或用随机加练。"));
-        return;
-      }
-      var mount = el("div");
-      area.appendChild(mount);
-      var countdown = el("p", "hint",
-        (kind === "new" ? "本组 " : "本组 ") + cards.length + " 张" +
-        (kind === "new" ? "新卡" : "已学到期卡") +
-        "（每日小批安排，完成后可继续下一组）。");
-      area.insertBefore(countdown, mount);
-      mountCards(mount, pool, { srs: true });
+    var raw = new URLSearchParams(location.search || '').get('limit');
+    var limit = raw && /^\d+$/.test(raw) ? Math.max(1, Math.min(30, Number(raw))) : 10;
+    var ids = allCards.filter(function (c) { return c && c.id; }).map(function (c) { return c.id; });
+    var head = el('div', 'due-head'), area = el('div');
+    area.id = 'daily-card-session';
+    var modes = el('div', 'cards-ctrl');
+    var due = el('button', 'btn', '复习到期卡'), fresh = el('button', 'btn', '学习新卡'), extra = el('button', 'btn', '随机加练');
+    [due, fresh, extra].forEach(function (b) { b.type = 'button'; modes.appendChild(b); });
+    container.appendChild(head); container.appendChild(area); container.appendChild(modes);
+    function counts(v) {
+      head.textContent = '已学到期 ' + v.dueCount + ' 张 · 未学余量 ' + v.newCount + ' 张 · 总卡量 ' + v.total + ' 张 · 本组上限 ' + limit + ' 张';
+      due.disabled = v.phase === 'saving' || !v.dueCount;
+      fresh.disabled = v.phase === 'saving' || !v.newCount;
+      extra.disabled = v.phase === 'saving';
     }
-
-    function compute() {
-      var ids = allCards.map(function (c) { return c.id || hash((c.lessonId || "") + "#" + c.term); });
-      var byId = {};
-      allCards.forEach(function (c) { byId[c.id || hash((c.lessonId || "") + "#" + c.term)] = c; });
-      var planLimits = LIMITS;
-      if (requestedLimit != null && srs.plan) {
-        var allDue = srs.dueIds(ids).length;
-        var dueCap = Math.min(Number(LIMITS.due) || 20, requestedLimit, allDue);
-        var freshCap = Math.min(Number(LIMITS.fresh) || 10, Math.max(0, requestedLimit - dueCap));
-        planLimits = Object.assign({}, LIMITS, { due: dueCap, fresh: freshCap });
-      }
-      var plan = srs.plan ? srs.plan(ids, planLimits) : {
-        dueIds: srs.dueIds(ids), newIds: srs.newIds ? srs.newIds(ids) : [],
-        due: srs.dueIds(ids).slice(0, planLimits.due), fresh: []
-      };
-      plan.fresh = plan.fresh || plan.new || [];
-      function cardsOf(list) {
-        return list.map(function (id) {
-          var c = byId[id];
-          return c ? Object.assign({ id: id }, c) : null;
-        }).filter(Boolean);
-      }
-      return {
-        ids: ids,
-        dueIds: plan.dueIds || [],
-        newIds: plan.newIds || [],
-        due: cardsOf(plan.due || []),
-        fresh: cardsOf(plan.fresh || [])
-      };
-    }
-
-    var plan = compute();
-    function chip(label, value, post) {
-      var c = el("span", "chip");
-      c.appendChild(document.createTextNode(label));
-      c.appendChild(el("b", undefined, String(value)));
-      if (post) c.appendChild(document.createTextNode(post));
-      return c;
-    }
-    head.appendChild(chip("已学到期 ", plan.dueIds.length, " 张"));
-    head.appendChild(chip("今日新卡 ", plan.fresh.length, " 张"));
-    head.appendChild(chip("未学余量 ", plan.newIds.length, " 张"));
-    head.appendChild(chip("总卡量 ", allCards.length, " 张"));
-    if (requestedLimit != null) head.appendChild(chip("本轮上限 ", requestedLimit, " 张"));
-    if (plan.due.length) start(plan.due, "due");
-    else start([], "due");
-    if (plan.fresh.length) {
-      var newSection = el("div", "due-new-section");
-      var previousArea = area;
-      area = newSection;
-      start(plan.fresh, "new");
-      newSection.insertBefore(el("h3", "due-group-title", "新卡小批"), newSection.firstChild);
-      container.appendChild(newSection);
-      area = previousArea;
-    }
-
-    var extra = el("button", "btn", "🎲 随机加练 10 张（也计入三盒）");
-    extra.addEventListener("click", function () {
-      var shuffled = allCards.slice();
-      for (var i = shuffled.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var t = shuffled[i]; shuffled[i] = shuffled[j]; shuffled[j] = t;
-      }
-      start(shuffled.slice(0, 10).map(function (c) {
-        return Object.assign({ id: c.id || hash((c.lessonId || "") + "#" + c.term) }, c);
-      }));
-      window.scrollTo({ top: 0 });
-    });
-    container.appendChild(extra);
+    var ctrl = mountCards(area, allCards, { srs: true, mode: srs.dueIds(ids).length ? 'due' : 'new', limit: limit,
+      sessionKey: 'zzkk:flash-session:v1:daily:' + location.pathname + ':' + limit, onChange: counts });
+    due.addEventListener('click', function () { ctrl.start('due'); });
+    fresh.addEventListener('click', function () { ctrl.start('new'); });
+    extra.addEventListener('click', function () { ctrl.start('extra'); });
+    container.disposeDue = ctrl.dispose;
+    return ctrl;
   }
 
   /* ---------------- 标记已学 ---------------- */
@@ -1045,18 +1014,14 @@
       var src = selSrc.value || "all";
       var n = parseInt(selN.value, 10);
       var pool = bank.filter(function (q) {
-        return (course === "all" || q.course === course) &&
+        return (course === "all" || q.source.course === course) &&
                (src === "all" || q.grp === src || !q.grp);
       });
       for (var i = pool.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
       }
-      var picked = pool.slice(0, Math.min(n, pool.length)).map(function (q) {
-        return { id: q.id, stem: "【" + q.course + " " + q.chapter + "】" + q.stem,
-                 options: q.options, answer: q.answer,
-                 doubt: q.doubt, warn: q.warn, src: q.src, exp: q.exp };
-      });
+      var picked = pool.slice(0, Math.min(n, pool.length));
       clear(area);
       var head = el("p", "hint", "本轮 " + picked.length + " 题，来自不同章节混合抽题。做完自动计分，错题自动进错题本。");
       area.appendChild(head);

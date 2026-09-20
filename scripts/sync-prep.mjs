@@ -32,6 +32,7 @@ import { patchPoliticsLearning, patchPoliticsPractice } from './lib/politics-lea
 import { applyCourseCorrections } from './lib/course-corrections.mjs'
 import { loadTeachingCatalog, supplementsForLesson, teachingPayloadFor, applyContentPatches, resolveQuestionRef } from './lib/teaching.mjs'
 import { extractCourseQuestions } from './lib/course-question-index.mjs'
+import { normalizePoliticsHtml } from './lib/politics-data.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DOCS = path.join(ROOT, 'docs')
@@ -429,6 +430,7 @@ function syncZsbMirror(c, examDate, teachingCatalog) {
     const relPath = path.relative(staging, f).replace(/\\/g, '/')
     let raw = applyCourseCorrections(fs.readFileSync(f, 'utf8'), c.slug, relPath)
     raw = applyContentPatches(raw, c.slug, relPath, teachingCatalog) // 已审校修正层（同步期注入，手改镜像会丢）
+    if (c.slug === 'zsb-politics' && f.endsWith('.html')) raw = normalizePoliticsHtml(raw, relPath)
     if (c.slug === 'zsb-politics' && relPath === 'index.html') raw = patchPoliticsLearning(raw)
     if (c.slug === 'zsb-politics' && relPath === 'lessons/practice.html') {
       raw = patchPoliticsPractice(raw)
@@ -637,7 +639,8 @@ const main = () => {
     return
   }
   // Validate every course before the first mirror is replaced.
-  const prepared = ZSB_COURSES.map((c) => {
+  const politicsOnly = process.argv.includes('--politics-only')
+  const prepared = ZSB_COURSES.filter(c => !politicsOnly || c.slug === 'zsb-politics').map((c) => {
     const lessonsDir = path.join(c.src, c.lessonsDir)
     const entries = collectPrepLessons(fs.readdirSync(lessonsDir), c)
     const lessonUrls = new Map(entries.map((e) => [e.name, `/courses/${c.slug}/l/${e.id}/`]))
@@ -645,10 +648,11 @@ const main = () => {
       entry.warnings = []
       try {
         const relPath = `${c.lessonsDir}/${entry.file}` // 与镜像同一 relPath 规则，补丁一致命中
-        const sourceHtml = applyContentPatches(
+        let sourceHtml = applyContentPatches(
           applyCourseCorrections(fs.readFileSync(path.join(lessonsDir, entry.file), 'utf8'), c.slug, relPath),
           c.slug, relPath, teachingCatalog,
         )
+        if (c.slug === 'zsb-politics') sourceHtml = normalizePoliticsHtml(sourceHtml, relPath)
         const teaching = supplementsForLesson(teachingCatalog, c.slug, entry.id)
         entry.conversion = lessonHtmlToMarkdown(sourceHtml, {
           slug: c.slug, lessonUrls, onWarn: (warning) => entry.warnings.push(warning),
@@ -660,7 +664,7 @@ const main = () => {
     }
     return { c, entries }
   })
-  const catalog = {}
+  const catalog = politicsOnly ? { ...previousCatalog } : {}
   for (const { c, entries } of prepared) {
     const files = syncZsbMirror(c, parsed?.examDate, teachingCatalog)
     const { lessons, changed, warnings, warnTypes, catalog: courseCatalog } = syncZsbCourse(c, entries)

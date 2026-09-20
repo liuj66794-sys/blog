@@ -1,0 +1,5035 @@
+{
+  "version": 1,
+  "overrides": {
+    "1708454761": {
+      "question": "人才评价中需要破除的“四唯”分别指什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"四唯\"",
+      "lessonId": "xg07"
+    },
+    "4d0c1626c5": {
+      "question": "“马克思主义中国化”命题由谁在何年、哪次会议的哪篇报告中正式提出？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"马克思主义中国化\"命题正式提出",
+      "lessonId": "mzt00"
+    },
+    "868f4ac67c": {
+      "question": "1945年党的七大上，谁在《关于修改党章的报告》中将毛泽东思想概括为什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "七大理论阐述",
+      "lessonId": "mzt00"
+    },
+    "df53a02534": {
+      "question": "为什么要推进马克思主义中国化时代化？分别从理论发展和中国实际问题两个方面回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中国化时代化两大原因",
+      "lessonId": "mzt00"
+    },
+    "38cbf7fa49": {
+      "question": "马克思主义中国化时代化的内涵包括哪三层意思？从解决问题、理论提炼和表达形式回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "内涵三层意思",
+      "lessonId": "mzt00"
+    },
+    "1b28c2091e": {
+      "question": "推进马克思主义中国化时代化，必须把马克思主义基本原理同哪两个方面相结合？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"两个结合\"",
+      "lessonId": "mzt00"
+    },
+    "713d77a5dd": {
+      "question": "马克思主义中国化第一次历史性飞跃形成了哪一理论成果？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第一次历史性飞跃",
+      "lessonId": "mzt00"
+    },
+    "4ee292a006": {
+      "question": "中国特色社会主义理论体系的开篇之作是哪一理论？它在哪次党代会上写入党章？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "开篇之作",
+      "lessonId": "mzt00"
+    },
+    "fb83adda95": {
+      "question": "十三届四中全会以后，以江泽民同志为主要代表的中国共产党人形成了哪一重要思想，实现了中国特色社会主义理论体系的跨世纪发展？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "跨世纪发展",
+      "lessonId": "mzt00"
+    },
+    "f618e822e9": {
+      "question": "党的十六大以后，以胡锦涛同志为主要代表的中国共产党人形成了哪一理论成果，推动了中国特色社会主义理论体系在新世纪新阶段的发展？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新世纪新阶段新发展",
+      "lessonId": "mzt00"
+    },
+    "c7c1be7de6": {
+      "question": "“中国特色社会主义理论体系”概念在哪次党代会上提出？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"中特理论体系\"概念提出",
+      "lessonId": "mzt00"
+    },
+    "06b1055478": {
+      "question": "党的十八大以来，哪一思想实现了马克思主义中国化时代化新的飞跃？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新的飞跃",
+      "lessonId": "mzt00"
+    },
+    "dda2fdb421": {
+      "question": "习近平新时代中国特色社会主义思想回答了哪三大时代课题？每个课题都要说明“什么样”和“怎样”。",
+      "answer": "坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义；建设什么样的社会主义现代化强国、怎样建设社会主义现代化强国；建设什么样的长期执政的马克思主义政党、怎样建设长期执政的马克思主义政党。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三大时代课题",
+      "previousAnswer": "中特社会主义 / 社会主义现代化强国 / 长期执政的马克思主义政党（各自\"是什么、怎样\"）",
+      "lessonId": "mzt00"
+    },
+    "a287aa9bed": {
+      "question": "“中国共产党为什么能，中国特色社会主义为什么好，归根到底是……”这句话应如何补全？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "金句",
+      "lessonId": "mzt00"
+    },
+    "d3c28ace52": {
+      "question": "贯穿毛泽东思想的活的灵魂包括哪三个基本方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "活的灵魂",
+      "lessonId": "mzt00"
+    },
+    "774b1a7177": {
+      "question": "毛泽东思想形成和发展的实践基础指党领导人民进行的哪些实践？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "形成发展的实践基础",
+      "lessonId": "mzt01"
+    },
+    "22147b1877": {
+      "question": "毛泽东思想在哪一时期开始萌芽？列出两篇代表著作及其中形成的革命基本思想。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "开始萌芽",
+      "lessonId": "mzt01"
+    },
+    "e99d540362": {
+      "question": "毛泽东思想在哪一时期初步形成？这一阶段提出了怎样的革命道路？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "初步形成",
+      "lessonId": "mzt01"
+    },
+    "e098f4136c": {
+      "question": "哪一革命理论的系统阐述标志着毛泽东思想走向成熟？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "走向成熟的标志",
+      "lessonId": "mzt01"
+    },
+    "6ad2edd4a3": {
+      "question": "遵义会议召开于何时？它对毛泽东的领导地位和独立解决中国革命问题有何意义？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "遵义会议",
+      "lessonId": "mzt01"
+    },
+    "59a18f7744": {
+      "question": "毛泽东思想在哪一年、哪次党代会上写入党章并确立为党的指导思想？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "写入党章确立指导思想",
+      "lessonId": "mzt01"
+    },
+    "b364bcd97f": {
+      "question": "马克思主义中国化第一次历史性飞跃的理论成果是哪一思想？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第一次历史性飞跃的理论成果",
+      "lessonId": "mzt01"
+    },
+    "0f464bbda0": {
+      "question": "把毛泽东思想主要内容归纳为六个方面，依据的是哪一年、哪次会议通过的什么文件？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "六个方面内容的划分依据",
+      "lessonId": "mzt01"
+    },
+    "f76899cf6f": {
+      "question": "毛泽东总结的中国革命战胜敌人的三大法宝分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三大法宝",
+      "lessonId": "mzt01"
+    },
+    "73ec1cfd01": {
+      "question": "毛泽东在哪一年、哪篇著作中首次提出“新民主主义革命”概念？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"新民主主义革命\"概念首次提出",
+      "lessonId": "mzt01"
+    },
+    "246dce23b7": {
+      "question": "毛泽东思想活的灵魂中的三个基本方面分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "活的灵魂三方面",
+      "lessonId": "mzt01"
+    },
+    "cd8d39b27a": {
+      "question": "毛泽东思想的精髓和基本点是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "毛泽东思想的精髓/基本点",
+      "lessonId": "mzt01"
+    },
+    "4fc0fabb78": {
+      "question": "毛泽东在哪一年、哪篇文章中科学界定了“实事求是”的含义？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "实事求是科学含义界定",
+      "lessonId": "mzt01"
+    },
+    "1effd2e119": {
+      "question": "“没有调查，没有发言权”出自毛泽东哪一年写的哪篇著作？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"没有调查，没有发言权\"",
+      "lessonId": "mzt01"
+    },
+    "d2bc1fe59a": {
+      "question": "党的群众路线的完整表述是什么？回答其群众立场、依靠力量和工作方法。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "群众路线",
+      "lessonId": "mzt01"
+    },
+    "d0d419c8f2": {
+      "question": "中国共产党执政以后面临的最大危险是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党执政后的最大危险",
+      "lessonId": "mzt01"
+    },
+    "7ee0d28de9": {
+      "question": "毛泽东在哪一年、哪篇著作中最初表述独立自主思想？当时用哪句话强调中国同志了解中国情况的重要性？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "独立自主最初表述",
+      "lessonId": "mzt01"
+    },
+    "8cae9e6110": {
+      "question": "评价毛泽东的历史功过，应怎样区分功绩与错误、晚年错误与毛泽东思想？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "评价毛泽东的结论",
+      "lessonId": "mzt01"
+    },
+    "8d82920a3f": {
+      "question": "近代中国的最基本国情，即社会性质是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "近代中国最基本国情",
+      "lessonId": "mzt02"
+    },
+    "bd9f8815a5": {
+      "question": "近代中国社会的两对主要矛盾是什么？其中哪一对是最主要矛盾？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两对主要矛盾",
+      "lessonId": "mzt02"
+    },
+    "8b607a8a06": {
+      "question": "新民主主义革命的根本任务是推翻哪三种势力的统治？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "革命根本任务",
+      "lessonId": "mzt02"
+    },
+    "58e8035759": {
+      "question": "哪一运动标志着新民主主义革命的开端？它与中国无产阶级和马克思主义的历史地位有什么联系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新民主主义革命开端的标志",
+      "lessonId": "mzt02"
+    },
+    "ae8f03c6d2": {
+      "question": "毛泽东在哪一年、哪篇著作中首次提出“新民主主义的革命”概念？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "首次提出\"新民主主义的革命\"概念",
+      "lessonId": "mzt02"
+    },
+    "d2d36f0b05": {
+      "question": "毛泽东在哪一年、哪篇讲话中完整表述了新民主主义革命总路线？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "总路线完整表述",
+      "lessonId": "mzt02"
+    },
+    "6eefaa4e5b": {
+      "question": "新民主主义革命的首要对象是谁？为什么它被列为首要对象？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "革命首要对象",
+      "lessonId": "mzt02"
+    },
+    "bdbf83ae93": {
+      "question": "新民主主义革命的动力包括哪些阶级？哪个是领导力量和最基本动力，哪个是主力军？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "革命动力",
+      "lessonId": "mzt02"
+    },
+    "663dd8c806": {
+      "question": "中国革命的中心问题，也是新民主主义革命理论的核心问题，指哪个阶级的什么权利？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中国革命的中心问题 / 理论核心问题",
+      "lessonId": "mzt02"
+    },
+    "0cdbffebe5": {
+      "question": "区分新民主主义革命和旧民主主义革命的根本标志是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "区别新旧民主主义革命的根本标志",
+      "lessonId": "mzt02"
+    },
+    "5ccfb58387": {
+      "question": "新民主主义革命在革命性质上属于哪一类型？其发展前途是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "革命性质与前途",
+      "lessonId": "mzt02"
+    },
+    "8ecd50f990": {
+      "question": "新民主主义的政治纲领规定了怎样的国体和政体？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "政治纲领",
+      "lessonId": "mzt02"
+    },
+    "76b1c3f317": {
+      "question": "新民主主义经济纲领的三项内容是什么？哪项是主要内容，哪项具有双重性质，哪项极具特色？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "经济纲领三条",
+      "lessonId": "mzt02"
+    },
+    "3d8ea6a380": {
+      "question": "新民主主义文化由谁领导、服务谁、反对什么？用哪三个形容词概括其性质？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "文化纲领",
+      "lessonId": "mzt02"
+    },
+    "89d91b6240": {
+      "question": "新民主主义革命选择了怎样的道路？用农村、城市和政权三个要素表述。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "革命道路",
+      "lessonId": "mzt02"
+    },
+    "599ecd5e55": {
+      "question": "农村包围城市、武装夺取政权道路包含哪三项内容？分别指出基本内容、主要形式和战略阵地。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "道路三内容",
+      "lessonId": "mzt02"
+    },
+    "682cd9f76a": {
+      "question": "《〈共产党人〉发刊词》总结的中国革命三大法宝分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三大法宝",
+      "lessonId": "mzt02"
+    },
+    "2c93e17e75": {
+      "question": "在统一战线、武装斗争、党的建设三大法宝中，哪一项居于核心地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三大法宝的核心",
+      "lessonId": "mzt02"
+    },
+    "670abb074e": {
+      "question": "中国共产党在革命实践中形成的三大优良作风分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三大优良作风",
+      "lessonId": "mzt02"
+    },
+    "90c6a55689": {
+      "question": "我国从新民主主义到社会主义的过渡时期，以哪两个年份和事件为起止标志？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "过渡时期起止",
+      "lessonId": "mzt03"
+    },
+    "4996d1d20e": {
+      "question": "新民主主义社会是否是独立的社会形态？它具有何种过渡性质、属于什么体系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新民主主义社会性质",
+      "lessonId": "mzt03"
+    },
+    "02bfdeb451": {
+      "question": "新民主主义社会的三种主要经济成分分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "主要经济成分（3 种）",
+      "lessonId": "mzt03"
+    },
+    "32776b4842": {
+      "question": "土地改革完成以后，我国国内的主要矛盾是哪两个阶级之间的矛盾？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "主要矛盾（土改完成后）",
+      "lessonId": "mzt03"
+    },
+    "9396427fa8": {
+      "question": "党在过渡时期的总路线于何年何月正式提出，又于何月得到完整表述？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "总路线正式提出",
+      "lessonId": "mzt03"
+    },
+    "c73c7bb1e3": {
+      "question": "过渡时期总路线的“一化三改”分别指什么？哪一部分是主体，哪些是两翼？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "一化三改",
+      "lessonId": "mzt03"
+    },
+    "223806d3a6": {
+      "question": "农业社会主义改造依次经历哪三个步骤？各步骤具有何种社会主义性质？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "农业改造步骤",
+      "lessonId": "mzt03"
+    },
+    "a07ec36ea8": {
+      "question": "手工业社会主义改造从小组到合作社，依次经历哪三个组织步骤？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "手工业改造步骤",
+      "lessonId": "mzt03"
+    },
+    "d2d529c755": {
+      "question": "我国对资本主义工商业进行社会主义改造采用什么方法？国家资本主义经历怎样的发展层次？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "工商业改造方法",
+      "lessonId": "mzt03"
+    },
+    "aaec599863": {
+      "question": "资本主义工商业改造中的“四马分肥”把利润分为哪四部分？资方红利约占多少？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四马分肥",
+      "lessonId": "mzt03"
+    },
+    "83ac1c56a7": {
+      "question": "我国社会主义改造的三条主要历史经验是什么？从工业化与改造的关系、过渡方式和改造方法回答。",
+      "answer": "坚持社会主义工业化建设与社会主义改造同时并举；采取积极引导、逐步过渡的方式；用和平方法进行改造。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "历史经验（3 条）",
+      "previousAnswer": "同时并举 / 逐步过渡 / 和平方法",
+      "lessonId": "mzt03"
+    },
+    "30f1e853b4": {
+      "question": "1956年底社会主义改造基本完成，如何标志着社会主义基本制度在经济领域的确立？",
+      "answer": "1956年底社会主义改造基本完成，社会主义公有制成为我国社会的经济基础，社会主义基本制度在我国确立。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "基本制度确立标志",
+      "previousAnswer": "1956 年底改造基本完成，公有制成为经济基础；1954 宪法（政治）",
+      "lessonId": "mzt03"
+    },
+    "5d9a3faa8e": {
+      "question": "我国社会主义政治制度中，人民代表大会制度属于哪个层级？多党合作和政治协商、民族区域自治属于哪个层级？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "根本/基本政治制度",
+      "lessonId": "mzt03"
+    },
+    "91c6d37adc": {
+      "question": "《论十大关系》提出于何时？它以谁为鉴，在探索社会主义建设道路上具有什么标志性意义？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "《论十大关系》",
+      "lessonId": "mzt04"
+    },
+    "d42c3e169d": {
+      "question": "《论十大关系》提出了怎样的社会主义建设基本方针？需要调动哪些方面的积极因素？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "《论十大关系》基本方针",
+      "lessonId": "mzt04"
+    },
+    "86ce71f32f": {
+      "question": "社会主义建设初步探索中的“第二次结合”要求把什么同中国实际相结合，探索什么道路？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第二次结合",
+      "lessonId": "mzt04"
+    },
+    "65e0c4505e": {
+      "question": "判断政治言论和行动是非的六条标准中，最重要的两条是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "六条标准中最重要的两条",
+      "lessonId": "mzt04"
+    },
+    "2e08bc3b54": {
+      "question": "毛泽东在哪一年哪月、哪篇著作中系统论述了社会主义社会矛盾问题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "系统论述社会矛盾的著作",
+      "lessonId": "mzt04"
+    },
+    "13b7fd3b2c": {
+      "question": "社会主义社会的基本矛盾是哪两对？其性质、相互关系和解决途径有什么特点？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社会主义社会基本矛盾",
+      "lessonId": "mzt04"
+    },
+    "5c8ce0ea68": {
+      "question": "党的八大怎样概括我国人民的需要与当时经济文化状况之间的主要矛盾？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "八大主要矛盾",
+      "lessonId": "mzt04"
+    },
+    "df863704e6": {
+      "question": "社会主义社会的敌我矛盾与人民内部矛盾，性质和处理方法分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两类矛盾与方法",
+      "lessonId": "mzt04"
+    },
+    "e4ee6d9637": {
+      "question": "正确处理人民内部矛盾的总方针是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "处理人民内部矛盾总方针",
+      "lessonId": "mzt04"
+    },
+    "2790d4d839": {
+      "question": "毛泽东认为社会主义国家政治生活的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社会主义国家政治生活的主题",
+      "lessonId": "mzt04"
+    },
+    "68b70fe783": {
+      "question": "社会主义建设初步探索中，中国工业化道路主要涉及哪几个产业的发展关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中国工业化道路的问题",
+      "lessonId": "mzt04"
+    },
+    "58b013df4f": {
+      "question": "社会主义建设初步探索时期，发展国民经济的总方针如何规定基础、主导及发展顺序？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "发展国民经济总方针",
+      "lessonId": "mzt04"
+    },
+    "dc60b04a79": {
+      "question": "工业发展“两条腿走路”方针要求哪四对工业布局或企业类型同时并举？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两条腿走路",
+      "lessonId": "mzt04"
+    },
+    "8e12a8de55": {
+      "question": "毛泽东提出的“两参一改三结合”中，两参、一改、三结合各指什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两参一改三结合",
+      "lessonId": "mzt04"
+    },
+    "8b6fc509b7": {
+      "question": "陈云提出的“三个主体、三个补充”，在经营、生产和市场三个方面分别如何对应？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个主体三个补充",
+      "lessonId": "mzt04"
+    },
+    "3df0d1c2aa": {
+      "question": "毛泽东把社会主义发展划分为哪两个阶段？哪一阶段需要更长时间？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社会主义发展阶段",
+      "lessonId": "mzt04"
+    },
+    "bcf8bdea46": {
+      "question": "从1954年到1964年底，“四个现代化”构想经历了哪些提出、补充和正式宣布的节点？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个现代化时间线",
+      "lessonId": "mzt04"
+    },
+    "81205530b3": {
+      "question": "“一纲四目”由谁归纳？它是针对解决什么问题的思想、政策和主张？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "一纲四目",
+      "lessonId": "mzt04"
+    },
+    "ea4271fb95": {
+      "question": "毛泽东关于三个世界的划分中，第一、第二、第三世界分别包括哪些国家？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个世界划分",
+      "lessonId": "mzt04"
+    },
+    "1335809cea": {
+      "question": "社会主义建设初步探索的理论成果有哪三方面意义？从制度巩固、中国特色社会主义准备和科学社会主义发展回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "意义（3 条）",
+      "lessonId": "mzt04"
+    },
+    "706ae6da4e": {
+      "question": "社会主义建设初步探索留下哪六方面经验教训？从道路、任务、发展节奏、法制、领导制度和开放回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "经验教训（6 条）",
+      "lessonId": "mzt04"
+    },
+    "9d72bdbb29": {
+      "question": "中国特色社会主义理论体系形成发展的时代主题是什么？",
+      "answer": "和平与发展。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "时代主题",
+      "previousAnswer": "和平与发展（邓小平 70 年代作出科学判断）",
+      "lessonId": "mzt05"
+    },
+    "d8d0487fda": {
+      "question": "新时代统筹的“两个大局”分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"两个大局\"",
+      "lessonId": "mzt05"
+    },
+    "4a72194849": {
+      "question": "中国特色社会主义理论体系形成发展的实践基础是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "理论体系的实践基础",
+      "lessonId": "mzt05"
+    },
+    "a2f65e19ab": {
+      "question": "哪一年哪月召开的哪次全会实现了改革开放新时期的伟大转折？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "伟大转折",
+      "lessonId": "mzt05"
+    },
+    "111738e623": {
+      "question": "邓小平在哪一年、哪次党代会的开幕词中提出“建设有中国特色的社会主义”命题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"建设有中国特色的社会主义\"命题",
+      "lessonId": "mzt05"
+    },
+    "23120fbc8f": {
+      "question": "哪一年哪次党代会标志着邓小平理论轮廓形成？会议提出和概括了哪些相关理论内容？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "邓小平理论轮廓形成",
+      "lessonId": "mzt05"
+    },
+    "8f75a606fd": {
+      "question": "邓小平理论走向成熟的标志是什么？这一谈话发生于哪一年？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "邓小平理论走向成熟",
+      "lessonId": "mzt05"
+    },
+    "8f1e987213": {
+      "question": "“邓小平理论”概念在哪一年、哪次党代会上正式提出并写入党章？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"邓小平理论\"概念正式提出",
+      "lessonId": "mzt05"
+    },
+    "25f39acaf5": {
+      "question": "邓小平理论通过哪一年的宪法修正案载入宪法？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "邓小平理论载入宪法",
+      "lessonId": "mzt05"
+    },
+    "01329fc89e": {
+      "question": "哪一理论是中国特色社会主义理论体系的开篇之作？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中特理论体系开篇之作",
+      "lessonId": "mzt05"
+    },
+    "b612ec1a77": {
+      "question": "江泽民首次全面阐述“三个代表”重要思想是在何时、何地考察期间？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"三个代表\"首次全面阐述",
+      "lessonId": "mzt05"
+    },
+    "02682d9ce2": {
+      "question": "贯彻“三个代表”重要思想的关键、核心和本质分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "贯彻三个代表的关键/核心/本质",
+      "lessonId": "mzt05"
+    },
+    "67a6973492": {
+      "question": "“三个代表”重要思想在哪一年、哪次党代会上写入党章？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"三个代表\"写入党章",
+      "lessonId": "mzt05"
+    },
+    "727d61c654": {
+      "question": "哪一重要思想实现了中国特色社会主义理论体系的跨世纪发展？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "跨世纪发展",
+      "lessonId": "mzt05"
+    },
+    "27ac19a6c1": {
+      "question": "党的立党之本、执政之基、力量之源，是始终做到哪一重要思想的要求？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "立党之本、执政之基、力量之源",
+      "lessonId": "mzt05"
+    },
+    "30d8ade139": {
+      "question": "党的文件首次提出科学发展观，是在哪一年哪月、哪次全会上？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "科学发展观首次提出（党的文件）",
+      "lessonId": "mzt05"
+    },
+    "3fc2885ad5": {
+      "question": "哪一年哪月召开的什么座谈会，标志着科学发展观的形成？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "科学发展观形成的标志",
+      "lessonId": "mzt05"
+    },
+    "3c393f1de8": {
+      "question": "科学发展观在哪一年、哪次党代会上写入党章，标志着其走向成熟？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "科学发展观走向成熟",
+      "lessonId": "mzt05"
+    },
+    "b9e25bd23d": {
+      "question": "科学发展观在哪一年、哪次党代会上确立为党的指导思想？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "科学发展观确立为指导思想",
+      "lessonId": "mzt05"
+    },
+    "671ce53233": {
+      "question": "哪一理论是马克思主义关于发展的世界观和方法论的集中体现？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "发展的世界观方法论集中体现",
+      "lessonId": "mzt05"
+    },
+    "eae9b9d00f": {
+      "question": "习近平新时代中国特色社会主义思想分别在哪一年写入党章、在哪一年载入宪法？分别通过什么会议或修正案？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "习思想写入党章/载入宪法",
+      "lessonId": "mzt05"
+    },
+    "502ac9eedd": {
+      "question": "概括习近平新时代中国特色社会主义思想主要内容的“十个”“十四个”“十三个”分别指什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "概括习思想主要内容",
+      "lessonId": "mzt05"
+    },
+    "66e3a34a50": {
+      "question": "中国特色社会主义理论体系深化了对哪三大规律的认识？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三大规律",
+      "lessonId": "mzt05"
+    },
+    "7ddadc2549": {
+      "question": "邓小平理论首要的、基本的理论问题包括哪两个相互联系的问题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "首要的基本的理论问题",
+      "lessonId": "mzt06"
+    },
+    "d08d3d838d": {
+      "question": "搞清楚“什么是社会主义、怎样建设社会主义”的关键是什么？以坚持什么为基础？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "搞清楚基本问题的关键",
+      "lessonId": "mzt06"
+    },
+    "644f541b60": {
+      "question": "邓小平首次提出“社会主义的本质”概念是在何年何月？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "首提\"社会主义的本质\"概念",
+      "lessonId": "mzt06"
+    },
+    "70c13d368a": {
+      "question": "1992年南方谈话怎样完整概括社会主义的本质？回答生产力、剥削、两极分化和最终目标。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社会主义本质论断",
+      "lessonId": "mzt06"
+    },
+    "50493b73ef": {
+      "question": "邓小平提出的社会主义两条根本原则分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两条根本原则",
+      "lessonId": "mzt06"
+    },
+    "296fdc5cc1": {
+      "question": "邓小平理论的精髓由哪两个相互联系的要求组成？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "邓小平理论的精髓",
+      "lessonId": "mzt06"
+    },
+    "748aaa63b1": {
+      "question": "作为十一届三中全会主题报告、开辟新时期新道路宣言书的讲话，标题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三中全会主题报告",
+      "lessonId": "mzt06"
+    },
+    "91e6319a0d": {
+      "question": "四项基本原则于何年何月提出？其在党和国家发展中的根本地位是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四项基本原则",
+      "lessonId": "mzt06"
+    },
+    "4673d8221c": {
+      "question": "“社会主义初级阶段”论断首次出现于何年何月、哪次会议通过的什么文件？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "初级阶段论断首次出处",
+      "lessonId": "mzt06"
+    },
+    "ab2ab4289b": {
+      "question": "社会主义初级阶段论断的两层含义是什么？分别为什么“不能离开”和“不能超越”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "初级阶段两层含义",
+      "lessonId": "mzt06"
+    },
+    "c7c1ab073c": {
+      "question": "社会主义初级阶段基本路线在哪次党代会上提出？它的简明概括是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "基本路线提出",
+      "lessonId": "mzt06"
+    },
+    "4060a754a2": {
+      "question": "党的基本路线中，兴国之要、立国之本、强国之路分别对应什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "兴国之要/立国之本/强国之路",
+      "lessonId": "mzt06"
+    },
+    "b4192747ee": {
+      "question": "邓小平怎样概括社会主义的根本任务？哪句关于发展的论断体现这一要求？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社会主义根本任务",
+      "lessonId": "mzt06"
+    },
+    "af8d3d1928": {
+      "question": "“科学技术是第一生产力”于何年何月提出，又在哪一重要谈话中得到再次明确？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"科学技术是第一生产力\"",
+      "lessonId": "mzt06"
+    },
+    "512c3564cf": {
+      "question": "邓小平“三步走”发展战略中，1990年、2000年、21世纪中叶各要达到什么目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"三步走\"目标",
+      "lessonId": "mzt06"
+    },
+    "5d1300db0b": {
+      "question": "邓小平何时会见哪位外国领导人时提出“小康之家”？当时怎样称呼我国的现代化？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"小康\"概念来源",
+      "lessonId": "mzt06"
+    },
+    "1e3d14275d": {
+      "question": "邓小平提出的经济发展三个战略重点分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个战略重点",
+      "lessonId": "mzt06"
+    },
+    "a8c185ca32": {
+      "question": "邓小平怎样评价改革的革命性质？改革与社会主义制度是什么关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "改革的性质",
+      "lessonId": "mzt06"
+    },
+    "03873e771b": {
+      "question": "判断改革得失的“三个有利于”标准分别考察什么？哪项是首要、最根本的标准？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"三个有利于\"标准",
+      "lessonId": "mzt06"
+    },
+    "9f6b77a230": {
+      "question": "哪一谈话标志着社会主义市场经济理论的形成？哪次党代会确立了相应经济体制改革目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "市场经济理论形成标志",
+      "lessonId": "mzt06"
+    },
+    "e20688544a": {
+      "question": "“一国两制”构想的核心是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"一国两制\"的核心",
+      "lessonId": "mzt06"
+    },
+    "c901701cd6": {
+      "question": "邓小平1985年对时代主题作出了什么判断？哪次党代会确认了这一判断？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "时代主题",
+      "lessonId": "mzt06"
+    },
+    "c8db79e1d7": {
+      "question": "邓小平理论的历史地位体现在哪三个方面？分别说明它与既有理论、理论体系和现代化建设的关系。",
+      "answer": "邓小平理论是马克思列宁主义、毛泽东思想的继承和发展；是中国特色社会主义理论体系的开篇之作；是改革开放和社会主义现代化建设的科学指南。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "历史地位（3 条）",
+      "previousAnswer": "继承和发展；开篇之作；科学指南",
+      "lessonId": "mzt06"
+    },
+    "6ebd0973a9": {
+      "question": "“三个代表”重要思想要求中国共产党始终代表哪三个方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "集中概括",
+      "lessonId": "mzt07"
+    },
+    "59381304c3": {
+      "question": "“三个代表”的三个方面为何是统一整体？说明生产力、人民群众和人民根本利益在其中的关系。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三者关系",
+      "lessonId": "mzt07"
+    },
+    "5502731c57": {
+      "question": "贯彻“三个代表”重要思想，关键、核心、本质各是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "贯彻要求",
+      "lessonId": "mzt07"
+    },
+    "edcd65951e": {
+      "question": "“三个代表”重要思想对党的建设有何根本定位？用“立党、执政、力量”三个维度回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "定位",
+      "lessonId": "mzt07"
+    },
+    "472a5a6488": {
+      "question": "“三个代表”重要思想把什么作为党执政兴国的第一要务？",
+      "answer": "发展是党执政兴国的第一要务。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第一要务",
+      "previousAnswer": "发展是党执政兴国的第一要务；21 世纪头二十年是重要战略机遇期",
+      "lessonId": "mzt07"
+    },
+    "12600326a5": {
+      "question": "改革、发展、稳定三者关系中，哪一个是动力、目的和前提？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "改革发展稳定",
+      "lessonId": "mzt07"
+    },
+    "b762f2c995": {
+      "question": "社会主义市场经济体制经历了哪次会议确立目标、哪次全会勾画框架、何时初步建立三个节点？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "市场经济体制目标",
+      "lessonId": "mzt07"
+    },
+    "7c812800d8": {
+      "question": "“社会主义市场经济”这一表述中，哪几个字点明了市场经济的性质？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "画龙点睛",
+      "lessonId": "mzt07"
+    },
+    "177d6fe161": {
+      "question": "社会主义市场经济宏观调控的四项目标分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "宏观调控目标",
+      "lessonId": "mzt07"
+    },
+    "e26e16a42e": {
+      "question": "20世纪末我国达到的总体小康具有哪三个不足或特点？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "总体小康特征",
+      "lessonId": "mzt07"
+    },
+    "b3d269a296": {
+      "question": "党的十六大提出在什么时期全面建设小康社会？目标覆盖多少人口、追求什么水平？",
+      "answer": "党的十六大提出在本世纪头二十年，全面建设惠及十几亿人口的更高水平的小康社会。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全面建设小康社会",
+      "previousAnswer": "十六大：本世纪头二十年，惠及十几亿人口的更高水平的小康社会，六个“更加”",
+      "lessonId": "mzt07"
+    },
+    "80622be764": {
+      "question": "发展社会主义政治文明，党的领导、人民当家作主、依法治国各处于什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "政治文明三者统一",
+      "lessonId": "mzt07"
+    },
+    "b549a918e2": {
+      "question": "中国加入世界贸易组织的决定于何时、在哪次会议通过？中国何时正式加入？",
+      "answer": "2001年11月多哈会议通过中国加入世界贸易组织的决定，同年12月中国正式加入。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "加入世贸组织",
+      "previousAnswer": "2001 年 11 月多哈会议通过决定，同年 12 月正式加入；三原则",
+      "lessonId": "mzt07"
+    },
+    "4efcc2fa82": {
+      "question": "加强和改进党的建设的核心问题是什么？党的最大政治优势和执政后的最大危险分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党建核心问题",
+      "lessonId": "mzt07"
+    },
+    "fbfcb622c1": {
+      "question": "“治国必先……，治党务必……”这句关于从严治党的要求应怎样补全？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "从严治党",
+      "lessonId": "mzt07"
+    },
+    "c87f1133ca": {
+      "question": "“三个代表”重要思想的历史地位体现在哪两个方面？从理论体系发展及党建和事业实践回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "历史地位",
+      "lessonId": "mzt07"
+    },
+    "d7981fdfed": {
+      "question": "科学发展观的第一要义、核心立场、基本要求、根本方法分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "科学内涵四要素",
+      "lessonId": "mzt08"
+    },
+    "12c9d52af6": {
+      "question": "科学发展观围绕发展回答了哪四个基本问题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个回答",
+      "lessonId": "mzt08"
+    },
+    "ad2c314748": {
+      "question": "党的十六大把哪一时期判断为我国发展的重要战略机遇期？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "重要战略机遇期",
+      "lessonId": "mzt08"
+    },
+    "a59b25fa5d": {
+      "question": "从党的十六大到十八大，小康社会目标由“全面建设”变为什么？完成时间指向哪一年？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全面建成小康社会",
+      "lessonId": "mzt08"
+    },
+    "200eae476e": {
+      "question": "科学发展观“以人为本”中的“人”包括哪些人，以哪些劳动者为主体？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "以人为本的\"人\"",
+      "lessonId": "mzt08"
+    },
+    "70225a385a": {
+      "question": "判断马克思主义政党与非马克思主义政党的分水岭和试金石，主要看怎样对待谁、依靠谁、为了谁的问题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "分水岭与试金石",
+      "lessonId": "mzt08"
+    },
+    "43ea52870a": {
+      "question": "科学发展观中，“全面”“协调”“可持续”分别强调发展的哪两种特性？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全面／协调／可持续",
+      "lessonId": "mzt08"
+    },
+    "b82a4003f1": {
+      "question": "“五位一体”建设中，经济、政治、文化、社会、生态文明建设分别发挥什么作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "五位一体定位",
+      "lessonId": "mzt08"
+    },
+    "51799d41b1": {
+      "question": "“五个统筹”在哪次全会上提出？哪次党代会又扩展了三个统筹？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "五个统筹",
+      "lessonId": "mzt08"
+    },
+    "93a290a7b6": {
+      "question": "科学发展观指导下，我国经济社会发展以什么为主题、以什么为主线？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "转方式主线",
+      "lessonId": "mzt08"
+    },
+    "64a86931ea": {
+      "question": "加快转变经济发展方式的关键是什么？其中经济体制改革的核心问题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "转方式的关键",
+      "lessonId": "mzt08"
+    },
+    "df7d801fea": {
+      "question": "解决农业、农村、农民问题的根本途径是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "解决\"三农\"问题的根本途径",
+      "lessonId": "mzt08"
+    },
+    "f096e045a7": {
+      "question": "人民民主对于社会主义具有什么地位？社会主义民主政治的本质和核心是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人民民主",
+      "lessonId": "mzt08"
+    },
+    "d7743fd1a9": {
+      "question": "依法治国和依法执政首先分别要求坚持什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "依宪治国",
+      "lessonId": "mzt08"
+    },
+    "9197295764": {
+      "question": "社会主义核心价值体系在国家发展中被称为什么？",
+      "answer": "社会主义核心价值体系是兴国之魂。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社会主义核心价值体系",
+      "previousAnswer": "兴国之魂；四项基本内容",
+      "lessonId": "mzt08"
+    },
+    "c6866e002d": {
+      "question": "构建社会主义和谐社会的六项总要求分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "和谐社会总要求（6条）",
+      "lessonId": "mzt08"
+    },
+    "38a2458422": {
+      "question": "保障和改善民生的“五有”分别涉及教育、劳动、医疗、养老和住房的什么目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "民生\"五有\"",
+      "lessonId": "mzt08"
+    },
+    "008a61f1fd": {
+      "question": "生态文明建设应树立哪三种对待自然的理念，并以建设什么样的中国为目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "生态文明理念",
+      "lessonId": "mzt08"
+    },
+    "3cb02be6ba": {
+      "question": "科学发展观指导下，党的建设主线包括哪三方面建设？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党建主线",
+      "lessonId": "mzt08"
+    },
+    "78e6f44142": {
+      "question": "党面临的“四大考验”和“四大危险”分别是什么？请分两组列出。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四大考验／四大危险",
+      "lessonId": "mzt08"
+    },
+    "efffbd2f22": {
+      "question": "科学发展观最鲜明的精神实质包括哪四个方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "精神实质",
+      "lessonId": "mzt08"
+    },
+    "dfdcea3516": {
+      "question": "科学发展观的历史地位体现在哪两个方面？从中国特色社会主义理论体系发展和现代化实践回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "历史地位（2条）",
+      "lessonId": "mzt08"
+    },
+    "26c97567a9": {
+      "question": "习近平新时代中国特色社会主义思想创立的五方面时代背景分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "创立的时代背景（5 个）",
+      "lessonId": "xg00"
+    },
+    "852102c5b4": {
+      "question": "习近平新时代中国特色社会主义思想的创立，在马克思主义中国化时代化进程中实现了怎样的理论发展？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "创立飞跃",
+      "lessonId": "xg00"
+    },
+    "94c147cd58": {
+      "question": "“两个结合”要求把马克思主义基本原理分别同哪两个方面相结合？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"两个结合\"内容",
+      "lessonId": "xg00"
+    },
+    "65963efca0": {
+      "question": "“两个结合”在探索中国道路中形成了什么性质的认识？对于取得成功具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"两个结合\"地位",
+      "lessonId": "xg00"
+    },
+    "b944bc3c6c": {
+      "question": "谁明确提出把马克思主义基本原理同中华优秀传统文化相结合？“第二个结合”被评价为怎样的思想解放？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"第二个结合\"提出",
+      "lessonId": "xg00"
+    },
+    "b4070be7f9": {
+      "question": "推进实践基础上的理论创新，要不断回答哪“四个之问”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"四个之问\"",
+      "lessonId": "xg00"
+    },
+    "ae27d2785e": {
+      "question": "习近平新时代中国特色社会主义思想回答了哪三大时代课题？分别完整说出“什么样”和“怎样”两方面。",
+      "answer": "坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义；建设什么样的社会主义现代化强国、怎样建设社会主义现代化强国；建设什么样的长期执政的马克思主义政党、怎样建设长期执政的马克思主义政党。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三大时代课题",
+      "previousAnswer": "中国特色社会主义 / 社会主义现代化强国 / 长期执政的马克思主义政党（各含\"什么样（什么）+怎样\"两问）",
+      "lessonId": "xg00"
+    },
+    "b31177ac5d": {
+      "question": "“十个明确”在习近平新时代中国特色社会主义思想科学体系中属于什么内容，发挥什么作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"十个明确\"定位",
+      "lessonId": "xg00"
+    },
+    "c123449c9c": {
+      "question": "“十四个坚持”被概括为新时代坚持和发展中国特色社会主义的什么方略？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"十四个坚持\"定位",
+      "lessonId": "xg00"
+    },
+    "d0543d65ad": {
+      "question": "党的二十大提出的“六个必须坚持”分别是什么？它们体现了习近平新时代中国特色社会主义思想的哪两个方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"六个必须坚持\"",
+      "lessonId": "xg00"
+    },
+    "8579d2f4b9": {
+      "question": "习近平新时代中国特色社会主义思想何时、分别经哪次会议写入党章和载入宪法？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "写入党章 / 载入宪法",
+      "lessonId": "xg00"
+    },
+    "dc9fcfdd22": {
+      "question": "习近平新时代中国特色社会主义思想的历史地位如何表述？从马克思主义发展、中华文化精神、理论飞跃和行动遵循四方面回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "历史地位四句",
+      "lessonId": "xg00"
+    },
+    "5ef8571a50": {
+      "question": "习近平新时代中国特色社会主义思想深化了对哪三个领域规律的认识？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个规律",
+      "lessonId": "xg00"
+    },
+    "1b73e5fdcb": {
+      "question": "推进马克思主义中国化时代化所说的“魂脉”和“根脉”分别指什么？二者应形成怎样的关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "魂脉与根脉",
+      "lessonId": "xg00"
+    },
+    "984a4ccdf3": {
+      "question": "“两个确立”分别确立了谁的什么地位和哪一思想的什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"两个确立\"内涵",
+      "lessonId": "xg00"
+    },
+    "f0a0068546": {
+      "question": "“两个确立”的意义怎样概括？从重大政治成果、决定性意义和应对不确定性三个角度回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"两个确立\"意义",
+      "lessonId": "xg00"
+    },
+    "493e40fc92": {
+      "question": "《习近平新时代中国特色社会主义思想概论》教材由哪些首尾部分和多少章组成？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "教材结构",
+      "lessonId": "xg00"
+    },
+    "acc07e879d": {
+      "question": "关于中国发展道路的“三个只有”，分别怎样回答救中国、发展中国和实现民族复兴的问题？",
+      "answer": "只有社会主义才能救中国，只有社会主义才能发展中国，只有坚持和发展中国特色社会主义才能实现中华民族伟大复兴。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个\"只有\"",
+      "previousAnswer": "只有社会主义才能救中国、发展中国；只有坚持和发展中特社才能实现民族复兴",
+      "lessonId": "xg01"
+    },
+    "196dbbe1d7": {
+      "question": "近代以来中华民族面临的两大历史任务分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两大历史任务",
+      "lessonId": "xg01"
+    },
+    "58c91b8318": {
+      "question": "中国特色社会主义从开创到进入新时代，邓小平、江泽民、胡锦涛、习近平各作出了怎样的发展贡献？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "开创/推进/发展",
+      "lessonId": "xg01"
+    },
+    "c83f1f3eed": {
+      "question": "怎样认识改革开放前后两个历史时期的关系？回答联系、区别、实践本质和评价原则。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两个历史时期",
+      "lessonId": "xg01"
+    },
+    "f11339b1d4": {
+      "question": "中国特色社会主义的“六个得来”分别对应哪六段历史及其时间跨度？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "六个得来",
+      "lessonId": "xg01"
+    },
+    "237e728742": {
+      "question": "中国特色社会主义是科学社会主义与中国社会发展哪两种逻辑的辩证统一？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中特社的定位",
+      "lessonId": "xg01"
+    },
+    "cd0c28c19b": {
+      "question": "中国特色社会主义不是哪“四个版”？分别说明所指的历史文化、经典作家设想、其他社会主义国家和国外现代化模式。",
+      "answer": "不是我国历史文化的母版，不是马克思主义经典作家设想的模板，不是其他国家社会主义实践的再版，也不是国外现代化发展的翻版。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个\"版\"",
+      "previousAnswer": "不是母版、不是模板、不是再版、不是翻版",
+      "lessonId": "xg01"
+    },
+    "f3409a5e82": {
+      "question": "改革开放以来取得一切成绩和进步的根本原因，体现在道路、理论体系、制度和文化哪四个方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "取得成绩的根本原因",
+      "lessonId": "xg01"
+    },
+    "f41eec13df": {
+      "question": "中国特色社会主义道路、理论体系、制度、文化分别承担实现途径、行动指南、根本保障、精神力量中的哪一作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四者定位",
+      "lessonId": "xg01"
+    },
+    "dc43270f3f": {
+      "question": "中国特色社会主义最本质的特征、制度的最大优势，共同指向什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "最本质特征/最大优势",
+      "lessonId": "xg01"
+    },
+    "1cc97e907b": {
+      "question": "中国特色社会主义进入新时代的三个“意味着”分别涉及民族复兴、科学社会主义和发展中国家现代化的什么变化？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新时代三个\"意味着\"",
+      "lessonId": "xg01"
+    },
+    "8a8a3c9869": {
+      "question": "新时代我国社会主要矛盾的两方面分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新时代社会主要矛盾",
+      "lessonId": "xg01"
+    },
+    "75a13fabe5": {
+      "question": "我国社会主要矛盾变化以后，基本国情和国际地位有哪些“没有变”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两个\"没有变\"",
+      "lessonId": "xg01"
+    },
+    "f14fbdec39": {
+      "question": "新时代十年的伟大变革在哪五个历史领域具有里程碑意义？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "里程碑意义",
+      "lessonId": "xg01"
+    },
+    "55f1e696c4": {
+      "question": "社会主义初级阶段基本路线被称为国家和人民的哪两条“线”？",
+      "answer": "党的基本路线是国家的生命线、人民的幸福线。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "基本路线定位",
+      "previousAnswer": "国家的生命线、人民的幸福线（\"一个中心两个基本点\"完整表述）",
+      "lessonId": "xg01"
+    },
+    "9e720f256c": {
+      "question": "党的十九大把新时代坚持和发展中国特色社会主义的基本方略概括为什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "基本方略",
+      "lessonId": "xg01"
+    },
+    "a7ff70120d": {
+      "question": "“四个全面”战略布局包括哪些内容？哪项是战略目标，另外三项是什么性质？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个全面",
+      "lessonId": "xg01"
+    },
+    "0ce44e249f": {
+      "question": "“中国共产党为什么能，中国特色社会主义为什么好”的根本原因怎样用两个“马克思主义行”表述？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "归根到底",
+      "lessonId": "xg01"
+    },
+    "3badebf46a": {
+      "question": "推进中国式现代化从事业创新性和工程复杂性来看，具有怎样的总体定位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "事业总体定位",
+      "lessonId": "xg02"
+    },
+    "0e9d4ea673": {
+      "question": "把推进中国式现代化比作“新的长征”，应怎样认识它的前途和任务？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"新的长征\"",
+      "lessonId": "xg02"
+    },
+    "b79fd578f5": {
+      "question": "在全面建设社会主义现代化国家的进程中，中国共产党发挥怎样的主心骨和领航作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党的地位",
+      "lessonId": "xg02"
+    },
+    "1c7d5e2c27": {
+      "question": "推进中国式现代化必须避免哪两条道路？分别用“老路”和“邪路”表述。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两条道路警示",
+      "lessonId": "xg02"
+    },
+    "5a37a327dc": {
+      "question": "中国式现代化为何被称为造福人民的现代化？说明发展的目的、依靠力量和成果归属。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "现代化与人民",
+      "lessonId": "xg02"
+    },
+    "2e234715c7": {
+      "question": "推进中国式现代化的动力来自哪项涉及改革与开放的战略举措？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "动力所在",
+      "lessonId": "xg02"
+    },
+    "d0b83c9da7": {
+      "question": "推进中国式现代化发扬斗争精神，要增强哪三种精神品质，坚持哪三个“不”，并统筹哪两个方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "斗争精神关键词",
+      "lessonId": "xg02"
+    },
+    "82f619e460": {
+      "question": "推进中国式现代化需要处理好哪六对重大关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "六对重大关系",
+      "lessonId": "xg02"
+    },
+    "5f28844657": {
+      "question": "推进中国式现代化制定战略时，应增强战略的哪三种特性？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "战略三性",
+      "lessonId": "xg02"
+    },
+    "f81ed3b8c1": {
+      "question": "推进中国式现代化为什么要守正创新？守正和创新分别防止或实现什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "守正创新",
+      "lessonId": "xg02"
+    },
+    "905fd1e7a6": {
+      "question": "独立自主对于中华民族精神和立党立国分别具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "独立自主",
+      "lessonId": "xg02"
+    },
+    "60158404d1": {
+      "question": "对外开放在我国政策体系中属于什么层级？对这一政策应持何种态度？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "对外开放",
+      "lessonId": "xg02"
+    },
+    "3aa45e5fd5": {
+      "question": "团结奋斗对于党和中国人民的精神标识、创造历史伟业的道路分别具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "团结奋斗定位",
+      "lessonId": "xg02"
+    },
+    "2e714b6e46": {
+      "question": "推进中国式现代化为什么必须持续团结奋斗？从目标、任务和形势三方面回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "持续团结奋斗三要求",
+      "lessonId": "xg02"
+    },
+    "caceac9370": {
+      "question": "关于党的领导，最本质特征、制度最大优势、最高政治领导力量和最高政治原则分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四句核心论断",
+      "lessonId": "xg03"
+    },
+    "903c159819": {
+      "question": "“什么是中国特色？这就是中国特色”所强调的中国最大的国情是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中国最大的国情",
+      "lessonId": "xg03"
+    },
+    "08619fb29d": {
+      "question": "中国共产党领导人民创造的“两大奇迹”分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两大奇迹",
+      "lessonId": "xg03"
+    },
+    "19cdd41517": {
+      "question": "坚持党的领导与人民当家作主之间是什么关系？党的领导应支持和保证人民实现什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党的领导与人民当家作主",
+      "lessonId": "xg03"
+    },
+    "2281fe741c": {
+      "question": "中国特色社会主义制度的最大优势是什么？这一优势在诸多制度优势中起什么作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "制度最大优势",
+      "lessonId": "xg03"
+    },
+    "21a8600b7e": {
+      "question": "中国共产党需要增强哪四种领导能力？哪种能力居于第一位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四大领导力",
+      "lessonId": "xg03"
+    },
+    "245717a00c": {
+      "question": "怎样用“党政军民学、东西南北中”这一论断表述党的最高政治领导力量地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "最高政治领导力量论断",
+      "lessonId": "xg03"
+    },
+    "fe473ef93b": {
+      "question": "中共中央“五一口号”发布于哪一年？号召召开什么会议、成立什么政府？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"五一口号\"",
+      "lessonId": "xg03"
+    },
+    "cb7922aa31": {
+      "question": "党的领导在对象、内容、过程和方式上体现出哪三种特性？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党的领导三特性",
+      "lessonId": "xg03"
+    },
+    "f10abd650f": {
+      "question": "党的领导的最高原则是什么？怎样理解“事在四方，要在中央”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党的领导最高原则",
+      "lessonId": "xg03"
+    },
+    "148540ea23": {
+      "question": "党的“四个服从”中，最核心的服从要求是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个服从的核心",
+      "lessonId": "xg03"
+    },
+    "ddc58751e5": {
+      "question": "我国的根本领导制度是什么？它在国家制度体系中具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "根本领导制度",
+      "lessonId": "xg03"
+    },
+    "063cc601ad": {
+      "question": "党的领导制度体系六个方面分别是什么，各承担什么定位？",
+      "answer": "不忘初心、牢记使命的制度是基础；维护党中央权威和集中统一领导的各项制度体现最高原则；党的全面领导制度是主体内容；为人民执政、靠人民执政的各项制度体现价值追求；提高党的执政能力和领导水平的制度体现实践要求；全面从严治党制度是坚强保证。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "六方面制度定位",
+      "previousAnswer": "基础 / 最高原则 / 主体内容 / 价值追求 / 实践要求 / 坚强保证",
+      "lessonId": "xg03"
+    },
+    "7b70ec06ef": {
+      "question": "《关于建立报告制度》由谁于何时起草？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "报告制度",
+      "lessonId": "xg03"
+    },
+    "349bad8325": {
+      "question": "党的领导决策核心由党的哪三个中央机构构成？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党的领导决策核心",
+      "lessonId": "xg03"
+    },
+    "3bf2e6805a": {
+      "question": "把党的领导比作“众星捧月”，强调党发挥哪两方面的领导核心作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"众星捧月\"",
+      "lessonId": "xg03"
+    },
+    "ec1bba9942": {
+      "question": "坚持以人民为中心在新时代中国特色社会主义中属于什么根本立场？它贯穿哪些治国理政活动？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "本章定位",
+      "lessonId": "xg04"
+    },
+    "98e5b92b94": {
+      "question": "马克思主义的本质属性和鲜明品格是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人民性",
+      "lessonId": "xg04"
+    },
+    "539449eb58": {
+      "question": "人民群众是历史创造者，具体体现在哪三方面作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "群众史观三体现",
+      "lessonId": "xg04"
+    },
+    "613cea0416": {
+      "question": "“江山就是人民，人民就是江山”这句话中，打江山、守江山守的是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "江山论",
+      "lessonId": "xg04"
+    },
+    "dcf6bb3c2e": {
+      "question": "人民在国家中的地位由什么决定？我国国家的一切权力属于谁？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人民地位的决定因素",
+      "lessonId": "xg04"
+    },
+    "93afdb0840": {
+      "question": "党的根本宗旨是什么？人民对于党执政的底气和根基具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党的宗旨与底气",
+      "lessonId": "xg04"
+    },
+    "a06dfb0b2c": {
+      "question": "中国共产党的根本政治立场是什么？这一立场与党区别于其他政党的显著标志有何关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党的根本政治立场",
+      "lessonId": "xg04"
+    },
+    "8d1b09d697": {
+      "question": "党的最大政治优势和执政后的最大危险分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "最大优势/最大危险",
+      "lessonId": "xg04"
+    },
+    "36294c47a6": {
+      "question": "坚持人民至上，分别在党的百年奋斗经验和新时代治国理政价值取向中具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人民至上的定位",
+      "lessonId": "xg04"
+    },
+    "dd9e935e4e": {
+      "question": "中国共产党把人民的什么向往作为自己的奋斗目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "奋斗目标",
+      "lessonId": "xg04"
+    },
+    "988b2bd819": {
+      "question": "依靠人民创造历史伟业，需要尊重人民的哪种地位和哪种精神？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "依靠人民两要求",
+      "lessonId": "xg04"
+    },
+    "ff7a2946b1": {
+      "question": "“时代是出卷人，我们是答卷人”这句话中，谁是阅卷人？请完整复述三者关系。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "阅卷人",
+      "lessonId": "xg04"
+    },
+    "91130e83e3": {
+      "question": "衡量政绩最重要的标准是什么？为什么不能简单以GDP增长率论英雄？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "最重要政绩",
+      "lessonId": "xg04"
+    },
+    "3d4de55d48": {
+      "question": "群众路线对于党的生命、工作路线和传统分别具有什么定位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "群众路线定位",
+      "lessonId": "xg04"
+    },
+    "00f5e582b4": {
+      "question": "调查研究与发言权、决策权之间有什么关系？用两个“没有”表述。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "调查研究",
+      "lessonId": "xg04"
+    },
+    "520b370a37": {
+      "question": "共同富裕对于中国特色社会主义和中国式现代化分别具有什么定位？为何它不只是经济问题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "共同富裕定位",
+      "lessonId": "xg04"
+    },
+    "11b8b2a868": {
+      "question": "促进共同富裕应把握哪四条原则？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "共同富裕四原则",
+      "lessonId": "xg04"
+    },
+    "0e424ce65a": {
+      "question": "促进共同富裕要形成怎样的收入分配结构？描述中间与两头的大小并说出形状。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "分配结构目标",
+      "lessonId": "xg04"
+    },
+    "cdeb2dd2db": {
+      "question": "现代化的最终目标，从人的发展角度应怎样表述？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "现代化最终目标",
+      "lessonId": "xg04"
+    },
+    "089034cfe1": {
+      "question": "决定当代中国命运的“关键一招”是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "关键一招",
+      "lessonId": "xg05"
+    },
+    "426d159d6d": {
+      "question": "改革开放推动中国创造了哪两大奇迹？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两大奇迹",
+      "lessonId": "xg05"
+    },
+    "783acb54b2": {
+      "question": "十一届三中全会和十八届三中全会为什么都被称为“划时代”？分别开启了怎样的改革阶段？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两个\"划时代\"",
+      "lessonId": "xg05"
+    },
+    "ab144f9db5": {
+      "question": "全面深化改革的总目标包含哪两个相互联系的方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全面深化改革总目标",
+      "lessonId": "xg05"
+    },
+    "b266ca66a6": {
+      "question": "全面深化改革总目标中的“完善和发展中国特色社会主义制度”，规定了改革的什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "总目标前句含义",
+      "lessonId": "xg05"
+    },
+    "e096950c56": {
+      "question": "全面深化改革总目标中的“推进国家治理体系和治理能力现代化”，明确了什么指向和要求？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "总目标后句含义",
+      "lessonId": "xg05"
+    },
+    "f5b79b5ade": {
+      "question": "深化经济体制改革应怎样处理市场与政府的作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "经济体制改革的核心",
+      "lessonId": "xg05"
+    },
+    "ab7be7cdd8": {
+      "question": "全面深化改革分别以什么为主线、重点和突破口？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "改革的主线/重点/突破口",
+      "lessonId": "xg05"
+    },
+    "946b019733": {
+      "question": "“国家治理体系”指在谁领导下、用于什么目的的制度体系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "国家治理体系",
+      "lessonId": "xg05"
+    },
+    "b0a7aa7d84": {
+      "question": "“国家治理能力”指运用什么来管理哪些事务的能力？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "国家治理能力",
+      "lessonId": "xg05"
+    },
+    "7899875262": {
+      "question": "十九届四中全会概括的13个显著制度优势中，居于首位的是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "13 个显著优势",
+      "lessonId": "xg05"
+    },
+    "5ac33db8f3": {
+      "question": "改革、发展、稳定作为三个重要支点，分别发挥动力、关键、前提中的什么作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个重要支点",
+      "lessonId": "xg05"
+    },
+    "588ddf5440": {
+      "question": "全面深化改革要求进一步解放哪三个方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个进一步解放",
+      "lessonId": "xg05"
+    },
+    "8344c7062c": {
+      "question": "全面深化改革应坚持哪五条方法论？从协同、探索、三者关系、推进节奏和法治回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "五条方法论",
+      "lessonId": "xg05"
+    },
+    "b6188e7ec1": {
+      "question": "推进重大改革时，对法律依据和制度破立次序有什么要求？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "重大改革法治要求",
+      "lessonId": "xg05"
+    },
+    "84382afc0c": {
+      "question": "“改革开放只有……，没有……”应如何补全？它体现怎样的持续推进态度？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "改革开放的态度",
+      "lessonId": "xg05"
+    },
+    "8645f00a24": {
+      "question": "推进中国式现代化的根本动力是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中国式现代化的根本动力",
+      "lessonId": "xg05"
+    },
+    "a62d16d6b3": {
+      "question": "扩大制度型开放主要涉及哪四个方面的对接？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "制度型开放四要素",
+      "lessonId": "xg05"
+    },
+    "795ab7124a": {
+      "question": "2024年7月二十届三中全会通过的《决定》全称是什么，共有多少条？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "二十届三中全会《决定》",
+      "lessonId": "xg05"
+    },
+    "5e83144a0d": {
+      "question": "二十届三中全会部署进一步全面深化改革，2029年和2035年分别对应什么任务节点？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "进一步全面深化改革时间表",
+      "lessonId": "xg05"
+    },
+    "fc92afcd78": {
+      "question": "进一步全面深化改革的“七个聚焦”分别指向哪些制度、发展和治理目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "七个聚焦",
+      "lessonId": "xg05"
+    },
+    "876347b2c7": {
+      "question": "高质量发展在新时代经济社会发展及全面建设社会主义现代化国家中分别具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "高质量发展定位",
+      "lessonId": "xg06"
+    },
+    "7f860a16f5": {
+      "question": "哪一年哪月、哪次会议首次概括习近平经济思想？当时以什么理念为主要内容？",
+      "answer": "2017年12月中央经济工作会议首次概括习近平经济思想，当时以新发展理念为主要内容。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "习近平经济思想首次概括",
+      "previousAnswer": "2017 年 12 月中央经济工作会议；以新发展理念为主要内容，7 条\"坚持\"",
+      "lessonId": "xg06"
+    },
+    "eaa6d64eda": {
+      "question": "我国经济发展的“三期叠加”分别指哪三个时期？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三期叠加",
+      "lessonId": "xg06"
+    },
+    "77074b118d": {
+      "question": "新发展阶段在社会主义初级阶段历史进程和民族发展进程中分别处于什么位置？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新发展阶段定位",
+      "lessonId": "xg06"
+    },
+    "fa66c15c5d": {
+      "question": "创新、协调、绿色、开放、共享五大新发展理念分别着重解决什么问题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "五大理念解决问题",
+      "lessonId": "xg06"
+    },
+    "a307d63830": {
+      "question": "完整、准确、全面贯彻新发展理念，需要从哪三个维度把握？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "把握新发展理念三维度",
+      "lessonId": "xg06"
+    },
+    "ef32f18a7b": {
+      "question": "高质量发展对发展要求的变化，可用从“有没有”转向什么来概括？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "高质量发展一句话",
+      "lessonId": "xg06"
+    },
+    "5749338a61": {
+      "question": "我国社会主义基本经济制度的新概括包括所有制、分配制度和经济体制哪三个方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "基本经济制度新概括（3 方面）",
+      "lessonId": "xg06"
+    },
+    "c61ca47e12": {
+      "question": "“两个毫不动摇”对公有制经济和非公有制经济分别提出什么要求？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两个毫不动摇",
+      "lessonId": "xg06"
+    },
+    "fe6b492044": {
+      "question": "国有企业对于中国特色社会主义及党执政兴国，分别具有什么基础和支柱地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "国有企业定位",
+      "lessonId": "xg06"
+    },
+    "f20295546e": {
+      "question": "我国分配制度由什么性质和国情决定？所有制结构与分配方式有什么关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "分配制度决定因素",
+      "lessonId": "xg06"
+    },
+    "e8cb400055": {
+      "question": "在资源配置中，市场和政府应如何发挥作用？怎样把有效市场与有为政府结合起来？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "政府与市场",
+      "lessonId": "xg06"
+    },
+    "074bc7d03d": {
+      "question": "新发展格局怎样安排国内循环与国际循环的关系？它对高质量发展具有什么战略定位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新发展格局定位",
+      "lessonId": "xg06"
+    },
+    "7d86a5f176": {
+      "question": "构建新发展格局最本质的特征是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "最本质特征",
+      "lessonId": "xg06"
+    },
+    "6788dd95bd": {
+      "question": "实体经济对于一国经济具有什么地位？发展经济应防止哪种倾向？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "实体经济地位",
+      "lessonId": "xg06"
+    },
+    "9dc8a7c596": {
+      "question": "乡村振兴的总目标、总方针、总要求和制度保障分别是什么？",
+      "answer": "总目标是农业农村现代化；总方针是坚持农业农村优先发展；总要求是产业兴旺、生态宜居、乡风文明、治理有效、生活富裕；制度保障是建立健全城乡融合发展体制机制和政策体系。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "乡村振兴四个总",
+      "previousAnswer": "总目标：农业农村现代化；总方针：农业农村优先发展；总要求：二十字；制度保障：城乡融合发展体制机制",
+      "lessonId": "xg06"
+    },
+    "78d6065dc1": {
+      "question": "建设现代化经济体系在我国发展中具有什么战略定位？",
+      "answer": "建设现代化经济体系是我国发展的战略目标。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "现代化经济体系定位",
+      "previousAnswer": "我国发展的**战略目标**；六大体系 + 一个经济体制",
+      "lessonId": "xg06"
+    },
+    "3838bee03f": {
+      "question": "教育、科技、人才对全面建设社会主义现代化国家具有怎样的共同定位？三者分别是根本、关键还是基础？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三者总定位",
+      "lessonId": "xg07"
+    },
+    "4ca8b98351": {
+      "question": "“三个第一”分别怎样定位科技、人才和创新？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个第一",
+      "lessonId": "xg07"
+    },
+    "9a1a226953": {
+      "question": "实施科教兴国、人才强国和创新驱动发展战略，对教育、科技、人才分别提出哪三个“坚持”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个坚持",
+      "lessonId": "xg07"
+    },
+    "8f4f4bbe2b": {
+      "question": "在教育、科技与现代化建设的关系中，科教兴国具有什么政策地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "基本国策",
+      "lessonId": "xg07"
+    },
+    "03328ee5c7": {
+      "question": "科技创新的“四个面向”分别面向哪些领域和需求？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个面向",
+      "lessonId": "xg07"
+    },
+    "760accde5b": {
+      "question": "创新驱动发展需要哪两种创新形成“双轮驱动”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "双轮驱动",
+      "lessonId": "xg07"
+    },
+    "47024716fd": {
+      "question": "教育在国家发展中具有哪三种地位特征？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "教育三性",
+      "lessonId": "xg07"
+    },
+    "3571f9b089": {
+      "question": "中国特色社会主义教育的“四个服务”分别服务哪些主体和事业？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个服务",
+      "lessonId": "xg07"
+    },
+    "83f007a287": {
+      "question": "我国教育必须落实的根本任务是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "教育的根本任务",
+      "lessonId": "xg07"
+    },
+    "5cf9a8d077": {
+      "question": "教育的根本问题包括哪三个关于人才培养的问题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "教育的根本问题",
+      "lessonId": "xg07"
+    },
+    "34cf662139": {
+      "question": "落实立德树人根本任务的关键课程是哪一类课程？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "立德树人的关键课程",
+      "lessonId": "xg07"
+    },
+    "97950d348f": {
+      "question": "建设教育强国时，基础教育和高等教育分别发挥什么作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "基点与龙头",
+      "lessonId": "xg07"
+    },
+    "b6da638e2d": {
+      "question": "建设教育强国最重要的基础工作是什么？“教育大计”以谁为本？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "教育强国最重要的基础工作",
+      "lessonId": "xg07"
+    },
+    "72beeaf18d": {
+      "question": "科技自立自强对于国家强盛、安全和发展分别具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "科技自立自强定位",
+      "lessonId": "xg07"
+    },
+    "5b62cb7faf": {
+      "question": "关键核心技术为什么被称为“国之重器”？用“要、买、讨”三个角度说明其获取要求。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "关键核心技术",
+      "lessonId": "xg07"
+    },
+    "ca8e3a532f": {
+      "question": "我国战略科技力量由哪四类主体组成？各自发挥什么作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四支战略科技力量",
+      "lessonId": "xg07"
+    },
+    "cf1ef03f76": {
+      "question": "我国人才工作24字方针由哪六组要求组成？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人才方针 24 字",
+      "lessonId": "xg07"
+    },
+    "c10e5c7cf2": {
+      "question": "国家战略人才力量主要包括哪四类人才或团队？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "国家战略人才力量",
+      "lessonId": "xg07"
+    },
+    "85d9ceea91": {
+      "question": "建设世界重要人才中心和创新高地，2025年、2030年、2035年分别有哪些阶段性目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人才中心和高地三节点",
+      "lessonId": "xg07"
+    },
+    "740ba81887": {
+      "question": "党的二十大把什么概括为社会主义民主政治的本质属性？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社会主义民主政治的本质属性",
+      "lessonId": "xg08"
+    },
+    "88a8681a12": {
+      "question": "人民民主对于社会主义、社会主义现代化和民族复兴具有什么重要地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人民民主的地位",
+      "lessonId": "xg08"
+    },
+    "297ce19844": {
+      "question": "社会主义民主政治的本质特征是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社会主义民主政治的本质特征",
+      "lessonId": "xg08"
+    },
+    "f5c9ba56bf": {
+      "question": "我国的根本政治制度是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "根本政治制度",
+      "lessonId": "xg08"
+    },
+    "bc4bf38c7d": {
+      "question": "我国三项基本政治制度分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "基本政治制度（3 项）",
+      "lessonId": "xg08"
+    },
+    "23fbaec38a": {
+      "question": "党的领导、人民当家作主、依法治国在社会主义民主政治中分别发挥什么作用？三者统一中最根本的是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三者有机统一",
+      "lessonId": "xg08"
+    },
+    "bfd9d9da91": {
+      "question": "政治制度评价中的“八个能否”，用于判断一个国家政治制度的哪两种属性？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"八个能否\"",
+      "lessonId": "xg08"
+    },
+    "999dccf04a": {
+      "question": "“人民民主是一种全过程的民主”于何年何月、在上海哪个基层联系点提出？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全过程人民民主首次提出",
+      "lessonId": "xg08"
+    },
+    "3437e75ceb": {
+      "question": "全过程人民民主体现哪四对民主形式或意志的统一？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个统一",
+      "lessonId": "xg08"
+    },
+    "6208dc11ff": {
+      "question": "全过程人民民主的全链条包含哪五个民主环节？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全链条五环节",
+      "lessonId": "xg08"
+    },
+    "33d4dfa57d": {
+      "question": "我国五级人民代表大会分别是哪五级？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "五级人大",
+      "lessonId": "xg08"
+    },
+    "a5dfd86e06": {
+      "question": "全过程人民民主的三个“最”分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个\"最\"",
+      "lessonId": "xg08"
+    },
+    "2914ffcb99": {
+      "question": "社会主义协商民主怎样体现“人民民主的真谛”？说明谁来商量，以及要找到什么最大公约数。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人民民主的真谛",
+      "lessonId": "xg08"
+    },
+    "124a20c3fb": {
+      "question": "我国协商民主有哪七种主要协商渠道？人民政协在其中是什么机构？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "七种协商渠道",
+      "lessonId": "xg08"
+    },
+    "c69ad22a49": {
+      "question": "基层民主在全过程人民民主和社会主义民主实践中分别具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "基层民主定位",
+      "lessonId": "xg08"
+    },
+    "c1afda2de5": {
+      "question": "人民代表大会制度的根本制度地位，与实现全过程人民民主的什么作用相联系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人大制度定位",
+      "lessonId": "xg08"
+    },
+    "d921f9ea0f": {
+      "question": "统一战线的本质要求是什么？它要解决哪两个方面的问题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "统一战线本质要求",
+      "lessonId": "xg08"
+    },
+    "b4304b19f2": {
+      "question": "中华民族共同体意识对民族团结具有什么作用？“四个与共”共同体理念包括哪些内容？",
+      "answer": "中华民族共同体意识是民族团结之本；“四个与共”是休戚与共、荣辱与共、生死与共、命运与共。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中华民族共同体意识",
+      "previousAnswer": "是民族团结之本；引导树立\"四个与共\"共同体理念",
+      "lessonId": "xg08"
+    },
+    "d7dde7a2cc": {
+      "question": "大统战工作格局怎样划分党委、统战部门和有关方面的职责？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "大统战工作格局",
+      "lessonId": "xg08"
+    },
+    "c94a5049f2": {
+      "question": "习近平法治思想的主要内容，集中体现为多少个“坚持”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "习近平法治思想",
+      "lessonId": "xg09"
+    },
+    "81f29a4b42": {
+      "question": "全面依法治国被称为国家治理的什么变革？它关系哪三个方面的长远发展？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全面依法治国定性",
+      "lessonId": "xg09"
+    },
+    "78c03986b1": {
+      "question": "全面依法治国的总目标包含建设什么体系和建设什么国家？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "总目标",
+      "lessonId": "xg09"
+    },
+    "df32d6ac34": {
+      "question": "全面依法治国的总抓手是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "总抓手",
+      "lessonId": "xg09"
+    },
+    "5f6095c725": {
+      "question": "中国特色社会主义法治道路的核心要义包含哪三个方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "法治道路核心要义",
+      "lessonId": "xg09"
+    },
+    "2407cc21b9": {
+      "question": "中国特色社会主义法治之魂、我国法治与西方资本主义国家法治最大的区别，指什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "法治之魂/最大区别",
+      "lessonId": "xg09"
+    },
+    "8175d623e2": {
+      "question": "全面依法治国和依法执政首先各要坚持什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "依法治国首要",
+      "lessonId": "xg09"
+    },
+    "ef91ecfcd1": {
+      "question": "宪法的生命和权威都在于哪个环节？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "宪法生命与权威",
+      "lessonId": "xg09"
+    },
+    "fcf17b0f0a": {
+      "question": "我国依宪治国、依宪执政与西方“宪政”是否相同？应怎样判断二者的关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "依宪治国 vs 西方宪政",
+      "lessonId": "xg09"
+    },
+    "49def7a0de": {
+      "question": "全面依法治国需要处理好哪四对重大关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四对重大关系",
+      "lessonId": "xg09"
+    },
+    "0b789bb155": {
+      "question": "中国特色社会主义法治体系由哪五个体系构成？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "法治体系五大构成",
+      "lessonId": "xg09"
+    },
+    "05a832988b": {
+      "question": "法治监督体系重点规范和约束什么权力？在监督中以哪种监督为主导？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "法治监督体系重点",
+      "lessonId": "xg09"
+    },
+    "7d6f945e55": {
+      "question": "把党内法规体系纳入中国特色社会主义法治体系，体现我国法治的什么鲜明特征？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党内法规体系入体系",
+      "lessonId": "xg09"
+    },
+    "5478797629": {
+      "question": "“推进法治中国建设”目标在哪次中央全会上首次提出？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "法治中国目标首提",
+      "lessonId": "xg09"
+    },
+    "03eab01b69": {
+      "question": "按法治中国建设规划的时间安排，2025年与2035年分别要实现怎样的法治体系和法治国家建设目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025/2035 节点",
+      "lessonId": "xg09"
+    },
+    "b831ea466b": {
+      "question": "法治国家、法治政府、法治社会在法治中国建设中分别承担目标、主体工程和基础中的什么角色？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三大支柱定位",
+      "lessonId": "xg09"
+    },
+    "b23f49b6b4": {
+      "question": "维护社会公平正义的最后一道防线是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "公正司法定位",
+      "lessonId": "xg09"
+    },
+    "a811fd864c": {
+      "question": "文化自信与其他自信相比有哪些特点？文化对国家民族发展的力量具有哪些持久性特征？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "文化自信定位",
+      "lessonId": "xg10"
+    },
+    "79bc5a22b7": {
+      "question": "文化自信的深厚基础、坚强基石、现实基础分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "文化自信三个基础",
+      "lessonId": "xg10"
+    },
+    "0c8e48e193": {
+      "question": "坚持文化和精神上的独立自主，要求怎样处理中国道理、中国经验与中国理论的关系，并避免什么倾向？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "精神上的独立自主",
+      "lessonId": "xg10"
+    },
+    "3757b32968": {
+      "question": "新时代宣传思想工作的五项使命任务分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "五项使命任务",
+      "lessonId": "xg10"
+    },
+    "4b49f28b58": {
+      "question": "文化建设的“二为”方向和“双百”方针分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"二为\"\"双百\"",
+      "lessonId": "xg10"
+    },
+    "f6b6402f70": {
+      "question": "意识形态工作对于国家、民族和党分别具有什么重要定位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "意识形态工作定位",
+      "lessonId": "xg10"
+    },
+    "10030cf064": {
+      "question": "党的新闻舆论工作职责使命的六组要求分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新闻舆论职责使命",
+      "lessonId": "xg10"
+    },
+    "a8be302109": {
+      "question": "中国特色哲学社会科学区别于其他哲学社会科学的根本标志是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "哲学社会科学根本标志",
+      "lessonId": "xg10"
+    },
+    "e8e950782b": {
+      "question": "社会主义核心价值观的24字基本内容是什么？按国家、社会、公民三个层面回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "核心价值观基本内容",
+      "lessonId": "xg10"
+    },
+    "a1816825e0": {
+      "question": "伟大建党精神的四组内涵分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "伟大建党精神",
+      "lessonId": "xg10"
+    },
+    "4b1a80a99a": {
+      "question": "中国共产党人的精神谱系以什么精神为源头？",
+      "answer": "中国共产党人的精神谱系以伟大建党精神为源头。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "精神谱系源头",
+      "previousAnswer": "以伟大建党精神为源头，四个时期一系列伟大精神",
+      "lessonId": "xg10"
+    },
+    "d02f261b75": {
+      "question": "中华文明具有哪五个突出特性？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中华文明五个突出特性",
+      "lessonId": "xg10"
+    },
+    "733d0a5ead": {
+      "question": "衡量文化产业发展应优先看什么效益、提供什么样的文化产品？能否只看经济效益？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "文化产业衡量标准",
+      "lessonId": "xg10"
+    },
+    "7886b65cbc": {
+      "question": "文化软实力从根本上取决于核心价值观的哪三种力量？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "文化软实力根本取决",
+      "lessonId": "xg10"
+    },
+    "fc4801e7fd": {
+      "question": "加强国际传播，要展现怎样的中国，塑造怎样的中国形象？分别用三组词概括。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中国形象",
+      "lessonId": "xg10"
+    },
+    "b715f4e6df": {
+      "question": "新时代保障和改善民生坚持什么根本执政理念？什么被称为“国之大者”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "根本执政理念",
+      "lessonId": "xg11"
+    },
+    "05e776ac43": {
+      "question": "增进民生福祉对于执政宗旨、社会主义生产和现代化建设，分别具有什么定位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "民生福祉三定位",
+      "lessonId": "xg11"
+    },
+    "eb1626abdf": {
+      "question": "脱贫攻坚在全面建成小康社会和民生工作中分别具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "脱贫攻坚定位",
+      "lessonId": "xg11"
+    },
+    "68f14813a0": {
+      "question": "精准扶贫的“六个精准”分别要在哪六个方面做到精准？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "六个精准",
+      "lessonId": "xg11"
+    },
+    "fb0f50efe8": {
+      "question": "脱贫攻坚的“两不愁、三保障”分别涉及哪些生活条件和公共服务？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两不愁三保障",
+      "lessonId": "xg11"
+    },
+    "84e99549b3": {
+      "question": "发展与民生是什么关系？分别用“总钥匙”和“指南针”表述。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "民生与发展",
+      "lessonId": "xg11"
+    },
+    "83ac2f4b4f": {
+      "question": "保障和改善民生的工作思路包括哪四项要求？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "民生工作思路",
+      "lessonId": "xg11"
+    },
+    "997d0b3083": {
+      "question": "分配制度对于共同富裕、收入分配对于民生，分别具有什么基础地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "分配制度定位",
+      "lessonId": "xg11"
+    },
+    "7208232265": {
+      "question": "初次分配、再分配、第三次分配分别发挥什么作用，主要有哪些调节途径？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三次分配",
+      "lessonId": "xg11"
+    },
+    "9945f23aaf": {
+      "question": "就业在民生中具有什么基础地位？为什么被称为民生工程、民心工程和根基工程？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "就业定位",
+      "lessonId": "xg11"
+    },
+    "af58d755be": {
+      "question": "社会保障分别作为民生、收入分配和经济运行的什么机制发挥作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社会保障三作用",
+      "lessonId": "xg11"
+    },
+    "ae08b0b7cb": {
+      "question": "完善社会保障体系应重点增强或保证哪三个方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社保体系建设重点",
+      "lessonId": "xg11"
+    },
+    "4688e722d8": {
+      "question": "人民健康在社会主义现代化建设中具有什么标志性地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "健康定位",
+      "lessonId": "xg11"
+    },
+    "d6865d0e8a": {
+      "question": "社会治理体系的七个要素分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "社会治理体系七要素",
+      "lessonId": "xg11"
+    },
+    "89df76dae3": {
+      "question": "共建、共治、共享在社会治理中分别是基础、关键还是目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "共建共治共享定位",
+      "lessonId": "xg11"
+    },
+    "59db618b76": {
+      "question": "创新社会治理方式要求推进哪四个“治理”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个治理",
+      "lessonId": "xg11"
+    },
+    "949fb9bedb": {
+      "question": "基层治理与国家治理是什么关系？社会治理最基本的单元是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "基层治理",
+      "lessonId": "xg11"
+    },
+    "3372312ac6": {
+      "question": "生态文明建设对于中华民族永续发展具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "生态文明建设的定位",
+      "lessonId": "xg12"
+    },
+    "7f04c43697": {
+      "question": "习近平生态文明思想的主要内容集中体现为多少个“坚持”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "习近平生态文明思想内容",
+      "lessonId": "xg12"
+    },
+    "8a7be9873a": {
+      "question": "人与自然和谐共生要求人类以哪三种基本态度对待自然？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人与自然的内在要求",
+      "lessonId": "xg12"
+    },
+    "bfbbad8fd2": {
+      "question": "生态兴衰与文明兴衰有什么关系？用“生态兴”和“生态衰”两句话回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "文明兴衰规律",
+      "lessonId": "xg12"
+    },
+    "a2352201cd": {
+      "question": "从人类文明发展进程看，生态文明与工业文明之间是什么关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "生态文明与工业文明",
+      "lessonId": "xg12"
+    },
+    "0bde8af913": {
+      "question": "“绿水青山就是金山银山”理念首次提出于何年何月何日、浙江哪个村？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两山理念首次提出",
+      "lessonId": "xg12"
+    },
+    "26dea6c220": {
+      "question": "“绿水青山就是金山银山”理念在哪次党代会上写入党章？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两山写入党章",
+      "lessonId": "xg12"
+    },
+    "3f1cde9bbd": {
+      "question": "习近平生态文明思想在哪一年哪月、哪次大会上确立？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "习近平生态文明思想确立",
+      "lessonId": "xg12"
+    },
+    "638642fe2c": {
+      "question": "什么被称为最公平的公共产品、最普惠的民生福祉？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "最普惠的民生福祉",
+      "lessonId": "xg12"
+    },
+    "262ae9daad": {
+      "question": "新时代我国生态文明建设发生了哪四个重大转变？逐项说明转变前后。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个重大转变",
+      "lessonId": "xg12"
+    },
+    "50e8a27391": {
+      "question": "生态文明建设通过哪一年哪月、哪次全国人大会议的宪法修正案写入宪法？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "生态文明写入宪法",
+      "lessonId": "xg12"
+    },
+    "ec9f72a45b": {
+      "question": "绿色发展的要义是什么？解决生态环境问题的治本之策是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "绿色发展的要义与治本之策",
+      "lessonId": "xg12"
+    },
+    "69a50eb982": {
+      "question": "我国“双碳”目标分别要求在什么时间前实现碳达峰和碳中和？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"双碳\"目标",
+      "lessonId": "xg12"
+    },
+    "c6195ffd11": {
+      "question": "“山水林田湖草是生命共同体”的命脉链怎样从人依次连接到田、水、山、土、林和草？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "生命共同体的命脉链",
+      "lessonId": "xg12"
+    },
+    "ba5336d862": {
+      "question": "国家生态安全屏障体系中的“三区四带”分别指哪些区域和地带？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三区四带",
+      "lessonId": "xg12"
+    },
+    "9c27a50c99": {
+      "question": "我国自然保护地体系以什么为主体、基础和补充？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "自然保护地体系",
+      "lessonId": "xg12"
+    },
+    "94f60a9840": {
+      "question": "保护生态环境需要怎样的制度和法治？制度生命力体现在哪个环节？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "制度保障",
+      "lessonId": "xg12"
+    },
+    "3f6b250fbc": {
+      "question": "中国在全球生态文明建设中承担哪三种角色？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中国的全球定位",
+      "lessonId": "xg12"
+    },
+    "9cd780f77f": {
+      "question": "中国承办的COP15推动达成了什么全球生物多样性治理框架？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "生物多样性治理里程碑",
+      "lessonId": "xg12"
+    },
+    "1bcca2d6d8": {
+      "question": "共建“一带一路”应以哪一种发展理念作为鲜明底色？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"一带一路\"的底色",
+      "lessonId": "xg12"
+    },
+    "46c7b769f7": {
+      "question": "实现民族复兴、保证人民安居乐业，哪一事务被强调为“头等大事”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "章引言金句",
+      "lessonId": "xg13"
+    },
+    "1ad4dc4fb9": {
+      "question": "维护国家安全与塑造国家安全是什么关系？塑造安全比维护安全体现怎样的层次和前瞻性？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "维护与塑造的关系",
+      "lessonId": "xg13"
+    },
+    "c8346c7e0e": {
+      "question": "国家安全的定义既包含怎样的安全状态，也包含怎样的保障能力？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "国家安全的定义",
+      "lessonId": "xg13"
+    },
+    "a9d766eb42": {
+      "question": "国家安全与社会稳定分别是民族复兴和国家强盛的什么条件？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "根基与前提",
+      "lessonId": "xg13"
+    },
+    "bfa27933b9": {
+      "question": "总体国家安全观在哪一年哪月哪日、哪次会议上首次提出？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "总体国家安全观首次提出",
+      "lessonId": "xg13"
+    },
+    "6eaa1c550c": {
+      "question": "总体国家安全观的五大要素，分别以什么为宗旨、根本、基础、保障和依托？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "五大要素",
+      "lessonId": "xg13"
+    },
+    "d86af57c9f": {
+      "question": "新时代国家安全工作发生了哪三组从原有状态到新状态的全局性变革？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全局性变革",
+      "lessonId": "xg13"
+    },
+    "a56fe1b0ff": {
+      "question": "全民国家安全教育日是每年哪一天？首个教育日出现在哪一年？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全民国家安全教育日",
+      "lessonId": "xg13"
+    },
+    "0181b6c34c": {
+      "question": "统筹发展和安全属于党治国理政的什么原则？它何时纳入“十四五”指导思想、何时写入党章？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "统筹发展和安全定位",
+      "lessonId": "xg13"
+    },
+    "a0947d01fa": {
+      "question": "为什么说发展和安全是一体之两翼、驱动之双轮？二者分别提供什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "发展和安全关系",
+      "lessonId": "xg13"
+    },
+    "146e2cf25b": {
+      "question": "哪一领域安全是国家安全的根本，被比作国家安全肌体的“心脏”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "政治安全定位",
+      "lessonId": "xg13"
+    },
+    "d6dff3f275": {
+      "question": "政治安全、人民安全、国家利益至上在国家安全工作中分别处于什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三者有机统一",
+      "lessonId": "xg13"
+    },
+    "bcb62d0018": {
+      "question": "国土安全、经济安全、社会安全分别被定位为立国之基、基础和晴雨表风向标中的哪一项？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "各领域定位",
+      "lessonId": "xg13"
+    },
+    "8ca119ee7a": {
+      "question": "维护重点领域国家安全，在国家安全工作中具有什么主阵地和主战场地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "重点领域安全定位",
+      "lessonId": "xg13"
+    },
+    "0d7da5d5e7": {
+      "question": "保障国家安全的治本之策是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "健全国家安全体系",
+      "lessonId": "xg13"
+    },
+    "8aa86288ba": {
+      "question": "平安中国建设要推动公共安全治理由什么模式向什么模式转型？应建立怎样的安全应急框架？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "平安中国治理模式转型",
+      "lessonId": "xg13"
+    },
+    "f811a10a06": {
+      "question": "防范风险的底线思维要求从哪里着眼、做什么准备、朝什么方向努力、争取什么结果？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "底线思维口诀",
+      "lessonId": "xg13"
+    },
+    "10ac00a7ae": {
+      "question": "防范风险运用“木桶原理”，除了补齐短板，还应特别注意什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "木桶原理",
+      "lessonId": "xg13"
+    },
+    "e61303d2bb": {
+      "question": "防范化解重大风险需要健全哪四个风险防控机制？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个风险防控机制",
+      "lessonId": "xg13"
+    },
+    "18b08be1b2": {
+      "question": "“强国必须……，……才能国安”这句关于国防和军队建设的论断应怎样补全？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "强军论断",
+      "lessonId": "xg14"
+    },
+    "0bc774e07d": {
+      "question": "巩固国防和强大人民军队，为新时代中国特色社会主义和民族复兴提供什么支撑？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "军队战略定位",
+      "lessonId": "xg14"
+    },
+    "ed659a2139": {
+      "question": "人民军队的建军之本、强军之魂是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "建军之本、强军之魂",
+      "lessonId": "xg14"
+    },
+    "8c561c7554": {
+      "question": "党在新时代的强军目标怎样规定军队的三项要求和最终建设目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "强军目标",
+      "lessonId": "xg14"
+    },
+    "1416c8b784": {
+      "question": "新时代强军目标的提出和明确，从2012年12月至党的十九大经历了哪三个会议节点？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "强军目标提出线",
+      "lessonId": "xg14"
+    },
+    "cd9dbb8d28": {
+      "question": "强军目标中的听党指挥、能打胜仗、作风优良分别是灵魂、核心还是保证，各解决什么问题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三者定位",
+      "lessonId": "xg14"
+    },
+    "eec6f85f07": {
+      "question": "新时代人民军队使命任务要求提供哪四个战略支撑？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个战略支撑",
+      "lessonId": "xg14"
+    },
+    "6832ede5bc": {
+      "question": "国防和军队现代化新“三步走”战略，2027年、2035年、本世纪中叶各对应什么目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新\"三步走\"",
+      "lessonId": "xg14"
+    },
+    "e8746faa70": {
+      "question": "到2035年基本实现国防和军队现代化，关键要推进哪四个方面的现代化？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2035 关键",
+      "lessonId": "xg14"
+    },
+    "939cb5ca0e": {
+      "question": "保证党对人民军队绝对领导的制度体系包括哪些主要制度和组织原则？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党对军队绝对领导的制度",
+      "lessonId": "xg14"
+    },
+    "9090a501c3": {
+      "question": "军委主席负责制在党对军队绝对领导的制度体系中具有什么根本地位和统领作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "军委主席负责制",
+      "lessonId": "xg14"
+    },
+    "61019b67ed": {
+      "question": "政治建军、改革强军、科技强军、人才强军、依法治军分别在军队建设中发挥什么作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "五军布局定位",
+      "lessonId": "xg14"
+    },
+    "89adb62f86": {
+      "question": "人民军队建设唯一的根本标准是什么？主责主业是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "战斗力标准",
+      "lessonId": "xg14"
+    },
+    "e77b51a931": {
+      "question": "军民融合发展与军政军民团结，分别怎样支撑富国与强军相统一？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "军民融合与团结",
+      "lessonId": "xg14"
+    },
+    "1279b4b518": {
+      "question": "“一国两制”中，统一国家的主体与个别地区分别实行什么制度？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "“一国两制”定义",
+      "lessonId": "xg15"
+    },
+    "bcad4044be": {
+      "question": "香港、澳门特别行政区的高度自治权主要包括哪些权力？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "特区高度自治权内容",
+      "lessonId": "xg15"
+    },
+    "779dad8596": {
+      "question": "“一国两制”构想最早针对什么问题提出，首先用于解决哪些地区的问题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "构想的提出与运用",
+      "lessonId": "xg15"
+    },
+    "8d65dd3bed": {
+      "question": "香港于何年何月何日回归祖国？此前《中英联合声明》何时签署？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "香港回归",
+      "lessonId": "xg15"
+    },
+    "096f3f10b9": {
+      "question": "澳门于何年何月何日回归祖国？此前《中葡联合声明》何时签署？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "澳门回归",
+      "lessonId": "xg15"
+    },
+    "4bef44f95f": {
+      "question": "坚持“一国两制”的根本宗旨，在国家利益与港澳发展方面分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "根本宗旨",
+      "lessonId": "xg15"
+    },
+    "6a29f76591": {
+      "question": "贯彻“一国两制”方针，应坚持哪两点要求？分别防止什么变化或偏差？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "贯彻方针两点",
+      "lessonId": "xg15"
+    },
+    "ddbfa5d6cc": {
+      "question": "“一国”与“两制”之间，谁是前提和基础，谁具有从属和派生关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "“一国”与“两制”关系",
+      "lessonId": "xg15"
+    },
+    "bba8e391b2": {
+      "question": "中央全面管治权与特别行政区高度自治权是什么关系？特别行政区是否存在“剩余权力”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两权关系",
+      "lessonId": "xg15"
+    },
+    "34070b0dc7": {
+      "question": "香港、澳门特别行政区的宪制基础由哪两类法律共同构成？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "宪制基础",
+      "lessonId": "xg15"
+    },
+    "150e127960": {
+      "question": "香港国安法由哪个机构于何年何月通过？它在维护香港稳定中被比作什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "香港国安法",
+      "lessonId": "xg15"
+    },
+    "e2fdc2de1a": {
+      "question": "完善香港特别行政区选举制度的决定于何年何月、哪次会议通过？它落实了什么原则？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "完善选举制度",
+      "lessonId": "xg15"
+    },
+    "92e9357adf": {
+      "question": "对港澳发展而言，最大优势、最大舞台和新机遇分别来自哪些制度与国家战略？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "港澳三个“最”",
+      "lessonId": "xg15"
+    },
+    "7eed59504e": {
+      "question": "解决台湾问题、实现祖国完全统一，对于党、中华儿女和民族复兴分别意味着什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "解决台湾问题三重定位",
+      "lessonId": "xg15"
+    },
+    "9ce6138b9b": {
+      "question": "新时代党解决台湾问题总体方略中，推进祖国统一的根本保证是什么？",
+      "answer": "坚持党中央对对台工作的集中统一领导。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "总体方略十定位",
+      "previousAnswer": "根本保证 / 历史方位 / 战略思路 / 大政方针 / 政治基础 / 实践途径 / 根本动力 / 必然要求 / 外部条件 / 战略支撑",
+      "lessonId": "xg15"
+    },
+    "64654942c8": {
+      "question": "实现两岸统一的最佳方式是哪一方针？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两岸统一最佳方式",
+      "lessonId": "xg15"
+    },
+    "569fad7b8f": {
+      "question": "对台工作中不承诺放弃使用武力，针对哪些对象？是否针对广大台湾同胞？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "不放弃武力针对对象",
+      "lessonId": "xg15"
+    },
+    "4673945c7d": {
+      "question": "习近平外交思想主要内容概括为多少个“坚持”？其统领、宗旨和底线各是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "习近平外交思想主要内容",
+      "lessonId": "xg16"
+    },
+    "602a32b209": {
+      "question": "世界百年未有之大变局主要表现在哪三个方面？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "大变局三大表现",
+      "lessonId": "xg16"
+    },
+    "df26791cb9": {
+      "question": "百年未有之大变局中，国际力量对比最具革命性的变化是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "最具革命性的变化",
+      "lessonId": "xg16"
+    },
+    "085387fe50": {
+      "question": "当前世界面临的“四个赤字”分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个赤字",
+      "lessonId": "xg16"
+    },
+    "ee047df608": {
+      "question": "分析国际形势应树立正确的哪三种观念？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "把握国际形势的三观",
+      "lessonId": "xg16"
+    },
+    "cbf72ad3ed": {
+      "question": "中国特色大国外交的主线和总目标分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中国特色大国外交主线/总目标",
+      "lessonId": "xg16"
+    },
+    "853f167cfa": {
+      "question": "中国坚持走和平发展道路的三个依据是什么？从制度、历史文化和世界潮流回答。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "走和平发展道路三依据",
+      "lessonId": "xg16"
+    },
+    "c71addf103": {
+      "question": "新型国际关系的核心内容是什么？对话与对抗、结伴与结盟应怎样选择？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新型国际关系",
+      "lessonId": "xg16"
+    },
+    "ab0d3d7d31": {
+      "question": "中美关系应坚持哪三项原则？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中美关系三原则",
+      "lessonId": "xg16"
+    },
+    "02c49b436c": {
+      "question": "中欧双方提出建设的四大伙伴关系分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中欧四大伙伴关系",
+      "lessonId": "xg16"
+    },
+    "df90b86035": {
+      "question": "中国周边外交的基本方针和理念分别是什么？",
+      "answer": "基本方针是与邻为善、以邻为伴；理念是亲、诚、惠、容。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "周边外交方针与理念",
+      "previousAnswer": "与邻为善、以邻为伴 + 亲诚惠容；亚洲安全观：共同、综合、合作、可持续",
+      "lessonId": "xg16"
+    },
+    "c856e4d222": {
+      "question": "中国同发展中国家发展关系应坚持什么理念和义利观？",
+      "answer": "坚持真实亲诚理念和正确义利观。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "对发展中国家理念",
+      "previousAnswer": "真实亲诚 + 正确义利观；金砖\"三轮驱动\"",
+      "lessonId": "xg16"
+    },
+    "98fd81b132": {
+      "question": "新型政党关系强调什么？党际交往应遵循哪四项原则？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新型政党关系",
+      "lessonId": "xg16"
+    },
+    "915649ca32": {
+      "question": "维护国家主权、安全、发展利益在中国对外工作中具有什么出发点、落脚点与使命地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "维护国家主权安全发展利益的地位",
+      "lessonId": "xg16"
+    },
+    "bae0a59eff": {
+      "question": "构建人类命运共同体如何回应时代之问？它在新时代中国对外工作中具有什么总目标地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人类命运共同体定位",
+      "lessonId": "xg16"
+    },
+    "a57ab93e73": {
+      "question": "构建人类命运共同体要建设怎样的“五个世界”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "五个世界",
+      "lessonId": "xg16"
+    },
+    "64d3b22e46": {
+      "question": "2015年9月第七十届联合国大会上提出的全人类共同价值包括哪六项？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全人类共同价值",
+      "lessonId": "xg16"
+    },
+    "37f07bdc2d": {
+      "question": "全球发展、安全、文明三大全球倡议分别于何时、在哪类国际会议上提出？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三大全球倡议",
+      "lessonId": "xg16"
+    },
+    "0eef36b30e": {
+      "question": "中国倡导怎样的全球治理观？在国际合作中坚持什么样的多边主义？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全球治理观",
+      "lessonId": "xg16"
+    },
+    "a98a3cd6bd": {
+      "question": "“一带一路”倡议于哪一年提出，由哪两个建设倡议组成？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"一带一路\"提出",
+      "lessonId": "xg16"
+    },
+    "8ee49b8191": {
+      "question": "共建“一带一路”的原则、理念和目标分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "一带一路原则/理念/目标",
+      "lessonId": "xg16"
+    },
+    "707a3fc59e": {
+      "question": "共建“一带一路”的“五通”分别指什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "五通",
+      "lessonId": "xg16"
+    },
+    "eb9aaa56d4": {
+      "question": "哪一年哪月、哪次会议把习近平关于党的建设的重要思想概括为“十三个坚持”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"十三个坚持\"",
+      "lessonId": "xg17"
+    },
+    "4b3b680c42": {
+      "question": "关于党的自身建设，“打铁还需自身硬”在党的十九大升级为何种表述？两种表述分别对应哪一年？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "打铁表述升级",
+      "lessonId": "xg17"
+    },
+    "4a92359c8d": {
+      "question": "中国共产党面临的“四大考验”分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四大考验",
+      "lessonId": "xg17"
+    },
+    "5f0ceb433c": {
+      "question": "中国共产党面临的“四种危险”分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四种危险",
+      "lessonId": "xg17"
+    },
+    "80a707d48f": {
+      "question": "全面从严治党的核心、基础、关键和要害分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全面从严治党定位",
+      "lessonId": "xg17"
+    },
+    "41f5b4a547": {
+      "question": "健全全面从严治党体系的“四个全”分别指内容、对象、责任和制度的什么要求？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "体系\"四个全\"",
+      "lessonId": "xg17"
+    },
+    "bb78b3c4ed": {
+      "question": "新时代党的建设主线包括哪三个方面的建设？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党建主线",
+      "lessonId": "xg17"
+    },
+    "e732ffa39f": {
+      "question": "党的政治建设具有怎样的根本地位和顺序要求？首要任务是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "政治建设",
+      "lessonId": "xg17"
+    },
+    "e20dedc2b8": {
+      "question": "党的思想建设具有怎样的基础地位？思想建党、理论强党发挥什么作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "思想建设",
+      "lessonId": "xg17"
+    },
+    "55b45e01a7": {
+      "question": "新时代好干部的五条标准分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "好干部标准",
+      "lessonId": "xg17"
+    },
+    "70a5af2e9d": {
+      "question": "党性、党风、党纪之间，何者是根本、表现和保障？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党性党风党纪",
+      "lessonId": "xg17"
+    },
+    "9c19b3056c": {
+      "question": "全面从严治党的治本之策是什么？党纪与国法在要求和适用先后上是什么关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "治本之策",
+      "lessonId": "xg17"
+    },
+    "40c8883221": {
+      "question": "截至2022年6月，我国现行有效党内法规共有多少部？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党内法规数据",
+      "lessonId": "xg17"
+    },
+    "89a182feb8": {
+      "question": "党内监督在党和国家各种监督形式中处于什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "党内监督地位",
+      "lessonId": "xg17"
+    },
+    "e6c2f8257d": {
+      "question": "腐败对于党的健康发展意味着什么？反腐败被称为怎样的自我革命？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "反腐败定性",
+      "lessonId": "xg17"
+    },
+    "e3729870c3": {
+      "question": "反腐败工作坚持什么治理方针、覆盖和容忍要求，并开展哪三类行动？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "反腐败方针",
+      "lessonId": "xg17"
+    },
+    "dd62f61af7": {
+      "question": "“不敢腐、不能腐、不想腐”之间，何者是前提、关键和根本？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三不腐",
+      "lessonId": "xg17"
+    },
+    "99713e2466": {
+      "question": "党跳出治乱兴衰历史周期率的第一个答案和第二个答案分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两个答案",
+      "lessonId": "xg17"
+    },
+    "e5154b82a7": {
+      "question": "党的自我革命要求增强哪“四个自我”能力？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "四个自我",
+      "lessonId": "xg17"
+    },
+    "ba96d5339f": {
+      "question": "党的二十大提出的“三个务必”分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个务必",
+      "lessonId": "xg17"
+    },
+    "8a093b3aef": {
+      "question": "党的二十届四中全会于何时、何地举行？审议通过的最重要规划文件是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "二十届四中全会",
+      "lessonId": "sz00"
+    },
+    "84d2c669a4": {
+      "question": "“十五五”时期在基本实现社会主义现代化进程中是什么关键时期，具有什么衔接地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"十五五\"时期定位",
+      "lessonId": "sz00"
+    },
+    "218d9b9744": {
+      "question": "“十五五”时期经济社会发展必须遵循的六大原则分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"十五五\"六大原则",
+      "lessonId": "sz00"
+    },
+    "073bbf02eb": {
+      "question": "“十五五”时期经济社会发展的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"十五五\"经济社会发展的主题",
+      "lessonId": "sz00"
+    },
+    "11a6d1066b": {
+      "question": "“十五五”规划建议展望2035年时，对国家实力、人均GDP和现代化程度分别提出什么目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2035年目标",
+      "lessonId": "sz00"
+    },
+    "5d621076d3": {
+      "question": "“十五五”12项重大部署之首是什么？其经济着力点、三大发展方向和物质技术基础定位分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "12项重大部署之首",
+      "lessonId": "sz00"
+    },
+    "45118e4378": {
+      "question": "伟大抗战精神的四方面内涵分别是什么？请同时说出相应的情怀、气节、气概和信念。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "伟大抗战精神",
+      "lessonId": "sz00"
+    },
+    "2c98eb2e12": {
+      "question": "百团大战发生在抗日战争的哪个战略阶段？它体现了中国共产党在全民族抗战中的什么作用？",
+      "answer": "百团大战发生在抗日战争的战略相持阶段，体现了中国共产党在全民族抗战中的中流砥柱作用。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "百团大战",
+      "previousAnswer": "2025年7月7日习近平参观山西阳泉百团大战纪念馆；百团大战发生在抗战**战略防御阶段**的关键时刻，展现了中国共产党在全民族抗战中的**中流砥柱**作用。",
+      "lessonId": "sz00"
+    },
+    "c265c9a19e": {
+      "question": "2025年全国人大常委会何时决定设立台湾光复纪念日？纪念日定在哪一天，2025年对应光复多少周年？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "台湾光复纪念日",
+      "lessonId": "sz00"
+    },
+    "4a31f047b5": {
+      "question": "生态环境法典草案于2025年何时首次提请审议？在当时的立法安排中，它拟成为我国第几部以“法典”命名的法律？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "生态环境法典草案",
+      "lessonId": "sz00"
+    },
+    "0841e644bc": {
+      "question": "修改代表法的决定由哪次会议于2025年哪一天通过？它有利于完善什么制度、发展什么民主？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "修改人大代表法",
+      "lessonId": "sz00"
+    },
+    "c356cfec7a": {
+      "question": "按2025年起施行的弹性退休暂行办法，弹性提前退休最长可提前几年，不得低于哪些原法定年龄？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "弹性退休制度",
+      "lessonId": "sz00"
+    },
+    "ef4961a472": {
+      "question": "“拥军优属、拥政爱民”在我国具有什么传统和政治优势地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "双拥工作",
+      "lessonId": "sz00"
+    },
+    "6fdfb57f9b": {
+      "question": "嫦娥六号完成了人类探月的哪项首次任务？任务团队获得了哪一2025年度航天奖项？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "嫦娥六号",
+      "lessonId": "sz00"
+    },
+    "5668e145d3": {
+      "question": "中国载人登月计划瞄准何时实现首次登月？登月服和载人月球车分别叫什么？",
+      "answer": "瞄准2030年前实现中国人首次登陆月球；登月服命名为“望宇”，载人月球车命名为“探索”。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "载人登月",
+      "previousAnswer": "瞄准**2030年前**实现中国人首次登陆月球；登月服命名\"**望宇**\"、载人月球车命名\"**探索**\"；**揽月**月面着陆器完成我国**首次**载人航天器地外天体着陆起飞试验；探月工程研制的**月壤打砖机**是世界**第一台**该类设备。",
+      "lessonId": "sz00"
+    },
+    "2f6996bb05": {
+      "question": "天问二号一次发射计划探测哪颗小行星和哪颗主带彗星？对两类目标分别实施哪些任务？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "天问二号",
+      "lessonId": "sz00"
+    },
+    "3bf66b848b": {
+      "question": "2025年漳州核电1号机组投入商业运行，它属于哪种自主核电技术路线、所在基地有何规模地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"华龙一号\"",
+      "lessonId": "sz00"
+    },
+    "d5fcacf683": {
+      "question": "我国首口超万米科探井深地塔科1井完钻深度是多少？按垂直深度排名在亚洲和世界各居第几？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "深地塔科1井",
+      "lessonId": "sz00"
+    },
+    "87a4602488": {
+      "question": "2025年发布的“祖冲之三号”是什么类型的量子计算原型机，拥有多少比特，并刷新了哪类纪录？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "祖冲之三号",
+      "lessonId": "sz00"
+    },
+    "12f3493370": {
+      "question": "龙芯3C6000采用什么指令系统？这一技术路线对国外授权技术有何依赖？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "龙芯3C6000",
+      "lessonId": "sz00"
+    },
+    "0544ab11eb": {
+      "question": "AG600“鲲龙”属于什么类型的飞机？2025年获型号合格证时，其起飞重量具有怎样的全球地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "AG600\"鲲龙\"",
+      "lessonId": "sz00"
+    },
+    "1866ec25aa": {
+      "question": "“悟空”（Darwin Monkey）类脑计算机由哪所大学研制，其神经元规模超过多少？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"悟空\"（Darwin Monkey）",
+      "lessonId": "sz00"
+    },
+    "cedd54e989": {
+      "question": "我国科研人员公布的“天宫尼尔菌”是在哪种航天设施中发现的什么新物种？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"天宫尼尔菌\"",
+      "lessonId": "sz00"
+    },
+    "f0182fe4ce": {
+      "question": "2025年“三体计算星座”进入组网阶段，它属于什么类型的太空计算星座？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"三体计算星座\"",
+      "lessonId": "sz00"
+    },
+    "78cedace72": {
+      "question": "海南商业航天发射场双工位首发成功，完整验证了国内首个商业航天发射场的什么能力？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "海南商业航天发射场",
+      "lessonId": "sz00"
+    },
+    "b1594468b7": {
+      "question": "2025年朱雀三号动力系统试车实现多少台发动机并联？当时在我国并联热试车中具有什么地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "朱雀三号",
+      "lessonId": "sz00"
+    },
+    "615e74bffb": {
+      "question": "2025年北极科考中，“蛟龙”号实现了我国载人深潜的哪项首次突破？",
+      "answer": "“蛟龙”号实现了我国首次北极冰区载人深潜。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"蛟龙\"号",
+      "previousAnswer": "实现我国**首次北极冰区载人深潜**；随后依托\"探索三号\"船创**全球首次密集冰区连续载人深潜**纪录。",
+      "lessonId": "sz00"
+    },
+    "a8b8833ca8": {
+      "question": "“奋斗者”号在海洋最深生态系统研究中，助力绘制了什么全球首个图景？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"奋斗者\"号",
+      "lessonId": "sz00"
+    },
+    "df430d193b": {
+      "question": "2025年12月26日通车的天山胜利隧道，在高速公路隧道长度方面具有什么世界地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "天山胜利隧道",
+      "lessonId": "sz00"
+    },
+    "6cbb61333f": {
+      "question": "玛尔挡水电站在黄河流域水电站中，具有哪项海拔纪录？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "玛尔挡水电站",
+      "lessonId": "sz00"
+    },
+    "6010d3e366": {
+      "question": "2025年12月18日投运的金上—湖北±800千伏特高压工程，在海拔和线路覆盖方面创造了什么纪录？",
+      "answer": "金上—湖北工程是世界海拔最高的特高压直流输电工程，也是首条深入川藏高原腹地的特高压工程。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "金上—湖北±800千伏特高压",
+      "previousAnswer": "**世界海拔最高**的特高压直流输电工程、首条深入川藏高原腹地（12月18日建成投运）；**宁夏—湖南特高压**：我国**首条**以输送**\"沙戈荒\"**风电光伏大基地新能源为主的特高压通道。",
+      "lessonId": "sz00"
+    },
+    "45a41fe733": {
+      "question": "“超碳一号”建于哪里？它是全球首台商用的哪一类型发电机组？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"超碳一号\"",
+      "lessonId": "sz00"
+    },
+    "a85826c4e9": {
+      "question": "在大连交付的“凯拓”轮采用什么动力形式，创造了哪项超大型油轮首制纪录？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"凯拓\"轮",
+      "lessonId": "sz00"
+    },
+    "8709299ccc": {
+      "question": "Agogo FPSO作为海上浮式生产储油卸油船，首次安装了什么碳治理装置？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "Agogo FPSO",
+      "lessonId": "sz00"
+    },
+    "013892d232": {
+      "question": "“雪龙2”号完成中国第41次南极考察历时多少天，创造了我国极地考察的哪项单船纪录？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"雪龙2\"号",
+      "lessonId": "sz00"
+    },
+    "bf4bdd07fa": {
+      "question": "秦岭站是我国第几个南极科考站、第几个常年考察站？它使中国南极考察进入什么越冬格局？",
+      "answer": "秦岭站是我国第五个南极科考站、继长城站和中山站之后的第三个常年考察站；中国南极考察由此进入“三站越冬”时代。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "秦岭站",
+      "previousAnswer": "我国第五个南极科考站、**第三个常年考察站**（继长城站、中山站之后），中国南极考察进入\"**三站越冬**\"时代；**长城站**迎来建站 **40周年**（我国在南极建立的**第一个**科考站）。",
+      "lessonId": "sz00"
+    },
+    "33dceb07c3": {
+      "question": "海南自由贸易港于2025年哪一天启动全岛封关运作？其“一线”“二线”和岛内管理的基本特征是什么？",
+      "answer": "2025年12月18日启动全岛封关运作；基本特征是“一线”放开、“二线”管住、岛内自由。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "海南自由贸易港",
+      "previousAnswer": "**2025年12月18日**正式启动**全岛封关**运作；基本特征是**\"一线\"放开、\"二线\"管住、岛内自由**；海南\"三区一中心\"中的\"三区\"指**全面深化改革开放试验区、国家生态文明试验区、国家重大战略服务保障区**。",
+      "lessonId": "sz00"
+    },
+    "8de992472c": {
+      "question": "《市场准入负面清单（2025年版）》的四项核心要求是什么？其中最核心的原则是哪项？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "《市场准入负面清单（2025年版）》",
+      "lessonId": "sz00"
+    },
+    "450bf48b7d": {
+      "question": "2025年免费学前教育政策从哪个学期开始，免除公办幼儿园哪个学段儿童的什么费用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "免费学前教育",
+      "lessonId": "sz00"
+    },
+    "b85910ac46": {
+      "question": "《加快建设农业强国规划（2024—2035年）》怎样定位农业强国与社会主义现代化强国的关系？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "《加快建设农业强国规划（2024—2035年）》",
+      "lessonId": "sz00"
+    },
+    "8817f3c3d1": {
+      "question": "保障国家粮食安全的根本是什么？建设高标准农田在其中发挥什么作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "高标准农田",
+      "lessonId": "sz00"
+    },
+    "a71cbe86cf": {
+      "question": "第四次全国农业普查安排在哪一年开展？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第四次全国农业普查",
+      "lessonId": "sz00"
+    },
+    "fdf32aa689": {
+      "question": "按再生稻发展目标，到2030年全国再生稻面积力争新增多少万亩？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "再生稻",
+      "lessonId": "sz00"
+    },
+    "6326fcc614": {
+      "question": "2024年我国氢能全年生产消费规模超过多少万吨，居世界第几位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "氢能",
+      "lessonId": "sz00"
+    },
+    "3db1e0e673": {
+      "question": "2024年上海港汽车吞吐量达到多少万辆，在世界港口中排名第几？",
+      "answer": "2024年上海港汽车吞吐量达363万辆，首次跃升世界第一。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "港口",
+      "previousAnswer": "上海港2024年汽车吞吐量 **363万辆**首次跃升**世界第一**；全国港口货物吞吐量 **176亿吨**、集装箱 **3.3亿标箱**，稳居世界第一。",
+      "lessonId": "sz00"
+    },
+    "a3e34992eb": {
+      "question": "塔里木油田在我国超深油气生产基地中具有什么规模地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "塔里木油田",
+      "lessonId": "sz00"
+    },
+    "2102f604a0": {
+      "question": "惠州19-6油田的发现，在海上深层至超深层哪种储层、整装油田和储量规模方面取得突破？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "惠州19-6油田",
+      "lessonId": "sz00"
+    },
+    "af56c2c0fc": {
+      "question": "流花油田是我国首个什么水深类型的油田？其礁灰岩油田地质储量具有什么国内地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "流花油田",
+      "lessonId": "sz00"
+    },
+    "4b3ddd496b": {
+      "question": "渤海油田在我国海上油田中具有什么规模地位？2025年油气当量突破多少万吨？",
+      "answer": "渤海油田是我国海上最大油田；2025年油气当量突破4000万吨，创历史新高。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "渤海油田",
+      "previousAnswer": "我国**海上最大油田**，2025年油气当量突破 **4000万吨**创新高；**秦皇岛29-6油田**是其2019年以来连续发现的**第7个**亿吨级油田。",
+      "lessonId": "sz00"
+    },
+    "053ceff25c": {
+      "question": "大东沟金矿探明金金属量是多少？其规模和品位类型创造了哪些国内纪录？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "大东沟金矿",
+      "lessonId": "sz00"
+    },
+    "298e588ee1": {
+      "question": "新疆油田在2025年的注碳能力上创造了什么国内首次纪录？它在新中国油田发展史中处于什么位置？",
+      "answer": "新疆油田成为我国首个年注碳百万吨油田，也是新中国第一个大油田。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "新疆油田",
+      "previousAnswer": "我国**首个年注碳百万吨**油田（新中国**第一个大油田**）；新疆粮食单产 **552.8公斤/亩**，蝉联**全国第一**。",
+      "lessonId": "sz00"
+    },
+    "164b6bc98a": {
+      "question": "国务院同意从哪一年起，把每年4月的哪一周设为“全民阅读活动周”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全民阅读活动周",
+      "lessonId": "sz00"
+    },
+    "f746c11ba9": {
+      "question": "第九届哈尔滨亚冬会上，中国代表团获得多少金牌和奖牌，在两榜各居什么位置？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第九届哈尔滨亚冬会",
+      "lessonId": "sz00"
+    },
+    "5ddf57f880": {
+      "question": "2025年成都世界运动会上，中国代表团的金、银、铜牌各有多少，两榜排名如何？",
+      "answer": "中国代表团获得36金17银11铜，位居金牌榜和奖牌榜首位。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "成都世运会",
+      "previousAnswer": "中国代表团 **36金17银11铜**，居**金牌榜、奖牌榜首位**；火炬\"**竹梦**\"是世界运动会历史上**首支火炬**。",
+      "lessonId": "sz00"
+    },
+    "7012f02ecd": {
+      "question": "第十五届全国运动会于2025年何时、何地开幕？联合举办地区的安排创造了什么首次纪录？",
+      "answer": "2025年11月9日在广州开幕，是首次由广东、香港、澳门三地联合举办的全国运动会。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "十五运会",
+      "previousAnswer": "**2025年11月9日**在**广州**开幕，**首次由粤港澳三地联合举办**的全国运动会；\"**夸父**\"成为**全球首个5G-A人形机器人火炬手**。",
+      "lessonId": "sz00"
+    },
+    "651e7497e8": {
+      "question": "2025年全国残特奥会于12月哪一天、在哪座城市闭幕？承办方式有何首次特点？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "残特奥会",
+      "lessonId": "sz00"
+    },
+    "52891b4cf1": {
+      "question": "赵心童在2025年斯诺克世锦赛上创造了中国球手的什么纪录？决赛对手和比分分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "赵心童",
+      "lessonId": "sz00"
+    },
+    "27d3edf8ca": {
+      "question": "谁分别获得世界泳联2024年度最佳男子、女子跳水运动员荣誉？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "曹缘、全红婵",
+      "lessonId": "sz00"
+    },
+    "40f89f3503": {
+      "question": "2025年世界人形机器人运动会在北京哪个场馆开幕？它的参赛主体和综合性赛事地位有何特点？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "世界人形机器人运动会",
+      "lessonId": "sz00"
+    },
+    "d282d0b566": {
+      "question": "2025年北京亦庄全球首个人形机器人半程马拉松，冠军机器人叫什么、成绩是多少？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "人形机器人半程马拉松",
+      "lessonId": "sz00"
+    },
+    "3b7e03aea2": {
+      "question": "清华“火神”队在2025年机器人世界杯获得哪个组别冠军，为中国机器人足球创造了什么首次成绩？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "清华火神队",
+      "lessonId": "sz00"
+    },
+    "92f5dcab71": {
+      "question": "2025年首届奥林匹克电竞运动会原定于何时何地举办？同年10月合作安排发生了什么变化？",
+      "answer": "2025年2月公布的原计划是2027年在沙特阿拉伯利雅得举办；2025年10月30日，国际奥委会宣布与沙特奥委会结束该项目合作，转而探索新的举办路径与合作模式。原计划不能继续当作确定赛程。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "首届电竞奥运会",
+      "previousAnswer": "**2027年**在沙特阿拉伯**利雅得**举行。",
+      "lessonId": "sz00"
+    },
+    "559df53a31": {
+      "question": "2025年中国新增6项全球重要农业文化遗产后，总数达到多少项、居世界第几位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全球重要农业文化遗产",
+      "lessonId": "sz00"
+    },
+    "ca722b7f4b": {
+      "question": "2025中关村论坛年会以什么为主题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025中关村论坛年会",
+      "lessonId": "sz00"
+    },
+    "813961d94d": {
+      "question": "博鳌亚洲论坛2025年年会的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "博鳌亚洲论坛2025年年会",
+      "lessonId": "sz00"
+    },
+    "4abf952408": {
+      "question": "中国发展高层论坛2025年年会的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中国发展高层论坛2025年年会",
+      "lessonId": "sz00"
+    },
+    "adede50b66": {
+      "question": "2025世界人工智能大会的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025世界人工智能大会",
+      "lessonId": "sz00"
+    },
+    "9b54103f0c": {
+      "question": "2025世界机器人大会的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025世界机器人大会",
+      "lessonId": "sz00"
+    },
+    "81b29a0f0a": {
+      "question": "2025世界互联网大会乌镇峰会的主题是什么？请包括破折号前后的两部分。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025世界互联网大会乌镇峰会",
+      "lessonId": "sz00"
+    },
+    "961fd05b4a": {
+      "question": "第三届中国国际供应链促进博览会的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第三届中国国际供应链促进博览会",
+      "lessonId": "sz00"
+    },
+    "7a2960b6e5": {
+      "question": "第138届广交会的展位数、参展企业数分别达到多少？首次设置了哪个医疗领域专区？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第138届广交会",
+      "lessonId": "sz00"
+    },
+    "9b61287aed": {
+      "question": "第22届中国—东盟博览会围绕中国—东盟自贸区哪个版本的新机遇，助建什么共同体？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第22届中国—东盟博览会",
+      "lessonId": "sz00"
+    },
+    "35f58355b5": {
+      "question": "第17届海峡论坛的主题是哪两项有关交流与发展的要求？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第17届海峡论坛",
+      "lessonId": "sz00"
+    },
+    "fe4edea756": {
+      "question": "2025年第25个全国科技活动周的主题是什么？",
+      "answer": "“矢志创新发展，建设科技强国”。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第25个全国科技活动周",
+      "previousAnswer": "\"矢志创新发展 建设科技强国\"（**5月30日**为第九个全国科技工作者日）",
+      "lessonId": "sz00"
+    },
+    "75b22a4364": {
+      "question": "2025年职业教育活动周采用什么主题？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "职业教育活动周",
+      "lessonId": "sz00"
+    },
+    "004c890714": {
+      "question": "2025种子大会暨南繁硅谷论坛的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025种子大会暨南繁硅谷论坛",
+      "lessonId": "sz00"
+    },
+    "9984104560": {
+      "question": "第五届中国国际消费品博览会的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第五届中国国际消费品博览会",
+      "lessonId": "sz00"
+    },
+    "31a836076f": {
+      "question": "第十三届世界和平论坛的主题是什么？请包括“共担、共享、共赢”所对应的前半部分。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "第十三届世界和平论坛",
+      "lessonId": "sz00"
+    },
+    "f2e498b9f0": {
+      "question": "2025年中国航海日的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025年中国航海日",
+      "lessonId": "sz00"
+    },
+    "6a91b47b07": {
+      "question": "2025中国科幻大会的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025中国科幻大会",
+      "lessonId": "sz00"
+    },
+    "3e3419a762": {
+      "question": "上海合作组织的“上海精神”包括哪些相互信任、合作和文明方面的内容？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"上海精神\"",
+      "lessonId": "sz00"
+    },
+    "a62fc7f5fd": {
+      "question": "2025年，印度尼西亚和越南分别以哪种身份加入金砖合作机制？",
+      "answer": "印度尼西亚成为金砖正式成员，越南以伙伴国身份加入。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "金砖国家",
+      "previousAnswer": "**印度尼西亚**成为金砖正式成员，**越南**以伙伴国身份加入；金砖国家是**全球南方第一方阵**；金砖精神：**开放包容、合作共赢**；习近平出席金砖领导人线上峰会并发表《团结合作 砥砺前行》重要讲话。",
+      "lessonId": "sz00"
+    },
+    "ab82514c6d": {
+      "question": "2025年4月《关于中美经贸关系若干问题的中方立场》白皮书，怎样概括中美经贸关系的本质？",
+      "answer": "中美经贸关系的本质是互利共赢。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中美关系",
+      "previousAnswer": "4月发布《关于中美经贸关系若干问题的中方立场》白皮书——中美经贸关系的本质是**互利共赢**；10月30日习近平同美国总统特朗普在**釜山**举行会晤。",
+      "lessonId": "sz00"
+    },
+    "11b89e69fd": {
+      "question": "新时代中俄战略协作精神的三方面内核是什么？中俄关系树立了什么典范？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中俄关系",
+      "lessonId": "sz00"
+    },
+    "b1f09e60c5": {
+      "question": "国际调解院公约签署仪式和首届国际调解论坛在哪座城市举行？成立该机构填补了哪个领域的机制空白？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "国际调解院",
+      "lessonId": "sz00"
+    },
+    "beb13c156b": {
+      "question": "巴勒斯坦问题在中东问题中处于什么地位？“两国方案”的核心要求是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "巴勒斯坦问题",
+      "lessonId": "sz00"
+    },
+    "53b11f0ba5": {
+      "question": "2025年中国对沙特、阿曼、科威特、巴林试行单方面免签后，当时政策适用国家增至多少个？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "单方面免签",
+      "lessonId": "sz00"
+    },
+    "8e35c5a26d": {
+      "question": "高市早苗在2025年当选日本第几任首相，创造了日本首相的哪项性别纪录？",
+      "answer": "高市早苗当选日本第104任首相，成为日本首位女首相。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "高市早苗",
+      "previousAnswer": "当选日本第 **104任**首相，是日本**首位女首相**；**李在明**当选韩国第 **21届**总统。",
+      "lessonId": "sz00"
+    },
+    "e27f773e42": {
+      "question": "柯丝蒂·考文垂在2025年当选国际奥委会主席，创造了哪项性别纪录？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "柯丝蒂·考文垂",
+      "lessonId": "sz00"
+    },
+    "d0408dbc93": {
+      "question": "2025年《全球软实力指数》中，中国和美国分别排名第几？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025年《全球软实力指数》",
+      "lessonId": "sz00"
+    },
+    "850a29e000": {
+      "question": "2025年诺贝尔物理学奖表彰了在电路中实现的哪两项量子物理成果？",
+      "answer": "在电路中实现宏观量子力学隧穿效应和能量量子化。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025年诺贝尔奖",
+      "previousAnswer": "物理学奖——在电路中实现**宏观量子力学隧穿效应和能量量子化**；化学奖——**金属有机框架**开发；经济学奖——**创新驱动经济增长理论**。",
+      "lessonId": "sz00"
+    },
+    "17eb67cc05": {
+      "question": "2025年遵义会议90周年纪念大会于1月哪一天、在哪里举行？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "遵义会议90周年",
+      "lessonId": "sz00"
+    },
+    "bbf307f668": {
+      "question": "2025年《反分裂国家法》实施20周年座谈会于哪月哪日举行？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "《反分裂国家法》实施20周年",
+      "lessonId": "sz00"
+    },
+    "43517bfc4a": {
+      "question": "2025年4月15日是第几个全民国家安全教育日？主题是什么，国家安全法施行满多少周年？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全民国家安全教育日",
+      "lessonId": "sz00"
+    },
+    "dec17c4a77": {
+      "question": "2025年中国航天日是4月哪一天、第几个航天日？",
+      "answer": "2025年4月24日是第十个中国航天日。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中国航天日",
+      "previousAnswer": "4月24日第十个；今年是**钱学森归国70周年**、我国第一颗人造卫星成功发射 **55周年**。",
+      "lessonId": "sz00"
+    },
+    "4ca1a6afc6": {
+      "question": "2025年中华全国总工会成立100周年庆祝活动于哪月哪日举行？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中华全国总工会成立100周年",
+      "lessonId": "sz00"
+    },
+    "ba736414af": {
+      "question": "陈云同志诞辰120周年纪念日是2025年哪月哪日？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "陈云同志诞辰120周年",
+      "lessonId": "sz00"
+    },
+    "bcfbe3f06f": {
+      "question": "2025年纪念中国人民抗日战争暨世界反法西斯战争胜利80周年的日期是哪一天？",
+      "answer": "2025年9月3日。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "抗战胜利80周年暨联合国成立80周年",
+      "previousAnswer": "9月3日；《联合国宪章》签署80周年（6月）。",
+      "lessonId": "sz00"
+    },
+    "66b1bef2ab": {
+      "question": "2025年西藏自治区成立多少周年，庆祝活动在哪个月举行？",
+      "answer": "2025年8月庆祝西藏自治区成立60周年。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "西藏自治区成立60周年",
+      "previousAnswer": "8月；**新疆维吾尔自治区成立70周年**：9月。",
+      "lessonId": "sz00"
+    },
+    "eddada6a64": {
+      "question": "2025年台湾光复80周年纪念日是哪一天？",
+      "answer": "2025年10月25日。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "台湾光复80周年",
+      "previousAnswer": "10月25日；**港珠澳大桥开通7周年**：10月23日。",
+      "lessonId": "sz00"
+    },
+    "662b55a298": {
+      "question": "在“两山”理念提出20周年的2025年，我国首批多少个国家公园于8月11日全部完成确权登记？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"两山\"理念提出20周年",
+      "lessonId": "sz00"
+    },
+    "ca8cac7bf5": {
+      "question": "2025年中国与欧盟建交50周年纪念日是几月几日？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中欧建交50周年",
+      "lessonId": "sz00"
+    },
+    "9db7e6ade9": {
+      "question": "故宫博物院在2025年哪个月迎来建院100周年？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "故宫博物院建院100周年",
+      "lessonId": "sz00"
+    },
+    "47f7e6a4e4": {
+      "question": "中国南极长城站在2025年哪一天迎来建站40周年？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "长城站建站40周年",
+      "lessonId": "sz00"
+    },
+    "5d5c1bea28": {
+      "question": "世界贸易组织成立30周年对应哪一年？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "世界贸易组织成立30周年",
+      "lessonId": "sz00"
+    },
+    "e9949622e1": {
+      "question": "2025年中央一号文件于何时发布，文件全称是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "文件名称与时间",
+      "lessonId": "sz00"
+    },
+    "154ec56e5e": {
+      "question": "2025年中央一号文件是党的十八大以来第几个指导“三农”工作的一号文件，也是新世纪连续第几年聚焦“三农”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两个定位数字",
+      "lessonId": "sz00"
+    },
+    "e41a77cf4a": {
+      "question": "2025年中央一号文件锚定什么总目标，以什么为动力，并要求学习运用哪项工程经验？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "总目标（锚定）",
+      "lessonId": "sz00"
+    },
+    "a0cc6bf0bc": {
+      "question": "2025年中央一号文件提出的“两个确保”分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两个确保",
+      "lessonId": "sz00"
+    },
+    "a8557fe897": {
+      "question": "2025年中央一号文件要求提升乡村哪三个方面的水平？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三个提升",
+      "lessonId": "sz00"
+    },
+    "8825c4d1a1": {
+      "question": "2025年中央一号文件要求农业、农村、农民分别实现哪“三增”？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "三增",
+      "lessonId": "sz00"
+    },
+    "66f19c7750": {
+      "question": "2025年中央一号文件强调，必须把解决什么问题作为全党工作重中之重？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "重中之重",
+      "lessonId": "sz00"
+    },
+    "17fd3fba79": {
+      "question": "2025年中央一号文件要求第二轮土地承包到期后再延长多少年？试点坚持什么稳定与调整原则？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "土地承包",
+      "lessonId": "sz00"
+    },
+    "e3b0ac8e01": {
+      "question": "2025年中央一号文件对耕地总量、占补关系和省域年度平衡提出哪些要求？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "耕地保护",
+      "lessonId": "sz00"
+    },
+    "1212733d4a": {
+      "question": "2025年中央一号文件如何部署农业新质生产力、种业振兴和“南繁硅谷”平台作用？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "农业新质生产力",
+      "lessonId": "sz00"
+    },
+    "4e23bc01e7": {
+      "question": "2025年中央一号文件提出通过哪三种联农带农方式，让农民分享产业增值收益？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "联农带农",
+      "lessonId": "sz00"
+    },
+    "232d51bd61": {
+      "question": "2025年中央一号文件关于农村农房、宅基地和退休干部建房的两个“不允许”分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "两个\"不允许\"",
+      "lessonId": "sz00"
+    },
+    "3269b7f179": {
+      "question": "2025年中央一号文件要求践行哪两种农业与食物观念，以何种方式开发食物资源？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "大食物观",
+      "lessonId": "sz00"
+    },
+    "5a8efc4088": {
+      "question": "2025年中央一号文件部署启动什么粮食产销区利益补偿机制，由哪个层级统筹？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "粮食利益补偿",
+      "lessonId": "sz00"
+    },
+    "02ee280efb": {
+      "question": "2025年中央一号文件要求全面落实什么基层工作制度，走好什么路线？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "作风要求",
+      "lessonId": "sz00"
+    },
+    "a950c44cd7": {
+      "question": "2025年新年贺词对2024年GDP的预计值是多少万亿元以上？",
+      "answer": "2024年我国国内生产总值预计超过130万亿元。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "GDP",
+      "previousAnswer": "2024年我国国内生产总值预计超过 **130万亿元**；粮食产量突破 **1.4万亿斤**。",
+      "lessonId": "sz00"
+    },
+    "af03463110": {
+      "question": "巴黎奥运会上中国体育代表团获得多少金银铜牌，创造了什么境外参赛成绩？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "巴黎奥运会",
+      "lessonId": "sz00"
+    },
+    "a37ba8d831": {
+      "question": "粤港澳大湾区建设锚定什么湾区与城市群目标？在新发展格局、高质量发展、中国式现代化中分别承担什么角色？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "粤港澳大湾区",
+      "lessonId": "sz00"
+    },
+    "c837011dc4": {
+      "question": "按2026年APEC“中国年”安排，第33次领导人非正式会议计划在哪个月、哪座城市举办？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "APEC\"中国年\"",
+      "lessonId": "sz00"
+    },
+    "91c5061ec8": {
+      "question": "“十五五”时期在现代化进程中处于什么关键阶段，经济社会发展的主题是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"十五五\"时期定位",
+      "lessonId": "sz00"
+    },
+    "b380c2cac8": {
+      "question": "“十五五”时期需要遵循的六项发展原则分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"十五五\"六大原则",
+      "lessonId": "sz00"
+    },
+    "413783146a": {
+      "question": "到2035年，人均国内生产总值计划达到哪类国家水平，并基本实现什么目标？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2035年目标",
+      "lessonId": "sz00"
+    },
+    "aa45294577": {
+      "question": "2025年9月3日抗战胜利80周年纪念大会的目的，用哪四组要求概括？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "抗战胜利80周年纪念大会（9.3）目的",
+      "lessonId": "sz00"
+    },
+    "dafac583e6": {
+      "question": "伟大抗战精神中，爱国情怀、民族气节、英雄气概、必胜信念分别如何表述？",
+      "answer": "天下兴亡、匹夫有责的爱国情怀；视死如归、宁死不屈的民族气节；不畏强暴、血战到底的英雄气概；百折不挠、坚忍不拔的必胜信念。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "伟大抗战精神",
+      "previousAnswer": "爱国情怀＋民族气节＋英雄气概＋必胜信念",
+      "lessonId": "sz00"
+    },
+    "ac47c0dc71": {
+      "question": "全球治理倡议的五项核心理念是什么？哪一项是首要前提？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "全球治理倡议五点",
+      "lessonId": "sz00"
+    },
+    "bcfb54dd31": {
+      "question": "“上海精神”的六方面内容分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "\"上海精神\"",
+      "lessonId": "sz00"
+    },
+    "7227c6ec06": {
+      "question": "台湾光复纪念日定于每年哪一天？2025年对应台湾光复多少周年？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "台湾光复纪念日",
+      "lessonId": "sz00"
+    },
+    "932aed7562": {
+      "question": "2025年中央城市工作会议确定的城市工作主线和目标分别是什么？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "中央城市工作会议",
+      "lessonId": "sz00"
+    },
+    "2e682ef13a": {
+      "question": "《中国共产党思想政治工作条例》在党的思想政治工作法规建设史上具有什么“第一部”的地位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "《中国共产党思想政治工作条例》",
+      "lessonId": "sz00"
+    },
+    "7cb9376b5c": {
+      "question": "2025年中央一号文件锚定什么乡村发展目标？这是新世纪以来连续第几年聚焦“三农”？",
+      "answer": "锚定推进乡村全面振兴、建设农业强国；是新世纪以来连续第22年聚焦“三农”的中央一号文件。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2025年中央一号文件",
+      "previousAnswer": "连续第22年聚焦\"三农\"；锚定推进乡村全面振兴、建设农业强国；二轮承包到期后再延三十年，坚持\"大稳定、小调整\"",
+      "lessonId": "sz00"
+    },
+    "c16dfbdf1f": {
+      "question": "嫦娥六号任务首次实现了什么月球探测突破，获得哪一2025年度航天奖项？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "嫦娥六号",
+      "lessonId": "sz00"
+    },
+    "813f019416": {
+      "question": "深地塔科1井的完钻深度是多少米，按垂直深度在亚洲和世界分别居第几位？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "深地塔科1井",
+      "lessonId": "sz00"
+    },
+    "19aad7c575": {
+      "question": "2025年通车的花江峡谷大桥以什么高度纪录成为新的世界第一高桥？桥面距水面高度和主跨分别是多少米？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "花江峡谷大桥",
+      "lessonId": "sz00"
+    },
+    "44e889f063": {
+      "question": "2025年哈尔滨亚冬会与成都世运会上，中国代表团分别获得多少金牌，两榜排名如何？",
+      "answer": "哈尔滨亚冬会32金，成都世运会36金；中国代表团均居金牌榜和奖牌榜首位。",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "哈尔滨亚冬会32金、成都世运会36金",
+      "previousAnswer": "中国均列金牌榜、奖牌榜首位；**十五运会首次由粤港澳三地联合举办**",
+      "lessonId": "sz00"
+    },
+    "7055109183": {
+      "question": "2026年新年贺词预计2025年经济总量达到多少万亿元？2025年和2026年分别处于哪个五年规划节点？",
+      "contentVersion": 2,
+      "editorialStatus": "reviewed",
+      "previousQuestion": "2026年新年贺词",
+      "lessonId": "sz00"
+    }
+  },
+  "aliases": {},
+  "splits": {
+    "30f1e853b4": {
+      "retainedId": "30f1e853b4",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "基本制度确立标志",
+      "previousAnswer": "1956 年底改造基本完成，公有制成为经济基础；1954 宪法（政治）",
+      "additions": [
+        {
+          "id": "30f1e853b4-constitution",
+          "question": "1954年通过的哪部法律为我国社会主义政治制度提供了宪法依据？",
+          "answer": "《中华人民共和国宪法》。",
+          "knowledgePoint": "1954年通过的哪部法律为我国社会主义政治制度提供了宪法依据",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "9197295764": {
+      "retainedId": "9197295764",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "社会主义核心价值体系",
+      "previousAnswer": "兴国之魂；四项基本内容",
+      "additions": [
+        {
+          "id": "9197295764-components",
+          "question": "社会主义核心价值体系的四项基本内容分别是什么？",
+          "answer": "马克思主义指导思想、中国特色社会主义共同理想、以爱国主义为核心的民族精神和以改革创新为核心的时代精神、社会主义荣辱观。",
+          "knowledgePoint": "社会主义核心价值体系的四项基本内容分别是什么",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "df90b86035": {
+      "retainedId": "df90b86035",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "周边外交方针与理念",
+      "previousAnswer": "与邻为善、以邻为伴 + 亲诚惠容；亚洲安全观：共同、综合、合作、可持续",
+      "additions": [
+        {
+          "id": "df90b86035-security",
+          "question": "中国倡导的亚洲安全观包含哪四项要求？",
+          "answer": "共同、综合、合作、可持续。",
+          "knowledgePoint": "中国倡导的亚洲安全观包含哪四项要求",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "c856e4d222": {
+      "retainedId": "c856e4d222",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "对发展中国家理念",
+      "previousAnswer": "真实亲诚 + 正确义利观；金砖\"三轮驱动\"",
+      "additions": [
+        {
+          "id": "c856e4d222-brics",
+          "question": "金砖合作的“三轮驱动”架构由哪三个领域组成？",
+          "answer": "经贸财金合作、政治安全合作、人文交流。",
+          "knowledgePoint": "金砖合作的“三轮驱动”架构由哪三个领域组成",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "5668e145d3": {
+      "retainedId": "5668e145d3",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "载人登月",
+      "previousAnswer": "瞄准**2030年前**实现中国人首次登陆月球；登月服命名\"**望宇**\"、载人月球车命名\"**探索**\"；**揽月**月面着陆器完成我国**首次**载人航天器地外天体着陆起飞试验；探月工程研制的**月壤打砖机**是世界**第一台**该类设备。",
+      "additions": [
+        {
+          "id": "5668e145d3-lander",
+          "question": "2025年“揽月”月面着陆器完成了我国载人航天器的哪项首次地外试验？",
+          "answer": "我国首次载人航天器地外天体着陆起飞试验。",
+          "knowledgePoint": "2025年“揽月”月面着陆器完成了我国载人航天器的哪项首次地外试验",
+          "contentVersion": 1
+        },
+        {
+          "id": "5668e145d3-bricks",
+          "question": "我国探月工程研制的月壤打砖机，创造了什么设备研制纪录？",
+          "answer": "世界第一台月壤打砖机。",
+          "knowledgePoint": "我国探月工程研制的月壤打砖机，创造了什么设备研制纪录",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "615e74bffb": {
+      "retainedId": "615e74bffb",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "\"蛟龙\"号",
+      "previousAnswer": "实现我国**首次北极冰区载人深潜**；随后依托\"探索三号\"船创**全球首次密集冰区连续载人深潜**纪录。",
+      "additions": [
+        {
+          "id": "615e74bffb-fendouzhe",
+          "question": "2025年依托“探索三号”在北极密集冰区进行连续载人深潜的潜水器叫什么？",
+          "answer": "“奋斗者”号载人潜水器。",
+          "knowledgePoint": "2025年依托“探索三号”在北极密集冰区进行连续载人深潜的潜水器叫什么",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "6010d3e366": {
+      "retainedId": "6010d3e366",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "金上—湖北±800千伏特高压",
+      "previousAnswer": "**世界海拔最高**的特高压直流输电工程、首条深入川藏高原腹地（12月18日建成投运）；**宁夏—湖南特高压**：我国**首条**以输送**\"沙戈荒\"**风电光伏大基地新能源为主的特高压通道。",
+      "additions": [
+        {
+          "id": "6010d3e366-ningxia",
+          "question": "宁夏—湖南特高压通道是我国首条以输送哪类基地新能源为主的特高压通道？",
+          "answer": "以输送“沙戈荒”风电光伏大基地新能源为主的特高压通道。",
+          "knowledgePoint": "宁夏—湖南特高压通道是我国首条以输送哪类基地新能源为主的特高压通道",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "33dceb07c3": {
+      "retainedId": "33dceb07c3",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "海南自由贸易港",
+      "previousAnswer": "**2025年12月18日**正式启动**全岛封关**运作；基本特征是**\"一线\"放开、\"二线\"管住、岛内自由**；海南\"三区一中心\"中的\"三区\"指**全面深化改革开放试验区、国家生态文明试验区、国家重大战略服务保障区**。",
+      "additions": [
+        {
+          "id": "33dceb07c3-zones",
+          "question": "海南“三区一中心”战略定位中的“三区”分别是什么？",
+          "answer": "全面深化改革开放试验区、国家生态文明试验区、国家重大战略服务保障区。",
+          "knowledgePoint": "海南“三区一中心”战略定位中的“三区”分别是什么",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "3db1e0e673": {
+      "retainedId": "3db1e0e673",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "港口",
+      "previousAnswer": "上海港2024年汽车吞吐量 **363万辆**首次跃升**世界第一**；全国港口货物吞吐量 **176亿吨**、集装箱 **3.3亿标箱**，稳居世界第一。",
+      "additions": [
+        {
+          "id": "3db1e0e673-national",
+          "question": "2024年全国港口货物和集装箱吞吐量分别是多少，在世界各居第几位？",
+          "answer": "货物吞吐量176亿吨、集装箱吞吐量3.3亿标箱，均居世界第一。",
+          "knowledgePoint": "2024年全国港口货物和集装箱吞吐量分别是多少，在世界各居第几位",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "4b3ddd496b": {
+      "retainedId": "4b3ddd496b",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "渤海油田",
+      "previousAnswer": "我国**海上最大油田**，2025年油气当量突破 **4000万吨**创新高；**秦皇岛29-6油田**是其2019年以来连续发现的**第7个**亿吨级油田。",
+      "additions": [
+        {
+          "id": "4b3ddd496b-qinhuangdao",
+          "question": "秦皇岛29-6油田是渤海油田自2019年以来连续发现的第几个亿吨级油田？",
+          "answer": "第7个亿吨级油田。",
+          "knowledgePoint": "秦皇岛29-6油田是渤海油田自2019年以来连续发现的第几个亿吨级油田",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "298e588ee1": {
+      "retainedId": "298e588ee1",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "新疆油田",
+      "previousAnswer": "我国**首个年注碳百万吨**油田（新中国**第一个大油田**）；新疆粮食单产 **552.8公斤/亩**，蝉联**全国第一**。",
+      "additions": [
+        {
+          "id": "298e588ee1-grain",
+          "question": "2025年时政资料记录的新疆粮食单产为每亩多少公斤，在全国排名第几？",
+          "answer": "552.8公斤/亩，蝉联全国第一。",
+          "knowledgePoint": "2025年时政资料记录的新疆粮食单产为每亩多少公斤，在全国排名第几",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "5ddf57f880": {
+      "retainedId": "5ddf57f880",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "成都世运会",
+      "previousAnswer": "中国代表团 **36金17银11铜**，居**金牌榜、奖牌榜首位**；火炬\"**竹梦**\"是世界运动会历史上**首支火炬**。",
+      "additions": [
+        {
+          "id": "5ddf57f880-torch",
+          "question": "2025年成都世运会火炬叫什么，在世界运动会历史上具有什么首次地位？",
+          "answer": "“竹梦”，是世界运动会历史上首支火炬。",
+          "knowledgePoint": "2025年成都世运会火炬叫什么，在世界运动会历史上具有什么首次地位",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "7012f02ecd": {
+      "retainedId": "7012f02ecd",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "十五运会",
+      "previousAnswer": "**2025年11月9日**在**广州**开幕，**首次由粤港澳三地联合举办**的全国运动会；\"**夸父**\"成为**全球首个5G-A人形机器人火炬手**。",
+      "additions": [
+        {
+          "id": "7012f02ecd-robot",
+          "question": "第十五届全国运动会火炬传递中，“夸父”创造了哪项机器人火炬手纪录？",
+          "answer": "成为全球首个5G-A人形机器人火炬手。",
+          "knowledgePoint": "第十五届全国运动会火炬传递中，“夸父”创造了哪项机器人火炬手纪录",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "fe4edea756": {
+      "retainedId": "fe4edea756",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "第25个全国科技活动周",
+      "previousAnswer": "\"矢志创新发展 建设科技强国\"（**5月30日**为第九个全国科技工作者日）",
+      "additions": [
+        {
+          "id": "fe4edea756-workers",
+          "question": "2025年第九个全国科技工作者日是哪一天？",
+          "answer": "2025年5月30日。",
+          "knowledgePoint": "2025年第九个全国科技工作者日是哪一天",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "a62fc7f5fd": {
+      "retainedId": "a62fc7f5fd",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "金砖国家",
+      "previousAnswer": "**印度尼西亚**成为金砖正式成员，**越南**以伙伴国身份加入；金砖国家是**全球南方第一方阵**；金砖精神：**开放包容、合作共赢**；习近平出席金砖领导人线上峰会并发表《团结合作 砥砺前行》重要讲话。",
+      "additions": [
+        {
+          "id": "a62fc7f5fd-spirit",
+          "question": "金砖国家被称为全球南方的什么方阵？金砖精神的核心表述是什么？",
+          "answer": "全球南方第一方阵；开放包容、合作共赢。",
+          "knowledgePoint": "金砖国家被称为全球南方的什么方阵？金砖精神的核心表述是什么",
+          "contentVersion": 1
+        },
+        {
+          "id": "a62fc7f5fd-speech",
+          "question": "习近平在2025年金砖国家领导人线上峰会上发表的讲话标题是什么？",
+          "answer": "《团结合作 砥砺前行》。",
+          "knowledgePoint": "习近平在2025年金砖国家领导人线上峰会上发表的讲话标题是什么",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "ab82514c6d": {
+      "retainedId": "ab82514c6d",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "中美关系",
+      "previousAnswer": "4月发布《关于中美经贸关系若干问题的中方立场》白皮书——中美经贸关系的本质是**互利共赢**；10月30日习近平同美国总统特朗普在**釜山**举行会晤。",
+      "additions": [
+        {
+          "id": "ab82514c6d-busan",
+          "question": "2025年10月30日，中美元首会晤在哪座城市举行？",
+          "answer": "韩国釜山。",
+          "knowledgePoint": "2025年10月30日，中美元首会晤在哪座城市举行",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "8e35c5a26d": {
+      "retainedId": "8e35c5a26d",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "高市早苗",
+      "previousAnswer": "当选日本第 **104任**首相，是日本**首位女首相**；**李在明**当选韩国第 **21届**总统。",
+      "additions": [
+        {
+          "id": "8e35c5a26d-korea",
+          "question": "李在明在2025年当选韩国第几届总统？",
+          "answer": "第21届总统。",
+          "knowledgePoint": "李在明在2025年当选韩国第几届总统",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "850a29e000": {
+      "retainedId": "850a29e000",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "2025年诺贝尔奖",
+      "previousAnswer": "物理学奖——在电路中实现**宏观量子力学隧穿效应和能量量子化**；化学奖——**金属有机框架**开发；经济学奖——**创新驱动经济增长理论**。",
+      "additions": [
+        {
+          "id": "850a29e000-chemistry",
+          "question": "2025年诺贝尔化学奖表彰了哪一类材料的开发？",
+          "answer": "金属有机框架的开发。",
+          "knowledgePoint": "2025年诺贝尔化学奖表彰了哪一类材料的开发",
+          "contentVersion": 1
+        },
+        {
+          "id": "850a29e000-economics",
+          "question": "2025年诺贝尔经济学奖表彰了哪一经济增长理论领域的贡献？",
+          "answer": "创新驱动经济增长理论。",
+          "knowledgePoint": "2025年诺贝尔经济学奖表彰了哪一经济增长理论领域的贡献",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "dec17c4a77": {
+      "retainedId": "dec17c4a77",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "中国航天日",
+      "previousAnswer": "4月24日第十个；今年是**钱学森归国70周年**、我国第一颗人造卫星成功发射 **55周年**。",
+      "additions": [
+        {
+          "id": "dec17c4a77-qian",
+          "question": "2025年是钱学森归国多少周年？",
+          "answer": "70周年。",
+          "knowledgePoint": "2025年是钱学森归国多少周年",
+          "contentVersion": 1
+        },
+        {
+          "id": "dec17c4a77-satellite",
+          "question": "2025年是我国第一颗人造卫星成功发射多少周年？",
+          "answer": "55周年。",
+          "knowledgePoint": "2025年是我国第一颗人造卫星成功发射多少周年",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "bcfbe3f06f": {
+      "retainedId": "bcfbe3f06f",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "抗战胜利80周年暨联合国成立80周年",
+      "previousAnswer": "9月3日；《联合国宪章》签署80周年（6月）。",
+      "additions": [
+        {
+          "id": "bcfbe3f06f-un",
+          "question": "2025年是联合国成立及《联合国宪章》签署多少周年？《宪章》签署周年纪念在几月？",
+          "answer": "均为80周年；《联合国宪章》签署周年纪念在6月。",
+          "knowledgePoint": "2025年是联合国成立及《联合国宪章》签署多少周年？《宪章》签署周年纪念在几月",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "66b1bef2ab": {
+      "retainedId": "66b1bef2ab",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "西藏自治区成立60周年",
+      "previousAnswer": "8月；**新疆维吾尔自治区成立70周年**：9月。",
+      "additions": [
+        {
+          "id": "66b1bef2ab-xinjiang",
+          "question": "2025年新疆维吾尔自治区成立多少周年，庆祝活动在哪个月举行？",
+          "answer": "70周年，9月。",
+          "knowledgePoint": "2025年新疆维吾尔自治区成立多少周年，庆祝活动在哪个月举行",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "eddada6a64": {
+      "retainedId": "eddada6a64",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "台湾光复80周年",
+      "previousAnswer": "10月25日；**港珠澳大桥开通7周年**：10月23日。",
+      "additions": [
+        {
+          "id": "eddada6a64-bridge",
+          "question": "2025年港珠澳大桥开通7周年纪念日是几月几日？",
+          "answer": "10月23日。",
+          "knowledgePoint": "2025年港珠澳大桥开通7周年纪念日是几月几日",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "a950c44cd7": {
+      "retainedId": "a950c44cd7",
+      "reason": "将原答案中可独立考查的知识点拆开；主卡保留原ID和记录，新卡独立学习。",
+      "previousQuestion": "GDP",
+      "previousAnswer": "2024年我国国内生产总值预计超过 **130万亿元**；粮食产量突破 **1.4万亿斤**。",
+      "additions": [
+        {
+          "id": "a950c44cd7-grain",
+          "question": "2025年新年贺词指出，2024年我国粮食产量突破多少万亿斤？",
+          "answer": "1.4万亿斤。",
+          "knowledgePoint": "2025年新年贺词指出，2024年我国粮食产量突破多少万亿斤",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "9ce6138b9b": {
+      "retainedId": "9ce6138b9b",
+      "reason": "十项定位各可独立回忆，拆成十张；原ID保留第一项，不将整张旧卡掌握状态扩散到九张新卡。",
+      "previousQuestion": "总体方略十定位",
+      "previousAnswer": "根本保证 / 历史方位 / 战略思路 / 大政方针 / 政治基础 / 实践途径 / 根本动力 / 必然要求 / 外部条件 / 战略支撑",
+      "additions": [
+        {
+          "id": "9ce6138b9b-2",
+          "question": "新时代党解决台湾问题总体方略中，历史方位是什么？",
+          "answer": "坚持在中华民族伟大复兴进程中推进祖国统一。",
+          "knowledgePoint": "对台工作总体方略·历史方位",
+          "contentVersion": 1
+        },
+        {
+          "id": "9ce6138b9b-3",
+          "question": "新时代党解决台湾问题总体方略中，战略思路是什么？",
+          "answer": "坚持在祖国大陆发展进步基础上解决台湾问题。",
+          "knowledgePoint": "对台工作总体方略·战略思路",
+          "contentVersion": 1
+        },
+        {
+          "id": "9ce6138b9b-4",
+          "question": "新时代党解决台湾问题总体方略中，大政方针是什么？",
+          "answer": "坚持“和平统一、一国两制”基本方针。",
+          "knowledgePoint": "对台工作总体方略·大政方针",
+          "contentVersion": 1
+        },
+        {
+          "id": "9ce6138b9b-5",
+          "question": "新时代党解决台湾问题总体方略中，政治基础是什么？",
+          "answer": "坚持一个中国原则和“九二共识”。",
+          "knowledgePoint": "对台工作总体方略·政治基础",
+          "contentVersion": 1
+        },
+        {
+          "id": "9ce6138b9b-6",
+          "question": "新时代党解决台湾问题总体方略中，实践途径是什么？",
+          "answer": "坚持推动两岸关系和平发展、融合发展。",
+          "knowledgePoint": "对台工作总体方略·实践途径",
+          "contentVersion": 1
+        },
+        {
+          "id": "9ce6138b9b-7",
+          "question": "新时代党解决台湾问题总体方略中，根本动力是什么？",
+          "answer": "坚持团结台湾同胞、争取台湾民心。",
+          "knowledgePoint": "对台工作总体方略·根本动力",
+          "contentVersion": 1
+        },
+        {
+          "id": "9ce6138b9b-8",
+          "question": "新时代党解决台湾问题总体方略中，必然要求是什么？",
+          "answer": "坚持粉碎“台独”分裂图谋。",
+          "knowledgePoint": "对台工作总体方略·必然要求",
+          "contentVersion": 1
+        },
+        {
+          "id": "9ce6138b9b-9",
+          "question": "新时代党解决台湾问题总体方略中，外部条件是什么？",
+          "answer": "坚持反对外部势力干涉。",
+          "knowledgePoint": "对台工作总体方略·外部条件",
+          "contentVersion": 1
+        },
+        {
+          "id": "9ce6138b9b-10",
+          "question": "新时代党解决台湾问题总体方略中，战略支撑是什么？",
+          "answer": "坚持决不承诺放弃使用武力。",
+          "knowledgePoint": "对台工作总体方略·战略支撑",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "b549a918e2": {
+      "retainedId": "b549a918e2",
+      "reason": "原答案含相互独立的记忆维度，保留原卡主问题，将原则或构成另设显式新卡。",
+      "previousQuestion": "加入世贸组织",
+      "previousAnswer": "2001 年 11 月多哈会议通过决定，同年 12 月正式加入；三原则",
+      "additions": [
+        {
+          "id": "b549a918e2-principles",
+          "question": "在中国加入世界贸易组织的谈判中，江泽民阐明了哪三条原则？",
+          "answer": "①中国加入世贸组织是中国发展的需要，世贸组织也需要中国；②中国只能以发展中国家的条件加入；③权利和义务必须平衡，不接受超出中国承受能力的要价。",
+          "knowledgePoint": "加入世贸组织：principles",
+          "contentVersion": 1
+        }
+      ]
+    },
+    "78d6065dc1": {
+      "retainedId": "78d6065dc1",
+      "reason": "原答案含相互独立的记忆维度，保留原卡主问题，将原则或构成另设显式新卡。",
+      "previousQuestion": "现代化经济体系定位",
+      "previousAnswer": "我国发展的**战略目标**；六大体系 + 一个经济体制",
+      "additions": [
+        {
+          "id": "78d6065dc1-structure",
+          "question": "现代化经济体系包括哪六大体系和哪一种经济体制？",
+          "answer": "创新引领、协同发展的产业体系；统一开放、竞争有序的市场体系；体现效率、促进公平的收入分配体系；彰显优势、协调联动的城乡区域发展体系；资源节约、环境友好的绿色发展体系；多元平衡、安全高效的全面开放体系；充分发挥市场作用、更好发挥政府作用的经济体制。",
+          "knowledgePoint": "现代化经济体系定位：structure",
+          "contentVersion": 1
+        }
+      ]
+    }
+  },
+  "relatedIds": {
+    "472a5a6488": [
+      "ad2c314748"
+    ],
+    "bf4bdd07fa": [
+      "47f7e6a4e4"
+    ],
+    "7cb9376b5c": [
+      "17fd3fba79"
+    ],
+    "44e889f063": [
+      "7012f02ecd"
+    ]
+  },
+  "evidence": {
+    "2c98eb2e12": [
+      {
+        "url": "https://m.ccdi.gov.cn/content/bf/ed/5404.html",
+        "note": "百团大战处于战略相持阶段。"
+      }
+    ],
+    "615e74bffb": [
+      {
+        "url": "https://zrzyt.xinjiang.gov.cn/xjgtzy/mtxc/202510/bbbc8a6906264c049b0ac175408cd3ea.shtml",
+        "note": "蛟龙首次北极冰区深潜；母船为深海一号。"
+      },
+      {
+        "url": "https://idsse.cas.cn/xwdt/ywdt/202510/t20251030_7999857.html",
+        "note": "探索三号与奋斗者实现密集冰区连续载人深潜。"
+      }
+    ],
+    "92f5dcab71": [
+      {
+        "url": "https://spa.gov.sa/en/N2259921",
+        "note": "2025年2月原计划。"
+      },
+      {
+        "url": "https://www.thenewsmarket.com/news/ioc-statement-on-the-olympic-esports-games/s/7d19d2f6-463d-4a53-a8f9-43bb4a4ba379",
+        "note": "IOC于2025年10月30日发布的终止合作声明。"
+      }
+    ]
+  }
+}

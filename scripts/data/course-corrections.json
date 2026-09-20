@@ -576,5 +576,33 @@
         "count": 1
       }
     ]
+  },
+  {
+    "id": "POLITICS-sz00-historical-and-event-corrections",
+    "subject": "zsb-politics",
+    "file": "lessons/sz00.html",
+    "reason": "核对百团大战战略阶段、两艘载人潜水器成果归属与IOC赛事合作终止声明；同步修正正文与闪卡。",
+    "sources": [
+      "https://m.ccdi.gov.cn/content/bf/ed/5404.html",
+      "https://idsse.cas.cn/xwdt/ywdt/202510/t20251030_7999857.html",
+      "https://www.thenewsmarket.com/news/ioc-statement-on-the-olympic-esports-games/s/7d19d2f6-463d-4a53-a8f9-43bb4a4ba379"
+    ],
+    "changes": [
+      {
+        "from": "百团大战发生在抗战<strong>战略防御阶段</strong>",
+        "to": "百团大战发生在抗战<strong>战略相持阶段</strong>",
+        "count": 1
+      },
+      {
+        "from": "实现我国<strong>首次北极冰区载人深潜</strong>；随后依托\"探索三号\"船创<strong>全球首次密集冰区连续载人深潜</strong>纪录。",
+        "to": "实现我国<strong>首次北极冰区载人深潜</strong>；另一项依托“探索三号”开展的<strong>北极密集冰区连续载人深潜</strong>任务由<strong>“奋斗者”号</strong>完成。",
+        "count": 1
+      },
+      {
+        "from": "<li><strong>首届电竞奥运会</strong>：<strong>2027年</strong>在沙特阿拉伯<strong>利雅得</strong>举行。</li>",
+        "to": "<li><strong>首届电竞奥运会</strong>：2025年2月公布的原计划为<strong>2027年</strong>在沙特阿拉伯<strong>利雅得</strong>举办；<strong>2025年10月30日</strong>国际奥委会宣布终止与沙特奥委会的该项目合作，探索新的举办路径与合作模式，不能把原计划继续当作确定赛程。</li>",
+        "count": 1
+      }
+    ]
   }
 ]

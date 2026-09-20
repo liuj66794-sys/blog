@@ -71,6 +71,20 @@ test('damaged or empty drafts are recoverable without changing existing records'
   assert.equal(JSON.stringify(entries), before)
 })
 
+test('politics alias migration preserves an in-progress answer and unsaved note', () => {
+  const old = { ...questions[0], id: 'zsb-politics:bank:old', slug: 'zsb-politics',
+    stem: '【导论】教材由（ ）组成。', options: [{ value: 'A', text: '导论和章' }, { value: 'B', text: '结语' }], answer: ['A'] }
+  const group = createReviewSession([old], reviewSettings('?limit=1'))
+  Object.assign(group.drafts[old.id], { picked: ['A'], submitted: true, correct: true, note: '尚未保存的笔记', noteDirty: true })
+  const canonical = { ...old, id: 'zsb-politics:bank:stable', schemaVersion: 1,
+    question: '教材由（ ）组成。', stem: '教材由（ ）组成。', legacyQuestion: '教材由（ ）组成。', legacyIds: [old.id] }
+  const restored = restoreReviewSession(JSON.stringify(group), { [canonical.id]: canonical })
+  assert.equal(restored.revised, 0)
+  assert.equal(restored.id, group.id)
+  assert.deepEqual(restored.ids, [canonical.id])
+  assert.deepEqual(restored.drafts[canonical.id], group.drafts[old.id])
+})
+
 test('group summaries count actual submissions and leave skipped questions unfinished', () => {
   const group = createReviewSession(questions, reviewSettings('?limit=5'))
   group.finished = true
