@@ -1,0 +1,109 @@
+{
+  "points": [
+    {
+      "id": "en-pron-personal-case",
+      "name": "人称代词主格与宾格",
+      "summary": "口诀“动词前用主格；动词介词后用宾格；You、It 主宾同；其他主宾须分清”。主格作主语（I / we / he / she / they），宾格作动词宾语或介词宾语（me / us / him / her / them）。并排使用时顺序是“单数人称二三一”（You, Tom and I）、“复数人称一二三”（We, you and they）。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-noun-function-subject", "en-noun-function-object"]
+    },
+    {
+      "id": "en-pron-possessive",
+      "name": "物主代词（形容词性 / 名词性）",
+      "summary": "口诀“两种代词形不同，添个 s 形变名；his、its 不用变，my 变 mine 要谨记”。形容词性物主代词只作定语，后面必须跟名词（our photos）；名词性物主代词 = 形物代 + 名词，可作主语、宾语、表语，后面不再跟名词（My hair is thin. Yours is thicker. / His camera is more expensive than hers.）。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-noun-possessive"]
+    },
+    {
+      "id": "en-pron-reflexive",
+      "name": "反身代词",
+      "summary": "口诀“一二形代第三宾，加上 -self 变反身”：第一、二人称由形容词性物主代词 + self（myself、yourself、ourselves），第三人称由宾格 + self（himself、herself、itself、themselves）。用法：① 作宾语，动作回到主语本身（teach oneself、hurt oneself、dress oneself）；② 作同位语表“亲自、本人”（My mom herself saw it.）；③ 固定搭配 by oneself 独自、enjoy oneself 玩得开心、help oneself 自取、seat oneself 就座。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-pron-personal-case"]
+    },
+    {
+      "id": "en-pron-it",
+      "name": "it 的用法（指代、形式主语、强调句）",
+      "summary": "it 的 7 种用法：① 指上文提到的事物；② 指不知性别的婴儿；③ 指时间、距离、天气（It's ten o'clock. / It is raining.）；④ 指已发生的事件（Stop it!）；⑤ 电话中识别、分辨人（It's your mother on the phone.）；⑥ 强调句 It is/was + 被强调部分 + that/who + 其余（It was three weeks later that he heard the news.）；⑦ 形式主语 It is + adj. + for sb. + to do sth.（Is it necessary to take off our shoes?）。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-noun-function-subject"]
+    },
+    {
+      "id": "en-pron-demonstrative",
+      "name": "指示代词（this/that、电话用语、比较级中的 that/those）",
+      "summary": "this/these 指较近，that/those 指较远（This red sweater doesn't fit me well, can you show me that blue one?）。两个高频场景：① 电话里用 that 问对方是谁、用 this 介绍自己（Who is that speaking? — This is Mary speaking.），介绍自己不说 I am；② 比较级中用 that 代替上文的单数比较对象、those 代替复数（The weather of Beijing is colder than that of Shanghai. / The books here are nicer than those in that store.）。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-pron-personal-case"]
+    },
+    {
+      "id": "en-pron-interrogative",
+      "name": "疑问代词",
+      "summary": "who 作主语、宾语、表语（Who gave you that book?）；whom 只作动词或介词宾语（Whom did you go with?）；whose 表“谁的”；what 可提问职业（What is your father? / What do you do?）；which 强调选择范围（Which do you prefer, milk or tea?）。",
+      "lessonRefs": ["3"],
+      "prereqs": []
+    },
+    {
+      "id": "en-pron-it-one-that",
+      "name": "it / one / ones / that / those 辨析",
+      "summary": "it 指同类同物（I have a pen. It is expensive.）；one/ones = a + 可数名词，泛指同类中的一个（I need a pen. I can buy one.），可与前置修饰语连用（the small books… the large ones）；the one/the ones 特指；that/those 指同类不同物且特指。两条高频规则：后面有 of 短语时多用 that/those（The population of China is larger than that of Japan.），有前置修饰语时只能用 one/ones。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-pron-it"]
+    },
+    {
+      "id": "en-pron-other-series",
+      "name": "another / other / others / the other / the others",
+      "summary": "other + 可数名词复数（other students）；the other 两者中的另一个（One is blue, the other is black.）；another 三者及以上中的另一个，泛指（Show me another one.）；others 另一些（泛指，= other + 复数名词）；the others 余下的全部（Some are from Beijing, the others are from Shanghai.）。加分句型：another + 数量 + 复数名词 = 数量 + more + 复数名词（another three weeks = three more weeks）。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-noun-countability"]
+    },
+    {
+      "id": "en-pron-each-every",
+      "name": "each / every 辨析",
+      "summary": "each 强调个体独立性、可用于两者及以上、可接 of（each of + 复数）；every 强调整体共同性、只用于三者及以上、不可接 of，只能 every + 名词。搭配差异：every 可与 almost、nearly、not 连用，each 不行（Almost every person is here. / Not every girl likes dresses.）；each 可单独作主语（Each of us has…），every 不能。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-noun-countability"]
+    },
+    {
+      "id": "en-pron-either-neither",
+      "name": "either / neither",
+      "summary": "either 指两者中的任意一个（either...or...）；neither 指两者都不（neither...nor...），是 both 的反义词。作主语时谓语用单数（Either is okay. / Neither knows the answer.）；either of / neither of + 复数名词作主语，谓语常用单数（Neither of the students has finished.）。范围只限两者，三者的“都不”要用 none。",
+      "lessonRefs": ["3"],
+      "prereqs": []
+    },
+    {
+      "id": "en-pron-no-none-nothing",
+      "name": "no one / none / nothing",
+      "summary": "no one 仅指人、不接 of、谓语用单数（No one answered the phone. / No one is going to my party.）；none 可指人或物、需有明确范围、可接 of（None of them are here. / None of the students passed.），谓语可单可复；nothing 仅指物、不接 of、谓语用单数（There is nothing in the bag.）。区别要点：回答 How many / How much 用 none；什么都不说 / 没有东西用 nothing。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-pron-either-neither"]
+    },
+    {
+      "id": "en-pron-all-both",
+      "name": "all / both",
+      "summary": "all 指三个及以上都（反义 none），指人时谓语用复数、指事物整体或抽象概念时可作单数；both 指两者都（反义 neither），作主语时谓语只能用复数。of 后是宾格代词时 of 不可省略，of 后是名词时可省略（all the stories = all of the stories）。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-pron-either-neither"]
+    },
+    {
+      "id": "en-pron-compound-indefinite",
+      "name": "复合不定代词（something / anything / everything / nothing）",
+      "summary": "something 多用于肯定句，表示“某事、某物”；anything 多用于疑问句和否定句；everything 表示“一切”（Have you got everything ready?）；nothing 表示“没有什么”。形容词修饰复合不定代词时要后置（something important）。回答“还有事要做”这类未完成的事用 something，表示“一切就绪”用 everything。",
+      "lessonRefs": ["3"],
+      "prereqs": []
+    },
+    {
+      "id": "en-pron-few-little",
+      "name": "few / a few / little / a little",
+      "summary": "口诀“few、little 表否定，前面加 a 变肯定；可数名词复数前用（a）few，不可数名词前用（a）little”。few 几乎没有（否定），a few 有几个（肯定）；little 几乎没有（否定），a little 有一点（肯定）。判断顺序：先看后面名词可数不可数，再看句意是肯定还是否定。",
+      "lessonRefs": ["3"],
+      "prereqs": ["en-noun-countability"]
+    },
+    {
+      "id": "en-pron-reciprocal",
+      "name": "相互代词 each other / one another",
+      "summary": "each other 与 one another 都表示“互相”，在句中作动词或介词的宾语：The two sisters love each other. / All the students in the class should respect one another.。传统上 each other 多指两者、one another 多指三者及以上，现代英语常通用。",
+      "lessonRefs": ["3"],
+      "prereqs": []
+    }
+  ]
+}

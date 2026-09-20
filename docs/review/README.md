@@ -4,6 +4,8 @@ permalink: /review/
 createTime: 2026/09/10 10:00:00
 readingTime: false
 comments: false
+sidebar: false
+aside: false
 ---
 
 <ReviewNotebook />

@@ -4,6 +4,7 @@ import fs from 'node:fs'
 import { extractCourseQuestions } from './course-question-index.mjs'
 import { exportMistakes, importMistakes, mistakeId, questionSignature, readMistakes, recordAttempt, refreshQuestionDefinitions, registerQuestion, setMistakeNote } from '../runtime/mistake-store.mjs'
 import { createStudyBackup, applyStudyImport } from '../../docs/.vuepress/study-backup.mjs'
+import { createReviewSession, restoreReviewSession } from '../../docs/.vuepress/review-session.mjs'
 
 const context = { slug: 'zsb-english', lessonId: '1' }
 const source = fs.readFileSync(new URL('../../docs/.vuepress/public/lessons/zsb-english/lessons/0001-nouns.html', import.meta.url), 'utf8')
@@ -58,11 +59,16 @@ test('old plain-text mistakes recover formatting without resetting review histor
   recordAttempt(old, { correct: true, attemptId: 'day2', now: 172801000 }, storage)
   setMistakeNote(id, '注意介词后的名词', storage)
   const before = readMistakes(storage)[id]
+  const session = createReviewSession([before], { limit: 1 })
+  session.drafts[id].picked = ['0']
   assert.equal(questionSignature(q), questionSignature(old))
   refreshQuestionDefinitions({ version: 1, entries: { [id]: q } }, storage)
   const after = readMistakes(storage)[id]
   assert.match(after.stemHtml || '', /<strong>work<\/strong>/)
   for (const key of ['status', 'successDays', 'dueAt', 'wrongs', 'note', 'updatedAt', 'signature']) assert.equal(after[key], before[key], key)
+  const resumed = restoreReviewSession(JSON.stringify(session), { [id]: after })
+  assert.equal(resumed.revised, 0)
+  assert.deepEqual(resumed.drafts[id].picked, ['0'])
 })
 
 test('invalid optional formatting in a backup is rejected before changing any records', () => {

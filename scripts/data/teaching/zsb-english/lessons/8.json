@@ -1,0 +1,601 @@
+{
+  "lessonId": "8",
+  "sections": [
+    {
+      "id": "pt-1",
+      "title": "第一部分 · 五大基本句型",
+      "goal": "解决“这句话属于哪个句型”：先找谓语动词，再看动词类型和后面挂了几个成分，并会用“换成 be 念一遍”区分表语与宾语。",
+      "minutes": 12,
+      "knowledgePoints": ["en-syntax-five-patterns", "en-syntax-predicative-vs-object"],
+      "prereqs": ["en-verb-vi-vt", "en-verb-linking"],
+      "teaching": [
+        {
+          "type": "english-explain",
+          "title": "五个骨架：主谓、主谓宾、主系表、主谓宾宾、主谓宾补",
+          "meaning": "I love you. 意思是“我爱你”；I am sad. 意思是“我很难过”；I give you a book. 意思是“我给你一本书”；You made me cry. 意思是“你把我弄哭了”。",
+          "breakdown": [
+            "I come.：只有主语和谓语，是主谓句型",
+            "I love you.：及物动词后跟宾语，是主谓宾",
+            "I am sad.：谓语是系动词 am，后面的 sad 是表语，是主系表",
+            "I give you a book.：谓语后跟两个宾语（人 you、物 a book），是主谓宾宾",
+            "You made me cry.：谓语后跟宾语 me，再跟补充说明它的 cry，是主谓宾补"
+          ],
+          "grammar": "英语五大基本句型：① 主语 + 谓语（I come.）；② 主语 + 谓语 + 宾语（I love you.）；③ 主 + 系 + 表（I am sad.）；④ 主语 + 谓语 + 间宾 + 直宾（I give you a book.）；⑤ 主语 + 谓语 + 宾语 + 宾补（You made me cry.）。主干顺序与中文一致。汉译英选型：有动作就用主谓宾，没动作就用主系表。",
+          "timeline": null,
+          "examples": {
+            "right": ["I come.（主谓）", "I love you.（主谓宾）", "I am sad.（主系表）", "I give you a book.（主谓宾宾）", "You made me cry.（主谓宾补）"],
+            "wrong": ["把 I am sad. 判成主谓宾 ×（am 是系动词，sad 是表语，不是动作对象）", "把 I give you a book. 判成主谓宾补 ×（you 与 a book 之间没有主表关系，是间宾 + 直宾）", "把 You made me cry. 判成主谓宾宾 ×（me 与 cry 是主表／动作关系，cry 是宾补）"],
+            "boundary": "判断顺序是先找谓语动词，再看动词类型：系动词 → 主系表；及物动词再看后面跟一个宾语、两个宾语还是宾语加宾补；不及物动词没有宾语 → 主谓。双宾语与宾补的分界线是“两个成分之间有没有逻辑主表关系”。"
+          },
+          "mnemonic": {
+            "text": "主谓、主谓宾、主系表、主谓宾宾、主谓宾补",
+            "note": "五句话的骨架就是“先看谓语，再数它后面挂了几样东西”；汉译英时先判有没有动作——有动作 → 主谓宾，没动作 → 主系表。"
+          }
+        },
+        {
+          "type": "english-explain",
+          "title": "He got angry 与 He got a cat：换成 be 念一遍",
+          "meaning": "He got angry. 意思是“他生气了”；He got a cat. 意思是“他得到了一只猫”。",
+          "breakdown": [
+            "He got angry. 换成 He was angry. 说得通 → got 是系动词，angry 是表语，句子为主系表",
+            "He got a cat. 换成 He was a cat. 说不通 → got 是及物动词，a cat 是宾语，句子为主谓宾",
+            "同一个 get，用“换成 be 念一遍”的方法就能区分它的两个身份"
+          ],
+          "grammar": "表语与宾语的区别：概念不同——宾语是动作的作用对象，表语说明主语的身份或特征；位置不同——宾语在及物动词或介词后，表语在系动词后；辨别法——把动词换成 be，句子说得通就是系动词（后接表语），说不通就是及物动词（后接宾语）。",
+          "timeline": null,
+          "examples": {
+            "right": ["He got angry. → He was angry. ✔（系动词 + 表语）", "The cake looks delicious.（系动词 + 表语）", "I am happy.（be + 表语）", "She likes chocolate.（及物动词 + 宾语）"],
+            "wrong": ["把 He got angry. 里的 angry 当宾语 ×（它不是动作对象，而是说明主语的状况）", "把 The cake looks delicious. 判成主谓宾 ×（looks 是感官系动词，delicious 是表语）"],
+            "boundary": "辨别法只适用于“既能当系动词又能当及物动词”的词（get、look、taste、smell、feel、turn 等）。纯粹的 be 一律是系动词；换成 be 讲不通时，动词就是及物动词，后面跟的才是宾语。"
+          },
+          "mnemonic": {
+            "text": "换成 be 念一遍，说得通是系动词",
+            "note": "系动词的作用相当于一个等号，所以把它换成 be 句子还成立；如果说成“A 是 B”明显不通（He was a cat. ✘），说明原句讲的是“得到”这个动作，动词就是及物动词。"
+          }
+        }
+      ],
+      "practiceRefs": ["quiz:0", "quiz:1", "quiz:2", "quiz:3", "quiz:4"],
+      "retell": "不看笔记背出五大句型，并用同一组主语谓语各造一句；再举一个“换成 be 念一遍”能区分系动词与及物动词的例子。"
+    },
+    {
+      "id": "pt-2",
+      "title": "第二部分 · 九大句子成分",
+      "goal": "解决“这个词在句子里是什么成分”：用九个成分的位置规律逐一定位主语、谓语、宾语、宾补、系动词、表语、定语、状语、同位语。",
+      "minutes": 15,
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "prereqs": ["en-syntax-five-patterns", "en-noun-function-subject", "en-noun-function-object"],
+      "teaching": [
+        {
+          "type": "english-explain",
+          "title": "Google, a famous Internet company, earns…：先定主语和谓语",
+          "meaning": "Google, a famous Internet company, earns billions of dollars every year. 意思是“谷歌这家著名的互联网公司每年赚取数十亿美元”。",
+          "breakdown": [
+            "Google 是句子所描述事件的主角，位于谓语之前 → 主语",
+            "a famous Internet company 用逗号隔开、紧跟在 Google 后，与它指同一家公司 → 同位语",
+            "earns 有时态和人称变化（第三人称单数加 -s），是谓语；一句话有且只有一个谓语动词",
+            "billions of 修饰后面的 dollars，说明数量 → 定语；dollars 是 earns 的对象 → 宾语；every year 说明动作频率 → 时间状语"
+          ],
+          "grammar": "主语是句子所描述的事件中的主角，位置在谓语动词之前，名词、代词、数词、不定式、动名词、句子都能充当。谓语是主语发出来的动作或状态，由动词充当，一句话有且只有一个谓语动词。九大成分各有固定位置：宾语在动词后或介词后，宾补在宾语后，表语在系动词后，同位语在名词后，定语单词在名词之前、短语在名词之后，状语可在句首、句中或句末。",
+          "timeline": null,
+          "examples": {
+            "right": ["She likes chocolate.（She 是主语）", "Tom goes to school every day.（goes 是谓语）", "The dog in the next door never stops barking.（stops 是谓语，in the next door 是修饰 The dog 的定语）"],
+            "wrong": ["把 a famous Internet company 当主语 ×（主语是 Google，它只是同位语）", "把 in the next door 当谓语 ×（它是修饰 The dog 的定语，谓语是 stops）", "把 every year 当宾语 ×（它说明动作发生的时间，是时间状语）"],
+            "boundary": "判断主语只有一个动作：先找谓语，谓语之前的名词性成分就是主语。同位语虽紧跟在主语之后，但去掉后句子依然完整；定语是修饰语，去掉后中心词变模糊，但句法照样成立。"
+          },
+          "mnemonic": {
+            "text": "先找谓语，谓语前面是主语",
+            "note": "谓语是一句话里唯一那个有时态、有人称变化的动词；先把它锁定，主语、宾语、表语、状语各归其位，剩下说不清位置的通常都是修饰语（定语）。"
+          }
+        },
+        {
+          "type": "english-explain",
+          "title": "I bought a new English book…：宾语、定语、状语的层次",
+          "meaning": "I bought a new English book at the bookstore yesterday. 意思是“我昨天在书店买了一本新的英语书”；My mother made me happy. 意思是“妈妈让我很开心”。",
+          "breakdown": [
+            "bought 是谓语，a new English book 是它的宾语；其中 a、new、English 都在修饰中心词 book → 定语",
+            "at the bookstore 说明动作发生的地点 → 地点状语；yesterday 说明时间 → 时间状语",
+            "My mother made me happy 里 me 是宾语，happy 补充说明 me 的状态 → 宾语补足语"
+          ],
+          "grammar": "宾语是谓语动作的承受者或接受者，位于及物动词后或介词后（I listen to music every morning. 中的 music 是介词宾语）。宾语补足语位于宾语之后，对宾语作补充说明，可由形容词、名词、不定式、分词充当。系动词连接主语和表语，表语表达主语的状态，位于系动词之后。",
+          "timeline": null,
+          "examples": {
+            "right": ["She likes chocolate.（chocolate 是动词宾语）", "I listen to music every morning.（music 是介词宾语）", "I heard a bird singing.（singing 是宾语补足语）", "They look very tired after the trip.（very tired 是表语）"],
+            "wrong": ["把 at the bookstore 当宾语 ×（bought 的宾语是 a new English book，at the bookstore 是地点状语）", "把 a / new / English 当宾语 ×（它们只是修饰 book 的定语，中心词 book 才是宾语）", "把 I listen to music. 里的 music 当主语 ×（I 才是主语，music 是介词 to 的宾语）"],
+            "boundary": "介词后面的名词性成分一律是介词宾语，不管整个介词短语在句中作什么成分：at the bookstore 里 the bookstore 是介词宾语，而整个 at the bookstore 才是地点状语。两层角色要分开说。"
+          },
+          "mnemonic": {
+            "text": "介词后的名词是介词宾语，整个介词短语才作状语",
+            "note": "判断成分要“先看它在哪一层”：词在短语里是什么角色、短语在句子里又是什么角色是两件事，不能混在一起答。"
+          }
+        },
+        {
+          "type": "english-explain",
+          "title": "the girl with long hair 与 Tom, an English teacher：定语、状语、同位语",
+          "meaning": "He knows the girl with long hair. 意思是“他认识那个长发女孩”；We all miss Tom, an English teacher from America. 意思是“我们都很想念汤姆，一位来自美国的英语老师”。",
+          "breakdown": [
+            "with long hair 在名词 the girl 之后，说明是哪一个女孩 → 定语（短语作定语后置）",
+            "an English teacher from America 用逗号隔开、跟在 Tom 后面，与 Tom 指同一个人 → 同位语",
+            "He saw her in the park 里的 in the park 说明动作发生的地点 → 状语"
+          ],
+          "grammar": "定语对名词或代词起限定作用，译成“……的”：单个词作定语放在名词之前（dark chocolate），短语作定语放在名词之后（the girl with long hair）。状语表示动作发生的时间、地点、方式、原因等，可位于句首、句中或句末。同位语对主语或宾语补充说明，与被说明的成分有相同的语法地位，位于名词之后、常加逗号。",
+          "timeline": null,
+          "examples": {
+            "right": ["She likes dark chocolate.（dark 是前置定语）", "He knows the girl with long hair.（with long hair 是后置定语）", "He saw her in the park.（in the park 是地点状语）", "Aishangke, an educational school, now has business all over the country.（an educational school 是同位语）"],
+            "wrong": ["把 the girl with long hair 里的 with long hair 当状语 ×（它修饰 the girl，说明是哪一个女孩，不是动作的方式）", "把 an English teacher from America 当定语 ×（它与 Tom 同指，去掉后 Tom 仍是完整的主语，是同位语）"],
+            "boundary": "定语和状语都常由介词短语充当，区别在修饰谁：紧跟在名词后面、回答“哪一个”的是定语；说明动作的时间地点方式、能移到句首的是状语。同位语的判据是“同指”，删掉后句子依然完整。"
+          },
+          "mnemonic": {
+            "text": "单词定语在名前，短语定语在名后；回答“哪一个”是定语，回答“何时何地”是状语",
+            "note": "先看它紧挨着的是名词还是动词：紧挨名词就往定语想，紧挨动词就往状语想；再问一句“能不能移到句首还不改变意思”，能移的多半是状语。"
+          }
+        }
+      ],
+      "practiceRefs": ["quiz:5", "quiz:6", "quiz-p22:0", "quiz-p22:1", "quiz-p22:2", "quiz-p22:3", "quiz-p22:4", "quiz-p22:5", "quiz-p22:6", "quiz-p22:7", "quiz-p22:8", "quiz-p22:9", "quiz-p22:10", "quiz-p22:11"],
+      "retell": "把 Google, a famous Internet company, earns billions of dollars every year. 一句从头到尾逐个成分说一遍，并说明每一处的判断依据。"
+    },
+    {
+      "id": "pt-3",
+      "title": "第三部分 · 三大基本句式",
+      "goal": "解决“这是简单句、并列句还是复合句”：按主谓套数数句子，并用“找连词，连词后面那句话就是从句”定位从句及其成分。",
+      "minutes": 12,
+      "knowledgePoints": ["en-syntax-clause"],
+      "prereqs": ["en-syntax-nine-elements", "en-conj-coordinate"],
+      "teaching": [
+        {
+          "type": "english-explain",
+          "title": "简单句、并列句、复合句：先数主谓套数",
+          "meaning": "He loves her but she doesn't love him. 意思是“他爱她，但她不爱他”；He knows that she likes playing football. 意思是“他知道她喜欢踢足球”。",
+          "breakdown": [
+            "He loves her 与 she doesn't love him 各自是一套主谓结构，用并列连词 but 连起来 → 并列句",
+            "He knows that she likes playing football 里 He knows 是主句，that she likes playing football 是充当宾语的从句 → 复合句",
+            "The dog in the next door never stops barking. 只有一套主谓成分 → 简单句"
+          ],
+          "grammar": "三大基本句式：① 简单句——只有一套主谓成分；② 并列句——两个或多个简单句用并列连词连接，即“简单句 + 并列连词 + 简单句”；③ 复合句（从句）——由一个主句和一个或多个从句组成，从句依赖主句、在复合句中充当某个成分、不能单独使用。",
+          "timeline": null,
+          "examples": {
+            "right": ["I come.（简单句）", "He loves her but she doesn't love him.（并列句）", "She has a book and he has a pen.（并列句）", "She is the girl who loves Tom.（复合句，who loves Tom 是定语从句）"],
+            "wrong": ["把 He loves her but she doesn't love him. 看成简单句 ×（but 连接的是两套主谓结构）", "把从句单独当句子用：That she likes playing football. ×（从句不能单独成句）"],
+            "boundary": "并列句里两个分句地位平等、各有一套主谓；复合句里从句只是主句的一个成分，删掉从句主句往往语义残缺（He knows ____）。判断句式时先数主谓套数，再看连接手段。"
+          },
+          "mnemonic": {
+            "text": "一套主谓是简单句，并列连词接起来是并列句，主句带从句是复合句",
+            "note": "先数主谓套数：一套就是简单句；两套以上再看连接手段——用并列连词（and、but、or、so）连的是并列句，用从属连词带出的是复合句。"
+          }
+        },
+        {
+          "type": "english-explain",
+          "title": "He knows that she likes playing football：连词后面就是从句",
+          "meaning": "He knows that she likes playing football. 意思是“他知道她喜欢踢足球”；She is the girl who loves Tom. 意思是“她就是那个爱着汤姆的女孩”。",
+          "breakdown": [
+            "第一句的主句是 He knows（主语 + 谓语，语义不完整），连词 that 后面的 that she likes playing football 整体作 knows 的宾语 → 宾语从句",
+            "第二句的主句是 She is the girl.（她是那个女孩），连词 who 后面的 who loves Tom 说明是哪一个女孩 → 定语从句",
+            "What she told me is very useful. 里连词 What 引出的从句位于句首、整体作主语 → 主语从句"
+          ],
+          "grammar": "区分主从句的方法：找连词，连词后面的那句话就是从句。从句依赖主句、在复合句中充当某个成分、不能单独使用。从句可以充当宾语（He knows that she likes playing football.）、定语（She is the girl who loves Tom.）、主语（What she told me is very useful.）等成分。",
+          "timeline": null,
+          "examples": {
+            "right": ["He knows that she likes playing football.（that 从句作宾语）", "She is the girl who loves Tom.（who 从句作定语）", "What she told me is very useful.（What 从句作主语）"],
+            "wrong": ["把 He knows 当从句 ×（He knows 是主句，语义不完整；连词后面才是从句）", "把 that she likes playing football 单独当句子 ×（从句不能单独使用）"],
+            "boundary": "“连词后面那句话就是从句”适用于最常见的从属连词（that、who、which、when、if、because 等）。当心同一个词既是介词又是连词（after、before），只有它后面接的是“主语 + 谓语”时才引出从句，否则只是介词短语。"
+          },
+          "mnemonic": {
+            "text": "区分主从句的方法：找连词，连词后面的那句话就是从句",
+            "note": "先定位连词，再把它后面直到句末那一整段框起来当成分用；框完之后剩下的那部分就是主句，它往往自己“缺胳膊少腿”，正好说明从句不可缺。"
+          }
+        }
+      ],
+      "practiceRefs": ["quiz:7"],
+      "retell": "用一句话说明简单句、并列句、复合句的区别；再把 He knows that she likes playing football. 的主句与从句各说一遍，并指出从句作什么成分。"
+    }
+  ],
+  "questions": {
+    "quiz:0": {
+      "knowledgePoints": ["en-syntax-five-patterns"],
+      "translation": "我喜欢吃蛋糕。",
+      "phrases": [
+        {"text": "like sth.", "meaning": "喜欢某物（like 是及物动词，后面接宾语）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "主谓句型只有主语和谓语，不能再有宾语；like 是及物动词，后面必须接宾语 cakes，句子的信息没说完。干扰点：把“句子短”等同于“成分少”。"},
+        {"option": 1, "verdict": "correct", "why": "like 是及物动词，cakes 是它的宾语，构成主语（I）+ 谓语（like）+ 宾语（cakes）→ 主谓宾。"},
+        {"option": 2, "verdict": "wrong", "why": "主谓宾宾要求谓语后面跟两个宾语（如 give you a book）；like 后面只有 cakes 一个宾语。干扰点：把“单个宾语”误当成双宾语的一半。"},
+        {"option": 3, "verdict": "wrong", "why": "主谓宾补要求宾语后面还有补充说明它的成分（如 made me happy）；cakes 后面没有别的词。干扰点：见到及物动词就往宾补句型上靠。"},
+        {"option": 4, "verdict": "wrong", "why": "主系表要求谓语是系动词；like 是表示动作的实义动词，cakes 也不是表语。干扰点：把表示“喜欢”的心理动词当成系动词。"}
+      ],
+      "steps": [
+        "先找谓语：like 是表示动作的实义动词，不是系动词，排除主系表。",
+        "再看宾语个数：like 后面只有 cakes 一个宾语，排除主谓宾宾、主谓宾补。",
+        "最后确认：主语 I + 谓语 like + 宾语 cakes → 主谓宾。"
+      ],
+      "compareTo": "quiz:3",
+      "sourceContext": {"label": "前置讲义 P20 连线题（参考答案）", "quote": "I like cakes. → 主谓宾（like 是及物动词，cakes 是宾语）"}
+    },
+    "quiz:1": {
+      "knowledgePoints": ["en-syntax-five-patterns"],
+      "translation": "他让门开着。",
+      "phrases": [
+        {"text": "leave + 宾语 + 宾补", "meaning": "使……保持某种状态（这里的 open 是宾语补足语）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "主谓句型容不下 left 后面的 the door 和 open 这两个成分，句子信息没说完。干扰点：忽略了 leave 后面还挂着宾语与补语。"},
+        {"option": 1, "verdict": "wrong", "why": "主谓宾只解释了 He left the door（他离开了门），剩下的 open 无处安放；open 补充说明门的状态，不能丢。干扰点：把宾补当成可省略的修饰语。"},
+        {"option": 2, "verdict": "wrong", "why": "主谓宾宾要求两个成分之间没有逻辑主表关系；而 the door 与 open 能说成 The door is open.（门是开着的），是主表关系，属宾补而非双宾。干扰点：看到动词后有两样东西就判双宾语。"},
+        {"option": 3, "verdict": "correct", "why": "open 补充说明宾语 the door 的状态（The door is open. 说得通），是宾语补足语，句型为主谓宾补。"},
+        {"option": 4, "verdict": "wrong", "why": "主系表要求谓语是系动词；leave 在这里是实义动词“使……处于某种状态”，不是系动词。干扰点：把 leave 的使役用法误当系表结构。"}
+      ],
+      "steps": [
+        "先找谓语：left 是实义动词，排除主系表。",
+        "再看 left 后面：the door 是宾语，open 紧跟在宾语之后。",
+        "最后验证主表关系：The door is open. ✔ → open 是宾补，句型为主谓宾补。"
+      ],
+      "compareTo": "quiz:3",
+      "sourceContext": {"label": "前置讲义 P20 连线题（参考答案）", "quote": "He left the door open. → 主谓宾补（the door open：open 是宾补）"}
+    },
+    "quiz:2": {
+      "knowledgePoints": ["en-syntax-five-patterns", "en-syntax-predicative-vs-object"],
+      "translation": "你是一位好老师。",
+      "phrases": [
+        {"text": "be + 名词", "meaning": "be + n. 表示主语“是什么、是什么身份”"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "主谓句型只有主语和谓语，而 are 后面还有 a good teacher，成分没说完。干扰点：把 be 当成可以单独结句的动词。"},
+        {"option": 1, "verdict": "wrong", "why": "主谓宾要求谓语是及物动词、后面跟动作对象；are 是系动词，a good teacher 说明主语的身份，不是动作对象。干扰点：见到动词后面的名词就判宾语。"},
+        {"option": 2, "verdict": "wrong", "why": "主谓宾宾需要两个宾语，本句 are 后面只有一个名词短语。干扰点：把表语也算成宾语之一。"},
+        {"option": 3, "verdict": "wrong", "why": "主谓宾补必须先有宾语，再跟补充说明宾语的成分；本句没有宾语。干扰点：忽略了“宾补必须先有宾语”这个前提。"},
+        {"option": 4, "verdict": "correct", "why": "are 是系动词，连接主语 You 和表语 a good teacher，构成主系表。"}
+      ],
+      "steps": [
+        "先找谓语：are 是系动词，排除主谓宾。",
+        "再看后面：a good teacher 说明主语的身份 → 表语。",
+        "最后定句型：主 + 系 + 表。"
+      ],
+      "compareTo": "quiz:0",
+      "sourceContext": {"label": "前置讲义 P20 连线题（参考答案）", "quote": "You are a good teacher. → 主系表（a good teacher 是表语）"}
+    },
+    "quiz:3": {
+      "knowledgePoints": ["en-syntax-five-patterns"],
+      "translation": "她给我买了一本书。",
+      "phrases": [
+        {"text": "buy sb. sth.", "meaning": "给某人买某物（buy 属 for 类双宾语动词，可改写为 buy sth. for sb.）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "主谓句型容不下 bought 后面的两个成分，me 和 a book 都必须有位置。干扰点：把整个双宾语结构忽略了。"},
+        {"option": 1, "verdict": "wrong", "why": "主谓宾只解释了 She bought a book；me 是间接宾语，说明给谁买，同样是谓语要求的成分，不能省。干扰点：只承认一个宾语。"},
+        {"option": 2, "verdict": "correct", "why": "me 是间接宾语（给谁买），a book 是直接宾语（买的东西），构成双宾语 → 主谓宾宾；可改写为 She bought a book for me.。"},
+        {"option": 3, "verdict": "wrong", "why": "主谓宾补要求 me 与 a book 之间有逻辑主表关系，但 He is a book 说不通；两者是“人”和“物”的关系，属双宾语。干扰点：看到动词后有两个成分就判宾补。"},
+        {"option": 4, "verdict": "wrong", "why": "主系表要求谓语是系动词；bought 是实义及物动词。干扰点：把“买”误解为系表结构。"}
+      ],
+      "steps": [
+        "先找谓语：bought 是及物动词，后面跟了两个成分。",
+        "再判关系：me 是给谁，a book 是买什么，两者没有主表关系（He is a book ✘）。",
+        "最后定句型：间宾 + 直宾 → 主谓宾宾，可用 for 改写为 bought a book for me。"
+      ],
+      "compareTo": "quiz:1",
+      "sourceContext": {"label": "前置讲义 P20 连线题（参考答案）", "quote": "She bought me a book. → 主谓宾宾（me 间宾 + a book 直宾，双宾语）"}
+    },
+    "quiz:4": {
+      "knowledgePoints": ["en-syntax-five-patterns"],
+      "translation": "他们将要出发。",
+      "phrases": [
+        {"text": "will + 动词原形", "meaning": "will 是助动词，与动词原形一起构成将来时"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "correct", "why": "will leave 是“助动词 will + 实义动词 leave”构成的谓语；leave 是不及物动词，后面没有宾语 → 主谓。"},
+        {"option": 1, "verdict": "wrong", "why": "主谓宾需要宾语，而 leave 在这里是不及物动词，后面没有、也不能直接带宾语。干扰点：把“出发”当成及物动作，硬去找宾语。"},
+        {"option": 2, "verdict": "wrong", "why": "主谓宾宾要有两个宾语，句中一个宾语都没有。干扰点：凭空给不及物动词配宾语。"},
+        {"option": 3, "verdict": "wrong", "why": "主谓宾补必须先有宾语，句子没有宾语，谈不上宾补。干扰点：忽略了宾补存在的前提。"},
+        {"option": 4, "verdict": "wrong", "why": "主系表要求谓语是系动词；leave 是表示动作的实义动词，不是系动词。干扰点：把 will 误当系动词的一部分。"}
+      ],
+      "steps": [
+        "先找谓语：will leave 是“助动词 + 实义动词”，核心谓语是 leave。",
+        "再判动词类型：leave 在这里是不及物动词，不接宾语。",
+        "最后定句型：只有主语和谓语 → 主谓。"
+      ],
+      "compareTo": "quiz:1",
+      "sourceContext": {"label": "前置讲义 P20 连线题（参考答案）", "quote": "They will leave. → 主谓（will leave）"}
+    },
+    "quiz:5": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "谷歌，一家著名的互联网公司，每年赚取数十亿美元。",
+      "phrases": [
+        {"text": "billions of dollars", "meaning": "数十亿美元（billions of 作定语修饰 dollars）"},
+        {"text": "every year", "meaning": "每年（时间状语）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "主语是句首的 Google；a famous Internet company 只是解释 Google 的补充成分，位于主语之后、用逗号隔开。干扰点：把紧跟主语的解释性成分当成主语。"},
+        {"option": 1, "verdict": "correct", "why": "它用逗号隔开、紧跟在 Google 之后，与 Google 指同一家公司，对主语作解释说明 → 同位语。（课件原题已给答案）"},
+        {"option": 2, "verdict": "wrong", "why": "定语对名词起限定作用、译成“……的”，而这里是给主语换一个说法，不是限定它。干扰点：把“名词 + 名词短语”一律当定语。"},
+        {"option": 3, "verdict": "wrong", "why": "宾语是谓语动作的对象、位于动词之后；本句的宾语是 dollars，不是这个解释性短语。干扰点：看到名词短语就往宾语上靠。"}
+      ],
+      "steps": [
+        "先划主干：去掉两个逗号之间的内容，句子还剩 Google earns billions of dollars every year.，依然完整。",
+        "再看关系：a famous Internet company 与 Google 指同一样东西 → 同位语。",
+        "最后排其他成分：它既不在动词后作宾语，也不是“……的”式限定。"
+      ],
+      "compareTo": "quiz-p22:1",
+      "sourceContext": {"label": "前置讲义 P22 判断成分（课件原答案）", "quote": "Google（主语）、a famous Internet company（同位语）、earns（谓语）、billions of（定语）、dollars（宾语）、every year（时间状语）"}
+    },
+    "quiz:6": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "我昨天在书店买了一本新的英语书。",
+      "phrases": [
+        {"text": "a new English book", "meaning": "一本新的英语书（a / new / English 都是定语）"},
+        {"text": "at the bookstore", "meaning": "在书店（介词短语作地点状语）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "宾语是动作的对象，bought 的宾语是 a new English book，at the bookstore 说明的是地点。干扰点：把动词后面的成分一律当宾语。"},
+        {"option": 1, "verdict": "wrong", "why": "定语要修饰名词、回答“哪一个”；at the bookstore 修饰的是动作 bought，回答“在哪里”。干扰点：见介词短语就判定语。"},
+        {"option": 2, "verdict": "correct", "why": "at the bookstore 说明 bought 这个动作发生的地点，修饰谓语 → 地点状语。（课件原题已给答案）"},
+        {"option": 3, "verdict": "wrong", "why": "表语只跟在系动词之后；bought 是实义及物动词，不构成系表结构。干扰点：概念混用，把修饰成分当表语。"}
+      ],
+      "steps": [
+        "先找谓语：bought 是实义动词 → 本句不可能是主系表，排除表语。",
+        "再看它修饰谁：at the bookstore 回答“在哪里”，修饰动作 bought，不修饰某个名词。",
+        "最后定成分：说明动作发生的地点 → 地点状语。"
+      ],
+      "compareTo": "quiz-p22:10",
+      "sourceContext": {"label": "前置讲义 P22 判断成分（课件原答案）", "quote": "I（主语）、bought（谓语）、a / new / English（定语）、book（宾语）、at the bookstore（地点状语）、yesterday（时间状语）"}
+    },
+    "quiz:7": {
+      "knowledgePoints": ["en-syntax-clause"],
+      "translation": "他知道她喜欢踢足球。",
+      "phrases": [
+        {"text": "that 从句", "meaning": "that 引导名词性从句，整个从句在句中作宾语"},
+        {"text": "like doing sth.", "meaning": "喜欢做某事"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "correct", "why": "先找连词 that，它后面的 she likes playing football 是从句；主句 He knows 只有主语和谓语、语义不完整，从句整体作 knows 的宾语 → 宾语从句。（笔记例 1）"},
+        {"option": 1, "verdict": "wrong", "why": "表语要跟在系动词之后；He knows 里的 knows 是实义及物动词。干扰点：把“动词后面的成分”一律当表语。"},
+        {"option": 2, "verdict": "wrong", "why": "定语要修饰名词、回答“哪一个”；这个从句前面没有名词可修饰。干扰点：见从句就联想到定语从句。"},
+        {"option": 3, "verdict": "wrong", "why": "状语说明时间、地点、原因、条件等；这个从句说的是“知道”的内容，是动作的对象。干扰点：把从句一律当状语从句。"}
+      ],
+      "steps": [
+        "先找连词：that 是连词，后面的 she likes playing football 就是从句。",
+        "再看主句：He knows 只有主语和谓语，语义不完整，正等着一个宾语。",
+        "最后定成分：从句整体作 knows 的宾语 → 宾语（从句）。"
+      ],
+      "compareTo": "quiz:5",
+      "sourceContext": {"label": "笔记例 1（复合句主从句判断）", "quote": "He knows that she likes playing football. 主句 He knows（主语+谓语，语义不完整）；从句 that she likes playing football（整体作 knows 的宾语）"}
+    },
+    "quiz-p22:0": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "谷歌，一家著名的互联网公司，每年赚取数十亿美元。",
+      "phrases": [
+        {"text": "earn billions of dollars", "meaning": "赚取数十亿美元"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "correct", "why": "Google 位于谓语 earns 之前，是句子所描述事件的主角、动作的发出者 → 主语。（课件原答案）"},
+        {"option": 1, "verdict": "wrong", "why": "谓语是 earns（有时态和人称变化），Google 是专有名词，不能作谓语。干扰点：把句子开头的词一律当谓语。"},
+        {"option": 2, "verdict": "wrong", "why": "宾语要在及物动词之后；earns 的宾语是 dollars。干扰点：主语和宾语的位置弄混。"},
+        {"option": 3, "verdict": "wrong", "why": "同位语是紧跟在名词后面解释它的成分；Google 后面的 a famous Internet company 才是同位语，Google 是被解释的对象。干扰点：把被解释的名词与解释它的成分弄反。"}
+      ],
+      "steps": [
+        "先找谓语：earns（第三人称单数，有时态变化）。",
+        "再看它前面：Google 是动作的发出者，位于谓语之前 → 主语。",
+        "最后核同位语：a famous Internet company 与 Google 同指，那才是同位语，反证 Google 是主语。"
+      ],
+      "compareTo": "quiz-p22:1",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "Google（主语）"}
+    },
+    "quiz-p22:1": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "谷歌，一家著名的互联网公司，每年赚取数十亿美元。",
+      "phrases": [
+        {"text": "a famous Internet company", "meaning": "一家著名的互联网公司（对 Google 作解释的同位语）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "主语是 Google；这个短语位于主语之后、用逗号隔开，是对主语的解释。干扰点：把解释性成分当成被解释的成分。"},
+        {"option": 1, "verdict": "correct", "why": "它与 Google 同指一家公司，用逗号隔开紧跟其后，对主语作补充说明 → 同位语。（课件原答案）"},
+        {"option": 2, "verdict": "wrong", "why": "定语是“……的”式限定，如 billions of 修饰 dollars；这里是换一个说法指同一家公司，不是限定。干扰点：见名词短语就判定语。"},
+        {"option": 3, "verdict": "wrong", "why": "宾语在谓语之后，本句宾语是 dollars。干扰点：把主语后面的名词短语算成宾语。"}
+      ],
+      "steps": [
+        "先划主干：去掉逗号之间的内容，Google earns billions of dollars every year. 依然成立。",
+        "再判同指：这个短语与 Google 指同一家公司 → 同位语。",
+        "最后排其他成分：它不作动词的宾语，也不是修饰别的名词的定语。"
+      ],
+      "compareTo": "quiz:5",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "a famous Internet company（同位语）"}
+    },
+    "quiz-p22:2": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "谷歌，一家著名的互联网公司，每年赚取数十亿美元。",
+      "phrases": [
+        {"text": "earn", "meaning": "赚取、挣得（及物动词，第三人称单数 earns）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "宾语是谓语动作的对象，本句是 dollars；earns 是发出动作的那个词。干扰点：把谓语动词本身当成宾语。"},
+        {"option": 1, "verdict": "wrong", "why": "定语修饰名词，句中 billions of 才是修饰 dollars 的定语；earns 是动词。干扰点：把动词当修饰语。"},
+        {"option": 2, "verdict": "correct", "why": "earns 带第三人称单数词形变化，是主语 Google 发出的动作 → 谓语。（课件原答案）"},
+        {"option": 3, "verdict": "wrong", "why": "状语由副词或介词短语充当，说明时间地点方式；句中的时间状语是 every year。干扰点：把谓语当成状语。"}
+      ],
+      "steps": [
+        "先看词形：earns 带第三人称单数 -s，是典型的谓语形式。",
+        "再看作用：它说明主语 Google 做了什么 → 谓语。",
+        "最后对照：句中的定语是 billions of，状语是 every year，都不是 earns。"
+      ],
+      "compareTo": "quiz-p22:0",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "earns（谓语）"}
+    },
+    "quiz-p22:3": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "谷歌，一家著名的互联网公司，每年赚取数十亿美元。",
+      "phrases": [
+        {"text": "billions of", "meaning": "数十亿的（作定语修饰后面的 dollars）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "correct", "why": "billions of 紧贴在中心名词 dollars 之前，说明数量，起限定说明作用 → 定语。（课件原答案）"},
+        {"option": 1, "verdict": "wrong", "why": "宾语是中心名词 dollars，billions of 只是它的数量修饰语。干扰点：把修饰语连同中心词一起算作宾语。"},
+        {"option": 2, "verdict": "wrong", "why": "同位语要与前面的名词同指；billions of 与 dollars 不是同一个东西，只说明数量。干扰点：把数量修饰当作解释说明。"},
+        {"option": 3, "verdict": "wrong", "why": "表语在系动词之后；本句谓语 earns 是实义动词，不存在表语。干扰点：概念混用。"}
+      ],
+      "steps": [
+        "先定位：billions of 紧挨在名词 dollars 的左边。",
+        "再看作用：它说明 dollars 的数量，与被修饰词是限定关系 → 定语。",
+        "最后排宾语：真正的宾语是中心词 dollars。"
+      ],
+      "compareTo": "quiz-p22:4",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "billions of（定语）"}
+    },
+    "quiz-p22:4": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "谷歌，一家著名的互联网公司，每年赚取数十亿美元。",
+      "phrases": [
+        {"text": "earn dollars", "meaning": "赚取美元（dollars 是 earn 的宾语）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "主语是 Google（位于谓语之前）；dollars 在及物动词 earns 之后。干扰点：把谓语后面的名词当成主语。"},
+        {"option": 1, "verdict": "correct", "why": "dollars 跟在及物动词 earns 后面，是动作 earn 的对象 → 宾语。（课件原答案）"},
+        {"option": 2, "verdict": "wrong", "why": "谓语是 earns，dollars 是名词。干扰点：把宾语当谓语。"},
+        {"option": 3, "verdict": "wrong", "why": "定语是修饰它的 billions of，dollars 是被修饰的中心词。干扰点：把中心词与修饰语的地位弄反。"}
+      ],
+      "steps": [
+        "先找谓语：earns。",
+        "再看它后面：dollars 是动作的直接对象 → 宾语。",
+        "最后理修饰关系：billions of 修饰 dollars，中心词 dollars 承担宾语这个角色。"
+      ],
+      "compareTo": "quiz-p22:3",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "dollars（宾语）"}
+    },
+    "quiz-p22:5": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "谷歌，一家著名的互联网公司，每年赚取数十亿美元。",
+      "phrases": [
+        {"text": "every year", "meaning": "每年（说明动作频率的时间状语）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "地点状语回答“在哪里”，like at the bookstore 那类短语；every year 回答的是“多久一次”。干扰点：把表示频率的时间短语当成地点。"},
+        {"option": 1, "verdict": "correct", "why": "every year 说明动作 earns 发生的时间频率，修饰谓语 → 时间状语。（课件原答案）"},
+        {"option": 2, "verdict": "wrong", "why": "宾语补足语要先有宾语、再补充说明宾语；every year 不说明 dollars 的状态。干扰点：把时间短语当补语。"},
+        {"option": 3, "verdict": "wrong", "why": "定语修饰名词；every year 修饰的是谓语 earns，不是某个名词。干扰点：见短语就判定语。"}
+      ],
+      "steps": [
+        "先看它修饰谁：修饰谓语 earns，说明动作发生的频率。",
+        "再定状语类别：回答“多久一次” → 时间状语。",
+        "最后排定语与补语：它不修饰名词，也不补充说明宾语。"
+      ],
+      "compareTo": "quiz-p22:11",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "every year（时间状语）"}
+    },
+    "quiz-p22:6": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "我昨天在书店买了一本新的英语书。",
+      "phrases": [
+        {"text": "buy sth. at some place", "meaning": "在某处买某物"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "correct", "why": "I 位于谓语 bought 之前，是动作的发出者 → 主语。（课件原答案）"},
+        {"option": 1, "verdict": "wrong", "why": "谓语是 bought（有过去式变化），I 是代词，不能作谓语。干扰点：把句子开头的词当谓语。"},
+        {"option": 2, "verdict": "wrong", "why": "宾语在动词之后，bought 的宾语是 a new English book。干扰点：主语与宾语的位置混淆。"},
+        {"option": 3, "verdict": "wrong", "why": "定语修饰名词，句中 a、new、English 才是定语。干扰点：把主语当成修饰语。"}
+      ],
+      "steps": [
+        "先找谓语：bought。",
+        "再看 bought 前面：I 是动作的发出者 → 主语。",
+        "最后核其余成分：a / new / English 是定语，book 是宾语。"
+      ],
+      "compareTo": "quiz-p22:0",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "I（主语）"}
+    },
+    "quiz-p22:7": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "我昨天在书店买了一本新的英语书。",
+      "phrases": [
+        {"text": "buy", "meaning": "买（过去式 bought）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "主语是 I；bought 是动作本身。干扰点：把谓语当主语。"},
+        {"option": 1, "verdict": "correct", "why": "bought 有过去式变化，说明主语 I 做过的动作 → 谓语。（课件原答案）"},
+        {"option": 2, "verdict": "wrong", "why": "宾语是 a new English book。干扰点：把谓语当宾语。"},
+        {"option": 3, "verdict": "wrong", "why": "状语由 at the bookstore、yesterday 充当，说明地点和时间。干扰点：把谓语当状语。"}
+      ],
+      "steps": [
+        "先看词形：bought 是 buy 的过去式，带时态变化 → 谓语。",
+        "再看它带出的成分：宾语 a new English book、状语 at the bookstore yesterday。",
+        "最后确认：谓语就是 bought。"
+      ],
+      "compareTo": "quiz-p22:2",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "bought（谓语）"}
+    },
+    "quiz-p22:8": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "我昨天在书店买了一本新的英语书。",
+      "phrases": [
+        {"text": "a new English book", "meaning": "一本新的英语书（冠词、性质、类别三层修饰语都作定语）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "宾语是它们修饰的中心词 book，a / new / English 只是附在 book 前面的修饰语。干扰点：把修饰语连同中心词一起当宾语。"},
+        {"option": 1, "verdict": "correct", "why": "a（限定词）、new（性质）、English（类别）都放在中心名词 book 之前，起限定说明作用 → 定语。（课件原答案）"},
+        {"option": 2, "verdict": "wrong", "why": "状语说明动作的时间地点方式，由副词或介词短语充当；这三个词只修饰名词。干扰点：见短语就判状语。"},
+        {"option": 3, "verdict": "wrong", "why": "同位语要与被说明的名词同指；a / new / English 都不是 book 的“另一个称呼”。干扰点：把修饰关系与同指关系混淆。"}
+      ],
+      "steps": [
+        "先找中心词：a new English book 的中心是 book。",
+        "再看三个词的位置与作用：都在 book 之前、起限定说明作用 → 定语。",
+        "最后排除宾语与同位语：宾语是中心词 book，同位语要求同指。"
+      ],
+      "compareTo": "quiz-p22:9",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "a / new / English（定语）"}
+    },
+    "quiz-p22:9": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "我昨天在书店买了一本新的英语书。",
+      "phrases": [
+        {"text": "center word", "meaning": "中心词——剥掉定语后剩下的那个名词，在句中承担主要成分"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "定语是修饰它的 a、new、English；book 是被修饰的中心词。干扰点：把中心词与修饰语的地位弄反。"},
+        {"option": 1, "verdict": "correct", "why": "book 是 bought 的宾语 a new English book 的中心词，剥掉定语后由它承担宾语这个角色 → book 作宾语。（课件原答案）"},
+        {"option": 2, "verdict": "wrong", "why": "谓语是 bought。干扰点：把名词当谓语。"},
+        {"option": 3, "verdict": "wrong", "why": "主语是 I，位于谓语之前。干扰点：主语与宾语的位置混淆。"}
+      ],
+      "steps": [
+        "先看 bought 后面：a new English book 整体是宾语。",
+        "再剥掉定语：a、new、English 都是修饰语，剩下的中心词 book 承担宾语这个角色。",
+        "最后确认：book 作宾语。"
+      ],
+      "compareTo": "quiz-p22:8",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "book（宾语）"}
+    },
+    "quiz-p22:10": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "我昨天在书店买了一本新的英语书。",
+      "phrases": [
+        {"text": "at the bookstore", "meaning": "在书店（说明动作发生的地点）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "宾语是 a new English book；at the bookstore 说的是动作发生的地点。干扰点：把动词后的介词短语一律当宾语。"},
+        {"option": 1, "verdict": "wrong", "why": "定语修饰名词、回答“哪一个”；这个短语修饰的是动作 bought。干扰点：把修饰动作的短语判定语。"},
+        {"option": 2, "verdict": "correct", "why": "at the bookstore 说明 bought 发生的地点，修饰谓语 → 地点状语。（课件原答案）"},
+        {"option": 3, "verdict": "wrong", "why": "时间状语是 yesterday；at the bookstore 回答“在哪里”，不是“什么时候”。干扰点：时间状语与地点状语混淆。"}
+      ],
+      "steps": [
+        "先看修饰对象：它修饰动词 bought，说明“在哪里买”。",
+        "再辨类别：回答“在哪里” → 地点状语。",
+        "最后与 yesterday 对照：地点在前、时间在后，两个都是状语，只是类别不同。"
+      ],
+      "compareTo": "quiz-p22:11",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "at the bookstore（地点状语）"}
+    },
+    "quiz-p22:11": {
+      "knowledgePoints": ["en-syntax-nine-elements"],
+      "translation": "我昨天在书店买了一本新的英语书。",
+      "phrases": [
+        {"text": "yesterday", "meaning": "昨天（说明动作发生的时间）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "correct", "why": "yesterday 说明 bought 发生的时间，修饰谓语 → 时间状语。（课件原答案）"},
+        {"option": 1, "verdict": "wrong", "why": "地点状语是 at the bookstore。干扰点：时间副词与地点状语混淆。"},
+        {"option": 2, "verdict": "wrong", "why": "定语修饰名词；yesterday 修饰的是谓语 bought。干扰点：见词就判定语。"},
+        {"option": 3, "verdict": "wrong", "why": "宾语是 a new English book。干扰点：把状语当宾语。"}
+      ],
+      "steps": [
+        "先看修饰对象：yesterday 修饰谓语 bought。",
+        "再辨类别：回答“什么时候” → 时间状语。",
+        "最后核对排列：地点在前、时间在后（at the bookstore yesterday），符合状语的习惯顺序。"
+      ],
+      "compareTo": "quiz-p22:10",
+      "sourceContext": {"label": "前置讲义 P22（课件原答案）", "quote": "yesterday（时间状语）"}
+    }
+  }
+}

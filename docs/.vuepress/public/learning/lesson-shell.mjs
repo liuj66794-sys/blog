@@ -2,6 +2,7 @@ import { trackReading } from './reading-state.mjs'
 import { attachLessonSession } from './lesson-session.mjs'
 import { attachMistakeTracking } from './lesson-mistakes.mjs'
 import { attachLearningGuide } from './learning-guide.mjs'
+import { mountTeachingFlow } from './teaching-flow.mjs'
 
 const base = document.querySelector('script[data-study-base]')?.dataset.studyBase || '/blog/'
 const root = document.documentElement
@@ -170,6 +171,6 @@ for (const pill of document.querySelectorAll('.lesson-progress')) {
     if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle() }
   })
 }
-function startSession() { attachMistakeTracking(base); attachLessonSession(base, {interactive:true}); attachLearningGuide(base); trackReading(base) }
+function startSession() { attachMistakeTracking(base); attachLessonSession(base, {interactive:true}); attachLearningGuide(base); mountTeachingFlow(base); trackReading(base) }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startSession, { once: true })
 else startSession()

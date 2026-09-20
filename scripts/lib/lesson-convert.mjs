@@ -348,6 +348,92 @@ function container(name, title, contentMd) {
   return `${fence} ${name}${title ? ` ${title}` : ''}\n\n${contentMd.trim()}\n\n${fence}`
 }
 
+/* ---------------- 教学补充渲染（ctx.teaching / ctx.knowledgePoints） ---------------- */
+
+/** 与 course-question-index.mjs 一致的 djb2（政治课内无 id 的 mcq  ref = 'h'+hash） */
+function djb2(text) { let h = 5381; for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) >>> 0; return h.toString(36) }
+
+/** 知识点 id → 展示名（ctx.knowledgePoints 为 Map 或普通对象；未定义回退 id 本身） */
+function kpName(ctx, id) {
+  const point = ctx.knowledgePoints?.get?.(id) ?? ctx.knowledgePoints?.[id]
+  return point?.name ?? id
+}
+
+/** 小节元数据：目标 / 建议用时 / 知识点 chips → info 容器 */
+function sectionMetaToMarkdown(section, ctx) {
+  const lines = []
+  if (section.goal) lines.push(`- **目标**：${section.goal}`)
+  if (section.minutes) lines.push(`- **建议用时**：${section.minutes} 分钟`)
+  const chips = (section.knowledgePoints ?? []).map((id) => `\`${kpName(ctx, id)}\``)
+  if (chips.length) lines.push(`- **知识点**：${chips.join(' ')}`)
+  return lines.length ? container('info', `本节指引 · ${section.title}`, lines.join('\n')) : ''
+}
+
+/** 结构化讲解块 → Markdown。未识别类型告警并跳过（不丢主体内容）。 */
+function teachingBlockToMarkdown(block, ctx) {
+  switch (block?.type) {
+    case 'english-explain': {
+      // 句意 → 拆解 → 语法 三段；可选时间轴 / 正反例 / 口诀
+      const parts = []
+      if (block.meaning) parts.push(`**句意**：${block.meaning}`)
+      if (block.breakdown?.length) parts.push(`**拆解**\n\n${block.breakdown.map((x) => `- ${x}`).join('\n')}`)
+      if (block.grammar) parts.push(`**语法**：${block.grammar}`)
+      if (block.timeline?.length) {
+        parts.push(block.timeline.map((x, i) => `${i + 1}. ${typeof x === 'string' ? x : `**${x.time}** ${x.text}`}`).join('\n'))
+      }
+      if (block.examples) {
+        const lines = []
+        if (block.examples.right?.length) lines.push(`正例：${block.examples.right.join('；')}`)
+        if (block.examples.wrong?.length) lines.push(`反例：${block.examples.wrong.join('；')}`)
+        if (block.examples.boundary) lines.push(`适用边界：${block.examples.boundary}`)
+        if (lines.length) parts.push(lines.join('\n'))
+      }
+      if (block.mnemonic) {
+        const m = typeof block.mnemonic === 'string' ? { text: block.mnemonic } : block.mnemonic
+        parts.push(`**口诀**：${m.text}${m.note ? ` —— ${m.note}` : ''}`)
+      }
+      return parts.length ? container('tip', block.title || '句子精讲', parts.join('\n\n')) : ''
+    }
+    case 'politics-term': {
+      // 五维卡片：白话 / 教材表述 / 情境 / 易混区别 / 答题关键词
+      const lines = []
+      if (block.plain) lines.push(`- **白话**：${block.plain}`)
+      if (block.textbook) lines.push(`- **教材表述**：${block.textbook}`)
+      if (block.scenario) lines.push(`- **情境**：${block.scenario}`)
+      if (block.confusable) lines.push(`- **易混区别**：${block.confusable}`)
+      if (block.keywords?.length) lines.push(`- **答题关键词**：${block.keywords.join('、')}`)
+      return lines.length ? container('info', block.term || '概念卡片', lines.join('\n')) : ''
+    }
+    case 'timeline': {
+      const items = (block.items ?? []).map((x, i) => `${i + 1}. ${typeof x === 'string' ? x : `**${x.time}** ${x.text}`}`)
+      return items.length ? container('info', block.title || '时间轴', items.join('\n')) : ''
+    }
+    case 'analogy': {
+      const rows = (block.mapping ?? []).map((m) => `| ${m.from} | ${m.to} |`)
+      const parts = rows.length ? [`| 本概念 | 类比为 |\n| --- | --- |\n${rows.join('\n')}`] : []
+      if (block.limit) parts.push(`**局限**：${block.limit}`)
+      return parts.length ? container('tip', block.title || '类比理解', parts.join('\n\n')) : ''
+    }
+    default:
+      ctx.onWarn(`[lesson-convert] 未识别的 teaching 块类型（跳过）：${block?.type}`)
+      return ''
+  }
+}
+
+/** 题目补充 → details 内追加内容：逐选项解析 / 翻译 / 词组 / 对比自测 / 原文定位 */
+function questionTeachingMarkdown(t, letterFor) {
+  const parts = []
+  if (t.optionAnalysis?.length) {
+    parts.push(`**逐选项解析**\n\n${t.optionAnalysis.map((oa) =>
+      `- ${letterFor(oa.option)} ${oa.verdict === 'correct' ? '✅' : '❌'} ${oa.why}`).join('\n')}`)
+  }
+  if (t.translation) parts.push(`**整句翻译**：${t.translation}`)
+  if (t.phrases?.length) parts.push(`**词组**：${t.phrases.map((p) => `\`${p.text}\` ${p.meaning}`).join('；')}`)
+  if (t.compareTo) parts.push(`**对比自测**：做完后对照 ${t.compareTo}，比较两题的判断依据`)
+  if (t.sourceContext?.quote) parts.push(`**原文定位**（${t.sourceContext.label ?? '来源'}）：${t.sourceContext.quote}`)
+  return parts.join('\n\n')
+}
+
 /**
  * 随堂测 → 题干 + 字母选项 + 折叠答案。
  * 兼容五门课的选项布局与答案标记：
@@ -360,8 +446,17 @@ function container(name, title, contentMd) {
  * - policy：li onclick=checkAnswer(this,true|false) 里 true 标记正确项，
  *   选项文本自带「A. 」前缀
  */
-function quizToMarkdown(openTag, inner, ctx) {
+function quizToMarkdown(openTag, inner, ctx, state) {
   const letterOf = (i) => String.fromCharCode(65 + i)
+
+  // 英语题 ref：最近的 id 匹配 /^quiz/ 的祖先容器 id + ':' + 组内序号
+  // （规则与 course-question-index.mjs 一致，用于定位 teaching.questions 补充）
+  let supplement = null
+  if (ctx.slug === 'zsb-english' && state?.quizGroup && ctx.teaching?.questions) {
+    const ordinal = state.quizOrdinals.get(state.quizGroup) ?? 0
+    state.quizOrdinals.set(state.quizGroup, ordinal + 1)
+    supplement = ctx.teaching.questions.get(`${state.quizGroup}:${ordinal}`) ?? null
+  }
 
   // 答案/解析属性可能在 quiz div 或 options 容器（english）上
   const answerAttr = (openTag.match(/data-answer="([^"]*)"/)?.[1]
@@ -459,15 +554,30 @@ function quizToMarkdown(openTag, inner, ctx) {
   parts.push(`**${qText.replace(/\*/g, '').trim()}**`)
   parts.push(opts.map((o, i) => `- ${letterOf(i)}. ${o.text.replace(/\n/g, '<br>')}`).join('\n'))
   const ansOpt = hasAnswer ? `（${escapeAngle(opts[answerIdx].text.replace(/[*`]/g, '')).replace(/\n/g, '<br>')}）` : ''
-  parts.push(container('details', '点开核对答案',
-    hasAnswer
-      ? `**答案：${letterOf(answerIdx)}${ansOpt}**${explain ? ` —— ${explain}` : ''}`
-      : `**答案：见交互版讲义**${explain ? ` —— ${explain}` : ''}`))
+  const answerLines = [hasAnswer
+    ? `**答案：${letterOf(answerIdx)}${ansOpt}**${explain ? ` —— ${explain}` : ''}`
+    : `**答案：见交互版讲义**${explain ? ` —— ${explain}` : ''}`]
+  if (supplement) {
+    const extra = questionTeachingMarkdown(supplement, (o) => letterOf(Number(o)))
+    if (extra) answerLines.push(extra)
+  }
+  parts.push(container('details', '点开核对答案', answerLines.join('\n\n')))
   return parts.join('\n\n')
 }
 
 /** 语义 div → plume 容器 / 元信息收集 / nav 收集 */
 function divToMarkdown(openTag, inner, ctx, state) {
+  // 英语测验容器（id=quiz/quiz-2/…）：透明展开，同时记下组 id 供组内 quiz 生成题 ref
+  const idAttr = openTag.match(/\bid="([^"]*)"/)?.[1] ?? ''
+  if (ctx.slug === 'zsb-english' && /^quiz/.test(idAttr)) {
+    const prevGroup = state.quizGroup
+    state.quizGroup = idAttr
+    try {
+      return inner.trim() ? convertInner(inner, ctx, state) : ''
+    } finally {
+      state.quizGroup = prevGroup
+    }
+  }
   const classes = (openTag.match(/class="([^"]*)"/)?.[1] ?? '').split(/\s+/).filter(Boolean)
   const has = (c) => classes.includes(c)
 
@@ -492,7 +602,7 @@ function divToMarkdown(openTag, inner, ctx, state) {
     }
     return ''
   }
-  if (has('quiz')) return quizToMarkdown(openTag, inner, ctx)
+  if (has('quiz')) return quizToMarkdown(openTag, inner, ctx, state)
   if (has('recall')) {
     // pi-agent（p.q + div.answer）/ 专升本高数（recall-tag + p.recall-q + div.recall-a）
     const q = inner.match(/<p class="q">([\s\S]*?)<\/p>/)?.[1]
@@ -679,8 +789,32 @@ function blockToMarkdown(b, ctx, state) {
     }
     case 'h2':
     case 'h3':
-    case 'h4':
-      return headingToMarkdown(b.tag, b.inner, ctx)
+    case 'h4': {
+      const heading = headingToMarkdown(b.tag, b.inner, ctx)
+      // 教学补充：h2/h3 命中小节（id 优先；政治课件标题常无 id，按标题文本匹配）时，
+      // 标题后渲染小节元数据与小节开头讲解块；同一小节只渲染一次。
+      if (b.tag !== 'h4' && ctx.teaching?.sections?.length) {
+        state.renderedSections ??= new Set()
+        const sectionId = b.openTag.match(/\bid="([^"]*)"/)?.[1]
+        const norm = (s) => String(s ?? '').replace(/<[^>]*>/g, '').replace(/\s+/g, '')
+        const headingText = norm(b.inner)
+        const section = (sectionId && ctx.teaching.sections.find((s) => s.id === sectionId))
+          || ctx.teaching.sections.find((s) => {
+            if (state.renderedSections.has(s.id)) return false
+            const title = norm(s.title)
+            return title && headingText && (headingText.includes(title) || title.includes(headingText))
+          })
+        if (section && !state.renderedSections.has(section.id)) {
+          state.renderedSections.add(section.id)
+          return [
+            heading,
+            sectionMetaToMarkdown(section, ctx),
+            ...(section.teaching ?? []).map((block) => teachingBlockToMarkdown(block, ctx)),
+          ].filter((x) => x && x.trim()).join('\n\n')
+        }
+      }
+      return heading
+    }
     case 'p': {
       const pClass = b.openTag.match(/class="([^"]*)"/)?.[1] ?? ''
       if (pClass.includes('teacher-note')) {
@@ -804,8 +938,10 @@ function fixCircledNumbersInMath(md) {
 /**
  * 讲义 HTML → Markdown。
  * @param {string} html 讲义全文
- * @param {{ slug?: string, onWarn?: (msg: string) => void }} ctx
+ * @param {{ slug?: string, onWarn?: (msg: string) => void, teaching?: object, knowledgePoints?: Map|object }} ctx
  *   slug：课程 slug（相邻课互链与镜像相对链接重写依赖它）
+ *   teaching：可选，supplementsForLesson 的合并结果（sections/questions/subjective）；
+ *   knowledgePoints：可选，知识点 id → {id,name,summary}
  * @returns {{
  *   headline: string,          // h1 主标题（讲义 headline，非 <title> 的课号名）
  *   metaLine: string,          // lesson-meta / subtitle 拼接行（模块｜周课｜时长等）
@@ -820,8 +956,17 @@ export function lessonHtmlToMarkdown(html, ctx = {}) {
     lessonUrls: ctx.lessonUrls,
     onWarn: ctx.onWarn ?? (() => {}),
     explanations: parseExplanations(html),
+    teaching: ctx.teaching
+      ? {
+        ...ctx.teaching,
+        questions: ctx.teaching.questions instanceof Map
+          ? ctx.teaching.questions
+          : new Map(Object.entries(ctx.teaching.questions ?? {})),
+      }
+      : null,
+    knowledgePoints: ctx.knowledgePoints,
   }
-  const state = { headline: '', metaLine: '', nav: { prev: null, middle: [], next: null } }
+  const state = { headline: '', metaLine: '', nav: { prev: null, middle: [], next: null }, quizGroup: null, quizOrdinals: new Map() }
 
   const prepared = inlineScriptQuizzes(html)
   const bodyHtml = (prepared.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? prepared)
@@ -837,10 +982,71 @@ export function lessonHtmlToMarkdown(html, ctx = {}) {
     if (md && md.trim()) out.push(md.trim())
   }
 
+  // 政治课内选择题：静态 HTML 里 #quiz 只是运行时挂载点，题目在 #lesson-data JSON，
+  // 阅读版需要显式补渲染（题干+选项+折叠核对），并并入 teaching 逐选项解析/原文定位
+  if (c.slug === 'zsb-politics' && c.teaching) {
+    const dataJson = html.match(/<script[^>]+id="lesson-data"[^>]*>([\s\S]*?)<\/script>/)?.[1]
+    const lessonData = dataJson ? JSON.parse(dataJson) : null
+    const mcqs = lessonData?.mcqs ?? []
+    if (mcqs.length) {
+      const lessonId = c.teaching.lessonId
+      const stubs = mcqs.map((q) => ({
+        ref: q.id || 'h' + djb2(`${lessonId}#${q.stem}`), kind: 'choice',
+        options: (q.options ?? []).map((o) => ({ value: o.letter })),
+      }))
+      const supplementByRef = new Map()
+      for (const [key, value] of c.teaching.questions ?? new Map()) {
+        const ref = resolveTeachingRef(key, stubs)
+        if (ref) supplementByRef.set(ref, { ...(supplementByRef.get(ref) ?? {}), ...value })
+      }
+      out.push('## 章末选择题')
+      mcqs.forEach((q, i) => out.push(politicsMcqToMarkdown(q, i, supplementByRef.get(stubs[i].ref), c)))
+    }
+  }
+
+  // 主观题支架（qa:N / anchor:xxx 锚定讲义问答块，不进题目索引）
+  const subjective = c.teaching?.subjective ?? {}
+  if (Object.keys(subjective).length) {
+    out.push('## 主观题支架')
+    for (const [ref, s] of Object.entries(subjective)) {
+      const parts = [`### ${ref}`]
+      if (s.keyPoints?.length) parts.push(`**要点**\n\n${s.keyPoints.map((k) => `- ${k}`).join('\n')}`)
+      if (s.derivation) parts.push(`**推导**：${s.derivation}`)
+      if (s.selfEval?.length) parts.push(`**自评标准**\n\n${s.selfEval.map((item) => `- [ ] ${item}`).join('\n')}`)
+      out.push(parts.join('\n\n'))
+    }
+  }
+
   return {
     headline: state.headline,
     metaLine: state.metaLine,
     body: fixCircledNumbersInMath(out.join('\n\n').trim()),
     nav: state.nav,
   }
+}
+
+/** 教学补充键 → 题目 ref：精确命中，或政治课内 mcq:N（1 起，按选择题序）。qa:/anchor: 不对应题目。 */
+function resolveTeachingRef(key, questions) {
+  if (/^(qa|anchor)[:.]/.test(key)) return null
+  if (questions.some((q) => q.ref === key)) return key
+  const mcq = key.match(/^mcq:(\d+)$/)
+  if (mcq) return questions.filter((q) => q.kind === 'choice')[Number(mcq[1]) - 1]?.ref ?? null
+  return null
+}
+
+/** 政治课内 mcq → 题干 + 字母选项 + 折叠核对（答案字母 + 解析 exp + teaching 补充） */
+function politicsMcqToMarkdown(q, index, supplement, ctx) {
+  const stem = inline(String(q.stem ?? ''), ctx)
+  const opts = (q.options ?? []).map((o) => `- ${o.letter}. ${inline(String(o.text ?? ''), ctx)}`)
+  const answer = String(q.answer ?? '').replace(/[、，,\s]+/g, '').split('').join('')
+  const answerLines = [`**答案：${answer || '见互动版'}**${q.exp ? ` —— ${inline(String(q.exp), ctx)}` : ''}`]
+  if (supplement) {
+    const extra = questionTeachingMarkdown(supplement, (o) => String(o).toUpperCase())
+    if (extra) answerLines.push(extra)
+  }
+  return [
+    `**${index + 1}. ${stem}**`,
+    opts.join('\n'),
+    container('details', '点开核对答案', answerLines.join('\n\n')),
+  ].join('\n\n')
 }

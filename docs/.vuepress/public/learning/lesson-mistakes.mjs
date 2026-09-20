@@ -59,6 +59,8 @@ function snapshot(node, base) {
     options: options.map(o => ({ value: String(o.value), text: readableText(o.text, meta.html), ...(formatted ? { html: readableMarkup(o.text, meta.html) } : {}) })),
     answer: meta.answer || [], doubt: !!meta.doubt,
     sourceLabel: meta.sourceLabel || '',
+    ...(meta.teaching ? { teaching: meta.teaching } : {}),
+    ...(meta.subjective ? { subjective: meta.subjective } : {}),
     contextRequired: (meta.slug === 'zsb-english' && Number(meta.lessonId) >= 18 && Number(meta.lessonId) <= 23) || !!node.querySelector('img,svg,canvas'),
     explanation: readableText(explanation, meta.html),
     source: location.pathname, title: document.querySelector('h1')?.textContent.trim() || document.title,

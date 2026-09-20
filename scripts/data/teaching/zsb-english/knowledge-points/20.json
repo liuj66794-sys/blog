@@ -1,0 +1,67 @@
+{
+  "points": [
+    {
+      "id": "en-passage-five-step",
+      "name": "篇章精读五步法",
+      "summary": "通读定主题 → 分层读段落 → 拆解长句 → 原文定位作答 → 译文复盘。五步是闭环而非顺序清单：做完题必须回到译文复盘，把错因归到词汇、结构或逻辑定位三处之一。",
+      "lessonRefs": ["20"],
+      "prereqs": []
+    },
+    {
+      "id": "en-passage-topic",
+      "name": "通读定主题（标题 + 首段 + 段首句）",
+      "summary": "先读标题、首段与每段首句，用一句中文概括文章在讲什么。标题与首段给题材与立场，段首句给段落主旨，三者合起来就是全文骨架；不先定主题就读细节，容易读懂每句却答错整篇。",
+      "lessonRefs": ["20"],
+      "prereqs": ["en-passage-five-step"]
+    },
+    {
+      "id": "en-passage-paragraph-logic",
+      "name": "段落功能与连接关系（转折 / 因果 / 举例 / 递进）",
+      "summary": "标出 however、but（转折）、because、therefore、as a result（因果）、for example、such as（举例）、more importantly、also（递进）等信号词，确认每段在全文中的功能：提出现象、给出原因、举例佐证，还是收束结论。",
+      "lessonRefs": ["20"],
+      "prereqs": ["en-passage-topic"]
+    },
+    {
+      "id": "en-passage-long-sentence",
+      "name": "长句拆解：主干先行，修饰后理",
+      "summary": "碰到长句先找主干主谓宾，再逐块处理从句、非谓语、同位语和插入成分。课件原解析的写法是「X 是主语；Y 是同位语；Z 是谓语部分」，把每块成分先归类再理解，不按词的先后硬译。",
+      "lessonRefs": ["20"],
+      "prereqs": ["en-syntax-five-patterns"]
+    },
+    {
+      "id": "en-passage-locate",
+      "name": "原文定位作答（题干关键词回原文，证据唯一）",
+      "summary": "把题干里的关键词（人名、时间、数字、专有名词、态度词）划出来回原文定位，找到唯一的那一句作证据；定位句必须同时解释正确项为什么对、干扰项为什么错，不能靠印象选「读起来像」。",
+      "lessonRefs": ["20"],
+      "prereqs": ["en-passage-topic"]
+    },
+    {
+      "id": "en-passage-context-clue",
+      "name": "语境线索：指代、复现、搭配",
+      "summary": "空处的答案常由同一段内的三条线索决定：代词（it / they / this）回指的先行词、同一主题词的复现或同义替换、以及与前后词的固定搭配（make a living、be tired of）。三条线索一致时答案才唯一。",
+      "lessonRefs": ["20", "21"],
+      "prereqs": ["en-passage-paragraph-logic"]
+    },
+    {
+      "id": "en-passage-word-guess",
+      "name": "词义猜测：构词与上下文",
+      "summary": "生词先看构词（前缀 un-/re-、后缀 -able/-less、词根），再看上下文：并列、举例、转折、因果往往直接给出释义范围，定义从句（that is、which means）与破折号后的解释更是显式提示。",
+      "lessonRefs": ["20"],
+      "prereqs": ["en-passage-context-clue"]
+    },
+    {
+      "id": "en-passage-three-gates",
+      "name": "答案三关：语义、语法、上下文",
+      "summary": "任何一个选项要成立必须同时过三关：语义关（译成中文讲得通）、语法关（时态、语态、主谓一致、从句结构都对）、上下文关（与前后句的逻辑和指代一致）。只过其中一两关的选项，就是命题人设的干扰项。",
+      "lessonRefs": ["20"],
+      "prereqs": ["en-passage-locate"]
+    },
+    {
+      "id": "en-passage-review",
+      "name": "译文复盘与错因归类（词汇 / 结构 / 逻辑定位）",
+      "summary": "做完再展开译文与答案，对照错题记录归类：是词不认识（词汇）、句子成分没拆开（结构），还是找到了句子却读反了逻辑（逻辑定位）。错因归类才能把一篇的失误迁移成下一遍的方法。",
+      "lessonRefs": ["20"],
+      "prereqs": ["en-passage-five-step"]
+    }
+  ]
+}

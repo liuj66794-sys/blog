@@ -11,6 +11,7 @@ import {
   readLastBackupAt,
   serializeStudyBackup,
   studyConflictId,
+  studyKeyLabel,
   validateStudyBackup,
   writeLastBackupAt,
 } from '../../docs/.vuepress/study-backup.mjs'
@@ -87,6 +88,12 @@ function allStudyValues() {
       hquestion: { picked: ['A'], done: true },
     }),
     'zsb-prep-checks': JSON.stringify({ [`${base}prep/gaoshu/#w1`]: 1 }),
+    'l1uj-knowledge-v1': JSON.stringify({
+      version: 1,
+      points: { 'kp-noun': { box: 2, dueAt: 3000, learnedAt: 3600000, lastResult: 'correct', history: [{ at: 3600000, result: 'correct' }] } },
+      sources: { 'kp-noun': { slug: 'zsb-english', lessonId: '1', ref: 'quiz:0', name: '名词单复数' } },
+    }),
+    'l1uj-sections-v1:zsb-english:1': JSON.stringify({ 'pt-1': { done: true, at: 3000 } }),
     'l1uj-study-progress-v1': JSON.stringify({
       version: 1,
       entries: {
@@ -375,4 +382,63 @@ test('round-trips a generated Chinese prepCatalog path and rejects encoded separ
     }
     assert.equal(validateStudyBackup(payload, { base }).valid, false, path)
   }
+})
+
+test('teaching keys are allow-listed with their own labels and skip bad local values on export', () => {
+  const knowledgeKey = 'l1uj-knowledge-v1'
+  const sectionsKey = 'l1uj-sections-v1:zsb-politics:mzt01'
+  assert.equal(isAllowedStudyKey(knowledgeKey, base), true)
+  assert.equal(isAllowedStudyKey(sectionsKey, base), true)
+  assert.equal(isAllowedStudyKey('l1uj-sections-v1:zsb-politics:../escape', base), false)
+  assert.equal(isAllowedStudyKey('l1uj-sections-v1:zsb-math:1', base), true)
+  assert.equal(isAllowedStudyKey('l1uj-knowledge-v2', base), false)
+  assert.match(studyKeyLabel(knowledgeKey), /知识点/)
+  assert.match(studyKeyLabel(sectionsKey, 'pt-1'), /小节/)
+  assert.match(studyKeyLabel(sectionsKey, 'pt-1'), /政治理论/)
+
+  const storage = new MemoryStorage({
+    [knowledgeKey]: JSON.stringify({ version: 1, points: { 'kp-a': { box: 9 } } }),
+    [sectionsKey]: JSON.stringify({ 'pt-1': { done: true, at: 5 } }),
+  })
+  const exported = createStudyBackup(storage, { base, now: 6000 })
+  assert.deepEqual(exported.skipped.map((item) => item.key), [knowledgeKey])
+  assert.deepEqual(Object.keys(exported.backup.records), [sectionsKey])
+  // 同一份备份再导入：坏值不进备份，也不会打断其余键的恢复
+  const restored = new MemoryStorage()
+  assert.equal(applyStudyImport(exported.backup, restored, { base }).applied, true)
+  assert.deepEqual(JSON.parse(restored.getItem(sectionsKey)), { 'pt-1': { done: true, at: 5 } })
+  assert.equal(restored.getItem(knowledgeKey), null)
+})
+
+test('knowledge points merge per point and keep the local source label when both sides have one', () => {
+  const key = 'l1uj-knowledge-v1'
+  const source = (name) => ({ slug: 'zsb-english', lessonId: '1', ref: 'quiz:0', name })
+  const local = new MemoryStorage({
+    [key]: JSON.stringify({
+      version: 1,
+      points: { 'kp-keep': { box: 3, dueAt: 9000, learnedAt: 9000, lastResult: 'correct', history: [{ at: 9000, result: 'correct' }] } },
+      sources: { 'kp-keep': source('本机名称') },
+    }),
+  })
+  const incoming = {
+    format: 'l1uj-study-backup', version: 1, base, createdAt: 9000,
+    records: {
+      [key]: {
+        version: 1,
+        points: {
+          'kp-keep': { box: 1, dueAt: 10, learnedAt: 10, lastResult: 'wrong', history: [{ at: 10, result: 'wrong' }] },
+          'kp-add': { box: 1, dueAt: 500, learnedAt: 500, lastResult: 'correct', history: [{ at: 500, result: 'correct' }] },
+        },
+        sources: { 'kp-add': source('导入名称'), 'kp-keep': source('导入名称') },
+      },
+    },
+  }
+  const preview = previewStudyImport(incoming, local, { base })
+  assert.equal(preview.valid, true)
+  assert.equal(applyStudyImport(incoming, local, { base }).applied, true)
+  const merged = JSON.parse(local.getItem(key))
+  assert.equal(merged.points['kp-keep'].learnedAt, 9000, '较新的本机记录保留')
+  assert.equal(merged.points['kp-add'].learnedAt, 500)
+  assert.equal(merged.sources['kp-keep'].name, '本机名称')
+  assert.equal(merged.sources['kp-add'].name, '导入名称')
 })

@@ -1,0 +1,102 @@
+{
+  "points": [
+    {
+      "id": "en-match-exam-profile",
+      "name": "文章句子匹配·考情与考查形式",
+      "summary": "考试分值 5 题 × 2 分 = 10 分（教材上册 P223–229）；考纲要求考查对文章整体内容和结构以及上下文逻辑意义的理解与把握，侧重语言结构形式与上下文的连贯手段；真题形式为一段文章留 5 个空，从 A–E 五个句子中为每个空选句回填。",
+      "lessonRefs": ["22"],
+      "prereqs": []
+    },
+    {
+      "id": "en-match-structure-scan",
+      "name": "第一步·了解文章话题、结构和考查形式",
+      "summary": "先看大标题、小标题、主题句或第一段确定话题；辨认总分、总分总等结构，勾画祈使句或结构一致的句子；再看设空处标点——空后是逗号还是句号、选项是半句还是完整句，先用句法形式排除无法衔接的选项。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-exam-profile"]
+    },
+    {
+      "id": "en-match-signal-words",
+      "name": "第二步·圈出选项中的逻辑词和实词（起承转合）",
+      "summary": "起＝时间关系（at first / first / firstly / in the first place / to start with / to begin with；second / secondly / then / afterwards / next / later；at last / finally / last；in the meantime、at the same time）；承＝并列与递进（too / either / also / as well as / likewise；besides / additionally / furthermore / moreover / in addition to / what's more；not only…but also、neither…nor…、the same…as）；转＝转折与让步（but / however / yet / while / nevertheless / whereas；although / though / even though / even if / despite / in spite of；instead of / rather than / on the other hand / on the contrary / by contrast；unlike、unfortunately）；合＝因果（because / because of / for / since / as / thanks to / due to / in that；so / therefore / thus / hence / as a result / consequently / accordingly）。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-structure-scan"]
+    },
+    {
+      "id": "en-match-cause-result",
+      "name": "第 1 招·因果关系匹配",
+      "summary": "前后句间存在原因和结果，可能是前因后果也可能是前果后因；标志有 as a result（结果）、thus / therefore（因此）、so / such…that…（如此……以至于）。先判断空与前后句谁为因谁为果，再找含对应结果或原因信号的选项。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-signal-words"]
+    },
+    {
+      "id": "en-match-contrast",
+      "name": "第 2 招·转折关系匹配",
+      "summary": "后句对前句形成逆转逻辑时，设空处很可能需要转折句；Although 引导让步（花了数周准备面试仍未拿到录用），However / while the opposite was not true 引出反向陈述，看到转折信号先判断方向再选句。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-signal-words"]
+    },
+    {
+      "id": "en-match-example",
+      "name": "第 3 招·例证关系匹配",
+      "summary": "前后句中的一句为另一句举例，例证形式可以是例子或类比，思维关系是从例子归纳观点或从观点推到例子，标志为 For example；一边是概括观点、另一边是具体事例时可优先匹配。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-cause-result"]
+    },
+    {
+      "id": "en-match-progression",
+      "name": "第 4 招·递进关系匹配",
+      "summary": "后句对前句形成层进、顺承关系时，设空处很可能是递进句；Regular physical exercise… 后接 Furthermore, it also… 即由身体健康递进到心理健康，标志为 Furthermore / Besides / moreover / also。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-signal-words"]
+    },
+    {
+      "id": "en-match-parallel",
+      "name": "第 5 招·平列关系匹配",
+      "summary": "同一层面并列列举几个要点，常用 First / Second 等顺序词衔接，句子结构往往一致；看到 Second 就要在前文找 First，看到 First 则后文应有 Second 或同类并列项。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-progression"]
+    },
+    {
+      "id": "en-match-pronoun-reference",
+      "name": "第 6 招·代词线索",
+      "summary": "代词指代前文提及的名词或名词性短语，利用指代关系和代词单复数差异可快速判断句子能否衔接；代词必须能找到明确先行词，人称与单复数也要一致（it 指代前文的 a study plan；he 与后文 he 同指一人）。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-signal-words"]
+    },
+    {
+      "id": "en-match-synonym-repeat",
+      "name": "第 7 招·同义词与近义词线索",
+      "summary": "上下文常重复使用同义词、近义词、近义表达或相同词汇构成照应（improve your mood ↔ cheer you up；mastering effective time management skills… such skills），是最稳的匹配证据；但要与逻辑关系同时成立，不能只看一个重复词。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-signal-words"]
+    },
+    {
+      "id": "en-match-hyponym",
+      "name": "第 8 招·上下义词与同一范畴词",
+      "summary": "上义词包含下义词，下义词是上义词的具体子集（fresh fruits 与 strawberries、blueberries、watermelon），同一范畴词也能形成语义照应；上下义关系不必字面重复也能构成强照应。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-synonym-repeat"]
+    },
+    {
+      "id": "en-match-gap-position-start",
+      "name": "第 9 招·段首设空找主题句",
+      "summary": "段首设空通常考查段落主题句：认真阅读后文，按段落一致性原则寻找同义词或相关词，推断主题句；重点读后文前一两句锁定信号词，再在选项中寻找相关特征词。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-structure-scan"]
+    },
+    {
+      "id": "en-match-gap-position-end",
+      "name": "第 10 招·段尾设空找结论或过渡",
+      "summary": "普通段尾常是结论或概括句，应关注 therefore、as a result、thus、hence、in short、to sum up、to conclude、in a word 等信号并查找与前文的同义照应；所选答案可能引出下一段，若与前文关联不明显就检查它能否衔接下一段开头；第一段段尾设空要判断此处是细节还是全文主题，段尾转出主题时常有转折信号词。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-gap-position-start"]
+    },
+    {
+      "id": "en-match-verify-reinsert",
+      "name": "回填通读与易错清单",
+      "summary": "不要只凭单个重复词选答案，必须同时验证逻辑关系、指代和句法形式；选项放回原文后要再通读整段，确认内容与结构都连贯（5 个选项通常各用一次）。口诀：先结构，后选项；圈逻辑，抓实词。起承转合定关系，代词同义找呼应，上下义词锁范畴。段首找主题，段尾找总结或过渡。",
+      "lessonRefs": ["22"],
+      "prereqs": ["en-match-pronoun-reference", "en-match-gap-position-end"]
+    }
+  ]
+}

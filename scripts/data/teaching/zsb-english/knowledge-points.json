@@ -1,0 +1,109 @@
+{
+  "points": [
+    {
+      "id": "en-noun-class",
+      "name": "名词分类（专有名词 / 普通名词）",
+      "summary": "名词先分专有名词（John Smith、Beijing、WTO、the Spring Festival，首字母大写）与普通名词；普通名词再按“能否计数”分为可数（个体名词、集体名词）与不可数（物质名词、抽象名词）。",
+      "lessonRefs": ["1"],
+      "prereqs": []
+    },
+    {
+      "id": "en-noun-countability",
+      "name": "名词可数性（可数 / 不可数）",
+      "summary": "可数名词有单复数、可加 a/an（a book / two books）；不可数名词（advice、information、progress、water、bread）不加 a/an、也不加 -s，要计数得借单位词 a piece of。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-class"]
+    },
+    {
+      "id": "en-noun-plural-regular",
+      "name": "名词规则复数变化",
+      "summary": "一般加 -s；s/x/ch/sh 结尾加 -es；辅音字母 + y 去 y 变 i 加 -es（元音字母 + y 直接加 -s）；辅音字母 + o 多数加 -s，hero/tomato/potato 加 -es；-f/-fe 多数变 v 加 -es，少数直接加 -s；例外 stomachs。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-countability"]
+    },
+    {
+      "id": "en-noun-plural-irregular",
+      "name": "不规则复数与“某国人”",
+      "summary": "变元音（man/woman/foot/tooth/goose）；单复数同形（deer、sheep、means、species）；只有复数形式（glasses、trousers、scissors）；特殊形式（child/ox/mouse/phenomenon）；“某国人”：Chinese、Japanese 不变，Englishman、Frenchman 变 -men，American、German 等加 -s。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-plural-regular"]
+    },
+    {
+      "id": "en-noun-compound-plural",
+      "name": "复合名词复数与 man/woman 修饰语",
+      "summary": "含 man/woman 作修饰语的复合名词前后两个词都变（woman doctor → women doctors）；有连字符或分开写的只变主要名词（fathers-in-law、passers-by）；没有主要名词的变最后一词（grown-ups）。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-plural-regular"]
+    },
+    {
+      "id": "en-noun-sense-shift",
+      "name": "单复数意义不同的名词",
+      "summary": "同一个词单复数词义不同：paper 纸张 / papers 文件；wood 木材 / woods 树林；custom 风俗 / customs 海关；work 工作 / works 作品、工厂；value 价值 / values 价值观；time 时间 / times 次数、时代。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-countability"]
+    },
+    {
+      "id": "en-noun-quantity-agreement",
+      "name": "不可数名词的量化与主谓一致",
+      "summary": "不可数名词用“单位词或容器 + of”量化（a piece of paper、two glasses of milk），被量化的名词用原形，谓语动词跟量化单位一致：A cup of tea is…／Ten bottles of water are…。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-countability"]
+    },
+    {
+      "id": "en-noun-abstract-concrete",
+      "name": "抽象名词具体化",
+      "summary": "抽象名词指具体的人或事时变可数、可加 a/an：a beauty、a youth、a success、a failure、an honor、take a walk。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-countability"]
+    },
+    {
+      "id": "en-noun-possessive",
+      "name": "名词所有格（'s 所有格 / of 所有格 / 双重所有格）",
+      "summary": "'s 所有格 A's B：单数或非 s 结尾复数加 -'s，s 结尾复数只加 '，共有只在最后一个名词后加 's、各有分别加；of 所有格 A of B 译作“B 的 A”；双重所有格 of + 's / 名词性物主代词表示“谁的（其中一个）”。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-plural-regular"]
+    },
+    {
+      "id": "en-noun-function-subject",
+      "name": "名词作主语",
+      "summary": "名词位于谓语动词之前、是动作的发出者或被说明的对象：The dog runs fast. / Honesty is the best policy.",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-class"]
+    },
+    {
+      "id": "en-noun-function-object",
+      "name": "名词作宾语（动词宾语 / 介词宾语）",
+      "summary": "名词跟在及物动词后作动词宾语（I like apples.），跟在介词后作介词宾语（She is in the room. / focus your attention on your work.）。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-class"]
+    },
+    {
+      "id": "en-noun-function-predicative",
+      "name": "名词作表语",
+      "summary": "名词位于系动词之后，说明主语的身份、特征或状态：He is a doctor. / He became the fool of the group. / The room is a mess.",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-class"]
+    },
+    {
+      "id": "en-noun-function-attributive",
+      "name": "名词作定语",
+      "summary": "名词直接放在另一个名词之前修饰它，表所属、分类、用途或特征：a book cover、banana trees、coffee cup、a history book。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-class"]
+    },
+    {
+      "id": "en-noun-function-appositive",
+      "name": "名词作同位语",
+      "summary": "名词紧跟另一个名词之后（常加逗号）并指同一对象，对被说明的名词作解释：My friend Tom、The city, Beijing, is the capital of China.、influenza, a common disease。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-class"]
+    },
+    {
+      "id": "en-noun-function-complement",
+      "name": "名词作补语（宾语补足语 / 主语补足语）",
+      "summary": "补充说明宾语的是宾语补足语（make our county a developed country）；句子改被动、原宾语成为主语后，该成分改称主语补足语（Chaplin is considered a great actor.）。",
+      "lessonRefs": ["1"],
+      "prereqs": ["en-noun-class"]
+    }
+  ]
+}

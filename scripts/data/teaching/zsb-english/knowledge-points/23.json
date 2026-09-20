@@ -1,0 +1,109 @@
+{
+  "points": [
+    {
+      "id": "en-grammar-fill-overview",
+      "name": "语法填空题型与解题总流程",
+      "summary": "语法填空以约 200 词的语篇挖 10 空，每空 1.5 分共 15 分，答案每空一词。设空分两类：给提示词（名词、动词、形容词/副词、代词变形）与无提示词（冠词、介词、代词、连词）。解题三步：读全文知大意 → 看空判类型（先看有没有提示词）→ 把答案放回原句复读，检查语法、逻辑、大小写与拼写。",
+      "lessonRefs": ["23"],
+      "prereqs": []
+    },
+    {
+      "id": "en-grammar-fill-no-hint-pronoun",
+      "name": "无提示词①：缺主语或宾语填代词",
+      "summary": "空前后的句子成分齐全、只缺主语或宾语时，填代词或名词，且必须与上文所指对象一致：指代前文提到的同一事物用 it；指人用 he/she/they；与主语同指一人时用反身代词。判断顺序是先看空缺什么成分，再回到上文找所指对象。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-overview"]
+    },
+    {
+      "id": "en-grammar-fill-no-hint-determiner",
+      "name": "无提示词②：名词前缺限定词",
+      "summary": "名词前没有冠词、形容词性物主代词、形容词或不定代词等限定成分时，设空处多半填限定词：第一次提到、泛指可数名词单数用 a/an（看音素不看字母）；上文已提到、被从句或最高级限定用 the；与句中主语同指的所属关系用形容词性物主代词（his/our/its）。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-overview"]
+    },
+    {
+      "id": "en-grammar-fill-no-hint-preposition",
+      "name": "无提示词③：句子成分完整时填介词",
+      "summary": "句子不缺主语、宾语或表语，而名词或代词前有空时，通常填介词：介词后接名词、代词或动名词。判断靠搭配与语义——同一动词搭配不同介词意义不同（be familiar with / respond to / succeed in / depend on / worry about / lead to），固定短语（as a result、for example、in a hurry、for lunch）整体记忆。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-overview"]
+    },
+    {
+      "id": "en-grammar-fill-no-hint-pattern",
+      "name": "无提示词④：用特殊句式判断",
+      "summary": "句子看似完整却仍读不通时，考虑特殊句式：强调句 It is/was...that...、it 作形式主语（It takes sb. some time to do sth. / It is difficult for sb. to do sth.）与形式宾语（make it possible for sb. to do sth.）、so/such...that 结果状语从句。这些句式中的 it 与 that 不能换成其他词。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-overview"]
+    },
+    {
+      "id": "en-grammar-fill-no-hint-conjunction",
+      "name": "无提示词⑤：缺连接时填连词或从句引导词",
+      "summary": "两个并列成分之间没有连词，填 and/or/but 等并列连词；两个句子之间既无连词也无分号、句号时，必须填并列连词或从属连词。引导词分三类：名词性从句（不作成分 that/whether，作成分 what/which/who）、定语从句（that/which/who/whom/whose；逗号后用 which、不能用 that）、状语从句（when/because/if/unless 等按状语关系选）。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-overview"]
+    },
+    {
+      "id": "en-grammar-fill-hint-noun-number",
+      "name": "有提示词·名词：单复数与所有格",
+      "summary": "名词提示词先判数再判格：前有数词或 these/those/several/many/all/both/various 等词、谓语为复数、one of 结构时用复数；单数名词和不以 -s 结尾的复数名词所有格加 -'s（children's），以 -s/-es 结尾的复数名词只加 '。名词还可转形容词（felt silent）或转其他词性。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-overview"]
+    },
+    {
+      "id": "en-grammar-fill-hint-wordclass",
+      "name": "有提示词·词性转换总表",
+      "summary": "提示词不是变形式而是换词性：作表语、定语、补语用形容词；作主语或及物动词、介词后的宾语用名词；形容词性物主代词后、冠词（+ 形容词）后用名词；修饰动词、形容词、副词或全句用副词。先看空在句中作什么成分，再决定变成什么词性。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-overview"]
+    },
+    {
+      "id": "en-grammar-fill-hint-adverb-ly",
+      "name": "有提示词·形容词转副词构词规则",
+      "summary": "形容词转副词：多数直接加 -ly；辅音字母 + y 变 y 为 i 再加 -ly（happy → happily）；辅音字母 + le 去 e 加 y（terrible → terribly）；以 ue 结尾去 e 加 -ly（true → truly）；以 ll 结尾直接加 y（full → fully）；以 ic 结尾加 -ally（basic → basically）；例外 whole → wholly。副词位置：副词 + 形容词、主语 + 副词 + 谓语、助动词 + 副词 + 实义动词。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-hint-wordclass"]
+    },
+    {
+      "id": "en-grammar-fill-hint-negative-affix",
+      "name": "有提示词·否定词缀与反义构词",
+      "summary": "句意需要相反或否定含义时，在词根前加 un-、im-、in-、dis-、ir-，或在词根后加 -less：successful → unsuccessful、possible → impossible、honest → dishonest、help → helpless、active → inactive。判断依据是上下文逻辑（如「不午休 → 使人生病」说明该填 unhealthy）。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-hint-wordclass"]
+    },
+    {
+      "id": "en-grammar-fill-hint-comparison",
+      "name": "有提示词·比较级与最高级",
+      "summary": "than、much/far/still/even/rather/a little/a bit/a lot 提示比较级；in/of/among 范围、one of the、the + 序数词提示最高级；固定句型 the + 比较级...the + 比较级...、比较级 + and + 比较级、「否定词 + 比较级」表最高级（no sweeter sight than...）。即使没有 than，也要按隐含比较判断。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-hint-wordclass"]
+    },
+    {
+      "id": "en-grammar-fill-hint-pronoun",
+      "name": "有提示词·代词形式选择",
+      "summary": "人称代词提示词按空的成分变形：作主语用主格（I/he/they），及物动词或介词后作宾语用宾格（me/him/them），名词前作定语用形容词性物主代词（my/our/its），独立使用用名词性物主代词（mine/ours），主语和宾语同指一人或固定搭配（remind oneself of / enjoy oneself / by oneself / keep oneself safe）用反身代词。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-overview", "en-pron-personal-case"]
+    },
+    {
+      "id": "en-grammar-fill-hint-verb-predicate",
+      "name": "有提示词·动词①：谓语动词（时态语态一致）",
+      "summary": "句中还没有谓语，或设空动词与已有谓语构成并列（有 and/but/or 等连词）时，填谓语：先定时态（时间状语、全文时态一致、主句时态呼应），再定语态（主语是动作承受者用 be + done），最后核对主谓一致（主语单复数、不可数、everybody 等）。情态动词与助动词后一律用动词原形。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-overview", "en-tense-simple"]
+    },
+    {
+      "id": "en-grammar-fill-hint-verb-nonfinite",
+      "name": "有提示词·动词②：非谓语动词",
+      "summary": "句中已有谓语且设空处不与它并列时，用非谓语：作主语或宾语常用 doing 表一般情况、to do 表具体或将来；作目的状语、在形容词后作状语用 to do；作定语时 doing 表主动进行、done 表被动完成、to do 表目的或将来；介词后一律用 doing；固定搭配（be determined to do / encourage sb. to do / let sb. do / begin doing / spend time doing）按搭配定形。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-hint-verb-predicate", "en-nonfinite-overview"]
+    },
+    {
+      "id": "en-grammar-fill-review",
+      "name": "答案回填复读与易错清单",
+      "summary": "五条高频易错：有提示词不机械变形，先判成分再定形式；动词题先找全句谓语，已有谓语且无并列连词时优先非谓语；无提示词先查是否缺主语/宾语，再查名词前限定词、介词搭配与句间连词；which 可引导非限制性定语从句指代整件事，that 不能用于逗号后；系动词后用形容词，修饰动词/形容词/全句用副词。最后把答案放回全文核对语法、逻辑、大小写与拼写。",
+      "lessonRefs": ["23"],
+      "prereqs": ["en-grammar-fill-overview"]
+    }
+  ]
+}

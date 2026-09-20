@@ -142,3 +142,24 @@ test('course notes keep their text representation under a custom deployment base
   applyStudyImport(backup, target, { base: '/school/' })
   assert.equal(target.getItem(key), source.getItem(key))
 })
+
+test('teaching supplements survive wrong-answer storage and backup without touching identity', () => {
+  const storage = new Storage()
+  const q = question({ teaching: { steps: ['看题干', '排错项'], optionAnalysis: [{ option: 'A', verdict: 'wrong', why: '不选它' }] }, subjective: { keyPoints: ['要点一'], derivation: '推导' } })
+  answer(q, storage, false, 'wrong')
+  const saved = readMistakes(storage)[mistakeId(q)]
+  assert.deepEqual(saved.teaching.steps, ['看题干', '排错项'])
+  assert.deepEqual(saved.subjective.keyPoints, ['要点一'])
+  assert.equal(saved.signature, readMistakes(storage)[mistakeId(q)].signature)
+
+  const restored = new Storage()
+  importMistakes(exportMistakes(storage), restored)
+  assert.deepEqual(readMistakes(restored)[mistakeId(q)].teaching, q.teaching)
+
+  const broken = JSON.parse(exportMistakes(storage))
+  broken.entries[mistakeId(q)].teaching = 7
+  assert.throws(() => importMistakes(JSON.stringify(broken), storage), /题目格式无效/)
+
+  answer(question({ ref: 'quiz:0-plain' }), storage, false, 'plain')
+  assert.equal(readMistakes(storage)[mistakeId(question({ ref: 'quiz:0-plain' }))].teaching, undefined)
+})

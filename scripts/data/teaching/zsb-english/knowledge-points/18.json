@@ -1,0 +1,209 @@
+[
+  {
+    "id": "en-cloze-overview",
+    "name": "完形填空考情与命题特征",
+    "summary": "完形填空以语篇意义选择为主、语法选择为辅；文章短、挖空多、逻辑性强，实词为主、虚词为辅，保留提示句。测试角度包括词义辨析、固定搭配、语法结构和文章衔接推理。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": []
+  },
+  {
+    "id": "en-cloze-principles",
+    "name": "完形填空三大答题原则",
+    "summary": "完形服从完意（整篇文章决定最佳词）、单句服从段落（句子作用与段落主题一致）、段落服从全文（推动文章发展、契合中心思想）。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-overview"
+    ]
+  },
+  {
+    "id": "en-cloze-three-steps",
+    "name": "完形填空解题三步",
+    "summary": "第一步跳空通读抓大意，尤其读懂首句和末句；第二步结合选项初选，从语法、搭配、上下文找提示；第三步先易后难、瞻前顾后，回填后再通读复核。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-principles"
+    ]
+  },
+  {
+    "id": "en-cloze-context-inference",
+    "name": "语境推理法",
+    "summary": "遇到难选空时分析上下文，理解句间关系、段落结构和全文逻辑；and 多同向、but 常反向，上文有因下文有果，从对立两面阐述时常有转折。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-three-steps"
+    ]
+  },
+  {
+    "id": "en-cloze-grammar",
+    "name": "运用语法理顺关系",
+    "summary": "完形中注意时态、人称、单复数及数的变化；主语从句、宾语从句、定语从句的关系词与语序；形容词、副词的原级、比较级、最高级。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-three-steps"
+    ]
+  },
+  {
+    "id": "en-cloze-repetition",
+    "name": "复现解题法",
+    "summary": "利用同义词、近义词、反义词的原形或异形复现解题；复现可能跨句甚至跨段出现，需要整体篇章意识。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-context-inference"
+    ]
+  },
+  {
+    "id": "en-cloze-collocation",
+    "name": "固定搭配解题法",
+    "summary": "完形常考动词、名词、形容词、副词与介词之间的惯用搭配，如 give up、pass down、depend on、look for、pay respects to、make a U-turn 等。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-context-inference"
+    ]
+  },
+  {
+    "id": "en-cloze-logic",
+    "name": "逻辑语气解题法",
+    "summary": "完形填空需先把握人物、时间、地点，再分析句间、段间关系；常见逻辑有并列、递进、因果、转折、委婉，选项多为连词、副词或起连词作用的短语。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-context-inference"
+    ]
+  },
+  {
+    "id": "en-cloze-culture",
+    "name": "文化背景与生活常识",
+    "summary": "完形以独立语篇命题，解题时除语言知识外，英美国家文化背景和生活常识也可能发挥作用。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-context-inference"
+    ]
+  },
+  {
+    "id": "en-cloze-contrast-parallel",
+    "name": "对比结构与平行结构",
+    "summary": "对比结构把两种对立事物或同一事物的两个不同方面并列比较；平行结构由结构相同、意义关联、语法一致的词或句子成串排列，解题时要保持前后同向或反向一致。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-context-inference"
+    ]
+  },
+  {
+    "id": "en-cloze-noun-choice",
+    "name": "完形·名词词义辨析",
+    "summary": "名词空先判「可数/不可数、单数/复数、所有格」，再看与前后词能否搭配；干扰项常是同义域内的近义词或同根不同词性。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-context-inference"
+    ]
+  },
+  {
+    "id": "en-cloze-verb-choice",
+    "name": "完形·动词词义辨析",
+    "summary": "动词空优先看宾语与搭配（do/make/take 类搭配、及物不及物），再判时态语态；干扰项常与正确答案同义域但搭配不同。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-context-inference"
+    ]
+  },
+  {
+    "id": "en-cloze-adj-adv-choice",
+    "name": "完形·形容词与副词辨析",
+    "summary": "先定词性（修饰名词用形容词、修饰动词/形容词/整句用副词），再定语义（褒贬与语境是否一致），最后看比较级与程度。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-context-inference"
+    ]
+  },
+  {
+    "id": "en-cloze-pronoun-choice",
+    "name": "完形·代词辨析",
+    "summary": "代词空先找先行词，再判指代对象的单复数与远近（it/they/this/that），最后看格（主格/宾格/形容词性物主代词/名词性物主代词）。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-context-inference"
+    ]
+  },
+  {
+    "id": "en-cloze-logic-connector",
+    "name": "完形·逻辑连接词",
+    "summary": "逻辑词空先判前后句的关系方向（转折、因果、并列、递进、让步），再选词；however/but、because/so、and/also 的方向不能互换。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-logic"
+    ]
+  },
+  {
+    "id": "en-cloze-culture-common-sense",
+    "name": "完形·文化背景与生活常识",
+    "summary": "无词汇线索时用生活常识兜底：场景（餐馆/面试/医院）、身份（顾客/面试官）、流程（排队—叫号—面谈）本身就能排除大半选项。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-culture"
+    ]
+  },
+  {
+    "id": "en-cloze-grammar-check",
+    "name": "完形·语法校验",
+    "summary": "语法不是选答案的第一步，而是最后一道闸门：主谓一致、时态语态、非谓语、连词结构必须成立，语法不成立的选项即使语义相近也要排除。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-grammar"
+    ]
+  },
+  {
+    "id": "en-cloze-review-check",
+    "name": "完形·复查与易错清单",
+    "summary": "填完回读：把 15 个答案放回原句复读，检查语义连贯、语法成立、代词有先行词、逻辑词方向正确；易错点集中在只看本句不看上下文与忽略搭配。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-three-steps"
+    ]
+  },
+  {
+    "id": "en-cloze-word-discrimination",
+    "name": "完形·词义辨析",
+    "summary": "同义域近义辨析：先定句子需要的语义方向，再用搭配、程度（轻微/强烈）、褒贬、文体四条标准筛掉近义词干扰项。",
+    "lessonRefs": [
+      "18"
+    ],
+    "prereqs": [
+      "en-cloze-context-inference"
+    ]
+  }
+]

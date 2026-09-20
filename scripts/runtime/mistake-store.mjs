@@ -6,7 +6,7 @@ const DAY = 86400000
 const object = value => value && typeof value === 'object' && !Array.isArray(value)
 const storageOf = storage => storage || globalThis.localStorage
 const number = value => Number.isFinite(value) && value >= 0 ? value : 0
-const definition = q => Object.fromEntries(['slug', 'lessonId', 'ref', 'kind', 'stem', 'stemHtml', 'options', 'answer', 'explanation', 'explanationHtml', 'doubt', 'source', 'sourceLabel', 'title', 'reading', 'legacyHtml', 'contextRequired'].filter(k => k in q).map(k => [k, q[k]]))
+const definition = q => Object.fromEntries(['slug', 'lessonId', 'ref', 'kind', 'stem', 'stemHtml', 'options', 'answer', 'explanation', 'explanationHtml', 'doubt', 'source', 'sourceLabel', 'title', 'reading', 'legacyHtml', 'contextRequired', 'teaching', 'subjective'].filter(k => k in q).map(k => [k, q[k]]))
 
 export function readMistakes(storage) {
   try {
@@ -118,10 +118,12 @@ export function parseMistakeBackup(text, base = '/blog/') {
   if (data.version !== 1 || !object(data.entries) || Object.keys(data.entries).length > 20000) throw new Error('这不是有效的知序错题备份。')
   const incoming = []
   const optionalMarkup = value => value === undefined || (typeof value === 'string' && value.length <= 60000)
+  const optionalTeaching = value => value === undefined || (object(value) && JSON.stringify(value).length <= 20000)
   for (const [id, q] of Object.entries(data.entries)) {
     if (!object(q) || !SUBJECTS[q.slug] || typeof q.ref !== 'string' || id !== mistakeId(q)
       || typeof q.stem !== 'string' || q.stem.length > 30000 || !REVIEW_LABELS[q.status]
       || !optionalMarkup(q.stemHtml) || !optionalMarkup(q.explanationHtml)
+      || !optionalTeaching(q.teaching) || !optionalTeaching(q.subjective)
       || !Array.isArray(q.options) || !q.options.every(o => object(o) && typeof o.value === 'string' && typeof o.text === 'string' && optionalMarkup(o.html))
       || !Array.isArray(q.answer) || !q.answer.every(a => typeof a === 'string')) throw new Error('备份中的题目格式无效，未导入任何记录。')
     incoming.push({ ...q, id, source: safeLessonPath(q.source, base), wrongs: number(q.wrongs),

@@ -1,0 +1,81 @@
+{
+  "points": [
+    {
+      "id": "en-writing-exam-overview",
+      "name": "写作考情：100 词应用文 15 分与历年真题分布",
+      "summary": "广东专升本英语写作考约 100 词应用文，满分 15 分（教材上册 P230、课件考情页）；2015—2025 年真题集中在通知（2025/2020/2019/2015）、邀请信（2024/2022/2018）、求职信与简历（2023/2016），另有投诉信（2017）、电子邮件回信（2021）。",
+      "lessonRefs": ["24"],
+      "prereqs": []
+    },
+    {
+      "id": "en-writing-prompt-analysis",
+      "name": "审题六要素（谁写、写给谁、为何写、写什么、用何时态、限制多少词）",
+      "summary": "动笔前用六问审题：谁写（身份决定语气与署名）、写给谁（机构还是个人，决定称呼）、为何写（体裁与目的句）、写什么（题干要点逐条编号）、用何时态（叙事用过去、安排用将来、请求期待用现在）、限制多少词（不少于 100 词）。",
+      "lessonRefs": ["24"],
+      "prereqs": ["en-writing-exam-overview"]
+    },
+    {
+      "id": "en-writing-format",
+      "name": "应用文三件套格式（称呼顶格 / 正文三段 / 落款右下角）",
+      "summary": "称呼顶格写并加逗号：写给机构用 Dear sir or madam, / To Whom It May Concern,，写给个人用 Dear Mr. Wang, / Dear Bob, / Dear Editors,；正文分三段；落款写在右下角，形式为结尾客套（Yours sincerely, / Yours truly, / Yours,）＋签名，客套语后有逗号、姓名后没有逗号。",
+      "lessonRefs": ["24"],
+      "prereqs": ["en-writing-prompt-analysis"]
+    },
+    {
+      "id": "en-writing-body-structure",
+      "name": "正文三段式（身份目的 / 要点展开 / 总结期待）",
+      "summary": "第一段第 1 句自我介绍或打招呼、第 2 句写作目的（信的中心思想）；第二段叙事或观点，按题干要点分层展开；第三段第 1 句总结、第 2 句期待回信或寒暄，不新增要点。",
+      "lessonRefs": ["24"],
+      "prereqs": ["en-writing-format"]
+    },
+    {
+      "id": "en-writing-opening-templates",
+      "name": "首段两句模板（I am ... ＋ I am writing to do sth.）",
+      "summary": "表明身份用 I am ...（I am a freshman / I am president of the Students' Union.）；表明主题用 I am writing to do sth.（可抄题干改写），也可用 I am writing the letter to you for the purpose of doing sth.。",
+      "lessonRefs": ["24"],
+      "prereqs": ["en-writing-body-structure"]
+    },
+    {
+      "id": "en-writing-purpose-cliches",
+      "name": "写信目的标志词与参考句式（建议/感谢/投诉/推荐/邀请/道歉/求职/询问/祝贺…）",
+      "summary": "每类信件都有标志词与同义替换：建议 suggest（advice / suggestion / proposal / opinion / idea）、感谢 thank（gratitude / appreciation）、投诉 complain（complaint / dissatisfaction / indignation）、推荐 recommend（recommendation / introduction）、邀请 invite（invitation）、道歉 apology（regret / sorry）、求职 apply for（qualified / candidate / application）、询问 inquire（ask for / wonder / inquiry）、祝贺 congratulate（congratulation），并各配 2—3 个参考句式。",
+      "lessonRefs": ["24"],
+      "prereqs": ["en-writing-opening-templates"]
+    },
+    {
+      "id": "en-writing-transitions",
+      "name": "第二段段首句与段内过渡词（首先 / 其次 / 最后）",
+      "summary": "段首句四选一：Of all the points / suggestions / details concerned, I'd like to name some significant ones as follows.；The following reasons / proposals / details are worth mentioning. / cannot be neglected.；Listed below is the relevant information.。过渡词三档：首先 first and foremost / in the first place / to start with / to begin with；其次 plus / in the second place / in addition / additionally / furthermore / moreover；最后 finally / lastly / more importantly / last but not least。",
+      "lessonRefs": ["24"],
+      "prereqs": ["en-writing-body-structure"]
+    },
+    {
+      "id": "en-writing-universal-reasons",
+      "name": "四大万能理由与三大必备句型",
+      "summary": "四大角度：成长成功发展、知识阅历机会、效率便利时间、健康压力愉悦（各配核心词与常用表达）；三大必备句型：句型一 It is generally recognized that nothing is more important than ＋ 名词/doing ＋ for ...；句型二（主题词）contributes to / is conducive to / is responsible for ...；句型三（主题词）exerts a / an positive / profound / far-reaching influence / effect / impact on ...。",
+      "lessonRefs": ["24"],
+      "prereqs": ["en-writing-transitions", "en-noun-clause-it"]
+    },
+    {
+      "id": "en-writing-closing-templates",
+      "name": "第三段与分类型结尾（建议/邀请/道歉/求职/询问/祝贺/保持联系）",
+      "summary": "第三段只重申主题，必要时配寒暄套话（Please accept my sincere gratitude to you for reading the content above. If you need to know more about it, please contact me.）；结尾按体裁选句：建议信 I hope you will take my suggestions into account.；邀请信 Please confirm your participation at your earliest convenience.；道歉信 I am sorry for causing you inconvenience.；求职信 I shall be much obliged if you accord me an opportunity for an interview.；询问信 Your prompt attention to this letter would be highly appreciated.；祝贺信 I wish you success and fulfillment in the future.；保持联系 Should there be anything I can do for you, please contact me without hesitation.。",
+      "lessonRefs": ["24"],
+      "prereqs": ["en-writing-body-structure"]
+    },
+    {
+      "id": "en-writing-template-14-types",
+      "name": "十四类应用文模板与真题范文（骨架可搬、槽位必换）",
+      "summary": "十四类模板：申请信/求职信、投诉信、道歉信、建议信、感谢信、邀请信、祝贺信、慰问信、求助信、推荐信/介绍信、通知、演讲/致辞、倡议书、电子邮件；模板给的是「称呼—首段目的句—中段要点句—末段结尾句」的骨架，槽位（____）必须换成题干给的身份、对象、时间、地点与要点，不能原样留在成文中。",
+      "lessonRefs": ["24"],
+      "prereqs": ["en-writing-purpose-cliches"]
+    },
+    {
+      "id": "en-writing-language-checks",
+      "name": "语言三检查与内容三检查（写作自查清单）",
+      "summary": "语言三检查：主谓一致、时态语态、单复数与冠词；内容三检查：题目要点不遗漏、人物关系不写反、日期地点不自相矛盾。配合格式自检（称呼顶格与逗号、落款客套语后逗号而姓名后无逗号、全文约 100 词）构成写完后的固定复查动作。",
+      "lessonRefs": ["24"],
+      "prereqs": ["en-writing-format", "en-agreement-meaning", "en-tense-simple", "en-voice-passive", "en-noun-countability", "en-art-a-an"]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "points": [
+    {
+      "id": "en-substitute-it",
+      "name": "it 指代同类同物",
+      "summary": "it 指代上文提到的同一个单数事物（My phone is old. I need to replace it soon.），通常不再带修饰语。",
+      "lessonRefs": ["17"],
+      "prereqs": []
+    },
+    {
+      "id": "en-substitute-one",
+      "name": "one / ones 替代同类异物",
+      "summary": "one 替代单数可数名词、ones 替代复数可数名词，表示同类中的另一个或另一些，可带前置修饰语（a new one、the larger ones）；one 不能替代不可数名词。",
+      "lessonRefs": ["17"],
+      "prereqs": ["en-substitute-it"]
+    },
+    {
+      "id": "en-substitute-the-one",
+      "name": "the one / the ones 特指替代",
+      "summary": "特指同类中的某一个或某些时用 the one / the ones，后面常接后置修饰语（the one on the shelf、the ones you recommended）；特指单数时 the one 与 that 有时都可用。",
+      "lessonRefs": ["17"],
+      "prereqs": ["en-substitute-one"]
+    },
+    {
+      "id": "en-substitute-that-those",
+      "name": "that / those 在比较结构中的替代",
+      "summary": "比较结构中用 that 替代前面出现过的单数可数名词或不可数名词、用 those 替代复数名词，以避免重复（The air here is fresher than that in the city.）；比较对象必须同类，不能拿 the population of A 与 B 本身比较。",
+      "lessonRefs": ["17"],
+      "prereqs": ["en-adv-clause-comparison", "en-substitute-one"]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "points": [
+    {
+      "id": "en-five-blank-type",
+      "name": "五选五题型与五类考查点",
+      "summary": "五选五（句子还原）从 5 个备选句中选出 5 句填回原文空处，考查的不是词汇量而是句间逻辑、段落结构、代词指代、词汇复现和上下文衔接；每句只用一次，因此任一空选错都会连锁影响其它空。",
+      "lessonRefs": ["21"],
+      "prereqs": []
+    },
+    {
+      "id": "en-five-blank-read-options",
+      "name": "先读选项：圈代词、连接词、重复词、主题词",
+      "summary": "动手填空前先把 5 个备选句通读一遍，圈出四类线索：人称与指示代词（it、they、he、this、these）、逻辑连接词（however、therefore、also、instead）、重复出现的实词、以及点明主题的词。有了这份线索清单，再回原文找空位。",
+      "lessonRefs": ["21"],
+      "prereqs": ["en-five-blank-type"]
+    },
+    {
+      "id": "en-five-blank-position",
+      "name": "空位功能判断（段首 / 段中 / 段尾）",
+      "summary": "段首的空多为承上启下或概括本段的主题句（常是短句或小标题）；段中的空多为解释、举例、转折或递进；段尾的空多为总结或导向下文。先判功能，再在 5 个选项里按功能初筛，可以把范围压到两句以内。",
+      "lessonRefs": ["21"],
+      "prereqs": ["en-five-blank-read-options"]
+    },
+    {
+      "id": "en-five-blank-two-way",
+      "name": "双向验证：既承前句，又启后句",
+      "summary": "选定一句后要做两次检验：把它接在前一句后面读得通吗（承前）？再把它放在后一句前面，后一句的代词、转折、举例接得上吗（启后）？只满足一边的选项几乎都是干扰项，这是五选五最容易失分的地方。",
+      "lessonRefs": ["21"],
+      "prereqs": ["en-five-blank-position"]
+    },
+    {
+      "id": "en-five-blank-pronoun",
+      "name": "代词指代线索（it / they / he / this 的先行词）",
+      "summary": "备选句里的代词必须有先行词，且单复数要对上：they 的先行词是复数名词（shoes、daydreamers、blue jeans），it 的先行词是单数事件或事物（mindfulness、the tournament），this 回指前面整句的做法。指代对不上，句子就放不进这一空。",
+      "lessonRefs": ["21"],
+      "prereqs": ["en-passage-context-clue"]
+    },
+    {
+      "id": "en-five-blank-logic",
+      "name": "逻辑连接词线索（however / therefore / also / instead）",
+      "summary": "备选句里的连接词直接决定它只能落在哪一种逻辑位置：however、but 要求前句是同方向的既定事实、后句转向；therefore、so 要求前句是原因；also、instead、rather than 要求与前句构成并列、替换关系。方向读错，句子就会填到语气相反的段里。",
+      "lessonRefs": ["21"],
+      "prereqs": ["en-passage-paragraph-logic"]
+    },
+    {
+      "id": "en-five-blank-parallel",
+      "name": "结构平行与编号小标题",
+      "summary": "原文用 One / second / third、First / Second / Finally 或「小标题 + 说明」展开时，空处必须保持结构平行：小标题空要填短语式的概括句，排比句空要与前后分句同结构（Friends against friends. / Husbands against wives.）。看到编号与并列，先按形式对齐再验语义。",
+      "lessonRefs": ["21"],
+      "prereqs": ["en-five-blank-position"]
+    },
+    {
+      "id": "en-five-blank-vocabulary",
+      "name": "词汇复现与同义替换",
+      "summary": "正确答案常常与前文形成词汇钩子：原词复现（write down ↔ write it down、the university ↔ George Mason University）、同义替换（steps ↔ methods、closer to the original source ↔ go to the original source）或上下义关系（relativity, Coke, Post-it notes ↔ great ideas and inventions）。找到钩子，答案基本锁定。",
+      "lessonRefs": ["21"],
+      "prereqs": ["en-passage-context-clue"]
+    },
+    {
+      "id": "en-five-blank-substitute",
+      "name": "代入复核与唯一性检验",
+      "summary": "五个空全部填完后通读全文，确认逻辑、语法和指代都唯一成立；若某两个选项互换也能读通，说明至少有一空是靠「读起来顺」蒙的，必须回到指代或连接词上找出真正的硬线索。",
+      "lessonRefs": ["21"],
+      "prereqs": ["en-five-blank-two-way"]
+    }
+  ]
+}

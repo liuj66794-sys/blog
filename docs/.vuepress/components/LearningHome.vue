@@ -7,6 +7,7 @@ import { readRecent, resumeUrl, READING_EVENT } from '../../../scripts/runtime/r
 import SubjectCards from './SubjectCards.vue'
 import TodayTasks from './TodayTasks.vue'
 import CourseSearch from './CourseSearch.vue'
+import ReviewEntry from './ReviewEntry.vue'
 
 const recent = ref(null)
 const query = ref('')
@@ -69,6 +70,8 @@ onUnmounted(() => {
           <p class="study-resume__footnote">从感兴趣的一课开始，也可以按章节循序渐进。</p>
         </template>
       </section>
+
+      <ReviewEntry />
 
       <aside class="study-week">
         <TodayTasks compact />

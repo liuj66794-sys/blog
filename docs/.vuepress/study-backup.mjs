@@ -25,6 +25,8 @@ export const STUDY_STORAGE_KEYS = Object.freeze([
   'l1uj-study-progress-v1',
   'l1uj-study-tasks-v1',
   'zsb-prep-checks-meta-v1',
+  // 知识点三盒；小节完成按课存为 l1uj-sections-v1:<slug>:<lessonId>（动态前缀，见 keyInfo）
+  'l1uj-knowledge-v1',
 ])
 
 const LESSON_SLUGS = new Set([
@@ -48,6 +50,10 @@ const PATH_ANSWER_PREFIXES = [
   'l1uj-politics-answers-v1:',
 ]
 
+// 课内小节完成：l1uj-sections-v1:<slug>:<lessonId>（slug 取自互动页路径，故限定四科）。
+const SECTIONS_PREFIX = 'l1uj-sections-v1:'
+const SECTIONS_KEY = /^(zsb-(?:math|english|politics|cs)):([\p{L}\p{N}_.:-]{1,180})$/u
+
 const DYNAMIC_PREFIXES = [
   'zc-progress-items-v1:',
   'zsb-course-done-',
@@ -61,6 +67,8 @@ const CONTAINER_MODES = Object.freeze({
   studyProgress: 'study-progress',
   studyTasks: 'study-tasks',
   prepMeta: 'prep-meta',
+  knowledge: 'knowledge',
+  sections: 'sections',
 })
 
 function isPlainObject(value) {
@@ -182,6 +190,11 @@ function keyInfo(key, base = DEFAULT_BASE) {
   if (key === 'l1uj-study-progress-v1') return { kind: 'l1uj-study-progress-v1', mode: CONTAINER_MODES.studyProgress }
   if (key === 'l1uj-study-tasks-v1') return { kind: 'l1uj-study-tasks-v1', mode: CONTAINER_MODES.studyTasks }
   if (key === 'zsb-prep-checks-meta-v1') return { kind: 'zsb-prep-checks-meta-v1', mode: CONTAINER_MODES.prepMeta }
+  if (key === 'l1uj-knowledge-v1') return { kind: 'l1uj-knowledge-v1', mode: CONTAINER_MODES.knowledge }
+  if (key.startsWith(SECTIONS_PREFIX)) {
+    const match = key.slice(SECTIONS_PREFIX.length).match(SECTIONS_KEY)
+    if (match && !hasUnsafeProperty(match[2])) return { kind: 'l1uj-sections-v1', id: key.slice(SECTIONS_PREFIX.length), mode: CONTAINER_MODES.sections }
+  }
   if (key.startsWith('zc-progress-items-v1:') && SAFE_ID.test(key.slice('zc-progress-items-v1:'.length))) {
     return { kind: 'zc-progress-items-v1', id: key.slice('zc-progress-items-v1:'.length) }
   }
@@ -485,6 +498,50 @@ function validateStudyTasks(value, errors) {
   }
 }
 
+function validateKnowledge(value, errors) {
+  const path = 'records.l1uj-knowledge-v1'
+  if (!checkObjectKeys(value, new Set(['version', 'points', 'sources']), path, errors, ['version', 'points'])) return
+  if (value.version !== 1) addError(errors, `${path}.version`, '只支持版本 1')
+  if (!isPlainObject(value.points)) { addError(errors, `${path}.points`, '必须是对象'); return }
+  for (const [id, point] of Object.entries(value.points)) {
+    const pointPath = `${path}.points.${id}`
+    if (!isSafeMapKey(id)) addError(errors, pointPath, '知识点键不安全')
+    const fields = new Set(['box', 'dueAt', 'learnedAt', 'lastResult', 'history'])
+    if (!checkObjectKeys(point, fields, pointPath, errors, [...fields])) continue
+    if (!Number.isInteger(point.box) || point.box < 1 || point.box > 3) addError(errors, `${pointPath}.box`, '必须是 1 到 3 的整数')
+    checkTimestamp(point.dueAt, `${pointPath}.dueAt`, errors)
+    checkTimestamp(point.learnedAt, `${pointPath}.learnedAt`, errors)
+    if (!['correct', 'wrong', 'viewed'].includes(point.lastResult)) addError(errors, `${pointPath}.lastResult`, '只能是 correct、wrong 或 viewed')
+    if (!Array.isArray(point.history) || point.history.length > 50) { addError(errors, `${pointPath}.history`, '必须是最多 50 条的历史数组'); continue }
+    point.history.forEach((entry, index) => {
+      const entryPath = `${pointPath}.history[${index}]`
+      if (!checkObjectKeys(entry, new Set(['at', 'result']), entryPath, errors, ['at', 'result'])) return
+      checkTimestamp(entry.at, `${entryPath}.at`, errors)
+      if (!['correct', 'wrong', 'viewed', 'skip'].includes(entry.result)) addError(errors, `${entryPath}.result`, '结果值不受支持')
+    })
+  }
+  if (value.sources == null) return
+  if (!isPlainObject(value.sources)) { addError(errors, `${path}.sources`, '必须是对象'); return }
+  for (const [id, source] of Object.entries(value.sources)) {
+    const sourcePath = `${path}.sources.${id}`
+    if (!isSafeMapKey(id)) addError(errors, sourcePath, '知识点键不安全')
+    if (!checkObjectKeys(source, new Set(['slug', 'lessonId', 'ref', 'name']), sourcePath, errors)) continue
+    if (source.slug != null && !EXAM_SLUGS.has(source.slug)) addError(errors, `${sourcePath}.slug`, '学科不受支持')
+    for (const field of ['lessonId', 'ref', 'name']) if (source[field] != null) checkString(source[field], `${sourcePath}.${field}`, errors, { max: 180 })
+  }
+}
+
+function validateSections(value, errors, path) {
+  if (!isPlainObject(value)) { addError(errors, path, '必须是对象'); return }
+  for (const [id, entry] of Object.entries(value)) {
+    const entryPath = `${path}.${id}`
+    if (!isSafeMapKey(id, SAFE_SCOPE)) addError(errors, entryPath, '小节键不安全')
+    if (!checkObjectKeys(entry, new Set(['done', 'at']), entryPath, errors, ['done', 'at'])) continue
+    if (entry.done !== true) addError(errors, `${entryPath}.done`, '只能是 true')
+    checkTimestamp(entry.at, `${entryPath}.at`, errors)
+  }
+}
+
 function validatePrepMeta(value, errors, base) {
   const path = 'records.zsb-prep-checks-meta-v1'
   if (!checkObjectKeys(value, new Set(Object.keys(value || {})), path, errors)) return
@@ -529,6 +586,8 @@ function validateRecord(key, value, errors, base) {
       return
     case 'l1uj-study-progress-v1': return validateStudyProgress(value, errors, base)
     case 'l1uj-study-tasks-v1': return validateStudyTasks(value, errors)
+    case 'l1uj-knowledge-v1': return validateKnowledge(value, errors)
+    case 'l1uj-sections-v1': return validateSections(value, errors, `records.${key}`)
     case 'zsb-prep-checks-meta-v1': return validatePrepMeta(value, errors, base)
     default: addError(errors, `records.${key}`, '未知存储键')
   }
@@ -672,6 +731,8 @@ function itemTimestamp(info, item) {
   if (info.mode === CONTAINER_MODES.reading || info.mode === CONTAINER_MODES.studyProgress || info.mode === CONTAINER_MODES.studyTasks || info.mode === CONTAINER_MODES.prepMeta) {
     return isTimestamp(item.updatedAt) ? item.updatedAt : null
   }
+  if (info.kind === 'l1uj-knowledge-v1' && isTimestamp(item.learnedAt)) return item.learnedAt
+  if (info.kind === 'l1uj-sections-v1' && isTimestamp(item.at)) return item.at
   if (info.kind === 'zzkk:v2:lesson' && isInstantString(item.at)) return Date.parse(item.at)
   if (info.kind === 'zzkk:v2:card' && isDateString(item.at)) return Date.parse(`${item.at}T00:00:00Z`)
   if (info.kind === 'zzkk:v2:wrong' && isDateString(item.lastAt)) return Date.parse(`${item.lastAt}T00:00:00Z`)
@@ -699,8 +760,12 @@ function keyLabel(key, itemKey) {
     'l1uj-study-progress-v1': '统一课程练习进度',
     'l1uj-study-tasks-v1': '今日任务偏好',
     'zsb-prep-checks-meta-v1': '新版周计划打卡',
+    'l1uj-knowledge-v1': '知识点复测排期',
+    'l1uj-sections-v1': '课内小节完成',
   }
   const info = keyInfo(key)
+  // 小节完成键自带课号，条目键只是 sectionId：冲突标签仍以课为单位。
+  if (info?.kind === 'l1uj-sections-v1') itemKey = key.slice(SECTIONS_PREFIX.length)
   const text = labels[info?.kind] || key
   if (itemKey == null) return text
   const subjectNames = { 'zsb-math': '高等数学', 'zsb-english': '公共英语', 'zsb-politics': '政治理论', 'zsb-cs': '计算机基础' }
@@ -764,6 +829,9 @@ function containerEntries(info, value) {
   if (info.mode === CONTAINER_MODES.reading) return value.entries.map((entry) => [entry.path, entry])
   if (info.mode === CONTAINER_MODES.studyProgress || info.mode === CONTAINER_MODES.studyTasks) return Object.entries(value.entries)
   if (info.mode === CONTAINER_MODES.prepMeta) return Object.entries(value)
+  // 知识点三盒按知识点合并；课内小节按 sectionId 合并。
+  if (info.mode === CONTAINER_MODES.knowledge) return Object.entries(value.points)
+  if (info.mode === CONTAINER_MODES.sections) return Object.entries(value)
   return []
 }
 
@@ -773,7 +841,15 @@ function withContainerEntries(info, source, entries) {
     return result
   }
   if (info.mode === CONTAINER_MODES.studyProgress || info.mode === CONTAINER_MODES.studyTasks) return { version: source.version, entries: Object.fromEntries(entries) }
+  if (info.mode === CONTAINER_MODES.knowledge) return { version: source.version, points: Object.fromEntries(entries) }
   return Object.fromEntries(entries)
+}
+
+/* 知识点来源随点一起合并：本机记录优先，导入点补上它的来源（今日任务据此回链原课）。 */
+function mergeKnowledgeSources(localValue, incomingValue, entries) {
+  const merged = { ...(localValue.sources || {}) }
+  for (const [id] of entries) if (!merged[id] && incomingValue.sources?.[id]) merged[id] = clone(incomingValue.sources[id])
+  return merged
 }
 
 function mergeContainer(key, info, localValue, incomingValue, decisions, untimestampedPolicy) {
@@ -800,7 +876,12 @@ function mergeContainer(key, info, localValue, incomingValue, decisions, untimes
   }
   const resultEntries = [...localEntries.entries()]
   if (info.mode === CONTAINER_MODES.reading) resultEntries.sort((left, right) => (itemTimestamp(info, right[1]) ?? 0) - (itemTimestamp(info, left[1]) ?? 0))
-  return { value: withContainerEntries(info, localValue, resultEntries), conflicts }
+  const value = withContainerEntries(info, localValue, resultEntries)
+  if (info.mode === CONTAINER_MODES.knowledge) {
+    const sources = mergeKnowledgeSources(localValue, incomingValue, resultEntries)
+    if (Object.keys(sources).length) value.sources = sources
+  }
+  return { value, conflicts }
 }
 
 function makeImportPlan(payload, storage, { base = DEFAULT_BASE, decisions, untimestampedPolicy = 'require' } = {}) {

@@ -1,0 +1,46 @@
+{
+  "points": [
+    {
+      "id": "en-numeral-cardinal",
+      "name": "基数词：确切数量与不确切数量",
+      "summary": "hundred/thousand/million/billion 前有具体数词时用单数、不接 of（two hundred、three thousand、11 million）；泛指时用复数 + of、前面不能有具体数词，可被 many/several/a few 修饰（hundreds of people、several thousands of）。",
+      "lessonRefs": ["5"],
+      "prereqs": ["en-noun-plural-regular"]
+    },
+    {
+      "id": "en-numeral-ordinal",
+      "name": "序数词及其冠词用法",
+      "summary": "123 特殊记，其余都加 th；8 去 t、9 去 e、ve 要用 f 替、见 y 变 ie 再加 th。序数词前一般加 the，表“又一、再一”可用 a/an（first 除外），前有物主代词或名词所有格时不再用 the；与基数词连用时序数词在前（the first three pages）；修饰谓语动词时 the 省掉。",
+      "lessonRefs": ["5"],
+      "prereqs": ["en-numeral-cardinal"]
+    },
+    {
+      "id": "en-numeral-fraction",
+      "name": "分数、小数、百分数及主谓一致",
+      "summary": "分数分子用基数词、分母用序数词，分子大于 1 时分母加 s（two thirds、four fifths），分母是 2/4 用 half/quarter，也可用 in / out of；小数用 point 逐位读；百分数是“基数词 + percent”。分数/百分数 + of + 名词作主语时，谓语与 of 后的名词一致（Two thirds of the money was spent on food.）。",
+      "lessonRefs": ["5"],
+      "prereqs": ["en-numeral-cardinal", "en-noun-quantity-agreement"]
+    },
+    {
+      "id": "en-numeral-multiple",
+      "name": "倍数句型四种表达",
+      "summary": "一倍 once、两倍 twice/double、三倍以上“基数词 + times”。四句型：倍数 + as + 原级 + as；倍数 + 比较级 + than；倍数 + the + size/length/width + of；比较级 + than … + by + 倍数。",
+      "lessonRefs": ["5"],
+      "prereqs": ["en-numeral-cardinal"]
+    },
+    {
+      "id": "en-conj-coordinate",
+      "name": "并列连词四大关系",
+      "summary": "并列 and（and、both...and...）、转折 but / yet / while（对比）、选择 or（or else、otherwise、either...or...、not...but...）、因果 so（结果）/ for（推断性原因，分句不能放句首）；并列连词连接对等成分（词+词、短语+短语、句+句）。but 与 although、so 与 because 不能同句连用；however / nevertheless 是副词不是连词。",
+      "lessonRefs": ["5"],
+      "prereqs": []
+    },
+    {
+      "id": "en-conj-correlative-agreement",
+      "name": "关联并列连词与就近原则",
+      "summary": "neither...nor...、not only...but (also)...、either...or... 连接两个主语时谓语遵循就近原则（与最近的主语一致）；both...and... 连接主语时谓语一律用复数。",
+      "lessonRefs": ["5"],
+      "prereqs": ["en-conj-coordinate"]
+    }
+  ]
+}

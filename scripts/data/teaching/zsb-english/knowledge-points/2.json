@@ -1,0 +1,32 @@
+{
+  "points": [
+    {
+      "id": "en-art-a-an",
+      "name": "不定冠词 a / an（看音素不看字母）",
+      "summary": "a/an 的选择看紧跟其后的名词（短语）第一个音素：元音音素用 an（an hour、an honest man、an interesting book），辅音音素用 a（a university、a useful book、a one、a European）。基本用法：① 泛指某一个；② 序数词前表“再一、又一”（a second time）；③ 动词转化的名词前表“一次、一番”（have a try / take a look）；④ a + 单数名词表某类（A cat is smaller than a tiger.）；⑤ 抽象名词具体化（a success、a pleasure）。只用于单数可数名词前。",
+      "lessonRefs": ["2"],
+      "prereqs": ["en-noun-countability"]
+    },
+    {
+      "id": "en-art-the",
+      "name": "定冠词 the（表特指）",
+      "summary": "必加 the 口诀“那个地球第一最酷的老人带着一家人弹着钢琴走南闯北欢度春节”：上文提过或双方都了解（the cat）、独一无二（the sun）、序数词前（the first）、最高级前（the happiest）、the + 形容词表一类人（the old）、姓氏复数前（the Smiths）、乐器前（play the piano）、方向前（the north）、中国传统节假日前（the Spring Festival）。另有“the + 比较级，the + 比较级”与固定搭配 on the left、by the way、in the end、in the morning。",
+      "lessonRefs": ["2"],
+      "prereqs": ["en-noun-class"]
+    },
+    {
+      "id": "en-art-zero",
+      "name": "零冠词（球月餐季、颜色星期、学科语言专有名词）",
+      "summary": "零冠词口诀“0 球 12 月 3 餐 4 季，56 颜色 7 星期；x 学科 y 语言，z 专有名词记心里”：球类棋类（play chess / play basketball）、月份（in June）、三餐（have lunch）、四季（in summer）、颜色（The door is red.）、星期（from Monday to Friday）、学科（I love English.）、语言（speak Chinese）、专有名词（Lu Xun）前不加冠词；watch TV 也是零冠词。对照：乐器前必须加 the（play the violin）。",
+      "lessonRefs": ["2"],
+      "prereqs": ["en-art-the"]
+    },
+    {
+      "id": "en-art-contrast",
+      "name": "有 the 与无 the 意思不同",
+      "summary": "同一介词短语加不加 the，意思由“动作/状态”变成“地点”：in hospital 住院 / in the hospital 在医院；in bed 睡觉 / in the bed 在床上；in class 在上课 / in the class 在班里；by sea 乘船 / by the sea 在海边。",
+      "lessonRefs": ["2"],
+      "prereqs": ["en-art-the", "en-art-zero"]
+    }
+  ]
+}

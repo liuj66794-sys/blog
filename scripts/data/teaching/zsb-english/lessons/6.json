@@ -1,0 +1,373 @@
+{
+  "lessonId": "6",
+  "sections": [
+    {
+      "id": "pt-1",
+      "title": "第一部分 · 形容词",
+      "goal": "解决“形容词该放哪儿、用什么形式”：按“美小圆旧黄，中国木书房”排出前置定语，认掉后置定语与复合不定代词，并用“物令人 -ing、人感到 -ed”选对分词形容词。",
+      "minutes": 15,
+      "knowledgePoints": ["en-adjadv-adjective-function", "en-adjadv-attribute-order", "en-adjadv-participle-adj"],
+      "prereqs": ["en-noun-function-attributive"],
+      "teaching": [
+        {
+          "type": "english-explain",
+          "title": "a little red flower 不是 a red little flower：前置定语的固定顺序",
+          "meaning": "This beautiful big new black Chinese wooden desk. 意思是“这张崭新的、漂亮的中式黑色木制大书桌”；a little red flower 意思是“一朵小红花”。",
+          "breakdown": [
+            "this 是限定词，占名词短语最外层，永远排第一",
+            "beautiful 属“美”（品质特征），主观评价最强，紧跟在限定词之后",
+            "big 属“小”（大小高低长短），new 属“旧”（新旧年龄），black 属“黄”（颜色）",
+            "Chinese 属“中国”（国籍），wooden 属“木”（物质材料），按主观在前、客观在后依次贴近名词"
+          ],
+          "grammar": "多个形容词修饰同一名词时按口诀排序：美（品质特征）→ 小（大小高低长短）→ 圆（形状）→ 旧（新旧年龄）→ 黄（颜色）→ 中国（国籍）→ 木（物质材料）→ 书房（类别用途）。限定词（冠词、物主代词、数词）排在这串形容词的最前面。总规律是主观评价在前、客观属性在后，越具体的越贴近名词。",
+          "timeline": null,
+          "examples": {
+            "right": ["his beautiful little black car（他那辆漂亮的黑色小车）", "two small black Shanghai leather handbags（两个上海产的黑色小皮包）", "this beautiful big new black Chinese wooden desk", "a little red flower（一朵小红花）"],
+            "wrong": ["a red little flower ×（颜色不能排在大小之前）", "beautiful little old black his ×（限定词 his 必须排最前）", "two Shanghai leather small black ×（产地、材料要排在大小、颜色之后）"],
+            "boundary": "口诀里的八类位置固定，但若某个修饰语不属于这八类（例如表用途的 writing、medical），就把它放在最贴近名词的位置。限定词（the、his、my、two、some）永远是第一位，不参与口诀排序。"
+          },
+          "mnemonic": {
+            "text": "美小圆旧黄，中国木书房",
+            "note": "八类从“主观评价”走到“客观事实”：越是说话人的看法（美）越靠外，越是物体本身的属性（材料、用途）越靠近名词。"
+          }
+        },
+        {
+          "type": "english-explain",
+          "title": "something interesting 和 brave enough：形容词什么时候站到名词后面",
+          "meaning": "I have enough money to buy a car. 意思是“我有足够的钱买辆车”；The boy brave enough to touch the snake is my brother. 意思是“那个胆大到敢碰蛇的男孩是我弟弟”。",
+          "breakdown": [
+            "enough money：enough 修饰名词 money 时可以放在名词前面",
+            "brave enough：这里 enough 作副词修饰形容词 brave，只能放在 brave 之后",
+            "something interesting / nothing serious：形容词修饰复合不定代词时必须后置"
+          ],
+          "grammar": "形容词作后置定语有 6 种情况：① 表语形容词（alive、afraid、awake、alone、asleep）作定语时后置；② 修饰 someone、something、anyone 等复合不定代词时后置；③ 成对的形容词后置（a large house, simple and beautiful）；④ 形容词后面带介词短语或不定式短语时后置；⑤ enough 修饰名词可前可后，作副词修饰形容词或副词时只能后置；⑥ old、long、high、wide 前附数量词短语时后置（a girl five years old = a five-year-old girl）。",
+          "timeline": null,
+          "examples": {
+            "right": ["something interesting（有趣的事）", "nothing serious（没有什么要紧的）", "enough money / money enough（修饰名词，可前可后）", "brave enough（修饰形容词，只能后置）", "a girl five years old = a five-year-old girl"],
+            "wrong": ["interesting something ×（复合不定代词的定语必须后置）", "enough brave ×（enough 修饰形容词不能前置）", "a five years old girl ×（带连字符作前置定语要用单数 year：a five-year-old girl）"],
+            "boundary": "6 种情况里只有 enough 修饰名词时两种位置都可以，其余都必须按规则就位。带连字符作前置定语时里面的名词要用单数：a five-year-old girl、a one-meter-long snake。"
+          },
+          "mnemonic": {
+            "text": "代词后面形容词后置，enough 修饰形容词也后置",
+            "note": "把 something、nothing 这类复合不定代词看成“身体太轻、扛不住一个前置形容词”，所以形容词只能跟在它后面；enough 修饰形容词时同理，它总要站在被修饰词的后面。"
+          }
+        },
+        {
+          "type": "english-explain",
+          "title": "excited 还是 exciting：物令人 -ing，人感到 -ed",
+          "meaning": "We were all excited when we heard the exciting news. 意思是“听到这条令人激动的消息时我们都很激动”。",
+          "breakdown": [
+            "主语 we 是人，说的是人的感受 → excited",
+            "news 是物，是让人产生这种情绪的原因 → exciting",
+            "两个词同源、方向相反：一个向外“令人……”，一个向内“感到……”"
+          ],
+          "grammar": "-ing 类形容词由现在分词转化，意为“令人……的”，修饰物或引起情绪的原因（exciting news、an interesting book、a surprising result）；-ed 类形容词由过去分词转化，意为“（人）感到……的”，修饰人（we were excited、I am interested）。常见成对词：interesting/interested、exciting/excited、surprising/surprised、boring/bored、tiring/tired。",
+          "timeline": null,
+          "examples": {
+            "right": ["an interesting story（令人感兴趣的故事）", "I am interested in the story.（人感到有兴趣）", "The news is exciting.（消息令人激动）", "We were excited at the news.（人感到激动）"],
+            "wrong": ["I am interesting in the story ×（主语是人，要用 interested）", "the excited news ×（news 是物，要用 exciting）", "He is boring with the class ×（人感到无聊用 bored）"],
+            "boundary": "判据是“被描述的是人还是物”，不是词形。人也可以作 -ing 的主语，只要它本身是引起别人情绪的原因：He is boring. 是“他很无趣（令人觉得无聊）”，与他感到无聊的 He is bored. 意思完全不同。"
+          },
+          "mnemonic": {
+            "text": "物令人 -ing，人感到 -ed",
+            "note": "-ing 有“正在向外散发”的味道，所以是某物让人产生情绪；-ed 有“已经被影响到自己身上”的味道，所以是人自己被触动了。"
+          }
+        }
+      ],
+      "practiceRefs": ["quiz:0", "quiz:1", "quiz:2", "quiz:5"],
+      "retell": "合上课件，把“美小圆旧黄，中国木书房”默写一遍，再各举一个后置定语的例子；最后用一句话说清 -ing 与 -ed 形容词分别修饰什么。"
+    },
+    {
+      "id": "pt-2",
+      "title": "第二部分 · 副词",
+      "goal": "解决“副词该放哪儿、用哪一个”：用“实义动词前，情态/助动/系动词后”定频度副词的位置，并用“具体空间还是抽象程度”区分同源副词。",
+      "minutes": 12,
+      "knowledgePoints": ["en-adjadv-adverb-formation-position", "en-adjadv-confusable"],
+      "prereqs": ["en-adjadv-adjective-function"],
+      "teaching": [
+        {
+          "type": "english-explain",
+          "title": "usually arrives 还是 arrives usually：频度副词的位置",
+          "meaning": "Tom quite often goes to his mum's on Saturdays for tea. 意思是“汤姆星期六常去他妈妈家喝茶”；She doesn't always finish her homework on time. 意思是“她不总是按时完成作业”。",
+          "breakdown": [
+            "quite often 修饰实义动词 goes，放在 goes 之前",
+            "doesn't always finish：always 放在助动词 doesn't 之后、实义动词 finish 之前",
+            "We must always respect …：always 放在情态动词 must 之后",
+            "The weather here is often rainy：often 放在系动词 is 之后"
+          ],
+          "grammar": "频度副词（always、usually、often、sometimes、seldom、never）的位置规则：放在实义动词之前，情态动词、第一个助动词或连系动词之后。程度副词修饰形容词或副词时放在被修饰词之前（extremely fast）；修饰动词时常放在第一个助动词后、实义动词之前。时间、地点副词一般放句尾，同时出现时地点在前、时间在后。",
+          "timeline": null,
+          "examples": {
+            "right": ["Tom quite often goes to his mum's.（实义动词前）", "We must always respect others' opinions.（情态动词后）", "She doesn't always finish her homework on time.（助动词后）", "The weather here is often rainy in spring.（系动词后）"],
+            "wrong": ["Tom goes quite often to his mum's. ×（频度副词要放在实义动词之前）", "She always doesn't finish her homework. ×（要放在助动词之后：doesn't always finish）", "We must respect always others' opinions. ×（要放在情态动词之后：must always respect）"],
+            "boundary": "情态动词与助动词成组出现时（如 must have been），位置由组里第一个决定。句子是 be + 表语的系表结构时，频度副词放在 be 之后（is often rainy），不要与 be 作助动词的进行时混淆——两种情况下位置都在 be 后面。"
+          },
+          "mnemonic": {
+            "text": "实义动词前，情态/助动/系动词后",
+            "note": "把频度副词想成“想贴到谓语左边、但会礼让助手”：它要站到实义动词前面，一旦遇到帮谓语干活的（情态动词、助动词、系动词），就排在这些“助手”的后面。"
+          }
+        },
+        {
+          "type": "english-explain",
+          "title": "deep into the mud 与 deeply moved：具体空间 vs 抽象程度",
+          "meaning": "He pushed the stick deep into the mud. 意思是“他把棍子深深地插进泥里”；Even father was deeply moved by the film. 意思是“连父亲也被这部电影深深打动了”。",
+          "breakdown": [
+            "deep into the mud 说的是空间上的深度：插进去多深",
+            "deeply moved 说的是感情被打动的程度：感动得多深",
+            "同一个词根，加 -ly 后从“具体空间”转向“抽象程度”"
+          ],
+          "grammar": "同源副词对比：close 近 / closely 紧密地；late 晚 / lately 最近；deep 空间上的深 / deeply 感情上深深地；high 空间上的高 / highly 程度“很、非常”；wide 空间上的宽 / widely 广泛地；free 免费 / freely 无限制地。判据是句子说的是“具体空间、价格”还是“抽象程度、方式”。",
+          "timeline": null,
+          "examples": {
+            "right": ["He is sitting close to me.（坐得近）", "Watch him closely.（紧紧盯着）", "I think highly of your opinion.（很看重）", "English is widely used in the world.（广泛使用）", "You can eat free in my restaurant.（免费）"],
+            "wrong": ["He is sitting closely to me. ×（空间距离用 close）", "What have you been doing late? ×（“最近”要用 lately）", "English is wide used in the world. ×（“广泛地”要用 widely）"],
+            "boundary": "只有表“具体空间、价格”时才用不带 -ly 的形式，表“抽象程度、方式”时用 -ly 形式。还要当心 late/lately、hard/hardly 这类同源词：加了 -ly 后意思整个换了（lately 是“最近”，hardly 是“几乎不”），不是简单的“更副词化”。"
+          },
+          "mnemonic": {
+            "text": "看得见的位置用原形，看不见的程度用 -ly",
+            "note": "能用手比划出来的（多深、多高、多宽、离多近）用不带 -ly 的词；只能用感受描述的（多感动、多看重、多广泛）用带 -ly 的词。"
+          }
+        }
+      ],
+      "practiceRefs": ["quiz:4"],
+      "retell": "用一句话说出频度副词的四条落点（实义动词前、情态动词后、助动词后、系动词后），再各举一组 deep/deeply、high/highly 的对比句。"
+    },
+    {
+      "id": "pt-3",
+      "title": "第三部分 · 比较级与最高级",
+      "goal": "解决“比较结构怎么搭”：as…as 中间只用原级，比较级要配能修饰它的 much/a lot/far/even/slightly，最高级必须有 the 和比较范围。",
+      "minutes": 15,
+      "knowledgePoints": ["en-adjadv-comparative", "en-adjadv-comparative-usage"],
+      "prereqs": ["en-numeral-multiple"],
+      "teaching": [
+        {
+          "type": "english-explain",
+          "title": "as good as mine：as…as 中间只用原级",
+          "meaning": "Mary's spoken English is as good as mine. 意思是“玛丽的英语口语和我的一样好”；My room is not as big as yours. 意思是“我的房间没有你的大”。",
+          "breakdown": [
+            "第一个 as 是程度副词，第二个 as 是连词，中间夹着形容词原级 good",
+            "比较对象用名词性物主代词 mine / yours，省掉重复出现的名词",
+            "否定式在第一个 as 前加 not，也可以把第一个 as 换成 so"
+          ],
+          "grammar": "as + 形容词/副词原级 + as 表示“和……一样”；not as(so) + 原级 + as 表示“不如、没有……那么”。第一个 as 后的形容词修饰名词时，冠词要放在形容词之后：as + adj. + a/an + 单数可数名词 + as（as strict a teacher as Mr. White）；接不可数名词或复数名词时用 as + adj. + 名词 + as（as valuable advice as you did）。",
+          "timeline": null,
+          "examples": {
+            "right": ["as good as mine（和我的一样好）", "not as/so big as yours（没有你的大）", "as strict a teacher as Mr. White", "as valuable advice as you did"],
+            "wrong": ["as better as ×（as…as 中间只能用原级）", "as more beautiful as ×（多音节词也不能用比较级）", "as a strict teacher as ×（a 要放在形容词之后：as strict a teacher as）"],
+            "boundary": "as…as 中间只能放原级，比较级和最高级一律不行；第一个 as 后带名词时语序是“形容词 + a/an + 名词”，不能写成 a + 形容词 + 名词，也不能写成 形容词 + 名词（可数单数时冠词不能省）。"
+          },
+          "mnemonic": {
+            "text": "as 原级 as；not as/so 原级 as",
+            "note": "两个 as 像一双手，中间夹住的必须是原级；要表“不如”，就在第一只手上加 not，或把第一个 as 换成 so。"
+          }
+        },
+        {
+          "type": "english-explain",
+          "title": "much more interesting：比较级前面该配什么词",
+          "meaning": "This book is much more interesting than that one. 意思是“这本书比那本有趣得多”；The box is too heavy for him to carry. 意思是“这个箱子太重，他搬不动”。",
+          "breakdown": [
+            "much 放在比较级 more interesting 前面，表示“大得多”",
+            "too heavy 中 too 修饰形容词 heavy，表示“太……（以至于不能）”",
+            "for him to carry 交代“对谁来说、做什么”，是不定式的逻辑主语与动作"
+          ],
+          "grammar": "可以修饰比较级的词：much、a lot、far、even、slightly。不能修饰比较级的词：very、so、quite、too（这些只修饰原级）。程度副词 too 修饰形容词后接不定式，构成 too + adj. + for sb. + to do（太……而不能）；形容词或副词 + enough + to do 表示“足够……能……”；enough 修饰形容词或副词时必须后置。",
+          "timeline": null,
+          "examples": {
+            "right": ["much more interesting（有趣得多）", "a lot more useful、far more difficult、even more important、slightly more expensive", "too heavy for him to carry（太重，他搬不动）", "heavy enough to carry（足够轻，能搬动）、brave enough to touch the snake"],
+            "wrong": ["very more interesting ×（very 只能修饰原级）", "so more difficult ×（so 只能修饰原级）", "enough heavy to carry ×（enough 修饰形容词必须后置：heavy enough）", "too heavy to carrying ×（to 后面接动词原形）"],
+            "boundary": "只能修饰原级的 very/so/quite 一旦碰到比较级就必须换成 much/a lot/far/even/slightly，不能硬凑。“太……而不能”与“足够……能”方向相反：too heavy to carry 是搬不动，heavy enough to carry 是搬得动——先定句意方向，再挑词。"
+          },
+          "mnemonic": {
+            "text": "much / a lot / far / even / slightly 配比较级；very / so / quite 配原级",
+            "note": "把这两串词当成两个口袋：一袋只能装比较级，一袋只能装原级；填空前先看后面跟的是原级还是比较级，再挑口袋。"
+          }
+        },
+        {
+          "type": "english-explain",
+          "title": "the oldest theater in London：最高级要带 the 和范围",
+          "meaning": "This is the oldest theater in London. 意思是“这是伦敦最古老的剧院”；Shanghai is one of the largest cities in China. 意思是“上海是中国最大的城市之一”。",
+          "breakdown": [
+            "the oldest theater：the + 形容词最高级 + 名词，表示三者或三者以上中程度最高的一个",
+            "in London 是表示比较范围的地点短语，说明在哪个范围内比较",
+            "one of the largest cities：one of the + 最高级 + 可数名词复数，表示“最……之一”"
+          ],
+          "grammar": "最高级句式：the + 形容词最高级（+ 名词）+ 表示范围的短语或从句（in / of …）。特殊用法：one of the + 形容词最高级 + 可数名词复数，意为“最……之一”；the + 比较级 + of the two + 名词，意为“两者中较……的那个”——两者之间比较仍用比较级，但也要加 the。",
+          "timeline": null,
+          "examples": {
+            "right": ["the oldest theater in London", "Shanghai is one of the largest cities in China.", "Mary is the tallest of the four girls in the family.", "He is the taller of the two boys.（两者中较高的那个）"],
+            "wrong": ["This is oldest theater in London. ×（最高级前要有 the）", "one of the largest city ×（one of 后面必须跟可数名词复数）", "the older of the three ×（三者以上要用最高级）"],
+            "boundary": "最高级必须有明确的比较范围（in / of 短语或从句），否则句子站不住；“最……之一”句型里名词一定用复数。两者之间比较不用最高级，而用 the + 比较级 + of the two。"
+          },
+          "mnemonic": {
+            "text": "最高级三件套：the + 最高级 + 范围",
+            "note": "最高级说的是“在一个范围里拔尖”，所以 the、最高级形式、范围短语三样少一样句子就不完整；反过来，只有两者比较时不用最高级，用 the + 比较级 + of the two。"
+          }
+        }
+      ],
+      "practiceRefs": ["quiz:3", "quiz:6", "quiz:7"],
+      "retell": "说出可以修饰比较级的五个词，并各造一句；再用 as…as、too…to、one of the + 最高级 三种结构各写一句话。"
+    }
+  ],
+  "questions": {
+    "quiz:0": {
+      "knowledgePoints": ["en-adjadv-attribute-order"],
+      "translation": "我喜欢他那辆漂亮的黑色小车。",
+      "phrases": [
+        {"text": "Benz car", "meaning": "奔驰车（Benz 作定语修饰 car，说明品牌）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "beautiful little old black his 把限定词 his 甩到了最后。限定词是名词短语最外层的修饰语，必须排在最前；而且这里也不需要表示新旧程度的 old。干扰点：只顾着排被修饰的形容词，忘了 his 这类限定词要先占第一位。"},
+        {"option": 1, "verdict": "wrong", "why": "black his little old beautiful 把颜色提到最前、又把 his 插在中间，还把 beautiful（品质）压到最后。按“美小圆旧黄”，品质类形容词主观性最强，应排在大小、颜色之前。干扰点：把最主观的品质词当成了最贴近名词的词。"},
+        {"option": 2, "verdict": "wrong", "why": "his beautiful black little 里 his 位置对（最前），但 black（颜色）排在了 little（大小）之前。口诀“美小圆旧黄”中“小”在“黄”之前，正确次序是 little black。干扰点：只抓住了限定词的位置，忽略了大小必须排在颜色之前。"},
+        {"option": 3, "verdict": "correct", "why": "限定词 his 排最前，其后按“美小圆旧黄”排序：beautiful（品质）→ little（大小）→ black（颜色），得 his beautiful little black。原题为教材 P31 随堂练习；来源：课件未附答案，本条为笔记补充解析。"}
+      ],
+      "steps": [
+        "先找限定词：his 必须排在最前，排除 A（his 在最后）和 B（his 在颜色之后）。",
+        "再排大小与颜色：口诀“美小圆旧黄”里“小”在“黄”之前，排除把 black 放在 little 前面的 C。",
+        "最后顺一遍：限定词 his → 美 beautiful → 小 little → 黄 black，得 his beautiful little black。"
+      ],
+      "compareTo": "quiz:1",
+      "sourceContext": {"label": "课件·前置定语顺序（教材 P31）", "quote": "美小圆旧黄，中国木书房（主观 → 客观）；例：this beautiful big new black Chinese wooden desk。"}
+    },
+    "quiz:1": {
+      "knowledgePoints": ["en-adjadv-attribute-order"],
+      "translation": "他们给女儿买了两个上海产的黑色小皮包作为生日礼物。",
+      "phrases": [
+        {"text": "as one's birthday present", "meaning": "作为某人的生日礼物"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "two Shanghai leather small black 把产地和材料排到了大小、颜色之前。口诀里“中国（产地）→ 木（材料）”要排在“小（大小）→ 黄（颜色）”之后，这一项把前后两段全调了个头。干扰点：只记得“有产地有材料”，没记它们的先后。"},
+        {"option": 1, "verdict": "wrong", "why": "two leather small black Shanghai 把材料 leather 提到产地 Shanghai 之前，同时两者都排到了大小、颜色前面。口诀中“木（材料）”紧跟在“中国（产地）”之后，顺序应是 Shanghai leather。干扰点：材料与产地互换位置。"},
+        {"option": 2, "verdict": "correct", "why": "数词 two 先占位，再按“小 → 黄 → 中国 → 木”排：small（大小）→ black（颜色）→ Shanghai（产地）→ leather（材料），得 two small black Shanghai leather。原题为教材 P31 随堂练习；来源：课件未附答案，本条为笔记补充解析。"},
+        {"option": 3, "verdict": "wrong", "why": "two black small Shanghai leather 里 black（颜色）排到了 small（大小）之前。口诀“美小圆旧黄”中“小”在“黄”之前，必须是 small black。干扰点：与正确项只差大小、颜色这两步的先后。"}
+      ],
+      "steps": [
+        "先定起点：two 是数词，属限定词层，排在最前（四个选项都一样，用来确认排序从哪儿数起）。",
+        "再走口诀前半：大小 small 在颜色 black 之前，排除把 black 提前的 D。",
+        "最后处理客观类：产地 Shanghai 在材料 leather 之前，A、B 把产地或材料提前，排除，只剩 C。"
+      ],
+      "compareTo": "quiz:0",
+      "sourceContext": {"label": "课件·前置定语顺序（教材 P31）", "quote": "美（品质特征）→ 小（大小高低长短）→ 圆（形状）→ 旧（新旧年龄）→ 黄（颜色）→ 中国（国籍）→ 木（物质材料）→ 书房（类别用途）。"}
+    },
+    "quiz:2": {
+      "knowledgePoints": ["en-adjadv-participle-adj"],
+      "translation": "听说救援队又找到一名幸存者这条令人激动的消息时，我们都非常激动。",
+      "phrases": [
+        {"text": "rescue team", "meaning": "救援队"},
+        {"text": "another survivor", "meaning": "另一名幸存者、又一名生还者"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "两空都填 excited。第一空 we were excited（人感到激动）是对的；第二空 news 是物，修饰物要用 -ing 形式 exciting（令人激动的消息）。干扰点：把 -ed 当成修饰情绪的万能形式。"},
+        {"option": 1, "verdict": "wrong", "why": "两空都填 exciting。第二空 news 用 exciting 对；第一空主语是 we（人），人“感到”激动要用 excited。干扰点：把 -ing 用在人身上，方向搞反。"},
+        {"option": 2, "verdict": "correct", "why": "第一空主语是 we（人），人感到激动 → excited；第二空修饰 news（物，是引起这种情绪的原因）→ exciting。这就是“物令人 -ing，人感到 -ed”。"},
+        {"option": 3, "verdict": "wrong", "why": "两空正好装反：人用了 exciting，物用了 excited。判据是“物令人 -ing，人感到 -ed”，两者位置不能互换。干扰点：看到两个空都带 -ing/-ed 就凭印象填，没有回头核对主语是人还是物。"}
+      ],
+      "steps": [
+        "先看第一空的主语：we were ____，主语是人、说的是人的感受 → -ed 形式 excited。",
+        "再看第二空的中心词：the ____ news，news 是物、是引起情绪的原因 → -ing 形式 exciting。",
+        "最后合起来核对：excited; exciting，与“人感到 -ed、物令人 -ing”完全一致。"
+      ],
+      "compareTo": "quiz:5",
+      "sourceContext": {"label": "课件·分词转化形容词小结（教材 P33）", "quote": "（1）-ing 类形容词：意为“令人……的”，修饰的是物；（2）-ed 类形容词：意为“（人）感到……的”，修饰的是人。"}
+    },
+    "quiz:3": {
+      "knowledgePoints": ["en-adjadv-comparative-usage"],
+      "translation": "这本书比那本有趣得多。",
+      "phrases": [
+        {"text": "more interesting than", "meaning": "比……更有趣（多音节形容词用 more 构成比较级）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "wrong", "why": "very 只能修饰形容词或副词的原级（very interesting），不能修饰比较级 more interesting。干扰点：very 是最常见的程度副词，不细看后面跟的是比较级就容易误填。"},
+        {"option": 1, "verdict": "correct", "why": "空处要修饰比较级 more interesting。much 表“大得多”，正是能修饰比较级的程度副词（同类还有 a lot / far / even / slightly）。"},
+        {"option": 2, "verdict": "wrong", "why": "so 修饰形容词或副词原级（so interesting），也可构成 so ... that 句型，但不能直接放在比较级前。干扰点：把 so 当成万能的“如此”。"},
+        {"option": 3, "verdict": "wrong", "why": "quite 修饰原级（quite interesting）表示“相当”，同样不能修饰比较级。干扰点：quite 与 very 同属“只能配原级”的一组。"}
+      ],
+      "steps": [
+        "先看空处后面：跟的是比较级 more interesting，空处必须是能修饰比较级的副词。",
+        "再排除只能配原级的 very / so / quite：这三个词后面只能接形容词原级。",
+        "最后确认 much：much more interesting = 有趣得多，与句尾的 than that one 比较语境吻合。"
+      ],
+      "compareTo": "quiz:7",
+      "sourceContext": {"label": "课件·修饰比较级的词（教材 P39）", "quote": "much / a lot / far / even / slightly：much more interesting（大得多）、a lot more useful（得多）、far more difficult（得多）、slightly more expensive（略微）。"}
+    },
+    "quiz:4": {
+      "knowledgePoints": ["en-adjadv-adverb-formation-position"],
+      "translation": "她通常到得很晚，但今天她来早了。",
+      "phrases": [
+        {"text": "arrive late", "meaning": "到得晚（late 这里是不带 -ly 的副词）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "correct", "why": "usually 是频度副词，位置规则是“实义动词之前，情态动词 / 第一个助动词 / 系动词之后”。句中 arrives 是实义动词，usually 放在它前面正合适。"},
+        {"option": 1, "verdict": "wrong", "why": "usual 是形容词“通常的”，只能作定语（the usual way）或表语，不能修饰动词 arrives。干扰点：usual 与 usually 只差 -ly，词性却从形容词变成副词。"},
+        {"option": 2, "verdict": "wrong", "why": "unusual 是形容词“不寻常的”，词性不对；意思也与句意相反（她“通常”会晚到）。干扰点：既错词性又错词义。"},
+        {"option": 3, "verdict": "wrong", "why": "unusually 虽是副词，但意思是“不寻常地”，用来修饰“频率”讲不通，也与 but today she's early 的对比语气不合。干扰点：只检查了“是不是副词”，没检查词义是否对得上。"}
+      ],
+      "steps": [
+        "先判词性：空处修饰实义动词 arrives，必须是副词，排除形容词 usual、unusual。",
+        "再定位置：频度副词放在实义动词之前，usually arrives 成立。",
+        "最后核词义：unusually 意为“不寻常地”，不能表示“通常”，排除，只剩 usually。"
+      ],
+      "compareTo": "quiz:3",
+      "sourceContext": {"label": "课件·频度副词的位置（教材 P35）", "quote": "频度副词放在实义动词之前，情态动词、第一个助动词或连系动词之后：Tom quite often goes to his mum's on Saturdays for tea."}
+    },
+    "quiz:5": {
+      "knowledgePoints": ["en-adjadv-participle-adj"],
+      "translation": "我对这个有趣的故事很感兴趣。",
+      "phrases": [
+        {"text": "be interested in", "meaning": "对……感兴趣（人作主语用 interested）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "correct", "why": "第一空主语是 I（人），人“感到”有兴趣用 -ed 形式 interested，构成 be interested in；第二空 story 是物、是引起兴趣的原因，用 -ing 形式 interesting。"},
+        {"option": 1, "verdict": "wrong", "why": "两空正好装反：人用了 interesting，物用了 interested。判据是“物令人 -ing，人感到 -ed”，由被描述对象是人还是物决定。干扰点：只背住两个词形，没有按主语性质分派。"}
+      ],
+      "steps": [
+        "先看第一空：I am ____ in，主语是人、说的是自己的感受 → interested（be interested in 固定搭配）。",
+        "再看第二空：the ____ story，story 是物、是让人感兴趣的原因 → interesting。",
+        "最后核对：interested; interesting 与“人感到 -ed、物令人 -ing”一致。"
+      ],
+      "compareTo": "quiz:2",
+      "sourceContext": {"label": "课件·分词转化形容词小结（教材 P32–33）", "quote": "-ing 类形容词：意为“令人……的”，修饰的是物；-ed 类形容词：意为“（人）感到……的”，修饰的是人。"}
+    },
+    "quiz:6": {
+      "knowledgePoints": ["en-adjadv-adverb-formation-position", "en-adjadv-comparative-usage"],
+      "translation": "这个箱子太重了，他搬不动。",
+      "phrases": [
+        {"text": "too ... to do", "meaning": "太……而不能做（too 后接形容词，to 后接动词原形）"},
+        {"text": "for sb. to do", "meaning": "对某人来说做某事（不定式的逻辑主语用 for 引出）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "correct", "why": "too ... to ... 表示“太……而不能”：too 后接形容词 heavy，to 后接动词原形 carry，构成 The box is too heavy for him to carry.（箱子太重，他搬不动）。"},
+        {"option": 1, "verdict": "wrong", "why": "so ... that 要求 that 后接一个完整的从句（The box is so heavy that he can't carry it.），而题中 to carry 是不定式，不是从句。干扰点：只记住 so 表“如此”，漏了 that 后面必须跟句子。"},
+        {"option": 2, "verdict": "wrong", "why": "enough 修饰形容词时必须后置（heavy enough），不能放在 heavy 前面；而且 enough ... to 表示“足够……能……”，与题意“太重搬不动”正好相反。干扰点：把 enough 的位置和意义都记反了。"},
+        {"option": 3, "verdict": "wrong", "why": "very 只表程度“很”，不构成结果结构，very heavy to carry 讲不出“搬不动”这层意思。干扰点：把 very 当成 too 的近义替代。"}
+      ],
+      "steps": [
+        "先读句意：箱子“太重”以至于“搬不动”，是“太……而不能”的结构。",
+        "再排除搭配不合的：so 后面要接完整的 that 从句，enough 修饰形容词必须后置且意思相反，very 没有“而不能”的含义。",
+        "最后确认 too ... to：too + 形容词 + for sb. + to do，两个空正好填满。"
+      ],
+      "compareTo": "quiz:7",
+      "sourceContext": {"label": "课件·程度副词的位置（教材 P35 特殊提醒）", "quote": "enough 作副词时总置于被修饰的形容词或副词之后：They can't walk fast enough."}
+    },
+    "quiz:7": {
+      "knowledgePoints": ["en-adjadv-comparative"],
+      "translation": "今天的天气和昨天一样暖和。",
+      "phrases": [
+        {"text": "as ... as", "meaning": "和……一样（中间用形容词或副词原级）"}
+      ],
+      "optionAnalysis": [
+        {"option": 0, "verdict": "correct", "why": "as ... as 是原级比较结构，两个 as 之间只能用形容词或副词的原级，所以填 warm，表示“和……一样温暖”。"},
+        {"option": 1, "verdict": "wrong", "why": "warmer 是比较级，只能用在 than 前面或 the + 比较级 + of the two 结构里，不能塞进 as ... as 中间。干扰点：见到“在比较”就条件反射写比较级。"},
+        {"option": 2, "verdict": "wrong", "why": "warmest 是最高级，需要 the 和表示范围的短语（in / of …）配合，与 as ... as 的原级结构不搭。干扰点：把“比较”一律理解成最高程度。"},
+        {"option": 3, "verdict": "wrong", "why": "more warm 形式本身就不对：warm 是单音节形容词，比较级直接加 -er（warmer），不用 more；何况 as ... as 中间不允许比较级。干扰点：把多音节形容词的 more 规则套到单音节词上。"}
+      ],
+      "steps": [
+        "先认结构：as ____ as 是原级比较的固定框架，中间只能填原级。",
+        "再排比较级与最高级：warmer 要有 than 或 of the two 配合，warmest 要有 the 和范围，都不符合。",
+        "最后检查词形：warm 是单音节词，即便要用比较级也是 warmer 而非 more warm，排除 D。"
+      ],
+      "compareTo": "quiz:3",
+      "sourceContext": {"label": "课件·原级比较（教材 P37）", "quote": "as + adj./adv. + as 和……一样（形容词和副词都用原形）：Mary's spoken English is as good as mine."}
+    }
+  }
+}

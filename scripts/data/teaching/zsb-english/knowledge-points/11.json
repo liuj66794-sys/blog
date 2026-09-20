@@ -1,0 +1,158 @@
+{
+  "points": [
+    {
+      "id": "en-nonfinite-overview",
+      "name": "非谓语动词总纲与三步判断",
+      "summary": "非谓语动词是动词的特殊形式，不能独立作谓语，只能作主语、宾语、表语、定语、状语或补足语。一个简单句只有一个谓语核心：没有连词或从句另立结构时，多余的动词必须降级为 to do / doing / done。判断三步：一找谓语、二判逻辑主语的主动被动、三看动作与谓语的先后。",
+      "lessonRefs": ["11"],
+      "prereqs": []
+    },
+    {
+      "id": "en-nonfinite-infinitive-form",
+      "name": "不定式的形式（一般/进行/完成/完成进行）",
+      "summary": "不定式一般式 to do / to be done 通常发生在谓语之后；进行式 to be doing 与谓语同时进行；完成式 to have done / to have been done 发生在谓语之前；完成进行式 to have been doing 在谓语时间前一直持续。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-overview"]
+    },
+    {
+      "id": "en-nonfinite-infinitive-subject",
+      "name": "不定式作主语与 it 形式主语",
+      "summary": "不定式作主语多指具体、一次性的动作；为避免头重脚轻常用 it 作形式主语：It + 谓语 + to do、It is + n. + to do、It is + adj. + for/of sb. + to do。for 前的形容词描述事情的难易等特征（easy、hard、important），of 前的形容词评价人的性格或品质（kind、nice、wise）。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-infinitive-form"]
+    },
+    {
+      "id": "en-nonfinite-infinitive-object",
+      "name": "不定式作宾语与 it 形式宾语",
+      "summary": "想要/希望（want、hope、wish、desire）、决定/承诺（decide、agree、choose）、拒绝/失败（refuse、fail）、请求/提供/设法（ask、offer、manage）、喜爱/学习（love、like、learn）等动词后接 to do 作宾语；find/think/feel/make/believe/consider 后可用 it 作形式宾语：动词 + it + adj. + to do。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-infinitive-form"]
+    },
+    {
+      "id": "en-nonfinite-infinitive-predicative",
+      "name": "不定式作表语",
+      "summary": "be + to do 作表语，表将来、计划、职责等；主语常是 duty、hope、idea、job、plan、problem、purpose、thing、wish 或 what 从句。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-infinitive-form"]
+    },
+    {
+      "id": "en-nonfinite-infinitive-attributive",
+      "name": "不定式作后置定语（介词不能漏）",
+      "summary": "n. + to do 作后置定语，与名词可构成动宾关系或主谓关系；不定式里的动词若不及物，介词不能漏：a pen to write with、a room to live in、nothing to worry about、someone to play tennis with。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-infinitive-form"]
+    },
+    {
+      "id": "en-nonfinite-infinitive-adverbial",
+      "name": "不定式作状语（目的/结果/原因）",
+      "summary": "to do 可作目的状语（He came here to see me.）、结果状语（only to do 表意外结果、too...to do、adj. enough to do）与原因状语（I am glad to see you. / He was lucky to have found the lost child.）。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-infinitive-form"]
+    },
+    {
+      "id": "en-nonfinite-infinitive-complement",
+      "name": "不定式作主语/宾语补足语",
+      "summary": "主语补足语：be said/reported/thought/believed/known/supposed + to do，可改写为 It is said that...；宾语补足语：advise、allow、ask、remind、invite、expect、warn、wish、order、persuade、teach、tell、want、encourage + sb. + to do。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-infinitive-object"]
+    },
+    {
+      "id": "en-nonfinite-bare-infinitive",
+      "name": "省 to 的不定式（一感二听三使五看；有 do 无 to）",
+      "summary": "一感（feel）、二听（hear、listen to）、三使（let、have、make）、五看（see、look at、watch、observe、notice）后接省 to 的不定式，主动省 to、被动还原 to；help 后的 to 可有可无；but/except 前有 do 则省 to、无 do 则用 to。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-infinitive-complement"]
+    },
+    {
+      "id": "en-nonfinite-gerund-function",
+      "name": "动名词的句法功能（名词性）",
+      "summary": "动名词具有名词性，可作主语、宾语、表语、定语；不作状语、补足语。作主语表抽象、习惯或泛指的行为，谓语通常用单数；常见句型 It is no use/good/point/help doing、It is a waste of time doing、sth. is worth doing。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-overview"]
+    },
+    {
+      "id": "en-nonfinite-gerund-verb",
+      "name": "只接动名词的动词与固定结构",
+      "summary": "admit、advise、acknowledge、appreciate、avoid、bear、can't help、consider、delay、deny、enjoy、escape、excuse、fancy、finish、imagine、keep、mind、miss、permit、postpone、practice、quit、risk、suggest 等后接 doing；固定结构：be busy (in) doing、have trouble/difficulty (in) doing、spend time (in) doing、can't stand doing、feel like doing。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-gerund-function"]
+    },
+    {
+      "id": "en-nonfinite-preposition-gerund",
+      "name": "介词后接动名词（这些 to 是介词）",
+      "summary": "介词后的动词用 doing；look forward to、when it comes to、be used to、devote...to、stick to、approach to、admit to、contribute to、be opposed to / object to、confess to、resort to 里的 to 是介词，后面接 doing。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-gerund-function"]
+    },
+    {
+      "id": "en-nonfinite-gerund-voice-subject",
+      "name": "动名词的被动式、完成式与逻辑主语",
+      "summary": "动名词一般式 doing / being done，完成式 having done / having been done（发生在谓语之前）；逻辑主语用形容词性物主代词或名词所有格：I don't mind your opening the window. / His being late made the teacher angry. / They insisted on my staying there for supper.",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-gerund-function"]
+    },
+    {
+      "id": "en-nonfinite-active-form-passive-meaning",
+      "name": "主动形式表被动意义",
+      "summary": "need/want/require/deserve + doing 与 be worth doing 用主动形式表被动意义：The bike needs repairing. = The bike needs to be repaired.；The point deserves mentioning. = The point deserves to be mentioned.；The book is worth reading.",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-gerund-verb"]
+    },
+    {
+      "id": "en-nonfinite-verb-pattern-shift",
+      "name": "doing 与 to do 含义不同",
+      "summary": "remember/forget/regret 后 doing 指已做过、to do 指要去做；stop doing 停止正在做的事、stop to do 停下来去做另一事；go on doing 继续同一件事、go on to do 接着做另一件事；try doing 试着做、try to do 设法做；mean doing 意味着、mean to do 打算做；like/love/hate/prefer 后 doing 表一般倾向、to do 表某次具体行为。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-infinitive-object", "en-nonfinite-gerund-verb"]
+    },
+    {
+      "id": "en-nonfinite-participle-form",
+      "name": "分词的形式与核心对立（doing / done）",
+      "summary": "现在分词：doing 主动、进行，being done 被动进行，having done / having been done 先发生；过去分词 done 表被动、完成或被动且完成。不及物动词的过去分词只表完成不表被动（fallen leaves、retired workers、a risen sun）。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-overview"]
+    },
+    {
+      "id": "en-nonfinite-participle-attributive",
+      "name": "分词作定语",
+      "summary": "单个分词常前置、分词短语常后置，后置分词短语可还原为定语从句：the man standing under the tree、the problem being discussed now、the book written by Lu Xun、a burning house。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-participle-form"]
+    },
+    {
+      "id": "en-nonfinite-participle-predicative",
+      "name": "分词作表语（物 -ing，人 -ed）",
+      "summary": "-ing 表示「令人……的」，说明事物给人的感受（The performance was exciting. / The news is surprising.）；-ed 表示「人感到……」，说明人的感受（We were excited. / We were surprised at the news.）。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-participle-form"]
+    },
+    {
+      "id": "en-nonfinite-participle-object-complement",
+      "name": "分词作宾语补足语（感官与使役）",
+      "summary": "感官动词 + sb. + doing 表动作正在发生、+ sb. + do 表全过程；have/make/keep/get 可接 doing 或 done：have sth. done、make oneself understood、keep the door locked；find sth. done 表「发现某物被……」。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-participle-form", "en-nonfinite-bare-infinitive"]
+    },
+    {
+      "id": "en-nonfinite-participle-adverbial",
+      "name": "分词作状语（伴随/原因/时间/条件/让步/结果）",
+      "summary": "分词作状语时逻辑主语通常必须与主句主语一致，可还原为相应状语从句。从句化简三步：删去与主句相同的主语及连词；do → doing、be + doing → doing、be + done → done；主系表删 be 保留表语，情态动词 + do → to do。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-participle-form"]
+    },
+    {
+      "id": "en-nonfinite-perfect-participle",
+      "name": "完成式分词（having done / having been done）",
+      "summary": "分词的完成式表示动作先于谓语发生：Having lived in Beijing for ten years, I can speak fluent Mandarin.（主动先发生）／Having been surrounded by the flood for over a week, the villagers lacked food.（被动先发生）。一般式 done 表被动或完成，不特意拉开时间先后。",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-participle-adverbial"]
+    },
+    {
+      "id": "en-nonfinite-absolute-construction",
+      "name": "独立主格与 with 复合结构",
+      "summary": "独立主格由名词或代词作逻辑主语，再接非谓语、名词、形容词、副词或介词短语，整体作状语：The job not finished, we couldn't see the film. / The meeting over, we all went home.；There being + n. 表原因；with + 宾语 + 宾补（doing / done / to do）表伴随、原因或条件：With the task finished, they went home. / With a lot of work to do, he had to stay at the office.",
+      "lessonRefs": ["11"],
+      "prereqs": ["en-nonfinite-participle-adverbial"]
+    }
+  ]
+}

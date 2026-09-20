@@ -1,0 +1,81 @@
+{
+  "points": [
+    {
+      "id": "en-noun-clause-basic",
+      "name": "名词性从句的四种类型与位置判定",
+      "summary": "本该由名词充当的位置改由一个句子来充当，就是名词性从句：在谓语之前是主语从句，在动词、介词或形容词之后是宾语从句，在系动词之后是表语从句，在 fact/news/idea 等抽象名词之后是同位语从句。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-function-subject", "en-noun-function-object"]
+    },
+    {
+      "id": "en-noun-clause-connector",
+      "name": "名词性从句的引导词两类与四步解题法",
+      "summary": "从句不缺成分时用 that（无含义）、whether（是否）、连接副词 when/where/why/how（有含义）；从句缺主语、宾语或定语时用连接代词 what/who/whom/which/whose。解题四步：划从句 → 看类型 → 看成分 → 看含义。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-clause-basic"]
+    },
+    {
+      "id": "en-noun-clause-word-order",
+      "name": "名词性从句一律用陈述语序",
+      "summary": "名词性从句一律用陈述语序（主语 + 谓语），不用疑问语序：Could you tell me how you improve your writing（不用 how do you improve）。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-clause-connector"]
+    },
+    {
+      "id": "en-noun-clause-subject",
+      "name": "主语从句的引导词选择",
+      "summary": "主语从句放在主句谓语之前：从句缺主语用 what，从句完整且无含义用 that，有“如何/何时/何地/为什么”的含义用 how/when/where/why，表“是否”用 whether（不用 if）。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-clause-connector"]
+    },
+    {
+      "id": "en-noun-clause-it",
+      "name": "it 作形式主语与形式宾语",
+      "summary": "形式主语：It is + 名词/形容词/分词/不及物动词 + that 从句（It is important that…、It is reported that… = sb. is reported to do）；形式宾语：find/think/consider/believe + it + adj. + that 从句，语序固定为 it + 形容词 + that。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-clause-connector"]
+    },
+    {
+      "id": "en-noun-clause-object",
+      "name": "宾语从句的位置、that 省略与主句时态呼应",
+      "summary": "宾语从句跟在动词、介词、形容词之后；that 只连接、不作成分，口语中可省略，但在 it 形式宾语后、双宾语中的直接宾语、插入语后、并列的第二个 that、从句主语是 this/that 时不能省；主句是过去时，从句用过去相关时态（She said she would…）。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-clause-connector"]
+    },
+    {
+      "id": "en-noun-clause-predicative",
+      "name": "表语从句与 reason 后的 that",
+      "summary": "表语从句放在系动词之后：主语是 reason 时连接词用 that（不用 because）；This/That/It is because… 后面接原因，That is why… 后面接结果；从句缺宾语时用 what。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-clause-connector"]
+    },
+    {
+      "id": "en-noun-clause-appositive",
+      "name": "同位语从句与抽象名词",
+      "summary": "同位语从句跟在 idea/fact/news/hope/belief/thought/doubt/promise/suggestion/order/possibility 等抽象名词之后，解释这个名词的具体内容；that 只连接、不作成分且不可省略；与定语从句的区别在于从句里的 that 是否充当成分。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-clause-connector", "en-attr-clause-basic"]
+    },
+    {
+      "id": "en-noun-clause-whether-if",
+      "name": "whether 与 if 的七种区别",
+      "summary": "whether 能引导所有名词性从句，if 只能引导宾语从句表“是否”。介词后、从句放句首、whether to do、与 or not 连用、discuss/decide/doubt 等动词后、引导主/表/同位语从句时，都只能用 whether。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-clause-connector"]
+    },
+    {
+      "id": "en-noun-clause-ever",
+      "name": "whoever/whatever 等 -ever 引导词",
+      "summary": "whoever = anyone who、whatever = anything that、whichever = any one that，表示泛指“无论谁/任何……”，who 常表特指；从句缺主语时用 whoever，不能用 whomever。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-clause-connector"]
+    },
+    {
+      "id": "en-noun-clause-negation-transfer",
+      "name": "宾语从句中的否定转移",
+      "summary": "think/believe/suppose/expect 等表观点的动词作主句谓语时，从句的否定通常转移到主句：I don't think he is right；对应的反意疑问句用肯定形式（is he?）。",
+      "lessonRefs": ["13"],
+      "prereqs": ["en-noun-clause-object"]
+    }
+  ]
+}

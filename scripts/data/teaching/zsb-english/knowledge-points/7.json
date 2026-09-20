@@ -1,0 +1,60 @@
+{
+  "points": [
+    {
+      "id": "en-verb-class",
+      "name": "动词的概念与分类总口诀",
+      "summary": "动词表示动作或状态（She runs every morning. / She is a doctor.）。分类总口诀“情 义 助 你 系 鞋 带”：情态动词、实义动词、助动词、系动词。",
+      "lessonRefs": ["7"],
+      "prereqs": []
+    },
+    {
+      "id": "en-verb-vi-vt",
+      "name": "不及物动词 vi. 与及物动词 vt.",
+      "summary": "vi. 不能直接跟宾语（smile、wait、die、rise），要接宾语得先加介词（look at、listen to、wait for、arrive in/at）；vt. 能直接跟宾语（love、raise、accept）。少数动词兼作 vi. 与 vt.（He left. / He left Beijing.）。rise 不及物“升起”，raise 及物“举起”。",
+      "lessonRefs": ["7"],
+      "prereqs": ["en-verb-class"]
+    },
+    {
+      "id": "en-verb-double-object",
+      "name": "双宾语与 to / for 的选择",
+      "summary": "vt. + sb. + sth. = vt. + sth. + to/for sb.。动作在对方那里截止才算完成的用 to（give、send、hand、lend、offer、pass、post、promise、return、show、teach、tell、write）；对方不参与该动作的用 for（buy、cook、draw、find、make、order、prepare、spare、save）。",
+      "lessonRefs": ["7"],
+      "prereqs": ["en-verb-vi-vt", "en-noun-function-object"]
+    },
+    {
+      "id": "en-verb-complex-object",
+      "name": "复合宾语：vt. + sb. + 宾补的六种形式",
+      "summary": "宾语补足语可以是形容词（Keep the window open.）、名词短语（We consider him a strange person.）、不定式 to do（allow problems to worry you）、不带 to 的不定式（John made her tell him everything.）、现在分词（keep your children watching TV）、过去分词（get my watch fixed）。",
+      "lessonRefs": ["7"],
+      "prereqs": ["en-verb-vi-vt", "en-noun-function-complement"]
+    },
+    {
+      "id": "en-verb-linking",
+      "name": "系动词：五感五变三保持两结果一是一像",
+      "summary": "系动词连接主语和表语构成系表结构。口诀：五感 look/sound/feel/taste/smell；五变 become/get/turn/go/grow/come；三保持 keep/stay/remain；两结果 prove/turn out；一是 be；一像 seem。be 后永远不能加动词原形，只能是 be + n./adj./介词短语/doing/done/to do。",
+      "lessonRefs": ["7"],
+      "prereqs": ["en-verb-class", "en-noun-function-predicative"]
+    },
+    {
+      "id": "en-verb-auxiliary",
+      "name": "助动词四大帮手 do / have / be / will",
+      "summary": "be + doing 构成进行时、be + done 构成被动；do/does/did 构成否定句与疑问句，并帮助构成强调与倒装；have/has/had + done 构成完成时；will + 动词原形构成将来时。否定句变法 1：句中有情态动词或 be 动词就在其后直接加 not；变法 2：两者都没有时在主语后加 don't/doesn't/didn't。",
+      "lessonRefs": ["7"],
+      "prereqs": ["en-verb-class"]
+    },
+    {
+      "id": "en-verb-modal-basic",
+      "name": "情态动词的基本用法与虚拟",
+      "summary": "情态动词本身有词义、不能单独作谓语，只能与动词原形一起构成谓语。口诀：不随主语变 / 后接动词原 / 变否加 not / 变疑要提前。can/could 能力、请求、推测；may/might 请求、推测、祝愿；must 表主观必须（无时态与三单变化），have to 表客观不得不（有时态与三单变化）；shall 用于规章条款表义务规定；should/ought to 表建议；will/would 表意愿、请求、习惯；dare、need 兼作情态动词与实义动词。情态动词 + have done 表对过去的虚拟或推测（should have done 本应该做而未做）。",
+      "lessonRefs": ["7"],
+      "prereqs": ["en-verb-auxiliary"]
+    },
+    {
+      "id": "en-verb-modal-speculation",
+      "name": "情态动词表猜测的三张表",
+      "summary": "对现在状态的推测用“情态动词 + 动词原形”；对正在发生的推测用“情态动词 + be doing”；对过去的推测用“情态动词 + have done”。can/can't 表推测只用于疑问句与否定句（can't 表“不可能”）；肯定句的“可能”用 may/might/could。可能性排序：must > should > may > might > could > can't（否定推测）。",
+      "lessonRefs": ["7"],
+      "prereqs": ["en-verb-modal-basic"]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "points": [
+    {
+      "id": "en-reading-steps",
+      "name": "阅读三步走（审题 → 定位 → 对比）",
+      "summary": "第一步审清题目，圈出有标记意义的关键词（动词、名词、数字年份、地点、大写词、观点对象、副词形容词、否定词），题干没有明显定位词时按题号顺序定位相应段落；第二步回原文找到「金三句」，不能只截取孤立词语作答；第三步把选项与定位处上下文逐项比对，选出同义替换或对原文高度概括的选项。",
+      "lessonRefs": ["19"],
+      "prereqs": []
+    },
+    {
+      "id": "en-reading-evidence-sentence",
+      "name": "金三句定位法（前一句 + 定位句 + 后一句）",
+      "summary": "定位的真正含义是找到承载答案依据的「前一句 + 定位句 + 后一句」；答案必须在金三句内找到依据，前后句常给出指代、因果或转折的必要信息，只看孤立词语容易误判。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-steps"]
+    },
+    {
+      "id": "en-reading-keyword-locating",
+      "name": "关键词定位与同义定位",
+      "summary": "关键词定位是圈出题干中有标记意义的词或词组再回原文搜索（What was the main reason for the decline of the small local shops in the 1990s? → 原文 the rise of large supermarkets）；同义定位承认题干与原文用词可以不同而语义相同（policy ↔ regulation，beneficial to the majority of the citizens ↔ good for most citizens）。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-steps"]
+    },
+    {
+      "id": "en-reading-synonym-rewrite",
+      "name": "同义替换与高度概括（正确选项的两个条件）",
+      "summary": "正确选项要同时满足两条：定位准确——能在金三句中找到依据；改写正确——实词能在原文找到对应表达或同义词，限定语没有随意增减。若选项是对原文的同义替换或高度概括，优先考虑。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-evidence-sentence"]
+    },
+    {
+      "id": "en-reading-limiter-fidelity",
+      "name": "限定语不失真（some / 十个城市 / at least 不能换成 all）",
+      "summary": "课件列出的限定语包括名词、形容词、冠词、形容词性物主代词、不定代词、定语从句、状语从句（尤其条件状语从句），以及 some、about、more than、in one way at least 这类数量与范围限制；一旦被换成 all、every、in every way、forever、wholly，范围就失真。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-synonym-rewrite"]
+    },
+    {
+      "id": "en-reading-distractor-unsupported",
+      "name": "错误选项·无中生有",
+      "summary": "选项内容通常与文章主题相关，但原文从未提到，甚至补入原文没有的原因、态度或细节。应试阅读必须忠于原文：即使某项是常识或真理，原文没提到也不能选。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-evidence-sentence"]
+    },
+    {
+      "id": "en-reading-distractor-range",
+      "name": "错误选项·扩大或缩小范围",
+      "summary": "把 some 偷换成 all、把特定对象（十个城市的进口水产品）扩大为全部对象（所有日本海鲜），或反过来把整体缩小为个别。对策是核对文章中的限定语，逐字比对范围。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-limiter-fidelity"]
+    },
+    {
+      "id": "en-reading-distractor-subjective",
+      "name": "错误选项·反客为主",
+      "summary": "原文只是客观描述，选项却人为加入主观态度或因果（说她不再爱他、说两人没有共同话题）。对策是读懂作者表达的观点，不在读完后另行发表个人判断，也不替人物编造动机。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-distractor-unsupported"]
+    },
+    {
+      "id": "en-reading-distractor-extreme",
+      "name": "错误选项·极端错误",
+      "summary": "把文章未出现的极端范围擅自加入选项：警惕 only、unique、completely、entirely、wholly、always、never、every/any one、everything/anything 以及形容词副词最高级。对策是看到绝对化词先回原文核查程度。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-limiter-fidelity"]
+    },
+    {
+      "id": "en-reading-distractor-wordform",
+      "name": "错误选项·以假乱真（词形词性）",
+      "summary": "原文某词的词性或词形在选项中被改动并伴随词义变化（size up「估量、判断」被读成「体型大小」，sure ticket 的 sure 被扩展到放松即必胜），也包含形近仿冒品牌的视觉类比。对策是核对完整词形、词性与语义，不因「长得像」就当同义。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-distractor-unsupported"]
+    },
+    {
+      "id": "en-reading-detail-direct",
+      "name": "细节理解·直接信息题",
+      "summary": "常用 when、where、who、what、why、how 等特殊疑问词提问，答案通常是原文某句或短语的直接表述（Where did the story happen? → The story took place in a small town）；圈出题干关键词后回原文直接定位即可作答。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-keyword-locating"]
+    },
+    {
+      "id": "en-reading-detail-indirect",
+      "name": "细节理解·间接信息题（加工与同义替换）",
+      "summary": "需对文中信息加工、转换、归纳或作最小推断：把并列信息归纳成特点清单（藏书丰富 + 阅读区舒适 + 免费 Wi-Fi），或识别同义替换（proficient in ↔ good at，were less likely to simply accept authority ↔ not easily accept authority）；答案句与选项不会字面相同。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-detail-direct", "en-reading-synonym-rewrite"]
+    },
+    {
+      "id": "en-reading-vocab-definition",
+      "name": "词汇理解·定义与解释线索",
+      "summary": "用 be、be called、call 等判断词、定语从句或标点给出的定义解释猜词：The herdsman, who looks after sheep（定语从句解释 herdsman＝牧人）；Mimicry is when an animal has markings…（定义句解释 mimicry＝拟态）。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-evidence-sentence"]
+    },
+    {
+      "id": "en-reading-vocab-contrast-cause",
+      "name": "词汇理解·对比、因果与常识线索",
+      "summary": "but、however、yet、otherwise、though 前后常有明显对比（与 clean 对比得出 grubby＝肮脏的）；because、since、as 提示原因，so、so…that、such…that 提示结果（头发太长 → trim＝修剪）；也可结合生活常识判断（寒冷对植物的影响 → wither＝枯萎），以及由 and/or 连接的同等关系（in his prime and always full of energy → prime＝盛年时期）。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-vocab-definition"]
+    },
+    {
+      "id": "en-reading-vocab-affix-list",
+      "name": "词汇理解·构词法与列举线索",
+      "summary": "前缀改变词义（un-不、非；re-再、又），后缀决定词性（-ness、-able），合成词可拆分推断（book + store = bookstore）；后文列举同类事物时按列举项归纳词义（The World of English、Foreign Language Teaching in Schools、English Learning → periodicals＝期刊杂志）。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-vocab-definition"]
+    },
+    {
+      "id": "en-reading-true-false-except",
+      "name": "是非判断·NOT / EXCEPT 题与排除法",
+      "summary": "审题先圈 not true、be not mentioned / included、all the following except 等否定表达，再逐项与原文相关细节比较，注意同义转换；措辞过于绝对的选项优先核查并排除，与原文相反或原文未提及的选项都可能成为答案。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-detail-direct"]
+    },
+    {
+      "id": "en-reading-inference-clue",
+      "name": "推理判断·推断只走半步",
+      "summary": "推理题考「由已知推未知」，文章中原样直接陈述的内容通常不是所求推论；推断必须能在文中找到事实、线索或理由，须忠实原文，不能用自己的观点替代作者观点，也不能脱离文本主观臆断（题干关键词：infer、indicate、imply/suggest、conclude、assume）。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-evidence-sentence"]
+    },
+    {
+      "id": "en-reading-inference-attitude",
+      "name": "推理判断·观点态度、写作意图与文章来源",
+      "summary": "观点态度题从用词、语气和论述方式推断（neutral 中立的、objective 客观的、critical 批评的、doubtful 怀疑的、indifferent 冷淡的等）；写作意图题看选项动词（explain 解释、prove 证明、persuade 劝说、advise 劝告、praise 赞扬、criticize 批评等）；文章来源题按内容、风格与语言特点判断报刊、网站、小说或学术论文。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-inference-clue"]
+    },
+    {
+      "id": "en-reading-main-idea-topic-sentence",
+      "name": "主旨大意·主题句定位",
+      "summary": "先确定体裁（记叙文围绕人物经历、说明文介绍事物特征、议论文提出观点并论证），再找主题句：首段首句或尾句常直接提出主题（Global warming is one of the most serious challenges…），尾段结尾常总结并与开头呼应（In conclusion, the key to solving the traffic problem…），少数在中间段开头或结尾。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-evidence-sentence"]
+    },
+    {
+      "id": "en-reading-main-idea-structure",
+      "name": "主旨大意·概括段意与分析结构",
+      "summary": "没有明显主题句时，先找每段关键信息与主要内容，再分析段落间逻辑关系，最后归纳核心思想；按总—分、总—分—总、分—总三种结构检查主旨：开头主题句即主旨、首尾共同体现主旨、结尾总结即主旨。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-main-idea-topic-sentence"]
+    },
+    {
+      "id": "en-reading-main-idea-distractors",
+      "name": "主旨大意·三类干扰项",
+      "summary": "以偏概全——只涉及部分内容（全文讲动植物适应环境，选项只说某一种动物）；过于宽泛——超出文章讨论范围（只讲某种植物的药用价值，选项泛指所有植物）；无中生有——加入文章没有提及的内容。标题型题目还要检查选项是否覆盖全文而非某一段。",
+      "lessonRefs": ["19"],
+      "prereqs": ["en-reading-main-idea-topic-sentence"]
+    }
+  ]
+}

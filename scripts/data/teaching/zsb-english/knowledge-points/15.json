@@ -1,0 +1,102 @@
+{
+  "points": [
+    {
+      "id": "en-subjunctive-concept",
+      "name": "虚拟语气的实质（与事实相反 / 未实现）",
+      "summary": "英语语气分陈述、祈使、虚拟三类；虚拟语气用动词的不同形式表达与事实相反或不能实现的假设、愿望、建议，形式分 (should) be 型、were 型、if 条件句及主句虚拟三类。",
+      "lessonRefs": ["15"],
+      "prereqs": []
+    },
+    {
+      "id": "en-subjunctive-should-do",
+      "name": "(should) be 型虚拟（一二四四标志词）",
+      "summary": "insist；order、command；suggest、advise、propose、recommend；ask、require、request、demand 及其名词、形容词形式引导的宾语、主语、表语、同位语从句用 (should) + 动词原形，should 可省；被动为 (should) be + 过去分词。",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-subjunctive-concept"]
+    },
+    {
+      "id": "en-subjunctive-suggest-insist",
+      "name": "suggest / insist 看词义",
+      "summary": "suggest 表“建议”、insist 表“坚持要求”时用 (should) + 动词原形；suggest 表“表明、暗示”、insist 表“坚持说”时陈述客观事实，用陈述语气。",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-subjunctive-should-do"]
+    },
+    {
+      "id": "en-subjunctive-it-is-adj",
+      "name": "It is + 形容词/名词 + that (should) do",
+      "summary": "表示必要性、重要性、合适性或主观反应的形容词（necessary、important、essential、vital、advisable、desirable、natural、proper、possible、compulsory 等）以及 It is of great importance that 等结构后，从句用 (should) + 动词原形。",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-subjunctive-should-do"]
+    },
+    {
+      "id": "en-subjunctive-lest",
+      "name": "lest / in case / for fear that 与 May 祝愿",
+      "summary": "lest、in case、for fear that 表“以免、万一、唯恐”时从句用 (should) + 动词原形；祝愿用 May + 主语 + 动词原形（May you be happy.）。",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-subjunctive-should-do"]
+    },
+    {
+      "id": "en-subjunctive-wish",
+      "name": "wish / if only 的 were 型虚拟",
+      "summary": "与现在事实相反用一般过去时（be 一律 were），与过去事实相反用 had done，与将来事实相反用 would/could + do；if only 表“要是……就好了”，only if 表“只有……才”且位于句首时主句部分倒装。",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-subjunctive-concept"]
+    },
+    {
+      "id": "en-subjunctive-as-if",
+      "name": "as if / as though 虚拟",
+      "summary": "as if/as though 所述与事实相反或极不可能时用虚拟语气：与现在相反用一般过去时（be 用 were），与过去相反用 had done，也可用 would/could/might + do。",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-adv-clause-manner"]
+    },
+    {
+      "id": "en-subjunctive-would-rather",
+      "name": "would rather 等 + 从句虚拟",
+      "summary": "would rather、would sooner、would prefer、had rather 后的从句用一般过去时表现在或将来的愿望，用过去完成时表对过去的愿望；would rather have done 表“宁愿过去做了”。",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-subjunctive-concept"]
+    },
+    {
+      "id": "en-subjunctive-if-conditional",
+      "name": "if 条件句与主句虚拟（三种时空）",
+      "summary": "与现在相反：从句 did/were，主句 would/should/could/might + do；与过去相反：从句 had done，主句 would/should/could/might + have done；与将来相反：从句 did/were to do/should do，主句 would + do。",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-adv-clause-condition"]
+    },
+    {
+      "id": "en-subjunctive-mixed-time",
+      "name": "错综时间虚拟与虚实混用",
+      "summary": "从句与主句分别与不同时间的事实相反时，各按自己的时间选动词形式（If you had left earlier, you would be at the concert now.）；句中真实的部分用正常时态，只有非真实部分才虚拟。",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-subjunctive-if-conditional"]
+    },
+    {
+      "id": "en-subjunctive-if-inversion",
+      "name": "省略 if 的倒装（were / should / had 提前）",
+      "summary": "if 从句含 were、should、had 时可省略 if 并把它提到主语前（Were I you...、Should it rain...、Had you taken...）；were it not for 对现在虚拟，had it not been for 对过去虚拟。",
+      "lessonRefs": ["15", "16"],
+      "prereqs": ["en-subjunctive-if-conditional"]
+    },
+    {
+      "id": "en-subjunctive-implied-condition",
+      "name": "含蓄虚拟（without / but for / otherwise / or）",
+      "summary": "假设条件可用 without、but for、otherwise、or、but 等表达，相当于 if 条件句的主句虚拟：Without air, there wouldn't be living things.／But for your advice, I would have failed.",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-subjunctive-if-conditional"]
+    },
+    {
+      "id": "en-subjunctive-modal-have-done",
+      "name": "情态动词 + have done（本应做而未做）",
+      "summary": "should have done 过去本应做而未做；shouldn't have done 本不应做却做了；could have done 本可以而未做；needn't have done 本不必做却做了；must、can、may 本身不用于这种“本来……却……”的虚拟结构。",
+      "lessonRefs": ["15"],
+      "prereqs": ["en-subjunctive-if-conditional"]
+    },
+    {
+      "id": "en-subjunctive-it-is-time",
+      "name": "It is (high/about) time + 从句",
+      "summary": "It is (high/about) time + 从句用一般过去时，或用 should + 动词原形且 should 不可省略（It is high time we went / should go to bed.）。",
+      "lessonRefs": ["15", "16"],
+      "prereqs": ["en-subjunctive-concept"]
+    }
+  ]
+}

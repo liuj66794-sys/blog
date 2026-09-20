@@ -1,0 +1,60 @@
+{
+  "points": [
+    {
+      "id": "en-attr-clause-basic",
+      "name": "定语从句与关系词的三大作用",
+      "summary": "定语从句是放在名词之后、译为“……的”、带引导词的一句话，结构为“先行词 + 关系词 + 从句”；关系词起连接、指代先行词、在从句中担当一个成分三大作用。",
+      "lessonRefs": ["12"],
+      "prereqs": ["en-noun-function-attributive"]
+    },
+    {
+      "id": "en-attr-clause-relative-pronoun",
+      "name": "关系代词的选择（that/which/who/whom/as）",
+      "summary": "关系代词 that 指人指物、which 指物、who 指人、whom 指人只作宾语、as 指人指物或整句；先看先行词是人还是物，再看从句缺什么成分：作主语不可省略，作宾语可省略。",
+      "lessonRefs": ["12"],
+      "prereqs": ["en-attr-clause-basic"]
+    },
+    {
+      "id": "en-attr-clause-whose",
+      "name": "whose 作定语与替换公式",
+      "summary": "whose 表示“先行词的……”，在从句中只作定语：whose + n. = the + n. + of which（指物）/ of whom（指人），如 He is the man whose cellphone was stolen。",
+      "lessonRefs": ["12"],
+      "prereqs": ["en-attr-clause-relative-pronoun", "en-noun-possessive"]
+    },
+    {
+      "id": "en-attr-clause-preposition",
+      "name": "介词 + which/whom 与 some/most of which",
+      "summary": "关系代词在从句中作介词宾语时，介词可提前：物用 on/in/about + which，人用 from/with + whom；介词由先行词的搭配或从句谓语的搭配决定；all/some/both/most of which(whom) 表示“其中……”。",
+      "lessonRefs": ["12"],
+      "prereqs": ["en-attr-clause-relative-pronoun"]
+    },
+    {
+      "id": "en-attr-clause-only-that",
+      "name": "只能用 that / 只能用 which / 常用 who",
+      "summary": "只能用 that：先行词被最高级或序数词修饰、被 the very/only/same/last 修饰、是不定代词或被 all/every/no/some/any/little/much 修饰、前面有 who/which 疑问词、先行词既有人也有物；只能用 which：介词后与非限制性定语从句；常用 who：先行词是指人的不定代词、非限制性从句指人。",
+      "lessonRefs": ["12"],
+      "prereqs": ["en-attr-clause-relative-pronoun"]
+    },
+    {
+      "id": "en-attr-clause-relative-adverb",
+      "name": "关系副词 when/where/why 与“缺不缺成分”",
+      "summary": "从句缺主语或宾语用关系代词，不缺主要成分用关系副词：时间先行词用 when、地点先行词（含 situation/case/point/stage 等抽象地点）用 where、先行词是 the reason 用 why；when/where/why 分别等于相应的“介词 + which”。",
+      "lessonRefs": ["12"],
+      "prereqs": ["en-attr-clause-basic"]
+    },
+    {
+      "id": "en-attr-clause-restrictive",
+      "name": "限制性 vs 非限制性定语从句与 as 引导的从句",
+      "summary": "限制性从句不用逗号、去掉后句意不完整；非限制性从句用逗号隔开、只作附加说明，且不能用 that 和 why。as 引导的非限从句可放句首、译“正如”（as we had expected），which 多在句尾指代整句话、译“这”。",
+      "lessonRefs": ["12"],
+      "prereqs": ["en-attr-clause-relative-pronoun"]
+    },
+    {
+      "id": "en-attr-clause-agreement",
+      "name": "定语从句的主谓一致",
+      "summary": "定语从句的谓语与先行词一致（不是与主句主语一致）：one of + 复数名词 + 定语从句，从句谓语用复数；the only one of + 复数名词 + 定语从句，从句谓语用单数。",
+      "lessonRefs": ["12"],
+      "prereqs": ["en-attr-clause-relative-pronoun", "en-noun-function-subject"]
+    }
+  ]
+}

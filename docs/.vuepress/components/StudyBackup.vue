@@ -170,7 +170,7 @@ function cancelPreview() {
     </div>
 
     <div class="study-backup__facts">
-      <p><strong>备份范围</strong> 阅读位置、数学练习、英语答案与完成标记、计算机错题与答题、政治进度/闪卡/错题，以及周计划打卡。</p>
+      <p><strong>备份范围</strong> 阅读位置、数学练习、英语答案与完成标记、计算机错题与答题、政治进度/闪卡/错题、知识点 1/3/7 复测与小节完成，以及周计划打卡。</p>
       <p><strong>备份时间</strong> {{ formatStamp(lastBackupAt) }} <span>· 记录最近一次导出时间。</span></p>
       <p><strong>导入规则</strong> 只处理本站学习记录；主题偏好和其他网站数据不会进入备份。</p>
     </div>

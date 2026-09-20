@@ -270,10 +270,208 @@
     count: function () { return Object.keys(scanMap(NS + "wrong:")).length; }
   };
 
-  function qidOf(q) { return q.id || hash(q.stem); }
+  function qidOf(q, lessonId) { return q.id || hash(String(lessonId || "") + "#" + q.stem); }
+
+  /* ---------------- 教学补充（逐选项反馈 / 主观题支架） ---------------- */
+
+  /* 课页注入的教学补充：#teaching-data（课内）/ #teaching-bank（题库刷题页，按卷打包）。
+     无补充时返回 null，判分与反馈保持旧行为。 */
+  function readTeachingData() {
+    try {
+      if (typeof document.getElementById !== "function") return null;
+      var lesson = document.getElementById("teaching-data");
+      if (lesson) {
+        var data = JSON.parse(lesson.textContent || "{}");
+        if (data && typeof data === "object" && data.questions) return data;
+      }
+      var bank = document.getElementById("teaching-bank");
+      if (!bank) return null;
+      var bankData = JSON.parse(bank.textContent || "{}");
+      var papers = bankData && bankData.papers || {};
+      var questions = {};
+      Object.keys(papers).forEach(function (id) {
+        var qs = papers[id].questions || {};
+        Object.keys(qs).forEach(function (ref) { if (!questions[ref]) questions[ref] = qs[ref]; });
+      });
+      return Object.keys(questions).length
+        ? { version: 1, lessonId: "", sections: [], questions: questions, knowledgePoints: [] } : null;
+    } catch (e) { return null; }
+  }
+
+  /* #teaching-data 注入在 </body> 前，课页脚本可能先于它执行：惰性读取，成功一次即缓存。 */
+  var teachingCache = null;
+  function teachingData() {
+    if (teachingCache) return teachingCache;
+    teachingCache = readTeachingData();
+    return teachingCache;
+  }
+
+  function teachingText(value) {
+    if (value == null) return "";
+    return Array.isArray(value) ? value.join("；") : String(value);
+  }
+
+  function byLetterOf(supp) {
+    var by = {};
+    (supp.optionAnalysis || []).forEach(function (oa) { by[String(oa.option).toUpperCase()] = oa; });
+    return by;
+  }
+
+  /* 富文本行：**加粗** 交给 appendRich，其余文本原样。 */
+  function richLine(tag, cls, value) {
+    var node = el(tag, cls);
+    appendRich(node, teachingText(value));
+    return node;
+  }
+
+  function richList(tag, cls, values) {
+    var list = el(tag, cls);
+    (values || []).forEach(function (value) { list.appendChild(richLine("li", undefined, value)); });
+    return list;
+  }
+
+  /* 同页同 ref 的题卡：对比自测跳转用。 */
+  function findItemByRef(container, ref) {
+    var items = typeof container.querySelectorAll === "function" ? container.querySelectorAll(".q-item") : container.children;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].studyQuestion && items[i].studyQuestion.ref === ref) return items[i];
+    }
+    return null;
+  }
+
+  /* 对比自测目标必须在本组才显示按钮。渲染收尾与每次作答后各校验一次：
+     恢复历史作答时，后面的题可能还没渲染出来。 */
+  function finalizeCompareRefs(container) {
+    (container.pendingCompareRefs || []).forEach(function (entry) {
+      entry.button.hidden = !findItemByRef(container, entry.ref);
+    });
+  }
+
+  /* 逐选项错项反馈：错选、漏选、分步判断、正确项成立理由、其余选项折叠、
+     整句翻译与词组、原文定位、对比自测。supp 来自 #teaching-data.questions[ref]。 */
+  function renderTeaching(item, container, supp, pickedLetters, answerLetters) {
+    var box = el("div", "qteach");
+    var byLetter = byLetterOf(supp);
+    var wrongPicked = pickedLetters.filter(function (L) { return answerLetters.indexOf(L) < 0; });
+    var missed = answerLetters.filter(function (L) { return pickedLetters.indexOf(L) < 0; });
+
+    wrongPicked.forEach(function (L) {
+      var block = el("div", "qteach-picked");
+      block.appendChild(el("strong", undefined, "✗ 你选 " + L + " 为什么错"));
+      var oa = byLetter[L];
+      if (oa && oa.why) block.appendChild(richLine("p", "qteach-why", oa.why));
+      box.appendChild(block);
+    });
+    if (wrongPicked.length && supp.wrongPick) box.appendChild(richLine("p", "qteach-why", supp.wrongPick));
+
+    if (missed.length && answerLetters.length > 1) {
+      var missBox = el("div", "qteach-missed");
+      missBox.appendChild(el("strong", undefined, "漏选 " + missed.join("、") + " 为什么"));
+      missed.forEach(function (L) {
+        var oa = byLetter[L];
+        var line = el("p", "qteach-why", L + "：");
+        appendRich(line, (oa && oa.why) || "这一项也是答案的一部分。");
+        missBox.appendChild(line);
+      });
+      if (supp.missedPick) missBox.appendChild(richLine("p", "qteach-why", supp.missedPick));
+      box.appendChild(missBox);
+    }
+
+    if (supp.steps && supp.steps.length) {
+      box.appendChild(el("p", "qteach-label", "分步判断"));
+      box.appendChild(richList("ol", "qteach-steps", supp.steps));
+    }
+
+    var okBlock = el("div", "qteach-correct");
+    okBlock.appendChild(el("strong", undefined, "✓ 正确答案 " + answerLetters.join("、") + " 为什么成立"));
+    answerLetters.forEach(function (L) {
+      var oa = byLetter[L];
+      if (oa && oa.why) {
+        var line = el("p", "qteach-why", answerLetters.length > 1 ? L + "：" : "");
+        appendRich(line, oa.why);
+        okBlock.appendChild(line);
+      }
+    });
+    box.appendChild(okBlock);
+
+    var rest = (supp.optionAnalysis || []).filter(function (oa) {
+      var L = String(oa.option).toUpperCase();
+      return pickedLetters.indexOf(L) < 0 && answerLetters.indexOf(L) < 0;
+    });
+    if (rest.length) {
+      var details = el("details", "qteach-rest");
+      details.appendChild(el("summary", undefined, "其余选项解析"));
+      rest.forEach(function (oa) {
+        var line = el("p", "qteach-why", String(oa.option).toUpperCase() + "（" + (oa.verdict === "correct" ? "正确" : "错误") + "）：");
+        appendRich(line, oa.why || "");
+        details.appendChild(line);
+      });
+      box.appendChild(details);
+    }
+    if (supp.translation) box.appendChild(richLine("p", "qteach-translation", "整句翻译：" + supp.translation));
+    if (supp.phrases && supp.phrases.length) {
+      var phrases = el("ul", "qteach-phrases");
+      supp.phrases.forEach(function (p) {
+        var line = el("li", undefined, p.text + " ");
+        appendRich(line, p.meaning || "");
+        phrases.appendChild(line);
+      });
+      box.appendChild(phrases);
+    }
+    if (supp.sourceContext && supp.sourceContext.quote) {
+      var quote = el("blockquote", "qteach-source");
+      quote.appendChild(el("b", undefined, "原文定位" + (supp.sourceContext.label ? " · " + supp.sourceContext.label : "")));
+      quote.appendChild(document.createElement("br"));
+      appendRich(quote, supp.sourceContext.quote);
+      box.appendChild(quote);
+    }
+    if (supp.compareTo) {
+      var compare = el("button", "btn qteach-compare", "对比自测");
+      compare.type = "button";
+      compare.setAttribute("data-compare-ref", supp.compareTo);
+      // 目标题可能在后半页，先登记，render 收尾时统一校验，本组无该题则隐藏。
+      (container.pendingCompareRefs = container.pendingCompareRefs || []).push({ button: compare, ref: supp.compareTo });
+      compare.addEventListener("click", function () {
+        var target = findItemByRef(container, supp.compareTo);
+        if (!target) return;
+        target.scrollIntoView({ block: "center" });
+        target.classList.add("quiz-flash");
+        setTimeout(function () { target.classList.remove("quiz-flash"); }, 1600);
+      });
+      box.appendChild(compare);
+    }
+    item.appendChild(box);
+    return box;
+  }
+
+  /* 主观题（政治问答）：作答要点、推导、自评标准折叠区。 */
+  function renderSubjective(item, sub) {
+    var details = el("details", "qteach-subjective");
+    details.appendChild(el("summary", undefined, "作答要点与自评"));
+    if (sub.keyPoints && sub.keyPoints.length) {
+      details.appendChild(el("p", "qteach-label", "作答要点"));
+      details.appendChild(richList("ul", "qteach-keypoints", sub.keyPoints));
+    }
+    if (sub.derivation) {
+      details.appendChild(el("p", "qteach-label", "推导"));
+      details.appendChild(richLine("p", "qteach-derivation", sub.derivation));
+    }
+    if (sub.selfEval && sub.selfEval.length) {
+      details.appendChild(el("p", "qteach-label", "自评标准"));
+      details.appendChild(richList("ul", "qteach-selfeval", sub.selfEval));
+    }
+    item.appendChild(details);
+    return details;
+  }
 
   /* ---------------- 选择题测验（单选/多选） ---------------- */
   function mountQuiz(container, questions, opts) {
+    // 课页可能在解析中（DOM 未完整）就调用：此时 </body> 前的 #teaching-data 尚未解析，
+    // 推迟到 DOMContentLoaded，保证教学补充与判分反馈一次到位。
+    if (typeof document !== 'undefined' && document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { mountQuiz(container, questions, opts); }, { once: true });
+      return;
+    }
     // Imported papers use both ABC and A、B、C. Compare option letters only.
     questions = questions.map(function (q) {
       var answer = q.answer == null ? null : String(q.answer).toUpperCase().replace(/[、，,\s]+/g, '');
@@ -285,6 +483,7 @@
     var fromLabel = opts.from || (lessonId || "");
     var recordWrong = opts.recordWrong !== false;
     var state = {};
+    var teaching = readTeachingData();
     if (lessonId) progress.touch(lessonId);
     var resumeKey = 'l1uj-politics-answers-v1:' + location.pathname + ':' + (container.id || lessonId || 'quiz');
     var persist = !/\/(practice|review|srs|wrong)\.html$/.test(location.pathname);
@@ -315,6 +514,7 @@
 
     function render() {
       clear(container);
+      container.pendingCompareRefs = [];
        state = { answered: 0, correct: 0, total: questions.length, reviewNeeded: false, unassessed: 0 };
       var box = el("div", "quiz");
 
@@ -333,8 +533,23 @@
         var locked = false;
         var picked = {};
         var signature = hash(JSON.stringify([q.stem, q.options, q.answer]));
-        item.studyQuestion = { slug: 'zsb-politics', lessonId: lessonId || '', ref: qidOf(q), stem: q.stem,
+        item.studyQuestion = { slug: 'zsb-politics', lessonId: lessonId || '', ref: qidOf(q, lessonId), stem: q.stem,
           options: q.options.map(function (o) { return { value: o.letter, text: o.text }; }), answer: q.answer ? q.answer.split('') : [], explanation: q.exp || '', sourceLabel: q.src || '', doubt: !!q.doubt };
+        var supp = (function () { var t = teachingData(); return t && t.questions ? t.questions[item.studyQuestion.ref] : null; })();
+        if (supp) {
+          if (supp.knowledgePoints) item.studyQuestion.knowledgePoints = supp.knowledgePoints;
+          item.studyQuestion.teaching = supp;
+          if (supp.subjective) item.studyQuestion.subjective = supp.subjective;
+        }
+        if (q.subjective && !item.studyQuestion.subjective) item.studyQuestion.subjective = q.subjective;
+        // 主观题支架（问答）常驻题卡底部，判分后移到最后，紧跟反馈。
+        var subjective = null;
+        function paintSubjective() {
+          var sub = item.studyQuestion.subjective;
+          if (!sub) return;
+          if (!subjective) subjective = renderSubjective(item, sub);
+          else item.appendChild(subjective);
+        }
         item.addEventListener('study-retry', function () { saved = readSaved(); delete saved[signature]; save(); render(); });
         var previous = saved[signature];
         function savePick(done) {
@@ -408,6 +623,9 @@
             appendRich(expBox, q.exp);
             judge.appendChild(expBox);
           }
+           if (supp) renderTeaching(item, container, supp, pickedLetters, q.answer.split(""));
+           paintSubjective();
+           finalizeCompareRefs(container);
            if (opts.onJudge && !restoring) opts.onJudge(q, right);
            updateScore(!restoring);
            syncLessonProgress();
@@ -448,6 +666,7 @@
           item.appendChild(confirmBtn);
         }
         item.appendChild(judge);
+        paintSubjective();
         box.appendChild(item);
         if (previous && Array.isArray(previous.picked)) {
           previous.picked.forEach(function (letter) {
@@ -459,6 +678,8 @@
           if (previous.done) finishPick(true);
         }
       });
+      // 对比自测目标不在本组（或在别页）时隐藏按钮，避免点了没反应。
+      finalizeCompareRefs(container);
 
       var score = el("div", "quiz-score");
       box.appendChild(score);

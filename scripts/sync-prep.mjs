@@ -30,6 +30,8 @@ import { buildStudyPlan, linkedLessons, linkedTools } from './lib/study-plan.mjs
 import { prepCatalog as previousCatalog } from '../docs/.vuepress/prep-catalog.mjs'
 import { patchPoliticsLearning, patchPoliticsPractice } from './lib/politics-learning-patch.mjs'
 import { applyCourseCorrections } from './lib/course-corrections.mjs'
+import { loadTeachingCatalog, supplementsForLesson, teachingPayloadFor, applyContentPatches, resolveQuestionRef } from './lib/teaching.mjs'
+import { extractCourseQuestions } from './lib/course-question-index.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DOCS = path.join(ROOT, 'docs')
@@ -330,7 +332,78 @@ export function stripUnmirroredLinks(html, c) {
   })
 }
 
-function syncZsbMirror(c, examDate) {
+/* ---------------- 教学补充注入 ---------------- */
+
+/** 镜像 relPath（lessons/xxx.html）→ 教学补充 lessonId。
+ *  英语 0001-nouns.html → '1'（前 4 位数字去前导零）；政治 mzt01/xg05/sz00 → 文件名本身。
+ *  非课次文件（course.html、practice.html 等工具页）返回 null。 */
+export function teachingLessonId(slug, relPath) {
+  if (slug !== 'zsb-english' && slug !== 'zsb-politics') return null
+  const name = relPath.replace(/\\/g, '/').match(/^lessons\/([^/]+)\.html$/)?.[1]
+  if (!name) return null
+  if (slug === 'zsb-english') {
+    const num = name.match(/^(\d{4})-/)?.[1]
+    return num ? String(Number(num)) : null
+  }
+  return /^(?:mzt|xg|sz)\d{2}$/.test(name) ? name : null
+}
+
+/** 收集该课 questions/sections 引用到的知识点定义（{id,name,summary}，按引用顺序去重）。 */
+function knowledgePointDefsFor(catalog, slug, merged, extraSections = []) {
+  const ids = []
+  const seen = new Set()
+  const add = (id) => { if (id && !seen.has(id)) { seen.add(id); ids.push(id) } }
+  for (const s of [...merged.sections, ...extraSections]) {
+    for (const id of s.knowledgePoints ?? []) add(id)
+    for (const id of s.prereqs ?? []) add(id)
+  }
+  for (const q of merged.questions.values()) for (const id of q.knowledgePoints ?? []) add(id)
+  const points = catalog.subjects[slug]?.knowledgePoints.points ?? []
+  return ids.map((id) => {
+    const point = points.find((p) => p.id === id)
+    if (!point) throw new Error(`教学补充 ${slug}/${merged.lessonId} 引用了未定义知识点 ${id}`)
+    return { id: point.id, name: point.name, summary: point.summary }
+  })
+}
+
+/** 在 </body> 前注入 application/json 数据块；< 转义为 < 防 JSON 里的标签提前闭合 script。 */
+function injectJsonScript(html, id, json, attrs, errorLabel) {
+  if (!/<\/body>/i.test(html)) throw new Error(`教学数据注入失败（缺 </body>）：${errorLabel}`)
+  return html.replace(/<\/body>/i,
+    `<script type="application/json" id="${id}"${attrs}>${json.replace(/</g, '\\u003c')}</script>\n</body>`)
+}
+
+/** 课级教学补充 → #teaching-data（无补充或补充为空则不注入，保持镜像原样）。
+    题键先解析为真实 ref（政治 mcq:N → hash ref），与运行时 qidOf / 题目索引一致。 */
+export function injectTeachingData(html, slug, lessonId, catalog = loadTeachingCatalog()) {
+  const merged = supplementsForLesson(catalog, slug, lessonId)
+  if (!merged || (!merged.sections.length && !merged.questions.size)) return html
+  const questions = extractCourseQuestions(html, { slug, lessonId, source: `${slug}/${lessonId}`, title: '' })
+  const payload = teachingPayloadFor(catalog, slug, lessonId, knowledgePointDefsFor(catalog, slug, merged),
+    (key) => resolveQuestionRef(key, questions))
+  if (!payload) return html
+  return injectJsonScript(html, 'teaching-data', JSON.stringify(payload), '', `${slug}/${lessonId}`)
+}
+
+/** 政治题库卷补充 → practice.html 单个 #teaching-bank（papers 按卷打包，避免重复 id）。 */
+export function injectTeachingBank(html, catalog = loadTeachingCatalog()) {
+  const papers = {}
+  for (const paperId of Object.keys(catalog.subjects['zsb-politics']?.bank ?? {})) {
+    const merged = supplementsForLesson(catalog, 'zsb-politics', paperId)
+    if (!merged) continue
+    const questions = {}
+    for (const [ref, q] of merged.questions) questions[ref] = q
+    papers[paperId] = {
+      version: 1, lessonId: paperId, sections: merged.sectionNotes, questions,
+      knowledgePoints: knowledgePointDefsFor(catalog, 'zsb-politics', merged, merged.sectionNotes),
+    }
+  }
+  if (!Object.keys(papers).length) return html
+  return injectJsonScript(html, 'teaching-bank', JSON.stringify({ version: 1, papers }),
+    '', `zsb-politics/bank（${Object.keys(papers).length} 卷）`)
+}
+
+function syncZsbMirror(c, examDate, teachingCatalog) {
   const dest = path.join(PUBLIC_LESSONS, c.slug)
   const staging = path.join(DOCS, '.vuepress', STAGING_DIR, c.slug)
   fs.rmSync(staging, { recursive: true, force: true })
@@ -353,9 +426,18 @@ function syncZsbMirror(c, examDate) {
   // 镜像改写点：HTML 注入导航条 + 摘除未收录源层死链；CSS 剔除缺失字体格式
   // （/lessons/ 静态页加载不到站点 JS，只能写入时处理，见 lib/lesson-nav.mjs）
   for (const f of walkFiles(staging, (n) => /\.(html|css|md)$/.test(n))) {
-    let raw = applyCourseCorrections(fs.readFileSync(f, 'utf8'), c.slug, path.relative(staging, f))
-    if (c.slug === 'zsb-politics' && path.relative(staging,f) === 'index.html') raw = patchPoliticsLearning(raw)
-    if (c.slug === 'zsb-politics' && path.relative(staging,f).replace(/\\/g, '/') === 'lessons/practice.html') raw = patchPoliticsPractice(raw)
+    const relPath = path.relative(staging, f).replace(/\\/g, '/')
+    let raw = applyCourseCorrections(fs.readFileSync(f, 'utf8'), c.slug, relPath)
+    raw = applyContentPatches(raw, c.slug, relPath, teachingCatalog) // 已审校修正层（同步期注入，手改镜像会丢）
+    if (c.slug === 'zsb-politics' && relPath === 'index.html') raw = patchPoliticsLearning(raw)
+    if (c.slug === 'zsb-politics' && relPath === 'lessons/practice.html') {
+      raw = patchPoliticsPractice(raw)
+      raw = injectTeachingBank(raw, teachingCatalog)
+    }
+    if (f.endsWith('.html')) {
+      const lessonId = teachingLessonId(c.slug, relPath)
+      if (lessonId) raw = injectTeachingData(raw, c.slug, lessonId, teachingCatalog)
+    }
     const patched = f.endsWith('.html')
       ? injectLessonNav(stripUnmirroredLinks(raw, c), {
           backUrl: withBase(`/courses/${c.slug}/`),
@@ -533,6 +615,11 @@ function writeFileIfChanged(file, rendered) {
 
 const main = () => {
   installLearningAssets(path.dirname(PUBLIC_LESSONS))
+  const teachingCatalog = loadTeachingCatalog()
+  const teachingKpMaps = {}
+  for (const slug of ['zsb-english', 'zsb-politics']) {
+    teachingKpMaps[slug] = new Map((teachingCatalog.subjects[slug]?.knowledgePoints.points ?? []).map((p) => [p.id, p]))
+  }
   // 环节 1：计划页（内容源缺失只跳过计划页，课程站镜像/转换照常）
   let parsed = null
   if (fs.existsSync(SOURCE)) {
@@ -557,8 +644,15 @@ const main = () => {
     for (const entry of entries) {
       entry.warnings = []
       try {
-        entry.conversion = lessonHtmlToMarkdown(applyCourseCorrections(fs.readFileSync(path.join(lessonsDir, entry.file), 'utf8'), c.slug, `${c.lessonsDir}/${entry.file}`), {
+        const relPath = `${c.lessonsDir}/${entry.file}` // 与镜像同一 relPath 规则，补丁一致命中
+        const sourceHtml = applyContentPatches(
+          applyCourseCorrections(fs.readFileSync(path.join(lessonsDir, entry.file), 'utf8'), c.slug, relPath),
+          c.slug, relPath, teachingCatalog,
+        )
+        const teaching = supplementsForLesson(teachingCatalog, c.slug, entry.id)
+        entry.conversion = lessonHtmlToMarkdown(sourceHtml, {
           slug: c.slug, lessonUrls, onWarn: (warning) => entry.warnings.push(warning),
+          ...(teaching ? { teaching, knowledgePoints: teachingKpMaps[c.slug] } : {}),
         })
       } catch (error) {
         throw new Error(`${c.subject}/${entry.file}：${error.message}`)
@@ -568,7 +662,7 @@ const main = () => {
   })
   const catalog = {}
   for (const { c, entries } of prepared) {
-    const files = syncZsbMirror(c, parsed?.examDate)
+    const files = syncZsbMirror(c, parsed?.examDate, teachingCatalog)
     const { lessons, changed, warnings, warnTypes, catalog: courseCatalog } = syncZsbCourse(c, entries)
     catalog[c.slug] = courseCatalog
     const types = [...warnTypes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4)

@@ -1,0 +1,102 @@
+{
+  "points": [
+    {
+      "id": "en-adv-clause-basics",
+      "name": "状语从句概说与九类从属连词",
+      "summary": "状语从句由一个从句担任状语，可修饰谓语、形容词、副词或整个句子；按意义分时间、地点、原因、条件、让步、目的、结果、方式、比较九类，由从属连词引导。",
+      "lessonRefs": ["14"],
+      "prereqs": []
+    },
+    {
+      "id": "en-adv-clause-time-connect",
+      "name": "时间状语从句连词（when / while / as）",
+      "summary": "when 可接短暂或持续动作，还用于 be doing...when...、be about to do...when...（这时突然）；while 多接持续动作或进行时；as 强调伴随、随着；the moment、the minute、each time、once 也可引导时间从句。",
+      "lessonRefs": ["14"],
+      "prereqs": ["en-adv-clause-basics"]
+    },
+    {
+      "id": "en-adv-clause-time-inversion",
+      "name": "“一……就……”结构（hardly…when / no sooner…than）",
+      "summary": "hardly/scarcely had + 主语 + done + when + 主语 + did；no sooner had + 主语 + done + than + 主语 + did；as soon as + 一般现在时或一般过去时。",
+      "lessonRefs": ["14", "16"],
+      "prereqs": ["en-adv-clause-time-connect"]
+    },
+    {
+      "id": "en-adv-clause-until",
+      "name": "until / till 与 not…until…",
+      "summary": "肯定句主句用延续性动词，until 译“直到……为止”；否定句主句用非延续性动词，not...until 译“直到……才”；till 不能置于句首。",
+      "lessonRefs": ["14", "16"],
+      "prereqs": ["en-adv-clause-basics"]
+    },
+    {
+      "id": "en-adv-clause-since",
+      "name": "since 的时态搭配",
+      "summary": "since 表“自从……”，从句用一般过去时，主句用现在完成时或过去完成时（I have lived here since I was a child.）。",
+      "lessonRefs": ["14", "16"],
+      "prereqs": ["en-adv-clause-basics"]
+    },
+    {
+      "id": "en-adv-clause-main-future",
+      "name": "主将从现",
+      "summary": "时间状语从句和条件状语从句中，主句用一般将来时，从句用一般现在时表将来（I will call you when I arrive at the station.）。",
+      "lessonRefs": ["14"],
+      "prereqs": ["en-adv-clause-time-connect"]
+    },
+    {
+      "id": "en-adv-clause-place",
+      "name": "地点状语从句 where / wherever",
+      "summary": "where、wherever 引导地点状语从句：where 前没有地点先行词、直接修饰主句谓语，是从属连词；有地点先行词时 where 是关系副词，属定语从句（make marks where… / at the places where…）。",
+      "lessonRefs": ["14"],
+      "prereqs": ["en-adv-clause-basics"]
+    },
+    {
+      "id": "en-adv-clause-reason",
+      "name": "原因状语从句连词（because / since / as / for / now that）",
+      "summary": "because 语气最强、回答 why；since、as、now that 表“既然”；for 是并列连词、补充说明推断理由；in that、seeing that、considering that 表“因为、鉴于”。",
+      "lessonRefs": ["14"],
+      "prereqs": ["en-adv-clause-basics"]
+    },
+    {
+      "id": "en-adv-clause-condition",
+      "name": "条件状语从句连词（if / unless / as long as…）",
+      "summary": "if、unless（=if not）、as/so long as（只要）、in case（万一）、once（一旦）、on condition that、provided that、supposing that 引导条件从句，并同样遵循主将从现。",
+      "lessonRefs": ["14", "15"],
+      "prereqs": ["en-adv-clause-main-future"]
+    },
+    {
+      "id": "en-adv-clause-concession",
+      "name": "让步状语从句（though / although / even if / no matter…）",
+      "summary": "though、although 不与 but 连用，though 可与 yet 连用；even if/even though 表“即使”；whether...or... 表“不管……还是”；no matter + 疑问词 = 疑问词 + -ever，但 no matter + 疑问词只引导让步从句。",
+      "lessonRefs": ["14", "16"],
+      "prereqs": ["en-adv-clause-basics"]
+    },
+    {
+      "id": "en-adv-clause-concession-inversion",
+      "name": "as / though 让步倒装",
+      "summary": "as 表“虽然”时须把表语、状语或动词原形提前（Child as he was…、Much as I like it…、Try as he might…），名词表语提前时去掉冠词；though 可倒装可不倒装。",
+      "lessonRefs": ["14", "16"],
+      "prereqs": ["en-adv-clause-concession"]
+    },
+    {
+      "id": "en-adv-clause-manner",
+      "name": "方式状语从句（as / as if / as though）",
+      "summary": "as 表“正如”（You must do as I told you.）；(just) as...so... 表“就像……一样……”；as if/as though 表“仿佛”，与事实相反时从句用虚拟语气，可能为事实时用陈述语气。",
+      "lessonRefs": ["14", "15"],
+      "prereqs": ["en-adv-clause-basics"]
+    },
+    {
+      "id": "en-adv-clause-purpose-result",
+      "name": "目的状语从句与结果状语从句（so that / so…that / such…that）",
+      "summary": "目的从句由 so that、in order that、in case 引导，从句常带情态动词；结果从句由 so...that、such...that 引导：so 后接形容词或副词，such 后接名词，many/much/few/little 表数量用 so，little 表“小”用 such。",
+      "lessonRefs": ["14"],
+      "prereqs": ["en-adv-clause-basics"]
+    },
+    {
+      "id": "en-adv-clause-comparison",
+      "name": "比较状语从句（as…as / than / the more…the more…）",
+      "summary": "同级比较 as + adj./adv. + as、not as/so...as、倍数 + as...as；不同级比较用比较级 + than、the more..., the more...、比较级 + and + 比较级；比较结构里常用 that/those 替代前面出现过的名词。",
+      "lessonRefs": ["14", "17"],
+      "prereqs": ["en-adv-clause-basics"]
+    }
+  ]
+}

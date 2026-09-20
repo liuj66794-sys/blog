@@ -1,0 +1,93 @@
+[
+  {
+    "id": "en-0009-marriage-time-anchor",
+    "subject": "zsb-english",
+    "file": "lessons/0009-tenses-voice.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：题干把 wedding 误作后置修饰语且 by 2022 缺说话时点。复核：当前基线已改为「真题改编（假设说话时点为2021年）」并给出 will have been married 口径，实质吸收。"
+  },
+  {
+    "id": "en-0011-not-invited-unique",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：not being invited 与 not having been invited 竞争。复核：当前基线 D 已改为 not having invited，解析承认原结构竞争，实质吸收。"
+  },
+  {
+    "id": "en-0011-interrupted-unique",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：being/having been interrupted 竞争。复核：当前基线 B 已改为 having，解析说明完成被动的适用语境，实质吸收。"
+  },
+  {
+    "id": "en-0011-produced-unique",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：Producing 与 Having produced 竞争。复核：当前基线 A 已改为 Produces（有限动词），解析说明原竞争，实质吸收。"
+  },
+  {
+    "id": "en-0011-see-playing-unique",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：see sb. do/doing 竞争。复核：当前基线 A 已改为 plays，解析说明 see sb. do 侧重整体，实质吸收。"
+  },
+  {
+    "id": "en-0011-after-admitted-unique",
+    "subject": "zsb-english",
+    "file": "lessons/0011-non-finite-verbs.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：being/having been admitted 竞争。复核：当前基线 C 已改为主动的 having admitted，解析承认原 C 合语法，实质吸收。"
+  },
+  {
+    "id": "en-0012-scholarship-article",
+    "subject": "zsb-english",
+    "file": "lessons/0012-attributive-clauses.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：a winner of scholarship 缺冠词。复核：当前基线已改为 a scholarship winner 并标注真题改编，实质吸收。"
+  },
+  {
+    "id": "en-0012-lifetime",
+    "subject": "zsb-english",
+    "file": "lessons/0012-attributive-clauses.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：a life time 拼写。复核：当前基线已改 lifetime，吸收。"
+  },
+  {
+    "id": "en-0013-such-a-success",
+    "subject": "zsb-english",
+    "file": "lessons/0013-noun-clauses.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：a such success 词序。复核：当前基线已改 such a success 并标注真题改编，实质吸收。"
+  },
+  {
+    "id": "en-0016-so-selfish-past",
+    "subject": "zsb-english",
+    "file": "lessons/0016-special-structures.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：avoid 与 was she 时态不一致。复核：当前基线已改 avoided，吸收。"
+  },
+  {
+    "id": "en-0020-bought-typo",
+    "subject": "zsb-english",
+    "file": "lessons/0020-passage-reading.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：bough 拼写。复核：当前基线 bought 已正确，吸收。"
+  },
+  {
+    "id": "en-0020-unemployment-range",
+    "subject": "zsb-english",
+    "file": "lessons/0020-passage-reading.html",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：fall from 20% to 30% 数值矛盾。复核：当前基线已改 from 30% to 20% 并改写解析，吸收。"
+  },
+  {
+    "id": "politics-resources-mcq-count",
+    "subject": "zsb-politics",
+    "file": "RESOURCES.md",
+    "absorbed": true,
+    "reason": "2026-09-10 审校：资源页客观题计数 1214。复核：当前基线已改 1245，吸收。"
+  }
+]

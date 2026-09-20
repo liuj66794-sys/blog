@@ -1,0 +1,102 @@
+{
+  "points": [
+    {
+      "id": "en-agreement-meaning",
+      "name": "主谓一致·意义一致原则（总纲）",
+      "summary": "谓语动词的单复数取决于主语的单复数意义，而不是它的语法形式：表语是复数不影响谓语（My favorite fruit is apples.），主语里带修饰语时谓语跟中心词走，真主语藏在定语从句时要找对中心词。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-noun-function-subject"]
+    },
+    {
+      "id": "en-agreement-collective",
+      "name": "集体名词作主语的三分法",
+      "summary": "① 通常作复数：people、police、cattle（三群恒复数）；② 可单可复：family、team、class、audience、committee、government 等，强调整体用单数、强调成员用复数；③ 常作不可数、恒用单数：equipment、furniture、luggage、foliage。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-noun-countability"]
+    },
+    {
+      "id": "en-agreement-quantity-subject",
+      "name": "时间 / 距离 / 金钱 / 速度复数名词作主语",
+      "summary": "时间、距离、金钱、重量、速度等复数名词作主语时被看作一个整体，谓语用单数：Ten years is a long time. / Five hundred dollars is not a small amount of money. / three weeks is already enough。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-noun-quantity-agreement"]
+    },
+    {
+      "id": "en-agreement-ics",
+      "name": "以 -ics 结尾的学科名词作主语",
+      "summary": "physics、mathematics、economics 等学科名词形式上是复数，意义上却是单数，作主语时谓语用单数：Physics is not an easy subject for some students. / Economics mainly refers to…",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-agreement-meaning"]
+    },
+    {
+      "id": "en-agreement-indefinite-pronoun",
+      "name": "不定代词作主语",
+      "summary": "everyone、everybody、someone、somebody、anyone、anybody、no one、nobody、nothing、each 等不定代词作主语时，谓语动词用单数：Everyone is here. / Nothing is impossible. / Somebody is waiting for you at the gate.",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-agreement-meaning"]
+    },
+    {
+      "id": "en-agreement-fraction",
+      "name": "分数 / 百分数 / the rest + of + 名词作主语",
+      "summary": "分数、百分数、part、the rest 等 + of + 名词作主语时，谓语与 of 后面的名词或代词一致：Forty percent of the water is polluted. / Part of the students have gone home. / 7% of them are…；分数写法：分子大于 1 时分母用复数 two-thirds。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-agreement-meaning"]
+    },
+    {
+      "id": "en-agreement-the-adj",
+      "name": "“the + 形容词”作主语",
+      "summary": "the rich、the poor、the disabled、the new 等作主语时看意义：表示一类人 → 谓语用复数（The rich are not always happy.；The disabled are well taken care of.）；表示抽象概念 → 谓语用单数（The new is certain to replace the old.）。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-agreement-meaning"]
+    },
+    {
+      "id": "en-agreement-what-clause",
+      "name": "what / whether 等主语从句作主语",
+      "summary": "从句作主语时谓语常用单数（What we eat affects our health.、Whether I will go or stay depends on…）；若主句是主系表结构，谓语单复数取决于表语名词的单复数：What we need is a good teacher. / What we need are good teachers.。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-noun-function-subject"]
+    },
+    {
+      "id": "en-agreement-number-of",
+      "name": "a number of 与 the number of",
+      "summary": "a number of + 复数名词 = “许多……”，谓语用复数（A number of students are…）；the number of + 复数名词 = “……的数目”，谓语用单数（The number of students is about 2000.）。最高频考点，与“a large number of”同理。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-noun-quantity-agreement"]
+    },
+    {
+      "id": "en-agreement-and",
+      "name": "and 连接并列主语的一致",
+      "summary": "并列主语指同一个人、同一件事或同一概念时谓语用单数（The writer and poet is coming.；War and peace is a constant theme.），指两个不同对象时用复数；iron and steel、law and order、bread and butter、a knife and fork 这类固定搭配表整体概念，也用单数。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-agreement-meaning"]
+    },
+    {
+      "id": "en-agreement-formal",
+      "name": "形式一致原则（more than one / many a / each…and… / 量词）",
+      "summary": "形式上是单数就用单数谓语：more than one / many a + 单数名词 → 单数（Many a boy likes…）；every/each/no + 名词 + and + every/each/no + 名词 → 单数；one + 单数名词 + and a half → 单数；a series of / a kind of / a piece of / a pair of 等量词的谓语以量词本身的单复数决定（Two pairs of shoes are…）。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-agreement-meaning"]
+    },
+    {
+      "id": "en-agreement-proximity",
+      "name": "就近原则（or / either…or / neither…nor / not only…but also / there be）",
+      "summary": "谓语与离它最近的主语一致：Either you or he is wrong.；Not only the students but also the teacher likes the movie.；Neither Mike nor I am able to…；There is a book and two pens on the table. / Here is a letter and some flowers for you.。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-agreement-formal"]
+    },
+    {
+      "id": "en-agreement-distance",
+      "name": "就远原则（with / but / as well as 等插入结构）",
+      "summary": "主语后面跟 with、together with、along with、but、besides、except、in addition to、as well as、including、rather than 等短语时，谓语与这些结构前面（较远）的主语一致：The teacher with his students is going to the park. / My mother as well as my sisters is watching TV.。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-agreement-formal"]
+    },
+    {
+      "id": "en-agreement-relative-clause",
+      "name": "one of + 复数名词 + 定语从句的一致",
+      "summary": "one of + 复数名词 + 定语从句中，从句谓语用复数（Jack is one of the experts who are working in China.）；若是 the only one of + 复数名词 + 定语从句，从句谓语用单数。",
+      "lessonRefs": ["10"],
+      "prereqs": ["en-agreement-formal"]
+    }
+  ]
+}

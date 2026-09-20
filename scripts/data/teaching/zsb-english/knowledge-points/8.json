@@ -1,0 +1,32 @@
+{
+  "points": [
+    {
+      "id": "en-syntax-five-patterns",
+      "name": "五大基本句型",
+      "summary": "主语 + 谓语（I come.）；主语 + 谓语 + 宾语（I love you.）；主 + 系 + 表（I am sad.）；主语 + 谓语 + 间宾 + 直宾（I give you a book.）；主语 + 谓语 + 宾语 + 宾补（You made me cry.）。汉译英选型：有动作就用主谓宾，没动作就用主系表。",
+      "lessonRefs": ["8"],
+      "prereqs": ["en-verb-vi-vt", "en-verb-linking"]
+    },
+    {
+      "id": "en-syntax-predicative-vs-object",
+      "name": "表语与宾语的区分",
+      "summary": "概念不同：宾语是动作的作用对象，表语说明主语的身份或特征。位置不同：宾语在及物动词或介词后，表语在系动词后。辨别法：把动词换成 be，句子说得通的是系动词（He got angry. → He was angry. ✔），说不通的是及物动词（He got a cat. → He was a cat. ✘）。",
+      "lessonRefs": ["8"],
+      "prereqs": ["en-syntax-five-patterns"]
+    },
+    {
+      "id": "en-syntax-nine-elements",
+      "name": "九大句子成分及其位置",
+      "summary": "主语（谓语之前）、谓语（一句话有且只有一个谓语动词）、宾语（v. 后 / 介词后）、宾语补足语（宾语之后）、系动词、表语（系动词之后）、定语（单词在 n. 前、短语在 n. 后）、状语（句首句中句末）、同位语（n. 之后，与被说明的名词同指）。",
+      "lessonRefs": ["8"],
+      "prereqs": ["en-syntax-five-patterns", "en-noun-function-subject"]
+    },
+    {
+      "id": "en-syntax-clause",
+      "name": "三大基本句式与主从句判断",
+      "summary": "简单句只有一套主谓成分；并列句是“简单句 + 并列连词 + 简单句”；复合句是“主句 + 从句”，从句依赖主句、在句中充当某个成分、不能单独使用。判断方法：找连词，连词后面的那句话就是从句。",
+      "lessonRefs": ["8"],
+      "prereqs": ["en-syntax-nine-elements", "en-conj-coordinate"]
+    }
+  ]
+}

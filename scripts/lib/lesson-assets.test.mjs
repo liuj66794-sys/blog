@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { test } from 'node:test'
-import { installLessonRuntime, stripMissingFontUrls } from './lesson-assets.mjs'
+import { installLessonRuntime, installLearningAssets, stripMissingFontUrls } from './lesson-assets.mjs'
 
 function fontFixture(t) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'lesson-fonts-'))
@@ -58,4 +58,18 @@ test('all four prep mirrors install maintained resume runtimes; other courses ke
   assert.equal(fs.readFileSync(target, 'utf8'), fs.readFileSync(new URL('../runtime/math-quiz.js', import.meta.url), 'utf8'))
   installLessonRuntime(dir, 'zsb-math')
   assert.equal(fs.readFileSync(target, 'utf8'), fs.readFileSync(new URL('../runtime/math-quiz.js', import.meta.url), 'utf8'))
+})
+
+test('shared learning assets publish the teaching flow runtime and its stylesheet next to the shell', (t) => {
+  const dir = fontFixture(t)
+  const publicRoot = path.join(dir, 'public')
+  installLearningAssets(publicRoot)
+  const published = fs.readdirSync(path.join(publicRoot, 'learning'))
+  for (const file of ['lesson-shell.mjs', 'teaching-flow.mjs', 'teaching-flow.css', 'mistake-store.mjs']) {
+    assert.ok(published.includes(file), `${file} 未发布`)
+  }
+  const read = name => fs.readFileSync(path.join(publicRoot, 'learning', name), 'utf8')
+  assert.equal(read('teaching-flow.mjs'), fs.readFileSync(new URL('../runtime/teaching-flow.mjs', import.meta.url), 'utf8'))
+  assert.match(read('lesson-shell.mjs'), /mountTeachingFlow\(base\)/, '共享外壳必须挂载教学流')
+  assert.match(read('teaching-flow.mjs'), /l1uj-knowledge-v1/)
 })

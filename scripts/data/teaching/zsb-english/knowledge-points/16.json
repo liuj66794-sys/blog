@@ -1,0 +1,102 @@
+{
+  "points": [
+    {
+      "id": "en-exclam-what-how",
+      "name": "感叹句 what / how",
+      "summary": "划掉句末“主语 + 谓语”后看剩余部分的中心词：名词用 what（可数单数要带 a/an），形容词或副词用 how；另有 How + adj. + a/an + 单数名词、How + 主语 + 谓语两种形式。",
+      "lessonRefs": ["16"],
+      "prereqs": []
+    },
+    {
+      "id": "en-imperative",
+      "name": "祈使句（动词原形 / let 结构）",
+      "summary": "祈使句主语 you 通常省略：肯定用动词原形，否定用 Don't / Never + 动词原形；let 结构为 Let + 宾语 + 动词原形，第一人称否定用 Let's not do，第三人称否定用 Don't let sb. do。",
+      "lessonRefs": ["16"],
+      "prereqs": []
+    },
+    {
+      "id": "en-emphasis-it-that",
+      "name": "强调句 It is/was…that/who…",
+      "summary": "It is/was + 被强调部分 + that/who + 其余部分；只能用 It is/It was，强调人可用 that 或 who、强调非人只用 that，且不能强调谓语；删去 It is/was 与 that/who 后剩余部分仍是完整句才是强调句。",
+      "lessonRefs": ["16"],
+      "prereqs": []
+    },
+    {
+      "id": "en-emphasis-not-until",
+      "name": "not…until 的强调与 do 强调谓语",
+      "summary": "强调 not...until 用 It is/was not until + 被强调部分 + that + 肯定形式的其余部分；谓语动词本身要强调时不用 It 结构，而用助动词 do/does/did + 动词原形（Mary does like surfing the Internet.）。",
+      "lessonRefs": ["16"],
+      "prereqs": ["en-emphasis-it-that", "en-adv-clause-until"]
+    },
+    {
+      "id": "en-it-patterns",
+      "name": "It 易混句型（since / before / when / first time）",
+      "summary": "It is/has been + 时间段 + since + 一般过去时；It was (not) + 时间段 + before + 一般过去时；It will (not) be + 时间段 + before + 一般现在时；It is/was the first time that + 现在完成时/过去完成时；It is (high) time that + 过去式或 should do。",
+      "lessonRefs": ["16"],
+      "prereqs": ["en-emphasis-it-that", "en-adv-clause-since"]
+    },
+    {
+      "id": "en-inversion-full",
+      "name": "完全倒装（副词 / 介词短语 / 表语置于句首）",
+      "summary": "here、there、then、down、away、out 及方位介词短语置于句首时，整个谓语提到主语前；主语是名词才倒装，人称代词不倒（Here comes the bus. / Here we are.）；表语置于句首用“表语 + 系动词 + 主语”。",
+      "lessonRefs": ["16"],
+      "prereqs": []
+    },
+    {
+      "id": "en-inversion-partial-negative",
+      "name": "否定成分置于句首的部分倒装",
+      "summary": "never、seldom、hardly、scarcely、little、not until、not only、by no means 等置于句首时主句部分倒装；hardly/scarcely...when、no sooner...than、not until 前不倒后倒、not only...but also 前倒后不倒。",
+      "lessonRefs": ["16"],
+      "prereqs": ["en-adv-clause-time-inversion", "en-adv-clause-until"]
+    },
+    {
+      "id": "en-inversion-only",
+      "name": "only + 状语置于句首的部分倒装",
+      "summary": "only 修饰副词、介词短语或状语从句并置于句首时主句部分倒装（Only in this way can I go to a good university.／Only when the war was over did he return.）；only 修饰主语时不倒装。",
+      "lessonRefs": ["16"],
+      "prereqs": ["en-inversion-partial-negative"]
+    },
+    {
+      "id": "en-inversion-so-neither",
+      "name": "so / neither / nor 的“也一样”与“确实如此”",
+      "summary": "So + 助动词/情态动词/be + 新主语 表“另一人也一样”；Neither/Nor + 助动词/be + 新主语 表“也不”；So + 主语 + 助动词 不倒装，表“的确如此”。",
+      "lessonRefs": ["16"],
+      "prereqs": []
+    },
+    {
+      "id": "en-inversion-concessive",
+      "name": "as / though 让步倒装与 so…that 前置倒装",
+      "summary": "as/though 让步从句把表语、状语或动词原形提前，单数可数名词作表语提前时省冠词（Teacher as she is…）；So/Such...that 中的 So/Such 置于句首时主句部分倒装（So fast did he run that...）。",
+      "lessonRefs": ["16"],
+      "prereqs": ["en-adv-clause-concession-inversion"]
+    },
+    {
+      "id": "en-tag-question-basic",
+      "name": "反义疑问句的基本原则与特殊主语",
+      "summary": "前肯后否、前否后肯，人称、数、时态保持一致；I am 的附加问句用 aren't I；everybody/someone 用 they，everything/this/that 用 it；no、never、few、seldom、hardly、little 是否定词，附加问句用肯定式，而 unhappy、dislike 等否定前后缀仍按肯定句处理。",
+      "lessonRefs": ["16"],
+      "prereqs": []
+    },
+    {
+      "id": "en-tag-question-modal",
+      "name": "ought to / used to / have / need / must 的附加问句",
+      "summary": "ought to → shouldn't / oughtn't；used to → didn't / usedn't；have 表“拥有”可用 have 或 do，表吃喝、度过、举办及 have to 用 do，作完成时助动词用 have；need 作实义动词用 do、作情态动词用 need；must 表推测时按 must 后实际谓语还原时态（must have done 有明确过去时间用 did/was，无明确过去时间用 have/has）。",
+      "lessonRefs": ["16"],
+      "prereqs": ["en-tag-question-basic"]
+    },
+    {
+      "id": "en-tag-question-imperative",
+      "name": "祈使句与 there be 的附加问句",
+      "summary": "Let's...（建议）用 shall we；Let us/me...（请求允许）用 will you；肯定祈使句用 will/won't you，否定祈使句只用 will you；there be 仍以 there 作主语（is there?）。",
+      "lessonRefs": ["16"],
+      "prereqs": ["en-imperative"]
+    },
+    {
+      "id": "en-tag-question-compound",
+      "name": "主从复合句与否定前移的附加问句",
+      "summary": "一般主从复合句的附加问句与主句对应；主句为第一人称 I/we + think、believe、suppose、expect 等态度动词时，附加问句看宾语从句，并按主句肯否决定附加问句肯否。",
+      "lessonRefs": ["16"],
+      "prereqs": ["en-tag-question-basic"]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "points": [
+    {
+      "id": "en-adjadv-adjective-function",
+      "name": "形容词的四大功能（定语 / 状语 / 表语 / 补语）",
+      "summary": "形容词作定语修饰名词（a serious man）；作状语表原因、结果、伴随、方式（Hungry and tired, I had to stop. / We arrived home late, safe and sound.）；作表语跟在系动词后（I felt homesick.）；作补语——描述宾语的是宾补（I find the book interesting.），描述主语的是主补（The classroom is kept tidy.）。",
+      "lessonRefs": ["6"],
+      "prereqs": ["en-noun-function-predicative"]
+    },
+    {
+      "id": "en-adjadv-attribute-order",
+      "name": "形容词作定语的位置（前置顺序与后置 6 种）",
+      "summary": "前置定语顺序：限定词 → 美（品质）→ 小（大小）→ 圆（形状）→ 旧（新旧）→ 黄（颜色）→ 中国（国籍）→ 木（材料）→ 书房（用途），即“美小圆旧黄，中国木书房”，主观在前客观在后。后置 6 种：表语形容词（alive、asleep）、修饰复合不定代词（something interesting）、成对形容词、后带介词短语或不定式、enough 修饰形容词或副词、old/long/high/wide 前附数量词短语（a girl five years old）。",
+      "lessonRefs": ["6"],
+      "prereqs": ["en-adjadv-adjective-function", "en-noun-function-attributive"]
+    },
+    {
+      "id": "en-adjadv-participle-adj",
+      "name": "分词转化形容词（-ing 修饰物 / -ed 修饰人）",
+      "summary": "-ing 类形容词意为“令人……的”，修饰物（exciting news、an interesting book）；-ed 类形容词意为“（人）感到……的”，修饰人（we were excited、I am interested）。",
+      "lessonRefs": ["6"],
+      "prereqs": ["en-adjadv-adjective-function"]
+    },
+    {
+      "id": "en-adjadv-adverb-formation-position",
+      "name": "副词的变化规则、功能与位置",
+      "summary": "形容词变副词：一般 +ly；辅音 + y 变 i 加 ly；辅音 + le 去 e 加 y；-ue 去 e 加 ly；-ll 直接 + y；-c 加 ally；例外 whole → wholly。副词可作状语、表语、定语（后置）、补足语、介词宾语。位置：时间地点副词放句尾（地点在前时间在后）；程度副词放在被修饰的形容词/副词之前，修饰动词时放在第一个助动词之后；频度副词放实义动词之前、情态动词/第一个助动词/系动词之后；修饰全句的副词居句中句末要加逗号；评论性副词多在句首。程度副词 too 构成 too + adj. + for sb. + to do（太……而不能）；enough 修饰形容词或副词时只能后置，构成 adj./adv. + enough + to do（足够……能……）。",
+      "lessonRefs": ["6"],
+      "prereqs": ["en-adjadv-adjective-function"]
+    },
+    {
+      "id": "en-adjadv-confusable",
+      "name": "易混副词辨析（同源副词）",
+      "summary": "close 近 / closely 紧密地；late 晚 / lately 最近；deep 空间深 / deeply 感情上深深地；high 空间高 / highly 程度“很、非常”；wide 空间宽 / widely 广泛地；free 免费 / freely 无限制地。判据是“具体空间”还是“抽象程度”。",
+      "lessonRefs": ["6"],
+      "prereqs": ["en-adjadv-adverb-formation-position"]
+    },
+    {
+      "id": "en-adjadv-comparative",
+      "name": "原级比较与比较级、最高级的变化规则",
+      "summary": "as + 原级 + as 表“和……一样”，not as(so) + 原级 + as 表“不如”；第一个 as 后形容词修饰名词时用 as + adj. + a/an + 单数可数名词 + as。变化规则：单音节及少数双音节 +er/-est；重读闭音节双写末尾辅音；-e 结尾直接 +r/+st；辅音 + y 去 y 变 i 再 +er/-est；多音节前加 more/most；不规则 bad→worse→worst、good/well→better→best、far→farther/further、little→less→least、old→older/elder。",
+      "lessonRefs": ["6"],
+      "prereqs": ["en-adjadv-adjective-function", "en-numeral-multiple"]
+    },
+    {
+      "id": "en-adjadv-comparative-usage",
+      "name": "比较级与最高级的特殊用法",
+      "summary": "修饰比较级用 much / a lot / far / even / slightly；特殊结构 no more than（= only 只不过）、no less than（= as much/many as 多达）、more...than...（与其说……不如说……）、比较级 + and + 比较级（越来越）、the + 比较级, the + 比较级（越……就越……）、the + 比较级 + of the two（两者中较……的）。最高级用“the + 最高级（+ 名词）+ 范围”，另有 one of the + 最高级 + 可数名词复数。",
+      "lessonRefs": ["6"],
+      "prereqs": ["en-adjadv-comparative"]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "points": [
+    {
+      "id": "en-prep-basic",
+      "name": "介词分类与三要素",
+      "summary": "分类：简单介词（on）、复合介词（into）、短语介词（according to）、分词介词（concerning）。三要素：① 介词后接名词、动名词 doing 或宾格（I am looking forward to your reply. / She is afraid of swimming.）；② 地点副词（home、here、there）前省略介词（go home，不说 go to home）；③ 介词不能单独使用，必须带宾语。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-noun-function-object"]
+    },
+    {
+      "id": "en-prep-common",
+      "name": "11 个常见介词核心用法",
+      "summary": "by 在旁/靠……方法/不迟于/被（被动）；for 为了/去向/支持/因为/对于/持续；of 所属、of + great + 抽象名词 = very + 同根形容词；against 倚靠/反对/以……为背景；at 小地点/时刻/速度/朝……；from 来自/由……制成（看不出原料）/使免受；on 表面/活动状态（on holiday、on fire、on duty）/具体某一天；over 悬在正上方/到处/在……期间/越过；under 在下面/少于；with 和……在一起/带有/用工具/随着/with + 名词 + 宾补；as 作为。含辨析 be made of（看得出原料）/ be made from（看不出）。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-basic"]
+    },
+    {
+      "id": "en-prep-collocation",
+      "name": "常见介词固定搭配",
+      "summary": "介词与动词、形容词、名词的固定搭配必须整块记：be good at doing（擅长）、be famous for（以……闻名）、arrive at（小地点）/ arrive in（大地点）、hear from sb.（收到某人来信）、prevent sb. from doing（阻止）、be made of / from（由……制成）、be afraid of doing、look forward to doing、be interested in、be proud of、treat sb. as（把某人当……对待）、be for / against（支持 / 反对）。搭配错了动词和形容词选得再对也拿不到分。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-common"]
+    },
+    {
+      "id": "en-prep-place",
+      "name": "at / on / in 表地点与 on/in the wall、tree",
+      "summary": "表地点：at the airport（小地点/某一点）、in the swimming pool（空间内部）、on the sofa（表面上）。墙上与树上：on the wall 挂在墙表面 / in the wall 嵌在墙里（窗户）；on the tree 长在树上（叶、果）/ in the tree 落在树上（猫、鸟等外来的东西）。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-common"]
+    },
+    {
+      "id": "en-prep-time",
+      "name": "at / on / in 表时间（时间口诀）",
+      "summary": "口诀“大于一天要用 in（in May / in 2025 / in summer），等于一天要用 on（on Sunday / on May 15th），小于一天要用 at（at 7 o'clock）”；三长 in the morning / afternoon / evening、两短 at night / at noon 特殊记。注意 on + 修饰词 + morning：on a cold morning、on Sunday morning（有修饰词就改用 on）。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-basic"]
+    },
+    {
+      "id": "en-prep-position",
+      "name": "above / over / on 与 across / over / through / past",
+      "summary": "上面的三兄弟：above 侧重相对水平高度、不一定在正上方（反义 below）；over 侧重垂直正上方（反义 under）；on 侧重与表面接触（反义 beneath）。穿过的四兄弟：across 从表面穿过（walk across the road）；over 从上方越过（jump over the wall）；through 从内部穿过（through the forest）；past 从旁边经过（walk past the shop）。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-place"]
+    },
+    {
+      "id": "en-prep-between-among",
+      "name": "between / among",
+      "summary": "between...and... 表示两者之间；among 用于三者或三者以上的中间。between 强调两两之间的界限，among 强调混在三者以上的人群或事物里。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-place"]
+    },
+    {
+      "id": "en-prep-method",
+      "name": "by / with / in / through 表方法、手段",
+      "summary": "by 后接交通工具、通信方式，单数名词前不加冠词（by air / by car / by post / by taxi）；with 后接有形的工具或身体器官（see with our eyes、write with a pen）；in 表示语言、材料（in English / in blue ink / in cash）；through 多指抽象的途径（master English through more practice）。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-common"]
+    },
+    {
+      "id": "en-prep-except",
+      "name": "besides / except / except for / but / apart from",
+      "summary": "“除了”五兄弟：besides 表“除……之外还”，宾语包括在内（= in addition to）；except 表“除……之外”，宾语排除在外，一般用于同类之间；except for 是“整体肯定 + 局部否定”的细节修正，一般不同类；but 常与 nobody、none、no one、nothing、all、everyone 等连用；apart from 可代替 besides / except for。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-basic"]
+    },
+    {
+      "id": "en-prep-end",
+      "name": "by the end of / at the end of / in the end",
+      "summary": "by the end of 表“到……为止”，只指时间，配过去完成时或将来时（He will come by the end of this month.）；at the end of 表“在……尽头”，可指地点也可指时间（at the end of March）；in the end = finally，单独使用（In the end, the parents found their kids.）。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-time"]
+    },
+    {
+      "id": "en-prep-front",
+      "name": "in front of / in the front of",
+      "summary": "in the front of 指在某一物体内部的前部（范围内），He is in the front of the car. 他坐在汽车前排；in front of 指在某一物体外部的前面（范围外），His wife is in front of the car. 他妻子在汽车前面。判断关键是“在里面还是外面”。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-place"]
+    },
+    {
+      "id": "en-prep-by-before",
+      "name": "by / before 表时间点",
+      "summary": "by 接时间点表示“不迟于某时”，包括某时在内，口诀“到哪哪完”：将来时间配一般将来时（I'll finish eating by nine o'clock.），过去时间配过去完成时（I had learned 2000 words by the end of last term.）。before 接时间点表示“在某时之前”，不包括某时（Several months before our trip, Wang Wei and I went to the library.）。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-time"]
+    },
+    {
+      "id": "en-prep-like-as",
+      "name": "like / as",
+      "summary": "like 是介词，表相似，“像……一样”（He looks like his father.）；as 表身份、职业、用途，“作为”（He works as a waiter. / Don't treat me as a child.）。表示“是真的那种身份”用 as，只是打比方用 like。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-common"]
+    },
+    {
+      "id": "en-prep-because",
+      "name": "because / because of",
+      "summary": "because 是连词，后面接完整的句子（She didn't go to school because she was ill.）；because of 是介词短语，后面接名词、代词或动名词（They delayed the trip because of the storm.）。同组还有 due to、thanks to。判断方法：空后是句子用 because，空后是名词性成分用 because of。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-prep-basic"]
+    },
+    {
+      "id": "en-prep-own",
+      "name": "of one's own / on one's own",
+      "summary": "of one's own 表示“属于某人自己的”（We have a library of our own. 我们有自己的图书馆）；on one's own 表示“独自地、独立地”（She does the work on her own. 她独自做这项工作）。一个强调所属，一个强调方式。",
+      "lessonRefs": ["4"],
+      "prereqs": ["en-pron-possessive"]
+    }
+  ]
+}

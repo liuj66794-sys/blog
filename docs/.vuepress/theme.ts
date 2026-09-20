@@ -64,6 +64,7 @@ export default defineThemeConfig({
     { text: '首页', link: '/' },
     { text: '课程', link: '/courses/', activeMatch: '^/courses/' },
     { text: '备考中心', link: '/prep/', activeMatch: '^/prep/' },
+    { text: '错题本', link: '/review/', activeMatch: '^/review/' },
     { text: '知识库', link: '/knowledge/' },
     { text: '学习手记', link: '/blog/' },
     { text: '更多', items: [
