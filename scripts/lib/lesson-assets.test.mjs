@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { test } from 'node:test'
-import { politicsRuntimeSource } from './lesson-assets.mjs'
+import { politicsRuntimeSource, versionPoliticsAssets } from './lesson-assets.mjs'
 import { installLessonRuntime, installLearningAssets, stripMissingFontUrls } from './lesson-assets.mjs'
 
 function fontFixture(t) {
@@ -13,6 +13,17 @@ function fontFixture(t) {
   fs.writeFileSync(path.join(dir, 'fonts', 'Main.woff2'), '')
   return dir
 }
+
+test('politics renderer and sizing CSS use content versions; unrelated assets are untouched', () => {
+  const html = '<script src="../assets/quiz.js"></script><link href="/blog/learning/lesson-shell.css"><script src="other.js"></script>'
+  const result = versionPoliticsAssets(html, { runtime: 'v1', css: 'css1' })
+  assert.match(result, /quiz\.js\?v=[a-f0-9]{16}/)
+  assert.match(result, /lesson-shell\.css\?v=[a-f0-9]{16}/)
+  assert.match(result, /src="other\.js"/)
+  assert.equal(versionPoliticsAssets(result, { runtime: 'v1', css: 'css1' }), result)
+  assert.notEqual(versionPoliticsAssets(result, { runtime: 'v2', css: 'css1' }), result)
+  assert.notEqual(versionPoliticsAssets(result, { runtime: 'v1', css: 'css2' }), result)
+})
 
 test('compressed KaTeX keeps closed font blocks and the following math layout rules', (t) => {
   const dir = fontFixture(t)

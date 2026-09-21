@@ -24,7 +24,7 @@ import { fileURLToPath } from 'node:url'
 import { withBase } from '../docs/.vuepress/site-meta.mjs'
 import { lessonHtmlToMarkdown } from './lib/lesson-convert.mjs'
 import { injectLessonNav } from './lib/lesson-nav.mjs'
-import { installLearningAssets, installLessonRuntime, stripMissingFontUrls } from './lib/lesson-assets.mjs'
+import { installLearningAssets, installLessonRuntime, stripMissingFontUrls, versionPoliticsAssets } from './lib/lesson-assets.mjs'
 import { collectPrepLessons } from './lib/prep-catalog.mjs'
 import { buildStudyPlan, linkedLessons, linkedTools } from './lib/study-plan.mjs'
 import { prepCatalog as previousCatalog } from '../docs/.vuepress/prep-catalog.mjs'
@@ -449,7 +449,7 @@ function syncZsbMirror(c, examDate, teachingCatalog) {
           examDate,
         })
       : f.endsWith('.css') ? stripMissingFontUrls(raw, path.dirname(f)) : raw
-    fs.writeFileSync(f, patched)
+    fs.writeFileSync(f, c.slug === 'zsb-politics' && f.endsWith('.html') ? versionPoliticsAssets(patched) : patched)
   }
 
   // 三步事务换入：dest → backup → staging → dest，失败回滚（同 sync-learn）

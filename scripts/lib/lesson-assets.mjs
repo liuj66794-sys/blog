@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { createHash } from 'node:crypto'
 
 /** Split CSS values without splitting commas/semicolons inside url(), local(), or quotes. */
 function splitCssValue(value, separator) {
@@ -65,6 +66,14 @@ export function stripMissingFontUrls(css, cssDir) {
 export function politicsRuntimeSource() {
   const session = fs.readFileSync(new URL('../runtime/politics-card-session.mjs', import.meta.url), 'utf8').replace(/^export /gm, '')
   return `window.PoliticsSession = (function () {\n${session}\nreturn { createCardSession };\n})();\n` + fs.readFileSync(new URL('../runtime/politics-quiz.js', import.meta.url), 'utf8')
+}
+// Canonical payload and its renderer must not mix with a cached legacy bundle.
+export function versionPoliticsAssets(html, {
+  runtime = politicsRuntimeSource(),
+  css = fs.readFileSync(new URL('../runtime/lesson-shell.css', import.meta.url), 'utf8'),
+} = {}) {
+  const version = createHash('sha256').update(runtime).update(css).digest('hex').slice(0, 16)
+  return html.replace(/((?:src|href)="[^"]*(?:assets\/quiz\.js|learning\/lesson-shell\.css))(?:\?[^"#]*)?"/g, `$1?v=${version}"`)
 }
 export function installLessonRuntime(courseRoot, slug) {
   const runtimes = { 'zsb-math': 'math', 'zsb-english': 'english', 'zsb-politics': 'politics', 'zsb-cs': 'cs' }
