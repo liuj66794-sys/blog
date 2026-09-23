@@ -329,7 +329,7 @@ function tableToMarkdown(html, ctx) {
 
 function preToMarkdown(html) {
   const inner = html.match(/^<pre[^>]*>([\s\S]*?)<\/pre>$/i)?.[1] ?? ''
-  const code = decodeEntities(inner).replace(/\n+$/, '')
+  const code = decodeEntities(inner.replace(/^\s*<code\b[^>]*>([\s\S]*?)<\/code>\s*$/i, '$1')).replace(/\n+$/, '')
   // 内容含反引号串时加长围栏，避免提前闭合
   const runs = code.match(/`+/g) || []
   const fence = '`'.repeat(Math.max(3, ...runs.map((r) => r.length + 1), 3))
@@ -530,12 +530,13 @@ function quizToMarkdown(openTag, inner, ctx, state) {
   // 解析兜底：engineering-skills 页尾 script 的 explanations[ratioName][字母]；
   // 专升本四科在块内自带 quiz-exp / quiz-expl / quiz-verdict（verdict 常为空容器）
   if (!explain) {
-    explain = escapeAngle(decodeEntities(
-      inner.match(/<div class="quiz-exp"[^>]*>([\s\S]*?)<\/div>/)?.[1]
+    const explanationHtml = inner.match(/<div class="quiz-exp"[^>]*>([\s\S]*?)<\/div>/)?.[1]
       || inner.match(/<p class="quiz-expl"[^>]*>([\s\S]*?)<\/p>/)?.[1]
       || inner.match(/<div class="quiz-verdict"[^>]*>([\s\S]*?)<\/div>/)?.[1]
-      || '',
-    )).replace(/\s+/g, ' ').trim()
+      || ''
+    explain = (ctx.slug === 'zsb-cs'
+      ? inline(explanationHtml.replace(/<(?:strong|b)>/gi, '\uE002').replace(/<\/(?:strong|b)>/gi, '\uE003'), ctx)
+      : escapeAngle(decodeEntities(explanationHtml))).replace(/\s+/g, ' ').trim()
   }
   if (!explain) {
     const radioName = inner.match(/<input[^>]*name="([^"]*)"/)?.[1]
@@ -551,9 +552,13 @@ function quizToMarkdown(openTag, inner, ctx, state) {
   }
   const hasAnswer = answerIdx >= 0 && answerIdx < opts.length
   const parts = []
-  parts.push(`**${qText.replace(/\*/g, '').trim()}**`)
-  parts.push(opts.map((o, i) => `- ${letterOf(i)}. ${o.text.replace(/\n/g, '<br>')}`).join('\n'))
-  const ansOpt = hasAnswer ? `（${escapeAngle(opts[answerIdx].text.replace(/[*`]/g, '')).replace(/\n/g, '<br>')}）` : ''
+  // C's * operator is content, not disposable Markdown emphasis. Keep code spans
+  // and escape literal operators in the CS template's plain-text question fields.
+  const csText = (text) => text.split(/(`[^`]*`)/g).map((part, i) => i % 2 ? part : part.replace(/\*/g, '\\*')).join('')
+  if (ctx.slug === 'zsb-cs') explain = csText(explain).replace(/[\uE002\uE003]/g, '**')
+  parts.push(`**${(ctx.slug === 'zsb-cs' ? csText(qText) : qText.replace(/\*/g, '')).trim()}**`)
+  parts.push(opts.map((o, i) => `- ${letterOf(i)}. ${(ctx.slug === 'zsb-cs' ? csText(o.text) : o.text).replace(/\n/g, '<br>')}`).join('\n'))
+  const ansOpt = hasAnswer ? `（${ctx.slug === 'zsb-cs' ? csText(opts[answerIdx].text) : escapeAngle(opts[answerIdx].text.replace(/[*`]/g, '')).replace(/\n/g, '<br>')}）` : ''
   const answerLines = [hasAnswer
     ? `**答案：${letterOf(answerIdx)}${ansOpt}**${explain ? ` —— ${explain}` : ''}`
     : `**答案：见交互版讲义**${explain ? ` —— ${explain}` : ''}`]
@@ -809,6 +814,7 @@ function blockToMarkdown(b, ctx, state) {
           return [
             heading,
             sectionMetaToMarkdown(section, ctx),
+            section.guide ? guideToMarkdown(section.guide) : '',
             ...(section.teaching ?? []).map((block) => teachingBlockToMarkdown(block, ctx)),
           ].filter((x) => x && x.trim()).join('\n\n')
         }
@@ -857,6 +863,36 @@ function blockToMarkdown(b, ctx, state) {
  * const explanations = { q1: { A: "…", C: "正确。…" }, … }
  * key 为 radio name，值为 字母 → 解析文本。
  */
+function guideToMarkdown(guide) {
+  const out = [`### ${escapeAngle(guide.title)}`, escapeAngle(guide.intro)]
+  if (guide.outlineInReading) {
+    out.push('打开本课交互版，可按以下步骤学习、保存作答并继续上次进度。下方保留完整原课讲义与解析。')
+    out.push(container('details', '分步学习路线', guide.steps.map((step, i) => `${i + 1}. **${escapeAngle(step.title)}**${step.reflection ? `：${escapeAngle(step.reflection)}` : ''}`).join('\n')))
+    // Keep new writing tasks available offline; original explanations are already rendered below.
+    for (const step of guide.steps.filter(s => s.writing)) {
+      out.push(`**${escapeAngle(step.title)}**`, ...step.body.map(escapeAngle), ...(step.context || []).map(escapeAngle), escapeAngle(step.reflection))
+      if (step.reference?.length) out.push(container('details', '参考要点（不自动判分）', step.reference.map(escapeAngle).join('\n\n')))
+    }
+    out.push(`**自己说一遍**：${escapeAngle(guide.recall)}`)
+    return out.filter(Boolean).join('\n\n')
+  }
+  for (const [i, step] of guide.steps.entries()) {
+    out.push(`**第 ${i + 1} 步：${escapeAngle(step.title)}**`, ...step.body.map(escapeAngle))
+    for (const e of step.examples || []) out.push(`> ${escapeAngle(e.en)}\n>\n> ${escapeAngle(e.zh)}${e.note ? `\n>\n> ${escapeAngle(e.note)}` : ''}`)
+    if (step.extra) out.push(container('details', step.extra.title, step.extra.lines.map(escapeAngle).join('\n\n')))
+    if (step.terms?.length) out.push(container('details', '这些术语是什么意思？', step.terms.map(escapeAngle).join('\n\n')))
+    const q = step.question
+    if (step.context) out.push(...step.context.map(escapeAngle))
+    if (step.reflection) out.push(`**自己试一试**：${escapeAngle(step.reflection)}`)
+    if (step.reference?.length) out.push(container('details', '参考要点（不自动判分）', step.reference.map(escapeAngle).join('\n\n')))
+    if (!q) continue
+    out.push(`**小判断：${escapeAngle(q.stem)}**`, q.translation ? escapeAngle(q.translation) : '', q.options.map((o, n) => `- ${String.fromCharCode(65 + n)}. ${escapeAngle(o.text)}`).join('\n'))
+    out.push(container('details', '先自己判断，再核对理由', q.steps.map((s, n) => `${n + 1}. ${escapeAngle(s)}`).join('\n') + '\n\n' + q.options.map((o, n) => `- ${String.fromCharCode(65 + n)}：${escapeAngle(o.why)}`).join('\n')))
+  }
+  out.push(`**自己说一遍**：${escapeAngle(guide.recall)}`, container('details', '参考要点', guide.checklist.map(s => `- ${escapeAngle(s)}`).join('\n')))
+  return out.filter(Boolean).join('\n\n')
+}
+
 export function parseExplanations(html) {
   const out = {}
   for (const sm of html.matchAll(/explanations\s*=\s*\{([\s\S]*?)\}\s*;/g)) {

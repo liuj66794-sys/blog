@@ -13,7 +13,8 @@
      "lessonId": "1",
      "sections": [{ "id": "pt-1"(锚定互动页 h2 id), "title", "goal", "minutes",
                     "knowledgePoints": [kpId], "prereqs": [kpId],
-                    "teaching": [讲解块…], "practiceRefs": [题目ref], "retell": "课末复述提示" }],
+                    "teaching": [讲解块…], "practiceRefs": [题目ref], "retell": "课末复述提示",
+                    "guide": 可选分步自测 {revision:1,title,intro,steps,recall,checklist} }],
      "questions": { "<ref>": {…} },       ref：英语 groupId:ordinal；政治课内 mcq:N（第N道）或题库题 id
      "subjective": { "<ref>": { "keyPoints": [], "derivation": "", "selfEval": [] } }
    }
@@ -28,6 +29,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { validateGuide } from '../runtime/guided-state.mjs'
 
 const TEACHING_ROOT = fileURLToPath(new URL('../data/teaching/', import.meta.url))
 const SLUGS = ['zsb-english', 'zsb-politics']
@@ -207,6 +209,7 @@ export function validateSupplement(supplement, { slug, questions, knowledgePoint
     : Object.entries(supplement.subjective ?? {})
   for (const [key] of subjective) if (!resolve(key)) refError('subjective', key)
   for (const s of supplement.sections) {
+    if (s.guide) errors.push(...validateGuide(s.guide).map(error => `${slug}/${supplement.lessonId}/${s.id}: ${error}`))
     if (!s.id || !s.title) errors.push(`${slug}/${supplement.lessonId}：小节缺 id/title`)
     if (s.practiceRefs) for (const r of s.practiceRefs) if (!resolve(r)) refError(`小节 ${s.id} 的 practiceRefs`, r)
     for (const kp of [...(s.knowledgePoints ?? []), ...(s.prereqs ?? [])]) if (!kpIds.has(kp)) errors.push(`${slug}/${supplement.lessonId}：小节 ${s.id} 知识点 ${kp} 未定义`)

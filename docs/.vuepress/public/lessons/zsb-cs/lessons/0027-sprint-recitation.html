@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html data-study-shell lang="zh-CN">
+<html data-study-shell data-cs-pointer="1" data-cs-course="1" lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 27 课 · 冲刺一：简答题背诵策略与复习题模板</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="stylesheet" data-cs-asset href="/blog/learning/cs-pointer.css?v=36c7b2534d87">
+<script type="module" data-cs-asset src="/blog/learning/cs-pointer.mjs?v=36c7b2534d87"></script>
 <link rel="icon" type="image/png" href="/blog/brand/zhixu-mark.png">
 <script data-study-appearance>try{var a=localStorage.getItem('vuepress-theme-appearance');document.documentElement.dataset.theme=a==='dark'||((a!=='light')&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}</script><link rel="stylesheet" href="/blog/learning/learning-tokens.css"><link rel="stylesheet" href="/blog/learning/lesson-shell.css"><script type="module" src="/blog/learning/lesson-shell.mjs" data-study-base="/blog/" data-exam-date="2027-03-27"></script>
 </head>
@@ -17,8 +19,29 @@
   <span>第 27 课 / 共 29 课</span>
 </nav>
 
-<h1>冲刺一：简答题背诵策略与复习题模板</h1>
-<p class="lesson-meta">对应题库 C语言数据结构-简答题、复习题一、复习题二、复习题三 · 约 15 分钟</p>
+<header class="cs-intro"><p class="cs-eyebrow">计算机 · 复习与模拟</p><h1>冲刺一：简答题背诵策略与复习题模板</h1><p class="lesson-meta">对应题库 C语言数据结构-简答题、复习题一、复习题二、复习题三 · 建议按小节分次学习</p><p>能把一个模板拆成前提、步骤、边界检查，并闭卷补全。</p><p class="cs-interactive-note">先看核心过程，再独立尝试，随后按需深入各知识点和原课测验。小节可以自由切换，支持展开全文。</p></header>
+<section class="cs-course"><aside class="cs-path" aria-label="本课学习路径"><strong>本课学习路径</strong><ol><li><a href="#cs-core">01 / 把背诵变成能复现的步骤</a></li><li><a href="#cs-transfer">02 / 把复习任务写具体</a></li><li><a href="#cs-detail-1">03 / 简答题分组表</a></li><li><a href="#cs-detail-2">04 / 14 天背诵打卡表</a></li><li><a href="#cs-detail-3">05 / 从复习题归纳的应用题代码模板</a></li><li><a href="#cs-detail-4">06 / 先回忆，再自测</a></li><li><a href="#cs-practice">07 / 测验（点击选项作答）</a></li><li><a href="#cs-detail-6">08 / 参考资料</a></li></ol></aside><section class="cs-content"><section id="cs-core" data-cs-step><h2 tabindex="-1">把背诵变成能复现的步骤</h2><p class="cs-goal">这一节要学会：能把一个模板拆成前提、步骤、边界检查，并闭卷补全。</p><p>复习像检查工具箱：不仅要认出工具，还要能在需要时取出来用。看见答案觉得熟悉，与合上资料能写出来，是两种不同证据。</p><p>每个模板用三栏复习：适用前提是什么、核心步骤是什么、如何用小例子检查。先闭卷写，再对照纠正，最后换输入重做。原课的分组表用于安排范围，下面演示如何处理一个具体薄弱点。</p><p>以单链表插入为例，先确认已知前驱且新节点有效，再回忆先接后继、后接前驱的顺序。若只会背两句却解释不出逆序后果，应返回第 <code>15</code> 课的连接演示。</p><section data-cs-lab="core"></section><details class="cs-trace-transcript"><summary>查看完整过程，逐步核对</summary><h3>第 1 步</h3><pre><code>闭卷写：把 X 插入 A 与 B 之间</code></pre><p>已知：p→A，s→X；目标：A→X→B</p><p>先把对象关系写出来，避免机械背变量名。</p><h3>第 2 步</h3><pre><code>补第一句：s-&gt;next = p-&gt;next;</code></pre><p>保存的后继：B</p><p>指出为什么要先保存 B，而不是先改 A。</p><h3>第 3 步</h3><pre><code>补第二句：p-&gt;next = s;</code></pre><p>结果：A→X→B</p><p>再检查从头能否遍历到所有应保留节点。</p><h3>第 4 步</h3><pre><code>换成表尾插入，再闭卷重写</code></pre><p>原后继：NULL；结果：A→X→NULL</p><p>换一个边界例子，验证自己掌握的是规则。</p></details><section data-cs-check="core"></section><details class="cs-check-answer"><summary>核对判断与理由</summary><p>哪种证据更能说明模板已掌握？</p><ol><li>看答案很熟悉：熟悉感不能证明能独立提取。</li><li>换变量和边界后能独立写出并解释：对。可复现的操作和解释更直接。</li><li>把答案收藏起来：收藏是管理资料，不等于完成练习。</li></ol><p>正确判断：换变量和边界后能独立写出并解释</p></details></section>
+<section id="cs-transfer" data-cs-step><h2 tabindex="-1">把复习任务写具体</h2><p class="cs-goal">先独立写出过程，再核对理由。遇到卡点可以回上一小节重走。</p><p class="cs-task">不看答案补全：<code>for(i=1;i&lt;n;i++){ key=a[i]; j=i-1; while(j&gt;=0 &amp;&amp; a[j]&gt;key){ ____; j--; } a[j+1]=key; }</code>。</p><details><summary>卡住时看提示</summary><p><code>key</code> 已保存待插入值；把当前较大的 <code>a[j]</code> 复制到它右边的空位。</p></details><details><summary>查看参考过程</summary><p>填 <code>a[j+1]=a[j];</code>，把比 <code>key</code> 大的元素右移。<code>key</code> 保存待插入值；<code>j&gt;=0</code> 放在 &amp;&amp; 左侧以避免访问 <code>a[-1]</code>。不熟悉时回第 <code>26</code> 课逐轮推演。</p></details><section data-cs-check="transfer"></section><details class="cs-check-answer"><summary>核对判断与理由</summary><p>复测仍然写反指针连接顺序，下一步最合适？</p><ol><li>只再读一遍整章：可以复习，但不定位断点往往难以知道改好了没有。</li><li>回具体状态演示，找出第一处不同并换题重做：对。把“不会”缩小到可检查的一步，再验证修正。</li><li>直接标记已完成：完成状态应反映独立作答的证据。</li></ol><p>正确判断：回具体状态演示，找出第一处不同并换题重做</p></details></section>
+<section id="cs-detail-1" data-cs-step><h2 tabindex="-1">一、简答题分组表</h2>
+<p>按 题库/C语言数据结构-简答题 的章节结构，把 130 问合并成 6 组。组内题目来自同一章或相邻章，便于联想记忆。</p>
+
+<table>
+  <tr><th>组</th><th>章节</th><th>题量</th><th>最高频代表题</th><th>一句话关键词</th></tr>
+  <tr><td>A</td><td>C 语言概述 + 数据存储与运算</td><td>18</td><td>编译四步骤；C 程序特点；++a 与 a++；字符与字符串常量区别</td><td>步骤、扩展名、自增、'\0'</td></tr>
+  <tr><td>B</td><td>顺序/选择/循环 + 数组 + 函数</td><td>32</td><td>三种基本结构；9 种控制语句；while 与 do…while；数组名作函数参数</td><td>结构、控制、循环、传址</td></tr>
+  <tr><td>C</td><td>指针 + 结构体 + 文件</td><td>18</td><td>指针与指针变量；结构体和共用体的区别；文件指针好处；数据文件有哪些类型</td><td>地址、->、FILE、文本/二进制</td></tr>
+  <tr><td>D</td><td>数据结构绪论 + 算法与复杂度 + 线性表 + 栈队列 + 串数组广义表</td><td>26</td><td>数据结构三方面；算法五特性；顺序表与链表区别；栈队列异同；循环队列长度公式</td><td>逻辑/存储/运算、复杂度、FIFO/LIFO</td></tr>
+  <tr><td>E</td><td>树 + 图</td><td>19</td><td>满/完全/BST/平衡二叉树；树转二叉树；BFS 与 DFS；Prim/Kruskal；Dijkstra/Floyd</td><td>度 2、左孩子右兄弟、遍历、生成树</td></tr>
+  <tr><td>F</td><td>散列 + 堆 + 排序</td><td>17</td><td>排序稳定性；插入/交换/选择类小结；归并/基数；外部排序；散列冲突处理</td><td>稳定、堆、归并、冲突</td></tr>
+</table>
+
+<div class="callout tip">
+  <p class="callout-title">背诵技巧</p>
+  <p>每组只背<strong>代表题</strong>，其余题目用代表题「带」过去。例如 D 组里「顺序表与链表区别」和「头指针头结点区别」可以互推，背熟一个，另一个用自己的话补全即可。</p>
+</div>
+
+<details><summary>本课目标与前置回顾</summary>
+
 
 <div class="goal">
   <p class="goal-title">学完这节课，你能做到：</p>
@@ -44,25 +67,8 @@
   <p>指针章【三】【五】课件、数组章【二】课件为真实缺口（笔记中已标注）。若简答题涉及这些缺口，请回到教材原文补全，不要凭记忆编代码细节。</p>
 </div>
 
-<h2>一、简答题分组表</h2>
-<p>按 题库/C语言数据结构-简答题 的章节结构，把 130 问合并成 6 组。组内题目来自同一章或相邻章，便于联想记忆。</p>
-
-<table>
-  <tr><th>组</th><th>章节</th><th>题量</th><th>最高频代表题</th><th>一句话关键词</th></tr>
-  <tr><td>A</td><td>C 语言概述 + 数据存储与运算</td><td>18</td><td>编译四步骤；C 程序特点；++a 与 a++；字符与字符串常量区别</td><td>步骤、扩展名、自增、'\0'</td></tr>
-  <tr><td>B</td><td>顺序/选择/循环 + 数组 + 函数</td><td>32</td><td>三种基本结构；9 种控制语句；while 与 do…while；数组名作函数参数</td><td>结构、控制、循环、传址</td></tr>
-  <tr><td>C</td><td>指针 + 结构体 + 文件</td><td>18</td><td>指针与指针变量；结构体和共用体的区别；文件指针好处；数据文件有哪些类型</td><td>地址、->、FILE、文本/二进制</td></tr>
-  <tr><td>D</td><td>数据结构绪论 + 算法与复杂度 + 线性表 + 栈队列 + 串数组广义表</td><td>26</td><td>数据结构三方面；算法五特性；顺序表与链表区别；栈队列异同；循环队列长度公式</td><td>逻辑/存储/运算、复杂度、FIFO/LIFO</td></tr>
-  <tr><td>E</td><td>树 + 图</td><td>19</td><td>满/完全/BST/平衡二叉树；树转二叉树；BFS 与 DFS；Prim/Kruskal；Dijkstra/Floyd</td><td>度 2、左孩子右兄弟、遍历、生成树</td></tr>
-  <tr><td>F</td><td>散列 + 堆 + 排序</td><td>17</td><td>排序稳定性；插入/交换/选择类小结；归并/基数；外部排序；散列冲突处理</td><td>稳定、堆、归并、冲突</td></tr>
-</table>
-
-<div class="callout tip">
-  <p class="callout-title">背诵技巧</p>
-  <p>每组只背<strong>代表题</strong>，其余题目用代表题「带」过去。例如 D 组里「顺序表与链表区别」和「头指针头结点区别」可以互推，背熟一个，另一个用自己的话补全即可。</p>
-</div>
-
-<h2>二、14 天背诵打卡表</h2>
+</details></section>
+<section id="cs-detail-2" data-cs-step><h2 tabindex="-1">二、14 天背诵打卡表</h2>
 <p>间隔重复的核心：第 1 天学，第 2、4、7、15 天回忆。下面把 6 组 stagger（错峰）启动，保证每天任务量可控。表中 <strong>L</strong> = 学习（首次背诵），<strong>R</strong> = 回忆（合上笔记口述）。</p>
 
 <table>
@@ -77,7 +83,8 @@
 
 <p>第 15 天为总复习日：把 A、C、E 三组中标记过的 ⭐️ 错题再快速过一遍。若某天任务太重，可以把当天的 <strong>R</strong> 挪到前后 1 天内完成，但不要把同一组的两次回忆连续跳过。</p>
 
-<h2>三、从复习题归纳的应用题代码模板</h2>
+</section>
+<section id="cs-detail-3" data-cs-step><h2 tabindex="-1">三、从复习题归纳的应用题代码模板</h2>
 <p>复习题一二三的应用题反复出现三类骨架：<strong>链表插删</strong>、<strong>排序</strong>、<strong>遍历</strong>。下面给出可直接默写的模板，代码细节与 数组、指针、结构体 笔记一致。</p>
 
 <h3>3.1 链表插入与删除</h3>
@@ -138,7 +145,8 @@ p->next = q->next;   /* 让 p 直接指向 q 的后继 */
   <p>拿到应用题先拆三段：<strong>输入</strong>（scanf / getchar / 初始化数组）→ <strong>处理</strong>（遍历 + 判断/累加/交换）→ <strong>输出</strong>（printf）。把这三段写出来，代码主体结构就不会丢分。</p>
 </div>
 
-<h2>四、先回忆，再自测</h2>
+</section>
+<section id="cs-detail-4" data-cs-step><h2 tabindex="-1">四、先回忆，再自测</h2>
 
 <details class="recall">
   <summary>合上笔记：什么是数据结构？涉及哪几个方面？</summary>
@@ -155,7 +163,8 @@ p->next = q->next;   /* 让 p 直接指向 q 的后继 */
   <div class="recall-a">相同点：都是操作受限的线性表。不同点：栈只能在一端（栈顶）插入和删除，先进后出；队列在一端（队尾）插入、另一端（队头）删除，先进先出。</div>
 </details>
 
-<h2>五、测验（点击选项作答）</h2>
+</section>
+<section id="cs-practice" data-cs-step><h2 tabindex="-1">五、测验（点击选项作答）</h2>
 
 <div class="quiz" data-answer="b">
   <p class="quiz-q">1. 按照 14 天打卡表，第 4 天需要对哪些组进行回忆？</p>
@@ -236,11 +245,14 @@ p->next = q->next;   /* 让 p 直接指向 q 的后继 */
   <p>③ 代码模板练习：用「数组遍历」模板复现 复习题一 应用题 3（求大于平均值的个数）；用「字符流遍历」模板复现 复习题二 应用题 2（字符分类统计）。写完后对照原题参考代码修正。</p>
 </div>
 
-<h2>参考资料</h2>
+</section>
+<section id="cs-detail-6" data-cs-step><h2 tabindex="-1">参考资料</h2>
 <p>首选精读：题库/C语言数据结构-简答题（共 130 问，考前背诵主战场）。应用题对照：复习题一、复习题二、复习题三。术语速查：<a href="../reference/glossary.html">课程术语表</a>；C 语法速查：<a href="../reference/c-syntax-cheatsheet.html">C 语法速查表</a>；数据结构公式速查：<a href="../reference/ds-formula-cheatsheet.html">数据结构公式表</a>。</p>
 
 <div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以帮你改背诵计划、解释某道简答为什么这样答，也可以针对你标 ⭐️ 的题再出几道同类题。</div>
 
+</section></section></section>
+<script type="application/json" id="cs-course-data">{"version":1,"storageKey":"zhixu:cs-course:27:1","stepIds":["cs-core","cs-transfer","cs-detail-1","cs-detail-2","cs-detail-3","cs-detail-4","cs-practice","cs-detail-6"],"checks":{"core":{"question":"哪种证据更能说明模板已掌握？","choices":["看答案很熟悉","换变量和边界后能独立写出并解释","把答案收藏起来"],"answer":1,"why":["熟悉感不能证明能独立提取。","对。可复现的操作和解释更直接。","收藏是管理资料，不等于完成练习。"]},"transfer":{"question":"复测仍然写反指针连接顺序，下一步最合适？","choices":["只再读一遍整章","回具体状态演示，找出第一处不同并换题重做","直接标记已完成"],"answer":1,"why":["可以复习，但不定位断点往往难以知道改好了没有。","对。把“不会”缩小到可检查的一步，再验证修正。","完成状态应反映独立作答的证据。"]}},"traces":{"core":{"title":"一次有证据的模板复习","frames":[{"code":"闭卷写：把 X 插入 A 与 B 之间","cells":[["已知","p→A，s→X"],["目标","A→X→B"]],"note":"先把对象关系写出来，避免机械背变量名。","pointer":""},{"code":"补第一句：s->next = p->next;","cells":[["保存的后继","B"]],"note":"指出为什么要先保存 B，而不是先改 A。","pointer":""},{"code":"补第二句：p->next = s;","cells":[["结果","A→X→B"]],"note":"再检查从头能否遍历到所有应保留节点。","pointer":""},{"code":"换成表尾插入，再闭卷重写","cells":[["原后继","NULL"],["结果","A→X→NULL"]],"note":"换一个边界例子，验证自己掌握的是规则。","pointer":""}]}},"signature":"962d6a242b7fc492"}</script>
 <nav class="footer-nav">
   <a href="0026-sorting.html">← 上一课：排序算法对比与选择</a>
   <a href="0028-mock-exam-2025.html">下一课：2025 年真题模拟 →</a>

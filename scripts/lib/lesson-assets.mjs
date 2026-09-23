@@ -86,7 +86,10 @@ export function installLessonRuntime(courseRoot, slug) {
 export function installLearningAssets(publicRoot) {
   const dest = path.join(publicRoot, 'learning')
   fs.mkdirSync(dest, { recursive: true })
-  for (const file of ['learning-tokens.css', 'lesson-shell.css', 'lesson-shell.mjs', 'reading-state.mjs', 'study-state.mjs', 'lesson-session.mjs', 'study-session.css', 'mistake-store.mjs', 'lesson-mistakes.mjs', 'question-markup.mjs', 'learning-guide.mjs', 'learning-guide.css', 'teaching-flow.mjs', 'teaching-flow.css']) {
+  for (const file of ['cs-pointer.css', 'cs-pointer.mjs']) {
+    fs.copyFileSync(new URL(`../runtime/${file}`, import.meta.url), path.join(dest, file))
+  }
+  for (const file of ['learning-tokens.css', 'lesson-shell.css', 'lesson-shell.mjs', 'reading-state.mjs', 'study-state.mjs', 'lesson-session.mjs', 'study-session.css', 'mistake-store.mjs', 'lesson-mistakes.mjs', 'question-markup.mjs', 'learning-guide.mjs', 'learning-guide.css', 'teaching-flow.mjs', 'teaching-flow.css', 'guided-section.mjs', 'guided-state.mjs']) {
     fs.copyFileSync(new URL(`../runtime/${file}`, import.meta.url), path.join(dest, file))
   }
 }

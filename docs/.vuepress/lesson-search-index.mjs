@@ -3220,19 +3220,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解（第 1—14 题） （建议 40 分钟）"
+              "heading": "第一部分 · 阅读理解（第 1—14 题） （建议 40 分钟）",
+              "href": "#paper-1"
             },
             {
-              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）"
+              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 20 分钟）"
+              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 20 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）"
+              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）"
+              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3248,19 +3253,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解（第 1—15 题） （建议 40 分钟）"
+              "heading": "第一部分 · 阅读理解（第 1—15 题） （建议 40 分钟）",
+              "href": "#paper-1"
             },
             {
-              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）"
+              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 20 分钟）"
+              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 20 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）"
+              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）"
+              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3276,19 +3286,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解（第 1—15 题） （建议 40 分钟）"
+              "heading": "第一部分 · 阅读理解（第 1—15 题） （建议 40 分钟）",
+              "href": "#paper-1"
             },
             {
-              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）"
+              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 20 分钟）"
+              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 20 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）"
+              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）"
+              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3304,19 +3319,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解（第 1—15 题） （建议 35 分钟）"
+              "heading": "第一部分 · 阅读理解（第 1—15 题） （建议 35 分钟）",
+              "href": "#paper-1"
             },
             {
-              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）"
+              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 25 分钟）"
+              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 25 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）"
+              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）"
+              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3332,19 +3352,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解（第 1—15 题） （建议 35 分钟）"
+              "heading": "第一部分 · 阅读理解（第 1—15 题） （建议 35 分钟）",
+              "href": "#paper-1"
             },
             {
-              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）"
+              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 25 分钟）"
+              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 25 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）"
+              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）"
+              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3360,19 +3385,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解（第 1—15 题） （建议 35 分钟）"
+              "heading": "第一部分 · 阅读理解（第 1—15 题） （建议 35 分钟）",
+              "href": "#paper-1"
             },
             {
-              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）"
+              "heading": "第二部分 · 五选五（第 16—20 题） （建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 25 分钟）"
+              "heading": "第三部分 · 完形填空（第 21—35 题） （建议 25 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）"
+              "heading": "第四部分 · 语法填空（第 36—45 题） （建议 15 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）"
+              "heading": "第五部分 · 写作（第 46 题） （建议 35 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3388,7 +3418,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）"
+              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）",
+              "href": "#paper-1"
             },
             {
               "heading": "Passage A（第 1—5 题）"
@@ -3400,16 +3431,20 @@ export const lessonSearchIndex = {
               "heading": "Passage C（第 11—15 题）"
             },
             {
-              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）"
+              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）"
+              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）"
+              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）"
+              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3425,7 +3460,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）"
+              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）",
+              "href": "#paper-1"
             },
             {
               "heading": "Passage A（第 1—5 题）"
@@ -3437,16 +3473,20 @@ export const lessonSearchIndex = {
               "heading": "Passage C（第 11—15 题）"
             },
             {
-              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）"
+              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）"
+              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）"
+              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）"
+              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3462,7 +3502,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）"
+              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）",
+              "href": "#paper-1"
             },
             {
               "heading": "Passage A（第 1—5 题）"
@@ -3474,16 +3515,20 @@ export const lessonSearchIndex = {
               "heading": "Passage C（第 11—15 题）"
             },
             {
-              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）"
+              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）"
+              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）"
+              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）"
+              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3499,7 +3544,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）"
+              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）",
+              "href": "#paper-1"
             },
             {
               "heading": "Passage A（第 1—5 题）"
@@ -3511,16 +3557,20 @@ export const lessonSearchIndex = {
               "heading": "Passage C（第 11—15 题）"
             },
             {
-              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）"
+              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）"
+              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）"
+              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）"
+              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3536,7 +3586,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）"
+              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）",
+              "href": "#paper-1"
             },
             {
               "heading": "Passage A（第 1—5 题）"
@@ -3548,16 +3599,20 @@ export const lessonSearchIndex = {
               "heading": "Passage C（第 11—15 题）"
             },
             {
-              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）"
+              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）"
+              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）"
+              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）"
+              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）",
+              "href": "#paper-5"
             }
           ]
         },
@@ -3573,7 +3628,8 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）"
+              "heading": "第一部分 · 阅读理解 （第 1—15 题 · 建议 40 分钟）",
+              "href": "#paper-1"
             },
             {
               "heading": "Passage A（第 1—5 题）"
@@ -3585,16 +3641,20 @@ export const lessonSearchIndex = {
               "heading": "Passage C（第 11—15 题）"
             },
             {
-              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）"
+              "heading": "第二部分 · 五选五 （第 16—20 题 · 建议 10 分钟）",
+              "href": "#paper-2"
             },
             {
-              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）"
+              "heading": "第三部分 · 完形填空 （第 21—35 题 · 建议 20 分钟）",
+              "href": "#paper-3"
             },
             {
-              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）"
+              "heading": "第四部分 · 语法填空 （第 36—45 题 · 建议 10 分钟）",
+              "href": "#paper-4"
             },
             {
-              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）"
+              "heading": "第五部分 · 写作 （第 46 题 · 建议 30 分钟）",
+              "href": "#paper-5"
             },
             {
               "heading": "附 · 考前提醒 （课件第 26 页）"
@@ -5822,6 +5882,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "从源代码到运行结果"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、四步骤与三个扩展名"
             },
             {
@@ -5849,6 +5927,24 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0002-data-representation.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "一串位怎样表示数"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、存储单位：bit 与 Byte"
             },
@@ -5905,6 +6001,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "把表达式拆成类型、运算和赋值"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、优先级：先记骨架，再记右结合"
             },
             {
@@ -5948,6 +6062,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "把输入、格式串、目标变量对齐"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、printf 格式输出"
             },
             {
@@ -5978,6 +6110,24 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0005-selection-basics.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "条件决定哪条路径真的执行"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、关系与逻辑表达式：值只有 0 或 1"
             },
@@ -6013,6 +6163,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "switch：入口与出口分开看"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、嵌套 if-else 与 else 配对"
             },
             {
@@ -6047,6 +6215,27 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "循环每轮都要记录状态"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "第 5 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、while 与 do-while：先判还是先执行"
             },
             {
@@ -6080,6 +6269,21 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0008-arrays-and-strings.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "字符数组里还要留一个结束标志"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、一维数组：定义、初始化与数组名"
             },
@@ -6118,6 +6322,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "函数收到的是参数的副本"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、定义与调用"
             },
             {
@@ -6152,6 +6374,27 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "递归先下去，再带着结果回来"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "第 5 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、数组名作参数：不是复制，是共享同一片内存"
             },
             {
@@ -6180,37 +6423,46 @@ export const lessonSearchIndex = {
         {
           "id": "11",
           "label": "第 11 课",
-          "title": "指针基础与一维数组",
+          "title": "指针，先弄清它指向哪里。",
           "group": "",
           "kind": "lesson",
-          "kindLabel": "概念课",
+          "kindLabel": "课程",
           "readingHref": "/courses/zsb-cs/l/11/",
           "interactiveHref": "/lessons/zsb-cs/lessons/0011-pointers-basics.html",
           "aliases": [],
           "chapterHits": [
             {
-              "heading": "一、指针变量：存地址的变量"
+              "heading": "01 / 变量、地址与指针"
             },
             {
-              "heading": "二、指针与一维数组"
+              "heading": "先把内存想成有编号的储物格"
             },
             {
-              "heading": "2.1 地址与元素的等价关系"
+              "heading": "02 / 改值，还是改指向"
             },
             {
-              "heading": "2.2 用指针遍历数组"
+              "heading": "03 / 指针怎样走过数组"
             },
             {
-              "heading": "三、三种 swap 辨析"
+              "heading": "再看一个完整循环"
             },
             {
-              "heading": "四、*p++ / *++p / (*p)++ 辨析"
+              "heading": "04 / 看懂三个自增表达式"
             },
             {
-              "heading": "五、先回忆，再自测"
+              "heading": "05 / 为什么 swap 要用指针"
             },
             {
-              "heading": "六、测验（点击选项作答）"
+              "heading": "为什么另外两种写法不行？"
+            },
+            {
+              "heading": "06 / 换一道题自己做"
+            },
+            {
+              "heading": "把它变成能运行的程序"
+            },
+            {
+              "heading": "07 / 原课测验与复习"
             },
             {
               "heading": "参考资料"
@@ -6228,6 +6480,21 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0012-pointers-advanced.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "二维数组的指针每次跨过一行"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、二维数组：降维寻址"
             },
@@ -6259,6 +6526,24 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0013-structs-and-files.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "先看对象，再看访问路径"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、结构体：声明、定义与初始化"
             },
@@ -6294,6 +6579,27 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "先数执行次数，再谈增长速度"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "第 5 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、五个必须精确的概念"
             },
             {
@@ -6327,6 +6633,21 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0015-linear-list.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "链表插入为什么先接后面"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、线性表的本质：逻辑结构"
             },
@@ -6371,6 +6692,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "循环队列里的下标会绕回起点"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、栈与队列的核心对比"
             },
             {
@@ -6407,6 +6746,24 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0017-array-matrix-glist.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "二维地址公式就是先数前面有几个元素"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、数组地址计算：先定顺序，再数元素"
             },
@@ -6454,6 +6811,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "子串必须连续，计数要说明口径"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、串的定义与三个基本概念"
             },
             {
@@ -6487,6 +6862,24 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0019-tree-basics.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "先数同一棵树，再理解性质"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、树的术语：先对齐名词"
             },
@@ -6527,6 +6920,27 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0020-binary-tree-traversal.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "遍历的区别在于何时访问根"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "第 5 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、四种遍历的口诀"
             },
@@ -6571,6 +6985,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "左孩子右兄弟：同一条边换了含义"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、树 → 二叉树：左孩子、右兄弟"
             },
             {
@@ -6614,6 +7046,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "哈夫曼树每次合并当前最小的两棵"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、赫夫曼树的构造：每次取最小的两棵合并"
             },
             {
@@ -6647,6 +7097,27 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0023-graph-basics-traversal.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "BFS 的队列记录接下来访问谁"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "第 5 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、图的基本概念：G=(V, E)"
             },
@@ -6691,6 +7162,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "最短路径先分清已确定与暂定距离"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
+            {
               "heading": "一、最小生成树：Prim 加点法与 Kruskal 选边法"
             },
             {
@@ -6727,6 +7216,21 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0025-searching.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "折半查找每次排除哪一半"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、ASL 与顺序查找"
             },
@@ -6773,6 +7277,27 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0026-sorting.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "排序时看清已排序区与移动方向"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "第 5 步"
+            },
+            {
+              "heading": "换个例子，自己试一次"
+            },
             {
               "heading": "一、基本概念与稳定性"
             },
@@ -6832,6 +7357,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "把背诵变成能复现的步骤"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "把复习任务写具体"
+            },
+            {
               "heading": "一、简答题分组表"
             },
             {
@@ -6872,6 +7415,24 @@ export const lessonSearchIndex = {
           "aliases": [],
           "chapterHits": [
             {
+              "heading": "模拟先记录过程，结束后再补知识"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "把复习任务写具体"
+            },
+            {
               "heading": "一、考试须知"
             },
             {
@@ -6911,6 +7472,24 @@ export const lessonSearchIndex = {
           "interactiveHref": "/lessons/zsb-cs/lessons/0029-mock-exam-2024.html",
           "aliases": [],
           "chapterHits": [
+            {
+              "heading": "用第二次模拟检验上次修正"
+            },
+            {
+              "heading": "第 1 步"
+            },
+            {
+              "heading": "第 2 步"
+            },
+            {
+              "heading": "第 3 步"
+            },
+            {
+              "heading": "第 4 步"
+            },
+            {
+              "heading": "把复习任务写具体"
+            },
             {
               "heading": "一、考试须知"
             },

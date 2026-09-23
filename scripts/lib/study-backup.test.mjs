@@ -42,6 +42,23 @@ class MemoryStorage {
 }
 
 const base = '/blog/'
+test('CS learning backup round-trips pointer and course states, rejects malformed payloads', () => {
+  const state = { version: 1, step: 'cs-core', answers: { core: { choice: 1, submitted: true } }, labs: { core: 2 }, signature: 'abcd', updatedAt: 1000 }
+  const keys = ['zhixu:cs-pointer:1', 'zhixu:cs-course:7:1', 'zhixu:cs-course:29:1']
+  const storage = new MemoryStorage(Object.fromEntries(keys.map(key => [key, JSON.stringify(state)])))
+  const exported = createStudyBackup(storage, { base, now: 2000 })
+  assert.equal(exported.skipped.length, 0)
+  const restored = new MemoryStorage()
+  assert.equal(applyStudyImport(exported.backup, restored, { base }).applied, true)
+  for (const key of keys) assert.deepEqual(JSON.parse(restored.getItem(key)), state)
+  assert.equal(isAllowedStudyKey('zhixu:cs-course:30:1'), false)
+  assert.equal(isAllowedStudyKey('zhixu:cs-course:../7:1'), false)
+  const invalid = structuredClone(exported.backup)
+  invalid.records[keys[0]].answers.core.choice = -1
+  assert.equal(validateStudyBackup(invalid, { base }).valid, false)
+  invalid.records[keys[0]] = { ...state, step: '__proto__' }
+  assert.equal(validateStudyBackup(invalid, { base }).valid, false)
+})
 const answerPath = (slug, name) => `${base}lessons/${slug}/lessons/${name}.html`
 
 function allStudyValues() {

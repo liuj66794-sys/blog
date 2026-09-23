@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html data-study-shell lang="zh-CN">
+<html data-study-shell data-cs-pointer="1" data-cs-course="1" lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 3 课 · 运算符与表达式</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="stylesheet" data-cs-asset href="/blog/learning/cs-pointer.css?v=c79323ac8166">
+<script type="module" data-cs-asset src="/blog/learning/cs-pointer.mjs?v=c79323ac8166"></script>
 <link rel="icon" type="image/png" href="/blog/brand/zhixu-mark.png">
 <script data-study-appearance>try{var a=localStorage.getItem('vuepress-theme-appearance');document.documentElement.dataset.theme=a==='dark'||((a!=='light')&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}</script><link rel="stylesheet" href="/blog/learning/learning-tokens.css"><link rel="stylesheet" href="/blog/learning/lesson-shell.css"><script type="module" src="/blog/learning/lesson-shell.mjs" data-study-base="/blog/" data-exam-date="2027-03-27"></script>
 </head>
@@ -17,8 +19,24 @@
   <span>第 3 课 / 共 29 课</span>
 </nav>
 
-<h1>运算符与表达式</h1>
-<p class="lesson-meta">对应笔记 C语言/02-数据存储与运算 §7 · 教材 P55–64 · 约 15 分钟</p>
+<header class="cs-intro"><p class="cs-eyebrow">计算机 · 逐步理解</p><h1>运算符与表达式</h1><p class="lesson-meta">对应笔记 C语言/02-数据存储与运算 §7 · 教材 P55–64 · 建议按小节分次学习</p><p>能解释为什么把整数除法结果存进 double 也不能补回小数。</p><p class="cs-interactive-note">先看核心过程，再独立尝试，随后按需深入各知识点和原课测验。小节可以自由切换，支持展开全文。</p></header>
+<section class="cs-course"><aside class="cs-path" aria-label="本课学习路径"><strong>本课学习路径</strong><ol><li><a href="#cs-core">01 / 把表达式拆成类型、运算和赋值</a></li><li><a href="#cs-transfer">02 / 换个例子，自己试一次</a></li><li><a href="#cs-detail-1">03 / 优先级：先记骨架，再记右结合</a></li><li><a href="#cs-detail-2">04 / 算术运算符：/ 整除、% 取余、++ 自增</a></li><li><a href="#cs-detail-3">05 / 类型转换：混合运算、强制转换与赋值转换</a></li><li><a href="#cs-detail-4">06 / 赋值与复合赋值【必考】</a></li><li><a href="#cs-detail-5">07 / 逗号表达式</a></li><li><a href="#cs-detail-6">08 / 先回忆，再自测</a></li><li><a href="#cs-practice">09 / 测验（点击选项作答）</a></li><li><a href="#cs-detail-8">10 / 参考资料</a></li></ol></aside><section class="cs-content"><section id="cs-core" data-cs-step><h2 tabindex="-1">把表达式拆成类型、运算和赋值</h2><p class="cs-goal">这一节要学会：能解释为什么把整数除法结果存进 double 也不能补回小数。</p><p>像把已经切掉的小数部分放进更大的盒子：盒子变大不会把丢掉的内容找回来。表达式先按操作数类型计算，之后才转换成目标变量的类型。</p><p><code>7</code> 和 <code>2</code> 都是 <code>int</code>，<code>7/2</code> 得到整数 <code>3</code>；赋给 <code>double</code> 后是 <code>3.0</code>。只要其中一个操作数先成为 <code>double</code>，例如 <code>7.0/2</code>，除法才得到 <code>3.5</code>。整数除法向零截断；余数 % 用于整数操作数。</p><p>优先级决定表达式怎样分组，不等于操作数总按从左到右求值。学习时先给表达式加括号，再标各子表达式类型；不要用含有未排序的重复自增表达式来猜一个“唯一答案”。</p><section data-cs-lab="core"></section><details class="cs-trace-transcript"><summary>查看完整过程，逐步核对</summary><h3>第 1 步</h3><pre><code>double a = 7 / 2;</code></pre><p>7 / 2：int: 3；a：3.0</p><p>除法发生在赋值之前，两边都是整数。</p><h3>第 2 步</h3><pre><code>double b = 7.0 / 2;</code></pre><p>7.0 / 2：double: 3.5；b：3.5</p><p>2 转换后参与浮点运算。</p><h3>第 3 步</h3><pre><code>double c = (double)(7 / 2);</code></pre><p>先除：3；c：3.0</p><p>外层强制转换发生得太晚。</p><h3>第 4 步</h3><pre><code>double d = (double)7 / 2;</code></pre><p>先转：7.0；d：3.5</p><p>先改变操作数类型，再计算除法。</p></details><section data-cs-check="core"></section><details class="cs-check-answer"><summary>核对判断与理由</summary><p><code>double x = 5 / 2;</code> 的 <code>x</code> 是？</p><ol><li><code>2.5</code>：先做整数除法，小数部分已截去。</li><li><code>2.0</code>：对。整数结果 <code>2</code> 转成 <code>double</code> 得到 <code>2.0</code>。</li><li>无法赋值：<code>int</code> 可以转换成 <code>double</code>，这不是类型错误。</li></ol><p>正确判断：<code>2.0</code></p></details></section>
+<section id="cs-transfer" data-cs-step><h2 tabindex="-1">换个例子，自己试一次</h2><p class="cs-goal">先独立写出过程，再核对理由。遇到卡点可以回上一小节重走。</p><p class="cs-task">把 <code>int a=5, b=2; double avg=a/b;</code> 改成保留小数的表达式，并说明转换应放在哪里。</p><details><summary>卡住时看提示</summary><p>沿着赋值右侧读：在除法开始前，至少让一个操作数先成为 <code>double</code>。</p></details><details><summary>查看参考过程</summary><p>写 <code>double avg=(double)a/b;</code>。先把 <code>a</code> 转成 <code>double</code>，再做除法得到 <code>2.5</code>。写 <code>(double)(a/b)</code> 只能把已经得到的 <code>2</code> 转成 <code>2.0</code>。</p></details><section data-cs-check="transfer"></section><details class="cs-check-answer"><summary>核对判断与理由</summary><p>哪种写法在除法前完成转换？</p><ol><li><code>(double)(a/b)</code>：括号里的整数除法已经完成。</li><li><code>(double)a/b</code>：对。转换只作用于 <code>a</code>，随后参与浮点除法。</li><li><code>double avg=a/b</code>：目标变量类型不会倒过来改变右侧运算。</li></ol><p>正确判断：<code>(double)a/b</code></p></details></section>
+<section id="cs-detail-1" data-cs-step><h2 tabindex="-1">一、优先级：先记骨架，再记右结合</h2>
+<p>15 级优先级不必逐级死背，先背这条<strong>骨架链</strong>（高 → 低）：</p>
+<p style="text-align:center;font-weight:bold;">括号/下标 &gt; 单目 &gt; 算术 &gt; 移位 &gt; 关系 &gt; 位（与&gt;异或&gt;或）&gt; 逻辑 &gt; 条件 &gt; 赋值 &gt; 逗号</p>
+<p>两条使用规则：</p>
+<ul>
+  <li><strong>不同优先级</strong>看级别——级别高的先算；</li>
+  <li><strong>相同优先级</strong>看结合方向——绝大多数从左至右（如 <code>5+6-2 = (5+6)-2</code>）。</li>
+</ul>
+<div class="callout warn">
+  <p class="callout-title">只有三种结合方向是「从右至左」</p>
+  <p>① 单目运算符（<code>! ~ ++ -- - (类型) * &amp; sizeof</code>，2 级）；② 条件 <code>?:</code>（13 级）；③ 赋值与复合赋值（14 级）。选择题问「右结合的运算符」就从这三档里找。2025 真题第 18 题：<code>~</code> 是 2 级单目，优先级高于 <code>/</code>、<code>&lt;&lt;</code>、<code>&amp;&amp;</code>。</p>
+</div>
+
+<details><summary>本课目标与前置回顾</summary>
+
 
 <div class="goal">
   <p class="goal-title">学完这节课，你能做到：</p>
@@ -39,20 +57,8 @@
   <p>上一课的数制与补码是「数据怎么存」，这一课是「数据怎么算」——第二章的 <strong>§7 是全章最重的一节（★★★★★）</strong>。2025 真题卷第 2、13、18 题全部出自这里：表达式求值、<code>a+=a-=a*a</code>、优先级最高的运算符。</p>
 </div>
 
-<h2>一、优先级：先记骨架，再记右结合</h2>
-<p>15 级优先级不必逐级死背，先背这条<strong>骨架链</strong>（高 → 低）：</p>
-<p style="text-align:center;font-weight:bold;">括号/下标 &gt; 单目 &gt; 算术 &gt; 移位 &gt; 关系 &gt; 位（与&gt;异或&gt;或）&gt; 逻辑 &gt; 条件 &gt; 赋值 &gt; 逗号</p>
-<p>两条使用规则：</p>
-<ul>
-  <li><strong>不同优先级</strong>看级别——级别高的先算；</li>
-  <li><strong>相同优先级</strong>看结合方向——绝大多数从左至右（如 <code>5+6-2 = (5+6)-2</code>）。</li>
-</ul>
-<div class="callout warn">
-  <p class="callout-title">只有三种结合方向是「从右至左」</p>
-  <p>① 单目运算符（<code>! ~ ++ -- - (类型) * &amp; sizeof</code>，2 级）；② 条件 <code>?:</code>（13 级）；③ 赋值与复合赋值（14 级）。选择题问「右结合的运算符」就从这三档里找。2025 真题第 18 题：<code>~</code> 是 2 级单目，优先级高于 <code>/</code>、<code>&lt;&lt;</code>、<code>&amp;&amp;</code>。</p>
-</div>
-
-<h2>二、算术运算符：/ 整除、% 取余、++ 自增</h2>
+</details></section>
+<section id="cs-detail-2" data-cs-step><h2 tabindex="-1">二、算术运算符：/ 整除、% 取余、++ 自增</h2>
 <h3>2.1 除法 <code>/</code> 与取余 <code>%</code></h3>
 <table>
   <tr><th>规则</th><th>例</th></tr>
@@ -71,14 +77,16 @@
 <p>例：i=10 时，<code>int a = i++;</code> → a=10，i=11；<code>int a = ++i;</code> → a=11，i=11。<br>
 c 语言例：a=3, b=9 时 <code>c = b/++a</code> → a 先变 4，c = 9/4 = <strong>2</strong>。</p>
 
-<h2>三、类型转换：混合运算、强制转换与赋值转换</h2>
+</section>
+<section id="cs-detail-3" data-cs-step><h2 tabindex="-1">三、类型转换：混合运算、强制转换与赋值转换</h2>
 <ul>
   <li><strong>混合运算</strong>：操作数中有 float/double → 结果为 double；<code>30+2.5*3-1/2</code> = 30+7.5-0 = <strong>37.5</strong>；<code>'A'+3</code> = 68（char 按 ASCII 参与运算，68 是 <code>'D'</code>）。</li>
   <li><strong>强制转换</strong> <code>(类型)(表达式)</code>：优先级 2（单目），<code>(int)x+y</code> 只转 x。<strong>不改变变量原值</strong>：x=3.14 时 <code>(int)x</code> 这个整体的值是 3，x 仍是 3.14。真题：<code>((double)4/2)+2.5</code> = 2.0+2.5 = <strong>4.5</strong>。</li>
   <li><strong>赋值自动转换</strong>：实→整<strong>舍去小数</strong>（<code>int a=3.14</code> → a=3）；整→实补 0；char→int 放 ASCII 值。链式赋值：<code>d = b = c = a = 3.14;</code>（a、b 为 int）→ a=3, b=3, c=3.0, d=3.0。</li>
 </ul>
 
-<h2>四、赋值与复合赋值【必考】</h2>
+</section>
+<section id="cs-detail-4" data-cs-step><h2 tabindex="-1">四、赋值与复合赋值【必考】</h2>
 <ul>
   <li>赋值号<strong>左侧不可以是算式</strong>：<code>a+b=2</code>、<code>(a=b)=c</code>、<code>(a++)=8</code> 均不合法；</li>
   <li>赋值表达式<strong>本身也有值</strong>：<code>x=(a=1)+(b=3)</code> → x=4；</li>
@@ -90,7 +98,8 @@ c 语言例：a=3, b=9 时 <code>c = b/++a</code> → a 先变 4，c = 9/4 = <st
   同型题 n=2：<code>n += n -= n*n</code> → 先 2−4=−2，再 −2+(−2) = <strong>−4</strong>。2025 真题第 13 题同款：a=6 时结果为 −60。</p>
 </div>
 
-<h2>五、逗号表达式</h2>
+</section>
+<section id="cs-detail-5" data-cs-step><h2 tabindex="-1">五、逗号表达式</h2>
 <ul>
   <li>从左到右逐个计算，<strong>整体值 = 最后一个表达式的值</strong>：<code>a=(10,20,30)</code> → a=30；</li>
   <li>优先级<strong>最低</strong>（15 级）——<code>y = a=1, a+5, b=a+10</code> 里赋值优先级高于逗号，先算 <code>y = a=1</code>；</li>
@@ -98,7 +107,8 @@ c 语言例：a=3, b=9 时 <code>c = b/++a</code> → a 先变 4，c = 9/4 = <st
 </ul>
 <p>代数式转写两条硬规矩：乘号不能省（3a 写 <code>3*a</code>）；除法整体要括号（a÷(3+2) 写 <code>a/(3+2)</code>）。</p>
 
-<h2>六、先回忆，再自测</h2>
+</section>
+<section id="cs-detail-6" data-cs-step><h2 tabindex="-1">六、先回忆，再自测</h2>
 <details class="recall">
   <summary>优先级骨架链是什么？哪三档是右结合？</summary>
   <div class="recall-a">括号/下标 &gt; 单目 &gt; 算术 &gt; 移位 &gt; 关系 &gt; 位（与&gt;异或&gt;或）&gt; 逻辑 &gt; 条件 &gt; 赋值 &gt; 逗号。右结合：单目、<code>?:</code>、赋值（含复合赋值）。</div>
@@ -116,7 +126,8 @@ c 语言例：a=3, b=9 时 <code>c = b/++a</code> → a 先变 4，c = 9/4 = <st
   <div class="recall-a">不合法——自增只能用于变量。前置先加后用；后置「后置看整体，之后变量必改值」。</div>
 </details>
 
-<h2>七、测验（点击选项作答）</h2>
+</section>
+<section id="cs-practice" data-cs-step><h2 tabindex="-1">七、测验（点击选项作答）</h2>
 
 <div class="quiz" data-answer="c">
   <p class="quiz-q">1. 运算对象必须是整型的运算符是</p>
@@ -195,11 +206,14 @@ c 语言例：a=3, b=9 时 <code>c = b/++a</code> → a 先变 4，c = 9/4 = <st
   <p>① 打开 题库/数据存储与运算-章节练习，遮住答案做其中的表达式求值与合法标识符题，错题标 ⭐️。② 回到笔记 C语言/02 §7，独立复推 <code>a += a -= a*a</code>（a=10）和 <code>n += n -= n*n</code>（n=2）两道必考题。③ 完成笔记末尾自测问题 Q10–Q13，口头作答。</p>
 </div>
 
-<h2>参考资料</h2>
+</section>
+<section id="cs-detail-8" data-cs-step><h2 tabindex="-1">参考资料</h2>
 <p>首选精读：C语言/02-数据存储与运算 §7（15 级优先级全表与经典题组）。语法速查：<a href="../reference/c-syntax-cheatsheet.html">C 语法速查表</a>；术语对照：<a href="../reference/glossary.html">课程术语表</a>。格式化输出衔接下一课：<a href="0004-sequential-io.html">第 4 课 · 顺序结构与输入输出</a>。</p>
 
 <div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
 
+</section></section></section>
+<script type="application/json" id="cs-course-data">{"version":1,"storageKey":"zhixu:cs-course:3:1","stepIds":["cs-core","cs-transfer","cs-detail-1","cs-detail-2","cs-detail-3","cs-detail-4","cs-detail-5","cs-detail-6","cs-practice","cs-detail-8"],"checks":{"core":{"question":"double x = 5 / 2; 的 x 是？","choices":["2.5","2.0","无法赋值"],"answer":1,"why":["先做整数除法，小数部分已截去。","对。整数结果 2 转成 double 得到 2.0。","int 可以转换成 double，这不是类型错误。"]},"transfer":{"question":"哪种写法在除法前完成转换？","choices":["(double)(a/b)","(double)a/b","double avg=a/b"],"answer":1,"why":["括号里的整数除法已经完成。","对。转换只作用于 a，随后参与浮点除法。","目标变量类型不会倒过来改变右侧运算。"]}},"traces":{"core":{"title":"先计算，再放入变量","frames":[{"code":"double a = 7 / 2;","cells":[["7 / 2","int: 3"],["a","3.0"]],"note":"除法发生在赋值之前，两边都是整数。","pointer":""},{"code":"double b = 7.0 / 2;","cells":[["7.0 / 2","double: 3.5"],["b","3.5"]],"note":"2 转换后参与浮点运算。","pointer":""},{"code":"double c = (double)(7 / 2);","cells":[["先除","3"],["c","3.0"]],"note":"外层强制转换发生得太晚。","pointer":""},{"code":"double d = (double)7 / 2;","cells":[["先转","7.0"],["d","3.5"]],"note":"先改变操作数类型，再计算除法。","pointer":""}]}},"signature":"0977fd55bf041cbf"}</script>
 <nav class="footer-nav">
   <a href="0002-data-representation.html">← 上一课：数据的表示</a>
   <a href="0004-sequential-io.html">下一课：顺序结构与输入输出 →</a>

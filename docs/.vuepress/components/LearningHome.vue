@@ -1,76 +1,38 @@
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import { withBase } from 'vuepress/client'
 import { prepSubjects, topicCourses } from '../learning-data.mjs'
-import { brand } from '../brand.mjs'
-import { readRecent, resumeUrl, READING_EVENT } from '../../../scripts/runtime/reading-state.mjs'
 import SubjectCards from './SubjectCards.vue'
 import TodayTasks from './TodayTasks.vue'
 import CourseSearch from './CourseSearch.vue'
 import ReviewEntry from './ReviewEntry.vue'
+import StudyDesk from './StudyDesk.vue'
 
-const recent = ref(null)
 const query = ref('')
 const searchExamples = ['洛必达', '名词', '导论']
 const total = prepSubjects.reduce((sum, subject) => sum + subject.count, 0)
-const resume = computed(() => resumeUrl(recent.value, __VUEPRESS_BASE__))
-const stamp = computed(() => recent.value ? new Intl.DateTimeFormat('zh-CN', { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(recent.value.updatedAt) : '')
-function refresh() { recent.value = readRecent(__VUEPRESS_BASE__) }
-onMounted(() => {
-  refresh()
-  window.addEventListener('pageshow', refresh)
-  window.addEventListener('storage', refresh)
-  window.addEventListener(READING_EVENT, refresh)
-})
-onUnmounted(() => {
-  window.removeEventListener('pageshow', refresh)
-  window.removeEventListener('storage', refresh)
-  window.removeEventListener(READING_EVENT, refresh)
-})
 </script>
 
 <template>
   <main class="learning-surface learning-home">
-    <header class="brand-hero">
-      <div class="brand-hero__copy">
+    <header class="student-home-heading">
+      <div>
         <p class="learning-eyebrow"><span class="brand-rule" aria-hidden="true" />知序 · 学习与实践</p>
-        <h1>把知识连成路，<br><span>一步步走向理解。</span></h1>
-        <p class="brand-hero__lead">读懂一个概念，做好一道练习。<br>从系统学习到亲手实践，让每一步都有收获。</p>
+        <h1>今天，学懂一个知识点。</h1>
+        <p class="student-home-heading__lead">接着上次学，或者选一门课，从一小步开始。</p>
+      </div>
+      <div class="student-home-heading__search">
         <form class="home-course-search" :action="withBase('/courses/')" method="get" role="search" aria-label="查找一节课">
           <CourseSearch id="home-course-search" v-model="query" placeholder="今天想学哪个知识点？" />
           <button class="learn-button" type="submit">找课 <span aria-hidden="true">→</span></button>
         </form>
         <div class="home-search-examples"><span>试着找</span><a v-for="keyword in searchExamples" :key="keyword" :href="withBase('/courses/') + '?q=' + encodeURIComponent(keyword)">{{ keyword }}</a></div>
-        <div class="learning-buttons brand-hero__actions">
-          <a class="learning-text-link home-start-link" :href="recent ? resume : '#today-tasks'">{{ recent ? '继续上次学习' : '开始今天的学习' }} <span aria-hidden="true">→</span></a>
-          <a class="learning-text-link" :href="withBase('/courses/')">全部课程 <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="brand-hero__meta"><span><b>04</b> 门备考课程</span><span><b>{{ total }}</b> 节系统讲义</span><span><b>03</b> 个探索专题</span></div>
       </div>
-      <figure class="brand-hero__visual">
-        <img :src="withBase(brand.hero)" alt="翻开的书页折成松绿阶梯，通向理解之门" width="1536" height="1024" fetchpriority="high" decoding="async">
-        <figcaption><span>知序 / KNOWLEDGE BECOMES A PATH</span><span aria-hidden="true">01 — ∞</span></figcaption>
-      </figure>
     </header>
 
-    <div class="study-start-grid" id="study-desk">
-      <section class="study-resume" aria-labelledby="resume-heading">
-        <div class="study-resume__top"><span class="study-label"><span class="status-dot" />{{ recent ? '接着上次，继续往前' : '从一节课开始' }}</span><span class="study-resume__number" aria-hidden="true">01</span></div>
-        <template v-if="recent">
-          <p class="study-resume__subject">{{ recent.subject }} <span> / {{ recent.mode === 'interactive' ? '互动课程' : '阅读讲义' }}</span></p>
-          <h2 id="resume-heading">{{ recent.title }}</h2>
-          <p class="study-resume__context">{{ recent.chapter && recent.chapter !== recent.title ? `上次读到：${recent.chapter}` : '回到上次的阅读位置，接着完成这一课。' }}</p>
-          <div class="learning-buttons"><a class="learn-button" :href="resume">继续学习 <span aria-hidden="true">→</span></a><a class="learning-text-link" :href="withBase(`/courses/${recent.slug}/`)">课程目录</a></div>
-          <p class="study-resume__footnote">最近学习 {{ stamp }} <span>· 记录保存在此设备</span></p>
-        </template>
-        <template v-else>
-          <h2 id="resume-heading">选一门课，<br>开始今天的学习。</h2>
-          <p class="study-resume__context">阅读与练习在同一页。下次回来，可以接着上次的位置继续。</p>
-          <div class="study-first-subjects"><a v-for="subject in prepSubjects" :key="subject.slug" :href="withBase(`/courses/${subject.slug}/`)"><span>{{ subject.short }}</span><span aria-hidden="true">↗</span></a></div>
-          <p class="study-resume__footnote">从感兴趣的一课开始，也可以按章节循序渐进。</p>
-        </template>
-      </section>
+    <StudyDesk />
 
+    <div class="study-start-grid student-home-tasks">
       <ReviewEntry />
 
       <aside class="study-week">
@@ -80,7 +42,7 @@ onUnmounted(() => {
     </div>
 
     <section class="learning-section" aria-labelledby="home-prep-heading">
-      <div class="learning-section__heading"><div><p class="learning-eyebrow">01 / 系统备考</p><h2 id="home-prep-heading">四门课程，一步步打牢基础。</h2></div><a class="learning-text-link" :href="withBase('/courses/')">全部课程 <span aria-hidden="true">→</span></a></div>
+      <div class="learning-section__heading"><div><p class="learning-eyebrow">01 / 系统备考 · {{ total }} 节讲义</p><h2 id="home-prep-heading">四门课程，一步步打牢基础。</h2></div><a class="learning-text-link" :href="withBase('/courses/')">全部课程 <span aria-hidden="true">→</span></a></div>
       <SubjectCards />
     </section>
 
@@ -93,3 +55,13 @@ onUnmounted(() => {
     <div class="learning-project-footer"><span>学习、实践，也把想法做成作品。</span><a :href="withBase('/projects/')">查看项目</a><a :href="withBase('/hire/')">找我开发 <span aria-hidden="true">↗</span></a></div>
   </main>
 </template>
+
+<style scoped>
+.student-home-heading{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;gap:36px;padding-bottom:28px}
+.student-home-heading .learning-eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;margin-bottom:10px!important;color:var(--study-muted)}
+.student-home-heading h1{font:500 clamp(27px,3vw,38px)/1.45 var(--study-display-font);letter-spacing:-.035em}
+.student-home-heading__lead{font-size:13px;line-height:1.8;color:var(--study-muted);margin-top:10px}
+.student-home-heading__search{min-width:0}.student-home-heading .home-course-search{margin-top:0}
+.student-home-tasks{margin-top:26px}
+@media(max-width:700px){.student-home-heading{grid-template-columns:minmax(0,1fr);gap:18px;padding-bottom:20px}.student-home-heading h1{font-size:27px}.student-home-heading__lead{font-size:12px}.student-home-heading .home-search-examples{display:none}.student-home-tasks{margin-top:20px}}
+</style>

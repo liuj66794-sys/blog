@@ -85,7 +85,7 @@ comments: false
 ### W8 ｜ 10-26 ~ 11-01
 
 - 计算机：C语言08 指针（上）
-- 配套课程（不替代原计划的练习卷）：[第 11 课 指针基础与一维数组](/blog/lessons/zsb-cs/lessons/0011-pointers-basics.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w8) · [第 12 课 指针进阶：二维数组、字符串与复杂声明](/blog/lessons/zsb-cs/lessons/0012-pointers-advanced.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w8)
+- 配套课程（不替代原计划的练习卷）：[第 11 课 指针，先弄清它指向哪里。](/blog/lessons/zsb-cs/lessons/0011-pointers-basics.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w8) · [第 12 课 指针进阶：二维数组、字符串与复杂声明](/blog/lessons/zsb-cs/lessons/0012-pointers-advanced.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w8)
 
 <label class="prep-check"><input type="checkbox" data-key="w8"> W8 完成（10-26 ~ 11-01）</label>
 
@@ -96,7 +96,7 @@ comments: false
 ### W9 ｜ 11-02 ~ 11-08
 
 - 计算机：08 指针（下）；DeepTutor 计算机Ⅰ启动
-- 配套课程（不替代原计划的练习卷）：[第 11 课 指针基础与一维数组](/blog/lessons/zsb-cs/lessons/0011-pointers-basics.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w9) · [第 12 课 指针进阶：二维数组、字符串与复杂声明](/blog/lessons/zsb-cs/lessons/0012-pointers-advanced.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w9)
+- 配套课程（不替代原计划的练习卷）：[第 11 课 指针，先弄清它指向哪里。](/blog/lessons/zsb-cs/lessons/0011-pointers-basics.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w9) · [第 12 课 指针进阶：二维数组、字符串与复杂声明](/blog/lessons/zsb-cs/lessons/0012-pointers-advanced.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w9)
 
 <label class="prep-check"><input type="checkbox" data-key="w9"> W9 完成（11-02 ~ 11-08）</label>
 
@@ -222,7 +222,7 @@ comments: false
 
 - 计算机：指针 / 结构体易错点速览
 - 配套工具：[错题本](/blog/lessons/zsb-cs/lessons/mistakes.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w22)
-- 配套课程（不替代原计划的练习卷）：[第 11 课 指针基础与一维数组](/blog/lessons/zsb-cs/lessons/0011-pointers-basics.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w22) · [第 12 课 指针进阶：二维数组、字符串与复杂声明](/blog/lessons/zsb-cs/lessons/0012-pointers-advanced.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w22) · [第 13 课 结构体与文件](/blog/lessons/zsb-cs/lessons/0013-structs-and-files.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w22)
+- 配套课程（不替代原计划的练习卷）：[第 11 课 指针，先弄清它指向哪里。](/blog/lessons/zsb-cs/lessons/0011-pointers-basics.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w22) · [第 12 课 指针进阶：二维数组、字符串与复杂声明](/blog/lessons/zsb-cs/lessons/0012-pointers-advanced.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w22) · [第 13 课 结构体与文件](/blog/lessons/zsb-cs/lessons/0013-structs-and-files.html?returnTo=%2Fblog%2Fprep%2Fjisuanji%2F%23w22)
 - 备注：春节（02-06）——只保留每日 1 个 DeepTutor 到期复习番茄
 
 <label class="prep-check"><input type="checkbox" data-key="w22"> W22 完成（02-01 ~ 02-07）</label>

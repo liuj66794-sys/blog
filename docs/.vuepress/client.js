@@ -1,12 +1,11 @@
 import { defineClientConfig } from 'vuepress/client'
-import { nextTick, onMounted } from 'vue'
+import { defineAsyncComponent, nextTick, onMounted } from 'vue'
 import { trackPortfolioEvent } from './analytics.mjs'
 import CommercialHome from './components/CommercialHome.vue'
 import HireMePage from './components/HireMePage.vue'
 import PortfolioProjectsPage from './components/PortfolioProjectsPage.vue'
 import ProjectCasePage from './components/ProjectCasePage.vue'
 import LearningHome from './components/LearningHome.vue'
-import CourseHub from './components/CourseHub.vue'
 import KnowledgeHub from './components/KnowledgeHub.vue'
 import PrepDashboard from './components/PrepDashboard.vue'
 import PrepCourseCatalog from './components/PrepCourseCatalog.vue'
@@ -24,6 +23,10 @@ import './styles/study.css'
 import './styles/tasks.css'
 import './styles/brand.css'
 import './styles/experience.css'
+
+// The course search index is only needed on /courses/, so keep it out of the
+// script every page downloads on first visit.
+const CourseHub = defineAsyncComponent(() => import('./components/CourseHub.vue'))
 
 let stopReading = null
 let stopSession = null

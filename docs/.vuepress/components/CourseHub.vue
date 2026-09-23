@@ -1,10 +1,11 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute, withBase } from 'vuepress/client'
 import { prepSubjects, topicCourses } from '../learning-data.mjs'
 import {
   appendReturnTo,
   buildLessonSearchIndex,
+  chapterTarget,
   makeSearchReturnTo,
   searchLessons,
 } from '../lesson-search.mjs'
@@ -15,6 +16,8 @@ import CourseSearch from './CourseSearch.vue'
 
 const { query, group, ready, currentQuery, reset } = useCourseFilters('全部')
 const searchField = ref(null)
+const expandedCourses = ref([])
+const initialHitCount = 4
 const route = useRoute()
 const groups = ['全部', '专升本备考', '专题学习', '已归档']
 const courseMeta = [
@@ -44,12 +47,28 @@ const returnTo = computed(() => hasSearchContext.value
   ? makeSearchReturnTo(route.path, currentQuery.value, route.hash, base)
   : '')
 
+watch([query, group], () => { expandedCourses.value = [] })
+
+function visibleHits(course) {
+  const hits = [...course.lessons, ...course.references]
+  return expandedCourses.value.includes(course.slug) ? hits : hits.slice(0, initialHitCount)
+}
+function toggleHits(slug) {
+  expandedCourses.value = expandedCourses.value.includes(slug)
+    ? expandedCourses.value.filter((item) => item !== slug)
+    : [...expandedCourses.value, slug]
+}
+
 function linkFor(path) {
   return withBase(appendReturnTo(path, returnTo.value))
 }
 
 function hitLink(hit) {
   return linkFor(hit.interactiveHref || hit.readingHref)
+}
+function chapterLink(hit, chapter) {
+  const target = chapterTarget(hit, chapter)
+  return target ? linkFor(target) : ''
 }
 function resetFilters() { reset(); searchField.value?.focus() }
 </script>
@@ -100,8 +119,8 @@ function resetFilters() { reset(); searchField.value?.focus() }
 
         <section v-if="hasQuery && (course.lessons.length || course.references.length)" class="course-result__hits" :aria-labelledby="`hits-${course.slug}`">
           <h3 :id="`hits-${course.slug}`">命中课次与资料</h3>
-          <ol class="course-hit-list">
-            <li v-for="hit in [...course.lessons, ...course.references]" :key="`${course.slug}-${hit.id}`" class="course-hit">
+          <ol :id="`hits-list-${course.slug}`" class="course-hit-list">
+            <li v-for="hit in visibleHits(course)" :key="`${course.slug}-${hit.id}`" class="course-hit">
               <div class="course-hit__body">
                 <div class="course-hit__meta">
                   <span class="course-hit__kind">{{ hit.kindLabel }}</span>
@@ -110,7 +129,11 @@ function resetFilters() { reset(); searchField.value?.focus() }
                 </div>
                 <a class="course-hit__title" :href="hitLink(hit)">{{ hit.title }}</a>
                 <p v-if="hit.chapterHits.length" class="course-hit__chapters">
-                  命中章节：<span v-for="chapter in hit.chapterHits" :key="chapter.heading">{{ chapter.heading }}</span>
+                  命中章节：<template v-for="(chapter, index) in hit.chapterHits" :key="`${chapter.heading}-${index}`">
+                    <span v-if="index"> · </span>
+                    <a v-if="chapterLink(hit, chapter)" :href="chapterLink(hit, chapter)" :aria-label="`直达章节：${chapter.heading}`">{{ chapter.heading }} ↗</a>
+                    <span v-else>{{ chapter.heading }}</span>
+                  </template>
                 </p>
               </div>
               <div class="course-hit__actions">
@@ -121,6 +144,9 @@ function resetFilters() { reset(); searchField.value?.focus() }
               </div>
             </li>
           </ol>
+          <button v-if="course.matchedCount > initialHitCount" class="course-hit-toggle" type="button" :aria-controls="`hits-list-${course.slug}`" :aria-expanded="expandedCourses.includes(course.slug)" @click="toggleHits(course.slug)">
+            {{ expandedCourses.includes(course.slug) ? '收起命中' : `展开其余 ${course.matchedCount - initialHitCount} 条命中` }}
+          </button>
         </section>
 
         <p v-else-if="hasQuery" class="course-result__course-match">命中课程名称或简介 · 可从课程目录继续查找 {{ course.lessonRange }}</p>
@@ -181,6 +207,22 @@ function resetFilters() { reset(); searchField.value?.focus() }
   list-style: none;
 }
 
+.course-hit-toggle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--vp-c-brand-1);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.course-hit-toggle:hover { text-decoration: underline; text-underline-offset: 4px; }
+
 .course-hit {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -227,9 +269,14 @@ function resetFilters() { reset(); searchField.value?.focus() }
   line-height: 1.65;
 }
 
-.course-hit__chapters span + span::before {
-  content: ' · ';
+.course-hit__chapters a {
+  color: var(--vp-c-brand-1);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
 }
+.course-hit__chapters a:hover,
+.course-hit__chapters a:focus-visible { text-decoration-color: currentColor; }
 
 .course-hit__actions {
   display: flex;

@@ -32,6 +32,8 @@ import { patchPoliticsLearning, patchPoliticsPractice } from './lib/politics-lea
 import { applyCourseCorrections } from './lib/course-corrections.mjs'
 import { loadTeachingCatalog, supplementsForLesson, teachingPayloadFor, applyContentPatches, resolveQuestionRef } from './lib/teaching.mjs'
 import { extractCourseQuestions } from './lib/course-question-index.mjs'
+import { prepareEnglishGuides } from './lib/english-guides.mjs'
+import { patchCsLearning, csReadingHtml } from './lib/cs-learning-patch.mjs'
 import { normalizePoliticsHtml } from './lib/politics-data.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -377,11 +379,13 @@ function injectJsonScript(html, id, json, attrs, errorLabel) {
 /** 课级教学补充 → #teaching-data（无补充或补充为空则不注入，保持镜像原样）。
     题键先解析为真实 ref（政治 mcq:N → hash ref），与运行时 qidOf / 题目索引一致。 */
 export function injectTeachingData(html, slug, lessonId, catalog = loadTeachingCatalog()) {
-  const merged = supplementsForLesson(catalog, slug, lessonId)
+  let merged = supplementsForLesson(catalog, slug, lessonId)
+  if (slug === 'zsb-english') ({ html, teaching: merged } = prepareEnglishGuides(html, merged, lessonId))
   if (!merged || (!merged.sections.length && !merged.questions.size)) return html
   const questions = extractCourseQuestions(html, { slug, lessonId, source: `${slug}/${lessonId}`, title: '' })
   const payload = teachingPayloadFor(catalog, slug, lessonId, knowledgePointDefsFor(catalog, slug, merged),
-    (key) => resolveQuestionRef(key, questions))
+    (key) => resolveQuestionRef(key, questions)) || { version: 1, lessonId: String(lessonId), questions: {}, knowledgePoints: [] }
+  payload.sections = merged.sections
   if (!payload) return html
   return injectJsonScript(html, 'teaching-data', JSON.stringify(payload), '', `${slug}/${lessonId}`)
 }
@@ -430,6 +434,7 @@ function syncZsbMirror(c, examDate, teachingCatalog) {
     const relPath = path.relative(staging, f).replace(/\\/g, '/')
     let raw = applyCourseCorrections(fs.readFileSync(f, 'utf8'), c.slug, relPath)
     raw = applyContentPatches(raw, c.slug, relPath, teachingCatalog) // 已审校修正层（同步期注入，手改镜像会丢）
+    raw = patchCsLearning(raw, c.slug, relPath)
     if (c.slug === 'zsb-politics' && f.endsWith('.html')) raw = normalizePoliticsHtml(raw, relPath)
     if (c.slug === 'zsb-politics' && relPath === 'index.html') raw = patchPoliticsLearning(raw)
     if (c.slug === 'zsb-politics' && relPath === 'lessons/practice.html') {
@@ -640,7 +645,9 @@ const main = () => {
   }
   // Validate every course before the first mirror is replaced.
   const politicsOnly = process.argv.includes('--politics-only')
-  const prepared = ZSB_COURSES.filter(c => !politicsOnly || c.slug === 'zsb-politics').map((c) => {
+  const csOnly = process.argv.includes('--cs-only')
+  if (politicsOnly && csOnly) throw new Error('不能同时指定 --politics-only 与 --cs-only')
+  const prepared = ZSB_COURSES.filter(c => (!politicsOnly || c.slug === 'zsb-politics') && (!csOnly || c.slug === 'zsb-cs')).map((c) => {
     const lessonsDir = path.join(c.src, c.lessonsDir)
     const entries = collectPrepLessons(fs.readdirSync(lessonsDir), c)
     const lessonUrls = new Map(entries.map((e) => [e.name, `/courses/${c.slug}/l/${e.id}/`]))
@@ -653,7 +660,9 @@ const main = () => {
           c.slug, relPath, teachingCatalog,
         )
         if (c.slug === 'zsb-politics') sourceHtml = normalizePoliticsHtml(sourceHtml, relPath)
-        const teaching = supplementsForLesson(teachingCatalog, c.slug, entry.id)
+        sourceHtml = csReadingHtml(patchCsLearning(sourceHtml, c.slug, relPath))
+        let teaching = supplementsForLesson(teachingCatalog, c.slug, entry.id)
+        if (c.slug === 'zsb-english') ({ html: sourceHtml, teaching } = prepareEnglishGuides(sourceHtml, teaching, entry.id))
         entry.conversion = lessonHtmlToMarkdown(sourceHtml, {
           slug: c.slug, lessonUrls, onWarn: (warning) => entry.warnings.push(warning),
           ...(teaching ? { teaching, knowledgePoints: teachingKpMaps[c.slug] } : {}),
@@ -664,7 +673,7 @@ const main = () => {
     }
     return { c, entries }
   })
-  const catalog = politicsOnly ? { ...previousCatalog } : {}
+  const catalog = politicsOnly || csOnly ? { ...previousCatalog } : {}
   for (const { c, entries } of prepared) {
     const files = syncZsbMirror(c, parsed?.examDate, teachingCatalog)
     const { lessons, changed, warnings, warnTypes, catalog: courseCatalog } = syncZsbCourse(c, entries)

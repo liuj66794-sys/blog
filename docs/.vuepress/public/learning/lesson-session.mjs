@@ -14,7 +14,7 @@ export function attachLessonSession(base = '/blog/', {interactive = false} = {})
   const addLink = (label, href, parent = top) => {
     const link = document.createElement('a'); link.textContent = label; link.href = href; parent.append(link); return link
   }
-  if (back) addLink(back.includes('/review/') ? '返回错题复习' : back.includes('/prep/') ? '返回原学习任务' : '返回搜索与筛选', back)
+  if (back) addLink(new URL(back, location.origin).pathname === base ? (back.endsWith('#today-tasks') ? '返回今日任务' : '返回学习工作台') : back.includes('/review/') ? '返回错题复习' : back.includes('/prep/') ? '返回原学习任务' : '返回搜索与筛选', back)
   addLink('今日任务', `${base}prep/#today-tasks`)
   if (identity) addLink('课程与学习状态', `${base}courses/${identity.slug}/`)
   if (hasMistakes) addLink('错题复习', `${base}review/?subject=${identity.slug}`)

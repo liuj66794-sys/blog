@@ -42,11 +42,11 @@ test('weekly task links use course semantics rather than confusing source chapte
 })
 test('today has at most three direct tasks, supports deferral, and course completion updates weekly counts without checking the entire week',()=>{
   const source=storage(),date=new Date(2026,8,8)
-  const initial=todayTasks(plan,prepCatalog,'/blog/',source,date)
+  const initial=todayTasks(plan,prepCatalog,'/blog/',source,date,{pace:'week'})
   assert.equal(initial.length,3);assert.equal(initial[0].id,'lesson:zsb-math:10')
   assert.ok(initial.every(task=>task.href.includes('/lessons/') && task.href.includes('returnTo=')))
   changeTask(initial[0].id,{deferUntil:'2026-09-09'},source)
-  assert.ok(!todayTasks(plan,prepCatalog,'/blog/',source,date).some(task=>task.id===initial[0].id))
+  assert.ok(!todayTasks(plan,prepCatalog,'/blog/',source,date,{pace:'week'}).some(task=>task.id===initial[0].id))
   saveStudyProgress({slug:'zsb-math',id:'10',title:lesson.title,path:'/blog'+lesson.interactive,total:4,answered:4,correct:4,reviewNeeded:0},source)
   assert.equal(weeklyTasks(plan,prepCatalog,'/blog/',source,date)[0].completed,1)
   assert.equal(source.getItem('zsb-prep-checks'),null)

@@ -36,6 +36,7 @@ export function safeReturnTo(value, base = '/blog/') {
   try {
     const url = new URL(value, 'https://study.invalid')
     if (url.origin !== 'https://study.invalid' || !url.pathname.startsWith(base)) return null
+    if (url.pathname === base) return url.pathname + url.search + url.hash
     if (!/^(?:courses|prep|knowledge|review)(?:\/|$)/.test(url.pathname.slice(base.length))) return null
     return url.pathname + url.search + url.hash
   } catch { return null }

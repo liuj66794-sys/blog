@@ -3,12 +3,17 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import { feedPlugin } from '@vuepress/plugin-feed'
 import { plumeTheme } from 'vuepress-theme-plume'
 import { fileURLToPath } from 'node:url'
+import { createRequire } from 'node:module'
 import theme from './theme.js'
 import { base, origin, siteUrl, withBase } from './site-meta.mjs'
 import { brand } from './brand.mjs'
 
 // 上游 @vuepress/plugin-comment rc.131 自引用断裂的兜底，详见 shim 文件头注释
 const commentServiceShim = fileURLToPath(new URL('./shims/comment-service.mjs', import.meta.url))
+// The old feed plugin also brings in an older helper. Vite can otherwise
+// prebundle that version for the theme's client imports and blank the page.
+const themeRequire = createRequire(import.meta.resolve('vuepress-theme-plume'))
+const themeHelperClient = themeRequire.resolve('@vuepress/helper/client')
 
 export default defineUserConfig({
   lang: 'zh-CN',
@@ -47,6 +52,7 @@ export default defineUserConfig({
       resolve: {
         alias: {
           '@vuepress/plugin-comment/service': commentServiceShim,
+          '@vuepress/helper/client': themeHelperClient,
         },
       },
     },

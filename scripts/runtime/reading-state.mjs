@@ -75,6 +75,7 @@ export function trackReading(base = '/blog/') {
     const top = document.querySelector('[data-blog-nav-bar]')?.getBoundingClientRect().height || 80
     let closest = anchors[0]
     for (const node of anchors) {
+      if (!node.getClientRects().length) continue // Collapsed or inactive lesson sections are not the reading position.
       if (node.getBoundingClientRect().top <= top + 28) closest = node
     }
     const section = closest?.matches('h1,h2,h3') ? closest.textContent.trim() : ''
@@ -97,7 +98,7 @@ export function trackReading(base = '/blog/') {
       history.replaceState(history.state, '', url.pathname + url.search + url.hash)
     }
     if (shouldRestore && previous) {
-      const anchor = anchors.find(node => node.dataset.readingAnchor === previous.anchor)
+      const anchor = anchors.find(node => node.dataset.readingAnchor === previous.anchor && node.getClientRects().length)
       const y = anchor ? window.scrollY + anchor.getBoundingClientRect().top + (previous.offset || 0) : previous.y
       window.scrollTo({ top: Math.max(0, y), behavior: 'instant' })
       // 焦点随阅读位置走：键盘与读屏用户落在恢复到的章节，而不是页首

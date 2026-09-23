@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html data-study-shell lang="zh-CN">
+<html data-study-shell data-cs-pointer="1" data-cs-course="1" lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 19 课 · 树与二叉树基础</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="stylesheet" data-cs-asset href="/blog/learning/cs-pointer.css?v=a27a96b55746">
+<script type="module" data-cs-asset src="/blog/learning/cs-pointer.mjs?v=a27a96b55746"></script>
 <link rel="icon" type="image/png" href="/blog/brand/zhixu-mark.png">
 <script data-study-appearance>try{var a=localStorage.getItem('vuepress-theme-appearance');document.documentElement.dataset.theme=a==='dark'||((a!=='light')&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}</script><link rel="stylesheet" href="/blog/learning/learning-tokens.css"><link rel="stylesheet" href="/blog/learning/lesson-shell.css"><script type="module" src="/blog/learning/lesson-shell.mjs" data-study-base="/blog/" data-exam-date="2027-03-27"></script>
 </head>
@@ -17,8 +19,29 @@
   <span>第 19 课 / 共 29 课</span>
 </nav>
 
-<h1>树与二叉树基础</h1>
-<p class="lesson-meta">对应笔记 数据结构/15-树与二叉树 · 教材 P90–92、P97–104 · 约 15 分钟</p>
+<header class="cs-intro"><p class="cs-eyebrow">计算机 · 逐步理解</p><h1>树与二叉树基础</h1><p class="lesson-meta">对应笔记 数据结构/15-树与二叉树 · 教材 P90–92、P97–104 · 建议按小节分次学习</p><p>能区分结点度、树的度、层数，并验证叶子与二度结点关系。</p><p class="cs-interactive-note">先看核心过程，再独立尝试，随后按需深入各知识点和原课测验。小节可以自由切换，支持展开全文。</p></header>
+<section class="cs-course"><aside class="cs-path" aria-label="本课学习路径"><strong>本课学习路径</strong><ol><li><a href="#cs-core">01 / 先数同一棵树，再理解性质</a></li><li><a href="#cs-transfer">02 / 换个例子，自己试一次</a></li><li><a href="#cs-detail-1">03 / 树的术语：先对齐名词</a></li><li><a href="#cs-detail-2">04 / 二叉树定义与六条性质</a></li><li><a href="#cs-detail-3">05 / 二叉链表：为什么是 n+1 个空链域</a></li><li><a href="#cs-detail-4">06 / 先回忆，再自测</a></li><li><a href="#cs-practice">07 / 测验（点击选项作答）</a></li><li><a href="#cs-detail-6">08 / 参考资料</a></li></ol></aside><section class="cs-content"><section id="cs-core" data-cs-step><h2 tabindex="-1">先数同一棵树，再理解性质</h2><p class="cs-goal">这一节要学会：能区分结点度、树的度、层数，并验证叶子与二度结点关系。</p><p>树像有层级的目录。结点的度是它直接拥有的孩子数，树的度是所有结点度的最大值；它们不是从根走到结点所经过的层数。</p><p>本例根 <code>A</code> 有孩子 <code>B</code>、<code>C</code>，<code>B</code> 有孩子 <code>D</code>、<code>E</code>，<code>C</code>、<code>D</code>、<code>E</code> 没有孩子。按根为第 <code>1</code> 层的约定，高度为 <code>3</code>；按边数计高度的资料会得到 <code>2</code>，读题要先确认约定。</p><p>非空二叉树每个结点最多两个孩子。令 <code>n0</code>、<code>n1</code>、<code>n2</code> 分别表示度为 <code>0</code>、<code>1</code>、<code>2</code> 的结点数。边数既是总结点数减 <code>1</code>，又是 <code>n1+2n2</code>，因此 <code>n0=n2+1</code>。</p><section class="cs-map" data-cs-map><svg viewBox="0 0 500 245" role="img" aria-label="树：A 的左孩子是 B、右孩子是 C；B 的左孩子是 D、右孩子是 E。"><title>树：A 的左孩子是 B、右孩子是 C；B 的左孩子是 D、右孩子是 E。</title><defs><marker id="cs-arrow-head" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z"/></marker></defs><line x1="231.71345637377297" y1="50.54356208229297" x2="171.33430089726485" y2="101.86584423732486"/><line x1="268.286543626227" y1="50.54356208229297" x2="328.6656991027351" y2="101.86584423732486"/><line x1="136.15960325763228" y1="139.6072287183543" x2="106.14712953276235" y2="182.12489982858668"/><line x1="163.84039674236772" y1="139.6072287183543" x2="193.85287046723766" y2="182.12489982858668"/><g data-node="A"><circle cx="250" cy="35" r="23"/><text x="250" y="41">A</text></g><g data-node="B"><circle cx="150" cy="120" r="23"/><text x="150" y="126">B</text></g><g data-node="C"><circle cx="350" cy="120" r="23"/><text x="350" y="126">C</text></g><g data-node="D"><circle cx="90" cy="205" r="23"/><text x="90" y="211">D</text></g><g data-node="E"><circle cx="210" cy="205" r="23"/><text x="210" y="211">E</text></g></svg><p class="cs-muted">树：A 的左孩子是 B、右孩子是 C；B 的左孩子是 D、右孩子是 E。</p></section><section data-cs-lab="core"></section><details class="cs-trace-transcript"><summary>查看完整过程，逐步核对</summary><h3>第 1 步</h3><pre><code>A(B(D,E),C)
+    A
+   / \
+  B   C
+ / \
+D   E</code></pre><p>总结点：5</p><p>括号表示父结点及其孩子，图中每条线连一对父子。</p><h3>第 2 步</h3><pre><code>数没有孩子的结点</code></pre><p>叶子：C D E；n0：3</p><p>叶子按孩子数为 0 判断。</p><h3>第 3 步</h3><pre><code>数有两个孩子的结点</code></pre><p>结点：A B；n2：2</p><p>没有度为 1 的结点，所以 n1=0。</p><h3>第 4 步</h3><pre><code>验证 n0=n2+1</code></pre><p>左边：3；右边：2+1=3</p><p>用边数推导的关系与小例子相符。</p></details><section data-cs-check="core"></section><details class="cs-check-answer"><summary>核对判断与理由</summary><p>这棵树中 <code>B</code> 的度与所在层数分别是？</p><ol><li><code>2</code> 和 <code>2</code>：对。<code>B</code> 有两个孩子，根算第 <code>1</code> 层时 <code>B</code> 在第 <code>2</code> 层。</li><li><code>3</code> 和 <code>2</code>：把某种高度计数混进结点的度了。</li><li><code>2</code> 和 <code>3</code>：<code>B</code> 的孩子在第 <code>3</code> 层，<code>B</code> 自己在第 <code>2</code> 层。</li></ol><p>正确判断：<code>2</code> 和 <code>2</code></p></details></section>
+<section id="cs-transfer" data-cs-step><h2 tabindex="-1">换个例子，自己试一次</h2><p class="cs-goal">先独立写出过程，再核对理由。遇到卡点可以回上一小节重走。</p><p class="cs-task">一棵非空二叉树有 <code>4</code> 个度为 <code>2</code> 的结点、<code>3</code> 个度为 <code>1</code> 的结点，叶子数与总结点数各是多少？</p><details><summary>卡住时看提示</summary><p>先用 <code>n0=n2+1</code> 求叶子，再把三种度的结点数相加。</p></details><details><summary>查看参考过程</summary><p>叶子 <code>n0=n2+1=5</code>，总结点数 <code>5+3+4=12</code>。用边数再检验：<code>3+2</code>×<code>4=11=12-1</code>。</p></details><section data-cs-check="transfer"></section><details class="cs-check-answer"><summary>核对判断与理由</summary><p>若只增加度为 <code>1</code> 的结点而不改变二度结点数，<code>n0=n2+1</code> 还适用吗？</p><ol><li>适用，关系中 <code>n1</code> 被消去了：对。该关系适用于所有非空二叉树。</li><li>不适用，只对满二叉树成立：推导不要求满或完全。</li><li>叶子数一定等于 <code>n1</code>：叶子数由 <code>n2+1</code> 给出，不等于 <code>n1</code>。</li></ol><p>正确判断：适用，关系中 <code>n1</code> 被消去了</p></details></section>
+<section id="cs-detail-1" data-cs-step><h2 tabindex="-1">一、树的术语：先对齐名词</h2>
+<p>树是 <strong>n 个结点的有限集</strong>，有一个根，其余结点分成若干互不相交的子树。核心逻辑：根没有前驱，其他结点有且只有一个前驱，叶子没有后继。</p>
+<table>
+  <tr><th>术语</th><th>含义</th><th>易错提醒</th></tr>
+  <tr><td>结点的度</td><td>该结点拥有的子树个数</td><td>不是「孩子个数」的口语说法，就是子树数</td></tr>
+  <tr><td>树的度</td><td>各结点度的最大值</td><td>不是所有度之和</td></tr>
+  <tr><td>叶子/终端结点</td><td>度为 0 的结点</td><td>—</td></tr>
+  <tr><td>深度</td><td>从根往下数到该结点的层数，根为第 1 层</td><td>不是从 0 开始</td></tr>
+  <tr><td>高度</td><td>从该结点往下到叶子的最长路径层数</td><td>深度从根往下，高度从叶子往上</td></tr>
+  <tr><td>森林</td><td>m 棵互不相交的树的集合</td><td>m≥0，空森林也是森林</td></tr>
+  <tr><td>有序树/无序树</td><td>子树从左到右能否互换</td><td>二叉树一定是「左右有序」</td></tr>
+</table>
+
+<details><summary>本课目标与前置回顾</summary>
+
 
 <div class="goal">
   <p class="goal-title">学完这节课，你能做到：</p>
@@ -40,20 +63,8 @@
   <p>树和二叉树是数据结构部分分值最高、题型最灵活的章节之一。这节课只讲「基础」——术语、定义与六条性质，但它们是后面遍历、树转二叉树、赫夫曼树所有大题的共同起点。巩固阶段要把公式变成条件反射。</p>
 </div>
 
-<h2>一、树的术语：先对齐名词</h2>
-<p>树是 <strong>n 个结点的有限集</strong>，有一个根，其余结点分成若干互不相交的子树。核心逻辑：根没有前驱，其他结点有且只有一个前驱，叶子没有后继。</p>
-<table>
-  <tr><th>术语</th><th>含义</th><th>易错提醒</th></tr>
-  <tr><td>结点的度</td><td>该结点拥有的子树个数</td><td>不是「孩子个数」的口语说法，就是子树数</td></tr>
-  <tr><td>树的度</td><td>各结点度的最大值</td><td>不是所有度之和</td></tr>
-  <tr><td>叶子/终端结点</td><td>度为 0 的结点</td><td>—</td></tr>
-  <tr><td>深度</td><td>从根往下数到该结点的层数，根为第 1 层</td><td>不是从 0 开始</td></tr>
-  <tr><td>高度</td><td>从该结点往下到叶子的最长路径层数</td><td>深度从根往下，高度从叶子往上</td></tr>
-  <tr><td>森林</td><td>m 棵互不相交的树的集合</td><td>m≥0，空森林也是森林</td></tr>
-  <tr><td>有序树/无序树</td><td>子树从左到右能否互换</td><td>二叉树一定是「左右有序」</td></tr>
-</table>
-
-<h2>二、二叉树定义与六条性质</h2>
+</details></section>
+<section id="cs-detail-2" data-cs-step><h2 tabindex="-1">二、二叉树定义与六条性质</h2>
 <h3>2.1 定义</h3>
 <p>二叉树不是「度为 2 的树」。它的定义只有两点：</p>
 <ol>
@@ -98,11 +109,13 @@
   <li>完全二叉树有 500 个叶子，总结点数最少 = <strong>999</strong>（n₂=499，完全二叉树 n₁ 取最小 0，n=500+0+499）。</li>
 </ul>
 
-<h2>三、二叉链表：为什么是 n+1 个空链域</h2>
+</section>
+<section id="cs-detail-3" data-cs-step><h2 tabindex="-1">三、二叉链表：为什么是 n+1 个空链域</h2>
 <p>二叉链表每个结点有 <code>lchild</code> 和 <code>rchild</code> 两个指针，共 <code>2n</code> 个指针域。n 个结点的二叉树有 <code>n−1</code> 条分支，每条分支占用一个指针。所以空指针数 = <code>2n − (n−1) = n+1</code>。</p>
 <p>这些空链域在线索二叉树中会被用来存放遍历次序下的前驱/后继指针，称为<strong>线索</strong>。但本节课只需要记住数字：<strong>n 个结点的二叉链表有 n+1 个空链域</strong>。</p>
 
-<h2>四、先回忆，再自测</h2>
+</section>
+<section id="cs-detail-4" data-cs-step><h2 tabindex="-1">四、先回忆，再自测</h2>
 <details class="recall">
   <summary>合上笔记默写：二叉树六条性质中涉及数值的三组公式</summary>
   <div class="recall-a">
@@ -127,7 +140,8 @@
   <div class="recall-a">11~1025。最矮为 ⌈log₂(1025+1)⌉ = ⌈log₂1026⌉ = 11 层，最高是单支树 1025 层——正是「n 个结点高度范围 ⌈log₂(n+1)⌉ ~ n」的具体应用。</div>
 </details>
 
-<h2>五、测验（点击选项作答）</h2>
+</section>
+<section id="cs-practice" data-cs-step><h2 tabindex="-1">五、测验（点击选项作答）</h2>
 
 <div class="quiz" data-answer="c">
   <p class="quiz-q">1. 某二叉树有 10 个度为 2 的结点，则叶子结点数为</p>
@@ -206,11 +220,14 @@
   <p>打开 数据结构/15-树与二叉树，完成「§2.2 计算练习」3 道题和「随堂练习」中第 3、7、8、10、12 题以及「补充 1、2」性质计算部分。错题在笔记旁标注 ⭐️，并把错因用一句话写进 <code>NOTES.md</code> 错题区。</p>
 </div>
 
-<h2>参考资料</h2>
+</section>
+<section id="cs-detail-6" data-cs-step><h2 tabindex="-1">参考资料</h2>
 <p>首选精读：数据结构/15-树与二叉树（§1、§2.1–§2.2、§4.1）。教材对照：严蔚敏《数据结构》P90–92、P97–104。公式速查：<a href="../reference/ds-formula-cheatsheet.html">数据结构公式速查表</a>；术语速查：<a href="../reference/glossary.html">课程术语表</a>。</p>
 
 <div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
 
+</section></section></section>
+<script type="application/json" id="cs-course-data">{"version":1,"storageKey":"zhixu:cs-course:19:1","stepIds":["cs-core","cs-transfer","cs-detail-1","cs-detail-2","cs-detail-3","cs-detail-4","cs-practice","cs-detail-6"],"checks":{"core":{"question":"这棵树中 B 的度与所在层数分别是？","choices":["2 和 2","3 和 2","2 和 3"],"answer":0,"why":["对。B 有两个孩子，根算第 1 层时 B 在第 2 层。","把某种高度计数混进结点的度了。","B 的孩子在第 3 层，B 自己在第 2 层。"]},"transfer":{"question":"若只增加度为 1 的结点而不改变二度结点数，n0=n2+1 还适用吗？","choices":["适用，关系中 n1 被消去了","不适用，只对满二叉树成立","叶子数一定等于 n1"],"answer":0,"why":["对。该关系适用于所有非空二叉树。","推导不要求满或完全。","叶子数由 n2+1 给出，不等于 n1。"]}},"traces":{"core":{"title":"在固定树上逐项点数","frames":[{"code":"A(B(D,E),C)\n    A\n   / \\\n  B   C\n / \\\nD   E","cells":[["总结点","5"]],"note":"括号表示父结点及其孩子，图中每条线连一对父子。","pointer":""},{"code":"数没有孩子的结点","cells":[["叶子","C D E"],["n0","3"]],"note":"叶子按孩子数为 0 判断。","pointer":""},{"code":"数有两个孩子的结点","cells":[["结点","A B"],["n2","2"]],"note":"没有度为 1 的结点，所以 n1=0。","pointer":""},{"code":"验证 n0=n2+1","cells":[["左边","3"],["右边","2+1=3"]],"note":"用边数推导的关系与小例子相符。","pointer":""}]}},"signature":"7ca3de6ac451e76e"}</script>
 <nav class="footer-nav">
   <a href="0018-string.html">← 上一课：串</a>
   <a href="0020-binary-tree-traversal.html">下一课：二叉树遍历 →</a>

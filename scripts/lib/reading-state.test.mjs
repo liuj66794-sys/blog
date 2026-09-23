@@ -70,10 +70,11 @@ test('resume waits for asynchronous math layout before restoring the saved secti
   let y = 0, sectionY = 1400, scrolls = 0, focused = null
   const noop = () => {}
   const heading = absoluteY => ({ dataset: {}, textContent: '三角函数必背包',
-    getBoundingClientRect: () => ({ top: absoluteY() - y }), matches: () => true, closest: () => null,
+    getBoundingClientRect: () => ({ top: absoluteY() - y }), getClientRects: () => [{}], matches: () => true, closest: () => null,
     setAttribute: noop, focus: options => { focused = options ?? null } })
   const title = heading(() => 100), section = heading(() => sectionY)
-  const main = { querySelector: () => title, querySelectorAll: () => [title, section] }
+  const hiddenSection = { ...heading(() => 0), getClientRects: () => [], textContent: '未展开的小节' }
+  const main = { querySelector: () => title, querySelectorAll: () => [title, section, hiddenSection] }
   globalThis.window = { location: { pathname: path, href: `https://local.test${encodeURI(path)}?resume=1` },
     localStorage: storage, ZC: { mathReady }, get scrollY() { return y },
     scrollTo: options => { y = options.top; scrolls++ }, addEventListener: noop, removeEventListener: noop, dispatchEvent: noop }
@@ -92,5 +93,6 @@ test('resume waits for asynchronous math layout before restoring the saved secti
   assert.equal(y, 1640, 'the restored offset follows the fully rendered section')
   assert.deepEqual(focused, { preventScroll: true }, 'focus lands on the resumed section without scrolling')
   assert.equal(readRecent('/blog/', storage).y, 1640)
+  assert.equal(readRecent('/blog/', storage).anchor, 'section-1', 'hidden headings must not replace the visible reading position')
   stop()
 })

@@ -9,6 +9,8 @@
  */
 
 import { parseMistakeBackup } from '../../scripts/runtime/mistake-store.mjs'
+import { GUIDED_PREFIX, validGuideState } from '../../scripts/runtime/guided-state.mjs'
+import { isCsLearningKey, validCsLearningState } from '../../scripts/runtime/cs-learning-state.mjs'
 export const BACKUP_FORMAT = 'l1uj-study-backup'
 export const BACKUP_VERSION = 1
 export const DEFAULT_BASE = '/blog/'
@@ -180,6 +182,7 @@ function isAllowedPathAnswerKey(key, base = DEFAULT_BASE) {
 }
 
 function keyInfo(key, base = DEFAULT_BASE) {
+  if (isCsLearningKey(key)) return { kind: 'cs-learning' }
   if (key.startsWith('l1uj-learning-guide-note-v1:') && isLessonPath(key.slice('l1uj-learning-guide-note-v1:'.length), base)) return { kind: 'learning-guide-note' }
   if (key === 'l1uj-reading-v1') return { kind: 'l1uj-reading-v1', mode: CONTAINER_MODES.reading }
   if (key === 'zc-progress-v1') return { kind: 'zc-progress-v1' }
@@ -191,6 +194,7 @@ function keyInfo(key, base = DEFAULT_BASE) {
   if (key === 'l1uj-study-tasks-v1') return { kind: 'l1uj-study-tasks-v1', mode: CONTAINER_MODES.studyTasks }
   if (key === 'zsb-prep-checks-meta-v1') return { kind: 'zsb-prep-checks-meta-v1', mode: CONTAINER_MODES.prepMeta }
   if (key === 'l1uj-knowledge-v1') return { kind: 'l1uj-knowledge-v1', mode: CONTAINER_MODES.knowledge }
+  if (key.startsWith(GUIDED_PREFIX) && /^zsb-(?:english|politics|math|cs):[a-z0-9-]{1,80}:[a-z0-9-]{1,80}$/.test(key.slice(GUIDED_PREFIX.length))) return { kind: 'l1uj-guided-v1' }
   if (key.startsWith(SECTIONS_PREFIX)) {
     const match = key.slice(SECTIONS_PREFIX.length).match(SECTIONS_KEY)
     if (match && !hasUnsafeProperty(match[2])) return { kind: 'l1uj-sections-v1', id: key.slice(SECTIONS_PREFIX.length), mode: CONTAINER_MODES.sections }
@@ -558,6 +562,12 @@ function validateRecord(key, value, errors, base) {
   const info = keyInfo(key, base)
   if (!info) { addError(errors, `records.${key}`, '存储键不在白名单中'); return }
   switch (info.kind) {
+    case 'cs-learning':
+      if (!validCsLearningState(value)) addError(errors, `records.${key}`, '计算机分节学习记录格式无效')
+      return
+    case 'l1uj-guided-v1':
+      if (!validGuideState(value)) addError(errors, `records.${key}`, '小步学习记录格式无效')
+      return
     case 'learning-guide-note':
       if (typeof value !== 'string' || value.length > 2000) errors.push(`records.${key}: 回忆笔记须为 2000 字以内文本`)
       return
@@ -728,6 +738,7 @@ function isMergeMode(info) {
 
 function itemTimestamp(info, item) {
   if (!item || typeof item !== 'object') return null
+  if (info.kind === 'l1uj-guided-v1' || info.kind === 'cs-learning') return isTimestamp(item.updatedAt) ? item.updatedAt : null
   if (info.mode === CONTAINER_MODES.reading || info.mode === CONTAINER_MODES.studyProgress || info.mode === CONTAINER_MODES.studyTasks || info.mode === CONTAINER_MODES.prepMeta) {
     return isTimestamp(item.updatedAt) ? item.updatedAt : null
   }
@@ -745,6 +756,7 @@ function keyTimestamp(info, value) {
 
 function keyLabel(key, itemKey) {
   const labels = {
+    'cs-learning': '计算机分节学习位置、演示与判断',
     'l1uj-reading-v1': '阅读位置',
     'zc-progress-v1': '数学累计进度',
     'zc-progress-items-v1': '数学逐题练习',
@@ -762,6 +774,7 @@ function keyLabel(key, itemKey) {
     'zsb-prep-checks-meta-v1': '新版周计划打卡',
     'l1uj-knowledge-v1': '知识点复测排期',
     'l1uj-sections-v1': '课内小节完成',
+    'l1uj-guided-v1': '小步学习位置、作答与笔记',
   }
   const info = keyInfo(key)
   // 小节完成键自带课号，条目键只是 sectionId：冲突标签仍以课为单位。

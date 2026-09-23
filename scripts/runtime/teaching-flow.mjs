@@ -3,6 +3,7 @@
    课页注入的 #teaching-data / #teaching-bank 提供 sections、题目补充与知识点定义；
    本模块只调度与呈现，题目判分仍由各课 quiz 运行时负责（经 study:attempt 上报）。 */
 import { readMistakes, mistakeId } from './mistake-store.mjs'
+import { mountGuidedSection } from './guided-section.mjs'
 
 const DAY = 86400000
 export const KNOWLEDGE_KEY = 'l1uj-knowledge-v1'
@@ -257,7 +258,8 @@ function mountSections(payload, slug, storage) {
   if (resumeIndex > 0) {
     const banner = el('p', 'tf-resume')
     const target = resolved[resumeIndex]
-    const link = el('a', 'tf-resume-link', `继续上次：第 ${resumeIndex + 1} 节 ${target.section.title || ''} →`)
+    const label = resolved.some(item => item.section.guide) ? '原讲义下一节' : '继续上次'
+    const link = el('a', 'tf-resume-link', `${label}：第 ${resumeIndex + 1} 节 ${target.section.title || ''} →`)
     link.href = `#${encodeURIComponent(target.section.id)}`
     banner.append(link)
     const anchor = document.querySelector('h1') || resolved[0].heading
@@ -405,6 +407,9 @@ export function mountTeachingFlow(base = '/blog/', storage) {
   document.addEventListener('study:attempt', onAttempt)
 
   const cleanups = [() => document.removeEventListener('study:attempt', onAttempt), mountSections(payload, slug, storage)]
+  ;(payload.sections || []).forEach((section, index) => {
+    if (section.guide) cleanups.push(mountGuidedSection({ section, heading: sectionHeading(section, index), slug, lessonId, base, storage }))
+  })
   mountWarmup(payload, slug, base, storage).then(cleanup => cleanups.push(cleanup))
   return () => cleanups.forEach(fn => fn())
 }

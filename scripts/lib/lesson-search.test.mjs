@@ -4,6 +4,7 @@ import test from 'node:test'
 import {
   appendReturnTo,
   buildLessonSearchIndex,
+  chapterTarget,
   defaultLessonSearchIndex,
   makeSearchReturnTo,
   normalizeSearchText,
@@ -76,6 +77,18 @@ test('返回上下文是同站相对路径并且只编码一次', () => {
   const parsed = new URL(target, 'https://example.test')
   assert.equal(parsed.pathname, '/lessons/zsb-math/lessons/0014-%E6%B4%9B%E5%BF%85%E8%BE%BE%E6%B3%95%E5%88%99.html')
   assert.equal(parsed.searchParams.get('returnTo'), returnTo)
+})
+
+test('命中章节可直达原课标题，缺失或无效锚点不生成链接', () => {
+  const [course] = searchLessons(defaultLessonSearchIndex, '名词')
+  const lesson = course.lessons.find(item => item.id === '1')
+  const chapter = lesson.chapterHits.find(item => item.href === '#pt-1')
+  assert.equal(chapterTarget(lesson, chapter), `${lesson.interactiveHref}#pt-1`)
+  assert.equal(chapterTarget(lesson, { heading: '无锚点' }), '')
+  assert.equal(chapterTarget(lesson, { href: 'https://example.com' }), '')
+  assert.equal(chapterTarget({ interactiveHref: '//example.com/' }, chapter), '')
+  const linked = appendReturnTo(chapterTarget(lesson, chapter), '/blog/courses/?q=%E5%90%8D%E8%AF%8D')
+  assert.match(linked, /returnTo=.*#pt-1$/)
 })
 
 test('浏览器搜索模块不依赖 node:fs，生成器才负责读目录', () => {

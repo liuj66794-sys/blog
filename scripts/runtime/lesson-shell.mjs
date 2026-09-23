@@ -147,6 +147,9 @@ for (const table of main.querySelectorAll('table')) {
   if (table.parentElement?.classList.contains('study-table-scroll')) continue
   const wrapper = document.createElement('div')
   wrapper.className = 'study-table-scroll'
+  const columnCount = [...table.rows].reduce((max, row) =>
+    Math.max(max, [...row.cells].reduce((count, cell) => count + cell.colSpan, 0)), 0)
+  if (columnCount >= 3) wrapper.classList.add('is-multicolumn')
   wrapper.tabIndex = 0
   wrapper.setAttribute('role', 'region')
   wrapper.setAttribute('aria-label', '表格，可横向滚动查看')

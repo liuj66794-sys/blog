@@ -1031,7 +1031,7 @@ export const prepCatalog = {
       {
         "id": "11",
         "label": "第 11 课",
-        "title": "指针基础与一维数组",
+        "title": "指针，先弄清它指向哪里。",
         "group": "",
         "href": "/courses/zsb-cs/l/11/",
         "interactive": "/lessons/zsb-cs/lessons/0011-pointers-basics.html"

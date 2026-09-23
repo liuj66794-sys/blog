@@ -74,8 +74,10 @@ html[data-study-shell] .cards-completion { padding:1.2rem; background:var(--stud
 html[data-study-shell] .q-metadata { color:var(--study-muted); font-size:.85rem; }
 html[data-study-shell] body>.topbar { position:static; background:var(--study-panel); color:var(--study-muted); border-color:var(--study-line); }
 html[data-study-shell] body>.topbar :is(.topbar-inner,nav.topnav) { flex-wrap:wrap; }
-.study-table-scroll { max-width:100%; overflow-x:auto; overscroll-behavior-x:contain; margin-block:20px; }
+/* Paint containment also keeps KaTeX's hidden MathML inside wide tables from widening the page. */
+.study-table-scroll { max-width:100%; overflow-x:auto; overscroll-behavior-x:contain; contain:paint; margin-block:20px; }
 .study-table-scroll table { width:100%; margin:0; }
+.study-table-scroll:focus-visible { outline:3px solid var(--study-focus,var(--study-accent)); outline-offset:2px; }
 html[data-study-shell] :is(th,td) { border-color:var(--study-line); }
 html[data-study-shell] th { background:var(--study-tint); color:var(--study-text); }
 html[data-study-shell] td { background:var(--study-panel); color:var(--study-text); }
@@ -148,6 +150,10 @@ html[data-study-shell] h1 { font-family:var(--study-display-font); font-weight:6
 html[data-study-shell] :is(a,button,summary,input,select,[tabindex]):focus-visible { outline-color:var(--study-focus); }
 [data-blog-nav-bar] :is(a,button,summary) { transition:background var(--study-duration),color var(--study-duration); }
 @media(max-width:600px) {
+  /* Keep examples readable: the wrapper scrolls instead of crushing every cell. */
+  .study-table-scroll table { min-width:32rem; }
+  .study-table-scroll.is-multicolumn table { min-width:42rem; }
+  .study-table-scroll::before { content:'表格可左右滑动查看 →'; display:block; width:max-content; margin-bottom:6px; color:var(--study-muted); font-size:12px; line-height:1.5; }
   .study-nav-mark.is-mobile { display:block; width:24px; height:24px; margin-right:7px; }
   [data-blog-nav-bar] .blog-lesson-nav-back { padding-right:2px; font-size:12px; }
   .blog-lesson-nav-inner { gap:3px; padding-inline:8px; }

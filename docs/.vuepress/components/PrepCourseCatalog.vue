@@ -6,7 +6,7 @@ import { filterPrepLessons } from '../../../scripts/lib/prep-catalog.mjs'
 import { useCourseFilters } from '../composables/useCourseFilters.mjs'
 import { useStudyUpdates } from '../composables/useStudyUpdates.mjs'
 import { subjectProgress, withStudyContext, matchesStudyFilter, STUDY_FILTERS } from '../../../scripts/runtime/study-state.mjs'
-import { makeSearchReturnTo } from '../lesson-search.mjs'
+import { makeSearchReturnTo } from '../lesson-return.mjs'
 import CourseSearch from './CourseSearch.vue'
 
 const props = defineProps({ slug: { type: String, required: true } })
@@ -29,7 +29,7 @@ const continueHref = computed(() => next.value ? withStudyContext(progress.value
 const nextLabel = computed(() => next.value && statuses.value[next.value.id].state === 'learning' ? '继续学习' : '开始下一课')
 const studyAdvice = computed(() => ({
   'zsb-math': '先看定义域与适用条件，再独立做 4–6 题。能说清为什么这样变形，比记住答案更重要；次日用错题复测检查理解。',
-  'zsb-english': '1–17 课侧重语法，18–24 课练篇章与输出，25–36 课为模拟材料自核对。长课按题组分次完成；阅读题要回到文章找证据。',
+  'zsb-english': '36 课均可从页首进入小步学习：1–17 课按例子与判断练语法，18–24 课练阅读与写作，25–36 课逐题写依据、对照原卷参考答案。位置、作答和草稿自动保存在此设备。',
   'zsb-politics': '先闭卷回忆概念关系，再做章节题和材料提纲。无答案、存疑题不计分；部分章节原课件缺失，补学范围以课内来源提示为准。',
   'zsb-cs': '先手算程序输出，再运行核对；排序和指针题写出中间步骤。指针扩展、文件读写、归并与基数排序等缺口需结合教材补学。',
 }[props.slug]))
@@ -40,7 +40,7 @@ function lessonHref(lesson,reading=false) {
 }
 function resetFilters() { reset(); searchField.value?.focus() }
 function actionLabel(lesson) {
-  if (isReadingMock(lesson)) return '阅读并核对 →'
+  if (isReadingMock(lesson)) return '分步练习与核对 →'
   const state = statuses.value[lesson.id]?.state
   return state === 'learning' ? '继续学习 →' : state === 'complete' ? '再练一遍 →' : '开始学习 →'
 }
@@ -92,11 +92,11 @@ function actionLabel(lesson) {
           <span class="learning-meta">{{ lesson.group }} {{ lesson.label }}</span>
           <span class="lesson-status" :data-state="statuses[lesson.id].state">{{statuses[lesson.id].label}}<template v-if="statuses[lesson.id].total"> · {{statuses[lesson.id].answered}}/{{statuses[lesson.id].total}}</template></span>
           <a class="prep-catalog__title" :href="lessonHref(lesson)">{{ lesson.title }}</a>
-          <p v-if="isReadingMock(lesson)" class="learning-meta">模拟材料 · 手动核对答案</p>
+          <p v-if="isReadingMock(lesson)" class="learning-meta">逐题保存草稿 · 参考答案自查</p>
           <p v-if="statuses[lesson.id].reviewNeeded" class="learning-meta">{{statuses[lesson.id].reviewNeeded}} 题答错过或待核对</p>
         </div>
         <div class="prep-catalog__actions">
-          <a :href="lessonHref(lesson)" :aria-label="`${isReadingMock(lesson) ? '阅读并核对' : '互动练习'}：${lesson.title}`">{{ actionLabel(lesson) }}</a>
+          <a :href="lessonHref(lesson)" :aria-label="`${isReadingMock(lesson) ? '分步练习与核对' : '互动练习'}：${lesson.title}`">{{ actionLabel(lesson) }}</a>
           <a :href="lessonHref(lesson,true)" :aria-label="`阅读讲义：${lesson.title}`">阅读版</a>
         </div>
       </li>

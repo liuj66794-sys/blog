@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html data-study-shell lang="zh-CN">
+<html data-study-shell data-cs-pointer="1" data-cs-course="1" lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第 29 课 · 2024 年真题模拟</title>
 <link rel="stylesheet" href="../assets/lesson.css">
+<link rel="stylesheet" data-cs-asset href="/blog/learning/cs-pointer.css?v=dbf0653877f9">
+<script type="module" data-cs-asset src="/blog/learning/cs-pointer.mjs?v=dbf0653877f9"></script>
 <link rel="icon" type="image/png" href="/blog/brand/zhixu-mark.png">
 <script data-study-appearance>try{var a=localStorage.getItem('vuepress-theme-appearance');document.documentElement.dataset.theme=a==='dark'||((a!=='light')&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}</script><link rel="stylesheet" href="/blog/learning/learning-tokens.css"><link rel="stylesheet" href="/blog/learning/lesson-shell.css"><script type="module" src="/blog/learning/lesson-shell.mjs" data-study-base="/blog/" data-exam-date="2027-03-27"></script>
 </head>
@@ -17,8 +19,17 @@
   <span>第 29 课 / 共 29 课</span>
 </nav>
 
-<h1>2024 年真题模拟</h1>
-<p class="lesson-meta">对应题库 题库/真题-2024年 · 约 150 分钟（120 分钟模拟 + 30 分钟复盘）</p>
+<header class="cs-intro"><p class="cs-eyebrow">计算机 · 复习与模拟</p><h1>2024 年真题模拟</h1><p class="lesson-meta">对应题库 题库/真题-2024年 · 约 150 分钟（120 分钟模拟 + 30 分钟复盘）</p><p>能比较同类错误与时间分配，制定下一轮优先任务。</p><p class="cs-interactive-note">先看核心过程，再独立尝试，随后按需深入各知识点和原课测验。小节可以自由切换，支持展开全文。</p></header>
+<section class="cs-course"><aside class="cs-path" aria-label="本课学习路径"><strong>本课学习路径</strong><ol><li><a href="#cs-core">01 / 用第二次模拟检验上次修正</a></li><li><a href="#cs-transfer">02 / 把复习任务写具体</a></li><li><a href="#cs-detail-1">03 / 考试须知</a></li><li><a href="#cs-detail-2">04 / 卷面结构与分值</a></li><li><a href="#cs-detail-3">05 / 120 分钟时间分配</a></li><li><a href="#cs-detail-4">06 / 作答策略</a></li><li><a href="#cs-detail-5">07 / 本卷特别提醒</a></li><li><a href="#cs-detail-6">08 / 复盘：对答案与错题归章</a></li><li><a href="#cs-detail-7">09 / 结课：三轮复习地图</a></li><li><a href="#cs-detail-8">10 / 先回忆，再自测</a></li><li><a href="#cs-practice">11 / 测验（点击选项作答）</a></li><li><a href="#cs-detail-10">12 / 参考资料</a></li></ol></aside><section class="cs-content"><section id="cs-core" data-cs-step><h2 tabindex="-1">用第二次模拟检验上次修正</h2><p class="cs-goal">这一节要学会：能比较同类错误与时间分配，制定下一轮优先任务。</p><p>第二次模拟像修好设备后的复检：关注上次故障有没有再次发生。只比较总分，可能看不见某个旧问题反复失分，也可能忽略题目难度差异。</p><p>保留同样清晰的记录方式：题型、用时、卡点、作答过程、核对状态。下面的数据是自编复盘例子，不代表 <code>2024</code> 年真题评分或难度结论。</p><p>优先处理反复出现且能定位的错误。已经能独立完成的内容用短复测维护；有题源争议的题先核对依据。下一轮任务要有课次、动作和验收题，避免只写“加强基础”。</p><section data-cs-lab="core"></section><details class="cs-trace-transcript"><summary>查看完整过程，逐步核对</summary><h3>第 1 步</h3><pre><code>上次：折半查找更新 low=mid，区间不缩小</code></pre><p>错误类型：边界更新；对应课：25</p><p>记录具体语句，不只写“查找错”。</p><h3>第 2 步</h3><pre><code>本次：能正确写 low=mid+1，但失败条件仍错</code></pre><p>已修正：右半区更新；仍薄弱：空区间判断</p><p>确认进步，同时把剩余问题缩小。</p><h3>第 3 步</h3><pre><code>补练目标不存在、只剩一个元素两种情况</code></pre><p>练习：成功与失败边界</p><p>两种情况都要写出 low、high、mid。</p><h3>第 4 步</h3><pre><code>再次闭卷：low&gt;high 时报告失败</code></pre><p>验收：不把最后 mid 当命中</p><p>这条标准比“再刷十题”更能说明是否修复。</p></details><section data-cs-check="core"></section><details class="cs-check-answer"><summary>核对判断与理由</summary><p>第二次总分提高，就一定说明上次的每个问题都解决了吗？</p><ol><li>一定：总分受题目分布等因素影响，不能证明每项能力。</li><li>不一定，要检查同类错误证据：对。总分与具体错因记录应结合看。</li><li>总分完全没有价值：总分仍可参考，只是不足以单独定位。</li></ol><p>正确判断：不一定，要检查同类错误证据</p></details></section>
+<section id="cs-transfer" data-cs-step><h2 tabindex="-1">把复习任务写具体</h2><p class="cs-goal">先独立写出过程，再核对理由。遇到卡点可以回上一小节重走。</p><p class="cs-task">为“树遍历总是漏写根”制定下一轮任务，包含复习入口和验收方式。</p><details><summary>卡住时看提示</summary><p>把任务写成“到哪一课→独立做什么→怎样确认没有漏结点”。</p></details><details><summary>查看参考过程</summary><p>回第 <code>20</code> 课对照同一棵树的三种遍历；在每次输出旁标出访问时机；换一棵小树闭卷写先、中、后序，确认每个结点恰好出现一次且顺序正确。</p></details><section data-cs-check="transfer"></section><details class="cs-check-answer"><summary>核对判断与理由</summary><p>下一轮优先任务哪项最具体？</p><ol><li>计算机全部重学：范围太大，难以判断任务何时完成。</li><li>第 <code>20</code> 课：换树闭卷写三种遍历并逐结点核对：对。入口、操作、验收都有了。</li><li>有空多看几遍：缺少明确的练习与验收证据。</li></ol><p>正确判断：第 <code>20</code> 课：换树闭卷写三种遍历并逐结点核对</p></details></section>
+<section id="cs-detail-1" data-cs-step><h2 tabindex="-1">一、考试须知</h2>
+<div class="callout warn">
+  <p class="callout-title">模拟纪律（与 2025 场相同）</p>
+  <p><strong>闭卷</strong>：不翻笔记、不查题库、不问 AI 助手；<strong>断资料</strong>：只留题库卷面一个窗口；<strong>手机计时</strong>：倒计时 120 分钟＋勿扰模式；<strong>手写答案</strong>：写在白纸上，卷面按题号分区，方便对答案。时间一到立即停笔，超时部分不计分。</p>
+</div>
+
+<details><summary>本课目标与前置回顾</summary>
+
 
 <div class="goal">
   <p class="goal-title">学完这节课，你能做到：</p>
@@ -30,13 +41,8 @@
   <p>第二套真题的价值不在「再学一遍」，而在<strong>对照</strong>：存储强度是否比上一场扎实——同样的考点闭卷手写能否更快提取；时间分配预案是否有效——超时板块有没有被压回来。上一场暴露的问题，这一场就是验收现场。纪律与上一场完全一致：闭卷、断资料、手机只用于计时、答案全部手写、到点停笔。</p>
 </div>
 
-<h2>一、考试须知</h2>
-<div class="callout warn">
-  <p class="callout-title">模拟纪律（与 2025 场相同）</p>
-  <p><strong>闭卷</strong>：不翻笔记、不查题库、不问 AI 助手；<strong>断资料</strong>：只留题库卷面一个窗口；<strong>手机计时</strong>：倒计时 120 分钟＋勿扰模式；<strong>手写答案</strong>：写在白纸上，卷面按题号分区，方便对答案。时间一到立即停笔，超时部分不计分。</p>
-</div>
-
-<h2>二、卷面结构与分值</h2>
+</details></section>
+<section id="cs-detail-2" data-cs-step><h2 tabindex="-1">二、卷面结构与分值</h2>
 <table>
   <tr><th>题型</th><th>题量 × 分值</th><th>小计</th></tr>
   <tr><td>单项选择题</td><td>20 × 3 分</td><td>60 分</td></tr>
@@ -48,7 +54,8 @@
 </table>
 <p><small>题量口径勘误：2025 题库分节标题写作「判断 5 题、简答 3 题」，曾让人以为本卷判断题多 5 题、简答题多 1 题；按两卷正文实际点数核对，判断题同为 10 题、简答题同为 4 题，客观题合计同为 120 分（单选 20×3＋判断 10×4＋填空 5×4），第 28 课已按此实际口径统一。本卷与 2025 卷真正不同的是：计算与应用明确为每题 10 分，是大题里按步骤给分最重的板块。客观题合计 120 分意味着「会但不熟」的损失被放大，读题速度要练出来。</small></p>
 
-<h2>三、120 分钟时间分配</h2>
+</section>
+<section id="cs-detail-3" data-cs-step><h2 tabindex="-1">三、120 分钟时间分配</h2>
 <table>
   <tr><th>环节</th><th>建议用时</th><th>执行要点</th></tr>
   <tr><td>单项选择（20 题）</td><td>35 分钟</td><td>单题 2 分钟封顶，卡壳先猜先标记</td></tr>
@@ -64,7 +71,8 @@
   <p>任何环节超时 5 分钟以上，从下一环节直接扣回来，不许「后面赶一赶」——后面的大题才是按步骤给分的主战场。判断题最适合压缩：第一判断的正确率通常不低于反复纠结。</p>
 </div>
 
-<h2>四、作答策略</h2>
+</section>
+<section id="cs-detail-4" data-cs-step><h2 tabindex="-1">四、作答策略</h2>
 <ul>
   <li><strong>先客观后主观</strong>：本卷客观题合计 120 分，占比过半，先用约 60 分钟把它稳住，再进主观题。</li>
   <li><strong>简答按关键词给分的逻辑写</strong>：先一句「是什么」，再分点补特点、优缺点或对比；本卷简答 4 题，务必给每题留出 4 分钟，不空题。</li>
@@ -72,13 +80,15 @@
   <li><strong>读程序先扫坑再谈逻辑</strong>：通读一遍条件里的「=」与「==」、自增先加还是后加、循环边界含不含等号，然后再逐行列表跟踪变量。</li>
 </ul>
 
-<h2>五、本卷特别提醒</h2>
+</section>
+<section id="cs-detail-5" data-cs-step><h2 tabindex="-1">五、本卷特别提醒</h2>
 <div class="callout warn">
   <p class="callout-title">来自题库的标注</p>
   <p>本卷<strong>客观题答案同为整理判定</strong>，存疑的题先查对应笔记的定义自证，再回看讲解 PDF 核对。另外，题库在计算题第 41 题处明确标注：原卷在 if 条件里把<strong>赋值「=」当比较用</strong>属「原样考点」——读到这类条件要意识到它是赋值、恒为真，按赋值语义推结果，别当成印刷错误跳过。</p>
 </div>
 
-<h2>六、复盘：对答案与错题归章</h2>
+</section>
+<section id="cs-detail-6" data-cs-step><h2 tabindex="-1">六、复盘：对答案与错题归章</h2>
 <p>停笔后同样四步走，约 30 分钟：</p>
 <ul>
   <li><strong>第一步 · 对答案</strong>：展开题库答案 callout，先统计各题型得分与总分，再逐题定位错误原因；「=」陷阱一类题按整理判定的语义核对。</li>
@@ -98,7 +108,8 @@
   <li><strong>对照验收</strong>：把本场三类失分模式与 2025 场写下的对比——已修复的划掉，仍在的写进二轮专题清单。</li>
 </ul>
 
-<h2>七、结课：三轮复习地图</h2>
+</section>
+<section id="cs-detail-7" data-cs-step><h2 tabindex="-1">七、结课：三轮复习地图</h2>
 <p>这一课是全课程的最后一课。考前的完整路径是三轮：</p>
 <table>
   <tr><th>轮次</th><th>内容</th><th>状态与目标</th></tr>
@@ -108,7 +119,8 @@
 </table>
 <p>课程完成，回到<a href="index.html">课程大纲</a>可按需重刷任意课。</p>
 
-<h2>八、先回忆，再自测</h2>
+</section>
+<section id="cs-detail-8" data-cs-step><h2 tabindex="-1">八、先回忆，再自测</h2>
 <details class="recall">
   <summary>临场自检 1：进考场坐定后，开考前的固定动作是什么？</summary>
   <div class="recall-a">先填姓名与考号，翻看全卷确认页数齐全、各题块位置，铃响前不落笔。把开考流程固定成一套动作，紧张也不会漏步。</div>
@@ -126,7 +138,8 @@
   <div class="recall-a">先按卷面结构表逐块清点有无整题漏答，再核对姓名、考号与涂卡完成度。检查只查漏错，不大改已写好的答案。</div>
 </details>
 
-<h2>九、测验（点击选项作答）</h2>
+</section>
+<section id="cs-practice" data-cs-step><h2 tabindex="-1">九、测验（点击选项作答）</h2>
 
 <div class="quiz" data-answer="d">
   <p class="quiz-q">1. 开考 60 分钟你才做完单选，明显慢于计划，此时应该</p>
@@ -193,11 +206,14 @@
   <p>① 打开 题库/真题-2024年，答案 callout 保持折叠，备好白纸和笔。② 倒计时 120 分钟，闭卷、断资料，按本课时间分配表作答（判断 10 题、简答 4 题）。③ 到点停笔：对答案、统计得分、填错题归章表。④ 错题回对应笔记重学并标 ⭐️，第二天摘星重做；对照上一场写下的失分模式做验收。⑤ 翻开「三轮复习地图」：给一轮画上完成勾，写下二轮 14 天背诵的起止日期，并把距考前重做两套真题的日子（目标限时正确率 ≥85%）写进日历。</p>
 </div>
 
-<h2>参考资料</h2>
+</section>
+<section id="cs-detail-10" data-cs-step><h2 tabindex="-1">参考资料</h2>
 <p>卷面与答案：题库/真题-2024年（含参考答案与标注）。简答背诵：题库/C语言数据结构-简答题。三轮加练：复习题一、复习题二、复习题三。临场速查：<a href="../reference/glossary.html">课程术语表</a>、<a href="../reference/ds-formula-cheatsheet.html">数据结构公式速查表</a>、<a href="../reference/c-syntax-cheatsheet.html">C 语法速查表</a>。</p>
 
 <div class="teacher-note">有哪里卡住了？直接把题目或疑问发给我——我是你的课程老师，可以逐条讲清楚，也可以针对你错的题再出几道同类题。</div>
 
+</section></section></section>
+<script type="application/json" id="cs-course-data">{"version":1,"storageKey":"zhixu:cs-course:29:1","stepIds":["cs-core","cs-transfer","cs-detail-1","cs-detail-2","cs-detail-3","cs-detail-4","cs-detail-5","cs-detail-6","cs-detail-7","cs-detail-8","cs-practice","cs-detail-10"],"checks":{"core":{"question":"第二次总分提高，就一定说明上次的每个问题都解决了吗？","choices":["一定","不一定，要检查同类错误证据","总分完全没有价值"],"answer":1,"why":["总分受题目分布等因素影响，不能证明每项能力。","对。总分与具体错因记录应结合看。","总分仍可参考，只是不足以单独定位。"]},"transfer":{"question":"下一轮优先任务哪项最具体？","choices":["计算机全部重学","第 20 课：换树闭卷写三种遍历并逐结点核对","有空多看几遍"],"answer":1,"why":["范围太大，难以判断任务何时完成。","对。入口、操作、验收都有了。","缺少明确的练习与验收证据。"]}},"traces":{"core":{"title":"比较两次相同类型的错误","frames":[{"code":"上次：折半查找更新 low=mid，区间不缩小","cells":[["错误类型","边界更新"],["对应课","25"]],"note":"记录具体语句，不只写“查找错”。","pointer":""},{"code":"本次：能正确写 low=mid+1，但失败条件仍错","cells":[["已修正","右半区更新"],["仍薄弱","空区间判断"]],"note":"确认进步，同时把剩余问题缩小。","pointer":""},{"code":"补练目标不存在、只剩一个元素两种情况","cells":[["练习","成功与失败边界"]],"note":"两种情况都要写出 low、high、mid。","pointer":""},{"code":"再次闭卷：low>high 时报告失败","cells":[["验收","不把最后 mid 当命中"]],"note":"这条标准比“再刷十题”更能说明是否修复。","pointer":""}]}},"signature":"1433d282e35db49b"}</script>
 <nav class="footer-nav">
   <a href="0028-mock-exam-2025.html">← 上一课：2025 年真题模拟</a>
   <a href="index.html">返回课程大纲（结课）→</a>
